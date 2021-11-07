@@ -1,0 +1,74 @@
+﻿@model GardifyModels.Models.PlantCharacteristicCategory
+
+@{
+    ViewBag.Title = "Neues Merkmal erstellen";
+    Layout = "~/Views/Shared/_LayoutAdminArea.cshtml";
+}
+
+<h2>Neues Merkmal erstellen</h2>
+@using (Html.BeginForm())
+{
+    <div class="alert alert-info">
+        <strong>Info!</strong> Hier können Sie neue Merkmale erstellen, die später Pflanzen zugeordnet werden können. Merkmale können eine Einheit und einen Werttypen beinhalten. Der Werttyp beschreibt zum Beispiel ein Intervall zwischen zwei Einheitsgrenzen. Die gewählte Einheit wird dann neben dem Name angezeigt.
+    </div>
+
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.Label("title", "Name", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("tagImage", "Bilddatei", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TagImage, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TagImage, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("characteristicValueType", "Werttyp", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EnumDropDownListFor(model => model.CharacteristicValueType, htmlAttributes: new { @class = "form-control", @id = "enumDropDown" })
+                @Html.ValidationMessageFor(model => model.CharacteristicValueType, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group" id="unitWrapper" hidden>
+            @Html.Label("characteristicValueType", "Einheit (cm etc.)", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Unit, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Unit, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Erstellen" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Zurück", "Index")
+</div>
+
+<script>
+    $("#enumDropDown").change(function () {
+        console.log("ja");
+        if ($("#enumDropDown").val() == 0) {
+            $("#unitWrapper").hide();
+        }
+        else {
+            $("#unitWrapper").show();
+        }
+    });
+</script>

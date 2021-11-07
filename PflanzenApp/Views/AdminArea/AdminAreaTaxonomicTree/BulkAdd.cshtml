@@ -1,0 +1,124 @@
+﻿@model GardifyModels.Models.AdminAreaViewModels.TaxonomicBulkAddViewModel
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LayoutAdminArea.cshtml";
+}
+
+<h2>Eigenschaften des gewählten Baumes "@Model.Name" unterliegenden Pflanzen zuordnen</h2>
+
+@*<div class="row">
+    <div class="col-lg-offset-10 col-lg-2 col-md-offset-8 col-md-4 col-12>*@
+@using (Html.BeginForm("bulk-add-all", "AdminAreaTaxonomicTree", new { tagId = Model.TagId, treeId = Model.TreeId }, FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <input type="submit" value="Alle Eigenschaften hinzufügen" class="btn btn-default" />
+}
+<br />
+@using (Html.BeginForm("bulk-delete-all", "AdminAreaTaxonomicTree", new { tagId = Model.TagId, treeId = Model.TreeId }, FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <input type="submit" value="Alle Eigenschaften löschen" onclick="if(confirm('Bist du sicher?')){}else{return false;};" class="btn btn-warning" />
+}
+<br />
+
+@*</div>
+    </div>*@
+<div class="form-horizontal">
+
+    <table class="table">
+        <tr>
+            <th>Pflanze</th>
+            <th>Veröffentlichen</th>
+
+            <th>Kategorie</th>
+            <th>Eigenschaft</th>
+            <th></th>
+        </tr>
+        @{
+            var currentPlant = "";
+
+        }
+        @foreach (var plant in Model.TagList)
+        {
+            var p = 0;
+            var currentCat = "";
+            foreach (var tag in plant.PlantTags)
+            {
+
+
+                <tr>
+                    @if (currentPlant != plant.PlantNameLatin)
+                    {
+                        currentPlant = plant.PlantNameLatin;
+                        <td>@plant.PlantName (@plant.PlantNameLatin)</td>
+                        <td>@plant.Published</td>
+
+                    }
+                    else
+                    {
+                        <td></td>
+                        <td></td>
+
+                    }
+                    @if (currentCat != tag.PlantTagCategoryName)
+                    {
+                        currentCat = tag.PlantTagCategoryName;
+                        <td>@tag.PlantTagCategoryName</td>
+
+                    }
+                    else
+                    {
+                        <td></td>
+
+                    }
+                    <td>@tag.PlantTagTitle</td>
+                    <td><a href="@Url.Action("delete-tags", new { tagId = tag.PlantTagId, treeId = Model.TreeId, plantId = plant.PlantId, tagName = tag.PlantTagTitle, fromDetail = true })">Löschen</a></td>
+                </tr>
+
+            };
+            if (!plant.PlantTags.Any())
+            {
+                <tr>
+                    @if (currentPlant != plant.PlantNameLatin)
+                    {
+                        currentPlant = plant.PlantNameLatin;
+                        <td>@plant.PlantName (@plant.PlantNameLatin)</td>
+                        <td>@plant.Published</td>
+
+                    }
+                    else
+                    {
+                        <td></td>
+                        <td></td>
+
+                    }
+
+                    <td></td>
+
+
+                    <td>
+                        <input hidden name="tagId" value="@Model.TagId" />
+                        <input hidden name="treeId" value="@Model.TreeId" />
+                        <input hidden name="plantId" value="@plant.PlantId" />
+                    </td>
+                    <td>
+                        @using (Html.BeginForm("add-new-tags", "AdminAreaTaxonomicTree", new { tagId = Model.TagId, treeId = Model.TreeId, plantId = plant.PlantId }, FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            <input type="submit" value="hinzufügen" class="btn btn-default" />
+
+                            @*<a href="@Url.Action("add-new-tags", new { tagId = Model.TagId, treeId = Model.TreeId, plantId = plant.PlantId})">Add</a>*@
+
+
+                        }
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+
+</div>
+
+<div>
+    @Html.ActionLink("zurück", "BulkEdit", new { treeId = Model.TreeId })
+</div>

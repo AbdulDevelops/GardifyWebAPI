@@ -1,0 +1,93 @@
+input.dark[type=date],  input.dark[type=text] {
+    -webkit-appearance: listbox;
+    color: white
+}
+
+.height_50{height: 70px;}
+.dev-img {
+   
+    object-fit: cover;
+}
+.g-badge {
+    width: 72px;
+    height: 72px;
+}
+.g-badge-count {
+    color: goldenrod;
+    text-align: center;
+    position: absolute;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    top: -4px;
+}
+.mt_075{
+    margin-top:0.75rem;
+}
+.backgrdColorGreenish{
+    background-color: #bcd3cd
+}
+.col_table{
+    border: 2px solid #bcd3cd;
+    
+    padding: 0px!important;
+    border-radius: 0.5rem;
+}
+
+table thead td, .table thead th {
+    border-bottom: 1px solid #e0e0e0!important;
+    border-top: 0px solid #e0e0e0!important;
+  }
+table td{
+    text-align: center;
+}
+
+[type="checkbox"]:checked,
+[type="checkbox"]:not(:checked) {
+    position: absolute;
+    left: -9999px;
+}
+[type="checkbox"]:checked + label,
+[type="checkbox"]:not(:checked) + label
+{
+    position: relative;
+    padding-left: 28px;
+    cursor: pointer;
+    line-height: 20px;
+    display: inline-block;
+}
+[type="checkbox"]:checked + label:before,
+[type="checkbox"]:not(:checked) + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 0.75rem;
+    border: 2px solid #7a9d34;
+    background: #fff;
+}
+[type="checkbox"]:checked + label:after,
+[type="checkbox"]:not(:checked) + label:after {
+    content: '';
+    width: 10px;
+    height: 10px;
+    border-radius: 0.5rem;
+    background: #7a9d34;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+[type="checkbox"]:not(:checked) + label:after {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+}
+[type="checkbox"]:checked + label:after {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}

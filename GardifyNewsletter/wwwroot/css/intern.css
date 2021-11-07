@@ -1,0 +1,291 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification\ 
+for details on configuring this project to bundle and minify static web assets. */
+body {
+    padding-bottom: 20px;
+    font-size: 0.9em;
+    margin-top:6rem;
+}
+
+.fill-parent {
+    width: 100%;
+    min-height: 1000px;
+    max-height: 1000px;
+}
+
+.container-fluid {
+    padding-left: 7%;
+    padding-right: 7%;
+}
+
+/* default link colors */
+a {
+    color: #343a40;
+}
+
+    a:hover {
+    color: #7a9d34;
+    }
+
+.padding {
+    padding-left: 7%;
+    padding-right: 7%;
+}
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.table th {
+    padding: .3rem
+}
+/* Carousel */
+.carousel-caption p {
+    font-size: 20px;
+    line-height: 1.4;
+}
+
+/*new*/
+/*new*/
+/* Make .svg files in the carousel display properly in older browsers */
+.carousel-inner .item img[src$=".svg"] {
+    width: 100%;
+}
+
+/* QR code generator */
+#qrCode {
+    margin: 15px;
+}
+
+.selectedbox {
+    width: 30% !important;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+}
+
+/*remove button hover effect*/
+.btn:focus, .btn:active {
+    outline: none !important;
+    box-shadow: none;
+}
+
+/* navbar */
+
+a.navbar-brand_b img {
+    width: 70%;
+}
+
+a.nav-link {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+a.nav-link:focus,
+a.nav-link:hover {
+    color: #fff !important;
+    background-color: transparent;
+    text-decoration: underline;
+}
+
+
+a.dropdown-item:hover {
+    color: #7a9d34 !important;
+    background-color: transparent;
+    text-decoration: underline;
+}
+
+#logo_netzlab img {
+    height: 65px;
+    width: auto;
+}
+
+#logo_jager img {
+    height: 60px;
+    width: auto;
+}
+
+.bg-light {
+    background-color: white !important;
+}
+
+/* button design */
+
+.btn-orange {
+    background-color: #7a9d34;
+    border-color: #7a9d34;
+    color: white;
+}
+
+
+input.btn.btn-sm.btn-orange:active,
+input.btn.btn-sm.btn-orange:hover {
+    background-color: gray;
+    border-color: gray;
+    color: white;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:active,
+.btn-outline-primary:focus {
+    color: white;
+    background-color: #7a9d34;
+    border-color: #7a9d34;
+}
+
+.btn-outline-primary {
+    color: #7a9d34;
+    border-color: #7a9d34;
+}
+
+.btn-outline-primary.disabled {
+    color: #7a9d34;
+    border-color: #7a9d34;
+}
+
+.btn-primary:active,
+.btn-primary:hover {
+    color: white !important;
+    background-color: gray;
+    border-color: gray;
+}
+
+.btn-primary {
+    color: white !important;
+    background-color: #7a9d34;
+    border-color: #7a9d34;
+}
+/*link style */
+a.text-dark:hover {
+    color: #7a9d34 !important;
+}
+
+.text-orange {
+    color: #7a9d34;
+}
+
+.light-orange {
+    background-color: #ffe0ce;
+}
+
+/* table style */
+.table {
+    text-align: left;
+    font-size: 0.9em;
+}
+
+    .table td {
+        padding: .3rem !important;
+    }
+
+thead {
+    background-color: #e0e5d5;
+    color: #7a9d34;
+    font-weight: bold;
+    border-style: hidden !important;
+}
+
+/* footer style */
+footer {
+    right: auto;
+    bottom: 0;
+    position: relative;
+    float: left;
+    margin: auto;
+    margin-right: 10px;
+}
+
+
+/* make logo smaller for screen smaller than */
+
+@media screen and (max-width: 1500px) {
+    #logo_netzlab img {
+        height: 50px;
+        width: auto;
+    }
+
+    #logo_jager img {
+        height: 60px;
+        width: auto;
+    }
+}
+
+
+
+/* Hide netzlab logo for smaller screens */
+
+@media screen and (max-width: 991px) {
+    #logo_netzlab {
+        display: none;
+        fill:white;
+    }
+
+    button.navbar-toggler {
+        right: 15px;
+    }
+}
+
+/*  style for screen larger than 991px */
+
+@media screen and (min-width: 768px) {
+    #navbarNav {
+        position: absolute;
+        bottom: 0.6rem;
+        width: auto;
+        right: 0;
+        left: 0;
+        margin: auto;
+    }
+}
+
+
+/* Hide/rearrange for smaller screens */
+@media screen and (max-width: 767px) {
+    /* Hide captions */
+    .carousel-caption {
+        display: none;
+    }
+}
+
+/*pagination style*/
+
+.page-item.active .page-link {
+    z-index: 3;
+    color: #fff !important;
+    background-color: #7a9d34 !important;
+    border-color: #7a9d34 !important;
+}
+.page-link {
+    color: #7a9d34 !important;
+}
+
+/*drop down menu style*/
+.dropdown-menu {
+    padding: 5px !important;
+    background-color: #7a9d34 !important;
+}
+
+.nav {
+    background-image: url("/images/Verlauf_gruen_Desktop.svg");
+    background-size: cover;
+    /* padding: 0 12%; */
+}
+/*tinymce style */
+.mce-label.mce-charactercount {
+    margin: 2px 0 2px 2px;
+    padding: 8px;
+    font-size: 12px;
+}
+
+
+.mce-path {
+    display: none !important;
+}
+
+.btn.btn-primary[disabled] {
+    color: #fff;
+    border-color: #929292;
+    background-color: #929292;
+}

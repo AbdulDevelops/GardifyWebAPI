@@ -1,0 +1,37 @@
+<div class="step-wrapper container position-absolute {{offset ? 'even' : 'odd'}}" [ngClass]="{'settings': isSettings, 'onsocial':isSocialPage,'general':!isSocialPage}">
+    <svg height="60" width="120" class="position {{offset ? 'even' : 'odd'}}" [ngClass]="{ 'onsocial':isSocialPage,'general':!isSocialPage}">
+        <polygon points="90,10 120,80 60,80" style="fill:#44835b;" />
+    </svg>
+    <div class="row step-header t-bold p-2">
+        <div class="col-11">{{step.title}}</div>
+        <button type="button" class="close" aria-label="Close">
+            <span class="text-ltgrey" aria-hidden="true" (click)='onCloseTour()'>&times;</span>
+        </button>
+    </div>
+    <div class="row step-body t-13 my-2">
+        <div class="col-12 px-2 t-12" [innerHTML]="step.text"></div>
+    </div>
+    <div class="row step-footer">
+        <div class="col-12 text-center px-1">
+            <button *ngIf="step.step >= 2 " class="text-white mx-1" (click)="onChangeStep(-1)">< zurück</button>
+              <span class="text-white mx-1">{{step.step}}/{{totalStep}}</span>
+            <button *ngIf="step.step < 10 && totalStep>=10" class="text-white mx-1" (click)="onChangeStep(1)">weiter ></button>
+            <button *ngIf="step.step < 5 && totalStep===5" class="text-white mx-1" (click)="onChangeStep(1)">weiter ></button>
+            <a (click)='onCloseTour()' *ngIf="step.step === 5 && totalStep===5" class="text-white mx-1" [routerLink]="[ '/' ]"></a>
+            <a (click)='onCloseTour()' *ngIf="step.step === 10 && totalStep>=10" class="text-white mx-1" [routerLink]="[ '/' ]">beenden</a>
+        </div>
+    </div>
+    <div class="row register-wrapper pb-3" *ngIf="!loggedIn && (step.step === 3 || step.step === 10) && !isSocialPage">
+        <div class="col-12 px-1">
+            <span class="t-bold">Interessiert?</span>
+            <span class="t-light d-block pb-1">Dann gleich registrieren oder gardify ohne Anmeldung 48 Stunden lang mit dem Demo-Login testen.</span>
+        </div>
+        <div class="col-12 px-1 pt-1 text-center">
+            <a (click)="onCloseTour()" class="p-2 btn_border075 btn-green text-white t-bold col-6 mr-1" [routerLink]="['/']" [queryParams]="{mode:'rg'}">Registrieren</a>
+            <a (click)="onCloseTour()" class="p-2 btn_border075 btn-green text-white t-bold col-6" [routerLink]="['/']" [queryParams]="{mode:'dm'}">Demo-Login</a>
+        </div>
+    </div>
+    <svg height="80" width="200" class="down" [ngClass]="{'settings': isSettings}">
+        <polygon points="200,60 200,10 160,10" style="fill:#44835b;" />
+    </svg>
+</div>

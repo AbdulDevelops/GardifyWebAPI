@@ -1,0 +1,25 @@
+<div class="ad-wrapper" (click)="onAdClick()">
+  <ng-container *ngIf="showAd">
+    <ins *ngIf="!isVertical" class="adsbygoogle advertisement"
+        style="display:inline-block"
+        [attr.data-ad-client]="adClient"
+        [attr.data-ad-slot]= "adSlot"
+        [attr.data-ad-format]="adFormat"
+        [attr.data-full-width-responsive]="fullWidthResponsive"
+        [attr.data-ad-layout-key]="data_ad_layout_key"
+        [attr.data-isVertical]="isVertical"
+        >
+      </ins>
+      <ins *ngIf="isVertical" class="adsbygoogle advertisementvertical"
+        style="display:inline-block"
+        [attr.data-ad-client]="adClient"
+        [attr.data-ad-slot]= "adSlot"
+        [attr.data-ad-format]="adFormat"
+        [attr.data-full-width-responsive]="fullWidthResponsive"
+        [attr.data-ad-layout-key]="data_ad_layout_key"
+        [attr.data-isVertical]="isVertical"
+      >
+    </ins>
+   
+  </ng-container> 
+</div>

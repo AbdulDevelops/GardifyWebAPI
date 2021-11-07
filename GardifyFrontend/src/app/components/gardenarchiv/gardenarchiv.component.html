@@ -1,0 +1,185 @@
+<ng-container *ngIf="loading">
+    <div class="overlay-loading" [hidden]="!loading">
+      <svg class="spinner position-relative" viewBox="25 25 50 50">
+        <circle class="path" cx="50" cy="50" r="24" fill="none" stroke-width="2" stroke-miterlimit="10" />
+      </svg>
+    </div>
+  </ng-container>
+<div class="wrapper pt-5 {{mode}} pb-5">
+   
+    <div class="container ">
+        <app-header-garden-archiv (showPresiEvent)=showPresi($event)></app-header-garden-archiv>
+        <ng-container *ngIf="showImages">
+            <div class="row mt-4 mb-4" *ngIf="!showUploadForm && !showPresentation">
+                <div class="col-5">
+                    
+                    <span >
+                        <button class="btn_white btn btn_border075 t-bold text-ltgrey t-12 filterbtn" [ngClass]="{'btn-green':selectedSortType=='all', 'text-white':selectedSortType=='all', 'btn_white':selectedSortType!=='all'}" value="Alle Fotos" (click)="getAllAlbumImg()"> Alle Fotos</button>
+                    </span>
+                    <span class="ml-2">
+                        <button class="btn_white btn btn_border075 t-bold text-ltgrey t-12 filterbtn" [ngClass]="{'btn-green':selectedSortType=='year', 'text-white':selectedSortType=='year', 'btn_white':selectedSortType!=='year'}" value="Jahre" (click)="sortImgs('year')"> Jahre</button>
+                    </span>
+                    <span class="ml-2" >
+                        <button class="btn_white btn btn_border075 t-bold text-ltgrey t-12 filterbtn"[ngClass]="{'btn-green':selectedSortType=='month', 'text-white':selectedSortType=='month' ,'btn_white':selectedSortType!=='month'}"  value="Monate" (click)="sortImgs('month')"> Monate</button>
+                    </span>
+                    <span class="ml-2">
+                        <button class="btn_white btn btn_border075 t-bold text-ltgrey t-12 filterbtn" [ngClass]="{'btn-green':selectedSortType=='day', 'text-white':selectedSortType=='day' ,'btn_white':selectedSortType!=='day'}"  (click)="sortImgs('day')"> Tage</button>
+                    </span>
+                    
+                </div>
+               
+                <div class="col-7" *ngIf="!showImgDetails">
+                    
+                        <div class="d-flex justify-content-end">
+                            <ng-container *ngIf="editMode==true">
+                                <div   class="ptr">
+                                    <img src="assets/images/Ausgewählte_Fotos.svg" class=" ptr" style="height: 30px; " ><span  class=" ml-2 ptr t-14">{{countSelectImgs}} Fotos</span>
+                                </div>
+                                <div   class="ptr ml-2">
+                                    <img src="assets/images/Edit.svg" class="edit  ptr" style="height: 8px;" >
+                                </div>
+                                <div   class="ptr ml-2">
+                                    <img src="assets/images/Teilen.svg" class=" ml-2 ptr" style="height: 20px;" >
+                                </div>
+                                <div   class="ptr ml-2">
+                                    <img src="assets/images/Löschen.svg" class=" ml-2 ptr" style="height: 20px;"  (click)="deleteFoto=true">
+                                    <ng-container *ngIf="deleteFoto" >
+                                        <ul class="dropdown-list {{mode}} ul-dropdown" (mouseleave)="deleteFoto = false">
+                                            <li class="mb-1">
+                                                <div class="d-flex">
+                                                    <div class="mr-auto">
+                                                        <span class="t-bold t-13">
+                                                          {{countSelectImgs}} Fotos löschen
+                                                        </span>
+                                                    </div>
+                                                    <div>
+                                                        <span class="t-bold t-13" (click)="deleteFoto = false">
+                                                            &times;
+                                                        </span>
+                                                    </div>
+        
+                                                </div>
+                                                
+                                            </li>
+                                            <li>
+                                                <span class="text-reg t-12">
+                                                    Achtung! Diese Fotos werden aus <br>deiner gardify Mediathek gelöscht.
+                                                </span>
+                                            </li>
+                                           
+                                            <li class="ptr t-bold text-white"><button class="btn text-white t-bold btn_border075" style="background-color: #da8374; width: 200px;" (click)="deleteSelectedImgs()"> {{countSelectImgs}} Foto löschen</button></li>
+                                           
+        
+                                        </ul>
+        
+                                    </ng-container>
+                                </div>
+                                <div   class="ptr ml-2">
+                                    <button class="btn-grey btn t-bold text-white t-12  rounded-pill" (click)="selectAllImgs(); selectAll=true"> Alle auswählen</button>
+                                </div>
+                                <div   (click)="resetImgSelection()" class="ptr ml-2">
+                                    <button class=" btn t-bold text-white t-12 filterbtn rounded-pill"  style="background-color: #938e8e;"> Abbrechen</button>
+                                </div>
+                            </ng-container>
+                            
+                            <ng-container *ngIf="editMode==false">
+                                <span  style="margin-left: 10rem;" (click)="editMode=true" class="ptr">
+                                    <button class="btn-grey btn t-bold text-white t-12 filterbtn rounded-pill"> Auswählen</button>
+                                </span>
+                            </ng-container>
+                            
+                            <div class="ml-2" >
+                                <img [routerLink]="'/gartenarchiv/uploadfoto'" class="ptr"  src="assets/images/Hinzufügen.svg" style="height: 30px;">
+                               
+                            </div>
+                            <div class="ml-2">
+                                <img src="assets/images/Filtern.svg" style="height: 30px;" (click)="filterSelected=true">
+                                <app-filter-options *ngIf="filterSelected" (mouseleave)="filterSelected=false"></app-filter-options>
+                            </div>
+                        </div>
+                </div>
+            </div>
+            <div class="row mb-5" *ngIf="listOfImages?.length>0 && showImages">
+                <div class="d-flex flex-wrap" >
+                    <ng-container *ngFor="let img of listOfImages ;let i=index">
+                        <div class="img-container mr-3 mt-3" style="height: 200px; width: 200px;">
+                            <img   class=" ptr image" [title]="img.Author? 'Autor:'+ img.Author : '' " [alt]="img.AltAttr" [src]="toUrl(img.SrcAttr,false)" [routerLink]="['/gartenarchiv/image/detail', img.Id]" [queryParams]="{o: 'archiv'}"   *ngIf="editMode==false">
+                            <img   class=" ptr image" [title]="img.Author? 'Autor:'+ img.Author : '' " [alt]="img.AltAttr" [src]="toUrl(img.SrcAttr,false)" *ngIf="editMode==true" (click)="pushSelectedImgId(img.Id); img.highlighted=true">
+                             <div *ngIf="img.highlighted==true" class="overlay" (click)="img.highlighted=false; removeImgFromSelection(img.Id)"><img src="assets/images/Ausgewählt.svg" class=" ptr" style="height: 30px; " ></div>
+                        </div>
+                    </ng-container>
+                </div>
+            </div> 
+            <div class="row mb-5" *ngIf="sortedImgs?.length>0  && selectedSortType=='day' && showImages">
+                <div class="col-12">
+                    <ng-container *ngFor="let sortImg of sortedImgs">
+                        <h2 class="t-15 t-bold {{mode==='light'?'text-darkgrey':'text-white'}}">{{sortImg[0].InsertDate| date: 'dd. MMMM yyyy'}}</h2>
+                        <div class="row mb-4 mt-3"  >
+                            <div class="d-flex flex-wrap" >
+                                <ng-container *ngFor="let img of sortImg">
+                                    <div class="img-container mr-3 mt-3" style="height: 200px; width: 200px;">
+                                        <img   class=" ptr image" [title]="img.Author? 'Autor:'+ img.Author : '' " [alt]="img.AltAttr" [src]="toUrl(img.SrcAttr,false)" [routerLink]="['/gartenarchiv/image/detail', img.Id]"   *ngIf="editMode==false">
+                                        <img   class=" ptr image" [title]="img.Author? 'Autor:'+ img.Author : '' " [alt]="img.AltAttr" [src]="toUrl(img.SrcAttr,false)" *ngIf="editMode==true" (click)="pushSelectedImgId(img.Id); img.highlighted=true">
+                                         <div *ngIf="img.highlighted==true" class="overlay" (click)="img.highlighted=false; removeImgFromSelection(img.Id)"><img src="assets/images/Ausgewählt.svg" class=" ptr" style="height: 30px; " ></div>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+                
+            </div>
+            <div class="row mb-5"  *ngIf="sortedImgs?.length>0 && selectedSortType=='year' && showImages ">
+                <div class="col-12 mb-4" style="background-color: #f9f5f5; border-radius: 0.75rem; ">
+                    <ng-container *ngFor="let sortImg of sortedImgs">
+                        
+                        <div class="row  mb-4 mt-3" >
+                            <div class="col-12 mt-3">
+                                <span class="t-15 t-bold {{mode==='light'?'text-darkgrey':'text-white'}}">{{sortImg[0].InsertDate| date: 'yyyy'}}</span><span class="float-right ptr"><img src="assets/images/Pfeil_nach_rechts.svg" style="height: 30px; " (click)="filterByDate(sortImg[0].InsertDate,'year');selectedSortType='month'"></span>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <div class="d-flex flex-wrap" >
+                                    <ng-container *ngFor="let img of sortImg">
+                                        <div class="img-container mr-3 mt-3" style="height: 200px; width: 200px;">
+                                            <img   class=" ptr image" [title]="img.Author? 'Autor:'+ img.Author : '' " [alt]="img.AltAttr" [src]="toUrl(img.SrcAttr,false)" [routerLink]="['/gartenarchiv/image/detail', img.Id]"   *ngIf="editMode==false">
+                                            <img   class=" ptr image" [title]="img.Author? 'Autor:'+ img.Author : '' " [alt]="img.AltAttr" [src]="toUrl(img.SrcAttr,false)" *ngIf="editMode==true" (click)="pushSelectedImgId(img.Id); img.highlighted=true">
+                                             <div *ngIf="img.highlighted==true" class="overlay" (click)="img.highlighted=false; removeImgFromSelection(img.Id)"><img src="assets/images/Ausgewählt.svg" class=" ptr" style="height: 30px; " ></div>
+                                         </div>                              
+                                    </ng-container>
+                                </div>
+                            </div>
+                          
+                        </div>
+                    </ng-container>
+                </div>
+                
+            </div>
+            <div class="row mb-5"  *ngIf="sortedImgs?.length>0 && selectedSortType=='month' && showImages">
+                <div class="col-12 mb-4" style="background-color: #f9f5f5; border-radius: 0.75rem; ">
+                    <ng-container *ngFor="let sortImg of sortedImgs">
+                        <div class="row  mb-4  mt-3" >
+                            <div class="col-12 mt-3">
+                                <span class="t-15 t-bold {{mode==='light'?'text-darkgrey':'text-white'}}">{{sortImg[0].InsertDate| date: 'MMMM yyyy'}}</span><span class="float-right ptr"><img src="assets/images/Pfeil_nach_rechts.svg" (click)="filterByDate(sortImg[0].InsertDate,'month');selectedSortType='day'" style="height: 30px; "></span>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <div class="d-flex flex-wrap" >
+                                    <ng-container *ngFor="let img of sortImg">
+                                        <div class="img-container mr-3 mt-3" style="height: 200px; width: 200px;">
+                                            <img   class=" ptr image" [title]="img.Author? 'Autor:'+ img.Author : '' " [alt]="img.AltAttr" [src]="toUrl(img.SrcAttr,false)" [routerLink]="['/gartenarchiv/image/detail', img.Id]"   *ngIf="editMode==false">
+                                            <img   class=" ptr image" [title]="img.Author? 'Autor:'+ img.Author : '' " [alt]="img.AltAttr" [src]="toUrl(img.SrcAttr,false)" *ngIf="editMode==true" (click)="pushSelectedImgId(img.Id); img.highlighted=true">
+                                             <div *ngIf="img.highlighted==true" class="overlay" (click)="img.highlighted=false; removeImgFromSelection(img.Id)"><img src="assets/images/Ausgewählt.svg" class=" ptr" style="height: 30px; " ></div>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </div>
+                           
+                        </div>
+                    </ng-container>
+                </div>
+                
+            </div>
+        </ng-container>
+ 
+        <router-outlet></router-outlet>
+    </div>
+</div>

@@ -1,0 +1,115 @@
+﻿@model GardifyModels.Models.LaunchPageCreateModel
+
+@{
+    ViewBag.Title = "CreateLaunchEntry";
+    Layout = "~/Views/Shared/_LayoutAdminArea.cshtml";
+}
+<link href="~/Scripts/jquery-te-1.4.0.css" rel="stylesheet" />
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js" charset="utf-8"></script>
+<script src="~/Scripts/jquery-te-1.4.0.min.js"></script>
+<h2>Landing Page erstellen</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>LaunchPageContent</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @*<div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+            </div>
+        </div>*@
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.PageContent, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.PageContent, new { @class = "form-control", @id = "PageContent", @rows = 5, cols = 80 })
+
+            @*@Html.EditorFor(model => model.PageContent, new { htmlAttributes = new { @class = "form-control" } })*@
+            @Html.ValidationMessageFor(model => model.PageContent, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Pflanze</label>
+        <div class="col-md-10">
+            @Html.DropDownList("plantId", new SelectList(ViewBag.PlantViewList, "Value", "Text"), new { @class = "form-control" })
+            <br />
+            <input type="button" id="addPlant" value="Pflanze hinzufügen" class="btn btn-default" />
+
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">News</label>
+        <div class="col-md-10">
+            @Html.DropDownList("newsId", new SelectList(ViewBag.NewsViewList, "Value", "Text"), new { @class = "form-control" })
+            <br />
+            <input type="button" id="addNews" value="News hinzufügen" class="btn btn-default" />
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Erstellen" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#PageContent").jqte();
+
+        $("#addPlant").click(function () {
+
+        });
+
+        $(".jqte_editor").keypress('keyup', e => {
+            console.log('Caret at: ', e);
+        })
+
+        $(".jqte_editor").click(function (e) {
+            console.log('Caret at: ', e);
+            start = e[0].selectionStart;
+            end = e[0].selectionEnd;
+            console.log('Caret at: ', e, start, end);
+        })
+
+        $("#addPlant").click(function (e) {
+            console.log('text is: ', $(".jqte_editor").html());
+
+            var plantId = $("#plantId option:selected").val();
+            var plantName = $("#plantId option:selected").text();
+
+            $(".jqte_editor").html($(".jqte_editor").html() + '&#160;<a style="color: #7a9d34 !important;" href="https://gardify.de/pflanze/' + plantId + '/' + plantName + '">[' + plantName + ']</a>');
+
+
+            //https://gardify.de/news/
+        })
+
+
+        $("#addNews").click(function (e) {
+            console.log('text is: ', $(".jqte_editor").html());
+
+            var plantId = $("#newsId option:selected").val();
+            var plantName = $("#newsId option:selected").text();
+
+            $(".jqte_editor").html($(".jqte_editor").html() + '&#160;<a style="color: #7a9d34 !important;" href="https://gardify.de/news/' + plantId + '/' + plantName + '">[' + plantName + ']</a>');
+
+
+            //https://gardify.de/news/
+        })
+
+
+    });
+
+
+
+</script>

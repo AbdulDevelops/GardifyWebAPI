@@ -1,0 +1,47 @@
+﻿@model GardifyModels.Models.SynonymViewModels.SynonymIndexViewModel
+
+@{
+    ViewBag.Title = "Synonymübersicht";
+    Layout = "~/Views/Shared/_LayoutAdminArea.cshtml";
+}
+
+<h2>Synonymübersicht</h2>
+
+<p>
+    @Html.ActionLink("Neues Synonym erstellen", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Synonym
+        </th>
+        <th>
+            Gehört zu
+        </th>
+        <th>
+            Referenztyp
+        </th>
+        <th>
+            Optionen
+        </th>
+    </tr>
+
+@foreach (var item in Model.SynonymList) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Text)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReferenceName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReferenceType)
+        </td>
+        <td>
+            @Html.ActionLink("Bearbeiten", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Löschen", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

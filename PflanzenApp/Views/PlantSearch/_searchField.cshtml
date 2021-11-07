@@ -1,0 +1,21 @@
+﻿@model GardifyModels.Models.PlantSearchViewModel
+<link rel="stylesheet" href="~/Content/jquery-ui.min.css">
+<script src="~/Scripts/jquery.js"></script>
+<script src="~/Scripts/jquery-ui-1.11.4.min.js"></script>
+<div class="form-horizontal">
+    <div class="form-group clearfix">
+        <label for="input_search" class="col-md-2 control-label">Suche nach Namen</label>
+        <div class="col-md-10">
+            <input type="search" id="input_search" class="form-control ui-autocomplete"
+                   data-autocomplete="@Url.Action("Autocomplete", "PlantSearch")" />
+            <!--@Html.TextBox("input_search", null, new { @class = "form-control" })-->
+            <input class="btn btn-default" id="search-btn2" type="submit" value="Suchen" />
+            <input class="btn btn-default" id="search-btn" type="submit" value="Suchen" />
+            @using (Html.BeginForm("reset-search", "PlantSearch", FormMethod.Post))
+            {
+                <input class="btn btn-default" type="button" value="Suchen" id="btn-search" />
+                <input class="btn btn-default" type="submit" value="Suche zurücksetzen" />
+            }
+        </div>
+    </div>
+</div>

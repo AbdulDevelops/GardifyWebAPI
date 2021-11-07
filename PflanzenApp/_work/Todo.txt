@@ -1,0 +1,120 @@
+﻿
+Property Create
+
+* Misc
+- Conventions aufschreiben, die wir benutzt haben
+- Datum für Todoansicht anpassbar
+
+* Plants
+- Beschreibung + Content
+
+* Userplants
+- Unter Merkliste alle Tagebucheinträge nach Datum sortiert anzeigen
+- Zeige Forum der entsprechenden Pflanze (Plant, nicht Userplant!)
+- Pflanzendoktor zur Pflanze angefragt? Zeige Frage+Antwort (wenn vorhanden) im Tagebuch an.
+- Alter unter einem Jahr: Berechne Monate
+
+* Plantsearch
++ Suchergebnisse können auf Wunsch in einer Merkliste gespeichert werden.
+-^ Hehe NEIN
++ Link auf neue Seite wo letzte 10 angeschaute Pflanzen angezeigt werden
++ "gefunde" zu gefunden umbennnen
+
+
+* Betakeys
+- Datum nullable
+~ keys ausgrauen/druchstreichen wenn gesendet/verwendet
+
+* Alerts
+- Jetzt schlägt ihm die Anwendung vor, zu den Pflanzen bedingte Warnungen hinzuzufügen, wenn diese bei den entsprechenden Pflanzen hinterlegt sind.
+- Warnungen betreffen zum Beispiel Wetterereignisse wie Frost, Hitze, Sturm, zu viel oder zu wenig Feuchtigkeit. Diese Warnungen hat ein Gartenfachmann, falls zutreffend, für den Benutzer bereits bei der Pflanze vorkonfiguriert und werden, wenn der Benutzer es wünscht, automatisch bei Vorliegen entsprechender
+- Wetterlagen als Warnungen per E-Mail, SMS oder Messenger Nachricht an ihn verschickt.
+
+* Allgmein
+- Passwort ändern mцglich machen
+- Email ändern
+- Email erst nach Bestätigung дndern
+- Wann wird eine Property ьberhaupt erstellt? Bei der Registrierung?
+
+* Todos
+- Bei neuem Todo: Auswahl genaues Datum oder "Anfang, Mitte, Ende Monat" bis ""...
+
+- Neues Todo/neues wiederkehrendes Todo auf eine Seite
+- Auf der Gartenseite+mehr Link zu neuem Todo
+- In der Liste die Anzahl der jeweiligen Pflanzen anzeigen
+- Ignorieren zu löschen umbenennen (überall)
+- Fällig am Datum mit Datepicker wo man direkt das Datum neu setzen kann
+- Standardmäßig die nächsten 10 Todos anzeigen auf Liste
+- Button für Heute, Diese Woche, Diesen Monat
+- Kalenderansicht
+- Tododetailansicht mit Beschreibung + Video/Bilder etc.
+- Beim hinzufügen von Pflanzen Bestätigung der Templatekopie
+- Nicht mit Startdate sondern Createdate by cyclic. Todos mьssen ab dem CreateDate erledigt werden kцnnen.
+- Todos bearbeiten (vorallem auch cyclic)
+- Im Adminbereich sollen die Vorschlдge editierbar sein.
+- Tooldetailseite soll Todos anzeigen
+- Wenn Todos anstehen, können benötigte Materialen oft einfach per Click direkt auf der Webseite bestellt werden.
+- ^ Link ins Model (für Produkt)
+
+* Shop
++ Artikel "normal" und mit Punkten bezahlen. Preise fьr beide Mцglichkeiten anzeigen
+- Change quantity - bei menge = 1 soll "-"-Button kein request machen
+
+* Mein Garten
+- Wetterwarnungen nach Todos anzeigen. Link zu Detailseite mit einer Liste der mцglichen Warnungen hinzufьgen (Dьrre, Frost, Sturm,...)
+
+* Tools
+- Gartengerдte und Maschinen hinzufьgen. Aus vorgeschlagenen auswдhlen oder selbst erstellen.
+
+* Sozialaspekte
+- Freunde hinzufьgen/lцschen. ?Blacklist?
+- Garten der Anderen kommentieren und bewerten.
+- Eingehende Kommentare lцschen
+- Tagebucheinträge freigeben + Kommentarfunktion- Aus allen Tagebucheinträgen und eigenen Fotos lässt sich in wenigen Schritten auch eine Gartenhomepage mit eigener Adresse im Netz erstellen, die dann entweder
+  nur an Freunde oder an alle freigegeben werden kann.
+
+* Forum
+- Seite zu Pflanzen, Tools
+- Thread+Post (Forums-Stil)
+
+* Content contribution
+- In Pflanzenlexikon soll der Benutzer fьr jede Pflanze Ergдnzungen vorschlagen kцnnen (Text, Bild, beides)
+- Fьr angenommene Ergдnzungen werden Punkte vergeben.
+
+* Rollenverwaltung
++ Admin
+- User
+
+___
+Notes:
+
+Wenn ein TodoTemplate hinzugefьgt wird, erhalten die Pflanzen die bereits in Gдrten sind dieses Todo nicht dazugeschrieben
+___
+Erledigt:
+- Bild hochladen bei Pflanzen-Edit geht nicht
+- Mehr Bilder statt Todos anzeigen in übersicht
+- TodoCyclic von Template Userid = 0000
+- Todo zu UserPlants, UserTools, UserGardens erstellen kцnnen
+- Todos allgemein erstellen kцnnen
+- Pflanzendetailseite soll Todos anzeigen
+- Ignorieren geht nicht
+- Erledigt Markieren geht nicht bei den Details Seiten
+- TodoController
+Beim Erstellen von neuen Gartenbereichen sollen vorausgefьllte
+Vorschlдge angeboten werden (Balkon, Terrasse, Rasen, ...)
+- Todos in eine Liste zusammenfassen und vor den Gartenbereichen anzeigen
+- Eigenen Garten "verцffentlichen" fьr alle oder nur fьr Freunde
+- Profilseite?
+
+* Pflanzenlexikon
+- Suche soll mit AJAX laufen
+- Aktive Suchkriterien als eine Liste darstellen
+
+
+- Artikel zum Warenkorb hinzufьgen/Anzahl дndern/lцschen
+- Warenkorbseite
+- Im Adminbereich: Wert des Punktes дndern
+- Im Adminbereich: bei jedem Artikel soll der Bonusprozent des Preises einzeln einstellbar sein
+
+* Tagebuch
+- Tagebucheinträge zu Pflanzen sollen die Möglichkeit haben, ins Forum kopiert zu werden

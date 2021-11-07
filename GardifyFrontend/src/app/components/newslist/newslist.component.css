@@ -1,0 +1,14 @@
+.bt-border { border-bottom: 1px solid; }
+.bt-border.dark { border-color: #666; }
+.bt-border.light { border-color: #a1a1a1; }
+
+img {
+    object-fit: cover;
+    height: 220px;
+    width: 100%;
+}
+img.post{
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+} 

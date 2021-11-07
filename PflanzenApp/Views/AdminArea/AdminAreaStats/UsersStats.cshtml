@@ -1,0 +1,215 @@
+﻿@{
+    ViewBag.Title = "User-Statistik";
+    Layout = "~/Views/Shared/_LayoutAdminArea.cshtml";
+}
+
+<h2>Benutzer-Statistik</h2>
+<a href="~/i/stats/GetAllActiveUsers">User Aktivitäten</a><br>
+<a href="~/i/stats/GetUserStatsFromAppAndWepPage">Registrierungen und Anmeldungen (App & Webpage)</a>
+<div class="row">
+    <div class="col-md-12">
+        @using (Html.BeginForm("GetUsersStats", "AdminAreaStats", null, FormMethod.Post))
+        {
+            <form class="form-horizontal">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label for="startDate">Startdatum</label>
+                        @Html.TextBox("startDate", (string)ViewBag.startDate, new { @type = "date", @class = "form-control col-lg-3 " })
+                    </div>
+                    <div class="col-md-3">
+                        <label for="endDate">Enddatum</label>
+                        @Html.TextBox("endDate", (string)ViewBag.endDate, new { @type = "date", @class = "form-control col-lg-3 " })
+                    </div>
+                    <div class="col-md-2">
+                        <label for="groupBy">Ansicht</label>
+                        <select class="form-control" id="groupBy" name="groupBy">
+                            <option value="day">Tag</option>
+                            <option value="week">Woche</option>
+                            <option value="month">Monat</option>
+                            <option value="year">Jahr</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="demoOnly">Normal User/Demo User</label>
+                        <select class="form-control" id="demoOnly" name="demoOnly">
+                            <option value="false" selected="@(ViewBag.DemoOnly == "False")">Nur Normal User</option>
+                            <option value="true" selected="@(ViewBag.DemoOnly == "True")">Nur Demo User</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2" style="padding-top:24px;">
+                        <input class="btn btn-default" type="submit" value="Filtern" />
+                    </div>
+                </div>
+            </form>
+        }
+        @using (Html.BeginForm("GetUsersStats", "AdminAreaStats", null, FormMethod.Post))
+        {
+            <form class="form-horizontal">
+
+                <div class="form-group row" style="margin-top: 8px">
+                    <div class="col-md-12">
+                        <input class="btn btn-primary" type="submit" value="Zurücksetzen" />
+                    </div>
+                </div>
+            </form>
+        }
+    </div>
+
+    @*<h3>Pflanzen</h3>
+    @if (ViewBag.DemoOnly == "True")
+    {
+        <h3>User Pflanzen Demo-Login</h3>
+    }
+    else
+    {
+        <h3>>User Pflanzen </h3>
+    }
+    <canvas id="plantsCountChart" width="800" height="400"></canvas>*@
+
+    <!--<!--<h3>Anmeldungen</h3>
+    -->
+    <!--@* User hat sich im Demomodus registriert *@-->
+    <!--<!--<canvas id="usersLastLoginChart" width="800" height="400"></canvas>-->
+
+    @if (ViewBag.DemoOnly == "True")
+    {
+        <h3> Demo-Registrierungen</h3>
+    }
+    else
+    {
+<h3>Registrierungen : Vorgestern (@ViewBag.BeforeYesterdayValue) / Gestern (@ViewBag.YesterdayValue) / Heute (@ViewBag.TodayValue) </h3>
+        <h4>(inklusive gelöschte User exklusive Demo-Registrierungen)</h4>
+    }
+    <canvas id="usersChart" width="800" height="400"></canvas>
+    
+
+    <h3>Registrierungen (kumulativ) @ViewBag.CumStartDate - @ViewBag.CumEndDate  : @ViewBag.CumRegUsersYesterday</h3>
+    <h4>exklusive gelöschte User</h4>
+    <canvas id="cumulativeRegistrations" width="800" height="400"></canvas>
+
+
+
+</div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
+    <script>
+
+    // cumulative registrations chart
+
+    var cumulativeRegistrationsLabels = @Html.Raw(Json.Encode(@ViewBag.CumRegUsers.Labels));
+    var cumulativeRegistrationsData = @Html.Raw(Json.Encode(@ViewBag.CumRegUsers.Values));
+    var cumulativeRegistrationsCtx = document.getElementById('cumulativeRegistrations').getContext('2d');
+    new Chart(cumulativeRegistrationsCtx, {
+        type: 'bar',
+        data: {
+            labels: cumulativeRegistrationsLabels,
+            datasets: [{
+                label: 'Kumulative Registrierungen',
+                data: cumulativeRegistrationsData,
+                backgroundColor: 'rgba(104, 214, 255, 0.3)',
+                borderColor: 'rgba(104, 214, 255, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+
+
+    // logins chart
+
+    @*var loginLabels = @Html.Raw(Json.Encode(@ViewBag.DemoUsers.Labels));
+    var loginData = @Html.Raw(Json.Encode(@ViewBag.DemoUsers.Values));
+    var usersVisitsCtx = document.getElementById('usersLastLoginChart').getContext('2d');
+    new Chart(usersVisitsCtx, {
+        type: 'bar',
+        data: {
+            labels: loginLabels,
+            datasets: [{
+                label: "@ViewBag.DemoOnly" === 'True' ? 'Anzahl der Anmeldungen im Demo-Login' : 'Anzahl der Anmeldungen',
+                data: loginData,
+                backgroundColor: 'rgba(104, 214, 255, 0.3)',
+                borderColor: 'rgba(104, 214, 255, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });*@
+
+    // register chart
+    var registerLabels = "@ViewBag.DemoOnly" === 'True'? @Html.Raw(Json.Encode(@ViewBag.ConvertedReg.Labels)):@Html.Raw(Json.Encode(@ViewBag.RegUsers.Labels)) ;
+    var registerData = "@ViewBag.DemoOnly" === 'True'?@Html.Raw(Json.Encode(@ViewBag.ConvertedReg.Values)):@Html.Raw(Json.Encode(@ViewBag.RegUsers.Values));
+    @*var registerLabels=@Html.Raw(Json.Encode(@ViewBag.RegUsers.Labels));
+    var registerData=@Html.Raw(Json.Encode(@ViewBag.RegUsers.Values));*@
+    var registerCtx = document.getElementById('usersChart').getContext('2d');
+    new Chart(registerCtx, {
+        type: 'bar',
+        data: {
+            labels: registerLabels,
+            datasets: [{
+                label:  "@ViewBag.DemoOnly" === 'True' ? 'Anzahl der neuen Registrierungen im Demo-Login' : 'Anzahl der neuen Registrierungen',
+                data: registerData,
+                backgroundColor: 'rgba(104, 214, 255, 0.3)',
+                borderColor: 'rgba(104, 214, 255, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+
+    // plant count chart
+    @*var plantsLabels = @Html.Raw(Json.Encode(@ViewBag.PlantsCount.Labels));
+    var plantsCount = @Html.Raw(Json.Encode(@ViewBag.PlantsCount.Values));
+    var plantsCountCtx = document.getElementById('plantsCountChart').getContext('2d');
+    new Chart(plantsCountCtx, {
+        type: 'bar',
+        data: {
+            labels: plantsLabels,
+            datasets: [{
+                label: 'User die mindestens (n) Pflanzen haben',
+                data: plantsCount,
+                backgroundColor: '#90be6d',
+                borderColor: '#90be6d',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });*@
+
+
+
+    
+
+    </script>

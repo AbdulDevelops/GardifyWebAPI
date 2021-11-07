@@ -1,0 +1,668 @@
+  <div class="wrapper {{mode}}">
+    <div class="">
+      <!---->
+      <div id="carouselImage" class=" d-md-block carousel slide" data-ride="carousel" data-interval="70000">
+       <!--  <ol class="carousel-indicators" style="bottom: 8px;">
+          <li data-target="#carouselImage" data-slide-to="0" class="active"></li>
+          <li data-target="#carouselImage" data-slide-to="1"></li>
+        </ol> -->
+        <div class="carousel-inner ">
+          <div class="carousel-item active  ">
+            <div class="col-lg-12 px-0" >
+              <picture>
+                <source media="(max-width: 768px)" srcset="./assets/images/21_JBY6943_Header_mobil.jpg">
+                <img class="d-block w-100 " src="./assets/images/21_JBY6943_Header_Desktop.jpg" alt=" Slide">
+                <span class="img-cred">FOTO: JÜRGEN BECKER - DESIGN UND GARTEN: PETER JANKE</span>
+              </picture>
+            </div>
+            <div  class="greyBox {{mode}}" *ngIf="register">
+              <div class="text-container">
+                <div class="row">
+                  <div class="col-12">
+                    <h2 [ngClass]="{'t-18':isMobile, 't-20':!isMobile}">Kostenlose Registrierung</h2>
+                  </div>
+                  <div class="col-12">
+                    <form  class="form-horizontal px-3" id="reg"  [formGroup]="registrationForm" validate>
+                      <div class="row">
+                        <div class="col-12 col-md-12 col-lg-4">
+                          <div class="row">
+                            <div class="col-12 px-0 py-2">
+                              <input type="email" autocomplete="email" formControlName="Email" class="form-control t-12 t-light btn_border075" [class.borderDanger]="f['Email'].invalid" placeholder="E-Mail *" [ngClass]="{ 'is-invalid': f.Email.errors && f.Email.touched, 'back-red':f.Email.errors && f.Email.touched}">
+                              <img *ngIf="!f['Email'].invalid" src="assets/main-icons/Haken.svg" id="input_img">
+
+                            </div>
+                            <div class="col-12 px-0 py-2">
+                              <input type="text" autocomplete="username" formControlName="UserName" class="form-control t-12 t-light d-inline-block mr-2" [class.borderDanger]="f['UserName'].invalid" placeholder="Username *" [ngClass]="{ 'is-invalid': f.UserName.errors && f.UserName.touched }">
+                              <img *ngIf="!f['UserName'].invalid" src="assets/main-icons/Haken.svg" id="input_img">
+
+                            </div>
+                            <div class="col-12 t-10">
+                              <span>* Pflichtangaben </span><br>
+                              <small class="text-danger" [hidden]="!f['Email'].invalid || !(f['Email'].dirty || f['Email'].touched)">
+                                Ihre E-Mail Adresse ist nicht korrekt.
+                              </small><br>
+                              <small class="text-danger" *ngIf="f['UserName'].errors?.minlength && f['UserName'].invalid">
+                                USERNAME muss mind. 4 Zeichen sein 
+                              </small>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-12 col-md-12 col-lg-4">
+                          <div class="row mb-3">
+                            <div class="col-12 px-0 py-2">
+
+                                <select formControlName="Country" [class.borderDanger]="f['Country'].invalid" class="form-control t-12 t-light" placeholder="Land eintragen *" [ngClass]="{ 'is-invalid': f.Country.errors && f.Country.touched }">
+                                  <option hidden value="" disabled selected>Land auswählen *</option>
+                                  <option [ngValue]="'Deutschland'">Deutschland</option>
+                                  <option [ngValue]="'Österreich'">Österreich</option>
+                                  <option [ngValue]="'Schweiz'">Schweiz</option>
+                                </select>
+                                <img *ngIf="!f['Country'].invalid" src="assets/main-icons/Haken.svg" id="input_img">
+
+                            </div>
+                            <div class="col-12 px-0 py-2">
+                              <input type="text"  formControlName="PLZ" [class.borderDanger]="f['PLZ'].invalid" class="form-control t-12 t-light" placeholder="PLZ *" [ngClass]="{ 'is-invalid': f.PLZ.errors && f.PLZ.touched  }">
+
+                              <img *ngIf="!f['PLZ'].invalid " src="assets/main-icons/Haken.svg" id="input_img">
+
+                            </div>
+                            <div class="col-12 t-10">
+                              <fa-icon class="text-grey ptr" [icon]="faInfoCircle" mat-raised-button matTooltipClass="tooltip-text" matTooltipPosition="above" matTooltip="Damit du standortgenaue Wetter-Infos, sowie Frost- und Sturmwarnungen für die empfindlichen Pflanzen in deinem Garten bekommst, benötigen wir deine Postleitzahl."></fa-icon>
+
+                              <span > Warum fragen wir das ab?</span><br>
+                              <small  class="text-danger" *ngIf=" (f['PLZ'].errors?.minlength && register && f['PLZ'].invalid )">
+                                Deine Postleitzahl ist nicht korrekt.
+                              </small>
+                              <small  class="text-danger" *ngIf="f.PLZ.errors?.zipCodeMustMatch">
+                                Deine Postleitzahl ist nicht korrekt.
+                              </small>
+                            </div>
+                          </div> 
+                          
+                        </div>
+                        <div class="col-12 col-md-12 col-lg-4">
+                          <div class="row">
+                            <div class="col-12  px-0 py-2" style="display: inherit;">
+                              <input type="password" autocomplete="new-password" formControlName="Password" class="form-control t-12 t-light" [class.borderDanger]="f['Password'].invalid" placeholder="Passwort *" [ngClass]="{ 'is-invalid': f.Password.errors && f.Password.touched }" appAppPassword >
+                              <img *ngIf="!f['Password'].invalid"src="assets/main-icons/Haken.svg" id="input_img2">
+
+                              
+                            </div>
+                            <div class="col-12  px-0 py-2" style="display: inherit;">
+                              <input type="password" formControlName="ConfirmPassword" [class.borderDanger]="f['ConfirmPassword'].invalid" class="form-control t-12 t-light" placeholder="Passwort wiederholen *" [ngClass]="{ 'is-invalid': f.ConfirmPassword.errors && f.ConfirmPassword.touched}"   appAppPassword>
+                              <img *ngIf="!f['ConfirmPassword'].invalid" src="assets/main-icons/Haken.svg" id="input_img2"><br>
+                             
+                             
+                            </div>
+                             <div class="col-12 t-10">
+                              <!--<small *ngIf="register && f.Password.errors.required"> Password is required</small>
+                              <small *ngIf=" register && f.ConfirmPassword.errors.required">Confirm Password is required</ small> -->
+                              <small class="text-danger " *ngIf="f.ConfirmPassword.errors?.mustMatch">
+                                Die Passwörter stimmen nicht überein.
+                              </small><br>
+                              <small [ngClass]="{'text-danger':f.Password.errors?.pattern && register && f.Password.invalid  }" >
+                                Passwort muss Folgendes enthalten: Kleinbuchstaben, Großbuchstaben, Nummer, Sonderzeichen
+                              </small><br>
+                              <small  [ngClass]="{'text-danger':f.Password.errors?.minlength && register && f.Password.invalid}">
+                                Passwort muss mind. 6 Zeichen sein 
+                              </small>                           
+                             </div> 
+                            
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                  <hr class="{{mode}}" style="width: 100%;">
+                  <div class="col-12">
+                   <div class="row">
+                     <div class="col-12 col-md-12 col-lg-4">
+                      <div class="custom-control custom-checkbox">
+                        <input class="custom-control-input" type="checkbox" id="inlineCheckbox" value="newsLetterAbo"(click)="newsLetterAbo=!newsLetterAbo">
+                        <label class="custom-control-label text-green t-14" for="inlineCheckbox">Newsletter bestellen</label>
+                      </div>
+                     </div>
+                     <div class="col-12 col-md-12 col-lg-6 t-10">
+                     <p> Wir schützen Nutzerdaten konsequent und treiben keinen Handel damit! Zu unserer <a routerLink="/datenschutz"><u>Datenschutzerklärung</u></a></p>
+                    </div>
+                    <div class="col-2">
+
+                    </div>
+                   </div>
+                     
+                  </div>
+                  <div class="col-12">
+                    <button style="width: 270px; " class=" float-left btn btn-green t-reg t-12 text-white btn_border075 " (click)="socialPageReg()"
+                    >Jetzt kostenlos registrieren                     <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                    </button>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div  class="whiteBox {{mode}}" *ngIf="!register">
+                
+                <div class="text-container">
+                    <div class="row">
+                        <div class="col-12 px-4 {{isMobile? 't-18': 't-20'}}">
+                          <span class="t-med ">Kostenlos als App und im Web</span><br>
+                          <span class=" t-bold">gardify – dein genialer Gartenmanager!</span><br><br>
+
+                        </div>
+                        <div class="col-12 col-md-12 col-lg-6 border-right px-4 {{isMobile? 't-11': 't-12'}} ">
+                           
+                           <span class="t-light text-blackish" > Einfach per Klick Pflanzen deinem Garten hinzufügen.
+                            Fertig ist dein individueller Gartenpflege-Kalender!</span><br><br>
+                            <ul class="t-light text-blackish">
+                                <li>   To-dos für über 3.000 Gartenpflanzen</li>
+                                
+                                <li>Pflanzenerkennung per Foto</li>
+                                <li>Online-Pflanzen-Doc</li>
+                                <li>Wetterwarnungen für Pflanzen und Geräte</li>
+                                <li>300 kombinierbare Kriterien für die Pflanzensuche</li>
+                                <li>Tipps zum ökologischen Gärtnern</li>
+                            </ul>
+                        </div>
+                        <div class="col-12 col-md-12 col-lg-6 order-12 order-sm-12 order-lg-1">
+                          <div class="btn_border075" >
+                            <button *ngIf="play" title="Ausblenden" class="hidevid-btn" (click)="play = false">&times;</button>
+                            <iframe *ngIf="play"   src="https://www.youtube.com/embed/zOc18eOb9Fg?autoplay=1" frameborder="0" allow="accelerometer;  encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <img *ngIf="!play" width="100%" height="100%" src="assets/images/Markus_Video_mit_Button.png" (click)="play=true">
+                          </div>
+                         
+                        </div>
+                        
+                      <div class="col-12 order-1 oder-sm-1 order-lg-12 px-4" >
+                        <div class="row">
+                          <div class="col-12">
+                            <button style="width: 270px;" class=" float-left btn btn-green t-reg t-12 text-white btn_border075 " (click)="register=true">
+                              Jetzt kostenlos registrieren</button>
+                          </div>
+                          <div class="col-12 d-none d-lg-block">
+                            <span ><a target="_blank" href="https://apps.apple.com/us/app/gardify/id1525529405"><img style="height: 55px;" src="assets/Header-icon/Download_on_the_App_Store_Badge_DE_RGB_blk_092917.svg"/></a></span> 
+
+                            <span> <a target="_blank" href="https://play.google.com/store/apps/details?id=com.gardify.android&gl=DE"><img style="height: 80px;" src="assets/Header-icon/google-play-badge.svg"/></a></span>
+
+                          </div>
+                          <div class="col-12 d-block d-lg-none">
+                            <span ><a target="_blank" href="https://apps.apple.com/us/app/gardify/id1525529405"><img style="height: 40px;" src="assets/Header-icon/Download_on_the_App_Store_Badge_DE_RGB_blk_092917.svg"/></a></span> 
+
+                            <span> <a target="_blank" href="https://play.google.com/store/apps/details?id=com.gardify.android&gl=DE"><img style="height: 55px;" src="assets/Header-icon/google-play-badge.svg"/></a></span>
+
+                          </div>
+                        </div>
+                        
+                        
+
+                        <hr class="d-lg-none {{mode}} " style="width: 100%; margin-top: 3rem;">
+                      </div>
+                      <div class="col-md-12 col-lg-6 order-12 order-sm-12 order-lg-1">
+                        
+        
+                      </div>
+                    </div>
+                 
+                </div>
+                  
+              </div>
+           
+            </div>
+  
+          
+          </div>
+        </div>
+      </div>
+      <div class="container d-none d-lg-block">
+        <div class="row justify-content-between text-white t-15">
+          <div class="col-2 caro-item center ">
+            <div class="imgBox ptr" style="background-color:#2d786f ; line-height: 15pt; " (click)="startTour(1)">
+              <img src="/assets/navbarIcons/Mein_Garten.svg" class="featicon">
+              <span class="t-bold mt-3 ">
+                MEIN
+              </span><br>
+              <span class="t-reg ">
+                GARTEN
+              </span>
+            </div>
+            <app-tour *ngIf="currentTourStep === 1" (closeTour)="closeTour()" (changeStep)="changeTourStep($event)" [step]="steps[currentTourStep-1]" [totalStep]="5"></app-tour>              
+
+          </div>
+          <div class="col-2 caro-item center">
+            <div class="imgBox ptr " style="background-color:#5c9022 ;line-height: 15pt;" (click)="startTour(2)">
+              <img src="/assets/navbarIcons/To_Do_Kalender.svg" class="featicon ">
+              <span class="t-bold ">
+               TO-DO
+              </span><br>
+              <span class="t-reg ">
+                KALENDAR
+              </span>
+            </div>
+            <app-tour *ngIf="currentTourStep === 2" (closeTour)="closeTour()" (changeStep)="changeTourStep($event)" [step]="steps[currentTourStep-1]" [totalStep]="5"></app-tour>              
+
+          </div>
+          <div class="col-2 caro-item center">
+            <div class="imgBox ptr " style="background-color:#89ab54 ;line-height: 15pt;" (click)="startTour(3)">
+              <img src="/assets/navbarIcons/Pflanzensuche.svg" class="featicon ">
+              <span class="t-reg ">
+                PFLANZEN
+              </span><br>
+              <span class="t-bold ">
+                SUCHE
+              </span>
+            </div>
+            <app-tour *ngIf="currentTourStep === 3" (closeTour)="closeTour()" (changeStep)="changeTourStep($event)" [step]="steps[currentTourStep-1]" [totalStep]="5"></app-tour>              
+
+          </div>
+          <div class="col-2 caro-item center">
+            <div class="imgBox ptr" style="background-color:#40968b ;line-height: 15pt;" (click)="startTour(4)">
+              <img src="/assets/navbarIcons/Pflanzenscan.svg" class="featicon">
+             
+              <span class="t-reg">
+                PFLANZEN
+              </span><br>
+              <span class="t-bold">
+                SCAN
+              </span>
+            </div>
+            <app-tour *ngIf="currentTourStep === 4" (closeTour)="closeTour()" (changeStep)="changeTourStep($event)" [step]="steps[currentTourStep-1]" [totalStep]="5"></app-tour>              
+
+          </div>
+          <div class="col-2 caro-item center">
+            <div class="imgBox ptr" style="background-color:#38a58a ;line-height: 15pt;" (click)="startTour(5)">
+              <img src="/assets/navbarIcons/Pflanzen_Doc_Icon.svg" class="featicon">
+              <span class="t-reg">
+                PFLANZEN
+              </span><br>
+              <span class="t-bold">
+                DOC
+              </span>
+            </div>
+            <app-tour *ngIf="currentTourStep === 5" (closeTour)="closeTour()" (changeStep)="changeTourStep($event)" [step]="steps[currentTourStep-1]" [totalStep]="5"></app-tour>              
+
+          </div>
+          <div class="col-2 caro-item center">
+            <div class="imgBox ptr" style="background-color:#2d786f ;line-height: 15pt;" (click)="startTour(6)">
+              <img src="/assets/navbarIcons/Video.svg" class="featicon">
+              <span class="t-reg">
+                GARDIFY
+              </span><br>
+              <span class="t-bold">
+                VIDEOS
+              </span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div  class=" d-lg-none d-block  {{mode}}">
+        <div class="container-fluid text-white t-15">
+          <div id="carouselNav" class="carousel slide " data-interval="20000" data-ride="carousel">
+            
+            <div class="carousel-inner" [ngStyle]="{'overflow': currentTourStep > 0 ? 'visible' : 'visible' }">
+              <ng-container>
+                  <!-- first slide -->
+                <div class="carousel-item active caro-padding">
+                  <div class="row justify-content-between">
+                    <div class="col-6 caro-item center ">
+                      <div class="imgBoxMobile ptr" style="background-color:#2d786f ; line-height: 15pt;" (click)="startTour(1)">
+                        <img src="/assets/navbarIcons/Mein_Garten.svg" class="featicon">
+                        <span class="t-bold mt-3 ">
+                          MEIN
+                        </span><br>
+                        <span class="t-reg ">
+                          GARTEN
+                        </span>
+                      </div>
+                      <app-tour *ngIf="currentTourStep === 1" (closeTour)="closeTour()" (changeStep)="changeTourStep($event)" [step]="steps[currentTourStep-1]" [totalStep]="5"></app-tour>              
+          
+                    </div>
+                    <div class="col-6 caro-item center">
+                      <div class="imgBoxMobile ptr " style="background-color:#5c9022 ;line-height: 15pt;" (click)="startTour(2)">
+                        <img src="/assets/navbarIcons/To_Do_Kalender.svg" class="featicon ">
+                        <span class="t-bold ">
+                         TO-DO
+                        </span><br>
+                        <span class="t-reg ">
+                          KALENDAR
+                        </span>
+                      </div>
+                      <app-tour *ngIf="currentTourStep === 2" (closeTour)="closeTour()" (changeStep)="changeTourStep($event)" [step]="steps[currentTourStep-1]" [totalStep]="5"></app-tour>              
+          
+                    </div>
+                  </div>
+                </div>
+                <!-- second slide -->
+                <div class="carousel-item  caro-padding">
+                  <div class="row justify-content-between">
+                    <div class="col-6 caro-item center">
+                      <div class="imgBoxMobile ptr " style="background-color:#89ab54 ;line-height: 15pt;" (click)="startTour(3)">
+                        <img src="/assets/navbarIcons/Pflanzensuche.svg" class="featicon ">
+                        <span class="t-reg ">
+                          PFLANZEN
+                        </span><br>
+                        <span class="t-bold ">
+                          SUCHE
+                        </span>
+                      </div>
+                      <app-tour *ngIf="currentTourStep === 3" (closeTour)="closeTour()" (changeStep)="changeTourStep($event)" [step]="steps[currentTourStep-1]" [totalStep]="5"></app-tour>              
+          
+                    </div>
+                    <div class="col-6 caro-item center">
+                      <div class="imgBoxMobile ptr" style="background-color:#40968b ;line-height: 15pt;" (click)="startTour(4)">
+                        <img src="/assets/navbarIcons/Pflanzenscan.svg" class="featicon">
+                       
+                        <span class="t-reg">
+                          PFLANZEN
+                        </span><br>
+                        <span class="t-bold">
+                          SCAN
+                        </span>
+                      </div>
+                      <app-tour *ngIf="currentTourStep === 4" (closeTour)="closeTour()" (changeStep)="changeTourStep($event)" [step]="steps[currentTourStep-1]" [totalStep]="5"></app-tour>              
+          
+                    </div>
+                  </div>
+                </div>
+                <!-- third slide -->
+                <div class="carousel-item  caro-padding">
+                  <div class="row justify-content-between">
+                    <div class="col-6 caro-item center">
+                      <div class="imgBoxMobile ptr" style="background-color:#38a58a ;line-height: 15pt;" (click)="startTour(5)">
+                        <img src="/assets/navbarIcons/Pflanzen_Doc_Icon.svg" class="featicon">
+                        <span class="t-reg">
+                          PFLANZEN
+                        </span><br>
+                        <span class="t-bold">
+                          DOC
+                        </span>
+                      </div>
+                      <app-tour *ngIf="currentTourStep === 5" (closeTour)="closeTour()" (changeStep)="changeTourStep($event)" [step]="steps[currentTourStep-1]" [totalStep]="5"></app-tour>              
+          
+                    </div>
+                    <div class="col-6 caro-item center">
+                      <div class="imgBoxMobile ptr" style="background-color:#2d786f ;line-height: 15pt;" (click)="startTour(6)">
+                        <img src="/assets/navbarIcons/Video.svg" class="featicon">
+                        <span class="t-reg">
+                          GARDIFY
+                        </span><br>
+                        <span class="t-bold">
+                          VIDEOS
+                        </span>
+                      </div>
+                      
+                            
+          
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+              
+            </div>
+            <ol class="carousel-indicators">
+              <li data-target="#carouselNav" data-slide-to="0" class="active"></li>
+              <li data-target="#carouselNav" data-slide-to="1"></li>
+              <li data-target="#carouselNav" data-slide-to="2"></li>
+            </ol>
+            <a class="carousel-control-prev controlFirst" href="#carouselNav" role="button" data-slide="prev">
+              <span class="carousel-control-prev {{mode}} " aria-hidden="false"></span>
+             
+               <span><img src="/assets/main-icons/Pfeil_Icon_links.svg" width="10"></span> 
+            </a>
+            <a class="carousel-control-next controlFirst" href="#carouselNav" role="button" data-slide="next">
+              <span class="carousel-control-next {{mode}}" aria-hidden="false"></span>
+               <span><img src="/assets/main-icons/Pfeil_Icon_rechts.svg" width="10"></span> 
+              
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class=" presse ">
+        <div class="container">
+          <div class="row t-14">
+            <div class="col-12 col-lg-8">
+              <div class="row mt-5">
+                <div class="col-12 col-lg-6">
+                  <div class="row">
+                    <div class="col-12">
+                      <h3 class="text-white">Pressestimmen</h3>
+                      <div class="sprechblase">
+                       " Gardify ist eine neue digitale Gartenanwendung, die <span class="t-bold">verschiedene nützliche Werkzeuge</span> einem Programm vereint."
+                        
+                      </div>
+                      <span class="float-right text-white" style="    margin-top: 0.5rem;" >GartenFlora</span>
+                    </div>
+                    <div class="col-12 mt-5" style="align-items: center;">
+                      <div class="sprechblase ">
+                       " Der <span class="t-bold">Einstieg</span> in gardify ist <span class="t-bold">schnell</span> gemacht."
+                       
+                      </div>
+                      <span class=" text-white float-right" style="    margin-top: 0.5rem;" >Gartenpraxis</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-lg-6">
+                  <div class="row">
+                    <div class="col-12 mt-5">
+                      <div class="sprechblase float-right" >
+                        "<span class="t-bold">Übersichtlicht, verständlich, wissenschaftlich fundiert</span> und erstmals exakt auf die eigenen Pflanzen und das regionale Wetter vor Ort abgestimmt. Gardify bündelt alle Pflege-, Dünge- und Schnitthinweise vollautomatisch zu einem individuellen To-Do-Kalender ... kinderleichte Handhabung.
+                        "
+                       </div>
+                       <span class="float-right text-white" style="    margin-top: 0.5rem;" >Nürtinger Zeitung</span>
+                    </div>
+                    <div class="col-12 mt-5">
+                      <div class="sprechblase float-left">
+                       " Positiv überrascht. Der Gartenplaner ist für Gärtner aller Größen und vor allem <span class="t-bold">für Einsteiger sehr gut geeignet.</span> "
+                        
+                       
+                       
+                      </div>
+                      <span class="float-right text-white"style="    margin-top: 0.5rem;" >Blogger Ladsyvu</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            
+            
+            <div class="col-12 col-lg-4">
+              <img class="phone" src="assets/images/gardify_App_Startseite.png">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>  
+  
+    <!--News Section-->
+  <div class="container pt-3 {{mode}} d-block {{mode==='light'?'text-darkgrey':'text-white'}}">
+    <h5 routerLink="/news" class="ptr pb-2 t-reg t-18 bt-border {{mode}} {{mode==='light'?'text-darkgrey':'text-white'}}">News</h5>
+    <div class="row col-12">
+      <span class="t-light {{mode==='dark'?'text-white':'text-blackish'}}" [ngClass]="{'t-20': isMobile, 't-27': !isMobile}">
+         <a (click)= "showInstaPosts()" [ngClass]="{'text-green t-bold': showInstapost, 'text-blackish t-reg': !showInstapost}">Garten News</a> 
+        <div class="d-inline-block" style="border-left: 1px solid #666; margin-left: 1rem;
+        margin-right: 1rem;
+        height: 30px;"></div>
+        <a [ngClass]="{'text-green t-bold': !showInstapost, 'text-blackish t-reg': showInstapost}" (click)="hideInstaPosts()">Gardify News</a></span>
+    </div>
+    <ng-container *ngIf="newsList && !showInstapost" >
+      <div *ngFor="let article of newsList; let last = last; let i = index">
+        <ng-container *ngIf="((i) % 6) == 0 && i > 0" >
+          <app-ad [ad]="ad" ></app-ad>
+      </ng-container>
+        <div class="row py-4 {{mode}}" [ngClass]="{'bt-border': !last}">
+          <div *ngIf="article.EntryImages.length>0" class="col-12 col-lg-4">
+            <img class="news-img ptr" [routerLink]="['/news/', article.Id, article.Title]" [src]="toUrl(article.EntryImages[0]?.SrcAttr || null)" [alt]=article.Title>
+          </div>
+          <div class="col-12 col-lg-7 offset-md-1">
+            <h3 class="t-light t-13 text-grey">{{article.Date | date:'dd.MM.yyyy'}}</h3>  
+            <h2 [routerLink]="['/news/', article.Id, article.Title]" class="t-bold t-18 ptr">{{article.Title}}</h2>
+            <h2 [routerLink]="['/news/', article.Id, article.Title]" class="t-light t-italic t-18 ptr">{{article.SubTitle}}</h2>
+            <p>
+              <span class="t-light t-13 {{mode === 'light'? 'text-blackish' : 'text-white'}}" [innerHTML]="article.Text.substr(0,400)"></span>
+              <a [routerLink]="['/news/', article.Id, article.Title]" class="t-bold">...mehr</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="instaPostList && showInstapost ">
+      <div *ngFor="let post of instaPostList; let i = index">
+        <ng-container *ngIf="((i) % 6) == 0 && i > 0" >
+          <app-ad [ad]="ad" ></app-ad>
+      </ng-container>
+          <div class="row py-4 bt-border {{mode}}">
+              <div class="col-12 col-md-12 col-lg-4">
+                <div class="row">
+                  <div class="col">
+                    <a data-toggle="modal" data-target="#newsImageModal" (click)="newsImageModal = ''; newsImageModal = post.MediaEntry; selectedPost=post">
+                      <img *ngIf="post.Media_Type =='IMAGE'" style="max-height: 400px;"  class="ptr post" [src]="post.MediaEntry" alt="image">
+                      <img *ngIf="post.Media_Type =='CAROUSEL_ALBUM'" style="max-height: 400px;" class="ptr post" [src]="post.MediaEntry" alt="image">
+                      <span *ngIf="post.Media_Type =='VIDEO'">
+                        <video controls width="330" height="250" [src]="post.MediaEntry" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></video>
+                      </span>
+                    </a>
+                    
+                  </div>
+                </div>
+
+              </div>
+              <div class="col-12 col-md-12 col-lg-7 offset-md-1">
+                <h3 class="t-light t-13 text-grey">{{post.Date | date:'dd.MM.yyyy'}}</h3>  
+                <p >
+                    <span class="t-light t-13  {{mode === 'light'? 'text-blackish' : 'text-white'}}" [innerHTML]="post.Expanded? (post.Text.replace(myRegex4,replacegrp) | safeHtml ): (post.Text.replace(myRegex4,replacegrp).substring(0,200)+'...') | safeHtml ">
+                    </span>
+                    <span class="ptr mx-1 text-green t-bold" (click)="post.Expanded = !post.Expanded;" role="button">
+                      {{post.Expanded?'weniger':'mehr'}}
+                    </span>
+                   
+                  </p>
+              </div>
+          </div>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="selectedPost">
+      <div class="modal fade" id="newsImageModal" tabindex="-1" role="dialog" aria-labelledby="newsImageModal" aria-hidden="true">
+        <div class="modal-dialog" role="document" style="max-width: 600px;">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <img *ngIf="selectedPost.Media_Type =='IMAGE'"  class="ptr post " [src]="selectedPost.MediaEntry" alt="image">
+              <img *ngIf="selectedPost.Media_Type =='CAROUSEL_ALBUM'"  class="ptr post" [src]="selectedPost.MediaEntry" alt="image">
+              <span *ngIf="selectedPost.Media_Type =='VIDEO'">
+                <video controls width="330" height="250" [src]="selectedPost.MediaEntry" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></video>
+              </span>            
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    <ng-template #noNews>
+      <div class="row">
+        <div class="col-12 text-center">
+          <div class="app-loading">
+            <svg class="spinner position-relative" viewBox="25 25 50 50">
+              <circle class="path" cx="50" cy="50" r="16" fill="none" stroke-width="2" stroke-miterlimit="10" />
+            </svg>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+  <!--Tipps Section-->
+  <div class="container {{mode}} {{mode==='light'?'text-darkgrey':'text-white'}} news-section d-none d-lg-block pt-3">
+    <h5 class="mb-1 pb-2 t-reg t-18 bt-border {{mode}} {{mode==='light'?'text-darkgrey':'text-white'}}">Aktuelle Tipps</h5>
+    <div class="container px-1 mt-4 pb-5">
+      <div *ngIf="actualTipps?.length>0;else noTipps" id="tippsCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
+        <div class="carousel-inner pb-5 d-none d-md-block">
+          <div class="carousel-item active" style="height:210px">
+            <div class="row pt-1 pb-5 justify-content-between" *ngIf="actualTipps">
+              <div *ngFor="let item of actualTipps | slice:0:4" class="col-6 col-md-3 text-center" [routerLink]="['/artikel/',item.Id,item.Name]" >
+                  <img class="actualTipp-article ptr" [src]=toUrl(item.ArticleImages[0]?.SrcAttr) [alt]="item.Name" (click)="createLastViewvedArt(item.Id)">
+                <h3 href="#" class="t-13 mt-2 mb-1 tipp-text ">{{item.Name}}</h3>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item" style="height:210px">
+            <div class="row pt-1 pb-5 justify-content-between" *ngIf="actualTipps">
+              <div *ngFor="let item of actualTipps | slice:4" class="col-6 col-md-3 text-center" [routerLink]="'/artikel/'+item.Id" >
+                  <img class="actualTipp-article ptr" [src]=toUrl(item.ArticleImages[0]?.SrcAttr) [alt]="item.Name" (click)="createLastViewvedArt(item.Id)">
+                <h3 href="#" class="t-13 mt-2 mb-1 tipp-text ">{{item.Name}}</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+        <a class="carousel-control-prev" href="#tippsCarousel" role="button" data-slide="prev" style="top:-80px;">
+          <span class="carousel-control-prev {{mode}}" aria-hidden="true"></span>
+          <span><img src="./assets/images/pfeilL1.svg" width="80"></span>
+        </a>
+        <a class="carousel-control-next" href="#tippsCarousel" role="button" data-slide="next" style="top:-80px;">
+          <span class="carousel-control-next {{mode}}" aria-hidden="true"></span>
+          <span><img src="./assets/images/pfeilR1.svg" width="80"></span>
+        </a>
+     
+    </div>
+    <ng-template #noTipps>
+      <div class="row">
+        <div class="col-12 text-center">
+          <div class="app-loading">
+            <svg class="spinner position-relative" viewBox="25 25 50 50">
+              <circle class="path" cx="50" cy="50" r="16" fill="none" stroke-width="2" stroke-miterlimit="10" />
+            </svg>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+    
+  </div>
+</div>
+  <!--Tipps Section Mobile-->
+<div class="container {{mode}} {{mode==='light'?'text-darkgrey':'text-white'}} news-section d-block d-lg-none">
+  <h5 class="pt-3 mb-1 pb-2 t-reg t-18 bt-border">Aktuelle
+    Tipps</h5>
+  <div class="container px-1 mt-4 pb-5">
+    <div id="tippsCarousel3" class="carousel slide" data-ride="carousel" data-interval="0">
+
+      <div class="carousel-inner">
+        <div class="carousel-item active" style="height:210px">
+          <div class="row pt-1 pb-5 justify-content-between" *ngIf="actualTipps">
+            <div *ngFor="let item of actualTipps | slice:0:2" class="col-6 col-md-3 text-center" [routerLink]="'/artikel/'+item.Id" >
+                <img class="actualTipp-article ptr" [src]=toUrl(item.ArticleImages[0]?.SrcAttr) [alt]="item.Name" (click)="createLastViewvedArt(item.Id)">
+              <h3 href="#" class="t-13 mt-2 mb-1 tipp-text ">{{item.Name}}</h3>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item" style="height:210px">
+          <div class="row pt-1 pb-5 justify-content-between" *ngIf="actualTipps">
+            <div *ngFor="let item of actualTipps | slice:2:4" class="col-6 col-md-3 text-center" [routerLink]="'/artikel/'+item.Id" >
+                <img class="actualTipp-article ptr" [src]=toUrl(item.ArticleImages[0]?.SrcAttr) [alt]="item.Name" (click)="createLastViewvedArt(item.Id)">
+              <h3 href="#" class="t-13 mt-2 mb-1 tipp-text ">{{item.Name}}</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a class="carousel-control-prev" href="#tippsCarousel3" role="button" data-slide="prev" style="top:-80px;">
+        <span class="carousel-control-prev {{mode}}" aria-hidden="true"></span>
+        <span><img class="" src="./assets/images/pfeilL1.svg" width="60"></span>
+      </a>
+      <a class="carousel-control-next" href="#tippsCarousel3" role="button" data-slide="next" style="top:-80px;">
+        <span class="carousel-control-next {{mode}}" aria-hidden="true"></span>
+        <span><img class="" src="./assets/images/pfeilR1.svg" width="60"></span>
+      </a>
+
+    </div>
+  </div>
+</div>
+
+   
+   
+  
+   
+  
+ 
+  

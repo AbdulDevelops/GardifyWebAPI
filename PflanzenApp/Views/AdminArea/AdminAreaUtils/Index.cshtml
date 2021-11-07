@@ -1,0 +1,112 @@
+﻿@model GardifyModels.Models.AdminAreaViewModels.UtilsViewModel
+@{
+    ViewBag.Title = "Utils";
+    Layout = "~/Views/Shared/_LayoutAdminArea.cshtml";
+}
+
+<h2>Utils</h2>
+@*<div id="statusMessage">
+        @{Html.RenderPartial("~/Views/AdminArea/AdminAreaUtils/_statusMessage.cshtml", Model.StatusMessage);}
+    </div>
+
+    @using (Ajax.BeginForm("migrate-ctx", new AjaxOptions { UpdateTargetId = "statusMessage", HttpMethod = "Post", InsertionMode = InsertionMode.Replace }))
+    {
+        <input type="submit" value="Migrate DB" class="btn btn-default" />
+    }*@
+
+<div>
+    <div>
+        <h4>Derzeit in Folgenden Rollen eingetragen:</h4>
+        <div>
+            @ViewBag.message
+        </div>
+    </div>
+    <hr />
+    <div class="form-horizontal">
+        <div class="form-group">
+            <label class="col-md-2 control-label">
+                Wert des Punktes
+            </label>
+            <div class="col-md-10">
+                @Model.PointValue€
+            </div>
+        </div>
+    </div>
+    <h3>Aktuelles Wetter</h3>
+    <table class="table">
+        <tr>
+            <th>Gültig am</th>
+            <th>Temperatur</th>
+            <th>Niederschlag (mm)</th>
+            <th>Luftdruck</th>
+            <th>Luftfeuchtigkeit</th>
+            <th>Windgeschwindigkeit</th>
+        </tr>
+        <tr>
+            @if (Model.CurrentWeather != null)
+            {
+                <td>@Model.CurrentWeather.ValidAt</td>
+                <td>@Model.CurrentWeather.AirTemperature.Value</td>
+                <td>@Model.CurrentWeather.PrecipitationPastInterval.Value</td>
+                <td>@Model.CurrentWeather.AirPressureInHpa</td>
+                <td>@Model.CurrentWeather.RelativeHumidityInPercent100Based</td>
+                <td>@Model.CurrentWeather.AverageWindSpeed.Value</td>}
+            else
+            {
+                <td>Fehler!</td>}
+        </tr>
+    </table>
+</div>
+<div class="form-horizontal">
+    @using (Html.BeginForm("change-custom-settings", "AdminAreaUtils"))
+    {
+        @Html.AntiForgeryToken()
+        <h3>Wetter und Datum überschreiben</h3>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <div class="checkbox">
+                    <label>@Html.EditorFor(model => model.UseCustomData) Wetter und Datum überschreiben</label>
+                </div>
+            </div>
+        </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">
+                    Datum
+                </label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CustomCurrentDate, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">
+                    Temperatur
+                </label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CustomCurrentTemperature, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>}
+</div>
+
+@*<div class="form-horizontal">
+        @using (Html.BeginForm("import-plantus", "AdminAreaUtils"))
+        {
+            @Html.AntiForgeryToken()
+            <h3>Plantus-Daten importieren</h3>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <input type="submit" value="import" disabled class="btn btn-default" />
+                    </div>
+                </div>
+        }
+    </div>*@
+
+
+
+@section Scripts {
+    @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.min.js")
+}

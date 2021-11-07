@@ -1,0 +1,120 @@
+﻿@model GardifyModels.Models.ArticleViewModels.ArticleViewModel
+
+
+@{
+    ViewBag.Title = "Artikel erstellen";
+    Layout = "~/Views/Shared/_LayoutAdminArea.cshtml";
+}
+@if (Model.StatusMessage != null)
+{
+    Html.RenderPartial("_modalStatusMessage", Model.StatusMessage);
+}
+<h2>Artikel erstellen</h2>
+@using (Html.BeginForm("Create", "AdminAreaArticle", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+<div class="form-horizontal">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        <label for="imageFile" class="control-label col-md-2">Bild auswählen</label>
+        <div class="col-md-10">
+            <input type="file" name="imageFile" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">Bild-Autor</label>
+        <div class="col-md-10">
+            <input class="form-control" name="imageAuthor" type="text" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">Lizenz-Quelle</label>
+        <div class="col-md-10">
+            <input class="form-control" name="imageLicense" type="text" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="name" class="control-label col-md-2">Name</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="description" class="control-label col-md-2">Beschreibung</label>
+        <div class="col-md-10">
+            <textarea class="form-control" name="description" rows="5" cols="80">@Model.Description</textarea>
+            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="experttip" class="control-label col-md-2">Expertentipp</label>
+        <div class="col-md-10">
+            <textarea class="form-control" name="experttip" rows="5" cols="80">@Model.ExpertTip</textarea>
+            @Html.ValidationMessageFor(model => model.ExpertTip, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="normalPrice" class="control-label col-md-2">Preis</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.NormalPrice, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.NormalPrice, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="category" class="control-label col-md-2">Kategorie(n)</label>
+        <div class="col-md-10">
+            @{
+                if (ViewBag.ArticleCategories == null || ViewBag.ArticleCategories.Count == 0)
+                {
+                    <div class="col-lg-4">
+                        <a href="~/AdminAreaArticleCategories">Neue Artikel-Kategorie erstellen</a>
+                    </div>
+                }
+                else
+                {
+                    foreach (var arc in ViewBag.ArticleCategories)
+                    {
+                        <div class="col-lg-4">
+                            <label>
+                                <input type="checkbox" name="articleCategories" value="@arc.Value">
+                                @arc.Text
+                            </label>
+                        </div>
+                    }
+                }
+            }
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="pricePercentagePayableWithPoints" class="control-label col-md-2">% bezahlbar mit Punkten</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.PricePercentagePayableWithPoints, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.PricePercentagePayableWithPoints, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="isAvailable" class="control-label col-md-2">Ist vorhanden</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.IsAvailable, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.IsAvailable, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="AllowPublishment" class="control-label col-md-2">Veröffentlicht</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.AllowPublishment, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.AllowPublishment, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Erstellen" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+<div>
+    @Html.ActionLink("Zurück", "Index")
+</div>

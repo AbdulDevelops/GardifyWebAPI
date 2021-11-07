@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_controller_home">
+
+    <fragment
+        android:id="@+id/nav_controller_home"
+        android:name="com.gardify.android.ui.home.HomeFragment"
+        android:label="@string/menuActivityMainDrawer_home"
+        tools:layout="@layout/fragment_home" />
+    <!-- Mein Garten fragment and sub-fragments-->
+    <fragment
+        android:id="@+id/nav_controller_my_garden"
+        android:name="com.gardify.android.ui.myGarden.MyGardenFragment"
+        android:label="@string/menuActivityMainDrawer_myGarden"
+        tools:layout="@layout/fragment_general_recycleview" />
+    <fragment
+        android:id="@+id/nav_controller_my_garden_edit_plant"
+        android:name="com.gardify.android.ui.myGarden.EditPlantFragment"
+        tools:layout="@layout/fragment_my_garden_edit_plant" />
+    <fragment
+        android:id="@+id/nav_controller_my_garden_edit_user_garden_list"
+        android:name="com.gardify.android.ui.myGarden.EditUserGardenFragment"
+        tools:layout="@layout/fragment_my_garden_edit_user_garden" />
+    <fragment
+        android:id="@+id/nav_controller_my_garden_add_device"
+        android:name="com.gardify.android.ui.myGarden.AddDeviceFragment"
+        tools:layout="@layout/fragment_my_garden_add_device" />
+    <fragment
+        android:id="@+id/nav_controller_my_garden_eco_detail"
+        android:name="com.gardify.android.ui.myGarden.MyGardenEcoDetailFragment"
+        tools:layout="@layout/fragment_my_garden_eco_detail" />
+
+    <!-- TodoCalendar fragment and sub-fragments-->
+    <fragment
+        android:id="@+id/nav_controller_todo"
+        android:name="com.gardify.android.ui.todosCalendar.TodoFragment"
+        android:label="@string/menuActivityMainDrawer_toDo"
+        tools:layout="@layout/fragment_todo_main" />
+    <fragment
+        android:id="@+id/nav_controller_plant_search"
+        android:name="com.gardify.android.ui.plantSearch.PlantSearchFragment"
+        android:label="@string/menuActivityMainDrawer_plantSearch"
+        tools:layout="@layout/fragment_plant_search" />
+
+    <!-- TodoCalendar fragment and sub-fragments-->
+    <fragment
+        android:id="@+id/nav_controller_plant_scan"
+        android:name="com.gardify.android.ui.plantScan.PlantScanFragment"
+        tools:layout="@layout/fragment_plant_scanner" />
+    <fragment
+        android:id="@+id/nav_controller_plant_scan_result"
+        android:name="com.gardify.android.ui.plantScan.PlantScanResultFragment"
+        tools:layout="@layout/fragment_plant_scanner" />
+
+    <fragment
+        android:id="@+id/nav_controller_news"
+        android:name="com.gardify.android.ui.news.NewsFragment"
+        android:label="@string/menuActivityMainDrawer_gardifyNews"
+        tools:layout="@layout/fragment_general_recycleview" />
+    <fragment
+        android:id="@+id/nav_controller_gardify_video"
+        android:name="com.gardify.android.ui.video.VideoFragment"
+        android:label="@string/menuActivityMainDrawer_gardenVideo"
+        tools:layout="@layout/fragment_general_recycleview" />
+
+    <!-- Plant Doc fragment and sub-fragments-->
+    <fragment
+        android:id="@+id/nav_controller_plant_doc"
+        android:name="com.gardify.android.ui.plantDoc.PlantDocFragment"
+        tools:layout="@layout/fragment_general_recycleview" />
+    <fragment
+        android:id="@+id/nav_controller_plant_doc_answer"
+        android:name="com.gardify.android.ui.plantDoc.answer.AnswerFragment"
+        tools:layout="@layout/fragment_plant_doc_answer" />
+    <fragment
+        android:id="@+id/nav_controller_plant_doc_ask_question"
+        android:name="com.gardify.android.ui.plantDoc.askQuestion.AskQuestionFragment"
+        tools:layout="@layout/fragment_plant_doc_ask_question" />
+    <fragment
+        android:id="@+id/nav_controller_plant_doc_my_post_answer"
+        android:name="com.gardify.android.ui.plantDoc.myPostAnswer.MyPostAnswerFragment"
+        tools:layout="@layout/fragment_general_recycleview" />
+    <fragment
+        android:id="@+id/nav_controller_plant_doc_my_posts"
+        android:name="com.gardify.android.ui.plantDoc.myPosts.PlantDocMyPostsFragment"
+        tools:layout="@layout/fragment_general_recycleview" />
+
+    <fragment
+        android:id="@+id/nav_controller_weather"
+        android:name="com.gardify.android.ui.weather.WeatherFragment"
+        android:label="@string/menuActivityMainDrawer_gardenWeather"
+        tools:layout="@layout/fragment_weather" />
+
+    <!-- Eco Scan fragment and sub-fragments-->
+
+    <fragment
+        android:id="@+id/nav_controller_eco_scan"
+        android:name="com.gardify.android.ui.ecoScan.EcoScanFragment"
+        android:label="@string/menuActivityMainDrawer_ecoScan"
+        tools:layout="@layout/fragment_eco_scan" />
+
+    <fragment
+        android:id="@+id/nav_controller_eco_scan_share_result"
+        android:name="com.gardify.android.ui.ecoScan.ShareResultFragment"
+        tools:layout="@layout/fragment_eco_scan_share_result" />
+
+    <fragment
+        android:id="@+id/nav_controller_garden_glossary"
+        android:name="com.gardify.android.ui.gardenGlossary.GardenGlossaryFragment"
+        tools:layout="@layout/fragment_general_recycleview" />
+    <fragment
+        android:id="@+id/nav_controller_suggest_plants"
+        android:name="com.gardify.android.ui.suggestPlants.SuggestPlantsFragment"
+        tools:layout="@layout/fragment_suggest_plants" />
+    <fragment
+        android:id="@+id/nav_controller_settings"
+        android:name="com.gardify.android.ui.settings.SettingsFragment"
+        tools:layout="@layout/fragment_settings" />
+
+    <!-- Eco Scan fragment and sub-fragments-->
+
+
+    <!-- nav drawer bottom fragments -->
+    <fragment
+        android:id="@+id/nav_controller_team"
+        android:name="com.gardify.android.ui.team.TeamFragment"
+        tools:layout="@layout/fragment_team" />
+
+    <fragment
+        android:id="@+id/nav_controller_agb"
+        android:name="com.gardify.android.ui.agb.AgbFragment"
+        tools:layout="@layout/fragment_agb" />
+
+    <fragment
+        android:id="@+id/nav_controller_newsletter"
+        android:name="com.gardify.android.ui.newsletter.NewsletterFragment"
+        tools:layout="@layout/fragment_newsletter" />
+
+    <fragment
+        android:id="@+id/nav_controller_contact"
+        android:name="com.gardify.android.ui.contact.ContactFragment"
+        tools:layout="@layout/fragment_contact" />
+
+    <fragment
+        android:id="@+id/nav_controller_privacy_policy"
+        android:name="com.gardify.android.ui.imprint_PrivacyPolicy.PrivacyPolicyFragment"
+        tools:layout="@layout/fragment_privacy_policy" />
+
+    <fragment
+        android:id="@+id/nav_controller_login"
+        android:name="com.gardify.android.ui.authentication.LoginFragment"
+        android:label="@string/all_login"
+        tools:layout="@layout/fragment_general_recycleview" />
+
+    <fragment
+        android:id="@+id/nav_controller_imprint"
+        android:name="com.gardify.android.ui.imprint_PrivacyPolicy.ImprintFragment"
+        tools:layout="@layout/fragment_imprint" />
+    <fragment
+        android:id="@+id/nav_controller_warning"
+        android:name="com.gardify.android.ui.warning.WarningFragment"
+        tools:layout="@layout/fragment_general_recycleview" />
+
+    <fragment
+        android:id="@+id/nav_controller_plant_detail"
+        android:name="com.gardify.android.ui.PlantDetailFragment"
+        tools:layout="@layout/fragment_plant_detail" />
+
+    <fragment
+        android:id="@+id/nav_controller_save_to_garden"
+        android:name="com.gardify.android.ui.saveToGarden.SaveToGardenFragment"
+        tools:layout="@layout/fragment_save_to_garden" />
+</navigation>

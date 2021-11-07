@@ -1,0 +1,71 @@
+﻿@model GardifyModels.Models._modalAddPlantToGardenPropertyViewModel
+<script src="~/Scripts/bootstrap.js"></script>
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" data-backdrop="false" aria-labelledby="addDialogLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="addDialogLabel">Zum Gartenbereich hinzufügen</h4>
+            </div>
+            @if (Model.Gardens == null || !Model.Gardens.Any())
+            {
+                <div class="modal-body">
+                    <p>Sie haben noch keine Gartenbereiche erstellt.</p>
+                    <a class="btn btn-default" href="@Url.Action("Create", "Garden")">Gartenbereich erstellen</a>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Schließen</button>
+                </div>}
+            else
+            {
+                using (Ajax.BeginForm("add-plant-to-property", "_Base", new AjaxOptions { UpdateTargetId = "modalWrapper" }))
+                {
+                    <div class="modal-body">
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(model => model.PlantId)
+
+                        <div class="form-horizontal">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="form-group">
+                                <label class="control-label col-md-5">Gartenbereich</label>
+                                <div class="col-md-7">
+                                    @Html.DropDownList("GardenId", new SelectList(Model.Gardens, "id", "name", 0), new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-5">Anzahl der Pflanzen</label>
+                                <div class="col-md-7">
+                                    @Html.EditorFor(model => model.PlantCount, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.PlantCount, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-5">Alter (Tage)</label>
+                                <div class="col-md-7">
+                                    @Html.EditorFor(model => model.InitialAgeInDays, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.InitialAgeInDays, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-5">Ist Topfpflanze?</label>
+                                <div class="col-md-7">
+                                    @Html.CheckBoxFor(model => model.IsInPot, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                            </div>
+                            @Html.Partial("_modalMiniTodoList", Model.Todos)
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Schließen</button>
+                        <input type="submit" value="Pflanze hinzufügen" class="btn btn-primary" />
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>
+
+<script>
+    $('#modal').modal('toggle');
+</script>

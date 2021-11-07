@@ -1,0 +1,288 @@
+﻿@model GardifyModels.Models.TodoTemplateViewModels.TodoTemplateCreateViewModel
+
+@{
+    ViewBag.Title = "Vorlage erstellen";
+    Layout = "~/Views/Shared/_LayoutAdminArea.cshtml";
+}
+
+<h2>Neue Vorlage erstellen</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        <p class="control-label col-md-2">Text</p>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <p class="control-label col-md-2">Beschreibung</p>
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.Description, new { @class = "form-control", colums = 10, rows = 10 })
+            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <p class="control-label col-md-2">Zu erledigen von/am</p>
+        <div class="col-md-10">
+            <select name="DateStartDay" id="DateStartDay">
+                <option value="0">-</option>
+                <option value="1">Anfang</option>
+                <option value="11">Mitte</option>
+                <option value="21">Ende</option>
+            </select>
+            <select name="DateStartMonth" id="DateStartMonth">
+                <option value="0">-</option>
+                <option value="1">Januar</option>
+                <option value="2">Februar</option>
+                <option value="3">März</option>
+                <option value="4">April</option>
+                <option value="5">Mai</option>
+                <option value="6">Juni</option>
+                <option value="7">Juli</option>
+                <option value="8">August</option>
+                <option value="9">September</option>
+                <option value="10">Oktober</option>
+                <option value="11">November</option>
+                <option value="12">Dezember</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group bis">
+        <p class="control-label col-md-2">Zu erledigen bis</p>
+        <div class="col-md-10">
+            <select name="DateEndDay" id="DateEndDay">
+                <option value="0">-</option>
+                <option value="1">Anfang</option>
+                <option value="11">Mitte</option>
+                <option value="21">Ende</option>
+            </select>
+            <select name="DateEndMonth" id="DateEndMonth">
+                <option value="0">-</option>
+                <option value="1">Januar</option>
+                <option value="2">Februar</option>
+                <option value="3">März</option>
+                <option value="4">April</option>
+                <option value="5">Mai</option>
+                <option value="6">Juni</option>
+                <option value="7">Juli</option>
+                <option value="8">August</option>
+                <option value="9">September</option>
+                <option value="10">Oktober</option>
+                <option value="11">November</option>
+                <option value="12">Dezember</option>
+            </select>
+        </div>
+    </div>
+    @*<div class="form-group">
+            <p class="control-label col-md-2">Zu erledigen von/am</p>
+            <div class="col-md-10">
+                @{ Model.DateStart = DateTime.Now;}
+                @Html.TextBoxFor(model => model.DateStart, "{0:dd/MM}", new { @class = "form control datepicker", placeholder = "Bitte Datum Wählen" })
+                @Html.ValidationMessageFor(model => model.DateStart, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group bis">
+            <p class="control-label col-md-2">Zu erledigen bis</p>
+            <div class="col-md-10">
+                @{ Model.DateEnd = DateTime.Now; }
+                @Html.TextBoxFor(model => model.DateEnd, "{0:dd/MM}", new { @class = "form control datepicker", placeholder = "Bitte Datum Wählen" })
+                @Html.ValidationMessageFor(model => model.DateEnd, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+    <div class="form-group">
+        <p class="control-label col-md-2">Wiederholungsart</p>
+        <div class="col-md-10">
+            @Html.DropDownList("Cycle", new List<SelectListItem>(){
+            new SelectListItem() { Text="-", Value = "0", Selected = true  },
+    new SelectListItem() { Text="Wöchentlich", Value = "1"},
+    new SelectListItem() { Text="Monatlich", Value = "2"},
+    new SelectListItem() { Text="Jährlich",Value="3" },
+    new SelectListItem() { Text="Alle 2 Jahre",Value="4" } })
+        </div>
+    </div>
+    <div class="form-group">
+        <p class="control-label col-md-2">Gehört zu</p>
+        <div class="col-md-10">
+            @Html.DropDownList("ReferenceType", new List<SelectListItem>(){
+               new SelectListItem() { Text="-", Selected = true},
+
+    new SelectListItem() { Text="Pflanze", Value = "4"},
+    new SelectListItem() { Text="Tool",Value="5" },
+    new SelectListItem() { Text = "Taxonomischer Baum", Value = "14" }},
+    new { @onchange = "ondropdownselect(this.value)" })
+        </div>
+    </div>
+    <div class="form-group reference-list-class" id="reference-list">
+        <p class="control-label col-md-2">Zugehörige Shop-Artikel(n) (IDs eingeben)</p>
+        <div class="col-md-10">
+            <input type="text" name="articlesRef" placeholder="Bsp. 126,129,34" class="form-control" />
+        </div>
+    </div>
+
+    <div class="form-group reference-list-class" id="reference-list">
+        <p class="control-label col-md-2">Wähle zugehöriges Objekt</p>
+        <div class="col-md-10" id="dropdowns">
+            <select name="ReferenceId[0]">
+                <option value="-1">Bitte auswählen</option>
+                @if (Model.SelectedPlantId == -1 || Model.SelectedPlantId == 0)
+                {
+                    foreach (var m in Model.InfoObjects)
+                    {
+                        <option name="@m.Name" value="@m.Id">@m.Name</option>
+                    }
+                }
+                else
+                {
+                    <option name="@Model.SelectedPlantName" value="@Model.SelectedPlantId" selected>@Model.SelectedPlantName</option>
+                }
+            </select>
+            <button type="button" onclick="addDropdown()">+</button>
+        </div>
+    </div>
+    <div class="form-group" id="taxonomic-tree-list">
+        <p class="control-label col-md-2">Vorlage anwenden auf alle Pflanzen unterhalb von:</p>
+        <div class="col-md-10" id="dropdowns">
+            <select name="TaxonomicTreeId">
+                <option value="-1">Bitte auswählen</option>
+                @foreach (var m in Model.TaxonomicTreeObjects)
+                {
+                    if (m.Id == Model.SelectedTaxonId)
+                    {
+                        <option name="@m.TitleLatin" value="@m.Id" selected>@m.TitleLatin</option>
+                    }
+                    else
+                    {
+                        <option name="@m.TitleLatin" value="@m.Id">@m.TitleLatin</option>
+                    }
+                }
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Erstellen" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+
+<div>
+    @Html.ActionLink("Zurück zur Übersicht", "Index")
+</div>
+
+@section scripts
+    {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
+<script>
+        var index = 1;
+        function addDropdown() {
+                    console.log('@Url.Action("AddDropDown","AdminAreaTodo")');
+
+            $.ajax({
+                url: '@Url.Action("AddDropDown","AdminAreaTodo")?index='+index,
+            }).done(function (obj) {
+                console.log(obj);
+                index++;
+                $("#dropdowns").append(obj);
+            });
+        }
+</script>
+    <script type="text/javascript">
+        @*$("select[name=Cycle]").on("change", () => {
+            if ($("select[name=Cycle]").val() == 3 || $("select[name=Cycle]").val() == 4) {
+                $("div.bis").addClass("hidden");
+                $("body").addClass("hide-year");
+                @{ Model.DateEnd = DateTime.Now.AddYears(100); }
+            } else {
+                $("div.bis").removeClass("hidden");
+                $("body").removeClass("hide-year");
+                @{ Model.DateEnd = DateTime.Now; }
+            }
+        });*@
+        /* German initialisation for the jQuery UI date picker plugin. */
+        jQuery(function (el) {
+            el.datepicker.regional['de'] = {
+                closeText: 'schließen',
+                prevText: '&#x3c;zurück',
+                nextText: 'Vor&#x3e;',
+                currentText: 'heute',
+                monthNames: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni',
+                'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
+                monthNamesShort: ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun',
+                'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'],
+                dayNames: ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'],
+                dayNamesShort: ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'],
+                dayNamesMin: ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'],
+                weekHeader: 'Wo',
+                dateFormat: 'dd.mm.yy',
+                firstDay: 1,
+                isRTL: false,
+                showMonthAfterYear: false,
+                yearSuffix: ''
+            };
+            $.datepicker.setDefaults($.datepicker.regional['de']);
+        });
+        $(function () { // will trigger when the document is ready
+            $(".datepicker").datepicker($.datepicker.regional["de"]);
+        });
+        $(document).ready(function () {
+            //ondropdownselect(4);
+            @if (Model.SelectedTaxonId != -1 && Model.SelectedTaxonId != 0)
+            {
+                @:ondropdownselect(14);
+            }
+            else
+            {
+                @:ondropdownselect(4);
+            }
+        });
+        function ondropdownselect(index) {
+            var list = $('#reference-list');
+            var dd = $('#ReferenceId');
+            console.log(list);
+            if (index == 14) {
+                $(".reference-list-class").hide();
+                $("#taxonomic-tree-list").show();
+            }
+            else {
+                $(".reference-list-class").show();
+                $("#taxonomic-tree-list").hide();
+            }
+            @*if (index == 0) {
+                list.hide();
+            } else {
+                list.show();
+                removeoptions(dd);
+                @{ int counter = 0;}
+                @foreach (var obj in Model.InfoObjects)
+            {
+                int modRefType = (int)obj.ReferenceType;
+                counter++;
+                @:var refType = @modRefType
+                    @:if (refType == index){
+                                        @:addoption(dd, @obj.Id, "@obj.Name");
+                                    @:}
+                                                                                                                                                                                                                 }
+            }*@
+        }
+
+        function addoption(dropdown, index, text) {
+            var newOption = "<option value='" + index + "'>"+text+"</option>";
+            dropdown.append(newOption);
+        }
+
+        function removeoptions(dropdown) {
+            $(dropdown).find("option").remove();
+        }
+    </script>
+}

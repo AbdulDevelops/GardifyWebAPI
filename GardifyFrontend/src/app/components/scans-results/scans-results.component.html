@@ -1,0 +1,255 @@
+<div class="wrapper {{mode}} pt-5 pb-5">
+  <div class="container px-5">
+    <div class="row justify-content-between pt-4 pb-2">
+      <div class="col-12 col-md-6 pb-4">
+          <h4 class="t-reg t-12 text-grey">Home/Pflanzenscan/Scanergbenis</h4>
+          <h2 class="t-light t-26 mt-3 {{mode==='light'?'text-grey':'text-white'}}">SCANERGEBNIS</h2>
+      </div>
+      <div class="mt-0 mt-md-4 col-12 col-md-6 d-flex flex-column align-items-end">
+        <button [routerLink]="['/scanverlauf']" class="btn btn-secondary br p-2 mb-3">
+          <fa-icon class="pr-1" [icon]="faSearch"></fa-icon>letzte Scans (Statistik)
+        </button>
+      </div>
+    </div>
+    <div class="row bt-border {{mode}} pb-2">
+      <div class="col-12 col-md-12 pt-4 px-3">
+ 
+        <a [routerLink]="['/scanner']" class="t-13 t-light {{mode==='light'?'text-darkgrey':'text-white'}} d-block">zurück</a>
+      </div>
+      <div class="col-4 col-md-3">
+        <h4 class="mt-5 t-reg t-13 {{mode==='light'?'text-darkgrey':'text-white'}}">Ausgangsbild(er)</h4>
+      </div>
+      <div class="col-12 col-md-8 px-3 px-md-2">
+        <img [src]=uploadedPic?.src alt="Ihr Bild" class="uploaded d-inline-block mr-3">
+        <div class="form-group mt-md-5 marg-t ch-container d-inline-block">
+          <!-- <label class="t-reg t-12 text-grey4" data-toggle="modal" data-target="#suggest" (click)="imageFromScan(true)"> -->
+
+          <!-- <label class="t-reg t-12 text-grey4" >
+            <input type="checkbox">
+            Pflanze für Datenbank vorschlagen
+            <span class="checkmark cr"></span>
+          </label> -->
+        </div>
+      </div>
+      <div class="col-12 col-md-1 pt-4 px-0">
+        <a href="#" data-toggle="modal" href="#infoPopup" role="button" aria-expanded="false" 
+        aria-controls="Info" class="t-13 t-light {{mode==='light'?'text-darkgrey':'text-white'}} d-block">Info/Hilfe</a>
+      </div>
+    </div>
+    <div class="row bt-border {{mode}} mb-4">
+      <div class="col-12 col-md-3">
+        <h4 class="mb-0 py-3 t-reg t-14 {{mode==='light'?'text-darkgrey':'text-white'}}">{{dbResults+pnResults || 0}} Ergebnisse</h4>
+      </div>
+      <div class="col-8 col-md-8 px-2 pt-3">
+          <span class="t-reg t-12 pr-3 text-grey4 d-inline-block">{{dbResults || 0}} Ergebnisse in gardify Datenbank</span>
+          <span class="t-reg t-12 pr-3 text-grey4 d-inline-block marg-t">{{pnResults || 0}} Ergebnisse in PlantNet</span>
+      </div>
+    </div>
+
+    <ng-container>
+      <div class="row">
+        <div class="col-12 px-0 mb-4" *ngIf="results?.PnResults?.results || results?.PnResults?.InDb">
+          <!-- gardify DB -->
+          <div class="row bt-border pb-3 mt-3">
+            <h4 class="col-12">
+                Ähnliche Pflanzen aus der gardify Datenbank
+
+            </h4>
+          </div>
+          <div class="row pb-3 mt-3 bt-border {{mode}}" *ngFor="let plant of results.PnResults.InDb">
+            <div class="col-12 col-md-6 col-lg-4 col-xl-3 plant-img"><img [routerLink]="['/pflanze/', plant.Id, plant.PlantUrl]" class="ptr" [src]=toUrl(plant) [alt]=plant.NameGerman></div>
+            <div class="col-12 col-md-6 col-lg-4 col-xl-6">
+              <h2 [routerLink]="['/pflanze/', plant.Id, plant.PlantUrl]" class="t-light t-16 mb-3 font-italic ptr {{mode==='light'?'text-darkgrey':'text-white'}}">
+                {{plant.NameLatin}}
+              </h2>
+              <h2 [routerLink]="['/pflanze/', plant.Id, plant.PlantUrl]" class="t-16 mb-1 t-bold ptr {{mode==='light'?'text-darkgrey':'text-white'}}">{{plant.NameGerman}}</h2>
+              <h2 *ngIf="plant.Synonym" [routerLink]="['/pflanze/', plant.Id, plant.PlantUrl]" class="t-14 mb-1 t-light ptr {{mode==='light'?'text-darkgrey':'text-white'}}">
+                Synonym:
+                <span class="t-reg text-green pl-2 t-15"  [innerHTML]="plant.Synonym"></span>
+              </h2>
+              <span class="d-inlineblock {{mode==='light'?'text-darkgrey':'text-white'}}" [innerHTML]="plant.Description.substring(0, 300) + '...' ||''"></span>
+              <a [routerLink]="['/pflanze/', plant.Id, plant.PlantUrl]" class="d-inlineblock t-bold text-green ptr">mehr</a>
+            </div>
+            <div class="col-12 col-md-12 col-lg-4 col-xl-3">
+              <button *ngIf="isLoggedIn || demoMode" class="btn btn-green text-white float-right mt-1 px-2 btn_border075" data-toggle="modal" data-target="#addPlantModal" 
+                (click)="selectPlant(plant); getPlantLists()" style="width:auto;">
+                in meinen Garten speichern
+              </button>
+              <button *ngIf="!isLoggedIn && !demoMode" class="btn br btn-green float-right mt-1 px-2" [routerLink]="['/new']" style="width:auto;">
+                in meinen Garten speichern
+              </button>
+            </div>
+          </div>
+           <!-- Plantnet -->
+          <div class="row bt-border pb-3 mt-3">
+            <h4 class="col-12">
+                Ähnliche Pflanzen aus PlantNet
+
+            </h4>
+          </div>
+          <div class="row pb-3 mt-3 bt-border {{mode}}" *ngFor="let plant of results.PnResults.results" >
+            <div class="col-12 col-md-6 col-lg-4 col-xl-3 plant-img ">
+              <a [href]="'https://google.com/search?q=' + plant.species.scientificNameWithoutAuthor" target="_blank">
+                <img *ngFor="let pnImg of plant.images | slice:0:4" class="pn-img" 
+                  [src]="pnImg.image.thumbnailLink || phImg" 
+                  [alt]=plant.species.scientificNameWithoutAuthor 
+                  [title]="'Quelle: ' + pnImg.image.contextLink">
+              </a>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4 col-xl-6">
+              <a [href]="'https://google.com/search?q=' + plant.species.scientificNameWithoutAuthor" target="_blank">
+                <h2 class="t-light t-16 mb-3 font-italic ptr {{mode==='light'?'text-darkgrey':'text-white'}}">
+                  {{plant.species.scientificNameWithoutAuthor}}
+                </h2>
+              </a>
+              <h2 class="t-16 mb-1 t-bold ptr {{mode==='light'?'text-darkgrey':'text-white'}}">
+                {{plant.species.commonNames? plant.species.commonNames[0] : plant.species.scientificNameWithoutAuthor}}
+              </h2>
+              <span class="d-block mb-3 mb-md-5 {{mode==='light'?'text-darkgrey':'text-white'}}">Pflanzenfamilie: 
+                <span class="t-bold text-green pl-2">{{plant.species.family.scientificNameWithoutAuthor || 'unbekannt'}}</span>
+              </span>
+            </div>
+             <div class="col-12  col-md-12 col-lg-4 col-xl-3" *ngIf="checkIfExist(plant)">
+              <button *ngIf="isLoggedIn || demoMode" class="btn br btn-green float-right mt-1 px-2" (click)="selectPlantForSuggestion(plant)" data-toggle="modal" [attr.data-target]="isLoggedIn? '#suggest':''" style="width:auto;">
+                Pflanze vorschlagen
+              </button>
+              <button *ngIf="!isLoggedIn && !demoMode" class="btn br btn-green float-right mt-1 px-2" [routerLink]="['/new']" style="width:auto;">
+                Pflanze vorschlagen     
+              </button>
+            </div> 
+          </div>
+          
+        </div>
+      </div>
+    </ng-container>
+    
+    <div class="row mt-3">
+      <div class="col-12 text-center">
+        <h3 class="t-14 t-bold {{mode==='light'?'text-darkgrey':'text-white'}}">Scan nicht erfolgreich?</h3>
+        <h3 class="t-14 t-reg mb-4 {{mode==='light'?'text-darkgrey':'text-white'}}">Nicht gefunden, was du suchst? Frage einen Experten!</h3>
+        <!-- <a [routerLink]="['/community']" class="btn t-14 t-bold btn-green px-2 btn_border075 m-2 text-white" style="width:auto;">
+          Community befragen
+        </a> -->
+        <a href="mailto:team@gardify.de" class="btn t-14 t-bold btn-green px-2 btn_border075 m-2 text-white" style="width:auto;line-height: 36px;">
+          Experten fragen <span class="t-reg">(Rückantwort in 1–7 Tagen)</span>
+        </a>
+      </div>
+    </div>
+  </div>
+  <hr>
+</div>
+
+<div class="modal fade pr-0" tabindex="-1" role="dialog" aria-hidden="true" id="infoPopup">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content {{mode}} ">
+      <div class="modal-header p-2">
+        <button type="button" class="close modal-close" data-dismiss="modal" aria-label="Close">
+          <span class="text-white t-reg" aria-hidden="true">&times;</span>
+        </button>
+        <a class="t-9 ptr {{mode==='dark'?'text-white':'text-grey4'}}" (click)="hidePopup()">
+          BITTE NICHT MEHR ANZEIGEN!
+        </a>
+      </div>
+      <div class="modal-body px-5 pb-4 pt-0">
+        <div class="row ml-1">
+          <div class="col-4 p-0"><img class="pic-1" src="assets/main-icons/Scan_and_Find_Pflanzenfoto.jpg" alt="Blume"></div>
+          <div class="col-4 p-0"><img class="pic-2" src="assets/main-icons/Scan_find_Pfeil.png" alt="Pfeil"></div>
+          <div class="col-4 p-0"><img class="pic-3" src="assets/main-icons/Scan_find_dunkel.svg" alt="Scan & Find"></div>
+        </div>
+        <div class="row mt-3">
+          <h3 class="t-bold t-18 text-green">
+            Pflanzenfoto zur Pflanzenbestimmung hochladen: So gelingt es!
+          </h3>
+          <ul class="t-12 pl-3 text-white">
+            <li>Es kann nur 1 Bild pro Scan upgeloaded und verarbeitet werden</li>
+            <li>Bitte keine Fotos über 4 MB Dateigröße hochladen. Größere Bilder bitte beschneiden oder eine kleinere Auflösung verwenden</li>
+            <li>Bitte haben Sie etwas Geduld, bis die Ergebnisse sichtbar werden</li>
+          </ul>
+          <p class="t-bold pt-2 t-12 text-white">
+            Und so geht´s noch besser! Mehr ...
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-container *ngIf="selectedPlant">
+  <div class="modal fade" id="addPlantModal" tabindex="-1" role="dialog" aria-hidden="true" >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content {{mode}}">
+        <div class="modal-header">
+          <h5 class="modal-title">{{selectedPlant.species?.scientificNameWithoutAuthor || selectedPlant.NameLatin}} zu {{addNewPlant ? 'Gardify':'meinem Gartenbereich'}}  hinzufügen</h5>
+          <button type="button" class="close" data-dismiss="modal" (click)='closeModal()' aria-label="Close">
+            <span class="{{mode==='dark'?'text-ltgrey':'text-blackish'}}" aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form *ngIf="!showTip" class="modal-body" [formGroup]="addForm" ngNativeValidate>
+          <div class="form-group mb-3">
+            <label class="mb-0 {{mode==='light'?'text-darkgrey':'text-white'}}">Mein Gartenbereich</label>
+
+          </div>
+          <div class="form-group mb-3 ">
+            <label class="{{mode==='dark'?'text-white':'text-blackish'}} mb-0">Liste auswählen:</label>
+        
+            <ng-multiselect-dropdown class="{{mode==='dark'?'text-white':'text-blackish'}} "
+              [placeholder]="'Meine Listen'"
+              [data]="userLists"
+              [(ngModel)]="selectedLists"
+              [settings]="dropdownSettings"
+              [ngModelOptions]="{standalone: true}"
+              (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)" [required]='requiredField' [ngClass]='setClass()'
+              >
+            </ng-multiselect-dropdown>
+            <p *ngIf="!requiredField" class="text-danger">
+              Bitte eine Liste auswählen oder <a data-toggle="collapse" href="#addNewList"><u>eine neue Liste erstellen.</u></a>
+            </p>
+          </div>
+          <div class="collapse row mb-3 px-4" id="addNewList">
+            <form [formGroup]="addNewList" class="form-group col-12 py-2 border {{mode === 'light'?'border-dark':'border-white'}}">
+              <label class="mb-0 {{mode==='light'?'text-darkgrey':'text-white'}}">Neue Liste erstellen</label>
+              <input class="form-control" type="text" formControlName="Name" placeholder="Name der Liste">
+              <input class="form-control" type="text" formControlName="Description" placeholder="Beschreibung (optiona)">
+              <button type="button" class="btn btn-green mt-2 float-right" (click)="createList()">Erstellen</button>
+            </form>
+          </div>
+          <div class="row mb-3">
+            <div class="form-group col-12">
+              <label class="mb-0 {{mode==='light'?'text-darkgrey':'text-white'}}">Anzahl</label>
+              <input class="form-control" type="number" min="1" formControlName="Count">
+            </div>
+
+          </div>
+          <div class="form-group mb-2 col-12 ch-container">
+            <label class="t-reg t-12 {{mode==='light'?'text-darkgrey':'text-white'}}">
+              <input type="checkbox" formControlName="IsInPot">
+              <p class="{{mode==='light'?'text-darkgrey':'text-white'}}">Topfpflanze?</p>
+              <span class="checkmark"></span>
+            </label>
+          </div>
+          <div *ngIf="addNewPlant === true" class="form-group col-12 mb-2 ch-container">
+              <label class="t-reg mt-1 {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+                <input type="checkbox"  (change)='suggestAgree($event.target.checked)'>
+                Bist du der Urheber dieses Bildes?
+                <span class="checkmark mt-1"></span>
+              </label>
+          </div>
+  
+        </form>
+        <div *ngIf="!showTip" class="modal-footer">
+          <button type="button" class="btn btn-secondary btn_border075 text-white" data-dismiss="modal" (click)='closeModal()'>Abbrechen</button>
+          <button *ngIf="!addNewPlant" type="button" class="btn btn-green btn_border075 text-white" data-dismiss="modal" (click)="borrowPlant()">Hinzufügen <img class="mx-auto" *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" /></button>
+          <button *ngIf="addNewPlant" type="button" class="btn btn-green btn_border075 text-white" data-dismiss="modal" (click)="addPlant()">Pflanze hinzufügen <img class="mx-auto" *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" /></button>
+        </div>
+        <div *ngIf="showTip" class="modal-body">
+          <p class="{{mode==='light'?'text-darkgrey':'text-white'}}">
+            Hallo {{userName}},<br>
+            die Ergänzung der von Dir gewünschten Pflanzen mit all ihren To-Dos und Eigenschaften wird auf Grund des hohen Aufkommens einige Zeit in Anspruch nehmen.<br><br>
+            Wir bitten um etwas Geduld. Weiterhin viel Spaß mit Gardify.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</ng-container>

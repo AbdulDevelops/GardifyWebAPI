@@ -1,0 +1,49 @@
+<div class="wrapper {{mode}}">
+  <div class="container pt-3">
+    <div class="row mt-5 mb-4">
+      <div class="col-12 col-md-9">
+        <h2 class="t-light t-18 {{mode === 'light'? 'text-grey' : 'text-white'}}">MEINE BONUSPUNKTE</h2>
+      </div>
+      <div class="col-12 col-md-3">
+        <a [routerLink]="['/shop']" class="float-right t-bold t-14 {{mode === 'light'? 'text-blackish' : 'text-white'}}">Zum Shop</a>
+      </div>
+    </div>
+
+    <div class="row">
+      <h3 class="col-12 t-bold t-14 text-green m-0 py-2 bt-border {{mode}}">Verdiente Punkte: {{totalEarned}}</h3>
+    </div>
+
+    <div class="timeline mt-2">
+      <div *ngFor="let point of earnedPts; let i = index" class="t-container {{i%2==0? 'left':'right'}}">
+        <div class="content">
+          <h3 class="t-reg t-18">{{point.Points}} Punkte</h3>
+          <p class="t-light t-14 mb-0">{{point.Action}}</p>
+        </div>
+      </div>
+    </div>
+
+    <br><br>
+
+    <div class="row">
+      <h3 class="col-12 t-bold t-14 text-red py-2 bt-border {{mode}}">Ausgegebene Punkte: {{totalSpent}}</h3>
+    </div>
+
+    <div class="timeline mt-2">
+      <div *ngFor="let point of spentPts; let i = index" class="t-container {{i%2==0? 'left':'right'}}">
+        <div class="content">
+          <h3 class="t-reg t-18">{{point.Points}} Punkte</h3>
+          <p class="t-light t-14 mb-0">{{point.Action}}</p>
+        </div>
+      </div>
+    </div>
+
+    <br><br>
+    <div class="row">
+        <h3 class="col-12 t-bold t-14 text-green py-2 bt-border {{mode}}">Weitere Punkte sammeln</h3>
+        <p class="px-3 mt-3 t-14 {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+          Du kannst weitere Punkte sammeln, indem du neue Pflanzen vorschlägst, Fotos für Pflanzen einreichst (z. B. von Blüte, Habitus, Keimlinge, attraktive Gesamtaufnahme), Videos über Pflegemaßnahmen einreichst oder Veranstaltungshinweise gibst. Bonuspunkte werden vergeben, wenn die Redaktion deine Vorschläge übernimmt. Weitere Infos findest du <a class="text-green" [routerLink]="['/bonusinfo']">hier</a>.
+        </p>
+    </div>
+    
+  </div>
+</div>

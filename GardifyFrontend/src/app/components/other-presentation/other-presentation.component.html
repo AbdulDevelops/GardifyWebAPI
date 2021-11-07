@@ -1,0 +1,46 @@
+
+<div class="wrapper {{mode}} pt-5  pb-5">
+   
+    <div class="container ">
+        <div class="row" style="background-color: black;">
+            <div class="col-12 my-3">
+                <div class="d-flex">
+                    <div class="mr-auto text-white">
+                        {{presentation[0].Headline}}
+                    </div>
+                    <div class="">
+                        <span class="t-bold t-14 text-white" >
+                            &times;
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 mb-4">
+                <div class="row justify-content-md-center">
+                    <div class="" style="width: 700px;">
+                        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                              <div class="carousel-item " [ngClass]="{'active': i === 0}" *ngFor="let img of presentation[0].EntryImages; let i=index">
+                                <img class="d-block w-100" [src]="toUrl(img.SrcAttr,false)" alt="First slide">
+                              </div>
+                              
+                            </div>
+                            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                              <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                              <span class="sr-only">Next</span>
+                            </a>
+                          </div>
+                    </div>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+    </div>
+</div>

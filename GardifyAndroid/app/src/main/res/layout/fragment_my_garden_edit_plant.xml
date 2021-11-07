@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/scrollView_all_seashell"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="16dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/text_view_my_garden_edit_plant_header"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/marginPaddingSize_24sdp"
+            android:textSize="@dimen/textSize_headline"
+            android:text=""
+            android:textColor="@color/text_all_gunmetal"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/my_garden_edit_plant_change_list_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+            android:text="Liste auswählen:"
+            android:textSize="@dimen/textSize_body_medium" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView_my_garden_edit_plant"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_130sdp"
+            android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+            android:background="@drawable/custom_borders"
+            android:padding="@dimen/marginPaddingSize_5sdp"
+            android:scrollbars="vertical" />
+        <TextView
+            android:id="@+id/my_garden_edit_plant_notes_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+            android:text="Deine Notizen:"
+            android:textSize="@dimen/textSize_body_medium" />
+        <EditText
+            android:id="@+id/edit_text_my_garden_plant_notes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_edit_text_default"
+            android:text="Notes"
+            android:textSize="@dimen/textSize_body_xsmall"
+            android:padding="@dimen/marginPaddingSize_10sdp"
+            android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+            android:gravity="top"
+            android:lines="10" />
+
+        <LinearLayout
+            android:id="@+id/linear_layout_my_garden_plant_count"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/marginPaddingSize_16sdp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/text_view_specify_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/myGarden_specifyNumber"
+                android:textSize="@dimen/textSize_body_medium"
+                android:textStyle="bold" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_my_garden_plant_list_minus"
+                style="@style/SecondaryButtonSmallNoPadding"
+                android:layout_width="@dimen/width_height_24sdp"
+                android:layout_height="@dimen/width_height_24sdp"
+                android:text="-" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_my_garden_plant_list_plus"
+                style="@style/SecondaryButtonSmallNoPadding"
+                android:layout_width="@dimen/width_height_24sdp"
+                android:layout_height="@dimen/width_height_24sdp"
+                android:layout_marginStart="@dimen/marginPaddingSize_16sdp"
+                android:text="+" />
+        </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_save_to_garden_add"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/marginPaddingSize_10sdp"
+            android:text="@string/all_save"
+            style="@style/PrimaryButtonStyle" />
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

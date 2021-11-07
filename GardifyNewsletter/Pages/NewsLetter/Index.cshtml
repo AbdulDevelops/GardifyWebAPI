@@ -1,0 +1,77 @@
+﻿@page
+@model GardifyNewsletter.Areas.Intern.Pages.Newsletter.IndexModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Pages/Shared/_LayoutIntern.cshtml";
+}
+<p class="text-secondary mt-4 mb-4">Interner Bereich: Newsletter</p>
+
+<h3 class="mt-3">Übersicht</h3>
+<p class="mt-2 mb-4">
+    <a class="text-dark" asp-page="Index">Newsletter Übersicht</a>
+    <span> | </span>
+    <a class="text-dark" asp-page="Create">Newsletter erstellen</a>
+    <span> | </span>
+    <a class="text-dark" asp-page="Test">Newsletter testen</a>
+</p>
+<br />
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Überschrift
+            </th>
+            <th>
+                Datum als Text
+            </th>
+            <th>
+                versendet am
+            </th>
+            <th>
+                Erstellt am
+            </th>
+            <th>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Newsletter)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NewsletterHeaderText)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NewsletterDateShownOnNewsletter)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NewsletterSentDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.WrittenDate)
+                </td>
+                <td class="text-right">
+                    <a class="btn btn-sm btn-outline-primary" asp-page-handler="Delete" asp-route-id="@item.NewsletterId" onclick="return confirm('Bist du sicher?')">Löschen</a>
+
+                    <a class="btn btn-sm btn-outline-primary" asp-page="Edit" asp-route-id="@item.NewsletterId">Bearbeiten</a>
+                    <a class="btn btn-sm btn-outline-primary" asp-page="Edit" asp-page-handler="ShowNewsletterPreview" asp-route-id="@item.NewsletterId" target="_blank">Vorschau anzeigen</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+@{ await Html.RenderPartialAsync("_PaginationIntern", new GardifyNewsletter.ViewModel.PaginationViewModel
+    {
+        CurrentPage = Model.CurrentPage,
+        TotalPages = Model.TotalPages,
+        EnableNext = Model.EnableNext,
+        SelectedSector = Model.SelectedSector,
+        CurrentSort = Model.CurrentSort,
+        SearchString = Model.SearchString,
+        EnablePrevious = Model.EnablePrevious
+    });}
+

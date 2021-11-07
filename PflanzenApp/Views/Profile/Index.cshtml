@@ -1,0 +1,68 @@
+﻿@model GardifyModels.Models.ProfileViewModels.ProfileViewModel
+
+@{
+	ViewBag.Title = "Mein Garten";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+@Html.ActionLink("Gärten anderer Benutzer ansehen", "Public")
+<h2>Benutzerdaten</h2>
+<b>Name:</b> @Model.UserName<br />
+<b>Punkte: </b> @Model.Points
+
+<h2>Meine Gartenbereiche</h2>
+<div id="garden-wrapper">
+	@if (Model.Gardens.Gardens != null && Model.Gardens.Gardens.Any())
+	{
+		foreach (var garden in Model.Gardens.Gardens)
+		{
+			<div class="row">
+				<div class="col-md-3">
+					@if (garden.Images != null && garden.Images.Any())
+					{
+						<div class="image-wrapper">
+							<div class="title-image">
+							<a href="@Url.Action("Details", "Garden", new { id = garden.Id})">
+								<img title="@garden.Images.FirstOrDefault().TitleAttr" src="@garden.Images.FirstOrDefault().SrcAttr" alt="@garden.Images.FirstOrDefault().AltAttr" />
+							</a>
+						</div>
+							@foreach (var img in garden.Images.Skip(1))
+							{
+								<div class="thumbnail col-md-4">
+									<img title="@img.TitleAttr" src="@img.SrcAttr" alt="@img.AltAttr" />
+								</div>
+							}
+						</div>
+					}
+				</div>
+				<div class="col-md-9">					
+					<h3><a href="@Url.Action("Details", "Garden", new { id = garden.Id})">@garden.Name</a></h3><br />
+					<div class="row plant-images-wrapper">
+						@if (garden.Plants != null && garden.Plants.UserPlants.Any())
+						{
+							foreach (var userPlant in garden.Plants.UserPlants)
+							{
+								if (userPlant.Images != null && userPlant.Images.Any())
+								{
+									foreach (var plantImage in userPlant.Images)
+									{
+										<div class="thumbnail col-md-2">
+											<img title="@plantImage.TitleAttr" src="@plantImage.SrcAttr" alt="@plantImage.AltAttr" />
+										</div>
+									}
+								}
+							}
+						}
+					</div>
+				</div>
+			</div>
+		}
+		<div>
+
+		</div>
+	}
+	else
+	{
+		<p>Benutzer hat keine Gartenbereiche freigegeben</p>
+	}
+</div>

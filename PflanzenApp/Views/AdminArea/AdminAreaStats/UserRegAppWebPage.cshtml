@@ -1,0 +1,173 @@
+﻿
+@{
+    ViewBag.Title = "UserRegAppWebPage";
+}
+
+<h2>Users-Registrierungen über App und Web-Seite</h2>
+<a href="~/i/stats/GetAllActiveUsers">User Aktivitäten</a>
+<br>
+<a href="~/i/stats/GetUsersStats">Benutzer-Statistik</a>
+<div class="row">
+    <div class="col-md-12">
+        @using (Html.BeginForm("GetUserStatsFromAppAndWepPage", "AdminAreaStats", null, FormMethod.Post))
+        {
+            <form class="form-horizontal">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label for="startDate">Startdatum</label>
+                        @Html.TextBox("startDate", (string)ViewBag.startDate, new { @type = "date", @class = "form-control col-lg-3 " })
+                    </div>
+                    <div class="col-md-3">
+                        <label for="endDate">Enddatum</label>
+                        @Html.TextBox("endDate", (string)ViewBag.endDate, new { @type = "date", @class = "form-control col-lg-3 " })
+                    </div>
+                    <div class="col-md-2">
+                        <label for="groupBy">Ansicht</label>
+                        <select class="form-control" id="groupBy" name="groupBy">
+                            <option value="day">Tag</option>
+                            <option value="week">Woche</option>
+                            <option value="month">Monat</option>
+                            <option value="year">Jahr</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="demoOnly">Normal User/Demo User</label>
+                        <select class="form-control" id="demoOnly" name="demoOnly">
+                            <option value="false" selected="@(ViewBag.DemoOnly == "False")">Nur Normal User</option>
+                            <option value="true" selected="@(ViewBag.DemoOnly == "True")">Nur Demo User</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2" style="padding-top:24px;">
+                        <input class="btn btn-default" type="submit" value="Filtern" />
+                    </div>
+                </div>
+            </form>
+        }
+        @using (Html.BeginForm("GetUserStatsFromAppAndWepPage", "AdminAreaStats", null, FormMethod.Post))
+        {
+            <form class="form-horizontal">
+
+                <div class="form-group row" style="margin-top: 8px">
+                    <div class="col-md-12">
+                        <input class="btn btn-primary" type="submit" value="Zurücksetzen" />
+                    </div>
+                </div>
+            </form>
+        }
+    </div>
+    <div class="row" style="margin-top:3rem">
+        <hr>
+        <h3>Users-Registrierungen über App und Web-Seite</h3>
+
+
+        <canvas id="usersRegs" width="800" height="400"></canvas>
+    </div>
+    <div class="row" style="margin-top:3rem">
+        <hr>
+        <h3>Users-Anmeldungen über App und Web-Seite</h3>
+
+
+        <canvas id="usersLogs" width="800" height="400"></canvas>
+    </div>
+
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
+<script>
+      //Users Login App and webpage
+      var logOnWebPage = @Html.Raw(Json.Encode(@ViewBag.LoginWebPage));
+    var logOnIos= @Html.Raw(Json.Encode(@ViewBag.LoginIos));
+    var logOnAndroid = @Html.Raw(Json.Encode(@ViewBag.LoginAndroid));
+    var LogDates = @Html.Raw(Json.Encode(@ViewBag.LogLabels));
+    var usersLogsCtx = document.getElementById('usersLogs').getContext('2d');
+    new Chart(usersLogsCtx, {
+        type: 'bar',
+        data: {
+            labels: LogDates,
+            datasets: [{
+                label: 'IOS Anmeldung ',
+                data: logOnIos,
+                backgroundColor: '#dde010',
+                borderColor: '#dde010',
+                borderWidth: 1
+            },
+            {
+                label: 'Android Anmeldung',
+                data: logOnAndroid,
+                backgroundColor: '#10e08d',
+                borderColor: '#10e08d',
+                borderWidth: 1
+            },
+            {
+                label: 'Web-Seite Anmeldung',
+                data: logOnWebPage,
+                backgroundColor: '#35733a',
+                borderColor: '#35733a',
+                borderWidth: 1
+            },
+
+            ]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    },
+                    stacked: true
+                }],
+                xAxes: [{
+                    stacked: true
+                }]
+            }
+        }
+    });
+
+    //Users Registrations App and webpage
+    var regOnWebPage = @Html.Raw(Json.Encode(@ViewBag.registerWebPage));
+    var regOnIos= @Html.Raw(Json.Encode(@ViewBag.RegisterIos));
+    var regOnAndroid = @Html.Raw(Json.Encode(@ViewBag.RegisterAndroid));
+    var RegDates = @Html.Raw(Json.Encode(@ViewBag.RegLabels));
+    var usersRegsCtx = document.getElementById('usersRegs').getContext('2d');
+    new Chart(usersRegsCtx, {
+        type: 'bar',
+        data: {
+            labels: RegDates,
+            datasets: [{
+                label: 'IOS Registrierung ',
+                data: regOnIos,
+                backgroundColor: '#0ef065',
+                borderColor: '#0ef065',
+                borderWidth: 1
+            },
+            {
+                label: 'Android Registrierung',
+                data: regOnAndroid,
+                backgroundColor: '#0ef0d6',
+                borderColor: '#0ef0d6',
+                borderWidth: 1
+            },
+            {
+                label: 'Web-Seite Registrierung',
+                data: regOnWebPage,
+                backgroundColor: '#b40ef0',
+                borderColor: '#b40ef0',
+                borderWidth: 1
+            },
+
+            ]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    },
+                    stacked: true
+                }],
+                xAxes: [{
+                    stacked: true
+                }]
+            }
+        }
+    });
+</script>

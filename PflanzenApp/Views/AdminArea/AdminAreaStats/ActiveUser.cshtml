@@ -1,0 +1,158 @@
+﻿
+@{
+    ViewBag.Title = "AtiveUsers";
+    Layout = "~/Views/Shared/_LayoutAdminArea.cshtml";
+
+}
+
+<h2> Aktive Benutzer</h2>
+<a href="~/i/stats/GetUsersStats">Kumulierte Benutzer-Registrierungen </a><br>
+<a href="~/i/stats/GetUserStatsFromAppAndWepPage">Registrierungen und Anmeldungen (App & Webpage)</a>
+<div class="row">
+    <div class="col-md-12">
+        @using (Html.BeginForm("GetAllActiveUsers", "AdminAreaStats", null, FormMethod.Post))
+        {
+            <form class="form-horizontal">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label for="startDate">Startdatum</label>
+                        @Html.TextBox("startDate", (string)ViewBag.startDate, new { @type = "date", @class = "form-control col-lg-3 " })
+                    </div>
+                    <div class="col-md-3">
+                        <label for="endDate">Enddatum</label>
+                        @Html.TextBox("endDate", (string)ViewBag.endDate, new { @type = "date", @class = "form-control col-lg-3 " })
+                    </div>
+                    <div class="col-md-2">
+                        <label for="groupBy">Ansicht</label>
+                        <select class="form-control" id="groupBy" name="groupBy">
+                            <option value="day">Tag</option>
+                            <option value="week">Woche</option>
+                            <option value="month">Monat</option>
+                            <option value="year">Jahr</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="demoOnly">Normal User/Demo User</label>
+                        <select class="form-control" id="demoOnly" name="demoOnly">
+                            <option value="false" selected="@(ViewBag.DemoOnly == "False")">Nur Normal User</option>
+                            <option value="true" selected="@(ViewBag.DemoOnly == "True")">Nur Demo User</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2" style="padding-top:24px;">
+                        <input class="btn btn-default" type="submit" value="Filtern" />
+                    </div>
+                </div>
+            </form>
+        }
+        @using (Html.BeginForm("GetAllActiveUsers", "AdminAreaStats", null, FormMethod.Post))
+        {
+            <form class="form-horizontal">
+
+                <div class="form-group row" style="margin-top: 8px">
+                    <div class="col-md-12">
+                        <input class="btn btn-primary" type="submit" value="Zurücksetzen" />
+                    </div>
+                </div>
+            </form>
+        }
+    </div>
+
+    <h3>Aktive Benutzer (innerhalb der ausgewählten Ansicht)</h3>
+
+    <!--@* User die aktiv am tag waren (irgendeine aktion ausgeführt) *@-->
+    <canvas id="userVisits" width="800" height="400"></canvas>
+
+    <div class="row" style="margin-top:3rem">
+        <hr>
+        <h3>Aktivität pro Monat</h3>
+        <canvas id="usersActivties" width="800" height="400"></canvas>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
+<script>
+      // active users chart Avg
+    var lessActivesUsersData = @Html.Raw(Json.Encode(@ViewBag.LessActivesUsers));
+    var occasActivUsersData = @Html.Raw(Json.Encode(@ViewBag.OccasActivUsers));
+    var activUsersData = @Html.Raw(Json.Encode(@ViewBag.ActivesUsers));
+    var mostActivesUsersData = @Html.Raw(Json.Encode(@ViewBag.MostActivesUsers));
+    var dataLabels = @Html.Raw(Json.Encode(@ViewBag.Labels));
+
+    var usersActivtiesCtx = document.getElementById('usersActivties').getContext('2d');
+
+    new Chart(usersActivtiesCtx, {
+        type: 'bar',
+        data: {
+            labels: dataLabels,
+            datasets: [{
+                label: '0-1 selten aktiv ',
+                data: lessActivesUsersData,
+                backgroundColor: '#f70260',
+                borderColor: '#f70260',
+                borderWidth: 1
+            },
+            {
+                label: '2-4 gelegentlich aktiv',
+                data: occasActivUsersData,
+                backgroundColor: '#fcba03',
+                borderColor: '#fcba03',
+                borderWidth: 1
+            },
+            {
+                label: '5-9 aktiv',
+                data: activUsersData,
+                backgroundColor: '#0281f7',
+                borderColor: '#0281f7',
+                borderWidth: 1
+            },
+            {
+                label: '>=10 oft aktiv',
+                data: mostActivesUsersData,
+                backgroundColor: '#90be6d',
+                borderColor: '#90be6d',
+                borderWidth: 1
+            },
+
+        ]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    },
+                    stacked: true
+                }],
+                xAxes: [{
+                    stacked: true
+                }]
+            }
+        }
+    });
+   // active users chart
+    var userVisitsLabels = @Html.Raw(Json.Encode(@ViewBag.UserVisits.Labels));
+    var userVisitsData = @Html.Raw(Json.Encode(@ViewBag.UserVisits.Values));
+    var usersVisitsCtx = document.getElementById('userVisits').getContext('2d');
+    new Chart(usersVisitsCtx, {
+        type: 'bar',
+        data: {
+            labels: userVisitsLabels,
+            datasets: [{
+                label: 'Aktive Benutzer',
+                data: userVisitsData,
+                backgroundColor: 'rgba(104, 214, 255, 0.3)',
+                borderColor: 'rgba(104, 214, 255, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+</script>
+

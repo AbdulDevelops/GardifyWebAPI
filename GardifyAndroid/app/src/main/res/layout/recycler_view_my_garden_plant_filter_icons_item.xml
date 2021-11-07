@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+    </data>
+    <LinearLayout
+        android:id="@+id/linear_layout_outerLl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/linear_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/ll_beeFriendly"
+                android:padding="@dimen/marginPaddingSize_5sdp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/marginPaddingSize_5sdp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/imageView_team_height_xxxsmall"
+                    android:src="@drawable/gardify_app_icon_bienenfreundlich" />
+
+                <TextView
+                    android:id="@+id/text_view_my_garden_bienen_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="@dimen/textSize_body_xsmall"
+                    android:text="0" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_insectFriendly"
+                android:padding="@dimen/marginPaddingSize_5sdp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/marginPaddingSize_5sdp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/imageView_team_height_xxxsmall"
+                    android:src="@drawable/gardify_app_icon_insektenfreundlich" />
+
+                <TextView
+                    android:id="@+id/text_view_my_garden_insektenfreundlich_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="@dimen/textSize_body_xsmall"
+                    android:text="0" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_nativePlant"
+                android:padding="@dimen/marginPaddingSize_5sdp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/marginPaddingSize_5sdp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/imageView_team_height_xxxsmall"
+                    android:src="@drawable/gardify_app_icon_heimische_pflanzen" />
+
+                <TextView
+                    android:id="@+id/text_view_my_garden_heimische_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="@dimen/textSize_body_xsmall"
+                    android:text="0" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_ecologicalPlant"
+                android:padding="@dimen/marginPaddingSize_5sdp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/marginPaddingSize_5sdp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/imageView_team_height_xxxsmall"
+                    android:src="@drawable/gardify_app_icon_oekologisch_wertvoll" />
+
+                <TextView
+                    android:id="@+id/text_view_my_garden_oekologisch_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="@dimen/textSize_body_xsmall"
+                    android:text="0" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_birdFriendly"
+                android:padding="@dimen/marginPaddingSize_5sdp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/marginPaddingSize_5sdp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/imageView_team_height_xxxsmall"
+                    android:src="@drawable/gardify_app_icon_vogelfreundlich" />
+
+                <TextView
+                    android:id="@+id/text_view_my_garden_vogelfreundlich_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/textSize_body_xsmall"
+                    android:layout_gravity="center_horizontal"
+                    android:text="0" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_butterflyFriendly"
+                android:padding="@dimen/marginPaddingSize_5sdp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/marginPaddingSize_5sdp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/imageView_team_height_xxxsmall"
+                    android:src="@drawable/gardify_app_icon_schmetterlingsfreundlich" />
+
+                <TextView
+                    android:id="@+id/text_view_my_garden_schmetterlingsfreundlich_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/textSize_body_xsmall"
+                    android:layout_gravity="center_horizontal"
+                    android:text="0" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_waterSaving"
+                android:padding="@dimen/marginPaddingSize_5sdp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/marginPaddingSize_5sdp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/imageView_team_height_xxxsmall"
+                    android:src="@drawable/gardify_app_icon_wassersparende_pflanzen" />
+
+                <TextView
+                    android:id="@+id/text_view_my_garden_wassersparende_pflanzen_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/textSize_body_xsmall"
+                    android:layout_gravity="center_horizontal"
+                    android:text="0" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/text_View_my_garden_applied_filter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="@dimen/textSize_body_small"
+            android:paddingStart="@dimen/marginPaddingSize_8sdp"
+            android:text=""
+            android:visibility="gone" />
+    </LinearLayout>
+</layout>

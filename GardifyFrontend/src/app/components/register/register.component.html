@@ -1,0 +1,249 @@
+<ng-container *ngIf="loading">
+  <div class="overlay-loading" [hidden]="!(loading)">
+    <svg class="spinner position-relative" viewBox="25 25 50 50">
+      <circle class="path" cx="50" cy="50" r="24" fill="none" stroke-width="2" stroke-miterlimit="10" />
+    </svg>
+  </div>
+</ng-container>
+<ng-container *ngIf="registerRoute">
+ <div id="regCarousel" class="carousel slide pb-5 pb-md-0" data-ride="carousel" data-interval="70000">
+  <ol class="carousel-indicators pb-5 pb-md-2">
+    <li data-target="#regCarousel" data-slide-to="0" class="inactive"></li>
+  </ol>
+    <div class="carousel-inner">
+    <div class="carousel-item active">
+      <picture>
+          <source media="(max-width: 768px)" srcset="./assets/images/_JAY9125_Header_mobil.jpg">
+          <img class="d-block w-100" src="./assets/images/_JAY9125_Header_Desktop.jpg" alt="Erste Slide">
+      </picture>
+      <div [ngStyle]="{'bottom': simpleMode?'140px':'-10px'}" class="carousel-caption reg-caption {{mode}} d-block">
+        <ng-template [ngTemplateOutlet]="registerTemplate"></ng-template>
+       
+      </div>
+    </div>
+  </div>
+</div> 
+</ng-container>
+<ng-container *ngIf="isTestRegistration">
+  <ng-template [ngTemplateOutlet]="registerTemplate"></ng-template>
+ </ng-container>
+<ng-container *ngIf="!registerRoute">
+  <ng-template [ngTemplateOutlet]="registerTemplate"></ng-template>
+ </ng-container>
+<ng-template #registerTemplate>
+ <div class="container">
+          <div class="row justify-content-center">
+            <div class="BoxReg pt-2 px-1 px-md-3">
+              <form  class="form-horizontal px-3" id="reg" [hidden]="register" [formGroup]="registrationForm" validate>
+                <ng-container *ngIf="!(simpleMode || isTestRegistration)">
+                  <div class="row mb-3">
+                    <label for="gender" class="col-12 t-12 t-light mb-0">ANREDE *:</label>
+                    <div class="col-12">
+                      <select formControlName="Gender" [class.borderDanger]="f['Gender'].invalid" class="form-control t-10 t-light" placeholder="Auswählen">
+                        <option [ngValue]="'Herr'">Herr</option>
+                        <option [ngValue]="'Frau'">Frau</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-12 col-md-6 px-0">
+                        <label for="vorname" class="col-12 t-12 t-light mb-0">VORNAME *:</label>
+                        <div class="col-12">
+                          <input type="text" formControlName="Firstname" [class.borderDanger]="f['Firstname'].invalid" class="form-control t-10 t-light" placeholder="Vorname eintragen">
+                    </div>
+                   
+                    </div>
+                    <div class="col-12 col-md-5 px-0 px-md-2">
+                        <label for="name" class="col-12 t-12 t-light mb-0">NAME *:</label>
+                        <div class="col-12">
+                          <input type="text" formControlName="Lastname" [class.borderDanger]="f['Lastname'].invalid" class="form-control t-10 t-light" placeholder="Nachname eintragen">
+                        </div>
+                      </div>
+                  </div>
+                  
+                  <div class="row mb-3">
+                    
+                    <div class="col-12 col-md-6 px-0">
+                      <label for="street" class="col-12 t-12 t-light mb-0 ">STRASSE *:</label>
+                      <div class="col-12">
+                        <input type="text" formControlName="Street" [class.borderDanger]="f['Street'].invalid" class="form-control t-10 t-light " placeholder="Straße eintragen">
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-5 px-0 px-md-2">
+                      <label for="houserNr" class="col-12 t-12 t-light mb-0">HAUSNUMMER *:</label>
+                      <div class="col-12">
+                        <input type="text" formControlName="HouseNr" [class.borderDanger]="f['HouseNr'].invalid" class="form-control t-10 t-light" placeholder="HausNr. eintragen">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-12 col-md-6 px-0">
+                      <label for="city" class="col-12 t-12 t-light mb-0">ORT *:</label>
+                      <div class="col-12">
+                        <input type="text" formControlName="City" [class.borderDanger]="f['City'].invalid" class="form-control t-10 t-light" placeholder="Ort eintragen">
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-5 px-0 px-md-2">
+                      <label for="plz" class="col-12 t-12 t-light mb-0">PLZ *:</label>
+                      <div class="col-12">
+                        <input type="text" min="0" formControlName="PLZ" [class.borderDanger]="f['PLZ'].invalid" class="form-control t-10 t-light" placeholder="PLZ eintragen">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <!-- <label for="country" class="col-12 t-12 t-light mb-0">LAND *:</label> -->
+                    <div class="col-12">
+                        <select formControlName="Country" [class.borderDanger]="f['Country'].invalid" class="form-control t-10 t-light" placeholder="Land eintragen *">
+                          <option [ngValue]="'Deutschland'">Deutschland</option>
+                          <option [ngValue]="'Österreich'">Österreich</option>
+                          <option [ngValue]="'Schweiz'">Schweiz</option>
+                        </select>
+                    </div>
+                  </div> 
+                  <div class="row mb-3">
+                    <label for="gartenadresse" class="col-12 t-12 t-light mb-0">GARTENADRESSE: <fa-icon class="d-md-none text-green ptr" [icon]="faInfoCircle"></fa-icon></label>
+                    <div class="col-12 col-md-6">
+                      <button class="btn btn-green btnlittle col-12 btn_border075 t-reg text-white t-11">Gleich Wohnadresse</button>
+                    </div>
+                    <div class="col-12 col-md-5 px-md-3">
+                      <button class="btn btn-green btnlittle col-12 mr-2 btn_border075 t-reg text-white t-11">Andere Adresse</button>
+                    </div>
+                    <div class="col-md-1 d-none d-md-inline-block px-0">
+                      <fa-icon class="text-green ptr" [icon]="faInfoCircle"></fa-icon>
+                    </div>
+                  </div>
+                </ng-container>
+                <ng-container *ngIf="!isTestRegistration">
+                  <div class="row mb-3" >
+                    <div class="col-12 px-0">
+                      <input type="email" autocomplete="email" formControlName="Email" class="form-control t-10 t-light" [class.borderDanger]="f['Email'].invalid" placeholder="E-Mail *" [ngClass]="{ 'is-invalid': f.Email.errors }">
+                      <small class="text-danger" [hidden]="!f['Email'].invalid || !(f['Email'].dirty || f['Email'].touched)">
+                        Bitte geben Sie eine richtige E-Mail-Adresse ein.
+                      </small>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-12 px-0">
+                      <input type="text" autocomplete="username" formControlName="UserName" class="form-control t-10 t-light d-inline-block mr-2" [class.borderDanger]="f['UserName'].invalid" placeholder="Username *" [ngClass]="{ 'is-invalid': f.UserName.errors }">
+                      <fa-icon class="text-green ptr" [icon]="faInfoCircle" mat-raised-button matTooltipClass="tooltip-text" matTooltipPosition="above" matTooltip="Dein Username wird in deinen Forenbeiträgen als Kennung verwendet"></fa-icon>
+                      <small class="text-danger" *ngIf="f['UserName'].errors?.minlength && f['UserName'].invalid">
+                        USERNAME muss mind. 4 Zeichen sein 
+                      </small>
+                    </div>
+                  </div>
+                </ng-container>
+               
+                <div *ngIf="isTestRegistration" class="row mb-3">
+                  <p class="t-light px-3">
+                    Schön, dass Du gardify® testen möchtest. Du kannst alle wichtigen Funktionen ohne Registrierung nutzen, deine Einstellungen werden allerdings nur 
+                    für 48 Stunden gespeichert. Finde Deine Pflanzen mit der Suchfunktion und speichere sie in Deinem virtuellen 
+                    Garten.
+                  </p>
+                  <p class="t-light px-3">
+                    Du erhälst termingenaue Pflegehinweise für Deine Pflanzen und aktuelle Wetterwarnungen für Deinen 
+                    Standort. Um deinen angelegten Garten künftig weiterhin nutzen zu können, musst du dich registrieren. 
+                    Die Nutzung ist kostenlos und Du erfährst wie ökologisch Dein Garten ist!
+                  </p>
+                </div>
+                <div *ngIf="!isConverting && (simpleMode || isTestRegistration)" class="row mb-3">
+                  <div class="col-12 col-md-6 px-0 py-2">
+                    <select formControlName="Country" [class.borderDanger]="f['Country'].invalid" class="form-control t-10 t-light" [ngClass]="{ 'is-invalid': f.Country.errors }">
+                      <option hidden value="" disabled selected>Land auswählen *</option>
+                      <option [ngValue]="'Deutschland'">Deutschland</option>
+                      <option [ngValue]="'Österreich'">Österreich</option>
+                      <option [ngValue]="'Schweiz'">Schweiz</option>
+                    </select>
+                  </div>
+                  <div class="col-12 col-md-6 px-0 py-2">
+                    <input type="text"  formControlName="PLZ" [class.borderDanger]="f['PLZ'].invalid" class="form-control t-10 t-light" placeholder="PLZ *" [ngClass]="{ 'is-invalid': f.PLZ.errors }">
+                    <small class="text-danger" *ngIf=" f['PLZ'].errors && f['PLZ'].invalid">
+                      Deine Postleitzahl ist nicht korrekt.
+                    </small>
+                  </div>
+                </div>
+                
+                <div class="row mb-4" *ngIf="!isTestRegistration">
+                  <div class="col-12 col-md-6 px-0 py-2">
+                    <input type="password" autocomplete="new-password" formControlName="Password" class="form-control t-10 t-light" [class.borderDanger]="f['Password'].invalid" placeholder="Passwort *" [ngClass]="{ 'is-invalid': f.Password.errors }" >
+
+                    <small class="text-danger" *ngIf="f['Password'].errors?.pattern || f['Password'].invalid">
+                      Passwort muss Folgendes enthalten: Großbuchstaben, Nummer, Sonderzeichen
+                    </small>
+                    <small class="text-danger" *ngIf="f['Password'].errors?.minlength || f['Password'].invalid">
+                      Passwort muss mind. 6 Zeichen sein 
+                    </small>
+                    
+                  </div>
+                  <div class="col-12 col-md-6 px-0 py-2" >
+                    <input type="password" formControlName="ConfirmPassword" [class.borderDanger]="f['ConfirmPassword'].invalid" class="form-control t-10 t-light" placeholder="Passwort wiederholen *"[ngClass]="{ 'is-invalid': f.ConfirmPassword.errors }" >
+                    <small class="text-danger " *ngIf="f.ConfirmPassword.errors?.mustMatch">
+                      Die Passwörter stimmen nicht überein.
+                    </small>
+                  </div>
+                  <div class="col-12 mt-3">
+                    <div class="custom-control custom-checkbox">
+                      <input class="custom-control-input" type="checkbox" id="inlineCheckbox" value="newsLetterAbo"(click)="newsLetterAbo=!NewsletterAbo">
+                      <label class="custom-control-label text-green t-14" for="inlineCheckbox">Newsletter bestellen</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row mb-4">
+                  <div class="col-12 px-0">
+                    <div class="float-right">
+                      <fa-icon class="text-green ptr" data-toggle="collapse" href="#signupInfo" role="button" aria-expanded="false" [icon]="faInfoCircle"></fa-icon>
+                      <button *ngIf="!isTestRegistration" (click)="onSubmit()" form="reg" class="mx-2 btn btn-green btnProp btn_border075 t-bold text-white t-12 d-inline-block ">Registrieren</button>
+                      <button *ngIf="isTestRegistration"  (click)="registerDemo()" form="reg" class="mx-2 btn btn-green btnProp btn_border075 t-bold text-white t-12 d-inline-block ">Demo-Login</button>
+                      <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                    </div>
+                    <div class="collapse col-12 mt-3" id="signupInfo">
+                      <p class="text-green mb-1">Vollständig anmelden (kostenlos!):</p>
+                      <p class="t-12 mb-1">Eine vollständige Anmeldung ermöglicht es uns, dir genauere Wetterdaten zur Verfügung zu stellen, weil die Postleitzahl nicht immer genau genug ist. Ein Haus an einem Fluss hat z. B. bereits ein anderes Wetter als der drei Kilometer entfernt gelegene Garten an der Stadtgrenze. Hierzu müssen die Geokoordinaten berechnet werden. Unser Wetterdienst stellt solche sehr genauen Wetterdaten zur Verfügung, 
+                        während viele andere mit interpolierten Daten von meist amerikanischen Anbietern arbeiten (Messstellennetze von 20 Kilometern und mehr). 
+                        Dies ist vor allem für die nächsten Stunden durchaus bedeutsam, wenn man beispielsweise überlegt, heute noch einzusäen oder mit Freunden draußen zu essen. 
+                        Die sonst eventuell notwendige Anmeldung im Shop entfällt dann.
+                      </p>
+                      <p class="t-12 mb-1">Für die Anmeldung und Nutzung entstehen keine Kosten oder Verpflichtungen. Eine Löschung ist jederzeit möglich, wenn dem keine gesetzliche Aufbewahrungspflicht entgegensteht.</p>
+                      <p class="mb-1"><a class="text-green" href="mailto:team@gardify.de?subject=Kontolöschen&body=Bitte löschen Sie meine persönlichen Daten und schicken Sie mir eine Bestätigung.">Meine Anmeldedaten bitte löschen.</a></p>
+                      <a class="t-12 mb-1" data-toggle="collapse" href="#signupInfo"><< Zurück</a>
+                    </div>
+                  <div class="col-12 float-right mt-4">
+                    <div class="">
+                    <p class="t-reg t-10 mb-1">
+                      Wir schützen Nutzerdaten konsequent und treiben keinen Handel damit!
+                    </p>
+                    </div>
+                  </div>
+                  
+                  </div>
+                  <div class="col-12">
+                      <div class="row">
+                        <div class="col-5">
+                         <span class="t-10 t-reg">*Pflichtangaben</span>
+                        </div>
+                        <div class="col-7">
+                          <span routerLink="/datenschutz" class="ptr t-bold t-10">
+                              >> Zu unserer Datenschutzerklärung
+                          </span>
+                        </div>
+                      </div>
+                     
+                    </div>
+                </div>
+              </form>
+            
+              <p *ngIf="(register && !testModeRegis)">
+                <span class="t-18">Vielen Dank für Deine Registrierung!</span><br>
+                Um Deine Registrierung abzuschließen erhältst Du von uns eine Bestätigungsmail mit einem Bestätigungslink, der Deine Registrierung aktiviert.
+              </p>
+              <p *ngIf="(register && !testModeRegis)">
+                Keine Bestätigungsmail erhalten? Bitte überprüfe Deinen Spam- bzw. Junkmail-Ordner.
+              </p>
+            </div>
+            <div *ngIf="register && !simpleMode && !testModeRegis" class="boxConfirm {{mode}} mb-5 pt-5 px-1 px-md-3">
+              <p class="t-reg t-18 {{mode==='light'?'text-darkgrey':'text-white'}}">
+                  Gardify hat Dir eine Nachricht mit einem Bestätigungslink geschickt! Bitte schaue in Dein E-Mail Postfach.
+              </p>
+            </div>
+          </div>
+        </div>
+</ng-template>

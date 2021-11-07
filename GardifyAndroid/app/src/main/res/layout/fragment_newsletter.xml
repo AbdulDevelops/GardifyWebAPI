@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/scrollView_all_seashell">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/marginPaddingSize_24sdp">
+
+        <ProgressBar
+            android:id="@+id/progressBar_newsletter"
+            style="@style/ProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/marginPaddingSize_10sdp"
+                android:text="Gern senden wir dir aktuelle Neuigkeiten rund um Garten und Pflanzen. Den Newsletter kannst du jederzeit wieder abbestellen. In jedem versendeten Newsletter ist ein Link, über den Du den Newsletter wieder abbestellen kannst."
+                android:textSize="@dimen/textSize_body_medium" />
+
+            <!-- card view newsletter subscribe -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/marginPaddingSize_16sdp"
+                android:layout_marginBottom="@dimen/marginPaddingSize_16sdp"
+                app:cardCornerRadius="@dimen/cardCornerRadius_medium"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/marginPaddingSize_10sdp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+                        android:text="Anmeldung für Newsletter"
+                        android:textSize="@dimen/textSize_headline"
+                        android:textStyle="bold" />
+
+                    <!-- EditText with Label -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/marginPaddingSize_10sdp"
+                            android:layout_weight="1"
+                            android:text="@string/all_email"
+                            android:textSize="@dimen/textSize_body_medium" />
+
+                        <TextView
+                            android:id="@+id/newsletter_email_options"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="&#8230;"
+                            android:textAppearance="?android:textAppearanceLarge"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <EditText
+                        android:id="@+id/edit_text_newsletter_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/custom_edit_text_default"
+                        android:padding="@dimen/marginPaddingSize_10sdp"
+                        android:text="" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/button_newsletter_subscribe"
+                        style="@style/PrimaryButtonStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/marginPaddingSize_10sdp"
+                        android:text="@string/all_newsletterSubscribe" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:id="@+id/text_view_newsletter_footer_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autoLink="all"
+                android:clickable="true"
+                android:linksClickable="true"
+                android:text=""
+                android:textColorLink="@color/text_all_gunmetal"
+                android:textSize="@dimen/textSize_body_medium" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_newsletter_unsubscribe"
+                style="@style/SecondaryButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/marginPaddingSize_10sdp"
+                android:layout_marginBottom="@dimen/marginPaddingSize_24sdp"
+                android:text="@string/newsletter_unsubscribe" />
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

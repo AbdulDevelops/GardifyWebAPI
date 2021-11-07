@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view_expandable_header"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:orientation="horizontal"
+    android:padding="@dimen/marginPaddingSize_10sdp"
+    app:cardCornerRadius="@dimen/cardCornerRadius_medium"
+    >
+
+    <TextView
+        android:id="@+id/text_section"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:fontFamily="@font/source_sans_pro"
+        android:layout_weight="1"
+        android:textColor="@color/text_all_black"
+        android:textStyle="bold"
+        android:textSize="@dimen/textSize_title" />
+
+    <ToggleButton
+        android:id="@+id/toggle_button_section"
+        android:layout_width="@dimen/width_height_18sdp"
+        android:layout_height="@dimen/width_height_18sdp"
+        android:layout_gravity="center"
+        android:background="@drawable/expand"
+        android:textOff=""
+        android:textOn="" />
+
+</LinearLayout>
+

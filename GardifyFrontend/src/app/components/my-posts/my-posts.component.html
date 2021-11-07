@@ -1,0 +1,95 @@
+
+<ng-container *ngIf="currentUserPosts">
+    <div *ngFor="let post of currentUserPosts; let i = index" class="bt-border"  >
+       <div class="row mb-3 {{mode === 'light'? 'text-darkgrey' : 'text-white'}}">
+            <div class="col-12 col-md-4  mt-2 mb-2 ">
+                <img class="" [src]="toUrl(post.Images[0]?.SrcAttr)" style="height: 220px;
+                width: 100%;object-fit: cover;">
+            </div>
+            <div class=" col-md-8  mt-2">
+                <span class="t-14 t-light d-inline-block ">{{post.PublishDate | date:'dd.MM.yyy'}}</span> 
+                <span class="t-14 t-light d-inline-block ptr {{mode === 'light'? 'text-darkgrey' : 'text-ltgrey '}}" [routerLink]="['/thread',{ id:post.QuestionId }]" style="float: right;">{{post.TotalAnswers}} Antwort(en)</span>
+
+                <h2 class="t-italic t-reg t-14">{{post.Thema}}</h2>
+                <p class="{{mode === 'light'? 'text-blackish' : 'text-white'}} t-14 t-reg">
+                    {{post.Description}} <span [routerLink]="['/thread',{ id:post.QuestionId }]" class="t-14 text-green ptr">...mehr</span>
+                </p>
+                <span *ngIf="post.isEdited" class=" t-light t-14 {{mode === 'light'? 'text-darkgrey' : 'text-ltgrey '}}">(bearbeitet)</span>
+
+            </div>
+            <div class="col-md-3 mt-2 ">
+                
+                <h2 class="t-14 t-light ml-3 ptr {{mode === 'light'? 'text-darkgrey' : 'text-ltgrey '}}" >Veröffentlicht? : {{post.AdminAllowsPublishment?'ja':'nein'}}</h2>
+    
+                <h2 data-toggle="modal" (click)="selectedPost = post;" data-target="#updatePost" class="t-14 t-light ml-3 ptr {{mode === 'light'? 'text-darkgrey' : 'text-ltgrey '}}" > Bearbeiten</h2>
+
+            </div>
+            <div class="col-md-12 ">
+              <button *ngIf="post.isEdited" type="button" (click)="getPostById(post.QuestionId)"class="btn btn-green float-right btn-text" data-toggle="collapse" data-target="#originalPost" aria-expanded="false" aria-controls="originalPost" >
+                <span class="if-collapsed">Original Post anzeigen</span>
+                <span class="if-not-collapsed ">Original Post ausblenden</span></button>
+              <div class="collapse" id="originalPost">
+                <div class="card card-body mt-5">
+                  <p *ngIf="postItem" class="t-light {{mode === 'light'? 'text-darkgrey' : 'text-white'}}">
+                    <span class="t-15 text-green t-reg">Thema: </span>{{postItem.Thema}}<br>
+                    <span class="t-15 text-green t-reg">Beschreibung</span>: {{postItem.Description}} <br>
+                   <span class="t-15 text-green t-reg">Frage: </span>{{postItem.QuestionText}}<br>
+                  </p>
+                </div>
+              </div>
+            </div>
+        </div>
+        <ng-container *ngIf="((i+1) % 5) == 0 " >
+            <app-ad [ad]="adBetween" ></app-ad>
+        </ng-container>
+    </div>
+</ng-container>
+<ng-container *ngIf="!currentUserPosts">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="{{mode === 'light'? 'text-blackish' : 'text-white'}} t-14 t-reg">
+                Noch Keine Posts!
+            </h2>
+        </div>
+    </div>
+</ng-container>
+<ng-container *ngIf="selectedPost">
+    <div class="modal fade" id="updatePost" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content {{mode}}">
+          <div class="modal-header">
+            <h5 class="modal-title">{{selectedPost.Thema}} bearbeiten</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span class="{{mode==='dark'?'text-white':'text-darkgrey'}}" aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form class="modal-body">
+            <div class="row mb-3">
+              <div class="form-group col-12 px-2">
+                <label class="{{mode==='light'?'text-darkgrey':'text-white'}}">Thema</label>
+                <input [(ngModel)]="selectedPost.Thema" type="text" class="form-control" name="PostThema">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="form-group col-12 px-2">
+                <label class="{{mode==='light'?'text-darkgrey':'text-white'}}">Beschreibung</label>
+                <textarea [(ngModel)]="selectedPost.Description" type="text" class="form-control" name="PostDesc"></textarea>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="form-group col-12 px-2">
+                <label class="{{mode==='light'?'text-darkgrey':'text-white'}}">Ihre Frage</label>
+                <textarea  [(ngModel)]="selectedPost.QuestionText"
+                          type="text" class="form-control" name="postQuestion">
+                </textarea>
+              </div>
+            </div>
+          </form>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
+            <button type="button" class="btn btn-green" data-dismiss="modal" (click)="updatePost(selectedPost)">Speichern</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>

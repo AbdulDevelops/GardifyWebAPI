@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="EHf-IW-A2E">
+            <objects>
+                <viewController id="01J-lp-oVM" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="Ze3-Wg-V1E">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" red="0.45882352939999999" green="0.59215686270000001" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LogoClear" translatesAutoresizingMaskIntoConstraints="NO" id="pWW-xG-MZG">
+                                <rect key="frame" x="-93" y="48" width="600" height="600"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="600" id="Man-XW-5CH"/>
+                                    <constraint firstAttribute="width" constant="600" id="eRD-Bh-ZxO"/>
+                                </constraints>
+                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="smart" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xc1-8y-c85">
+                                <rect key="frame" x="0.0" y="466" width="414" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="und ökologisch" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mw9-dp-6SF">
+                                <rect key="frame" x="0.0" y="495" width="414" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="gärtnern" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oIN-Q3-4mc">
+                                <rect key="frame" x="0.0" y="524" width="414" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n7o-b3-2YN">
+                                <rect key="frame" x="28" y="817.5" width="358" height="1"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="A2Y-nx-WOf"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="© BECKER JOEST VOLK VERLAG" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k8q-M8-ClE">
+                                <rect key="frame" x="30" y="826.5" width="354" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <constraints>
+                            <constraint firstItem="n7o-b3-2YN" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="8" id="0Ee-89-Zbv"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="n7o-b3-2YN" secondAttribute="trailing" constant="8" id="3IE-2F-Sjp"/>
+                            <constraint firstItem="pWW-xG-MZG" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-100" id="6b0-St-OiS"/>
+                            <constraint firstItem="oIN-Q3-4mc" firstAttribute="top" secondItem="mw9-dp-6SF" secondAttribute="bottom" constant="5" id="8wr-sd-CAr"/>
+                            <constraint firstItem="Ze3-Wg-V1E" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="IbW-8z-P1B"/>
+                            <constraint firstItem="Xc1-8y-c85" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Kto-R5-lkz"/>
+                            <constraint firstItem="mw9-dp-6SF" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="MQw-Mk-Qjz"/>
+                            <constraint firstAttribute="trailing" secondItem="Ze3-Wg-V1E" secondAttribute="trailing" id="Rk1-A6-9YH"/>
+                            <constraint firstItem="pWW-xG-MZG" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="TMn-nW-wLO"/>
+                            <constraint firstItem="Ze3-Wg-V1E" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="TcZ-YC-fYP"/>
+                            <constraint firstItem="k8q-M8-ClE" firstAttribute="top" secondItem="n7o-b3-2YN" secondAttribute="bottom" constant="8" id="VdF-d9-jIR"/>
+                            <constraint firstItem="mw9-dp-6SF" firstAttribute="top" secondItem="Xc1-8y-c85" secondAttribute="bottom" constant="5" id="Wsh-YB-Z6R"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="k8q-M8-ClE" secondAttribute="bottom" constant="15" id="agv-jR-hEe"/>
+                            <constraint firstAttribute="bottom" secondItem="Ze3-Wg-V1E" secondAttribute="bottom" id="bmH-UC-7yY"/>
+                            <constraint firstItem="mw9-dp-6SF" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="cIR-fm-bH7"/>
+                            <constraint firstItem="k8q-M8-ClE" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="10" id="hjM-Ib-xgd"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Xc1-8y-c85" secondAttribute="trailing" id="phF-LA-b3U"/>
+                            <constraint firstItem="oIN-Q3-4mc" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="rgo-6r-iHV"/>
+                            <constraint firstItem="oIN-Q3-4mc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="wEv-yB-F3s"/>
+                            <constraint firstItem="Xc1-8y-c85" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="30" id="wPr-Vu-ltm"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="k8q-M8-ClE" secondAttribute="trailing" constant="10" id="wxi-6C-Lto"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="52.173913043478265" y="375"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="LogoClear" width="842" height="595"/>
+        <image name="background" width="1000" height="2013"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

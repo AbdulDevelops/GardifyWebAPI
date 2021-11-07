@@ -1,0 +1,124 @@
+﻿@model GardifyModels.Models.ShopcartViewModels.ShopcartEntriesListViewModel
+@using PflanzenApp.HtmlHelpers;
+@{
+    ViewBag.Title = "Ihr Warenkorb";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@if (Model.StatusMessage != null)
+{
+	Html.RenderPartial("_modalStatusMessage", Model.StatusMessage);
+}
+<h2>Ihr Warenkorb</h2>
+<div id="shopcart">
+	@Html.Partial("_Shopcart", Model)
+</div>
+
+@section Scripts {
+<script type="text/javascript">
+	// shopcart
+	$(document).ready(function () {
+		var shopcart = new Shopcart('#shopcart');
+		shopcart.updateControls();
+	});
+
+	function Shopcart(shopcartSelector) {
+		this.selector = shopcartSelector;
+		var root = this;
+
+		this.updateControls = function () {
+
+			$(this.selector + ' .shopcart-wrapper .shopcart-control.remove').click(function (event) {
+				event.preventDefault();
+				root.remove($(this).data('entryid'));
+			});
+
+			$(this.selector + ' .shopcart-wrapper .shopcart-control.minus, .shopcart-wrapper .shopcart-control.plus').mousedown(function () {
+				root.onPlusMinusDown(this);
+			}).mouseup(function () {
+				root.onPlusMinusUp(this);
+			});
+		}
+
+		this.remove = function (entryId) {			
+			$(root.selector + ' .loading-div').show();
+			$.ajax({
+				url: '@Url.Action("deleteShopcartEntry", "Shopcart")',
+				type: 'post',
+				cache: false,
+				data: { 'entryId': entryId, @Html.AjaxAntiForgeryTokenExtention() },
+			})
+			.done(function (result) {
+				$(root.selector).html(result);
+				root.updateControls();
+				$(root.selector + ' .loading-div').hide();
+				updateShopcartCounter();
+			});			
+		}
+
+		var clickInterval;
+		this.onPlusMinusDown = function (button) {
+			var $quantitySpan = $(button).parent().find('.quantity-span');
+			var newQuantity = parseInt($quantitySpan.html());
+
+			// short click
+			if ($(button).hasClass('plus')) {
+				newQuantity += 1;
+			} else {
+				if (newQuantity > 1) {
+					newQuantity -= 1;
+				} else {
+					return false;
+				}
+			}
+
+			$quantitySpan.html(newQuantity);
+
+			// long click
+			clickInterval = window.setInterval(function () {
+				if ($(button).hasClass('plus')) {
+					newQuantity += 1;
+				} else {
+					if (newQuantity > 1) {
+						newQuantity -= 1;
+					} else {
+						return false;
+					}
+				}
+
+				$quantitySpan.html(newQuantity);
+
+			}, 200);
+		}
+
+		var sendTimeout;
+		this.onPlusMinusUp = function (button) {
+			window.clearInterval(clickInterval);
+			window.clearTimeout(sendTimeout);
+
+			var articleId = $(button).parent().data('articleid');
+			var quantity = $(button).parent().find('.quantity-span').html();
+
+			sendTimeout = window.setTimeout(function () {
+				root.changeQuantity(articleId, quantity);
+			}, 800);
+		}
+
+		this.changeQuantity = function (articleId, quantity) {
+			$(root.selector + ' .loading-div').show();
+			$.ajax({
+				url: '@Url.Action("changeQuantity", "Shopcart")',
+				type: 'post',
+				cache: false,
+				data: { 'articleId': articleId, 'newQuantity': quantity, @Html.AjaxAntiForgeryTokenExtention() },
+			})
+			.done(function (result) {
+				$(root.selector).html(result);
+				root.updateControls();
+				$(root.selector + ' .loading-div').hide();
+			});
+		}
+	}
+
+</script>
+	
+}

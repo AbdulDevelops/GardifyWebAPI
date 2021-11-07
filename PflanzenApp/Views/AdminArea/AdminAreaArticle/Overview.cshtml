@@ -1,0 +1,95 @@
+﻿@model GardifyModels.Models.ArticleViewModels.ArticleListViewModel
+@{
+    ViewBag.Title = "Alle Artikel";
+    Layout = "~/Views/Shared/_LayoutAdminArea.cshtml";
+}
+
+<h2>Alle Artikel (@Model.ListEntries.Count() gesamt)</h2>
+
+<p>
+    @Html.ActionLink("Neuer Artikel", "Create")
+</p>
+<p>
+    @Html.ActionLink("Zur detaillierten Ansicht", "Index")
+</p>
+<form method="get" class="form-horizontal">
+    <div class="form-group row">
+        <div class="col-md-2">Suche nach:</div>
+        @Html.TextBox("SearchText", (string)ViewBag.SearchText, new { @class = "form-control col-md-10" })
+        <input class="btn btn-default" type="submit" value="Suchen" />
+    </div>
+</form>
+<table class="table">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Preis
+        </th>
+        <th>
+            Aktuelle Sortierung
+        </th>
+        <th>
+            Neue Sortierung
+        </th>
+        <th>
+            Veröffentlicht
+        </th>
+        <th>
+            Verfügbar
+        </th>
+        <th>
+            Nicht lieferbar
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.ListEntries)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.NormalPrice)€
+    </td>
+    <td id="art@(item.Id)">
+        @Html.DisplayFor(modelItem => item.Sort)
+    </td>
+    <td>
+        <select onchange="onSort(@item.Id, this.value)">
+            <option value="-1">-</option>
+            @{
+                for (var i = 1; i < Model.ListEntries.Count() + 1; i++)
+                {
+                    <option value="@i">@i</option>
+                }
+            }
+        </select>
+    </td>
+    <td>
+        @{if (item.AllowPublishment)
+            {<span>Ja</span>}
+            else
+            {<span>Nein</span>}
+        }
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.IsAvailable)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.IsNotDeliverable)
+    </td>
+    <td>
+        @Html.ActionLink("ändern", "Edit", new { id = item.Id })
+    </td>
+</tr>
+    }
+
+</table>
+<script>
+    function onSort(articleId, newSort) {
+        window.location.href = `/intern/i/shop/UpdateArticleSort?articleId=${articleId}&newSort=${newSort}`;
+    }
+</script>

@@ -1,0 +1,148 @@
+﻿@model FileUploadLib.Models.FileListViewModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+<p>Es wurden insgesamt @Model.FileCount Dateien gefunden</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">
+                <form asp-controller="FileSearch" asp-action="Post" method="post" class="file-search-form">
+                    <input type="hidden" asp-for="ApplicationId" value="@Model.ApplicationId" />
+                    <input type="hidden" asp-for="UsesTestEnvironment" value="@Model.UsesTestEnvironment" />
+                    <input type="hidden" asp-for="FilterBy" value="@Model.FilterBy" />
+                    <input type="hidden" asp-for="ModuleId" value="@Model.ModuleId" />
+                    <input type="hidden" asp-for="OrderBy" value="ID" />
+                    <button type="submit" class="btn-link-custom">ID</button>
+                </form>
+            </th>
+            <th scope="col">
+                <form asp-controller="FileSearch" asp-action="Post" method="post" class="file-search-form">
+                    <input type="hidden" asp-for="ApplicationId" value="@Model.ApplicationId" />
+                    <input type="hidden" asp-for="UsesTestEnvironment" value="@Model.UsesTestEnvironment" />
+                    <input type="hidden" asp-for="FilterBy" value="@Model.FilterBy" />
+                    <input type="hidden" asp-for="ModuleId" value="@Model.ModuleId" />
+                    <input type="hidden" asp-for="OrderBy" value="Description" />
+                    <button type="submit" class="btn-link-custom">Beschreibung</button>
+                </form>
+            </th>
+            <th scope="col">
+                <form asp-controller="FileSearch" asp-action="Post" method="post" class="file-search-form">
+                    <input type="hidden" asp-for="ApplicationId" value="@Model.ApplicationId" />
+                    <input type="hidden" asp-for="UsesTestEnvironment" value="@Model.UsesTestEnvironment" />
+                    <input type="hidden" asp-for="FilterBy" value="@Model.FilterBy" />
+                    <input type="hidden" asp-for="ModuleId" value="@Model.ModuleId" />
+                    <input type="hidden" asp-for="OrderBy" value="Path" />
+                    <button type="submit" class="btn-link-custom">Pfad</button>
+                </form>
+            </th>
+            <th scope="col">
+                <form asp-controller="FileSearch" asp-action="Post" method="post" class="file-search-form">
+                    <input type="hidden" asp-for="ApplicationId" value="@Model.ApplicationId" />
+                    <input type="hidden" asp-for="UsesTestEnvironment" value="@Model.UsesTestEnvironment" />
+                    <input type="hidden" asp-for="FilterBy" value="@Model.FilterBy" />
+                    <input type="hidden" asp-for="ModuleId" value="@Model.ModuleId" />
+                    <input type="hidden" asp-for="OrderBy" value="EditedDate" />
+                    <button type="submit" class="btn-link-custom">Bearbeitet</button>
+                </form>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Files == null || !Model.Files.Any())
+        {
+            <tr>
+                <th scope="row">
+                    Es wurden keine Ergebnisse gefunden.
+                </th>
+            </tr>
+        }
+        else
+        {
+            @foreach (var file in Model.Files)
+            {
+                <tr>
+                    <th scope="row">
+                        @file.FileToModuleId
+
+                        @if (file.File.IsImageFile)
+                        {
+                            <img src="~/@file.File.Path" class="list-image hidden" alt="@file.AltText">
+                        }
+                        else if (file.File.IsPdfFile)
+                        {
+                            <div class="list-image hidden">
+                                <a asp-controller="File" asp-action="Download" asp-route-fileToModuleId="@file.FileToModuleId" target="_blank">
+                                    <i class="far fa-file-pdf fa-4x"></i>
+                                    <p>@file.File.OriginalFileName</p>
+                                </a>
+                            </div>
+                        }
+                        else if (file.File.IsExcelFile)
+                        {
+                            <div class="list-image hidden">
+                                <a asp-controller="File" asp-action="Download" asp-route-fileToModuleId="@file.FileToModuleId" target="_blank">
+                                    <i class="far fa-file-excel fa-4x"></i>
+                                    <p>@file.File.OriginalFileName</p>
+                                </a>
+                            </div>
+                        }
+                    </th>
+                    <td>
+                        @file.Description
+                    </td>
+                    <td>
+                        @file.File.Path
+                    </td>
+                    <td>
+                        @file.EditedDate.ToShortDateString()
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<div class="text-center">
+    @if (Model.Page > 0)
+    {
+        <form asp-controller="FileSearch" asp-action="Post" method="post" class="inline-block">
+            <input type="hidden" asp-for="ApplicationId" value="@Model.ApplicationId" />
+            <input type="hidden" asp-for="UsesTestEnvironment" value="@Model.UsesTestEnvironment" />
+            <input type="hidden" asp-for="FilterBy" value="@Model.FilterBy" />
+            <input type="hidden" asp-for="ModuleId" value="@Model.ModuleId" />
+            <input type="hidden" asp-for="OrderBy" value="@Model.OrderBy" />
+            <input type="hidden" asp-for="Page" value="0" />
+            <button type="submit" class="btn-link-custom"><i class="fas fa-angle-double-left"></i></button>
+        </form>
+        <form asp-controller="FileSearch" asp-action="Post" method="post" class="inline-block">
+            <input type="hidden" asp-for="ApplicationId" value="@Model.ApplicationId" />
+            <input type="hidden" asp-for="UsesTestEnvironment" value="@Model.UsesTestEnvironment" />
+            <input type="hidden" asp-for="FilterBy" value="@Model.FilterBy" />
+            <input type="hidden" asp-for="ModuleId" value="@Model.ModuleId" />
+            <input type="hidden" asp-for="OrderBy" value="@Model.OrderBy" />
+            <input type="hidden" asp-for="Page" value="@(Model.Page-1)" />
+            <button type="submit" class="btn-link-custom"><i class="fas fa-angle-left"></i></button>
+        </form>
+    }
+    <p class="inline-block">@(Model.Page + 1) von @(Model.PageCount)</p>
+    @if (Model.Page + 1 < Model.PageCount)
+    {
+        <form asp-controller="FileSearch" asp-action="Post" method="post" class="inline-block">
+            <input type="hidden" asp-for="ApplicationId" value="@Model.ApplicationId" />
+            <input type="hidden" asp-for="UsesTestEnvironment" value="@Model.UsesTestEnvironment" />
+            <input type="hidden" asp-for="FilterBy" value="@Model.FilterBy" />
+            <input type="hidden" asp-for="ModuleId" value="@Model.ModuleId" />
+            <input type="hidden" asp-for="OrderBy" value="@Model.OrderBy" />
+            <input type="hidden" asp-for="Page" value="@(Model.Page+1)" />
+            <button type="submit" class="btn-link-custom"><i class="fas fa-angle-right"></i></button>
+        </form>
+        <form asp-controller="FileSearch" asp-action="Post" method="post" class="inline-block">
+            <input type="hidden" asp-for="ApplicationId" value="@Model.ApplicationId" />
+            <input type="hidden" asp-for="UsesTestEnvironment" value="@Model.UsesTestEnvironment" />
+            <input type="hidden" asp-for="FilterBy" value="@Model.FilterBy" />
+            <input type="hidden" asp-for="ModuleId" value="@Model.ModuleId" />
+            <input type="hidden" asp-for="OrderBy" value="@Model.OrderBy" />
+            <input type="hidden" asp-for="Page" value="@(Model.PageCount-1)" />
+            <button type="submit" class="btn-link-custom"><i class="fas fa-angle-double-right"></i></button>
+        </form>
+    }
+</div>

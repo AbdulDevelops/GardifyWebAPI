@@ -1,0 +1,120 @@
+<ng-container *ngIf="loading">
+    <div class="overlay-loading" [hidden]="!loading">
+      <svg class="spinner position-relative" viewBox="25 25 50 50">
+        <circle class="path" cx="50" cy="50" r="24" fill="none" stroke-width="2" stroke-miterlimit="10" />
+      </svg>
+    </div>
+  </ng-container>
+<div class="wrapper pt-5 {{mode}} pb-5">
+   
+    <div class="container ">
+        <app-header-garden-archiv ></app-header-garden-archiv>
+
+        <div class="row mt-3">
+            <div class="col-12">
+                <h2 class="t-15 t-bold">Suche</h2>
+                <input type="search" class="form-control text-input" (keyup)="onSearchImg($event)" />
+            </div>
+            <div class="col-6">
+                <h2 class="t-15 t-bold my-3" >Suchfilter</h2>
+                <div id="accordion" class="accordion">
+                    <div class="card mb-0">
+                        <div class="card-header collapsed" data-toggle="collapse" href="#collapseOne">
+                            <a class="card-title t-15 t-bold" > Jahr </a><span> <img src="assets/images/Pfeil_nach_unten.svg" style="height: 15px; float:right"> </span>
+                        </div>
+                        <div id="collapseOne" class="card-body collapse" data-parent="#accordion">
+                            <input type="date" class="form-control text-input" style="width: 100%!important;" (keyup)="onSearchImg($event)" />   
+                            <mat-selection-list [disableRipple]="true" #item>
+                                <mat-list-option checkboxPosition="before" *ngFor="let year of listOfYears">
+                                   {{year}}
+                                </mat-list-option>
+                                
+                            </mat-selection-list>  
+                           </div>
+                        <div class="card-header collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                            <a class="card-title t-15 t-bold"> Erstellungsdatum </a><span> <img src="assets/images/Pfeil_nach_unten.svg" style="height: 15px; float:right"> </span>
+                        </div>
+                        <div id="collapseTwo" class="card-body collapse" data-parent="#accordion">
+                            <input type="search" class="form-control text-input" style="width: 100%!important;" (keyup)="onSearchImg($event)" />
+                        </div>
+                        <div class="card-header collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                            <a class="card-title t-15 t-bold"> Zugewiesenes Datum </a><span> <img src="assets/images/Pfeil_nach_unten.svg" style="height: 15px; float:right"> </span>
+                        </div>
+                        <div id="collapseThree" class="collapse" data-parent="#accordion">
+                            <div class="card-body">
+                                <input type="search" class="form-control text-input" style="width: 100%!important;" (keyup)="onSearchImg($event)" />
+                            </div>
+                        </div>
+                        <div class="card-header collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+                            <a class="card-title t-15 t-bold"> Album </a><span> <img src="assets/images/Pfeil_nach_unten.svg" style="height: 15px; float:right"> </span>
+                        </div>
+                        <div id="collapseFour" class="collapse" data-parent="#accordion">
+                            <div class="card-body">
+                                <mat-selection-list [disableRipple]="true" #item>
+                                    <mat-list-option checkboxPosition="before" *ngFor="let album of listOfAlbums">
+                                       {{album}}
+                                    </mat-list-option>
+                                    
+                                </mat-selection-list>
+                             </div>
+                        </div>
+                        <div class="card-header collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven">
+                            <a class="card-title t-15 t-bold"> Präsentation </a><span> <img src="assets/images/Pfeil_nach_unten.svg" style="height: 15px; float:right"> </span>
+                        </div>
+                        <div id="collapseSeven" class="collapse" data-parent="#accordion">
+                            <div class="card-body">
+                                <mat-selection-list [disableRipple]="true" #item>
+                                    <mat-list-option checkboxPosition="before" *ngFor="let presi of listOfPresi">
+                                       {{presi}}
+                                    </mat-list-option>
+                                    
+                                </mat-selection-list>
+                             </div>
+                        </div>
+                        <div class="card-header collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
+                            <a class="card-title t-15 t-bold"> Bewertungen </a><span> <img src="assets/images/Pfeil_nach_unten.svg" style="height: 15px; float:right"> </span>
+                        </div>
+                        <div id="collapseFive" class="collapse" data-parent="#accordion">
+                            <div class="card-body">
+                                <mat-selection-list [disableRipple]="true" #item>
+                                    
+                                    <mat-list-option checkboxPosition="before">
+                                        <img src="assets/images/Unbewertet.svg" class="albumgreen ">Unbewertet
+                                    </mat-list-option>
+                                    <mat-list-option checkboxPosition="before">
+                                        <img src="assets/images/1_Stern.svg" class="albumgreen ">
+                                    </mat-list-option>
+                                    <mat-list-option checkboxPosition="before">
+                                        <img src="assets/images/2_Sterne.svg" class="albumgreen ">
+                                    </mat-list-option>
+                                    <mat-list-option checkboxPosition="before">
+                                        <img src="assets/images/3_Sterne.svg" class="albumgreen ">
+                                    </mat-list-option>
+                                    <mat-list-option checkboxPosition="before">
+                                        <img src="assets/images/4_Sterne.svg" class="albumgreen">
+                                    </mat-list-option>
+                                    <mat-list-option checkboxPosition="before">
+                                        <img src="assets/images/5_Sterne.svg" class="albumgreen">
+                                    </mat-list-option>
+                                </mat-selection-list>
+                            </div>
+                        </div>
+                        <div class="card-header collapsed" data-toggle="collapse" data-parent="#accordion" >
+                            <a class="card-title t-15 t-bold">
+                                <mat-selection-list [disableRipple]="true" #item>
+                                    <mat-list-option checkboxPosition="before">
+                                       Nicht verschlagwortete Bilder
+                                    </mat-list-option>
+                                    <mat-list-option checkboxPosition="before">
+                                        Dieses Bild stammt nicht von mir
+                                    </mat-list-option>
+                                </mat-selection-list>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

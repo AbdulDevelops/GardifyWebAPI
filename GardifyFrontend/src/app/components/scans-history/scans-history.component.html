@@ -1,0 +1,70 @@
+<div class="wrapper {{mode}} pt-5 pb-5">
+  <div class="container px-5">
+    <div class="row justify-content-between pt-4 pb-2 bt-border {{mode}}">
+      <div class="col-12 col-md-6 pb-4">
+          <h2 class="t-light t-26 mt-3 {{mode==='light'?'text-grey':'text-white'}}">MEINE LETZTEN SCANS</h2>
+      </div>
+      <div class="mt-4 col-12 col-md-6 d-flex flex-column align-items-end">
+        <button [routerLink]="['/scanverlauf']" class="btn btn-secondary px-3 py-2 mb-3">
+          Sortieren nach
+        </button>
+        <a [routerLink]="['/scanner']" class="t-11 t-light text-green">zurück</a>
+      </div>
+    </div>
+
+    <ng-container *ngIf="results">
+      <div class="row">
+        <div class="col-12 px-0 mb-4 bt-border {{mode}}" *ngFor="let sr of results">
+          <div class="row pb-3 mt-3">
+            <div class="col-12 col-md-3 plant-img"><a [href]="toUrl(sr.ImageFilePath)" target="_blank"><img [src]="toUrl(sr.ImageFilePath)" [alt]="sr.ImageFileName"></a></div>
+            <div class="col-12 col-md-9 {{mode==='light'?'text-darkgrey':'text-white'}}">
+              <h2 *ngIf="sr.GName" class="t-16 mb-1 t-light font-italic">{{sr.GName}} <small>(von Google)</small></h2>
+              <h2 *ngIf="sr.PnName" class="t-light t-16 mb-3 font-italic ptr">
+                {{sr.PnName}} <small>(von Plantnet)</small>
+              </h2>
+              <span class="d-block mb-3 mb-md-5 {{mode==='light'?'text-darkgrey':'text-white'}}">Pflanzenfamilie: <span class="t-bold text-green pl-2">{{sr.Family || 'unbekannt'}}</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <!-- Pagination -->
+  </div>
+  <hr>
+</div>
+
+<div class="modal fade pr-0" tabindex="-1" role="dialog" aria-hidden="true" id="infoPopup">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content {{mode}} ">
+      <div class="modal-header p-2">
+        <button type="button" class="close modal-close" data-dismiss="modal" aria-label="Close">
+          <span class="text-white t-reg" aria-hidden="true">&times;</span>
+        </button>
+        <!-- <a class="t-9 ptr {{mode==='dark'?'text-white':'text-grey4'}}" (click)="hidePopup()">
+          BITTE NICHT MEHR ANZEIGEN!
+        </a> -->
+      </div>
+      <div class="modal-body px-5 pb-4 pt-0">
+        <div class="row ml-1">
+          <div class="col-4 p-0"><img class="pic-1" src="assets/main-icons/Scan_and_Find_Pflanzenfoto.jpg" alt="Blume"></div>
+          <div class="col-4 p-0"><img class="pic-2" src="assets/main-icons/Scan_find_Pfeil.png" alt="Pfeil"></div>
+          <div class="col-4 p-0"><img class="pic-3" src="assets/main-icons/Scan_find_dunkel.svg" alt="Scan & Find"></div>
+        </div>
+        <div class="row mt-3">
+          <h3 class="t-bold t-18 text-green">
+            Pflanzenfoto zur Pflanzenbestimmung hochladen: So gelingt es!
+          </h3>
+          <ul class="t-12 pl-3 text-white">
+            <li>Es kann nur 1 Bild pro Scan upgeloaded und verarbeitet werden</li>
+            <li>Bitte keine Fotos über 4 MB Dateigröße hochladen. Größere Bilder bitte beschneiden oder eine kleinere Auflösung verwenden</li>
+            <li>Bitte haben Sie etwas Geduld, bis die Ergebnisse sichtbar werden</li>
+          </ul>
+          <p class="t-bold pt-2 t-12 text-white">
+            Und so geht´s noch besser! Mehr ...
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

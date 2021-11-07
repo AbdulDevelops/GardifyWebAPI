@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+        android:layout_marginBottom="@dimen/marginPaddingSize_5sdp"
+        app:cardCornerRadius="@dimen/cardCornerRadius_medium"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="@dimen/marginPaddingSize_5sdp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/title_icon"
+                    android:layout_width="@dimen/imageView_all_width_18sdp"
+                    android:layout_height="@dimen/imageView_all_height_18sdp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/imageView_all_marginStart_5sdp"
+                    android:layout_marginEnd="@dimen/imageView_all_marginEnd_5sdp" />
+
+                <TextView
+                    android:id="@+id/textView_my_garden_device_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="5dp"
+                    android:fontFamily="@font/source_sans_pro"
+                    android:layout_weight="1"
+                    android:text="--"
+                    android:textSize="@dimen/textSize_body_medium"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button_my_garden_device_item_device_count"
+                    style="@style/PrimaryButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/width_height_24sdp"
+                    android:insetLeft="0dp"
+                    android:insetTop="0dp"
+                    android:insetRight="0dp"
+                    android:insetBottom="0dp"
+                    android:minWidth="@dimen/width_height_24sdp"
+                    android:padding="0dp"
+                    app:strokeWidth="0dp"
+                    android:text="0" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/textView_my_garden_device_item_minus_button"
+                    style="@style/SecondaryButtonSmallNoPadding"
+                    android:layout_height="@dimen/width_height_24sdp"
+                    android:layout_width="@dimen/width_height_24sdp"
+                    android:layout_marginStart="@dimen/marginPaddingSize_10sdp"
+                    android:text="-" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/textView_my_garden_device_item_plus_button"
+                    style="@style/SecondaryButtonSmallNoPadding"
+                    android:layout_height="@dimen/width_height_24sdp"
+                    android:layout_width="@dimen/width_height_24sdp"
+                    android:layout_marginStart="@dimen/marginPaddingSize_10sdp"
+                    android:text="+"/>
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/imageView_all_marginTop_5sdp"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/linear_layout_my_garden_frost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.switchmaterial.SwitchMaterial
+                        android:id="@+id/switch_my_garden_device_frost"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/height_8sdp"
+                        app:switchMinWidth="@dimen/switch_all_width_xxsmall"
+                        android:thumb="@drawable/switch_selector_thumb"
+                        app:track="@drawable/switch_selector_track" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/source_sans_pro"
+                        android:layout_marginStart="@dimen/marginPaddingSize_5sdp"
+                        android:textSize="@dimen/textSize_body_xsmall"
+                        android:text="@string/all_frostWarning" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+                    android:layout_below="@id/linear_layout_my_garden_frost"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.switchmaterial.SwitchMaterial
+                        android:id="@+id/switch_my_garden_device_storm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/height_8sdp"
+                        app:switchMinWidth="@dimen/switch_all_width_xxsmall"
+                        android:thumb="@drawable/switch_selector_thumb"
+                        app:track="@drawable/switch_selector_track" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/source_sans_pro"
+                        android:layout_marginStart="@dimen/marginPaddingSize_5sdp"
+                        android:textSize="@dimen/textSize_body_xsmall"
+                        android:text="@string/all_stormWarning" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/textview_my_garden_delete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/linear_layout_my_garden_frost"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="5dp"
+                    android:textAllCaps="false"
+                    android:fontFamily="@font/source_sans_pro"
+                    android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+                    android:textSize="@dimen/textSize_body_medium"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:text="@string/all_delete"
+                    android:focusable="true" />
+            </RelativeLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</layout>

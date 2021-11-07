@@ -1,0 +1,86 @@
+.plantDetailBody.dark{
+    background-color: #090b09
+}
+.plantDetailBody.light{
+    background-color: #e5e5e5
+}
+.form-control{
+    border-radius: 0%;
+    background-color: #8c8c8c;
+  
+}
+.form-control.light{
+    background-color: #8c8c8c;
+    color:white
+}
+.form-control.dark{
+    background-color: white;
+    color:#8c8c8c;
+    
+}
+input.form-control.dark::placeholder{
+    color: #8c8c8c
+}
+input.form-control.light::placeholder{
+    color: white
+}
+.btnmenu{
+    position: relative;
+}
+.btnmenu .btn:hover {
+    background-color: #7a9d34;
+  }
+.btnmenu .dropdown{
+    position: absolute;
+    top: 61%;
+  left: 4%;
+}
+.btn-primary{
+    border-color: #7a9e33
+}
+.show>.btn-primary.dropdown-toggle {
+    color: #fff;
+     background-color: #7a9d34; 
+    border-color: #7a9d34; 
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.file-input {
+    padding: 0.2rem;
+    color: white;
+    background-color: #494949;
+    width: 140px;
+    margin: 0 auto;
+    text-align: center;
+}
+.post-img {
+    height: 100%;
+    max-height: 300px;
+    width: 100%;
+    object-fit: cover;
+}
+.post-imgMini {
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
+}
+img.uploaded {
+    height: 60px;
+    width: 60px;
+    margin: 6px 6px;
+}
+[data-toggle="collapse"].collapsed .if-not-collapsed {
+    display: none;
+  }
+  [data-toggle="collapse"]:not(.collapsed) .if-collapsed {
+    display: none;
+  }
+@media (max-width: 990px) and (orientation:landscape) {
+    .col-md-5,.col-md-7 {
+      flex: 0 0 50%;
+      max-width: 50%;
+    }
+  }

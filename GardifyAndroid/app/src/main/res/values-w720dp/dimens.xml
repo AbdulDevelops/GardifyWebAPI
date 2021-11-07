@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+        Portrait mode w720dp / Landscape mode w400dp
+
+        1.) Widths
+        2.) Heights
+        3.) Margins
+    -->
+
+    <!-- 1.) Widths -->
+    <dimen name="width_team_cardView">400dp</dimen>
+    <dimen name="width_team_cardView_landscape">235dp</dimen>
+
+
+    <!-- 2.) Heights -->
+    <dimen name="height_team_cardView">480dp</dimen>
+    <dimen name="height_team_cardView_landscape">280dp</dimen>
+    <dimen name="height_bottomSheet">900dp</dimen>
+    <dimen name="imageView_plantScan_height_layoutItem">200dp</dimen>
+    <dimen name="imageView_all_height_cameraGallery">90dp</dimen>
+
+    <!-- 3.) Margins -->
+    <dimen name="margin_team_tableLayout">30dp</dimen>
+    <dimen name="margin_team_tableLayout_landscape">22dp</dimen>
+    <dimen name="margin_team_tableRow">15dp</dimen>
+    <dimen name="margin_team_tableRow_landscape">11dp</dimen>
+
+</resources>

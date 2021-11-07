@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Green color for this state, it's reserved for persistent color change-->
+    <item android:color="@color/colorPrimary" android:state_selected="true" />
+    <!-- White for neutral default state-->
+    <item android:color="@color/text_all_riverBed" />
+</selector>

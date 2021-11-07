@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+        android:layout_marginBottom="@dimen/marginPaddingSize_5sdp"
+        android:orientation="horizontal"
+        android:foreground="?android:attr/selectableItemBackground">
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:gravity="bottom"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:textSize="@dimen/textSize_body_medium"
+            android:textColor="@color/text_all_gunmetal"
+            tools:text="This is text here" />
+
+        <ImageView
+            android:id="@+id/image_view_checked_icon"
+            android:layout_width="@dimen/imageView_all_width_18sdp"
+            android:layout_height="@dimen/imageView_all_height_18sdp"
+            android:layout_gravity="center_vertical"
+            android:visibility="gone"
+            android:src="@drawable/checked_checkbox"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:visibility="invisible"
+            android:padding="@dimen/marginPaddingSize_5sdp"
+            android:layout_gravity="center_vertical"
+            android:text="&#8230;"
+            android:textSize="@dimen/textSize_icon"
+            android:textStyle="bold" />
+    </LinearLayout>
+</layout>

@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "Error404View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Seite nicht gefunden</h2>
+
+<div>
+    <h4>Fehler</h4>
+    <hr />
+    Die Seite wurde nicht gefunden.
+</div>
+<p>
+    @Html.ActionLink("Zurück zur Startseite", "Index", "Garden")
+</p>

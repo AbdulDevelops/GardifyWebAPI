@@ -1,0 +1,176 @@
+﻿@model GardifyModels.Models.LastViewedViewModels.LastViewedIndexViewModel
+@{
+    ViewBag.Title = "Zuletzt angesehen";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="modalWrapper"></div>
+<h2>Zuletzt angesehene Pflanzen</h2>
+@if (Model.UserLastViewed != null && Model.UserLastViewed.Count() > 0)
+{
+	<div class="plant-search-table">
+		<div class="row">
+			<div class="col-md-3"><b>Pflanze</b></div>
+			<div class="col-md-3"><b>Beschreibung</b></div>
+			<div class="col-md-3"><b>Eigenschaften</b></div>
+			<div class="col-md-3"></div>
+		</div>
+		<hr style="margin: 10px 0 5px" />
+		@foreach (var item in Model.UserLastViewed)
+		{
+			<div class="row">
+				<div class="col-md-6">
+					<h3>
+						<a href="@Url.Action("PlantDetails", "PlantSearch", new { id = item.Id })">
+							<b>@Html.DisplayFor(modelItem => item.NameLatin)</b>
+							@if (!String.IsNullOrEmpty(item.NameGerman))
+							{
+								<br />@Html.DisplayFor(modelItem => item.NameGerman)
+							}
+						</a>
+					</h3>
+				</div>
+			</div>
+				<div class="row">
+					<div class="col-md-3">
+						<a href="@Url.Action("PlantDetails", "PlantSearch", new { id = item.Id })">
+							<img title="@item.NameLatin" alt="@item.NameLatin" src="@item.Images.FirstOrDefault().SrcAttr" />
+						</a>
+					</div>
+					<div class="col-md-3">
+						@(item.Description.Length < 100 ? item.Description : item.Description.Substring(0, 100) + "...")
+					</div>
+					<div class="col-md-3">
+						@if (item.PlantTags != null && item.PlantTags.Any())
+					{
+						for (int i = 0; i < item.PlantTags.Count(); i++)
+						{
+								@(i > 0 ? ", " : "")@(item.PlantTags.ElementAt(i).Category.Title + ": " + item.PlantTags.ElementAt(i).Title);
+						}
+					}
+
+						@if (item.PlantCharacteristics != null && item.PlantCharacteristics.Any())
+					{
+							<hr />
+						for (int i = 0; i < item.PlantCharacteristics.Count(); i++)
+						{
+								@(i > 0 ? ", " : "")
+								@(item.PlantCharacteristics.ElementAt(i).Category.Title + ": ")
+							Html.RenderPartial("~/Views/Shared/_PlantCharacteristicValuePartial.cshtml", item.PlantCharacteristics.ElementAt(i));
+						}
+					}
+					</div>
+					<div class="col-md-3">
+						@if (User.Identity.IsAuthenticated)
+					{
+						using (Ajax.BeginForm("get-add-plant-dialog", "PlantSearch", new AjaxOptions { UpdateTargetId = "modalWrapper" }))
+						{
+								@Html.AntiForgeryToken();
+								@Html.Hidden("plantId", item.Id);
+								<input class="btn btn-default" type="submit" value="Zu meinem Garten hinzufügen" />
+						}
+							<br />
+						using (Ajax.BeginForm("get-add-plant-to-watchlist-dialog", "PlantSearch", new AjaxOptions { UpdateTargetId = "modalWrapper" }))
+						{
+								@Html.AntiForgeryToken();
+								@Html.Hidden("plantId", item.Id);
+								<input class="btn btn-default" type="submit" value="Zu Merkliste hinzufügen" />
+						}
+					}
+					</div>
+				</div>
+				<hr />
+		}
+	</div>
+}
+else
+{
+	<p>Noch keine Daten vorhanden</p>
+}
+
+<h2>Von anderen Benutzer zuletzt angesehene Pflanzen</h2>
+@if (Model.OtherLastViewed != null && Model.OtherLastViewed.Count() > 0)
+{
+	<div class="plant-search-table">
+		<div class="row">
+			<div class="col-md-3"><b>Pflanze</b></div>
+			<div class="col-md-3"><b>Beschreibung</b></div>
+			<div class="col-md-3"><b>Eigenschaften</b></div>
+			<div class="col-md-3"></div>
+		</div>
+		<hr style="margin: 10px 0 5px" />
+		@foreach (var item in Model.OtherLastViewed)
+		{
+			<div class="row">
+				<div class="col-md-6">
+					<h3>
+						<a href="@Url.Action(" PlantDetails", "PlantSearch" , new { id=item.Id })">
+							<b>@Html.DisplayFor(modelItem => item.NameLatin)</b>
+							@if (!String.IsNullOrEmpty(item.NameGerman))
+							{
+								<br />@Html.DisplayFor(modelItem => item.NameGerman)
+							}
+						</a>
+					</h3>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-3">
+					<a href="@Url.Action(" PlantDetails", "PlantSearch" , new { id=item.Id })">
+						<img title="@item.NameLatin" alt="@item.NameLatin" src="@item.Images.FirstOrDefault().SrcAttr" />
+					</a>
+				</div>
+				<div class="col-md-3">
+					@(item.Description.Length < 100 ? item.Description : item.Description.Substring(0, 100) + "...")
+				</div>
+				<div class="col-md-3">
+					@if (item.PlantTags != null && item.PlantTags.Any())
+					{
+						for (int i = 0; i < item.PlantTags.Count(); i++)
+						{
+							@(i > 0 ? ", " : "")@(item.PlantTags.ElementAt(i).Category.Title + ": " + item.PlantTags.ElementAt(i).Title);
+						}
+					}
+
+								@if (item.PlantCharacteristics != null && item.PlantCharacteristics.Any())
+					{
+							<
+	<hr />
+						for (int i = 0; i < item.PlantCharacteristics.Count(); i++)
+						{
+		@(i > 0 ? ", " : "")
+		@(item.PlantCharacteristics.ElementAt(i).Category.Title + ": ")
+							Html.RenderPartial("~/Views/Shared/_PlantCharacteristicValuePartial.cshtml", item.PlantCharacteristics.ElementAt(i));
+						}
+					}
+</div>
+<div class="col-md-3">
+	@if (User.Identity.IsAuthenticated)
+					{
+						using (Ajax.BeginForm("get-add-plant-dialog", "PlantSearch", new AjaxOptions { UpdateTargetId = "modalWrapper" }))
+						{
+			@Html.AntiForgeryToken();
+			@Html.Hidden("plantId", item.Id);
+			<input class="btn btn-default" type="submit" value="Zu meinem Garten hinzufügen" />
+						}
+		<br />
+						using (Ajax.BeginForm("get-add-plant-to-watchlist-dialog", "PlantSearch", new AjaxOptions { UpdateTargetId = "modalWrapper" }))
+						{
+			@Html.AntiForgeryToken();
+			@Html.Hidden("plantId", item.Id);
+			<input class="btn btn-default" type="submit" value="Zu Merkliste hinzufügen" />
+						}
+					}
+</div>
+</div>
+				<hr />
+		}
+	</div>
+}
+else
+{
+	<p>Noch keine Daten vorhanden</p>
+}
+
+@section Scripts {
+	@Scripts.Render("~/scripts/jquery.unobtrusive-ajax.min.js")
+}

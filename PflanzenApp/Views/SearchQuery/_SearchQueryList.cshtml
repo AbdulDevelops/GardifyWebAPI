@@ -1,0 +1,17 @@
+﻿@model IEnumerable<GardifyModels.Models.SearchQuery>
+<div class="search-queries-list">
+	<div class="loading-div">
+		<img src="~/Images/ajax_loader_gray_48.gif" title="Loading..." />
+		<p>Loading...</p>
+	</div>
+	<a href="#" onclick="AddSearchQuery(); return false;">Aktuelle Suche speichern</a>
+@if (Model != null && Model.Any())
+{
+	<ul>
+		@foreach (var item in Model)
+		{
+			<li><a href="#" data-value="@item.CookieString" onclick="UseSearchQuery('@item.CookieString'); return false;">@item.SearchName</a> <span data-id="@item.Id" onclick="RemoveSearchQuery(@item.Id); return false;">(X)</span></li>
+		}
+	</ul>
+}
+</div>

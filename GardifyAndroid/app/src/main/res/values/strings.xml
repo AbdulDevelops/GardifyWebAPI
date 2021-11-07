@@ -1,0 +1,465 @@
+<resources>
+    <!--
+        1.) all
+        2.) main activity
+        3.) splash screen
+        4.) toolbar
+        5.) navigation side
+        6.) home
+        7.) my garden
+        8.) to-do calendar
+        9.) plant search
+        10.) plant scan
+        11.) gardify news
+        12.) garden videos
+        13.) plant doc
+        14.) garden weather
+        15.) gardify shop
+        16.) garden eco scan
+        17.) garden glossary
+        18.) suggest plant
+        19.) gardify plus
+        20.) guided tour
+        21.) team
+        22.) agb
+        23.) shopping cart
+        24.) wish list
+        25.) order
+        26.) settings
+        27.) newsletter
+        28.) contact
+        29.) privacy
+        30.) imprint
+        31.) register / login
+        
+    -->
+
+    <!-- 1.) all -->
+    <string name="all_gardify">Gardify</string>
+    <string name="all_devices">Geräte</string>
+    <string name="all_camera">Kamera</string>
+    <string name="all_photo">Foto</string>
+    <string name="all_message">Nachricht</string>
+    <string name="all_save">Speichern</string>
+    <string name="all_cancel">Abbrechen</string>
+    <string name="all_add">Hinzufügen</string>
+    <string name="all_delete">Löschen</string>
+    <string name="all_anzahl">Anzahl</string>
+    <string name="all_description">Beschreibung</string>
+    <string name="all_topPlant">Topfpflanze?</string>
+    <string name="all_saveToGarden">Im Garten speichern</string>
+    <string name="all_network">Network</string>
+    <string name="all_plants">Pflanzen</string>
+    <string name="all_guidedTour">Guided <b>Tour</b></string>
+    <string name="all_toDo">TO-DO</string>
+    <string name="all_calendar">Kalender</string>
+    <string name="all_search">Suche</string>
+    <string name="all_news">News</string>
+    <string name="all_ecoScan">Ökoscan</string>
+    <string name="all_seeAllPlantInfos">Alle Infos zur Pflanze ansehen</string>
+    <string name="all_close">Schließen</string>
+    <string name="all_infoWarningTurnOffWarning"><b>Warnung abschalten.</b>  Für laufende Winterperiode. Am 21.06. wird die Warnung automatisch wieder aktiviert.</string>
+    <string name="all_infoWarningActivateWarning"><b>Warnung aktivieren.</b>  Die weiteren Parameter können unter Einstellungen individuell angepasst werden.</string>
+    <string name="all_anErrorOccurred">Es ist ein Fehler aufgetreten:</string>
+    <string name="all_plantsGroup">Pflanzengruppe</string>
+    <string name="all_family">Familie</string>
+    <string name="all_origin">Herkunft</string>
+    <string name="all_storeInMyGarden">In meinen Garten speichern</string>
+    <string name="all_moreDetails">Mehr dazu</string>
+    <string name="all_back">zurück</string>
+    <string name="all_saveToGardenHeaderText">zu meinem Gartenbereich hinzufügen</string>
+    <string name="all_dataSavedSuccessfully">Daten erfolgreich gespeichert</string>
+    <string name="all_ecologyCriteria">Öko-Kriterien</string>
+    <string name="all_ecoElements">Öko-Elemente</string>
+    <string name="all_today">Heute</string>
+    <string name="all_tomorrow">Morgen</string>
+    <string name="all_mainActivity">MainActivity</string>
+    <string name="all_plantName">Pflanzenname</string>
+    <string name="all_similarPlants">Ähnliche Pflanzen</string>
+    <string name="all_resetWarnings">Warnungen zurücksetzen</string>
+    <string name="all_resetWarningsMessage">Wir empfehlen das einmalige Zurücksetzen der Grundeinstellungen, wenn Teile deines Gartens vor dem 12.12.2020 angelegt wurden.</string>
+    <string name="all_frostWarning">Frostwarnung</string>
+    <string name="all_stormWarning">Sturmwarnung</string>
+    <string name="all_send">Senden</string>
+    <string name="all_newsletterSubscribe">Newsletter bestellen</string>
+    <string name="all_login">Anmelden</string>
+    <string name="all_email">Email</string>
+    <string name="all_password">Passwort</string>
+    <string name="all_edit">Bearbeiten</string>
+    <string name="all_passwordValidationHint">Passwort muss folgendes enthalten: Großbuchstaben, Nummer, Sonderzeichen  Passwort muss mind. 6 Zeichen sein</string>
+    <string name="all_confirm">Bestätigen</string>
+    <string name="all_required">Pflichtfelder</string>
+    <string name="all_hello">Hallo</string>
+    <string name="all_hello_comma_blankspace">Hallo, </string>
+    <string name="all_suggestion_message">\ndie Ergänzung der von dir gewünschten Pflanzen mit all ihren To-Dos und Eigenschaften wird aufgrund des hohen Aufkommens einige Zeit in Anspruch nehmen. Die Aktualisierung in "Mein Garten" erfolgt dann automatisch.\nWir bitten um etwas Geduld. Weiterhin viel Spaß mit Gardify.</string>
+    <string name="all_scan">Scannen</string>
+    <string name="all_passwordDoesNotMatch">Die Passwörter stimmen nicht überein!</string>
+
+
+
+    <!-- 2.) main activity -->
+    <string name="mainActivity_newVersionReady">Neue Version bereit!</string>
+    <string name="mainActivity_install">Installieren</string>
+    <string name="mainActivity_firstTimeUserMessage">Willkommen bei gardify! Dies ist die Beta Test-Version der gardify App.\n\nDie offizielle App ist demnächst verfügbar.\nViel Spaß beim Ausprobieren, wir freuen uns auf dein Feedback! </string>
+    <string name="mainActivity_noConnectionMaintenance">Wartungsarbeiten: gardify wird gerade aktualisiert.\nBitte versuche es in 30 Minuten noch einmal.</string>
+    <string name="mainActivity_understood">Verstanden</string>
+    <string name="mainActivity_navigationDrawerOpen">Open navigation drawer</string>
+    <string name="mainActivity_navigationDrawerClose">Close navigation drawer</string>
+
+    <!-- 3.) splash screen -->
+    <string name="splashScreen_copyrightText">© BECKER JOEST VOLK VERLAG</string>
+    <string name="splashScreen_text">smart\nund ökologisch\ngärtnern</string>
+    <string name="splashScreen_notYetRegistered">Noch nicht\n<b>registriert?</b></string>
+    <string name="splashScreen_fundamentalFunctions">Für diese grundlegenden Funktionen ist die\nRegistrierung erforderlich:</string>
+    <string name="splashScreen_savePlants">Pflanzen in Mein Garten speichern</string>
+    <string name="splashScreen_todos">Pflegehinweise (To-Dos) automatisch\nim Kalender sammeln</string>
+    <string name="splashScreen_frost">Frostwarnungen für Pflanzen hinterlegen</string>
+    <string name="splashScreen_registerButton">Jetzt kostenlos registrieren</string>
+    <string name="splashScreen_loginButton">Direkt zum Login</string>
+
+    <!-- 4.) toolbar -->
+    <string name="warnings">Warnungen</string>
+
+    <!-- 5.) navigation side -->
+    <string name="menuActivityMainDrawer_home">Home</string>
+    <string name="menuActivityMainDrawer_myGarden"><b>Mein</b> Garten</string>
+    <string name="menuActivityMainDrawer_toDo"><b>To-Do</b> Kalender</string>
+    <string name="menuActivityMainDrawer_plantSearch">Pflanzen <b>Suche</b></string>
+    <string name="menuActivityMainDrawer_plantScan">Pflanzen <b>Scan</b></string>
+    <string name="menuActivityMainDrawer_gardifyNews">gardify <b>News</b></string>
+    <string name="menuActivityMainDrawer_gardenVideo">garten <b>Videos</b></string>
+    <string name="menuActivityMainDrawer_plantDoc">Pflanzen <b>Doc</b></string>
+    <string name="menuActivityMainDrawer_gardenWeather">Garten <b>Wetter</b></string>
+    <string name="menuActivityMainDrawer_gardifyShop">gardify <b>Shop</b></string>
+    <string name="menuActivityMainDrawer_ecoScan">Garten <b>Ökoscan</b></string>
+    <string name="menuActivityMainDrawer_gardenGlossary">Garten <b>glossar</b></string>
+    <string name="menuActivityMainDrawer_suggestPlant">Pflanzen <b>ergänzen</b></string>
+    <string name="menuActivityMainDrawer_gardifyPlus">Gardify <b>Plus</b></string>
+    <string name="menuActivityMainDrawerFooter_team">Team</string>
+    <string name="menuActivityMainDrawerFooter_agb">AGB</string>
+    <string name="menuActivityMainDrawerFooter_shoppingCart">Warenkorb</string>
+    <string name="menuActivityMainDrawerFooter_wishList">Wunschliste</string>
+    <string name="menuActivityMainDrawerFooter_settings">Einstellungen</string>
+    <string name="menuActivityMainDrawerFooter_order">Bestellungen</string>
+    <string name="menuActivityMainDrawerFooter_newsletter">Newsletter</string>
+    <string name="menuActivityMainDrawerFooter_contact">Kontakt</string>
+    <string name="menuActivityMainDrawerFooter_privacy">Datenschutz</string>
+    <string name="menuActivityMainDrawerFooter_imprint">Impressum</string>
+    <string name="menuActivityMainDrawerFooter_logout">Abmelden</string>
+
+    <!-- 6.) home -->
+    <string name="home_my">Mein</string>
+    <string name="home_garden">Garten</string>
+    <string name="home_scan">Scan</string>
+    <string name="home_video">Video</string>
+    <string name="home_doc">DOC</string>
+    <string name="home_weather">Wetter</string>
+    <string name="home_shop">Shop</string>
+    <string name="home_glossary">Glossar</string>
+    <string name="home_suggest">Ergänzen</string>
+    <string name="home_plus">Plus</string>
+    <string name="home_guided">guided</string>
+    <string name="home_tour">tour</string>
+    <string name="home_guidedTourPopupMyGarden">Hier kannst du deine Pflanzen, Gartengeräte und ökologische Ausstattung deinem Garten (+) hinzufügen. So entsteht automatisch dein To-Do-Kalender für deinen Garten. Zudem steht dir zur Verfügung:\n
+            <font fgcolor='#6ba42a'>&gt;</font> Notizen zu deinen Pflanzen \n
+            <font fgcolor='#6ba42a'>&gt;</font> Gartenbereiche hinzufügen \n
+            <font fgcolor='#6ba42a'>&gt;</font> Sturmwarnungen für Schirme, Markisen, etc. \n
+            <font fgcolor='#6ba42a'>&gt;</font> Frostwarnungen zu deinen gefährdeten Pflanzen \n
+            <font fgcolor='#6ba42a'>&gt;</font> Filter (z. B. frostgefährdet, giftig, bienenfreundlich uvm.) \n
+            <font fgcolor='#6ba42a'>&gt;</font> Statistik deiner Pflanzen
+    </string>
+    <string name="home_guidedTourPopupTodoCalendar">Dein To-do-Kalender wird automatisch erzeugt, wenn du Pflanzen in deinen Garten kopiert hast. Er zeigt dir an, was, wann und auch wie es zu tun ist. Hake erledigte To-dos ab, füge eigene To-Dos oder Tagebucheinträge hinzu und lösche To-Dos, die du nicht mehr bekommen möchtest. </string>
+    <string name="home_guidedTourPopupSearchPlant">Die Pflanzensuche hilft dir, die richtigen Pflanzen zu finden. Dazu kannst du alle Pflanzen in der Datenbank nach 300 Eigenschaften in Sekunden sortieren. Aus der Pflanzensuche heraus, kannst du auch Pflanzen direkt in deinen Garten kopieren. </string>
+    <string name="home_guidedTourPopupPlantDoc">Deine Pflanze leidet unter einem Schädlingsbefall oder einer dir unbekannten Krankheit? Frag den Pflanzen-Doc! Suche in den Beiträgen oder eröffne ein neues Thema. Lade dazu das Foto hoch und beschreibe das Problem möglichst genau. </string>
+    <string name="home_guidedTourPopupPlantScan">Du hast eine Pflanze im Garten, die du nicht kennst? Lade hier zur Pflanzenbestimmung einfach ein Foto der Pflanze hoch oder nutze deine Smartphone-Kamera. Du erhältst dann Vorschläge, um welche Pflanze es sich handeln könnte. Achte darauf, dass du nah genug herangehst und nur eine Pflanze auf dem Bild zu sehen ist. Ist die Pflanze noch nicht in unserer Datenbank, kannst du sie zur Erfassung vorschlagen. </string>
+    <string name="home_guidedTourPopupEcoScan">Jeder Garten hilft der Natur, allem voran Insekten und Vögeln. Wenn du wissen möchtest, in welchen Monaten dein Garten besonders gut abschneidet und wie die anderen Ökobewertungen deines Gartens ausfallen, probiere mal den Ökoscan! Das Ergebnis kannst du per Mail an Gartenfreunde verschicken oder im To-Do-Kalender abspeichern. </string>
+    <string name="home_guidedTourPopupSuggestPlants">Deine gesuchte Pflanze ist nicht bei gardify aufgeführt? Schlage sie für die Datenbank vor! Bitte schickt immer ein Bild mit und gebt den Namen an, wenn ihr eine Idee habt, um welche Pflanze es sich handeln könnte. </string>
+    <string name="home_guidedTourPopupGardenWeather">Hier bekommst du standortgenaue Wetter-Infos, sowie Frost- und Sturmwarnungen für deine empfindlichen Pflanzen und deine Gartenausrüstung. Um diese Funktionen zu nutzen, ist eine Anmeldung technisch erforderlich, damit du die Wetterdaten für deinen Standort siehst. </string>
+    <string name="home_guidedTourPopupGardifyShop">Hier findest du von uns geprüfte Produkte für den Garten. Faire Beschreibungen helfen dir, die richtigen Produkte zu finden. Alle Dünger, Erden, Saatgut und  Spritzmittel werden von uns einer kritischen Prüfung durch unser Team aus Dipl.-Biologen und Gartenexperten unterworfen.\n\nWir freuen uns, wenn ihr gardify durch Kauf in unserem Shop unterstützt. Wir garantieren euch sehr faire Preise und Bedingungen! </string>
+    <string name="home_guidedTourPopupSettings">Über die Einstellungen verwaltest du deine Nutzerdaten, deinen Gartenstandort und die Benachrichtigungen, sowie Frost- und Sturmwarnungen. </string>
+
+    <!-- 7.) my garden -->
+    <string name="myGarden_lists">Listen</string>
+    <string name="myGarden_editList">Liste bearbeiten</string>
+    <string name="myGarden_savedList">Liste gespeichert!</string>
+    <string name="myGarden_myPlants">Meine Pflanzen</string>
+    <string name="myGarden_filterPlants">Pflanzen filtern</string>
+    <string name="myGarden_addNewList">Neue Liste erstellen</string>
+    <string name="myGarden_ecoElementDescription">Bitte aktiviere die Öko-Elemente, die in deinem Garten vorhanden sind. Sie verbessern die ökologische Qualität deines Gartens und helfen Tieren und Pflanzen, sich wohlzufühlen.</string>
+    <string name="myGarden_name">Name</string>
+    <string name="myGarden_notes">Notizen:</string>
+    <string name="myGarden_noDescription">Noch keine Beschreibung</string>
+    <string name="myGarden_addPlant">Pflanze hinzufügen</string>
+    <string name="myGarden_toDos">To-dos:</string>
+    <string name="myGarden_movePlant">Pflanze verschieben</string>
+    <string name="myGarden_moveToFollowingList">Pflanzen in folgende Liste verschieben:</string>
+    <string name="myGarden_moveToAnotherList">Pflanzen in andere Liste verschieben</string>
+    <string name="myGarden_moveAndDelete">Verschieben und Liste löschen</string>
+    <string name="myGarden_deleteImmediately">Liste sofort löschen</string>
+    <string name="myGarden_deletingListSuccessful">Die Liste wurde erfolgreich gelöscht.</string>
+    <string name="myGarden_deletingDeviceSuccessful">Das Gerät wurde erfolgreich gelöscht.</string>
+    <string name="myGarden_deletingPlantSuccessful">Die Pflanze wurde erfolgreich gelöscht.</string>
+    <string name="myGarden_deletingWarning">Achtung! Es werden alle Pflanzen dieser Liste aus deinem Garten gelöscht.</string>
+    <string name="myGarden_specifyNumber">Anzahl angeben</string>
+    <string name="myGarden_notesForThePlant">Notizen zur Pflanze</string>
+    <string name="myGarden_addPlantViaPlantList">Pflanze hinzufügen über Pflanzensuche</string>
+    <string name="myGarden_addPlantViaPlantScan">Pflanze hinzufügen über Pflanzenscan</string>
+    <string name="myGarden_addNewDeviceAccessories">Neues Gerät/Zubehör hinzufügen</string>
+    <string name="myGarden_descriptionOptional">Beschreibung (optional)</string>
+    <string name="myGarden_done">erledigt</string>
+    <string name="myGarden_resetFilter">Filter zurücksetzen</string>
+
+    <!-- 8.) to-do calendar -->
+    <string name="toDoCalendar_infoTodo"><b>To-Do:</b> wird automatisch erzeugt, wenn Pflanzen in deinem Garten gespeichert werden.</string>
+    <string name="toDoCalendar_infoTodoCustom"><b>Eigenes To-Do:</b> kannst du selbst anlegen.</string>
+    <string name="toDoCalendar_infoTodoDiary"><b>Tagebucheintrag:</b> kannst du selbst anlegen, wird aber nicht wiederholt.</string>
+    <string name="toDoCalendar_infoTodoScan"><b>Ökoscan:</b> hält den ökologischen Wert deines Gartens für diesen Tag fest.</string>
+    <string name="toDoCalendar_errorSomethingWentWrong">Etwas ist schief gelaufen</string>
+    <string name="toDoCalendar_noTodoMessage">Du hast in diesem Monat keine To-Dos</string>
+    <string name="toDoCalendar_title">Titel</string>
+    <string name="toDoCalendar_date">Datum</string>
+    <string name="toDoCalendar_addTodoEntry">Eigenes To-do anlegen</string>
+    <string name="toDoCalendar_repetitionType">Wiederholungsart</string>
+    <string name="toDoCalendar_dueFrom">Fälligkeit von*</string>
+    <string name="toDoCalendar_dueTo">Fälligkeit bis*</string>
+    <string name="toDoCalendar_uploadImages">Fotos hochladen</string>
+    <string name="toDoCalendar_addTodoDiaryEntry">Eintrag in mein Tagebuch</string>
+    <string name="toDoCalendar_myNotes">Meine Notizen</string>
+    <string-array name="toDoCalendar_customWeekdaysGermanArray">
+        <item>So</item>
+        <item>Mo</item>
+        <item>Di</item>
+        <item>Mi</item>
+        <item>Do</item>
+        <item>Fr</item>
+        <item>Sa</item>
+    </string-array>
+
+    <!-- 9.) plant search -->
+    <string name="plantSearch_ecologyFilterLabel">Filter nach ökologischen Kriterien</string>
+    <string name="plantSearch_frostHardness">Frosthärte</string>
+    <string name="plantSearch_detailedSearch">Detailsuche</string>
+    <string name="plantSearch_plantFamily">Pflanzenfamilie</string>
+    <string name="plantSearch_excludeTemperatureSensitivePlants">Temperaturempfindliche Pflanzen ausschließen</string>
+    <string name="plantSearch_classificationAccordingToWinterHardnessZones">Einteilung nach Winterhärtezonen</string>
+    <string name="plantSearch_location">Standort</string>
+    <string name="plantSearch_topFilter">Top-Filter</string>
+    <string name="plantSearch_use">Verwendung</string>
+    <string name="plantSearch_blossomColored">Blütenfarben</string>
+    <string name="plantSearch_floweringPeriod">Blühdauer</string>
+    <string name="plantSearch_growthHeight">Wuchshöhe</string>
+    <string name="plantSearch_HorticulturalGroup">Gärtnerische Gruppe</string>
+    <string name="plantSearch_roses">z. B. Rosen - Kletterrosen</string>
+    <string name="plantSearch_search">Suche ...</string>
+    <string name="plantSearch_evergreen">z. B. Immergrüne</string>
+    <string name="plantSearch_ericaceae">z. B. Ericaceae</string>
+    <string name="plantSearch_noResultMessage">War deine gesuchte Pflanze nicht dabei?</string>
+    <string name="plantSearch_proposePlantForDatabase">Pflanze für Datenbank vorschlagen</string>
+    <string name="plantSearch_noResultSuggestionHint">Hinweis: In vielen Fällen ist es hilfreich, vorerst eine ähnliche Sorte auszuwählen. Die Pflegearbeiten sind in aller Regel übertragbar</string>
+    <string name="plantSearch_searchResults">Suchergebnisse</string>
+    <string name="plantSearch_moveToAnotherGarden">In anderen Gartenbereich verschieben</string>
+    <string name="plantSearch_flowersAvailableIn">Blüten erhältlich in:</string>
+    <string-array name="plantSearch_exclusionTagsArray">
+        <item>allergieauslösend / phototoxisch</item>
+        <item>unangenehmer Geruch</item>
+        <item>dornig / stachelig</item>
+        <item>benötigt Rhizomsperre</item>
+        <item>anfällig für Schneckenfraß</item>
+        <item>invasiv</item>
+    </string-array>
+
+    <!-- 10.) plant scan -->
+    <string name="plantScan_scanNotSuccessful">Scan nicht erfolgreich</string>
+    <string name="plantScan_openInGoogle">In Google öffnen</string>
+    <string name="plantScan_suggestPlant">Pflanze vorschlagen</string>
+    <string name="plantScan_similarPlantsFromGardifyDatabase">Ähnliche Pflanzen aus der gardify-Datenbank</string>
+    <string name="plantScan_similarPlantsFromPlantNet">Ähnliche Pflanzen aus PlantNet</string>
+    <string name="plantScan_creator_of_picture">Sind Sie der Urheber dieser Bilder?</string>
+    <string name="plantScan_yes">Ja</string>
+    <string name="plantScan_no">Nein</string>
+    <string name="plantScan_result_synonym">Synonym</string>
+    <string name="plantScan_result_notFound">Nicht gefunden, was du suchst? Frage einen Experten!</string>
+    <string name="plantScan_result_askExpert"><b>Experten fragen</b> (Rückantwort in 1-7 Tagen)</string>
+
+    <!-- 11.) gardify news -->
+    <string name="gardify_news">Gardify News</string>
+    <string name="garden_news">Garten News</string>
+
+    <!-- 12.) garden video -->
+    <string name="gardenVideo_sort">Sortieren</string>
+    <string name="gardenVideo_topicSearch">Themensuche</string>
+
+    <!-- 13.) plant doc -->
+    <string name="plantDoc_myPosts">Meine Posts</string>
+    <string name="plantDoc_questionAsked">Vielen Dank für deine Frage. In Kürze erhältst du eine Antwort.</string>
+    <string name="plantDoc_question">Frage</string>
+    <string name="plantDoc_askQuestion">Frage stellen</string>
+    <string name="plantDoc_sendQuestion">Frage abschicken</string>
+    <string name="plantDoc_reply">Antworten</string>
+    <string name="plantDoc_noImage">Du hast noch kein Bild hochgeladen. Pflanzen-Doc-Anfragen sind nur mit Foto möglich, da eine Beurteilung ohne Bild erschwert ist.</string>
+
+    <!-- 14.) garden weather -->
+    <string name="gardenWeather_legendMaxTemperature">Max. Temp. (°C)</string>
+    <string name="gardenWeather_legendMinTemperature">Min. Temp. (°C)</string>
+    <string name="gardenWeather_legendRainFall">Niederschlagsmenge</string>
+    <string name="gardenWeather_legendSunshine">Sonnenschein (h)</string>
+    <string name="gardenWeather_morning">MORGENS</string>
+    <string name="gardenWeather_noon">MITTAGS</string>
+    <string name="gardenWeather_evening">ABENDS</string>
+    <string name="gardenWeather_night">NACHTS</string>
+    <string name="gardenWeather_eightDayTrend">8-Tage-Trend</string>
+    <string name="gardenWeather_outlook">Aussichten</string>
+    <string name="gardenWeather_hourlyForecast">Stündliche Vorhersage</string>
+
+    <!-- 15.) gardify shop -->
+
+    <!-- 16.) garden eco scan -->
+    <string name="ecoScan_plantDiversity">Pflanzenvielfalt</string>
+    <string name="ecoScan_floweringTime">Blühdauer</string>
+    <string name="ecoScan_saveResultToCalendar">Ergebnis im Kalender speichern</string>
+    <string name="ecoScan_meterSquared">m²</string>
+    <string name="ecoScan_evaluation">Auswertung</string>
+    <string name="ecoScan_landUse">Flächennutzung</string>
+    <string name="ecoScan_gardenFrom">Garten von</string>
+    <string name="ecoScan_myPersonalEcoScan">Mein persönlicher Ökoscan</string>
+    <string name="ecoScan_description">Mit deinem persönlichen Ökoscan bekommst du ein Gefühl dafür, wie ökologisch dein Garten ist und in welchem Bereich du noch etwas für die Natur tun kannst. Hierbei spielen die Verwendung deiner Außenfläche, die Auswahl und Blühdauer der Pflanzen sowie die Anzahl der Öko-Elemente eine Rolle. \n\n<i>Hinweis: Pflanzen, die über den Pflanzenscan in deinen Garten gespeichert wurden, beeinflussen auch die Pflanzenvielfalt und die Menge der insektenfreundlichen, blühenden Pflanzen nach Monaten. Der Ökoscan passt sich automatisch an, sobald wir die Pflanzen vollständig in die Datenbank aufgenommen haben.</i></string>
+    <string name="ecoScan_optimalForYourGardenSize">Optimum für deine Gartengröße</string>
+    <string name="ecoScan_numberOfFloweringSpecies">Menge deiner blühenden, insektenfreundlichen Pflanzensorten</string>
+    <string name="ecoScan_optimumAchieved">Optimum erreicht</string>
+    <string name="ecoScan_shareResult">Ergebnis teilen</string>
+    <string name="ecoScan_emailNote">(trenne einzelne Adressen mit einem Komma)</string>
+    <string name="ecoScan_yourEmail">Deine E-mail</string>
+    <string name="ecoScan_from">Von</string>
+    <string name="ecoScan_to">An</string>
+    <string name="ecoScan_sendOff">Abschicken</string>
+    <string name="ecoScan_messageClosingSignature">Viele Grüße,</string>
+
+    <!-- 17.) garden glossary -->
+    <string name="gardenGlossary_empty"></string>
+    <string name="gardenGlossary_themeNotFound">Thema nicht gefunden?</string>
+    <string name="gardenGlossary_askOurExperts">Fragen Sie unsere Experten</string>
+
+    <!-- 18.) suggest plant -->
+    <string name="suggestPlant_copyright_hint">Wenn Du gardify® die übersendeten Fotos zur Veröffentlichung zur Verfügung stellen willst, lies und beachte bitte die Hinweise zum <u>Urheberrecht</u>.</string>
+    <string name="suggestPlant_headerText">Hier könnt ihr uns Vorschläge für die gardify-Pflanzendatenbank schicken</string>
+    <string name="suggestPlant_plant_name">Name der Pflanze (wenn bekannt)</string>
+    <string name="suggestPlant_input_plant_name_hint">Hier den Pflanzennamen eingeben</string>
+    <string name="suggestPlant_already_exists">Die Pflanze, die du hinzufügen möchtest, existiert bereits in unserer Datenbank.\n\nWenn du auf "Schließen" drückst, wirst du zur Suche mit der von dir vorgeschlagenen Pflanze weitergeleitet.</string>
+
+    <!-- 19.) gardify plus -->
+
+    <!-- 20.) guided tour -->
+
+    <!-- 21.) team -->
+    <string name="team_nameMarkus">DR. MARKUS <b>PHLIPPEN</b></string>
+    <string name="team_nameJasmin">DIPL. BIO. JASMIN <b>OBHOLZER</b></string>
+    <string name="team_nameMelanie">M.SC. MELANIE <b>BAYO</b></string>
+    <string name="team_nameTherese">M.SC. THERESE <b>LIOUVILLE</b></string>
+    <string name="team_nameJanine">Dr.rer.nat. JANINE <b>SOMMER</b></string>
+    <string name="team_nameJana">JANA <b>ADAM</b></string>
+    <string name="team_nameMartha">MARTHA <b>AGNES</b></string>
+    <string name="team_nameVanessa">VANESSA <b>SCHMOLKE</b></string>
+    <string name="team_nameKarinB">M.SC. KARIN <b>BECKER</b></string>
+    <string name="team_nameJustyna">DIPL.-DES. JUSTYNA <b>SCHWERTNER</b></string>
+    <string name="team_nameCarolin">DIPL.-DES. CAROLIN <b>MOHR</b></string>
+    <string name="team_nameEllen">ELLEN <b>SCHLÜTER</b></string>
+    <string name="team_nameMaja">MAJA <b>SAUVANT</b></string>
+    <string name="team_namePhiline">PHILINE <b>ANASTASOPOULOS</b></string>
+    <string name="team_nameValerie">VALERIE <b>MAYER</b></string>
+    <string name="team_nameAnnika">ANNIKA <b>STEINACKER</b></string>
+    <string name="team_nameKaterina">KATERINA <b>STEGEMANN</b></string>
+    <string name="team_nameKarl">KARL FRIEDRICH <b>JOEST</b></string>
+    <string name="team_nameKarinK">KARIN <b>KOKOSCHKA</b></string>
+    <string name="team_nameJohonna">JOHANNA <b>HÄNICHEN</b></string>
+    <string name="team_nameAndreas">ANDREAS <b>GREWE</b></string>
+    <string name="team_nameRalf">RALF <b>JOEST</b></string>
+    <string name="team_nameBob">BOB THE <b>DIGGER</b></string>
+    <string name="team_qualificationScientificManagement">Wissenschaftliche Leitung</string>
+    <string name="team_qualificationScientificEmployee">Wissenschaftliche Mitarbeiterin</string>
+    <string name="team_qualificationManagementGraphic">Leitung Grafik</string>
+    <string name="team_qualificationGraphic">Grafik</string>
+    <string name="team_qualificationProjectManagement">Projektmanagement</string>
+    <string name="team_qualificationPress">Presse</string>
+    <string name="team_qualificationSocialMedia">Social Media</string>
+    <string name="team_qualificationAccounting">Buchhaltung</string>
+    <string name="team_qualificationManagementProgramming">Leitung Programmierung</string>
+    <string name="team_qualificationManagingDirector">Geschäftsführerin</string>
+    <string name="team_qualificationSoilAnalysis">Bodenanalyse</string>
+    <string name="team_quoteMarkus"><b>Lieblingszitat:</b> „Gardening is cheaper than therapy and you have tomatoes“</string>
+    <string name="team_quoteJasmine"><b>Lieblingszitat:</b> „Life\'s a garden and good friends are the flowers!“</string>
+    <string name="team_quoteMelanie"><b>Lieblingspflanze:</b> <i>Hoya carnosa</i> Porzellanblume</string>
+    <string name="team_quoteTherese"><b>Lieblingspflanze:</b> <i>Tulipa linifolia</i> Leinblättrige Tulpe</string>
+    <string name="team_quoteJanine"><b>Lieblingszitat:</b> „Blumen sind das Lächeln der Erde.“ R. W. Emerson</string>
+    <string name="team_quoteJana"><b>Lieblingszitat:</b> „Nature is my wisest self, made visible outside of me.“</string>
+    <string name="team_quoteMartha"><b>Lieblingspflanze:</b> <i>Aquilegia vulgaris</i> Gemeine Akelei</string>
+    <string name="team_quoteVanessa"><b>Lieblingspflanze:</b> <i>Clematis viticella</i> Italienische Waldrebe</string>
+    <string name="team_quoteKarinB"><b>Lieblingspflanze:</b> <i>Helianthus annuus</i> Sonnenblume</string>
+    <string name="team_quoteJustyna"><b>Lieblingspflanze:</b> Perückenstrauch, wegen des lustigen Namens und der „Wuschelfrisur im Herbst“</string>
+    <string name="team_quoteCaroline"><b>Lieblingspflanze:</b> <i>Dahlia \'Pooh\'</i> Halskrausendahlie \'Pooh\'</string>
+    <string name="team_quoteEllen"><b>Lieblingszitat:</b> „Grün ist nicht alles, aber ohne Grün ist alles nichts.“ Hans-Hermann Bentrup“</string>
+    <string name="team_quoteMaja"><b>Lieblingspflanze:</b> <i>Alocasia zebrina</i> Pfeilblatt</string>
+    <string name="team_quotePhiline"><b>Lieblingspflanze:</b> <i>Wisteria sinensis</i> Chinesischer Blauregen, Glyzinie</string>
+    <string name="team_quoteValerie"><b>Lieblingszitat:</b> „Ich freue mich, wenn es regnet. Wenn ich mich nicht freue, regnet es trotzdem.“</string>
+    <string name="team_quoteAnnika"><b>Lieblingspflanze:</b> <i>Aesculus hippocastanum</i> Gemeine Rosskastanie</string>
+    <string name="team_quoteKaterina"><b>Lieblingspflanze:</b> <i>Lavandula angustifolia</i> Echter Lavendel</string>
+    <string name="team_quoteKarl"><b>Lieblingspflanze:</b> <i>Olea europaea</i> Olivenbaum</string>
+    <string name="team_quoteKarinK"><b>Lieblingspflanze:</b> <i>Glebionis coronaria</i> Kronen-Wucherblume</string>
+    <string name="team_quoteRalf"><b>Lieblingszitat:</b> „Gras wächst nicht schneller wenn man daran zieht.“</string>
+    <string name="team_quoteJohanna"><b>Lieblingszitat:</b> „In der Einfachheit und Stille der Natur findet der Mensch die Lebenskraft.“</string>
+    <string name="team_quoteAndreas"><b>Lieblingspflanze:</b> <i>Sequoiadendron giganteum</i> Riesenmammutbaum</string>
+    <string name="team_quoteBob"><b>Lieblingszitat:</b> „Life‘s a garden. Dig it.“</string>
+
+    <!-- 22.) agb -->
+
+    <!-- 23.) shopping cart -->
+
+    <!-- 24.) wish list -->
+
+    <!-- 25.) order -->
+
+    <!-- 26.) settings -->
+    <string name="settings_username">Username</string>
+    <string name="settings_frostWarningBuffer">Frostwarnung Puffer (°C)</string>
+    <string name="settings_album">Album</string>
+    <string name="settings_choose">Wählen</string>
+    <string name="settings_deleteAccount">Konto löschen</string>
+    <string name="settings_deleteAccountMessage">Deine Pflanzen, To-Dos und Gärten werden vollständig gelöscht und sind danach nicht wiederherstellbar.\nMöchtest du wirklich dein Gardify-Konto löschen?</string>
+    <string name="settings_confirmNewPassword">Neues Passwort bestätigen</string>
+    <string name="settings_currentPassword">Aktuelles Passwort</string>
+    <string name="settings_newPassword">Neues Passwort</string>
+    <string name="settings_passwordUpdated">Passwort aktualisiert</string>
+
+    <!-- 27.) newsletter -->
+    <string name="newsletter_unsubscribe">Newsletter abbestellen</string>
+
+    <!-- 28.) contact -->
+    <string name="contact_writeUs">Schreib uns!</string>
+    <string name="contact_subject">Betreff</string>
+    <string name="contact_emailAddress">E-Mail Adresse</string>
+    <string name="contact_commendationsAndCriticism">Wir freuen uns über deine Nachricht, dein Lob oder deine Kritik. Wir versuchen alle Mails zeitnah zu lesen. Wenn du neue Pflanzen vorschlagen willst oder Fragen an unsere Pflanzen-Doc hast, nutze bitte die entsprechenden Funktionen der App.</string>
+
+    <!-- 29.) privacy policy -->
+    <string name="privacyPolicy_updateNotification">Datenschutz wird bald aktualisiert.</string>
+
+    <!-- 30.) imprints -->
+    <string name="imprint_gardifyAddress"><![CDATA[BECKER JOEST VOLK VERLAG GmbH & Co. KG \nBahnhofsallee 5 \n40721 Hilden \nTelefon 0 21 03 – 9 07 88 0 \nFax 0 21 03 – 9 07 88 28]]></string>
+    <string name="imprint_gardifyImpressumRegistrationDetail"><![CDATA[\nRegistergericht Amtsgericht Düsseldorf \nRegisternummer HRA 22734 \nVerkehrsnummer 11460 \nFinanzamt Hilden \nSteuernummer 135/5905/0545 \nUSt-IdNr. DE230403678 \n\nVertreten durch die persönlich haftende Gesellschafterin \nBecker Joest Volk Verwaltungs GmbH \nBahnhofsallee 5 \n40721 Hilden \n\nRegistergericht: Amtsgericht Düsseldorf \nRegisternummer: HRB 72786 \nGeschäftsführer: Ralf Joest, Andreas Grewe, Johanna Hänichen \nRedaktionelle Verantwortung: Ralf Joest / Johanna Hänichen\n]]></string>
+    <string name="imprint_liabilityNotice">Haftungshinweis</string>
+    <string name="imprint_liabilityNoticeText">"Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine Haftung für die Inhalte externer Links und Foren. Für den Inhalt der verlinkten Seiten sind ausschließlich deren Betreiber verantwortlich.\n"</string>
+    <string name="imprint_disputeResolution">Online-Streitbeilegung gemäß Art. 14 Abs. 1 ODR-Verordnung</string>
+    <string name="imprint_disputeResolutionText"><![CDATA[Wir nehmen, im Falle einer ungeklärten Streitigkeit, (freiwillig) an einem Streitbeilegungsverfahren mit einer Verbraucherschlichtungsstelle teil. Die für uns zuständige Verbraucherschlichtungsstelle ist: Allgemeine Verbraucherschlichtungsstelle des Zentrums für Schlichtung e. V. \nStraßburger Str. 8 \n77694 Kehl \nTelefon: +49 7851 79579 40 \nTelefax: +49 7851 79579 41 \nInternet: www.verbraucher-schlichter.de \nE-Mail: mail@verbraucher-schlichter.de \nUnsere E-Mail-Adresse lautet: info@bjvv.de \nGestaltung dieser Website \n\nMAKRO CHROMA Joest & Volk OHG, Hilden \nCMS, Datenbank und Programmierung \nnetzlab GmbH]]></string>
+
+    <!-- 31.) register / login -->
+    <string name="registerLogin_forgotPassword">Passwort vergessen?</string>
+    <string name="registerLogin_newRegistration">Neu-Registrierung</string>
+    <string name="registerLogin_withoutRegistration">Ohne Anmeldung</string>
+    <string name="registerLogin_confirmPasswordMandatory">Passwort wiederholen *</string>
+    <string name="registerLogin_passwordMandatory">Passwort *</string>
+    <string name="registerLogin_postalCodeMandatory">PLZ *</string>
+    <string name="registerLogin_usernameMandatory">Username *</string>
+    <string name="registerLogin_emailMandatory">Email *</string>
+    <string name="registerLogin_register">Registrieren</string>
+    <string name="registerLogin_registrationSuccess">Vielen Dank für Deine Registrierung!\n\nUm Deine Registrierung abzuschließen erhältst Du von uns eine Bestätigungsmail mit einem Bestätigungslink, der Deine Registrierung aktiviert.\n\nKeine Bestätigungsmail erhalten? Bitte überprüfe Deinen Spam- bzw. Junkmail-Ordner.</string>
+    <string name="registerLogin_startTourGuide">Tour jetzt starten</string>
+    <string name="registerLogin_rememberMe">Eingeloggt bleiben</string>
+</resources>

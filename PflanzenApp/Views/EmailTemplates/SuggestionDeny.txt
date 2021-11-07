@@ -1,0 +1,22 @@
+﻿<style>
+    a, .green {
+        color: #7a9d34;
+    }
+
+        a:hover {
+            cursor: pointer;
+        }
+</style>
+<h3>Hallo @Model.UserName,</h3>
+
+<p>
+Vielen Dank für deinen Vorschlag! Es tut uns leid, leider entspricht deine vorgeschlagene Pflanze nicht unseren gardify Kriterien.     <br><br>
+@Model.message     <br><br>
+Wir wünschen dir weiterhin viel Spaß mit gardify</p>
+
+
+<h3>
+Mit freundlichen Grüßen</h3>
+<h4>Das gardify-Team</h4>
+
+

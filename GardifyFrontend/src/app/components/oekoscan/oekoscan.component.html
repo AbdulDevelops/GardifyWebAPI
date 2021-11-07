@@ -1,0 +1,239 @@
+<div class="overlay-loading" [hidden]="!loading">
+    <svg class="spinner position-relative" viewBox="25 25 50 50">
+      <circle class="path" cx="50" cy="50" r="24" fill="none" stroke-width="2" stroke-miterlimit="10" />
+    </svg>
+  </div>
+<div class="wrapper-oeko {{mode}} pt-5 pb-5">
+    <div class="container pt-5 px-5 oko-container wrapper-oeko {{mode==='light'?'text-darkgrey':'text-white'}}" id="MyDIv">
+        <div class="row">
+            <div class="col-md-6">
+                <h2 class="t-26 t-light {{mode==='dark'?'text-white':'text-grey'}}">MEIN PERSÖNLICHER ÖKOSCAN</h2>
+                <!-- <ng-container *ngIf="userInfo"> -->
+                    <h2 class="t-18 t-light font-italic" *ngIf="userInfo">Garten von {{userInfo.UserName}}</h2>
+                <!-- </ng-container> -->
+            </div>
+            <div class="col-md-6 t-16 t-light text-right pt-3">
+                <span>{{currentDate| date:'dd.MM.yyyy' }}</span>
+            </div>
+        </div>
+        <div class="row justify-content-between pt-3 mb-3">
+            <div class="col-md-12 text-justify">
+                Mit deinem persönlichen Ökoscan bekommst du ein Gefühl dafür, wie ökologisch dein Garten ist und in welchem Bereich du noch etwas für die Natur tun kannst. Hierbei spielen die Verwendung deiner Außenfläche, die Auswahl und Blühdauer der Pflanzen sowie die Anzahl der Öko-Elemente eine Rolle.
+            </div>
+            <div class="col-12 t-italic">
+                Hinweis: Pflanzen, die über den Pflanzenscan in deinen Garten gespeichert wurden, beeinflussen auch die Pflanzenvielfalt und die Blühdauer im Ökoscan. Der Ökoscan passt sich automatisch an, sobald wir die Pflanzen vollständig in die Datenbank aufgenommen haben.
+            </div>
+        </div>
+        <div class="row justify-content-between pt-3 mb-3">
+                <div class="col-lg-6 col-md-9 pb-3">
+                    <div class="row mx-0 area-input-container flex-container p-2 pr-4">
+                        <div class="col-9">
+                                Außenfläche =<br/>Bepflanzte + versiegelte Außenfläche 
+                        </div>
+                        <div class="col-2 px-0">
+                            <input type="number" name="number" autocomplete="on" class="area-input-field" (mouseup)="updateTotalArea($event.target.value)" (keyup)="updateTotalArea($event.target.value)">
+                        </div>
+                        <div class="col-1 pr-0">
+                            m<sup>2</sup>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="col-lg-6 col-md-9 pb-3">
+                    <div class="row mx-0 area-input-container flex-container p-2 pr-4">
+                        <div class="col-9">
+                                Begrünte Fläche                     
+                            </div>
+                        <div class="col-2 px-0">
+                            <input type="number" name="number" autocomplete="on" class="area-input-field" (mouseup)="updateGardenArea($event.target.value)" (keyup)="updateGardenArea($event.target.value)">
+                        </div>
+                        <div class="col-1 pr-0">
+                            m<sup>2</sup>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        <div class="row justify-content-between pt-3 mb-3">
+            <div class="col-12 ">
+                <div class=" border-bottom border-dark">
+                    <h2 class="t-18 t-bold">
+                        Auswertung
+                    </h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 py-2 scan-container">
+                <div class="row pb-3">
+                    <div class="col-md-3 my-3">
+                            <fa-icon class="info-icon position-absolute info-icon-normal" (click)="tooltip1.toggle()" mat-raised-button #tooltip1="matTooltip"
+                            matTooltip="{{flaechennutzungAlert}}"
+                            matTooltipClass="tooltip-text"
+
+                            [matTooltipPosition]="'right'"
+                            matTooltipHideDelay="0"   [icon]="faInfo"></fa-icon>
+
+                        Flächennutzung
+                    </div>
+                    <div class="col-md-9 progress-outer " >
+      
+                        <div class="progress-inner {{areaRatingClass}}">
+                            <div class="progress-indicator" [ngStyle]="{'left': 'calc('+areaRating+'% - 10px)'}">
+
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="row pb-3">
+                    <div class="col-md-3 my-3">
+                            <fa-icon class="info-icon position-absolute info-icon-normal" (click)="tooltip2.toggle()" mat-raised-button #tooltip2="matTooltip"
+                            matTooltip="{{oekoAlert}}"
+                            matTooltipClass="tooltip-text"
+                            [matTooltipPosition]="'right'"
+                            matTooltipHideDelay="0"  [icon]="faInfo"></fa-icon>
+
+                            Öko-Elemente
+                    </div>
+                    <!-- <div class="col-9" *ngIf="plantsRating">
+                        <progress-bar [progress]="plantsRating" [color]="'#488aff'">
+                        </progress-bar>
+                    </div> -->
+                    <div class="col-md-9 progress-outer ">
+                        <!-- <progress-bar [progress]="gardenRating" [color]="'#488aff'">
+                        </progress-bar> -->
+                        <div class="progress-inner garden-rating">
+                            <div class="progress-indicator" [ngStyle]="{'left': 'calc('+gardenRating+'% - 10px)'}">
+
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="row pb-3">
+                    <div class="col-md-3 my-3">
+                            <fa-icon class="info-icon position-absolute info-icon-normal" (click)="tooltip3.toggle()" mat-raised-button #tooltip3="matTooltip"
+                            matTooltip="{{plantAlert}}"
+                            matTooltipClass="tooltip-text"
+
+                            [matTooltipPosition]="'right'"
+                            matTooltipHideDelay="0" [icon]="faInfo"></fa-icon>
+
+                        Pflanzenvielfalt
+
+                    </div>
+                    <div class="col-md-9 progress-outer ">
+      
+                        <div class="progress-inner plants-rating">
+                            <div class="progress-indicator" [ngStyle]="{'left': 'calc('+plantsRating+'% - 10px)'}">
+
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="row pb-3">
+                    <div class="col-md-3 mb-0 mb-md-3 mt-3 pb-4">
+                            <fa-icon class="info-icon position-absolute info-icon-normal" (click)="tooltip4.toggle()" mat-raised-button #tooltip4="matTooltip"
+                            matTooltip="{{chartAlert}}"
+                            matTooltipClass="tooltip-text"
+
+                            [matTooltipPosition]="'right'"
+                            matTooltipHideDelay="0" [icon]="faInfo"></fa-icon>
+
+                        Blühdauer
+
+                    </div>
+                    <div class="col-md-9 pt-5 px-0" *ngIf="barChartLabels">
+
+                        <div style="display: block">
+                            <canvas id="canvas" baseChart
+                                    [datasets]="barChartData"
+                                    [labels]="barChartLabels"
+                                    [options]="barChartOptions"
+                                    [legend]="barChartLegend"
+                                    [chartType]="barChartType">
+                            </canvas>
+                            <div class="px-3 justify-content-center row mx-0">
+                                <div class="col-md-4 pr-0 legend-block">
+                                       <span class="block-1"></span> Optimale Kurve der Blühdauer
+                                </div>
+                                <div class="col-md-5 pr-0 legend-block">
+                                        <span class="block-2"></span><span class="block-4"></span> Anzahl meiner blühenden Arten/Sorten
+                                </div>
+                                <div class="col-md-3 pr-0 legend-block">
+                                        <span class="block-3"></span>  Optimum erreicht
+                                </div>
+                              
+                            </div>
+                          </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container px-4 px-md-5 oko-container wrapper-oeko {{mode}}">
+        <div class="row">
+            <div class="col-12 pb-2 scan-container">
+                <div class="row py-3">
+                        <div class="col-md-3">
+                            <!-- <button class="btn t-22 pb-0 t-light">&lt;&lt;&nbsp;<span class="t-16">Züruck</span></button>  -->
+                            &nbsp;
+                        </div>
+                        <div class="col-md-4" >
+                            <button class="btn btn-block btn-orange" (click)='saveScan()'>
+                                Ergebnis im Kalender speichern
+                            </button>
+               
+                        </div>
+                        <!-- <div class="col-5" >
+                            <button class="btn btn-block btn-orange">an eine/n Freund/in weiterleiten</button>
+               
+                        </div> -->
+                    </div>
+                    <form class="modal-body" [formGroup]="sendEmail" autocomplete="on">
+                        <div class="row pb-3 align-bottom" >
+                                <div class="col-md-3 col-6 mt-3 order-md-1 order-2">
+                                        <a [routerLink]="[ '/' ]" class="btn t-20 pb-0 t-light {{mode==='light'?'text-darkgrey':'text-grey4'}}">&lt;&lt;&nbsp; Zurück</a>
+                                    </div>
+                                <div class="col-md-7 order-md-2 order-1 px-0" >
+                                    <div class="form-group mb-3">
+                                        <label class="mb-0 {{mode==='light'?'text-darkgrey':'text-white'}}">E-mail (trenne einzelne Adressen mit einem Komma)</label>
+                                        <input class="form-control px-4" type="text"  formControlName="email" >
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label class="mb-0 {{mode==='light'?'text-darkgrey':'text-white'}}">Deine E-mail Adresse</label>
+                                        <input class="form-control px-4" type="text" formControlName="fromMail">
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label class="mb-0 {{mode==='light'?'text-darkgrey':'text-white'}}">Von:</label>
+                                        <input class="form-control px-4" type="text" formControlName="fromName" (mouseup)="updateSenderName($event.target.value)" (keyup)="updateSenderName($event.target.value)">
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label class="mb-0 {{mode==='light'?'text-darkgrey':'text-white'}}">An:</label>
+                                        <input class="form-control px-4" type="text" formControlName="toName" (mouseup)="updateReceiverName($event.target.value)" (keyup)="updateReceiverName($event.target.value)">
+                                    </div>
+                                    <div class="form-group mb-0">
+                                        <label class="mb-0 {{mode==='light'?'text-darkgrey':'text-white'}}">Nachricht</label>
+                                        <label class="email-textarea form-control px-4 pt-3 pb-0 my-0" readonly type="text"  rows="2" >
+                                            Hallo {{toNameText}},
+                                        </label>
+                                        <textarea class="email-textarea form-control px-4 py-3"  type="text" formControlName="emailText" rows="14" >
+                                        </textarea>
+                                        <label  class="email-textarea form-control px-4 pt-2" readonly type="text"  rows="2" >
+                                            Viele Grüße,<br/>{{fromNameText}}
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 col-6 order-md-3 order-3">
+                                    <button class="btn btn-orange" (click)='exportAsPDF()'>Senden</button>
+                                </div>
+                            
+                        </div>
+                    </form>
+
+                    
+            </div>
+        </div>
+    </div>
+</div>

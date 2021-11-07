@@ -1,0 +1,31 @@
+﻿@model GardifyModels.Models.AdminAreaViewModels.AdminAreaImportIndexViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdminArea.cshtml";
+}
+
+<h2>Importieren von Pflanzen</h2>
+@using (Html.BeginForm())
+{
+    <div class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-md-2">Pflanze importieren:</label>
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => Model.SelectedPlantId, Model.PlantList)
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Eigenschaften kopieren (optional):</label>
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => Model.SelectedCopyPlantId, Model.PlantListCopy)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Speichern" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+

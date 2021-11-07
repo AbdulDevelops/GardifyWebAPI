@@ -1,0 +1,200 @@
+<div class="wrapper {{mode}}">
+<div *ngIf="item" class="container pt-3 pb-5 {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+    <div class="row mt-5 mb-4">
+        <div class="col-12 col-md-6">
+            <a (click)="goBack()">
+            <h2 class="t-light t-20 ptr {{mode === 'light'? 'text-grey' : 'text-white'}}">
+                zurück zur Artikelübersicht</h2> 
+            </a> 
+        </div> 
+    </div>
+    <hr>
+    <div class="row pb-2">
+        <div class="col-12 col-md-4 mt-4">
+            <img *ngIf="item.PhotoLink" style="width: 300px;" [src]="item.PhotoLink" [alt]="item.Name">
+            <a *ngIf="!item.ProduktLink && item.ArticleImages?.length>0" data-toggle="modal" data-target="#articleImageModal" 
+                (click)="articleImageModal = toUrl(item.ArticleImages[0]?.SrcAttr);"
+                [title]="item.ArticleImages[0]?.Author ? 'Autor: '+ item.ArticleImages[0]?.Author:''">
+                <img [src]=toUrl(item.ArticleImages[0]?.SrcAttr) [alt]="item.Name" style="width: 300px;">
+            </a>
+            <ng-container *ngIf="!item.ProduktLink">
+                <a *ngFor="let img of item.ArticleImages | slice:1" data-toggle="modal" data-target="#articleImageModal" (click)="articleImageModal = toUrl(img.SrcAttr);">
+                    <img class="col-3 px-0 mr-2 mt-2" [src]=toUrl(img.SrcAttr) [alt]="item.Name">
+                </a>
+            </ng-container>
+        </div>
+        <div class="col-12 col-md-8 mt-4">
+            <div class="row">
+                <div class="col-12 col-md-12 mb-4">
+                    <h3 class="t-bold t-16 mb-0">{{item.Name}}</h3>
+                    <h4 *ngIf="item.Brand" class="t-light t-16 t-italic">von {{ item.Brand }}</h4>
+                    <h4 class="t-light t-12">Artikelnummer: {{ item.ArticleNr || padNr(item.Id) }} <span *ngIf="item.EANCode"> (EAN: {{item.EANCode}})</span></h4>
+                    <h4 *ngIf="item.MakerId" class="t-light t-12">Hersteller-Artikelnr: {{ item.MakerId }}</h4>
+                </div>
+                <div class="col-12 col-md-12 mb-1 ">
+                    <h3 class="t-bold t-14 mb-0">{{item.Name}}</h3>
+                </div>
+                <div class="col-12 col-md-12 mb-1">
+                    <p class="t-14 t-light" style="line-height: 22pt;" [innerHTML]=item.Description></p>
+                    <p *ngIf="item.Author" class="t-14 t-light">Autor: {{item.Author}}</p>
+                    <p *ngIf="item.BulkArticle" class="t-14 t-light t-italic">Dieser Artikel ist ein Sperrgut.</p>
+                </div>
+                <div class="col-12 col-md-12 mb-4">
+                    <p *ngIf="item.HazardNotice" class="t-14 t-light text-danger">Gefahrenhinweis: {{item.HazardNotice}}</p>
+                </div>
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-6">
+                            <span style="top:20px;" class="t-light t-12 position-relative">Menge</span>
+                        </div>
+                        <div class="pl-md-4 col-6">
+                            <h4 class="t-orange t-12 mb-1">{{item.IsAvailable?'Verfügbar':'Aktuell nicht verfügbar'}}</h4>
+                            <h4 *ngIf="item.IsNotDeliverable" class="t-light t-12 text-danger">Aktuell nicht lieferbar</h4>
+                            <h4 *ngIf="!item.IsNotDeliverable" class="t-light t-12">Lieferbar in 2-4 Werktagen</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class=" col-12 col-md-12">
+                    <div class="row">
+                        <div class="col-6" style="padding-top: 4px;">
+                            <div class="d-inline-block" style="line-height: 18px;">
+                                <button (click)="stepCount(-1)" class="ptr p-1" style="width: 26px;border: none;background: #aaa;">-</button>
+                                <span class="t-light t-13 mx-2">{{itemCount}}</span>
+                                <button (click)="stepCount(1)" class="ptr p-1" style="width: 26px;border: none;background: #aaa;">+</button>
+                            </div>
+                            <span class="t-bold ml-5">{{totalPrice | currency:'EUR':'code'}}</span>
+                            <small *ngIf="item.VAT" class="mx-1">inkl. {{item.VAT * 100 | number:'.0'}}% MwSt.</small>
+                            <a data-toggle="modal" data-target="#shippingCosts"><small class="mx-1 d-block text-center">zzgl. Versandkosten</small></a>
+                            <small class="text-warning d-block mt-2" *ngIf="totalLessThanMin">Bitte beachte den Mindestbestellwert von 10,00 EUR</small>
+                        </div>
+                        <div class="pl-md-4 col-6 ">
+                            <a *ngIf="item.ProductLink" [href]="item.ProductLink" target="_blank" class="btn t-11 text-white btn-orange mr-3">Produkt kaufen</a>
+                            <button *ngIf="!(item.ProductLink || item.IsNotDeliverable)" (click)="addToCart(item)" class="btn t-11 btn-orange mr-3" [disabled]="!item.IsAvailable">Produkt kaufen</button>
+                            <button *ngIf="!(item.ProductLink || !item.IsNotDeliverable)" (click)="addToCart(item)" class="btn t-11 btn-orange mr-3" [disabled]="!item.IsAvailable">Produkt vorbestellen</button>
+
+                            <button (click)="addToWishlist(item)" class="btn t-11 btn-orange marg_top">Auf die Wunschliste</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="item.ExpertTip" class="row mt-5 pb-4 bt-border {{mode}}">
+        <div class="col-12 col-md-4">
+            <h2 class="t-bold t-14 mb-4">Expertentipp</h2>
+            <img class="ml-3" src="./assets/main-icons/Expertentipp.png" alt="Expertentipp" width="200">
+        </div>
+        <div class="col-10 col-md-8 pt-4 ">
+            <p class="t-14 t-light" style="line-height: 22pt;" [innerHTML]="item.ExpertTip || ''"></p>
+        </div>
+    </div>
+
+    <div class="row pb-4 pt-3 bt-border {{mode}}" *ngIf="artViewedByOtherUser?.length>0"> 
+        <div class="col-12">
+            <h2 class="t-bold t-14 mb-2">Käufer haben sich auch folgende Artikel angesehen</h2>
+        </div>
+        <div *ngFor="let vItem of artViewedByOtherUser"  class="col-6 col-md-3 text-center">
+            <img [routerLink]="['/artikel/', vItem.Id, vItem.Name]" class="latest-article ptr"  [src]="vItem.Thumbnail || toUrl(vItem.ArticleImages[0]?.SrcAttr)" [title]="vItem.Name" [alt]="vItem.Name">
+            <h3 class="t-med t-13 mt-2 mb-1">{{vItem.Name}}</h3>
+            <h3 class="t-med t-13 text-grey4">{{vItem.NormalPrice | currency:'EUR':'code'}}</h3>
+        </div>
+    </div>
+
+    <div class="row pb-4 pt-3 bt-border {{mode}}" *ngIf="lastViewed"> 
+        <div class="col-12">
+            <h2 class="t-bold t-14 mb-2">Zuletzt angesehen</h2>
+        </div>
+        <div *ngFor="let vItem of lastViewed; let i=index"  class="col-6 col-md-3 text-center">
+            <img [routerLink]="['/artikel/',vItem.Id, vItem.Name]" class="latest-article ptr"  [src]="vItem.Thumbnail || toUrl(vItem.ArticleImages[0]?.SrcAttr)" [title]="vItem.Name" [alt]="vItem.Name">
+            <h3 class="t-med t-13 mt-2 mb-1">{{vItem.Name}}</h3>
+            <h3 class="t-med t-13 text-grey4">{{vItem.Price | currency:'EUR':'code'}}</h3>
+        </div>
+    </div>
+
+    <div class="row pb-4 pt-3 bt-border {{mode}}">
+        <div class="col-12">
+            <h2 class="t-bold t-14 mb-2">Zuletzt gekauft</h2>
+        </div>
+        <div *ngFor="let pItem of lastPurchased" class="col-6 col-md-3 text-center">
+            <img [routerLink]="['/artikel/', pItem.ArticleId, pItem.Name]" class="latest-article ptr" [src]="toUrl(pItem.ArticleImages[0]?.SrcAttr)" [title]="pItem.Name" [alt]="pItem.Name">
+            <h3 class="t-med t-13 mt-2 mb-1">{{pItem.Name}}</h3>
+            <h3 class="t-med t-13 text-grey4">{{pItem.Price | currency:'EUR':'code'}}</h3>
+        </div>
+        <h2 *ngIf="!lastPurchased?.length>0" class="col-12 text-center my-3 t-med text-grey4 t-italic t-15">Sie haben noch keinen Einkauf gemacht</h2>
+    </div>
+</div>
+<ng-container *ngIf="!item" >
+    <div class="container pt-3 pb-5 text-center">
+        <div class="row mt-5">
+            <div class="col-12 col-md-12">
+            <p class="t-light t-20 ptr {{mode === 'light'? 'text-darkgrey' : 'text-white'}}">Dieser Artikel ist nicht verfügbar</p>
+            </div>
+        </div>
+    </div>
+    
+
+</ng-container>
+</div>
+<ng-container *ngIf="item">
+  <div class="modal fade" id="articleImageModal" tabindex="-1" role="dialog" aria-labelledby="articleImageModal" aria-hidden="true">
+    <div class="modal-dialog" role="document" style="max-width: 600px;">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <img class="w-100" [src]="articleImageModal" [alt]="item.Name">
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<div class="modal fade" id="shippingCosts" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document" style="max-width: 600px;">
+      <div class="modal-content">
+        <div class="modal-header py-0">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body pt-0">
+            <p>
+                <strong class="mt-0">Zahlung und Versand</strong> 
+                Es gelten folgende Bedingungen:
+      
+                <strong>Mindestbestellwert</strong>
+                Der Mindestbestellwert beträgt: 10 €.
+                
+                <strong>Versandbedingungen</strong>
+                Die Lieferung der Ware erfolgt weltweit. <br>
+                Versandkostenangaben sind inklusive gesetzliche Mehrwertsteuer.
+                
+                <strong>Lieferungen im Inland (Deutschland):</strong>
+                Wir berechnen die Versandkosten pauschal mit 4,95 € pro Bestellung. <br>
+                
+                Bei der Versendung sperriger Güter (Speditionsversand) berechnen wir wie folgt: <br>
+                Luftpolsterfolien und Sperrgüter werden per Spedition oder DHL Großpaket versendet – 4,95 € je Artikel. <br>
+                
+                Sperrige Güter sind als solche in der Artikelbeschreibung gekennzeichnet.
+                
+                <strong>Lieferungen ins Ausland:</strong>
+                <!-- Die Versandkosten können bei Bestellungen aus dem Ausland per Kontaktformular angefragt werden. <br> -->
+                Eine Lieferung ins Ausland erfolgt nicht bzw. nur nach schriftlichem Angebot.<br>
+
+                Wir berechnen die Versandkosten ins Ausland nach Versandgewicht:<br>
+                Österreich pauschal 9,90 €<br>
+                Weltweit / Europa / EU:<br>
+                Die Versandkosten können bei Bestellungen aus dem Ausland per Kontaktformular angefragt werden.<br>
+                <span>Bei Fragen finden Sie unsere Kontaktdaten im Impressum.</span>
+            </p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Zurück</button>
+        </div>
+      </div>
+    </div>
+  </div>

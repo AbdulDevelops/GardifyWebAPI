@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent">
+
+    <ProgressBar
+        android:id="@+id/progressBar_eco_scan"
+        android:layout_width="wrap_content"
+        style="@style/ProgressBar"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:elevation="@dimen/elevation_20dp"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:id="@+id/scrollView_ecoScan"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:background="@color/scrollView_all_seashell"
+        android:padding="@dimen/marginPaddingSize_24sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/linear_layout_eco_scan_top_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <!-- fragment title & desc -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardView_home_plant_scan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="@dimen/cardCornerRadius_medium">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:padding="@dimen/marginPaddingSize_10sdp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+                        android:text="@string/ecoScan_myPersonalEcoScan"
+                        android:textSize="@dimen/textSize_headline"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/ecoScan_gardenFrom"
+                            android:textSize="@dimen/textSize_body_medium"
+                            android:textStyle="italic" />
+
+                        <TextView
+                            android:id="@+id/text_view_eco_scan_garden_owner_label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/marginPaddingSize_5sdp"
+                            android:textSize="@dimen/textSize_body_medium"
+                            android:textStyle="italic" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/text_view_eco_scan_date_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:text="0"
+                        android:textSize="@dimen/textSize_body_medium" />
+
+                    <TextView
+                        android:id="@+id/text_view_eco_scan_about_desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/marginPaddingSize_10sdp"
+                        android:justificationMode="inter_word"
+                        android:lines="4"
+                        android:text="@string/ecoScan_description"
+                        android:textSize="@dimen/textSize_body_xsmall" />
+
+                    <ImageView
+                        android:id="@+id/expand_icon_eco_scan_desc"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="end"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/expand"
+                        android:text="@string/all_moreDetails"
+                        android:textSize="@dimen/textSize_body_medium" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/marginPaddingSize_10sdp"
+                android:backgroundTint="@color/cardView_ecoScan_surface"
+                app:cardCornerRadius="@dimen/cardCornerRadius_medium">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/marginPaddingSize_10sdp">
+
+                    <TextView
+                        android:id="@+id/text_view_eco_scan_surface_label"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="@dimen/marginPaddingSize_5sdp"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textAppearance="?android:textAppearanceMedium"
+                        android:textColor="@color/text_all_white"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/editText_eco_scan_surface"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/marginPaddingSize_10sdp"
+                        android:layout_marginRight="@dimen/marginPaddingSize_10sdp"
+                        android:layout_weight="0.2"
+                        android:inputType="numberDecimal"
+                        android:background="@color/editText_ecoScan_surface"
+                        android:minWidth="@dimen/width_ecoScan_editText" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="@dimen/marginPaddingSize_5sdp"
+                        android:text="@string/ecoScan_meterSquared"
+                        android:textAppearance="?android:textAppearanceMedium"
+                        android:textColor="@color/text_all_white"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/marginPaddingSize_10sdp"
+                android:backgroundTint="@color/cardView_ecoScan_surface"
+                app:cardCornerRadius="@dimen/cardCornerRadius_medium">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/marginPaddingSize_10sdp">
+
+                    <TextView
+                        android:id="@+id/text_view_eco_scan_green_area_label"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="@dimen/marginPaddingSize_5sdp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:lines="2"
+                        android:text=""
+                        android:textAppearance="?android:textAppearanceMedium"
+                        android:textColor="@color/text_all_white"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/editText_eco_scan_green_area"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/marginPaddingSize_10sdp"
+                        android:layout_marginRight="@dimen/marginPaddingSize_10sdp"
+                        android:layout_weight="0.2"
+                        android:inputType="numberDecimal"
+                        android:background="@color/editText_ecoScan_surface"
+                        android:minWidth="@dimen/width_ecoScan_editText" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="@dimen/marginPaddingSize_5sdp"
+                        android:text="@string/ecoScan_meterSquared"
+                        android:textAppearance="?android:textAppearanceMedium"
+                        android:textColor="@color/text_all_white"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/marginPaddingSize_10sdp"
+                app:cardCornerRadius="@dimen/cardCornerRadius_medium">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/marginPaddingSize_10sdp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/marginPaddingSize_10sdp"
+                        android:text="@string/ecoScan_evaluation"
+                        android:textSize="@dimen/textSize_headline"
+                        android:textStyle="bold" />
+
+                    <!-- land use slider -->
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/marginPaddingSize_10sdp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/ecoScan_landUse"
+                            android:textAppearance="?android:textAppearanceMedium"
+                            android:textSize="@dimen/textSize_body_medium" />
+
+                        <ImageView
+                            android:id="@+id/image_view_eco_scan_land_use_info"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_info"
+                            app:tint="@color/imageView_ecoScan_infoIcon" />
+                    </LinearLayout>
+
+                    <SeekBar
+                        android:id="@+id/seekbar_eco_scan_land_use"
+                        android:layout_width="fill_parent"
+                        android:layout_height="@dimen/height_20dp"
+                        android:layout_marginTop="@dimen/marginPaddingSize_10sdp"
+                        android:layout_marginBottom="@dimen/marginPaddingSize_10sdp"
+                        android:max="100"
+                        android:paddingStart="0dp"
+                        android:paddingEnd="0dp"
+                        android:progress="50"
+                        android:splitTrack="false"
+                        android:thumb="@drawable/seekbar_eco_thumb_icon" />
+
+                    <!-- Eco element slider -->
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/all_ecoElements"
+                            android:textAppearance="?android:textAppearanceMedium"
+                            android:textSize="@dimen/textSize_body_medium" />
+
+                        <ImageView
+                            android:id="@+id/image_view_eco_scan_eco_element_info"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_info"
+                            app:tint="@color/imageView_ecoScan_infoIcon" />
+                    </LinearLayout>
+
+                    <SeekBar
+                        android:id="@+id/seekbar_eco_scan_eco_element"
+                        android:layout_width="fill_parent"
+                        android:layout_height="@dimen/height_20dp"
+                        android:layout_marginTop="@dimen/marginPaddingSize_10sdp"
+                        android:layout_marginBottom="@dimen/marginPaddingSize_10sdp"
+                        android:max="100"
+                        android:paddingStart="0dp"
+                        android:paddingEnd="0dp"
+                        android:progress="50"
+                        android:splitTrack="false"
+                        android:thumb="@drawable/seekbar_eco_thumb_icon" />
+
+                    <!-- Plant diversity slider -->
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/ecoScan_plantDiversity"
+                            android:textAppearance="?android:textAppearanceMedium"
+                            android:textSize="@dimen/textSize_body_medium" />
+
+                        <ImageView
+                            android:id="@+id/image_view_eco_scan_plant_diversity_info"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_info"
+                            app:tint="@color/imageView_ecoScan_infoIcon" />
+                    </LinearLayout>
+
+                    <SeekBar
+                        android:id="@+id/seekbar_eco_scan_plant_diversity"
+                        android:layout_width="fill_parent"
+                        android:layout_height="@dimen/height_20dp"
+                        android:layout_marginTop="@dimen/marginPaddingSize_10sdp"
+                        android:layout_marginBottom="@dimen/marginPaddingSize_10sdp"
+                        android:max="100"
+                        android:paddingStart="0dp"
+                        android:paddingEnd="0dp"
+                        android:progress="50"
+                        android:splitTrack="false"
+                        android:thumb="@drawable/seekbar_eco_thumb_icon" />
+
+                    <!-- Flowering time slider -->
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/ecoScan_floweringTime"
+                            android:textAppearance="?android:textAppearanceMedium"
+                            android:textSize="@dimen/textSize_body_medium" />
+
+                        <ImageView
+                            android:id="@+id/image_view_eco_scan_flowering_time_info"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_info"
+                            app:tint="@color/imageView_ecoScan_infoIcon" />
+
+                    </LinearLayout>
+
+                    <com.github.mikephil.charting.charts.CombinedChart
+                        android:id="@+id/combined_chart_eco_scan"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/height_200sdp"
+                        android:layout_marginTop="10dp" />
+
+                    <!-- legends -->
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/marginPaddingSize_10sdp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/imageView_all_width_18sdp"
+                            android:layout_height="@dimen/imageView_all_height_18sdp"
+                            android:src="@drawable/oko_optimum_gartengroesse_icon" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/marginPaddingSize_10sdp"
+                            android:text="@string/ecoScan_optimalForYourGardenSize"
+                            android:textSize="@dimen/textSize_body_xsmall" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/imageView_all_width_18sdp"
+                            android:layout_height="@dimen/imageView_all_height_18sdp"
+                            android:src="@drawable/oko_menge_bluehende_pflanzen" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/marginPaddingSize_10sdp"
+                            android:text="@string/ecoScan_numberOfFloweringSpecies"
+                            android:textSize="@dimen/textSize_body_xsmall" />
+                    </LinearLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/button_eco_scan_save_result_to_calendar"
+                        style="@style/PrimaryButtonStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/marginPaddingSize_10sdp"
+                        android:text="@string/ecoScan_saveResultToCalendar" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/button_eco_scan_share_result"
+                        style="@style/SecondaryButtonStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/marginPaddingSize_24sdp"
+                        android:text="@string/ecoScan_shareResult" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+    </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+

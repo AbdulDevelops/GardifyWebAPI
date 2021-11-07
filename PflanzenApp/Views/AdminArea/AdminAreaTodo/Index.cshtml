@@ -1,0 +1,33 @@
+﻿@model GardifyModels.Models.TodoTemplateViewModels.TodoTemplateIndexViewModel
+
+@{
+    ViewBag.Title = "Vorlagenliste";
+    Layout = "~/Views/Shared/_LayoutAdminArea.cshtml";
+}
+
+<h2>Liste der vorhandenen Vorlagen</h2>
+
+<p>
+    @Html.ActionLink("Neu erstellen", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>Text</th>
+    </tr>
+
+    @foreach (var item in Model.TodoTemplates)
+    {
+        <tr>
+            <td>
+                <b>@Html.DisplayFor(modelItem => item.Title)</b> - @Html.DisplayFor(m => item.ReferenceName)
+            </td>
+            <td>
+                @*@Html.ActionLink("Bearbeiten", "Edit", new { id = item.Id }) |*@
+                @Html.ActionLink("Bearbeiten", "BulkEdit", new { id = item.Id }) |
+
+                @Html.ActionLink("Alle Löschen", "BulkDelete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>

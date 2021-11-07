@@ -1,0 +1,36 @@
+<div class="overlay-loading" [hidden]="!loading">
+  <svg class="spinner position-relative" viewBox="25 25 50 50">
+      <circle class="path" cx="50" cy="50" r="24" fill="none" stroke-width="2" stroke-miterlimit="10" />
+  </svg>
+</div>
+<div class="wrapper {{mode}} {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+  <div class="container pt-3 pb-5">
+    <div class="row mt-5 mb-4">
+      <div class="col-12">
+        <h2 class="t-light t-26 {{mode === 'light'? 'text-grey' : 'text-white'}}">DEINE BESTELLUNG</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <p>Die Bestellung {{orderId}} war nicht erfolgreich.</p>
+        <p>{{errMsg}}</p>
+      </div>
+      <div class="col-12" *ngIf="order">
+        <div *ngFor="let item of order.OrderedArticles">
+          <div class="row">
+            <div class="col-4 col-md-2 mt-3" *ngIf="item.ArticleImages?.length>0">
+              <img class="ptr article" [routerLink]="'/artikel/'+item?.Id"
+                [src]="toUrl(item.ArticleImages[0].SrcAttr)" [alt]="item.Name">
+            </div>
+            <div class="col-8 col-md-10 mt-4 row">
+              <div class="col-md-12 underlined {{mode === 'light'? 'text-darkgrey' : 'text-white'}} ">
+                <h3 class="t-16 t-reg">{{item.Name}}</h3>
+              </div>
+            </div>
+            <hr>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

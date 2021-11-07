@@ -1,0 +1,9 @@
+﻿Module besitzen EIgenschaft: Maximale Bilderanzahl (Nur SuperAdmins)
+Sortieren wie bei Julius bei VTI
+Statt Bild ein youtube-video hochladen (Entweder Video, oder Bilder, einstellbar) ehemals LinkToPic (wichtig zwecks portierbarkeit)
+Beim Hochladen von Bildern automatisch 4 verschiedene Versionen erstellen, die später überschrieben werden können.
+
+Split SaveFileToDisk(), to get information of files to use them for the resizedFiles - FileController
+
+Retina-Problematik:
+- https://internetingishard.com/html-and-css/responsive-images/

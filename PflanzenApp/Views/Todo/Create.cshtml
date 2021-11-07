@@ -1,0 +1,184 @@
+﻿@model GardifyModels.Models.TodoViewModels.TodoCreateViewModel
+@{
+    ViewBag.Title = "Todo erstellen";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Neues Todo Erstellen</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <p class="control-label col-md-2">Text</p>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <p class="control-label col-md-2">Beschreibung</p>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <p class="control-label col-md-2">Startdatum</p>
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.DateStart, "{0:dd/MM/yyyy}", new { @class = "form-control datepicker", placeholder = "Bitte Datum Wählen" })
+                @Html.ValidationMessageFor(model => model.DateStart, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <p class="control-label col-md-2">Gültig bis</p>
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.DateEnd, "{0:dd/MM/yyyy}", new { @class = "form-control datepicker", placeholder = "Bitte Datum Wählen" })
+                @Html.ValidationMessageFor(model => model.DateEnd, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <p class="control-label col-md-2">Wiederholungsart</p>
+            <div class="col-md-10">
+                @Html.DropDownList("Cycle", new List<SelectListItem>(){
+        new SelectListItem() { Text="-", Value = "0", Selected = true  },
+        new SelectListItem() { Text="Wöchentlich", Value = "1"},
+        new SelectListItem() { Text="Monatlich", Value = "2"},
+        new SelectListItem() { Text="Jährlich",Value="3" },
+        new SelectListItem() { Text="Alle 2 Jahre",Value="4" } })
+            </div>
+        </div>
+        <div class="form-group">
+            <p class="control-label col-md-2">Gehört zu</p>
+            <div class="col-md-10">
+                @Html.DropDownList("ReferenceType", new List<SelectListItem>(){
+        new SelectListItem() { Text="-", Value = "0", Selected = true  },
+        new SelectListItem() { Text="Pflanze", Value = "1"},
+        new SelectListItem() { Text="Tool",Value="2" },
+        new SelectListItem() { Text="Garten",Value="3" } }, new { @onchange = "ondropdownselect(this.value)" })
+            </div>
+        </div>
+        <div class="form-group" id="reference-list">
+            <p class="control-label col-md-2">Wähle zugehöriges Objekt</p>
+            <div class="col-md-10">
+                @Html.DropDownList("ReferenceId", new List<SelectListItem>() { })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Erstellen" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+<div>
+    @Html.ActionLink("Zurück zur Übersicht", "Index")
+</div>
+<script type="text/javascript">
+    /* German initialisation for the jQuery UI date picker plugin. */
+    jQuery(function (el) {
+        el.datepicker.regional['de'] = {
+            closeText: 'schließen',
+            prevText: '&#x3c;zurück',
+            nextText: 'Vor&#x3e;',
+            currentText: 'heute',
+            monthNames: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni',
+            'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
+            monthNamesShort: ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun',
+            'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'],
+            dayNames: ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'],
+            dayNamesShort: ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'],
+            dayNamesMin: ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'],
+            weekHeader: 'Wo',
+            dateFormat: 'dd.mm.yy',
+            firstDay: 1,
+            isRTL: false,
+            showMonthAfterYear: false,
+            yearSuffix: ''
+        };
+        $.datepicker.setDefaults($.datepicker.regional['de']);
+    });
+    $(function () { // will trigger when the document is ready
+        $(".datepicker").datepicker($.datepicker.regional["de"]);
+    });
+    $(document).ready(function () {
+        @{ int type = (int)Model.ReferenceType;}
+        ondropdownselect(0);
+        @if (type != 0)
+        {
+            @:selectCorrectType();
+                                        }
+    });
+    function ondropdownselect(index) {
+        var list = $('#reference-list');
+        var dd = $('#ReferenceId');
+        console.log(list);
+        if (index == 0) {
+            list.hide();
+        } else {
+            list.show();
+            removeoptions(dd);
+            @{ int counter = 0;}
+            @foreach (var obj in Model.InfoObjects)
+            {
+                int modRefType = (int)obj.ReferenceType;
+                counter++;
+                @:var refType = @modRefType
+                @:if (refType == index){
+                                                    @:addoption(dd, @obj.Id, "@obj.Name");
+                                        @:}
+                                                                         }
+        }
+    }
+
+    function selectCorrectType(){
+        @{
+            int x = 0;
+            if(type == 0)
+            {
+                 @:$("#ReferenceType option[value='0']").attr('selected', true);
+                         x = 0;
+                                    }
+            else if(type == 4)
+            {
+                 @:$("#ReferenceType option[value='1']").attr('selected', true);
+                         x = 1;
+                            }
+            else if(type == 3)
+            {
+                 @:$("#ReferenceType option[value='3']").attr('selected', true);
+                          x = 3;
+                    }
+            else if(type == 5)
+            {
+                 @:$("#ReferenceType option[value='2']").attr('selected', true);
+                         x = 2;
+                    }
+        }
+        var dd = $('#ReferenceId');
+        removeoptions(dd);
+        @{ int counter2 = 0;}
+        @foreach (var obj in Model.InfoObjects)
+        {
+            int modRefType = (int)obj.ReferenceType;
+            counter++;
+            @:var refType = @modRefType
+            @:if (refType == @x){
+                        @:addoption(dd, @obj.Id, "@obj.Name");
+                        @:}
+                }
+        $('#reference-list').show();
+        $("#reference-list option[value='@Model.ReferenceId']").attr('selected', true);
+    }
+
+    function addoption(dropdown, index, text) {
+        var newOption = "<option value='" + index + "'>"+text+"</option>";
+        dropdown.append(newOption);
+    }
+
+    function removeoptions(dropdown) {
+        $(dropdown).find("option").remove();
+    }
+</script>

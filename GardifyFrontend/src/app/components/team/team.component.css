@@ -1,0 +1,30 @@
+.card-footer{
+    background-color: transparent !important;
+    border-top:transparent !important
+}
+.card-body {
+    flex-grow: inherit;
+    flex-basis: min-content;
+}
+.rounded {
+    border-radius: .75rem!important;
+}
+.text-colour{
+    color: #434444;
+}
+.wrapper.light {
+    background-image: none;
+    background-color: #f1f1f1;
+}
+.card {
+    border: none;
+    height: 490px;
+}
+.t-12-5 {
+    font-size: 12.5pt;
+}
+@media only screen and (max-width: 800px) {
+    .card {
+        height: unset;
+    }
+}

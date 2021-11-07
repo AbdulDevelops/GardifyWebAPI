@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginBottom="@dimen/marginPaddingSize_5sdp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/marginPaddingSize_6sdp"
+        app:cardCornerRadius="@dimen/cardCornerRadius_small">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="@dimen/marginPaddingSize_6sdp"
+            android:paddingBottom="@dimen/marginPaddingSize_6sdp">
+
+            <ImageView
+                android:id="@+id/imageView_video_header_expand_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textView_video_header_search"
+                app:srcCompat="@drawable/expand" />
+
+            <TextView
+                android:id="@+id/textView_video_header_search"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:text="@string/all_search"
+                android:textColor="@color/text_all_gunmetal"
+                android:textSize="@dimen/textSize_title"
+                android:textStyle="bold"
+                android:fontFamily="@font/source_sans_pro"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/linear_layout_video_sort_spinners"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView_video_header_search">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/marginPaddingSize_10sdp"
+                    android:layout_marginTop="@dimen/marginPaddingSize_10sdp"
+                    android:fontFamily="@font/source_sans_pro"
+                    android:text="@string/gardenVideo_sort"
+                    android:textSize="@dimen/textSize_body_medium" />
+
+                <Spinner
+                    android:id="@+id/spinner_video_popularity_date_sort"
+                    android:layout_width="match_parent"
+                    android:overlapAnchor="false"
+                    android:layout_margin="@dimen/marginPaddingSize_10sdp"
+                    android:theme="@style/CustomVideoSpinnerItemStyle"
+                    style="@style/CustomSpinnerStyle"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/marginPaddingSize_10sdp"
+                    android:fontFamily="@font/source_sans_pro"
+                    android:layout_marginTop="@dimen/marginPaddingSize_10sdp"
+                    android:text="@string/gardenVideo_topicSearch"
+                    android:textSize="@dimen/textSize_body_medium"/>
+
+                <Spinner
+                    android:id="@+id/spinner_video_topic_sort"
+                    android:layout_width="match_parent"
+                    android:overlapAnchor="false"
+                    android:dropDownVerticalOffset="@dimen/_40sdp"
+                    android:theme="@style/CustomVideoSpinnerItemStyle"
+                    style="@style/CustomSpinnerStyle"
+                    android:layout_margin="@dimen/marginPaddingSize_10sdp"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

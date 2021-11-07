@@ -1,0 +1,151 @@
+.wrapper.dark input.bordered, .wrapper.dark select.bordered {
+  border: 1px solid white !important;
+}
+.wrapper.light input.bordered, .wrapper.light select.bordered {
+  border: 1px solid black !important;
+}
+
+.wrapper.light .bg-yellowish select.bordered {
+  background-color: white !important;
+}
+.Hover:hover{
+  cursor: pointer;
+}
+.cal-month-view .cal-cell.cal-weekend {
+  color: blue;
+}
+.svg-inline--fa {
+  vertical-align: -0.5rem !important;
+}
+
+.todo-bg {
+  color: #beca3b;
+}
+
+.text-todo {
+  color: #beca3b;
+}
+
+.text-bioscan {
+  color: #ff7f23;
+}
+
+.month-view {
+  
+  display: inline-block;
+}
+
+.todo-img-wrapper {
+  width: 220px;
+  height: 140px;
+}
+
+  .todo-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+.h-140 {
+  height: 140px;
+}
+
+.dropdown-list.view {
+  margin-top: -34px;
+}
+
+.dropdown-list {
+  margin-top: 50px;
+}
+
+  .dropdown-list.to-right {
+    margin-top: 44px;
+  }
+
+
+.wrapper.light .todolist-item, .wrapper.light .todolist-ops {
+  border-top: 1px solid #444;
+  border-bottom: 1px solid #444;
+}
+
+.wrapper.dark .todolist-item, .wrapper.dark .todolist-ops {
+  border-top: 1px solid #bbb;
+  border-bottom: 1px solid #bbb;
+}
+
+.todolist-item.diary {
+  border-left: 10px solid #a965bd;
+}
+
+.todolist-item.bioscan {
+  border-left: 10px solid #ff7f23;
+}
+
+.todolist-item.todo {
+  border-left: 10px solid #beca3b;
+}
+
+.todolist-item.ownTodo {
+  border-left: 10px solid #3a6188;
+}
+select {
+  text-align: center;
+  text-align-last: center;
+}
+option {
+  text-align: left;
+}
+@media only screen and (min-width: 993px) and (max-width: 1200px) {
+
+  .h-140 {
+    height: 144px;
+  }
+
+  .todo-img-wrapper {
+    width: 220px;
+    height: 143px;
+  }
+  .set-mt{
+    margin-top: -1.5rem
+  }
+}
+
+@media only screen and (min-width: 769px) and (max-width: 992px) {
+  .h-140 {
+    height: 149px;
+  }
+
+  .todo-img-wrapper {
+    width: 220px;
+    height: 150px;
+  }
+  
+}
+
+@media only screen and (max-width: 768px) {
+  .h-140 {
+    height: 144px;
+  }
+
+  .todo-img-wrapper {
+    width: 220px;
+    height: 143px;
+  }
+  
+}
+@media only screen and (max-width: 768px) {
+  
+  .set-mt{
+    margin-top: 2rem
+  }
+}
+@media (max-width: 575.98px) {
+  .h-140 {
+    height: 66px;
+  }
+
+  .todo-img-wrapper {
+    width: 220px;
+    height: 143px;
+  }
+}

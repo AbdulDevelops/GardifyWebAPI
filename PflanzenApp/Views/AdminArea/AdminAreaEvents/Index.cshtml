@@ -1,0 +1,56 @@
+﻿@model GardifyModels.Models.EventsListViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdminArea.cshtml";
+}
+<h2>Alle Veranstaltungen</h2>
+<p>
+    @Html.ActionLink("Neue Veranstaltung", "Create")
+</p>
+<div>
+    @if (Model.Events != null && Model.Events.Any())
+    {
+        foreach (var item in Model.Events)
+        {
+            <div class="row">
+                @if (item.EntryImages != null && item.EntryImages.Any())
+                {
+                    <div class="image-wrapper col-md-3">
+                        <div class="title-image">
+                            <img title="@item.EntryImages.FirstOrDefault().TitleAttr" src="@item.EntryImages.FirstOrDefault().SrcAttr" alt="@item.EntryImages.FirstOrDefault().AltAttr" />
+                        </div>
+                        @foreach (var img in item.EntryImages.Skip(1))
+                        {
+                            <div class="thumbnail col-md-4">
+                                <img title="@img.TitleAttr" src="@img.SrcAttr" alt="@img.AltAttr" />
+                            </div>
+                        }
+                    </div>
+                }
+                <div class="col-md-9">
+                    <h3>@Html.ActionLink(item.Title, "Edit", new { id = item.Id }, new { style = "color: #000" })</h3>
+                    <h4>@Html.DisplayFor(model => item.Date)</h4>
+                    @if (item.Text.Length > 228)
+                    {
+                        @(item.Text.Substring(0, 228) + " ...")
+                    }
+                    else
+                    {
+                        @item.Text
+                    }
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-3 col-md-push-9">
+                    <hr />
+                    @Html.ActionLink("ändern", "Edit", new { id = item.Id }, new { style = "float: right; margin: 0 20px 0 0;", @class = "btn btn-default" })
+                </div>
+            </div>
+            <hr />
+        }
+    }
+    else
+    {
+<p>Es sind noch keine Veranstaltungen vorhanden</p>
+    }
+</div>

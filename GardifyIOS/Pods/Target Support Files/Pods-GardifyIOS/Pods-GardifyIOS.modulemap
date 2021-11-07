@@ -1,0 +1,6 @@
+framework module Pods_GardifyIOS {
+  umbrella header "Pods-GardifyIOS-umbrella.h"
+
+  export *
+  module * { export * }
+}

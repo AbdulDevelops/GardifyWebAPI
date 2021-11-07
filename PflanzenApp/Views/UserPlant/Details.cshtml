@@ -1,0 +1,185 @@
+﻿@model GardifyModels.Models.UserPlantViewModels.UserPlantDetailsViewModel
+@using PflanzenApp.HtmlHelpers;
+
+@{
+    ViewBag.Title = "Pflanzendetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Pflanzendetails</h2>
+@if (Model.Images != null && Model.Images.Any())
+{
+    <div class="image-wrapper clearfix" style="max-width: 300px;">
+        <div class="title-image">
+            <img title="@Model.Images.FirstOrDefault().TitleAttr" src="@Model.Images.FirstOrDefault().SrcAttr" alt="@Model.Images.FirstOrDefault().AltAttr" />
+        </div>
+        @foreach (var img in Model.Images.Skip(1))
+        {
+            <div class="thumbnail col-md-4">
+                <img title="@img.TitleAttr" src="@img.SrcAttr" alt="@img.AltAttr" />
+            </div>
+        }
+    </div>
+    <hr />
+}
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            Botanischer Name
+        </dt>
+        <dd>
+            <b>@Model.Name</b>
+            <br />
+            @Model.Name
+        </dd>
+        <dt>
+            Anzahl
+        </dt>
+        <dd>
+            @Model.Count
+        </dd>
+
+        <dt>
+            Beschreibung
+        </dt>
+        <dd>
+            @Model.Description
+        </dd>
+        <dt>
+            Alter
+        </dt>
+        <dd>
+            @Model.Age
+        </dd>
+        <dt>
+            Topfpflanze
+        </dt>
+        <dd>
+            @Html.DisplayFor(v => Model.IsInPot)
+        </dd>
+    </dl>
+</div>
+@Html.ActionLink("Neues Todo", "CreateRef", "Todo", new { referenceType = (int)GardifyModels.Models.ModelEnums.ReferenceToModelClass.Plant, referenceId = Model.Id }, null)
+<br />
+<hr />
+@if (Model.Articles != null && Model.Articles.Any())
+{
+    <h4>Vorgeschlagene Artikel</h4>
+    <ul>
+        @foreach (var article in Model.Articles)
+        {
+            <li>
+                @Html.ActionLink(article.Name, "details", "article", new { id = article.Id }, null)
+            </li>
+        }
+    </ul>
+}
+<br />
+<hr />
+<h4>Todoliste</h4>
+@{DateTime oldTime = DateTime.MinValue;}
+@{int datepick_counter = 0;}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Todo
+            </th>
+            <th>
+                Fällig am
+            </th>
+        </tr>
+    </thead>
+    @foreach (var todo in Model.TodosOld.TodoList)
+    {
+        if (oldTime.Date.Year < todo.DateStart.Year || oldTime.Date.Month < todo.DateStart.Month || oldTime == DateTime.MinValue)
+        {
+            <tr style="background-color: #dddddd">
+                <td>
+                    <div class="h3">@todo.DateStart.ToString("MMMM")</div>
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        }
+        oldTime = todo.DateStart;
+        <tr>
+            <td>
+                @todo.Title
+            </td>
+            <td>
+                @todo.DateStart.ToString("dd.MM.yyyy")
+            </td>
+            @Html.Partial("_TodoTableMarkActions", todo)
+        </tr>
+        datepick_counter++;
+    }
+    @if (Model.TodosOld.TodoList.Count() == 0)
+    {
+        @:Keine Todos gefunden.
+    }
+</table>
+<hr />
+<p>
+    @Html.ActionLink("Löschen", "Delete", new { id = Model.Id }) |
+    @Html.ActionLink("Bearbeiten", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Zurück zur Pflanzenübersicht", "Index") |
+    @Html.ActionLink("Zum Pflanzenlexikon", "PlantDetails", "PlantSearch", new { id = Model.PlantId }, null)
+</p>
+<hr />
+@if (Model.VideoReferenceList.Count() > 0)
+{
+    <h2>Dazugehörige Videos</h2>
+    foreach (var vid in Model.VideoReferenceList)
+    {
+        <h4>@vid.Title</h4>
+        @Html.Raw(vid.GetHmlCode())
+    }
+    <hr />
+}
+@if (Model.FaqList.FaqList.Count() > 0)
+{
+    <h2>
+        Pflanzendoktor
+    </h2>
+    foreach (var faq in Model.FaqList.FaqList)
+    {
+        if (faq.EntryImages != null && faq.EntryImages.Any())
+        {
+            <div class="col-md-3">
+                <div class="title-image">
+                    <img title="@faq.EntryImages.FirstOrDefault().TitleAttr" src="@faq.EntryImages.FirstOrDefault().SrcAttr" alt="@faq.EntryImages.FirstOrDefault().AltAttr" />
+                </div>
+                @foreach (var img in faq.EntryImages.Skip(1))
+                {
+                    <div class="thumbnail col-md-4">
+                        <img title="@img.TitleAttr" src="@img.SrcAttr" alt="@img.AltAttr" />
+                    </div>
+                }
+            </div>
+        }
+        <div>
+            @faq.Date:
+            <br />
+            <dl class="dl-horizontal">
+                <dd>
+                    Frage
+                </dd>
+                <dt>
+                    @faq.QuestionText
+                </dt>
+                <dd>
+                    Antwort
+                </dd>
+                <dt>
+                    @faq.AnswerText
+                </dt>
+            </dl>
+        </div>
+        <hr />
+    }
+}
+<h2>Tagebuch der Pflanze</h2>
+@Html.Action("getDiaryEntries", "Diary", new { objectId = Model.Id, diaryType = GardifyModels.Models.ModelEnums.ReferenceToModelClass.UserPlant })

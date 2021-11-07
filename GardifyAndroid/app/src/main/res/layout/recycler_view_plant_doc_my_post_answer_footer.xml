@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.gardify.android.ui.plantDoc.myPostAnswer.PlantDocMyPostAnswerFooter xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_plant_doc_my_post_answer_footer_answer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textAllCaps="false"
+            app:cornerRadius="@dimen/cardCornerRadius_small"
+            android:textSize="@dimen/textSize_body_medium"
+            android:text="Antworten"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView_plant_doc_my_post_answer_footer_answer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Antwort"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button_plant_doc_my_post_answer_footer_answer" />
+
+        <EditText
+            android:id="@+id/button_plant_doc_my_post_answer_footer_answer_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/custom_borders"
+            android:ems="10"
+            android:gravity="top"
+            android:inputType="textMultiLine|text"
+            android:maxLines="5"
+            android:minLines="5"
+            android:overScrollMode="always"
+            android:paddingLeft="10dp"
+            android:scrollbarStyle="insideInset"
+            android:scrollbars="vertical"
+            android:text="@string/all_hello_comma_blankspace"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_plant_doc_my_post_answer_footer_answer" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_plant_doc_my_post_answer_footer_send_answer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="Antwort abschicken"
+            android:textAllCaps="false"
+            app:cornerRadius="@dimen/cardCornerRadius_small"
+            android:textSize="@dimen/textSize_body_medium"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button_plant_doc_my_post_answer_footer_answer_text" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.gardify.android.ui.plantDoc.myPostAnswer.PlantDocMyPostAnswerFooter>

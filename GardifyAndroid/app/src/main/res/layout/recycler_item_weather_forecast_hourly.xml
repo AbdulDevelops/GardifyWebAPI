@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <import type="android.view.View" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/linearLayout_all_white"
+        android:orientation="horizontal"
+        android:padding="@dimen/marginPaddingSize_10sdp">
+
+        <TextView
+            android:id="@+id/textView_weatherForecastHourly_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+            android:layout_marginLeft="@dimen/marginPaddingSize_10sdp"
+            android:layout_marginRight="@dimen/marginPaddingSize_16sdp"
+            android:text="date label"
+            android:textStyle="bold"
+            android:textSize="@dimen/textSize_body_small" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <!-- horizontal icon text - 0 -->
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/linear_layout_temperature"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/image_view_weather_clarity"
+                    android:layout_width="@dimen/imageView_all_width_18sdp"
+                    android:layout_height="@dimen/imageView_all_height_18sdp" />
+
+                <TextView
+                    android:id="@+id/text_view_temperature"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="Temperature label"
+                    android:textSize="@dimen/textSize_body_small" />
+            </LinearLayout>
+            <!-- horizontal icon text - 1 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/imageView_all_width_18sdp"
+                    android:layout_height="@dimen/imageView_all_height_18sdp"
+                    android:src="@drawable/gardify_weather_icon_precipitation" />
+
+                <TextView
+                    android:id="@+id/text_view_weather_precipitation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="precipitation label"
+                    android:textSize="@dimen/textSize_body_small" />
+            </LinearLayout>
+            <!-- horizontal icon text - 2 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/imageView_all_width_18sdp"
+                    android:layout_height="@dimen/imageView_all_height_18sdp"
+                    android:src="@drawable/gardify_weather_icon_wind" />
+
+                <TextView
+                    android:id="@+id/text_view_weather_wind_direction_speed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/marginPaddingSize_5sdp"
+                    android:text="wind direction label"
+                    android:textSize="@dimen/textSize_body_small" />
+            </LinearLayout>
+            <!-- horizontal icon text - 3 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/imageView_all_width_18sdp"
+                    android:layout_height="@dimen/imageView_all_height_18sdp"
+                    android:src="@drawable/gardify_weather_icon_air_pressure" />
+
+                <TextView
+                    android:id="@+id/text_view_weather_air_pressure"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/marginPaddingSize_5sdp"
+                    android:text="air pressure label"
+                    android:textSize="@dimen/textSize_body_small" />
+            </LinearLayout>
+            <!-- horizontal icon text - 4 -->
+            <LinearLayout
+                android:id="@+id/linear_layout_humidity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/imageView_all_width_18sdp"
+                    android:layout_height="@dimen/imageView_all_height_18sdp"
+                    android:src="@drawable/gardify_weather_icon_humidity" />
+
+                <TextView
+                    android:id="@+id/text_view_weather_humidity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/marginPaddingSize_5sdp"
+                    android:text="humidity label"
+                    android:textSize="@dimen/textSize_body_small" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</layout>

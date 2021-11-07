@@ -1,0 +1,18 @@
+﻿<h3>Hallo,</h3>
+
+<p>
+    @Model.Name (@Model.Email) hat eine neue Pflanze vorgeschlagen:
+</p>
+
+<p>
+    @{
+        if (Model.PlantName == "")
+        {
+            <span>Name: unbekannt</span>
+        }
+        else
+        {
+            <span>Name: @Model.PlantName</span>
+        }
+    }
+</p>

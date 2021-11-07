@@ -1,0 +1,9 @@
+.btn_white{
+    background-color: whitesmoke;
+    
+ }
+ ::ng-deep .mat-divider-vertical {
+    
+    border-top-color: #aaafaf!important;
+    border-right-color: #aaafaf!important;
+ }

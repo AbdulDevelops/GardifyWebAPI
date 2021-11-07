@@ -1,0 +1,25 @@
+﻿@model GardifyModels.Models.IndexUserViewModel
+
+@{
+    ViewBag.Title = "Alle Benutzer";
+    Layout = "~/Views/Shared/_LayoutAdminArea.cshtml";
+}
+<br/>
+@Html.ActionLink("Neuen Benutzer hinzufügen", "Create")
+<br />
+<br />
+<table class="table">
+    <tr>
+        <th>Email-Adresse</th>
+        <th></th>
+        <th></th>
+    </tr>
+    @foreach (var user in Model.UserList)
+    {
+        <tr>
+            <td>@Html.ActionLink(user.Email, "Details", new { id= user.Id })</td>
+            <td>@Html.ActionLink("Bearbeiten", "Edit", new { id = user.Id })</td>
+            <td>@Html.ActionLink("Löschen", "Delete", new { id = user.Id })</td>
+        </tr>
+    }
+</table>

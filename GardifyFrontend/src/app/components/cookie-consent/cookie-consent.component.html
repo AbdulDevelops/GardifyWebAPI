@@ -1,0 +1,9 @@
+<div *ngIf="display" class="consent-popup d-flex w-100 py-3 px-2 px-md-3 pb-5 pb-md-3">
+    <p class="t-light col-8 col-md-10 pb-3 pb-md-0 mb-0">Wir verwenden Cookies, um Deine Erfahrungen auf unserer Website zu verbessern. <br class="d-none d-md-block">
+        <a class="t-reg ptr" routerLink="/agb">Erfahre mehr</a>
+    </p>
+    <div class="col-4 col-md-2 pt-1 text-center">
+        <button class="btn btn-white mx-1 px-2" (click)="onAccept()">Verstanden</button>
+        <!-- <button class="btn btn-secondary mx-1">Einstellen</button> -->
+    </div>
+</div>

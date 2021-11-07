@@ -1,0 +1,45 @@
+.filterbtn{
+   width: 100px; 
+}
+
+::ng-deep .mat-divider-vertical {
+    
+   border-top-color: #434444!important;
+   border-right-color: #434444!important;
+}
+.ul-dropdown {
+   margin-top: 1.5rem !important;
+   margin-bottom: 1rem !important;
+   margin-right: 15rem !important;
+}
+.img-container {
+   position: relative;
+   width: 50%;
+   max-width: 200px;
+   height: 200px;
+ }
+ 
+ .image {
+   display: block;
+   width: 100%;
+   height: 100%;
+ }
+ 
+ .overlay {
+   position: absolute; 
+   bottom: 0; 
+   background: rgb(0, 0, 0);
+   background: rgba(0, 0, 0, 5); /* Black see-through */
+   color: #f1f1f1; 
+   width: 100%;
+   transition: .5s ease;
+   opacity:0;
+   color: white;
+   font-size: 20px;
+   padding: 42%;
+   text-align: center;
+ }
+ 
+ .img-container .overlay {
+   opacity: 0.5;
+ }

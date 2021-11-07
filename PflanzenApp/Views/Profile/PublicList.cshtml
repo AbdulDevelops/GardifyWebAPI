@@ -1,0 +1,13 @@
+﻿@model GardifyModels.Models.ProfileViewModels.ProfileListViewModel
+@{
+    ViewBag.Title = "PublicList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Benutzerprofile</h2>
+<ul>
+	@foreach (var link in Model.UserLinks)
+	{
+		<li>@Html.ActionLink(link.UserName + "(" + link.UserPoints + ")", "Public", new { id = link.UserUrl })</li>
+	}
+</ul>

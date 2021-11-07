@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/marginPaddingSize_16sdp"
+    android:background="@color/scrollView_all_white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/marginPaddingSize_10sdp"
+        android:layout_marginBottom="@dimen/marginPaddingSize_32sdp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/imageView_all_width_18sdp"
+                android:layout_height="@dimen/imageView_all_height_18sdp"
+                android:background="@drawable/red_circle"
+                android:backgroundTint="@color/imageView_todoCalendar_diaryEntry" />
+
+            <TextView
+                android:id="@+id/textView_todo_add_diary_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/marginPaddingSize_10sdp"
+                android:text="@string/toDoCalendar_addTodoDiaryEntry"
+                android:textSize="@dimen/textSize_body_medium"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!--upload images -->
+
+        <LinearLayout
+            android:id="@+id/linearLayout_todo_add_diary_upload_section"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/image_view_add_diary_todo_upload_icon"
+                    android:layout_width="@dimen/imageView_all_width_50sdp"
+                    android:layout_height="@dimen/imageView_all_height_50sdp"
+                    android:padding="@dimen/imageView_all_padding_5sdp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/all_upload_image" />
+
+                <TextView
+                    android:id="@+id/text_view_add_diary_todo_image_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/marginPaddingSize_16sdp"
+                    android:text="@string/toDoCalendar_uploadImages"
+                    android:textSize="@dimen/textSize_body_xsmall"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout_add_diary_recyclerView_section"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view_diary_grid_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:id="@+id/image_view_diary_delete_icon"
+                    android:layout_width="@dimen/imageView_all_width_50sdp"
+                    android:layout_height="@dimen/imageView_all_height_50sdp"
+                    android:layout_gravity="center_vertical"
+                    android:padding="@dimen/imageView_all_padding_5sdp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/all_delete_image_icon" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout_todo_add_diary_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/toDoCalendar_title"
+                    android:textSize="@dimen/textSize_body_xsmall"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="*"
+                    android:textSize="@dimen/textSize_body_xsmall"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/editText_todo_add_diary_title_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:background="@drawable/custom_edit_text_default"
+                android:padding="@dimen/marginPaddingSize_5sdp"
+                android:textSize="@dimen/textSize_body_xsmall" />
+        </LinearLayout>
+
+        <!--description -->
+        <LinearLayout
+            android:id="@+id/linearLayout_todo_add_diary_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/all_description"
+                    android:textSize="@dimen/textSize_body_xsmall"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="*"
+                    android:textSize="@dimen/textSize_body_xsmall"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/editText_todo_add_diary_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="top"
+                android:background="@drawable/custom_edit_text_default"
+                android:lines="2"
+                android:inputType="textMultiLine"
+                android:padding="@dimen/marginPaddingSize_5sdp"
+                android:textSize="@dimen/textSize_body_xsmall" />
+        </LinearLayout>
+
+        <!--notes -->
+        <LinearLayout
+            android:id="@+id/linearLayout_add_diary_notes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/toDoCalendar_myNotes"
+                android:textSize="@dimen/textSize_body_xsmall"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/editText_diary_notes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_edit_text_default"
+                android:gravity="top"
+                android:lines="2"
+                android:inputType="textMultiLine"
+                android:textSize="@dimen/textSize_body_xsmall"
+                android:text="" />
+        </LinearLayout>
+
+        <!--date from-->
+        <LinearLayout
+            android:id="@+id/linearLayout_todo_add_diary_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/toDoCalendar_date"
+                android:textSize="@dimen/textSize_body_xsmall"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/editText_todo_add_diary_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_todoCalendar_addDiary"
+                android:textSize="@dimen/textSize_body_xsmall"
+                android:background="@drawable/custom_edit_text_date"
+                android:padding="@dimen/marginPaddingSize_5sdp" />
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progressbar_addDiaryEntry"
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:layout_height="wrap_content"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_todo_add_diary_save"
+            style="@style/ButtonConfirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/all_save"
+            android:textAllCaps="false"
+            android:textSize="@dimen/textSize_body_medium"
+            app:cornerRadius="@dimen/cardCornerRadius_small" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_todo_add_diary_cancel"
+            style="@style/ButtonCancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/all_cancel"
+            android:textAllCaps="false"
+            android:textSize="@dimen/textSize_body_medium"
+            app:cornerRadius="@dimen/cardCornerRadius_small" />
+
+    </LinearLayout>
+
+</ScrollView>

@@ -1,0 +1,21 @@
+﻿@model GardifyModels.Models.SynonymViewModels.SynonymDeleteViewModel
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_LayoutAdminArea.cshtml";
+}
+
+<h2>Synonym Löschen</h2>
+
+<h3>Sind Sie sicher, dass Sie "@Model.Text" löschen möchten?</h3>
+<div>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Löschen" class="btn btn-default" /> |
+            @Html.ActionLink("Zurück zur Übersicht", "Index")
+        </div>
+    }
+</div>

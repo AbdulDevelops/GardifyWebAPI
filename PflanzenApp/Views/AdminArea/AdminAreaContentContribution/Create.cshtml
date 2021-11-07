@@ -1,0 +1,86 @@
+﻿@model GardifyModels.Models.SynonymViewModels.SynonymCreateViewModel
+
+@{
+    ViewBag.Title = "Neues Synonynm";
+    Layout = "~/Views/Shared/_LayoutAdminArea.cshtml";
+}
+
+<h2>Neues Synonym erstellen</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Text, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Text, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Text, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.ReferenceType, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ReferenceType", new List<SelectListItem>(){
+        new SelectListItem() { Text="-", Value = "0", Selected = true  },
+        new SelectListItem() { Text="Pflanze", Value = "4"},
+        new SelectListItem() { Text="Tool",Value="5" } }, new { @onchange = "ondropdownselect(this.value)" })
+            </div>
+        </div>
+        <div class="form-group" id="reference-list">
+            @Html.LabelFor(model => model.InfoObjects, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ReferenceId", new List<SelectListItem>() { })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Zurück zur Übersicht", "Index")
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        ondropdownselect(0);
+    });
+    function ondropdownselect(index) {
+        var list = $('#reference-list');
+        var dd = $('#ReferenceId');
+        console.log(list);
+        if (index == 0) {
+            list.hide();
+        } else {
+            list.show();
+            removeoptions(dd);
+            @{ int counter = 0;}
+            @foreach (var obj in Model.InfoObjects)
+            {
+                int modRefType = (int)obj.ReferenceType;
+                counter++;
+                @:var refType = @modRefType
+                @:if (refType == index){
+                                @:addoption(dd, @obj.Id, "@obj.Name");
+                    @:}
+             }
+        }
+    }
+
+    function addoption(dropdown, index, text) {
+        var newOption = "<option value='" + index + "'>"+text+"</option>";
+        dropdown.append(newOption);
+    }
+
+    function removeoptions(dropdown) {
+        $(dropdown).find("option").remove();
+    }
+</script>

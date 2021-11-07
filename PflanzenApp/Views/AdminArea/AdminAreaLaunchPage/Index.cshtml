@@ -1,0 +1,34 @@
+﻿@model GardifyModels.Models.LaunchPageViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdminArea.cshtml";
+}
+
+<h2>Landing Page</h2>
+
+<p>
+    @Html.ActionLink("New Launch Page", "Create")
+</p>
+
+
+<div>
+    @if (Model.PageContents != null && Model.PageContents.Any())
+    {
+        foreach (var item in Model.PageContents)
+        {
+            <hr />
+
+            <div class="row">
+                @Html.Raw(item.PageContent)
+            </div>
+            @Html.ActionLink("ändern", "Edit", new { id = item.Id }, new { style = "float: right; margin: 0 20px 0 0;", @class = "btn btn-default" })
+
+            <hr />
+        }
+    }
+    else
+    {
+<p>Es sind noch keine Landing Page-Vorlage vorhanden</p>
+    }
+</div>

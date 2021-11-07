@@ -1,0 +1,43 @@
+button.sbmt-btn {
+    border-radius: 0;
+    border: 2px solid #272727;
+    cursor: pointer;
+    width: 10%
+  }
+  
+  div.sbmt-btn-txt {
+    padding: 10px;
+    font-size: 1em;
+  }
+  
+  button.sbmt-btn:hover {
+    background: #272727;
+    color: white;
+  }
+  
+  button {
+    outline: 0;
+  }
+.latest-article {
+  width: 100%;
+  object-fit: cover;
+  max-width: 220px;
+  height: 220px;
+}
+#shippingCosts p {
+  padding: 0 1rem;
+}
+#shippingCosts strong {
+  display: block;
+  margin-top: 1rem;
+}
+#shippingCosts span {
+  display: block;
+  margin: 0.5rem 0;
+}
+@media only screen and (max-width: 768px) {
+  .ml-5 {
+    margin-left: 0!important;
+  }
+  .marg_top{margin-top: 1rem;}
+}

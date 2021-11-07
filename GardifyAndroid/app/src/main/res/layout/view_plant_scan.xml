@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/constraintLayout_all_seashell">
+
+    <ImageView
+        android:id="@+id/imageView_view_plant_scan"
+        android:layout_width="0dp"
+        android:layout_height="150dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout_viewPlantScan" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout_viewPlantScan"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        app:layout_constraintDimensionRatio="2.1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView_view_plant_scan_camera"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/marginPaddingSize_10sdp"
+
+            android:layout_weight="1"
+            android:backgroundTint="@color/cardView_all_greenishBlue"
+            app:cardCornerRadius="@dimen/cardCornerRadius_medium">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imageView_view_plant_scan_camera"
+                    android:layout_width="@dimen/imageView_all_width_50sdp"
+                    android:layout_height="@dimen/imageView_all_height_50sdp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:src="@drawable/gardify_app_icon_camera" />
+
+                <TextView
+                    android:id="@+id/textView_view_plant_scan_camera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/marginPaddingSize_8sdp"
+                    android:fontFamily="@font/source_sans_pro"
+                    android:text="@string/all_camera"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/textSize_icon"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView_view_plant_scan_album"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/marginPaddingSize_10sdp"
+
+            android:layout_weight="1"
+            android:backgroundTint="@color/cardView_all_sea"
+            app:cardCornerRadius="@dimen/cardCornerRadius_medium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imageView_view_plant_scan_album"
+                    android:layout_width="@dimen/imageView_all_width_50sdp"
+                    android:layout_height="@dimen/imageView_all_height_50sdp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:src="@drawable/gardify_app_icon_album" />
+
+                <TextView
+                    android:id="@+id/textView_view_plant_scan_album"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/marginPaddingSize_8sdp"
+                    android:fontFamily="@font/source_sans_pro"
+                    android:text="@string/all_photo"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/textSize_icon"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_view_plant_scan_grid"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/marginPaddingSize_16sdp"
+        android:backgroundTint="@color/cardView_all_white"
+        android:visibility="gone"
+        app:cardCornerRadius="@dimen/cardCornerRadius_medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_view_plant_scan">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_grid_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_view_tipps"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/marginPaddingSize_10sdp"
+        app:cardCornerRadius="@dimen/cardCornerRadius_medium"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/card_view_plant_scan_grid">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_tipps"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:id="@+id/textView_plant_scan_notFound"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/marginPaddingSize_8sdp"
+        android:text="@string/plantScan_result_notFound"
+        android:textSize="@dimen/_13ssp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/card_view_tipps" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_plant_scan_askExpert"
+        style="@style/PrimaryButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/marginPaddingSize_3sdp"
+        android:text="@string/plantScan_result_askExpert"
+        android:textSize="@dimen/_12sdp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textView_plant_scan_notFound" />
+</androidx.constraintlayout.widget.ConstraintLayout>

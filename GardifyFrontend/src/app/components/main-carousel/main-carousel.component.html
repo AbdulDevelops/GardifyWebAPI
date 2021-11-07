@@ -1,0 +1,44 @@
+<!-- Main Carousel -->
+<div id="mainCarousel" class="carousel slide" data-ride="carousel" data-interval="7000">
+  <ol class="carousel-indicators">
+    <li data-target="#mainCarousel" data-slide-to="0" class="active"></li>
+    <li data-target="#mainCarousel" data-slide-to="1"></li>
+    <li data-target="#mainCarousel" data-slide-to="2"></li>
+  </ol>
+  <label class="switch" id="mobToggleBtn">
+    <input type="checkbox" checked >
+    <span class="slider round" (click)="toggleTheme()"></span>
+    <span class="absolute-no" (click)="toggleTheme()" >WHITE</span>
+  </label>
+   <div class="carousel-inner">
+    <div class="carousel-item active">
+      <picture>
+          <source media="(max-width: 768px)" srcset="./assets/images/_JAY9125_Header_mobil.jpg">
+          <img class="d-block w-100" src="./assets/images/_JAY9125_Header_Desktop.jpg" alt="Erste Slide">
+      </picture>
+      <div class="carousel-caption main-caption {{mode}} d-none d-xl-block">
+        <button class="btn-video"></button>
+        <h6 class="text-green t-bold t-16">Herzlich Wilkommen bei gardify</h6>
+        <p class="t-13 t-reg">erwartete Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh
+          uismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam,
+          quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat.
+        </p>
+      </div>
+      <div class="carousel-caption d-block d-lg-none" style="top: 40px; padding-top: 0;">
+        <img class="logo-mobile" src="./assets/Header-icon/Gardify_Logo_x_v6_weiß_rund.svg" alt="Gardify Logo">
+      </div>
+    </div>
+    <div class="carousel-item">
+      <picture>
+          <source media="(max-width: 768px)" srcset="./assets/images/_JDY2394_Header_mobil.jpg">
+          <img class="d-block w-100" src="./assets/images/_JDY2394_Header_Desktop.jpg" alt="Zweite Slide">
+      </picture>
+    </div>
+    <div class="carousel-item">
+      <picture>
+          <source media="(max-width: 768px)" srcset="./assets/images/21_JBY6943_Header_mobil.jpg">
+          <img class="d-block w-100" src="./assets/images/21_JBY6943_Header_Desktop.jpg" alt="Dritte Slide">
+      </picture>
+    </div>
+  </div>
+</div>

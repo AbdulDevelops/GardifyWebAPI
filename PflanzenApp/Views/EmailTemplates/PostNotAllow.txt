@@ -1,0 +1,23 @@
+﻿<style>
+    a, .green {
+        color: #7a9d34;
+    }
+
+        a:hover {
+            cursor: pointer;
+        }
+</style>
+<h3>Hallo @Model.UserName,</h3>
+
+
+<p>
+    Aus einigen Gründen kann Ihre Frage nicht validiert und veröffentlicht werden.
+    <br><br>
+    Hast du Fragen zum Umgang mit Deinen Daten? Informiere dich über unsere <a href='https://gardify.de/datenschutz'>Datenschutzgrundsätze</a> und unsere <a href='https://gardify.de/agb'> Allgemeinen Geschäftsbedingungen.</a>
+</p>
+
+
+<h3>
+    Vielen Dank,
+</h3>
+<h4>Das gardify-Team</h4>

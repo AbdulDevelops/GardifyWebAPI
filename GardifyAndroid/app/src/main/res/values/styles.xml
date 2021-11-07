@@ -1,0 +1,381 @@
+<resources>
+    <!-- base application theme -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textViewStyle">@style/SourceSansPro</item>
+        <item name="actionBarStyle">@style/Actionbar</item>
+        <item name="android:popupMenuStyle">@style/PopupMenu</item>
+        <item name="android:textAppearanceLargePopupMenu">@style/myPopupMenuTextAppearanceLarge</item>
+        <item name="android:textAppearanceSmallPopupMenu">@style/myPopupMenuTextAppearanceSmall</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:textViewStyle">@style/SourceSansPro</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <!-- font style -->
+    <style name="SourceSansPro" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/source_sans_pro</item>
+    </style>
+
+    <!-- actionbar style -->
+    <style name="Actionbar" parent="Widget.AppCompat.ActionBar">
+        <item name="contentInsetStart">0dp</item>
+        <item name="contentInsetEnd">0dp</item>
+        <item name="android:actionBarSize">@dimen/_64sdp</item>
+        <item name="actionBarSize">@dimen/_64sdp</item>
+    </style>
+
+    <!-- navigation style -->
+    <style name="NavigationSide">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:scrollbars">none</item>
+        <item name="android:elevation">0dp</item>
+    </style>
+
+    <style name="NavigationBottom">
+
+    </style>
+
+    <!-- popup menu style -->
+    <style name="PopupMenu" parent="@android:style/Widget.PopupMenu">
+        <item name="android:popupBackground">@android:color/white</item>
+        <item name="android:textSize">@dimen/textSize_body_xsmall</item>
+    </style>
+
+    <style name="myPopupMenuTextAppearanceSmall" parent="@android:style/TextAppearance.DeviceDefault.Widget.PopupMenu.Small">
+        <item name="android:textSize">@dimen/textSize_body_xsmall</item>
+    </style>
+
+    <style name="myPopupMenuTextAppearanceLarge" parent="@android:style/TextAppearance.DeviceDefault.Widget.PopupMenu.Large">
+        <item name="android:textSize">@dimen/textSize_body_xsmall</item>
+    </style>
+
+    <!-- bottom sheet style -->
+    <style name="BaseBottomSheetDialog" parent="@style/Theme.Design.Light.BottomSheetDialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="bottomSheetStyle">@style/BottomSheet</item>
+    </style>
+
+    <style name="BottomSheet" parent="@style/Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/bg_bottom_sheet_dialog_fragment</item>
+        <item name="behavior_peekHeight">@dimen/height_bottomSheet</item>
+    </style>
+
+    <style name="ConstraintLayoutFragment">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:paddingTop">@dimen/marginPaddingSize_24sdp</item>
+        <item name="android:paddingRight">@dimen/marginPaddingSize_24sdp</item>
+        <item name="android:paddingLeft">@dimen/marginPaddingSize_24sdp</item>
+        <item name="android:background">@color/seashell</item>
+    </style>
+
+    <!-- linear layout style -->
+    <style name="LinearLayoutExpandableListTitle">
+        <item name="android:orientation">horizontal</item>
+        <item name="android:background">@color/white</item>
+    </style>
+
+    <style name="LinearLayoutExpandableListInner">
+        <item name="android:paddingTop">@dimen/marginPaddingSize_5sdp</item>
+        <item name="android:paddingRight">@dimen/marginPaddingSize_10sdp</item>
+        <item name="android:paddingBottom">@dimen/marginPaddingSize_5sdp</item>
+        <item name="android:paddingLeft">@dimen/marginPaddingSize_16sdp</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:background">@color/white</item>
+    </style>
+
+    <!-- progressbar style -->
+    <style name="ProgressBar" parent="android:Widget.Material.ProgressBar">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">@dimen/marginPaddingSize_5sdp</item>
+        <item name="android:background">@drawable/red_circle</item>
+        <item name="android:backgroundTint">@color/white</item>
+        <item name="android:elevation">@dimen/elevation_20dp</item>
+        <item name="android:visibility">invisible</item>
+    </style>
+
+    <!--text view style  -->
+    <style name="TextViewHeadline" parent="@android:style/TextAppearance">
+        <item name="android:fontFamily">@style/SourceSansPro</item>
+        <item name="android:textSize">@dimen/textSize_headline</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/text_all_white</item>
+        <item name="android:visibility">gone</item>
+    </style>
+
+    <style name="TextViewSubHeadline" parent="@android:style/TextAppearance">
+        <item name="android:fontFamily">@style/SourceSansPro</item>
+        <item name="android:textSize">@dimen/textSize_subHeadline</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/text_all_black</item>
+    </style>
+
+    <style name="TextViewTitle" >
+        <item name="android:textSize">@dimen/textSize_body_medium</item>
+    </style>
+
+    <style name="TextViewBody" >
+        <item name="android:textSize">@dimen/textSize_body_medium</item>
+    </style>
+
+    <style name="TextViewFooter" >
+        <item name="android:textSize">@dimen/textSize_body_medium</item>
+    </style>
+
+    <style name="TextViewActionbarDataName" parent="@android:style/TextAppearance">
+        <item name="android:fontFamily">@style/SourceSansPro</item>
+        <item name="android:textSize">@dimen/textSize_body_xsmall</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/text_all_white</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="TextViewActionbarDataCounter" parent="@android:style/TextAppearance">
+        <item name="android:layout_gravity">center</item>
+        <item name="android:fontFamily">@style/SourceSansPro</item>
+        <item name="android:textSize">@dimen/textSize_body_xsmall</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/text_all_white</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="TextViewNavigationSide" parent="@android:style/TextAppearance">
+        <item name="android:fontFamily">@style/SourceSansPro</item>
+        <item name="android:textSize">@dimen/textSize_body_small</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="TextViewExpandableListTitle" parent="@android:style/TextAppearance">
+        <item name="android:paddingLeft">@dimen/marginPaddingSize_10sdp</item>
+        <item name="android:fontFamily">@style/SourceSansPro</item>
+        <item name="android:textSize">@dimen/textSize_title</item>
+    </style>
+
+    <style name="TextViewExpandableListTitleCounter" parent="@android:style/TextAppearance">
+        <item name="android:layout_weight">1</item>
+        <item name="android:fontFamily">@style/SourceSansPro</item>
+        <item name="android:textSize">@dimen/textSize_title</item>
+        <item name="android:textColor">@color/grey</item>
+    </style>
+
+    <style name="TextViewExpandableListInner" parent="@android:style/TextAppearance">
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:fontFamily">@style/SourceSansPro</item>
+        <item name="android:textSize">@dimen/textSize_body_medium</item>
+        <item name="android:textColor">@color/grey</item>
+    </style>
+
+    <style name="TextViewEditTextTitle" >
+        <item name="android:fontFamily">@style/SourceSansPro</item>
+        <item name="android:textSize">@dimen/textSize_body_medium</item>
+    </style>
+
+    <!-- edit text -->
+    <style name="EditTextOneLine">
+        <item name="android:padding">@dimen/marginPaddingSize_5sdp</item>
+        <item name="android:fontFamily">@style/SourceSansPro</item>
+        <item name="android:gravity">top</item>
+        <item name="android:background">@drawable/custom_edit_text_default</item>
+        <item name="android:textSize">@dimen/textSize_body_medium</item>
+    </style>
+
+    <style name="EditTextFourLines">
+        <item name="android:padding">@dimen/marginPaddingSize_5sdp</item>
+        <item name="android:fontFamily">@style/SourceSansPro</item>
+        <item name="android:gravity">top</item>
+        <item name="android:lines">4</item>
+        <item name="android:background">@drawable/custom_edit_text_default</item>
+        <item name="android:textSize">@dimen/textSize_body_medium</item>
+    </style>
+
+    <style name="PrimaryEditTextStyle">
+        <item name="android:background">@drawable/custom_edit_text_default</item>
+        <item name="android:textSize">@dimen/textSize_body_medium</item>
+        <item name="android:padding">@dimen/marginPaddingSize_5sdp</item>
+    </style>
+
+    <!-- button style -->
+    <style name="ButtonConfirm" parent="Widget.MaterialComponents.Button">
+        <item name="android:fontFamily">@style/SourceSansPro</item>
+        <item name="android:textSize">@dimen/textSize_body_medium</item>
+        <item name="android:textColor">@color/text_all_white</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="colorPrimary">@color/button_all_confirm</item>
+        <item name="android:backgroundTint">@color/button_all_confirm</item>
+        <item name="cornerRadius">@dimen/cardCornerRadius_small</item>
+    </style>
+
+    <style name="ButtonCancel" parent="Widget.MaterialComponents.Button">
+        <item name="android:fontFamily">@style/SourceSansPro</item>
+        <item name="android:textSize">@dimen/textSize_body_medium</item>
+        <item name="android:textColor">@color/text_all_gunmetal</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="colorPrimary">@color/button_all_sendClosePlusMinus</item>
+        <item name="android:backgroundTint">@color/button_all_sendClosePlusMinus</item>
+        <item name="cornerRadius">@dimen/cardCornerRadius_small</item>
+    </style>
+
+    <style name="PrimaryButtonStyle" parent="Widget.MaterialComponents.Button">
+        <item name="colorPrimary">@color/button_all_confirm</item>
+        <item name="android:backgroundTint">@color/button_all_confirm</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">@dimen/textSize_body_medium</item>
+        <item name="cornerRadius">@dimen/cardCornerRadius_small</item>
+        <item name="android:textColor">@color/text_all_white</item>
+    </style>
+
+    <style name="SecondaryButtonStyle" parent="Widget.MaterialComponents.Button">
+        <item name="colorPrimary">@color/imageView_all_dawn</item>
+        <item name="android:backgroundTint">@color/imageView_all_dawn</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/text_all_gunmetal</item>
+        <item name="android:textSize">@dimen/textSize_body_medium</item>
+        <item name="cornerRadius">@dimen/cardCornerRadius_small</item>
+    </style>
+
+    <style name="PrimaryWarningButtonStyle" parent="Widget.MaterialComponents.Button">
+        <item name="colorPrimary">@color/jasper</item>
+        <item name="android:backgroundTint">@color/jasper</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/text_all_white</item>
+        <item name="android:textSize">@dimen/textSize_body_medium</item>
+        <item name="cornerRadius">@dimen/cardCornerRadius_small</item>
+    </style>
+
+    <style name="TransparentButtonStyle" parent="@style/Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="colorPrimary">@android:color/transparent</item>
+        <item name="android:textColor">@color/button_all_confirm</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">@dimen/textSize_body_small</item>
+    </style>
+
+    <style name="SecondaryButtonSmallNoPadding" parent="Widget.MaterialComponents.Button">
+        <item name="colorPrimary">@color/button_all_sendClosePlusMinus</item>
+        <item name="android:backgroundTint">@color/button_all_sendClosePlusMinus</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/text_all_gunmetal</item>
+        <item name="android:textSize">@dimen/textSize_body_medium</item>
+        <item name="cornerRadius">@dimen/cardCornerRadius_small</item>
+        <item name="android:inset">0dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetRight">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:minWidth">@dimen/width_height_22sdp</item>
+        <item name="android:padding">0dp</item>
+        <item name="strokeWidth">0dp</item>
+    </style>
+
+    <style name="PrimaryButtonStyleDarker">
+        <item name="android:backgroundTint">@color/button_all_confirm</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">@dimen/textSize_body_medium</item>
+        <item name="cornerRadius">@dimen/cardCornerRadius_small</item>
+        <item name="android:textColor">@color/text_all_white</item>
+    </style>
+
+    <!-- image view style -->
+    <style name="ImageViewSplashScreen">
+        <item name="android:scaleType">fitCenter</item>
+        <item name="android:src">@drawable/gardify_logo</item>
+    </style>
+
+    <style name="ImageViewExpandableListTitleIcon">
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:paddingEnd">@dimen/marginPaddingSize_10sdp</item>
+        <item name="android:background">@drawable/ripple_circular</item>
+    </style>
+
+    <style name="ImageViewExpandableListInnerIcon">
+        <item name="android:layout_gravity">center_vertical</item>
+    </style>
+
+    <!-- custom card view for back button style -->
+    <style name="CustomCardCorners" parent="@style/Widget.MaterialComponents.CardView">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance_custom_corners</item>
+    </style>
+
+    <style name="ShapeAppearance_custom_corners" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeBottomRight">@dimen/cardCornerRadius_small</item>
+        <item name="cornerSizeTopRight">@dimen/cardCornerRadius_small</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+        <item name="cornerSizeTopLeft">0dp</item>
+    </style>
+
+    <!-- chip group text appearance -->
+    <style name="MaterialComponents_Chip_custom" parent="@style/Widget.MaterialComponents.ChipGroup">
+        <item name="chipMinHeight">24dp</item>
+        <item name="chipMinTouchTargetSize">24dp</item>
+        <item name="chipIconSize">18dp</item>
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.MaterialComponents.Chip_Thin</item>
+        <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Body2_Thin</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.MaterialComponents.Chip_Thin" parent="">
+        <item name="cornerSize">12dp</item>
+    </style>
+
+    <style name="TextAppearance.MaterialComponents.Body2_Thin" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="android:textSize">@dimen/textSize_body_medium</item>
+    </style>
+
+    <!-- switch style -->
+    <style name="CustomSwitchStyle">
+        <item name="android:padding">@dimen/marginPaddingSize_5sdp</item>
+        <item name="android:layout_height">@dimen/height_8sdp</item>
+        <item name="switchMinWidth">@dimen/switch_all_width_xxsmall</item>
+        <item name="android:thumb">@drawable/switch_selector_thumb</item>
+        <item name="track">@drawable/switch_selector_track</item>
+    </style>
+
+    <!-- spinner style -->
+    <style name="CustomSpinnerStyle">
+        <item name="android:background">@drawable/custom_spinner</item>
+        <item name="android:textSize">@dimen/textSize_body_medium</item>
+        <item name="android:padding">@dimen/marginPaddingSize_5sdp</item>
+        <item name="android:spinnerMode">dropdown</item>
+        <item name="android:overlapAnchor">false</item>
+    </style>
+
+    <style name="CustomSpinnerItemStyle" parent="@android:style/Widget.TextView.SpinnerItem">
+        <item name="android:textSize">@dimen/textSize_body_medium</item>
+        <item name="android:paddingTop">@dimen/marginPaddingSize_6sdp</item>
+        <item name="android:paddingBottom">@dimen/marginPaddingSize_5sdp</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <style name="CustomVideoSpinnerItemStyle" parent="@android:style/Widget.TextView.SpinnerItem">
+        <item name="android:textSize">@dimen/textSize_body_medium</item>
+        <item name="android:paddingTop">@dimen/marginPaddingSize_3sdp</item>
+        <item name="android:paddingBottom">@dimen/marginPaddingSize_3sdp</item>
+        <item name="android:textAlignment">textStart</item>
+    </style>
+
+    <!-- calendar style -->
+    <style name="CalendarWeekLabelAppearance" parent="AppTheme">
+        <item name="android:backgroundTint">@color/greenTransparent</item>
+        <item name="background">@color/greenTransparent</item>
+        <item name="android:textSize">@dimen/textSize_body_xsmall</item>
+    </style>
+    <style name="CalendarTextAppearance" parent="AppTheme">
+        <item name="android:textSize">@dimen/textSize_body_xsmall</item>
+    </style>
+</resources>

@@ -1,0 +1,64 @@
+﻿@model GardifyModels.Models.FaqViewModels.FaqEditViewModel
+
+@{
+	ViewBag.Title = "Frage ändern";
+	Layout = "~/Views/Shared/_LayoutAdminArea.cshtml";
+}
+@*@if (Model.StatusMessage != null)
+{
+	Html.RenderPartial("_modalStatusMessage", Model.StatusMessage);
+}*@
+<h2>Frage ändern</h2>
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+
+	<div class="form-horizontal">
+		@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+		@Html.HiddenFor(model => model.Id)
+		<div class="form-group">
+			<label class="control-label col-md-2">Frage</label>
+			<div class="col-md-10">
+				<textarea class="form-control" name="QuestionText" rows="5" cols="80">@Model.QuestionText</textarea>
+				@Html.ValidationMessageFor(model => model.QuestionText, "", new { @class = "text-danger" })
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label col-md-2">Antwort</label>
+			<div class="col-md-10">
+				<textarea class="form-control" name="AnswerText" rows="5" cols="80">@Model.AnswerText</textarea>
+				@Html.ValidationMessageFor(model => model.AnswerText, "", new { @class = "text-danger" })
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label col-md-2">Administrator erlaubt Veröffentlichung</label>
+			<div class="col-md-10">
+				<div class="checkbox">
+					@Html.EditorFor(model => model.AdminAllowsPublishment)
+					@Html.ValidationMessageFor(model => model.AdminAllowsPublishment, "", new { @class = "text-danger" })
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label col-md-2">Nutzer erlaubt Veröffentlichung</label>
+			<div class="col-md-10">
+				<div class="checkbox">
+					@Html.DisplayFor(model => model.UserAllowsPublishment)
+				</div>
+			</div>
+		</div>
+        <div>
+            Hinweis: Beide müssen eine Veröffentlichung erlauben, damit der Eintrag öffentlich verfügbar ist.
+        </div>
+		<div class="form-group">
+			<div class="col-md-offset-2 col-md-10">
+				<input type="submit" value="Speichern" class="btn btn-default" />
+			</div>
+		</div>
+	</div>
+}
+
+<div>
+	@Html.ActionLink("Zurück", "Index")
+</div>

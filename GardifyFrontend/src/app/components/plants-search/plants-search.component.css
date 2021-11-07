@@ -1,0 +1,471 @@
+.wrapper.dark { color: #fff; }
+.wrapper.light { color: #494949; }
+.wrapper.dark label { color: #fff; }
+.wrapperhead.dark{background-color: black}
+.btn-green {
+    width: 137px;
+    height: 40px;
+    border-radius: 0.8rem;
+    font-weight: 700;
+    font-size: 13pt;
+    color: white;
+    padding: 0;
+}
+.btn-grey {
+    width: 140px;
+    height: 40px;
+    border-radius: 0.8rem;
+    font-weight: 700;
+    font-size: 13pt;
+    color: white;
+    padding: 0;
+    background-color: #494949
+}
+.hide-filter-btn {
+    position: relative;
+    right: -36px;
+    top: -16px;
+}  
+  
+  .modal-lg {
+    max-width: 80% !important;
+}
+.plant-img {
+    height: 240px;
+    max-width: 240px;
+    padding: 0;
+}
+.quarter-img {
+    height: 49%;
+    width: 49%;
+    object-fit: cover;
+    margin: 1px;
+    min-height: 120px;
+}
+
+img {
+    max-width:100%;
+    max-height:100%;
+    height: 240px;
+    width: 240px;
+    object-fit: cover;
+}
+img.quarter {
+    max-width:48%;
+    max-height:48%;
+    border: 1px solid white;
+}
+.dropdown-icon {
+    max-width:100%;
+    max-height:100%;
+    height: 30px!important;
+    width: 30px!important;
+    object-fit: cover;
+}
+.select-icon {
+    position: absolute;
+    right: 10px;
+    pointer-events: none;
+}
+p{
+    text-align: justify;
+  text-justify: inter-word;
+}
+.opac50 {
+    opacity: 0.5;
+}
+
+.wrapper.dark .details-search, .wrapper.dark .filter-header {
+    background-color: #000;
+}
+.wrapper.light .details-search, .wrapper.light .filter-header {
+    background-color: #fff;
+}
+.wrapper.light .filter-header {
+    background-color: #eee;
+}
+
+.list-toggler {
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #444;
+}
+
+.wrapper.dark .list-toggler {
+    color: #fff;
+    border-bottom: 1px solid white;
+}
+
+.input-icon {
+    position: relative;
+    left: 0;
+    top: 1px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    margin-left: -30px;
+}
+
+.list-toggler .input-icon {
+    background-color: transparent;
+    top: 0.2rem;
+}
+
+.filter-icon {
+    width: 26px;
+    height: 26px;
+    display: inline-block;
+    margin: 0 0.5rem;
+}
+
+[type="checkbox"]:checked, [type="radio"]:checked,
+[type="checkbox"]:not(:checked), [type="radio"]:not(:checked) {
+    position: absolute;
+    left: -9999px;
+}
+[type="checkbox"]:checked + label, [type="radio"]:checked + label,
+[type="checkbox"]:not(:checked) + label, [type="radio"]:not(:checked) + label
+{
+    position: relative;
+    padding-left: 28px;
+    cursor: pointer;
+    line-height: 20px;
+    display: inline-block;
+}
+[type="checkbox"]:checked + label:before, [type="radio"]:checked + label:before,
+[type="checkbox"]:not(:checked) + label:before, [type="radio"]:not(:checked) + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 0.75rem;
+    border: 2px solid #7a9d34;
+    background: #fff;
+}
+[type="checkbox"]:checked + label:after, [type="radio"]:checked + label:after,
+[type="checkbox"]:not(:checked) + label:after, [type="radio"]:not(:checked) + label:after {
+    content: '';
+    width: 10px;
+    height: 10px;
+    border-radius: 0.5rem;
+    background: #7a9d34;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+[type="checkbox"]:not(:checked) + label:after, [type="radio"]:not(:checked) + label:after {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+}
+[type="checkbox"]:checked + label:after, [type="radio"]:checked + label:after {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+.wrapper.dark input.inputWhite, .wrapper.dark textarea, .wrapper.dark select { background-color: black !important; }
+.wrapper.light input.inputWhite, .wrapper.light textarea, .wrapper.light select { background-color: #fff !important; }
+
+/* display 7 items, for colors */
+.col-md-15 {
+    flex: 0 0 14.285%;
+    max-width: 14.285%;
+}
+
+.wrapper.light input, .wrapper.light select, .wrapper.dark input, .wrapper.dark select {
+    height: 30px;
+    border-bottom : none !important;
+}
+.wrapper.dark input.bordered, .wrapper.dark select.bordered {
+    border: 1px solid white !important;
+}
+.wrapper.light input.bordered, .wrapper.light select.bordered {
+    border: 1px solid black !important;
+}
+
+.wrapper.light .bg-yellowish select.bordered {
+    background-color: white !important;
+}
+
+.eco-label img {
+    height: 55%;
+    width: 25%;
+    margin-top: -5px;
+}
+
+/* .eco-label [type="checkbox"]:checked + label:before,
+.eco-label [type="checkbox"]:not(:checked) + label:before {
+    top: 18px;
+}
+
+.eco-label [type="checkbox"]:checked + label:after,
+.eco-label [type="checkbox"]:not(:checked) + label:after {
+     top: 23px; 
+} */
+.subtext {
+    margin: 0 4px;
+    font-size: 8pt;
+    font-weight: normal;
+}
+.info-icon {
+    background:#7a9d34;
+    color:white;
+    border-radius: 50%;
+    font-size: 8pt;
+    padding: 0 5px;
+    top: -5px;
+    position: relative;
+}
+.g-badge {
+    width: 72px;
+    height: 72px;
+}
+
+/* frost sliders */
+::ng-deep span.star {
+    top: 33px;
+    left: 4px;
+    position: absolute;
+    font-weight: 700;
+    color: white;
+    font-size: 1.2rem;
+}
+::ng-deep .custom-slider .ng5-slider-span.ng5-slider-bar.ng5-slider-selection {
+    margin-left: 2px;
+    border-radius: none;
+}
+
+::ng-deep .custom-slider.hardiness .ng5-slider .ng5-slider-selection {
+    border-radius: none;
+}
+
+::ng-deep .custom-slider .ng5-slider .ng5-slider-bar {
+    background: #bc444c;
+    height: 30px;
+}
+
+::ng-deep .custom-slider .ng5-slider .ng5-slider-pointer {
+    width: 4px;
+    height: 124px;
+    top: -8px;
+    bottom: 0;
+    background-color: #333;
+}
+::ng-deep .custom-slider .ng5-slider .ng5-slider-pointer:before {
+    content: url('/assets/images/Filter_Frosthaerte_Pfeil_Grau.svg');
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-radius: unset;
+    background: unset;
+    z-index: 3;
+}
+/* hides arrow when the slider isnt in start position */
+::ng-deep .custom-slider.hide-arrow .ng5-slider .ng5-slider-pointer:before {
+    display: none;
+}
+
+::ng-deep .custom-slider .ng5-slider .ng5-slider-pointer:focus {
+    outline: none;
+}
+::ng-deep .ng5-slider .ng5-slider-pointer:hover::after {
+    background-color: transparent !important;
+    opacity: 0.85;
+}
+
+::ng-deep .custom-slider .ng5-slider .ng5-slider-pointer:after {
+    display: none;
+}
+
+::ng-deep .custom-slider .ng5-slider .ng5-slider-bubble {
+    bottom: 14px;
+}
+
+::ng-deep .custom-slider .ng5-slider .ng5-slider-tick {
+    width: 1px;
+    height: 30px;
+    margin-left: 4px;
+    border-radius: 0;
+    background: #f7f7f7;
+    top: 2px;
+}
+
+::ng-deep .custom-slider .ng5-slider-span.ng5-slider-tick-value {
+    top: -28px;
+}
+
+::ng-deep .custom-slider .ng5-slider-inner-tooltip {
+    font-size: 0.9rem;
+    font-weight: 300;
+}
+/* hardiness slider */
+::ng-deep .custom-slider.hardiness .ng5-slider-inner-tooltip {
+    margin-left: 90px;
+}
+::ng-deep .custom-slider.hardiness .ng5-slider-inner-tooltip:last-child {
+    display: none;
+}
+::ng-deep .custom-slider.hardiness .ng5-slider-span.ng5-slider-tick-legend {
+    top: -28px;
+    left: 44px;
+    font-size: 0.9rem;
+    font-weight: 300;
+    cursor: auto;
+}
+::ng-deep .custom-slider.hardiness .ng5-slider .ng5-slider-tick {
+    cursor: auto;
+}
+::ng-deep .custom-slider.hardiness .ng5-slider-span.ng5-slider-bubble.ng5-slider-model-value {
+    display: none;
+}
+::ng-deep .custom-slider.hardiness .ng5-slider .ng5-slider-pointer {
+    display: none;
+}
+
+.stickyBar {
+    overflow-y: auto;
+    scrollbar-width: thin;
+}
+
+.stickyCtrls {
+    max-width: 170px;
+    transition-property: all;
+	transition-duration: .5s;
+	transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+}
+.stickyCtrls.closed {
+    max-width: 0;
+}
+
+button.hideSticky {
+    border: none;
+    position: fixed;
+    right: 0;
+    top: 580px;
+    height: 30px;
+}
+
+#gardenMap {
+    position: relative;
+    width: 100%;
+    padding-bottom: 110%;
+    vertical-align: middle;
+    margin: 0;
+    overflow: hidden;
+}
+#gardenMap svg {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+@media only screen and (max-width: 500px), 
+(max-width: 990px) and (orientation:landscape) {
+    /* For mobile phones: */
+    .offset-top-extra {
+        top: 4px;
+        left: 0px;
+        width: 100px;
+    }
+    .offset-top {
+        top: unset;
+    }
+    .button.hideSticky {
+        display: none;
+    }
+    .stickyCtrls { 
+        max-width: unset;
+        display: flex !important;
+        right: 0;
+        top: unset;
+        z-index: 5;
+        bottom: 46px;
+        width: 100%;
+        margin: 0;
+        left: 0;
+        flex-flow: wrap-reverse;
+    }
+    .filter-btn {
+        font-size: 0.7rem !important;
+        width: 33%;
+        padding: 0;
+        height: 32px !important;
+    }
+    .stickyBar {
+        width: 34%;
+        height: auto;
+    }
+    .apFilter {
+        font-size: 0.7rem !important;
+    }
+}
+@media (max-width: 990px) and (orientation:landscape) {
+    .beta-ver {
+        display: none !important;
+    }
+    .button.hideSticky {
+        display: none;
+    }
+    .stickyCtrls { 
+        max-width: 70%;
+        margin: 0 auto;
+    }
+    .stickyBar-pad {
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+    }
+    .btn-count {
+        display: none !important;
+    }
+    .btn-count-mob {
+        display: block !important;
+    }
+    .offset-top-extra {
+        top: -44px !important;
+        left: -40px !important;
+    }
+}
+
+@media (max-width: 740px) {
+    button.hideSticky {
+        display: none;
+    }
+    .col-md-15 {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+    ::ng-deep .custom-slider.hardiness .ng5-slider-span.ng5-slider-tick-legend {
+        left: 18px;
+    }
+}
+
+@media (max-width: 990px) and (orientation:landscape) {
+    .plant-img {
+        flex-grow: 0 0 40%;
+        max-width: 40%;
+    }
+    .plant-desc {
+        flex-grow: 0 0 60%;
+        max-width: 60%;
+    }
+    .ch-container {
+        display: block !important;
+    }
+}
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    
+    .plant-img {
+        height:100%;
+        width: 100%;
+        object-fit: cover;
+        max-width: 240px;
+    }
+    .plant-img-wrapper {
+        width: 100%;
+        max-width: 100%;
+    }
+  }

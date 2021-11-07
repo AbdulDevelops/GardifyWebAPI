@@ -1,0 +1,26 @@
+﻿<style>
+    a, .green {
+        color: #7a9d34;
+    }
+
+        a:hover {
+            cursor: pointer;
+        }
+</style>
+<h3>Hallo @Model.UserName,</h3>
+
+<p>
+Vielen Dank für deinen Vorschlag! Die Ergänzung der von Dir gewünschten Pflanze mit all ihren To-Dos und Eigenschaften wird auf Grund des hohen Aufkommens einige Zeit in Anspruch nehmen.
+    <br><br>
+Dein Vorschlag wurde mit einem Platzhalterbild in deinem Garten vorgespeichert. Sobald deine Pflanze fertig ist, wirst du per E-Mail benachrichtigt und siehst die Pflanze vollständig in deinem Garten 
+ <br><br>
+ Wir bitten um etwas Geduld und wünschen Dir viel Spaß mit gardify!
+</p>
+
+
+<h3>
+    Mit freundlichen Grüßen,
+</h3>
+<h4>Team gardify</h4>
+
+

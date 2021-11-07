@@ -1,0 +1,10 @@
+﻿Allgemeine Struktur:
+Jedes Objekt (Pflanze/Todo/etc...) erhält einen eigenen Controller und je nach Objekt die Funktionen Index, Details, Create, Edit, Delete
+Zu jeder Funktion gibt es ein Viewmodel, was genau die Informationen enthält, die im jeweiligen View verwendet werden - nicht mehr und nicht weniger.
+
+Das IndexViewModel entählt ein IEnumerable<DetailsViewModel>.
+Es gibt in jedem Controller standard DatabaseAccess Methoden DbGet:Model, DbGets:IEnumerable<Model>, DbEdit, DbCreate, DbDelete
+Außerdem gibt es Methoden für jedes ViewModel, die auf jeden Fall die DbGet Methoden benutzen und nicht die Datenbank selbst benutzen.
+Das IndexViewModel wird mit einer foreach Schleife über GetDetailsViewModel gebildet.
+
+Alle Vm/Db Methoden haben das Tag [NonAction].

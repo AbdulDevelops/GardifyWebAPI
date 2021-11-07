@@ -1,0 +1,97 @@
+.step-wrapper {
+    width: 240px;
+    background-color: #e1ece3;
+    color: #111;
+    border-radius: 8px;
+    z-index: 999;
+    border-radius: 14px;
+    top: 140px;
+    margin-left: -140px;
+}
+.step-wrapper.settings {
+    top: 80px;
+    margin-left: -90px;
+}
+.step-header {
+    border-top-left-radius: 14px;
+    border-top-right-radius: 14px;
+}
+.step-footer {
+    padding: 4px;
+    border-bottom-left-radius: 14px;
+    border-bottom-right-radius: 14px;
+}
+.step-header, .step-footer {
+    background-color: #44835b;
+    color: white;
+    width: 240px;
+}
+
+button {
+    background: none;
+    border: none;
+    outline: none;
+}
+svg.down {
+    display: none;
+}
+svg {
+    position: absolute;
+    top: -50px;
+}
+.register-wrapper {
+    position: absolute;
+    background: #fff;
+    margin-top: 8px;
+    width: 100%;
+    padding: 5px;
+}
+.step-wrapper.settings .register-wrapper {
+    top: 200px;
+}
+@media (min-width: 1024px) and  (max-width: 1024px) {
+    .step-wrapper {
+       
+        margin-left: -10px;
+    }
+    svg.odd.onsocial {
+        left: -50px;
+     }
+     svg.even.onsocial {
+        left: -50px;
+     }
+}
+@media (max-width: 990px) {
+    svg.odd.onsocial {
+       left: -50px;
+    }
+    .step-wrapper.odd.onsocial{
+        margin-left: 0px;
+    }
+    .step-wrapper.odd.general {
+        margin-left: -160px;
+    }
+     .step-wrapper.even.general {
+        margin-left: -240px;
+    } 
+     .step-wrapper.even.onsocial {
+        margin-left: none;
+    } 
+    .step-wrapper.settings {
+        margin-left: -240px;
+        position: fixed !important;
+        top: 50%;
+    }
+    .step-wrapper.settings svg {
+        display: none;
+    }
+    .step-wrapper.settings svg.down.settings {
+        display: unset;
+        position: absolute;
+        top: 220px;
+    }
+    .step-wrapper.settings .register-wrapper {
+        top: unset;
+        bottom: 200px;
+    }
+}

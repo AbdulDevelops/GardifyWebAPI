@@ -1,0 +1,141 @@
+<div class="wrapper {{mode}} py-5">
+  <div class="container">
+    <div class="row mb-2 {{mode}} bt-border">
+      <div class="col-12 col-md-5">
+        <h2 class="t-reg t-12 {{mode === 'light'? 'text-grey' : 'text-white'}}">TO-DO KALENDAR</h2>
+        <h2 *ngIf="isMobile" class="t-light t-18 {{mode === 'light'? 'text-grey' : 'text-white'}}">
+          <span class="ptr" routerLink="/todo"><<</span> EIGENES TO-DO ANLEGEN<fa-icon [icon]="faCircle" class="text-ownTodo ml-2 t-12"></fa-icon>
+        </h2>
+        <h2 *ngIf="!isMobile" class="t-light t-26 {{mode === 'light'? 'text-grey' : 'text-white'}}">
+          <span class="ptr" routerLink="/todo"><<</span> EIGENES TO-DO ANLEGEN<fa-icon [icon]="faCircle" class="text-ownTodo ml-2 t-12"></fa-icon>
+        </h2>
+      </div>
+    </div>
+
+    <div class="row mt-5"></div>
+    <form [formGroup]="newTodo">
+      
+        <!----->
+        <div class="row mb-2 form-area-background justify-content-center {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+          <div class="col-12 col-lg-6"><h2 class=" mb-0 t-bold t-14">Titel (*)</h2></div>
+          <div class="col-12 col-lg-6  text-ltgrey">
+            <div class="row">
+              <div class="col-10">
+                <input type="text" class="inputWhite" formControlName="Title" placeholder="...">
+              </div>
+              <div class="col-2">
+                <a class="pl-2 setting-pencil"  >
+                    <fa-icon [icon]="faPencilAlt" class="text-ltgrey t-14"></fa-icon>
+                </a>
+              </div>
+            </div>
+          </div>
+     
+        </div>
+        <div class="row mb-2 form-area-background justify-content-center {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+          <div class="col-12 col-lg-6"><h2 class=" mb-0 t-bold t-14">Beschreibung (*)</h2></div>
+          <div class="col-12 col-lg-6  text-ltgrey">
+            <div class="row">
+              <div class="col-10">
+                <input type="text" class="inputWhite" formControlName="Description" placeholder="...">
+              </div>
+              <div class="col-2">
+                <a class="pl-2 setting-pencil"  >
+                    <fa-icon [icon]="faPencilAlt" class="text-ltgrey t-14"></fa-icon>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mb-2 form-area-background justify-content-center {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+          <div class="col-12 col-lg-6"><h2 class=" mb-0 t-bold t-14">Wiederholungsart</h2></div>
+          <div class="col-12 col-lg-6  text-ltgrey">
+            <div class="row">
+              <div class="col-11">
+                <select formControlName="Cycle">
+                  <option [ngValue]="CycleType.Once">Niemals</option>
+                  <option [ngValue]="CycleType.Daily">Täglich</option>
+                  <option [ngValue]="CycleType.Weekly">Wöchentlich</option>
+                  <option [ngValue]="CycleType.Monthly">Monatlich</option>
+                  <option [ngValue]="CycleType.Yearly">Jährlich</option>
+                  <option [ngValue]="CycleType.BiYearly">2-jährig</option>
+                  <option [ngValue]="CycleType.TriYearly">3-jährig</option>
+                  <option [ngValue]="CycleType.QuadYearly">4-jährig</option>
+                  <option [ngValue]="CycleType.PentYearly">5-jährig</option>
+                </select>
+                <fa-icon class="input-icon" [icon]="faChevronDown"></fa-icon>
+              </div>
+            </div>
+          </div>
+        </div>
+     
+      <ng-container >
+        <div class="row mb-2 form-area-background justify-content-center {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+          <div class="col-12 col-lg-6"><h2 class=" mb-0 t-bold t-14">Fälligkeit von (*)</h2></div>
+          <div class="col-12 col-lg-6  text-ltgrey">
+            <div class="row">
+              <div class="col-12">
+                <input type="date" class="inputWhite" formControlName="DateStart" required>
+              </div>
+              <div class="col-12" *ngIf="newTodo.value.Cycle===CycleType">
+                <input type="date" class="inputWhite" formControlName="DateEnd" required>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="loop">
+        <div class="row mb-2 form-area-background justify-content-center {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+          <div class="col-12 col-lg-6"><h2 class=" mb-0 t-bold t-14">Fälligkeit bis (*)</h2></div>
+          <div class="col-12 col-lg-6  text-ltgrey">
+            <div class="row">
+              <div class="col-12">
+                <input type="date" class="inputWhite" formControlName="DateEnd" required>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      
+      <div class="row mb-2 form-area-background justify-content-center {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+        <div class="col-12 col-lg-6"><h2 class=" mb-0 t-bold t-14">Erinnerung</h2></div>
+        <div class="col-12 col-lg-6  text-ltgrey">
+          <div class="row">
+            <div class="col-11">
+              <select formControlName="Notification">
+                <option [ngValue]="NotifyType.Entry">Kalendereintrag</option>
+                <option [ngValue]="NotifyType.EntryHighlight">Kalendereintrag hervorheben</option>
+                <option [ngValue]="NotifyType.Push">Pushnachricht</option>
+                <option [ngValue]="NotifyType.Email">Emailnachricht</option>
+              </select>
+              <fa-icon class="input-icon" [icon]="faChevronDown"></fa-icon>
+            </div>
+          </div>
+        </div>
+      </div>
+     
+      <div class="row mb-2 form-area-background justify-content-center {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+        <div class="col-12 col-lg-6"><h2 class=" mb-0 t-bold t-14">Fotos hochladen</h2></div>
+        <div class="col-12 col-lg-6  text-ltgrey">
+          <div class="row">
+            <div class="col-11">
+              <label class="text-darkgrey diaryImageInput">
+                {{images.length || 0}} Bild(er) ausgewählt
+                <input class="form-control" type="file" accept="image/*, .heic, .heics, .heif, .heifs" (change)="onImageUpload($event)">
+              </label>
+              <fa-icon class="input-icon" [icon]="faChevronDown"></fa-icon>
+            </div>
+            <div class="col-12 px-3 px-md-2">
+              <img *ngFor="let img of images" [src]=img.src alt="img.title" class="uploaded">
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    (*) benötigte Felder
+    <br>
+
+    <button type="submit" [disabled]="newTodo.invalid || invalidImg" class="btn btn-green mt-3 btn_border075 mb-5 text-white" (click)="addTodo()">Speichern</button>
+  </div>
+</div>

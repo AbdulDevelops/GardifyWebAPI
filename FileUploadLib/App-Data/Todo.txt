@@ -1,0 +1,36 @@
+﻿================================== Heute =====================================
++ PDFs auch hochladen können
++ alles umbenennen zu "file-..." 
++ file-list hinzufügen (an jager-drucklufttechnik.de/intern/dateien.aspx)
++ nach Dateityp und Modulname filtern können
++ verschiedene Bildgrößen unterstützen und anzeigen können
++ Skript von den jetzigen Bildern in das neue Format
+
+
+
+
+================================== Später ====================================
+Bildunterschrift für Slider
+Link und AltText hinzufügen
+Bildgrößen für Application manageable machen
+
+partial-tag-helper "skip" einbauen
+
+verschiedene Dateiformate erlauben/verbieten
+- 
+
+Wasserzeichen automatisch einfügen pro Application
+- möglicherweise mehrere?
+- Mit auswahl?
+
+Javascript seitiges manipulieren der Bilder
+- für bestimmte Pixelgrößen
+- für bestimmte Bildschärfe
+
+Überprüfung von minimalen/maximalen Pixelgrößen für Bilder
+
+Sortieren bei Edit
+
+
+================================== Erledigt ====================================
+* Verkleinerte Bilder richtig speichern

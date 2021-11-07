@@ -1,0 +1,2173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_vertical"
+    android:background="@color/scrollView_all_seashell"
+    tools:context=".ui.team.TeamFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TableLayout
+            android:id="@+id/tableLayout_team"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_team_tableLayout"
+            android:layout_marginTop="@dimen/margin_team_tableLayout"
+            android:layout_marginEnd="@dimen/margin_team_tableLayout"
+            android:layout_marginBottom="@dimen/margin_team_tableLayout"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/margin_team_tableRow"
+                android:gravity="center">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView_dr_markus_philippen"
+                    android:layout_width="@dimen/width_team_cardView"
+                    android:layout_height="@dimen/height_team_cardView"
+                    android:layout_marginRight="@dimen/margin_team_tableRow"
+                    app:cardCornerRadius="10dp"
+                    app:layout_constraintStart_toStartOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/imageView_team_imageProfileMarkus"
+                            android:layout_width="@dimen/imageView_team_width_medium"
+                            android:layout_height="@dimen/imageView_team_height_large"
+                            android:layout_marginStart="@dimen/imageView_all_marginStart_8sdp"
+                            android:layout_marginTop="@dimen/imageView_all_marginTop_5sdp"
+                            android:layout_marginEnd="@dimen/imageView_all_marginEnd_8sdp"
+                            android:background="@drawable/gardify_markus_philippen_x"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/imageView_team_logoMarkus"
+                            android:layout_width="@dimen/imageView_team_width_xsmall"
+                            android:layout_height="@dimen/imageView_team_height_20sdp"
+                            android:layout_marginStart="@dimen/imageView_all_marginStart_8sdp"
+                            android:background="@drawable/gardify_team_wissenschaftliche_mitarbeiter"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView_team_nameMarkus"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/imageView_team_imageProfileMarkus" />
+
+                        <TextView
+                            android:id="@+id/textView_team_nameMarkus"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:layout_marginEnd="@dimen/marginPaddingSize_8sdp"
+                            android:gravity="center_vertical"
+                            android:minLines="2"
+                            android:text="@string/team_nameMarkus"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xsmall"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/imageView_team_logoMarkus"
+                            app:layout_constraintTop_toBottomOf="@+id/imageView_team_imageProfileMarkus" />
+
+                        <TextView
+                            android:id="@+id/textView_team_qualificationMarkus"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+                            android:gravity="center_vertical"
+                            android:minLines="2"
+                            android:text="@string/team_qualificationScientificManagement"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xxsmall"
+                            app:layout_constraintEnd_toEndOf="@+id/textView_team_nameMarkus"
+                            app:layout_constraintStart_toStartOf="@+id/imageView_team_logoMarkus"
+                            app:layout_constraintTop_toBottomOf="@+id/textView_team_nameMarkus" />
+
+                        <View
+                            android:id="@+id/view10"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/height_1sdp"
+                            android:layout_marginTop="@dimen/marginPaddingSize_3sdp"
+                            android:background="@color/view_all_divider"
+                            app:layout_constraintEnd_toEndOf="@+id/textView_team_qualificationMarkus"
+                            app:layout_constraintStart_toStartOf="@+id/textView_team_qualificationMarkus"
+                            app:layout_constraintTop_toBottomOf="@+id/textView_team_qualificationMarkus" />
+
+                        <TextView
+                            android:id="@+id/textView_team_favouriteQuoteMarkus"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/marginPaddingSize_3sdp"
+                            android:text="@string/team_quoteMarkus"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xxsmall"
+                            app:layout_constraintEnd_toEndOf="@+id/view10"
+                            app:layout_constraintStart_toStartOf="@+id/view10"
+                            app:layout_constraintTop_toBottomOf="@+id/view10" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView_diplom_bio_jasmin_obholzer"
+                    android:layout_width="@dimen/width_team_cardView"
+                    android:layout_height="@dimen/height_team_cardView"
+                    android:layout_marginLeft="@dimen/margin_team_tableRow"
+                    app:cardCornerRadius="10dp"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/imageView_team_imageProfileJasminO"
+                            android:layout_width="@dimen/imageView_team_width_medium"
+                            android:layout_height="@dimen/imageView_team_height_large"
+                            android:layout_marginStart="@dimen/imageView_all_marginStart_8sdp"
+                            android:layout_marginTop="@dimen/imageView_all_marginTop_5sdp"
+                            android:layout_marginEnd="@dimen/marginPaddingSize_8sdp"
+                            android:src="@drawable/gardify_jasmin_obholzer_x"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/imageView8"
+                            android:layout_width="@dimen/imageView_team_width_xsmall"
+                            android:layout_height="@dimen/imageView_team_height_20sdp"
+                            android:layout_marginStart="@dimen/imageView_all_marginStart_8sdp"
+                            android:src="@drawable/gardify_team_wissenschaftliche_mitarbeiter"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView16"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView16" />
+
+                        <TextView
+                            android:id="@+id/textView16"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/marginPaddingSize_8sdp"
+                            android:gravity="center_vertical"
+                            android:minLines="2"
+                            android:text="@string/team_nameJasmin"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xsmall"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/imageView8"
+                            app:layout_constraintTop_toBottomOf="@+id/imageView_team_imageProfileJasminO" />
+
+                        <TextView
+                            android:id="@+id/textView17"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+                            android:gravity="center_vertical"
+                            android:minLines="2"
+                            android:text="@string/team_qualificationScientificEmployee"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xxsmall"
+                            app:layout_constraintEnd_toEndOf="@+id/textView16"
+                            app:layout_constraintStart_toStartOf="@+id/imageView8"
+                            app:layout_constraintTop_toBottomOf="@+id/textView16" />
+
+                        <View
+                            android:id="@+id/view11"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/height_1sdp"
+                            android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+                            android:background="@color/view_all_divider"
+                            app:layout_constraintEnd_toEndOf="@+id/textView17"
+                            app:layout_constraintStart_toStartOf="@+id/textView17"
+                            app:layout_constraintTop_toBottomOf="@+id/textView17" />
+
+                        <TextView
+                            android:id="@+id/textView22"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/marginPaddingSize_3sdp"
+                            android:text="@string/team_quoteJasmine"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xxsmall"
+                            app:layout_constraintEnd_toEndOf="@+id/view11"
+                            app:layout_constraintStart_toStartOf="@+id/view11"
+                            app:layout_constraintTop_toBottomOf="@+id/view11" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/margin_team_tableRow"
+                android:layout_marginBottom="@dimen/margin_team_tableRow"
+                android:gravity="center">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView_melanie_bayo"
+                    android:layout_width="@dimen/width_team_cardView"
+                    android:layout_height="@dimen/height_team_cardView"
+                    android:layout_marginRight="@dimen/margin_team_tableRow"
+                    app:cardCornerRadius="10dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/imageView9"
+                            android:layout_width="@dimen/imageView_team_width_medium"
+                            android:layout_height="@dimen/imageView_team_height_large"
+                            android:layout_marginStart="@dimen/imageView_all_marginStart_8sdp"
+                            android:layout_marginTop="@dimen/imageView_all_marginTop_5sdp"
+                            android:layout_marginEnd="@dimen/imageView_all_marginEnd_8sdp"
+                            android:src="@drawable/gardify_melanie_bayo_x"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/imageView7"
+                            android:layout_width="@dimen/imageView_team_width_xsmall"
+                            android:layout_height="@dimen/imageView_team_height_20sdp"
+                            android:layout_marginStart="@dimen/imageView_all_marginStart_8sdp"
+                            android:src="@drawable/gardify_team_wissenschaftliche_mitarbeiter"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView23"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView23" />
+
+                        <TextView
+                            android:id="@+id/textView23"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:layout_marginEnd="@dimen/marginPaddingSize_8sdp"
+                            android:gravity="center_vertical"
+                            android:minLines="2"
+                            android:text="@string/team_nameMelanie"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xsmall"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/imageView7"
+                            app:layout_constraintTop_toBottomOf="@+id/imageView9" />
+
+                        <TextView
+                            android:id="@+id/textView24"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/imageView_all_marginTop_5sdp"
+                            android:gravity="center_vertical"
+                            android:minLines="2"
+                            android:text="@string/team_qualificationScientificEmployee"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xxsmall"
+                            app:layout_constraintEnd_toEndOf="@+id/textView23"
+                            app:layout_constraintStart_toStartOf="@+id/imageView7"
+                            app:layout_constraintTop_toBottomOf="@+id/textView23" />
+
+                        <View
+                            android:id="@+id/view12"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/height_1sdp"
+                            android:layout_marginTop="@dimen/marginPaddingSize_3sdp"
+                            android:background="@color/view_all_divider"
+                            app:layout_constraintEnd_toEndOf="@+id/textView24"
+                            app:layout_constraintStart_toStartOf="@+id/textView24"
+                            app:layout_constraintTop_toBottomOf="@+id/textView24" />
+
+                        <TextView
+                            android:id="@+id/textView25"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/marginPaddingSize_3sdp"
+                            android:text="@string/team_quoteMelanie"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xxsmall"
+                            app:layout_constraintEnd_toEndOf="@+id/view12"
+                            app:layout_constraintStart_toStartOf="@+id/view12"
+                            app:layout_constraintTop_toBottomOf="@+id/view12" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView_therese_liouville"
+                    android:layout_width="@dimen/width_team_cardView"
+                    android:layout_height="@dimen/height_team_cardView"
+                    android:layout_marginLeft="@dimen/margin_team_tableRow"
+                    app:cardCornerRadius="10dp"
+                    app:layout_constraintTop_toBottomOf="@id/tableLayout_team">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/imageView10"
+                            android:layout_width="@dimen/imageView_team_width_medium"
+                            android:layout_height="@dimen/imageView_team_height_large"
+                            android:layout_marginStart="@dimen/imageView_all_marginStart_8sdp"
+                            android:layout_marginTop="@dimen/imageView_all_marginTop_5sdp"
+                            android:layout_marginEnd="@dimen/imageView_all_marginEnd_8sdp"
+                            android:src="@drawable/gardify_therese_liouville_x"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/imageView30"
+                            android:layout_width="@dimen/imageView_team_width_xsmall"
+                            android:layout_height="@dimen/imageView_team_height_20sdp"
+                            android:layout_marginStart="@dimen/imageView_all_marginStart_8sdp"
+                            android:src="@drawable/gardify_team_wissenschaftliche_mitarbeiter"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView26"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView26" />
+
+                        <TextView
+                            android:id="@+id/textView26"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:layout_marginEnd="@dimen/marginPaddingSize_8sdp"
+                            android:gravity="center_vertical"
+                            android:minLines="2"
+                            android:text="@string/team_nameTherese"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xsmall"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/imageView30"
+                            app:layout_constraintTop_toBottomOf="@+id/imageView10" />
+
+                        <TextView
+                            android:id="@+id/textView27"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+                            android:gravity="center_vertical"
+                            android:minLines="2"
+                            android:text="@string/team_qualificationScientificEmployee"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xxsmall"
+                            app:layout_constraintEnd_toEndOf="@+id/textView26"
+                            app:layout_constraintStart_toStartOf="@+id/imageView30"
+                            app:layout_constraintTop_toBottomOf="@+id/textView26" />
+
+                        <View
+                            android:id="@+id/view13"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/height_1sdp"
+                            android:layout_marginTop="@dimen/marginPaddingSize_3sdp"
+                            android:background="@color/view_all_divider"
+                            app:layout_constraintEnd_toEndOf="@+id/textView27"
+                            app:layout_constraintStart_toStartOf="@+id/textView27"
+                            app:layout_constraintTop_toBottomOf="@+id/textView27" />
+
+                        <TextView
+                            android:id="@+id/textView28"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/marginPaddingSize_3sdp"
+                            android:text="@string/team_quoteTherese"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xxsmall"
+                            app:layout_constraintEnd_toEndOf="@+id/view13"
+                            app:layout_constraintHorizontal_bias="0.508"
+                            app:layout_constraintStart_toStartOf="@+id/view13"
+                            app:layout_constraintTop_toBottomOf="@+id/view13" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/margin_team_tableRow"
+                android:layout_marginBottom="@dimen/margin_team_tableRow"
+                android:gravity="center">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView_janine_sommer"
+                    android:layout_width="@dimen/width_team_cardView"
+                    android:layout_height="@dimen/height_team_cardView"
+                    android:layout_marginRight="@dimen/margin_team_tableRow"
+                    app:cardCornerRadius="10dp"
+                    app:layout_constraintTop_toBottomOf="@id/cardView_melanie_bayo">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/imageView11"
+                            android:layout_width="@dimen/imageView_team_width_medium"
+                            android:layout_height="@dimen/imageView_team_height_large"
+                            android:layout_marginStart="@dimen/imageView_all_marginStart_8sdp"
+                            android:layout_marginTop="@dimen/imageView_all_marginTop_5sdp"
+                            android:layout_marginEnd="@dimen/imageView_all_marginEnd_8sdp"
+                            android:src="@drawable/gardify_janine_sommer_x"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/imageView31"
+                            android:layout_width="@dimen/imageView_team_width_xsmall"
+                            android:layout_height="@dimen/imageView_team_height_20sdp"
+                            android:layout_marginStart="@dimen/imageView_all_marginStart_8sdp"
+                            android:src="@drawable/gardify_team_wissenschaftliche_mitarbeiter"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView29"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView29" />
+
+                        <TextView
+                            android:id="@+id/textView29"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:layout_marginEnd="@dimen/marginPaddingSize_8sdp"
+                            android:gravity="center_vertical"
+                            android:minLines="2"
+                            android:text="@string/team_nameJanine"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xsmall"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/imageView31"
+                            app:layout_constraintTop_toBottomOf="@+id/imageView11" />
+
+                        <TextView
+                            android:id="@+id/textView30"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+                            android:gravity="center_vertical"
+                            android:minLines="2"
+                            android:text="@string/team_qualificationScientificEmployee"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xxsmall"
+                            app:layout_constraintEnd_toEndOf="@+id/textView29"
+                            app:layout_constraintStart_toStartOf="@+id/imageView31"
+                            app:layout_constraintTop_toBottomOf="@+id/textView29" />
+
+                        <View
+                            android:id="@+id/view14"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/height_1sdp"
+                            android:layout_marginTop="@dimen/marginPaddingSize_3sdp"
+                            android:background="@color/view_all_divider"
+                            app:layout_constraintEnd_toEndOf="@+id/textView30"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="@+id/textView30"
+                            app:layout_constraintTop_toBottomOf="@+id/textView30" />
+
+                        <TextView
+                            android:id="@+id/textView31"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/marginPaddingSize_3sdp"
+                            android:text="@string/team_quoteJanine"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xxsmall"
+                            app:layout_constraintEnd_toEndOf="@+id/view14"
+                            app:layout_constraintStart_toStartOf="@+id/view14"
+                            app:layout_constraintTop_toBottomOf="@+id/view14" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView_jana_adam"
+                    android:layout_width="@dimen/width_team_cardView"
+                    android:layout_height="@dimen/height_team_cardView"
+                    android:layout_marginLeft="@dimen/margin_team_tableRow"
+                    app:cardCornerRadius="10dp"
+                    app:layout_constraintTop_toBottomOf="@+id/cardView_therese_liouville">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/imageView12"
+                            android:layout_width="@dimen/imageView_team_width_medium"
+                            android:layout_height="@dimen/imageView_team_height_large"
+                            android:layout_marginStart="@dimen/imageView_all_marginStart_8sdp"
+                            android:layout_marginTop="@dimen/imageView_all_marginTop_5sdp"
+                            android:layout_marginEnd="@dimen/imageView_all_marginEnd_8sdp"
+                            android:src="@drawable/gardify_jana_adam_x"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/imageView32"
+                            android:layout_width="@dimen/imageView_team_width_xsmall"
+                            android:layout_height="@dimen/imageView_team_height_20sdp"
+                            android:layout_marginStart="@dimen/imageView_all_marginStart_8sdp"
+                            android:src="@drawable/gardify_team_wissenschaftliche_mitarbeiter"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView32"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView32" />
+
+                        <TextView
+                            android:id="@+id/textView32"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="@dimen/marginPaddingSize_8sdp"
+                            android:gravity="center_vertical"
+                            android:minLines="2"
+                            android:text="@string/team_nameJana"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xsmall"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/imageView32"
+                            app:layout_constraintTop_toBottomOf="@+id/imageView12" />
+
+                        <TextView
+                            android:id="@+id/textView33"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+                            android:gravity="center_vertical"
+                            android:minLines="2"
+                            android:text="@string/team_qualificationScientificEmployee"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xxsmall"
+                            app:layout_constraintEnd_toEndOf="@+id/textView32"
+                            app:layout_constraintStart_toStartOf="@+id/imageView32"
+                            app:layout_constraintTop_toBottomOf="@+id/textView32" />
+
+                        <View
+                            android:id="@+id/view15"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/height_1sdp"
+                            android:layout_marginTop="@dimen/marginPaddingSize_3sdp"
+                            android:background="@color/view_all_divider"
+                            app:layout_constraintEnd_toEndOf="@+id/textView33"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="@+id/textView33"
+                            app:layout_constraintTop_toBottomOf="@+id/textView33" />
+
+                        <TextView
+                            android:id="@+id/textView34"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/marginPaddingSize_3sdp"
+                            android:text="@string/team_quoteJana"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xxsmall"
+                            app:layout_constraintEnd_toEndOf="@+id/view15"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="@+id/view15"
+                            app:layout_constraintTop_toBottomOf="@+id/view15" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/margin_team_tableRow"
+                android:layout_marginBottom="@dimen/margin_team_tableRow"
+                android:gravity="center">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView_martha_agnes"
+                    android:layout_width="@dimen/width_team_cardView"
+                    android:layout_height="@dimen/height_team_cardView"
+                    android:layout_marginRight="@dimen/margin_team_tableRow"
+                    app:cardCornerRadius="10dp"
+                    app:layout_constraintTop_toBottomOf="@+id/cardView_janine_sommer">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/imageView13"
+                            android:layout_width="@dimen/imageView_team_width_medium"
+                            android:layout_height="@dimen/imageView_team_height_large"
+                            android:layout_marginStart="@dimen/imageView_all_marginStart_8sdp"
+                            android:layout_marginTop="@dimen/imageView_all_marginTop_5sdp"
+                            android:layout_marginEnd="@dimen/imageView_all_marginEnd_8sdp"
+                            android:src="@drawable/gardify_martha_agnes_x"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/imageView33"
+                            android:layout_width="@dimen/imageView_team_width_xsmall"
+                            android:layout_height="@dimen/imageView_team_height_20sdp"
+                            android:layout_marginStart="@dimen/imageView_all_marginStart_8sdp"
+                            android:src="@drawable/gardify_team_wissenschaftliche_mitarbeiter"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView35"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView35" />
+
+                        <TextView
+                            android:id="@+id/textView35"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="@dimen/marginPaddingSize_8sdp"
+                            android:gravity="center_vertical"
+                            android:minLines="2"
+                            android:text="@string/team_nameMartha"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xsmall"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/imageView33"
+                            app:layout_constraintTop_toBottomOf="@+id/imageView13" />
+
+                        <TextView
+                            android:id="@+id/textView36"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+                            android:gravity="center_vertical"
+                            android:minLines="2"
+                            android:text="@string/team_qualificationScientificEmployee"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xxsmall"
+                            app:layout_constraintEnd_toEndOf="@+id/textView35"
+                            app:layout_constraintStart_toStartOf="@+id/imageView33"
+                            app:layout_constraintTop_toBottomOf="@+id/textView35" />
+
+                        <View
+                            android:id="@+id/view16"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/height_1sdp"
+                            android:layout_marginTop="@dimen/marginPaddingSize_3sdp"
+                            android:background="@color/view_all_divider"
+                            app:layout_constraintEnd_toEndOf="@+id/textView36"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="@+id/textView36"
+                            app:layout_constraintTop_toBottomOf="@+id/textView36" />
+
+                        <TextView
+                            android:id="@+id/textView37"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/marginPaddingSize_3sdp"
+                            android:text="@string/team_quoteMartha"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xxsmall"
+                            app:layout_constraintEnd_toEndOf="@+id/view16"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="@+id/view16"
+                            app:layout_constraintTop_toBottomOf="@+id/view16" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView_vanessa_schmolke"
+                    android:layout_width="@dimen/width_team_cardView"
+                    android:layout_height="@dimen/height_team_cardView"
+                    android:layout_marginLeft="@dimen/margin_team_tableRow"
+                    app:cardCornerRadius="10dp"
+                    app:layout_constraintTop_toBottomOf="@+id/cardView_jana_adam">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/imageView14"
+                            android:layout_width="@dimen/imageView_team_width_medium"
+                            android:layout_height="@dimen/imageView_team_height_large"
+                            android:layout_marginStart="@dimen/imageView_all_marginStart_8sdp"
+                            android:layout_marginTop="@dimen/imageView_all_marginTop_5sdp"
+                            android:layout_marginEnd="@dimen/imageView_all_marginEnd_8sdp"
+                            android:src="@drawable/gardify_vanessa_schmolke_x"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/imageView34"
+                            android:layout_width="@dimen/imageView_team_width_xsmall"
+                            android:layout_height="@dimen/imageView_team_height_20sdp"
+                            android:layout_marginStart="@dimen/imageView_all_marginStart_8sdp"
+                            android:src="@drawable/gardify_team_wissenschaftliche_mitarbeiter"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView38"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView38" />
+
+                        <TextView
+                            android:id="@+id/textView38"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="@dimen/marginPaddingSize_8sdp"
+                            android:gravity="center_vertical"
+                            android:minLines="2"
+                            android:text="@string/team_nameVanessa"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xsmall"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/imageView34"
+                            app:layout_constraintTop_toBottomOf="@+id/imageView14" />
+
+                        <TextView
+                            android:id="@+id/textView54"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+                            android:gravity="center_vertical"
+                            android:minLines="2"
+                            android:text="@string/team_qualificationScientificEmployee"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xxsmall"
+                            app:layout_constraintEnd_toEndOf="@+id/textView38"
+                            app:layout_constraintStart_toStartOf="@+id/imageView34"
+                            app:layout_constraintTop_toBottomOf="@+id/textView38" />
+
+                        <View
+                            android:id="@+id/view17"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/height_1sdp"
+                            android:layout_marginTop="@dimen/marginPaddingSize_3sdp"
+                            android:background="@color/view_all_divider"
+                            app:layout_constraintEnd_toEndOf="@+id/textView54"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="@+id/textView54"
+                            app:layout_constraintTop_toBottomOf="@+id/textView54" />
+
+                        <TextView
+                            android:id="@+id/textView70"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/marginPaddingSize_3sdp"
+                            android:text="@string/team_quoteVanessa"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xxsmall"
+                            app:layout_constraintEnd_toEndOf="@+id/view17"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="@+id/view17"
+                            app:layout_constraintTop_toBottomOf="@+id/view17" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/margin_team_tableRow"
+                android:layout_marginBottom="@dimen/margin_team_tableRow"
+                android:gravity="center">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView_karin_becker"
+                    android:layout_width="@dimen/width_team_cardView"
+                    android:layout_height="@dimen/height_team_cardView"
+                    android:layout_marginRight="@dimen/margin_team_tableRow"
+                    app:cardCornerRadius="10dp"
+                    app:layout_constraintTop_toBottomOf="@+id/cardView_martha_agnes">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/imageView15"
+                            android:layout_width="@dimen/imageView_team_width_medium"
+                            android:layout_height="@dimen/imageView_team_height_large"
+                            android:layout_marginStart="@dimen/imageView_all_marginStart_8sdp"
+                            android:layout_marginTop="@dimen/imageView_all_marginTop_5sdp"
+                            android:layout_marginEnd="@dimen/imageView_all_marginEnd_8sdp"
+                            android:src="@drawable/gardify_karin_becker_x"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/imageView35"
+                            android:layout_width="@dimen/imageView_team_width_xsmall"
+                            android:layout_height="@dimen/imageView_team_height_20sdp"
+                            android:layout_marginStart="@dimen/imageView_all_marginStart_8sdp"
+                            android:src="@drawable/gardify_team_wissenschaftliche_mitarbeiter"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView39"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView39" />
+
+                        <TextView
+                            android:id="@+id/textView39"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="@dimen/marginPaddingSize_8sdp"
+                            android:gravity="center_vertical"
+                            android:minLines="2"
+                            android:text="@string/team_nameKarinB"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xsmall"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/imageView35"
+                            app:layout_constraintTop_toBottomOf="@+id/imageView15" />
+
+                        <TextView
+                            android:id="@+id/textView55"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+                            android:gravity="center_vertical"
+                            android:minLines="2"
+                            android:text="@string/team_qualificationScientificEmployee"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xxsmall"
+                            app:layout_constraintEnd_toEndOf="@+id/textView39"
+                            app:layout_constraintStart_toStartOf="@+id/imageView35"
+                            app:layout_constraintTop_toBottomOf="@+id/textView39" />
+
+                        <View
+                            android:id="@+id/view18"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/height_1sdp"
+                            android:layout_marginTop="@dimen/marginPaddingSize_3sdp"
+                            android:background="@color/view_all_divider"
+                            app:layout_constraintEnd_toEndOf="@+id/textView55"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="@+id/textView55"
+                            app:layout_constraintTop_toBottomOf="@+id/textView55" />
+
+                        <TextView
+                            android:id="@+id/textView71"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/marginPaddingSize_3sdp"
+                            android:text="@string/team_quoteKarinB"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xxsmall"
+                            app:layout_constraintEnd_toEndOf="@+id/view18"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="@+id/view18"
+                            app:layout_constraintTop_toBottomOf="@+id/view18" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView_justyna_schwertner"
+                    android:layout_width="@dimen/width_team_cardView"
+                    android:layout_height="@dimen/height_team_cardView"
+                    android:layout_marginLeft="@dimen/margin_team_tableRow"
+                    app:cardCornerRadius="10dp"
+                    app:layout_constraintTop_toBottomOf="@+id/cardView_vanessa_schmolke">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/imageView16"
+                            android:layout_width="@dimen/imageView_team_width_medium"
+                            android:layout_height="@dimen/imageView_team_height_large"
+                            android:layout_marginStart="@dimen/imageView_all_marginStart_8sdp"
+                            android:layout_marginTop="@dimen/imageView_all_marginTop_5sdp"
+                            android:layout_marginEnd="@dimen/imageView_all_marginEnd_8sdp"
+                            android:src="@drawable/gardify_justyna_schwertner_x"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/imageView36"
+                            android:layout_width="@dimen/imageView_team_width_xsmall"
+                            android:layout_height="@dimen/imageView_team_height_20sdp"
+                            android:layout_marginStart="@dimen/imageView_all_marginStart_8sdp"
+                            android:src="@drawable/gardify_team_grafik"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView40"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView40" />
+
+                        <TextView
+                            android:id="@+id/textView40"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="@dimen/marginPaddingSize_8sdp"
+                            android:gravity="center_vertical"
+                            android:minLines="2"
+                            android:text="@string/team_nameJustyna"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xxsmall"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/imageView36"
+                            app:layout_constraintTop_toBottomOf="@+id/imageView16" />
+
+                        <TextView
+                            android:id="@+id/textView56"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+                            android:gravity="center_vertical"
+                            android:minLines="2"
+                            android:text="@string/team_qualificationManagementGraphic"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xxsmall"
+                            app:layout_constraintEnd_toEndOf="@+id/textView40"
+                            app:layout_constraintStart_toStartOf="@+id/imageView36"
+                            app:layout_constraintTop_toBottomOf="@+id/textView40" />
+
+                        <View
+                            android:id="@+id/view19"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/height_1sdp"
+                            android:layout_marginTop="@dimen/marginPaddingSize_3sdp"
+                            android:background="@color/view_all_divider"
+                            app:layout_constraintEnd_toEndOf="@+id/textView56"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="@+id/textView56"
+                            app:layout_constraintTop_toBottomOf="@+id/textView56" />
+
+                        <TextView
+                            android:id="@+id/textView72"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/marginPaddingSize_3sdp"
+                            android:text="@string/team_quoteJustyna"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xxxsmall"
+                            app:layout_constraintEnd_toEndOf="@+id/view19"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="@+id/view19"
+                            app:layout_constraintTop_toBottomOf="@+id/view19" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/margin_team_tableRow"
+                android:layout_marginBottom="@dimen/margin_team_tableRow"
+                android:gravity="center">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView_carolin_mohr"
+                    android:layout_width="@dimen/width_team_cardView"
+                    android:layout_height="@dimen/height_team_cardView"
+                    android:layout_marginRight="@dimen/margin_team_tableRow"
+                    app:cardCornerRadius="10dp"
+                    app:layout_constraintTop_toBottomOf="@+id/cardView_karin_becker">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/imageView17"
+                            android:layout_width="@dimen/imageView_team_width_medium"
+                            android:layout_height="@dimen/imageView_team_height_large"
+                            android:layout_marginStart="@dimen/imageView_all_marginStart_8sdp"
+                            android:layout_marginTop="@dimen/imageView_all_marginTop_5sdp"
+                            android:layout_marginEnd="@dimen/imageView_all_marginEnd_8sdp"
+                            android:src="@drawable/gardify_caroline_mohr_x"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/imageView37"
+                            android:layout_width="@dimen/imageView_team_width_xsmall"
+                            android:layout_height="@dimen/imageView_team_height_20sdp"
+                            android:layout_marginStart="@dimen/imageView_all_marginStart_8sdp"
+                            android:src="@drawable/gardify_team_grafik"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView41"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView41" />
+
+                        <TextView
+                            android:id="@+id/textView41"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="@dimen/marginPaddingSize_8sdp"
+                            android:gravity="center_vertical"
+                            android:minLines="2"
+                            android:text="@string/team_nameCarolin"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xsmall"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/imageView37"
+                            app:layout_constraintTop_toBottomOf="@+id/imageView17" />
+
+                        <TextView
+                            android:id="@+id/textView57"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+                            android:gravity="center_vertical"
+                            android:minLines="2"
+                            android:text="@string/team_qualificationGraphic"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xxsmall"
+                            app:layout_constraintEnd_toEndOf="@+id/textView41"
+                            app:layout_constraintStart_toStartOf="@+id/imageView37"
+                            app:layout_constraintTop_toBottomOf="@+id/textView41" />
+
+                        <View
+                            android:id="@+id/view20"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/height_1sdp"
+                            android:layout_marginTop="@dimen/marginPaddingSize_3sdp"
+                            android:background="@color/view_all_divider"
+                            app:layout_constraintEnd_toEndOf="@+id/textView57"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="@+id/textView57"
+                            app:layout_constraintTop_toBottomOf="@+id/textView57" />
+
+                        <TextView
+                            android:id="@+id/textView73"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/marginPaddingSize_3sdp"
+                            android:text="@string/team_quoteCaroline"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xxsmall"
+                            app:layout_constraintEnd_toEndOf="@+id/view20"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="@+id/view20"
+                            app:layout_constraintTop_toBottomOf="@+id/view20" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView_ellen_schlueter"
+                    android:layout_width="@dimen/width_team_cardView"
+                    android:layout_height="@dimen/height_team_cardView"
+                    android:layout_marginLeft="@dimen/margin_team_tableRow"
+                    app:cardCornerRadius="10dp"
+                    app:layout_constraintTop_toBottomOf="@+id/cardView_justyna_schwertner">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/imageView18"
+                            android:layout_width="@dimen/imageView_team_width_medium"
+                            android:layout_height="@dimen/imageView_team_height_large"
+                            android:layout_marginStart="@dimen/imageView_all_marginStart_8sdp"
+                            android:layout_marginTop="@dimen/imageView_all_marginTop_5sdp"
+                            android:layout_marginEnd="@dimen/imageView_all_marginEnd_8sdp"
+                            android:src="@drawable/gardify_ellen_schluter_x"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/imageView38"
+                            android:layout_width="@dimen/imageView_team_width_xsmall"
+                            android:layout_height="@dimen/imageView_team_height_20sdp"
+                            android:layout_marginStart="@dimen/imageView_all_marginStart_8sdp"
+                            android:src="@drawable/gardify_team_grafik"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView42"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView42" />
+
+                        <TextView
+                            android:id="@+id/textView42"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="@dimen/marginPaddingSize_8sdp"
+                            android:gravity="center_vertical"
+                            android:minLines="2"
+                            android:text="@string/team_nameEllen"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xsmall"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/imageView38"
+                            app:layout_constraintTop_toBottomOf="@+id/imageView18" />
+
+                        <TextView
+                            android:id="@+id/textView58"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+                            android:gravity="center_vertical"
+                            android:minLines="2"
+                            android:text="@string/team_qualificationGraphic"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xxsmall"
+                            app:layout_constraintEnd_toEndOf="@+id/textView42"
+                            app:layout_constraintStart_toStartOf="@+id/imageView38"
+                            app:layout_constraintTop_toBottomOf="@+id/textView42" />
+
+                        <View
+                            android:id="@+id/view21"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/height_1sdp"
+                            android:layout_marginTop="@dimen/marginPaddingSize_3sdp"
+                            android:background="@color/view_all_divider"
+                            app:layout_constraintEnd_toEndOf="@+id/textView58"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="@+id/textView58"
+                            app:layout_constraintTop_toBottomOf="@+id/textView58" />
+
+                        <TextView
+                            android:id="@+id/textView74"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/marginPaddingSize_3sdp"
+                            android:text="@string/team_quoteEllen"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xxsmall"
+                            app:layout_constraintEnd_toEndOf="@+id/view21"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="@+id/view21"
+                            app:layout_constraintTop_toBottomOf="@+id/view21" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/margin_team_tableRow"
+                android:layout_marginBottom="@dimen/margin_team_tableRow"
+                android:gravity="center">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView_maja_sauvant"
+                    android:layout_width="@dimen/width_team_cardView"
+                    android:layout_height="@dimen/height_team_cardView"
+                    android:layout_marginRight="@dimen/margin_team_tableRow"
+                    app:cardCornerRadius="10dp"
+                    app:layout_constraintTop_toBottomOf="@+id/cardView_carolin_mohr">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/imageView19"
+                            android:layout_width="@dimen/imageView_team_width_medium"
+                            android:layout_height="@dimen/imageView_team_height_large"
+                            android:layout_marginStart="@dimen/imageView_all_marginStart_8sdp"
+                            android:layout_marginTop="@dimen/imageView_all_marginTop_5sdp"
+                            android:layout_marginEnd="@dimen/imageView_all_marginEnd_8sdp"
+                            android:src="@drawable/gardify_maja_sauvant_x"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/imageView39"
+                            android:layout_width="@dimen/imageView_team_width_xsmall"
+                            android:layout_height="@dimen/imageView_team_height_20sdp"
+                            android:layout_marginStart="@dimen/imageView_all_marginStart_8sdp"
+                            android:src="@drawable/gardify_team_grafik"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView43"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView43" />
+
+                        <TextView
+                            android:id="@+id/textView43"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="@dimen/marginPaddingSize_8sdp"
+                            android:gravity="center_vertical"
+                            android:minLines="2"
+                            android:text="@string/team_nameMaja"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xsmall"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/imageView39"
+                            app:layout_constraintTop_toBottomOf="@+id/imageView19" />
+
+                        <TextView
+                            android:id="@+id/textView59"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+                            android:gravity="center_vertical"
+                            android:minLines="2"
+                            android:text="@string/team_qualificationGraphic"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xxsmall"
+                            app:layout_constraintEnd_toEndOf="@+id/textView43"
+                            app:layout_constraintStart_toStartOf="@+id/imageView39"
+                            app:layout_constraintTop_toBottomOf="@+id/textView43" />
+
+                        <View
+                            android:id="@+id/view22"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/height_1sdp"
+                            android:layout_marginTop="@dimen/marginPaddingSize_3sdp"
+                            android:background="@color/view_all_divider"
+                            app:layout_constraintEnd_toEndOf="@+id/textView59"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="@+id/textView59"
+                            app:layout_constraintTop_toBottomOf="@+id/textView59" />
+
+                        <TextView
+                            android:id="@+id/textView75"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/marginPaddingSize_3sdp"
+                            android:text="@string/team_quoteMaja"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xxsmall"
+                            app:layout_constraintEnd_toEndOf="@+id/view22"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="@+id/view22"
+                            app:layout_constraintTop_toBottomOf="@+id/view22" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView_philine_anastasopoulos"
+                    android:layout_width="@dimen/width_team_cardView"
+                    android:layout_height="@dimen/height_team_cardView"
+                    android:layout_marginLeft="@dimen/margin_team_tableRow"
+                    app:cardCornerRadius="10dp"
+                    app:layout_constraintTop_toBottomOf="@+id/cardView_ellen_schlueter">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/imageView20"
+                            android:layout_width="@dimen/imageView_team_width_medium"
+                            android:layout_height="@dimen/imageView_team_height_large"
+                            android:layout_marginStart="@dimen/imageView_all_marginStart_8sdp"
+                            android:layout_marginTop="@dimen/imageView_all_marginTop_5sdp"
+                            android:layout_marginEnd="@dimen/imageView_all_marginEnd_8sdp"
+                            android:src="@drawable/gardify_philine_anastasopoulos_x"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/imageView40"
+                            android:layout_width="@dimen/imageView_team_width_xsmall"
+                            android:layout_height="@dimen/imageView_team_height_20sdp"
+                            android:layout_marginStart="@dimen/imageView_all_marginStart_8sdp"
+                            android:src="@drawable/gardify_team_projektmanagement"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView44"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView44" />
+
+                        <TextView
+                            android:id="@+id/textView44"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="@dimen/marginPaddingSize_8sdp"
+                            android:gravity="center_vertical"
+                            android:minLines="2"
+                            android:text="@string/team_namePhiline"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xsmall"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/imageView40"
+                            app:layout_constraintTop_toBottomOf="@+id/imageView20" />
+
+                        <TextView
+                            android:id="@+id/textView60"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+                            android:gravity="center_vertical"
+                            android:minLines="2"
+                            android:text="@string/team_qualificationProjectManagement"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xxsmall"
+                            app:layout_constraintEnd_toEndOf="@+id/textView44"
+                            app:layout_constraintStart_toStartOf="@+id/imageView40"
+                            app:layout_constraintTop_toBottomOf="@+id/textView44" />
+
+                        <View
+                            android:id="@+id/view23"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/height_1sdp"
+                            android:layout_marginTop="@dimen/marginPaddingSize_3sdp"
+                            android:background="@color/view_all_divider"
+                            app:layout_constraintEnd_toEndOf="@+id/textView60"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="@+id/textView60"
+                            app:layout_constraintTop_toBottomOf="@+id/textView60" />
+
+                        <TextView
+                            android:id="@+id/textView76"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/marginPaddingSize_3sdp"
+                            android:text="@string/team_quotePhiline"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xxsmall"
+                            app:layout_constraintEnd_toEndOf="@+id/view23"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="@+id/view23"
+                            app:layout_constraintTop_toBottomOf="@+id/view23" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/margin_team_tableRow"
+                android:layout_marginBottom="@dimen/margin_team_tableRow"
+                android:gravity="center">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView_valerie_mayer"
+                    android:layout_width="@dimen/width_team_cardView"
+                    android:layout_height="@dimen/height_team_cardView"
+                    android:layout_marginRight="@dimen/margin_team_tableRow"
+                    app:cardCornerRadius="10dp"
+                    app:layout_constraintTop_toBottomOf="@+id/cardView_maja_sauvant">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/imageView21"
+                            android:layout_width="@dimen/imageView_team_width_medium"
+                            android:layout_height="@dimen/imageView_team_height_large"
+                            android:layout_marginStart="@dimen/imageView_all_marginStart_8sdp"
+                            android:layout_marginTop="@dimen/imageView_all_marginTop_5sdp"
+                            android:layout_marginEnd="@dimen/imageView_all_marginEnd_8sdp"
+                            android:src="@drawable/gardify_valerie_mayer_x"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/imageView41"
+                            android:layout_width="@dimen/imageView_team_width_xsmall"
+                            android:layout_height="@dimen/imageView_team_height_20sdp"
+                            android:layout_marginStart="@dimen/imageView_all_marginStart_8sdp"
+                            android:src="@drawable/gardify_team_presse"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView45"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView45" />
+
+                        <TextView
+                            android:id="@+id/textView45"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="@dimen/marginPaddingSize_8sdp"
+                            android:gravity="center_vertical"
+                            android:minLines="2"
+                            android:text="@string/team_nameValerie"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xsmall"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/imageView41"
+                            app:layout_constraintTop_toBottomOf="@+id/imageView21" />
+
+                        <TextView
+                            android:id="@+id/textView61"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+                            android:gravity="center_vertical"
+                            android:minLines="2"
+                            android:text="@string/team_qualificationPress"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xxsmall"
+                            app:layout_constraintEnd_toEndOf="@+id/textView45"
+                            app:layout_constraintStart_toStartOf="@+id/imageView41"
+                            app:layout_constraintTop_toBottomOf="@+id/textView45" />
+
+                        <View
+                            android:id="@+id/view24"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/height_1sdp"
+                            android:layout_marginTop="@dimen/marginPaddingSize_3sdp"
+                            android:background="@color/view_all_divider"
+                            app:layout_constraintEnd_toEndOf="@+id/textView61"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="@+id/textView61"
+                            app:layout_constraintTop_toBottomOf="@+id/textView61" />
+
+                        <TextView
+                            android:id="@+id/textView77"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/marginPaddingSize_3sdp"
+                            android:text="@string/team_quoteValerie"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xxsmall"
+                            app:layout_constraintEnd_toEndOf="@+id/view24"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="@+id/view24"
+                            app:layout_constraintTop_toBottomOf="@+id/view24" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView_annika_steinacker"
+                    android:layout_width="@dimen/width_team_cardView"
+                    android:layout_height="@dimen/height_team_cardView"
+                    android:layout_marginLeft="@dimen/margin_team_tableRow"
+                    app:cardCornerRadius="10dp"
+                    app:layout_constraintTop_toBottomOf="@+id/cardView_philine_anastasopoulos">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/imageView22"
+                            android:layout_width="@dimen/imageView_team_width_medium"
+                            android:layout_height="@dimen/imageView_team_height_large"
+                            android:layout_marginStart="@dimen/imageView_all_marginStart_8sdp"
+                            android:layout_marginTop="@dimen/imageView_all_marginTop_5sdp"
+                            android:layout_marginEnd="@dimen/imageView_all_marginEnd_8sdp"
+                            android:src="@drawable/gardify_annika_steinacker_x"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/imageView42"
+                            android:layout_width="@dimen/imageView_team_width_xsmall"
+                            android:layout_height="@dimen/imageView_team_height_20sdp"
+                            android:layout_marginStart="@dimen/imageView_all_marginStart_8sdp"
+                            android:src="@drawable/gardify_team_social_media"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView46"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView46" />
+
+                        <TextView
+                            android:id="@+id/textView46"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="@dimen/marginPaddingSize_8sdp"
+                            android:gravity="center_vertical"
+                            android:minLines="2"
+                            android:text="@string/team_nameAnnika"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xsmall"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/imageView42"
+                            app:layout_constraintTop_toBottomOf="@+id/imageView22" />
+
+                        <TextView
+                            android:id="@+id/textView62"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+                            android:gravity="center_vertical"
+                            android:minLines="2"
+                            android:text="@string/team_qualificationSocialMedia"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xxsmall"
+                            app:layout_constraintEnd_toEndOf="@+id/textView46"
+                            app:layout_constraintStart_toStartOf="@+id/imageView42"
+                            app:layout_constraintTop_toBottomOf="@+id/textView46" />
+
+                        <View
+                            android:id="@+id/view25"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/height_1sdp"
+                            android:layout_marginTop="@dimen/marginPaddingSize_3sdp"
+                            android:background="@color/view_all_divider"
+                            app:layout_constraintEnd_toEndOf="@+id/textView62"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="@+id/textView62"
+                            app:layout_constraintTop_toBottomOf="@+id/textView62" />
+
+                        <TextView
+                            android:id="@+id/textView78"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/marginPaddingSize_3sdp"
+                            android:text="@string/team_quoteAnnika"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xxsmall"
+                            app:layout_constraintEnd_toEndOf="@+id/view25"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="@+id/view25"
+                            app:layout_constraintTop_toBottomOf="@+id/view25" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/margin_team_tableRow"
+                android:layout_marginBottom="@dimen/margin_team_tableRow"
+                android:gravity="center">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView_katerina_stegemann"
+                    android:layout_width="@dimen/width_team_cardView"
+                    android:layout_height="@dimen/height_team_cardView"
+                    android:layout_marginRight="@dimen/margin_team_tableRow"
+                    app:cardCornerRadius="10dp"
+                    app:layout_constraintTop_toBottomOf="@+id/cardView_valerie_mayer">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/imageView23"
+                            android:layout_width="@dimen/imageView_team_width_medium"
+                            android:layout_height="@dimen/imageView_team_height_large"
+                            android:layout_marginStart="@dimen/imageView_all_marginStart_8sdp"
+                            android:layout_marginTop="@dimen/imageView_all_marginTop_5sdp"
+                            android:layout_marginEnd="@dimen/imageView_all_marginEnd_8sdp"
+                            android:src="@drawable/gardify_katerina_stegemann_x"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/imageView43"
+                            android:layout_width="@dimen/imageView_team_width_xsmall"
+                            android:layout_height="@dimen/imageView_team_height_20sdp"
+                            android:layout_marginStart="@dimen/imageView_all_marginStart_8sdp"
+                            android:src="@drawable/gardify_team_buchhaltung"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView47"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView47" />
+
+                        <TextView
+                            android:id="@+id/textView47"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="@dimen/marginPaddingSize_8sdp"
+                            android:gravity="center_vertical"
+                            android:minLines="2"
+                            android:text="@string/team_nameKaterina"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xsmall"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/imageView43"
+                            app:layout_constraintTop_toBottomOf="@+id/imageView23" />
+
+                        <TextView
+                            android:id="@+id/textView63"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+                            android:gravity="center_vertical"
+                            android:minLines="2"
+                            android:text="@string/team_qualificationAccounting"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xxsmall"
+                            app:layout_constraintEnd_toEndOf="@+id/textView47"
+                            app:layout_constraintStart_toStartOf="@+id/imageView43"
+                            app:layout_constraintTop_toBottomOf="@+id/textView47" />
+
+                        <View
+                            android:id="@+id/view26"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/height_1sdp"
+                            android:layout_marginTop="@dimen/marginPaddingSize_3sdp"
+                            android:background="@color/view_all_divider"
+                            app:layout_constraintEnd_toEndOf="@+id/textView63"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="@+id/textView63"
+                            app:layout_constraintTop_toBottomOf="@+id/textView63" />
+
+                        <TextView
+                            android:id="@+id/textView79"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/marginPaddingSize_3sdp"
+                            android:text="@string/team_quoteKaterina"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xxsmall"
+                            app:layout_constraintEnd_toEndOf="@+id/view26"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="@+id/view26"
+                            app:layout_constraintTop_toBottomOf="@+id/view26" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView_karl"
+                    android:layout_width="@dimen/width_team_cardView"
+                    android:layout_height="@dimen/height_team_cardView"
+                    android:layout_marginLeft="@dimen/margin_team_tableRow"
+                    app:cardCornerRadius="10dp"
+                    app:layout_constraintTop_toBottomOf="@+id/cardView_annika_steinacker">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/imageView24"
+                            android:layout_width="@dimen/imageView_team_width_medium"
+                            android:layout_height="@dimen/imageView_team_height_large"
+                            android:layout_marginStart="@dimen/imageView_all_marginStart_8sdp"
+                            android:layout_marginTop="@dimen/imageView_all_marginTop_5sdp"
+                            android:layout_marginEnd="@dimen/imageView_all_marginEnd_8sdp"
+                            android:src="@drawable/gardify_karl_joest_x"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/imageView44"
+                            android:layout_width="@dimen/imageView_team_width_xsmall"
+                            android:layout_height="@dimen/imageView_team_height_20sdp"
+                            android:layout_marginStart="@dimen/imageView_all_marginStart_8sdp"
+                            android:src="@drawable/gardify_team_programmierung"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView48"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView48" />
+
+                        <TextView
+                            android:id="@+id/textView48"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="@dimen/marginPaddingSize_8sdp"
+                            android:gravity="center_vertical"
+                            android:minLines="2"
+                            android:text="@string/team_nameKarl"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xsmall"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/imageView44"
+                            app:layout_constraintTop_toBottomOf="@+id/imageView24" />
+
+                        <TextView
+                            android:id="@+id/textView64"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+                            android:gravity="center_vertical"
+                            android:minLines="2"
+                            android:text="@string/team_qualificationManagementProgramming"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xxsmall"
+                            app:layout_constraintEnd_toEndOf="@+id/textView48"
+                            app:layout_constraintStart_toStartOf="@+id/imageView44"
+                            app:layout_constraintTop_toBottomOf="@+id/textView48" />
+
+                        <View
+                            android:id="@+id/view27"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/height_1sdp"
+                            android:layout_marginTop="@dimen/marginPaddingSize_3sdp"
+                            android:background="@color/view_all_divider"
+                            app:layout_constraintEnd_toEndOf="@+id/textView64"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="@+id/textView64"
+                            app:layout_constraintTop_toBottomOf="@+id/textView64" />
+
+                        <TextView
+                            android:id="@+id/textView80"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/marginPaddingSize_3sdp"
+                            android:text="@string/team_quoteKarl"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xxsmall"
+                            app:layout_constraintEnd_toEndOf="@+id/view27"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="@+id/view27"
+                            app:layout_constraintTop_toBottomOf="@+id/view27" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/margin_team_tableRow"
+                android:layout_marginBottom="@dimen/margin_team_tableRow"
+                android:gravity="center">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView_karin_k"
+                    android:layout_width="@dimen/width_team_cardView"
+                    android:layout_height="@dimen/height_team_cardView"
+                    android:layout_marginRight="@dimen/margin_team_tableRow"
+                    app:cardCornerRadius="10dp"
+                    app:layout_constraintTop_toBottomOf="@+id/cardView_katerina_stegemann">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/imageView25"
+                            android:layout_width="@dimen/imageView_team_width_medium"
+                            android:layout_height="@dimen/imageView_team_height_large"
+                            android:layout_marginStart="@dimen/imageView_all_marginStart_8sdp"
+                            android:layout_marginTop="@dimen/imageView_all_marginTop_5sdp"
+                            android:layout_marginEnd="@dimen/imageView_all_marginEnd_8sdp"
+                            android:src="@drawable/gardify_karin_kokoschka_x"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/imageView45"
+                            android:layout_width="@dimen/imageView_team_width_xsmall"
+                            android:layout_height="@dimen/imageView_team_height_20sdp"
+                            android:layout_marginStart="@dimen/imageView_all_marginStart_8sdp"
+                            android:src="@drawable/gardify_team_programmierung"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView49"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView49" />
+
+                        <TextView
+                            android:id="@+id/textView49"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="@dimen/marginPaddingSize_8sdp"
+                            android:gravity="center_vertical"
+                            android:minLines="2"
+                            android:text="@string/team_nameKarinK"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xsmall"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/imageView45"
+                            app:layout_constraintTop_toBottomOf="@+id/imageView25" />
+
+                        <TextView
+                            android:id="@+id/textView65"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+                            android:gravity="center_vertical"
+                            android:minLines="2"
+                            android:text="@string/team_qualificationManagementProgramming"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xxsmall"
+                            app:layout_constraintEnd_toEndOf="@+id/textView49"
+                            app:layout_constraintStart_toStartOf="@+id/imageView45"
+                            app:layout_constraintTop_toBottomOf="@+id/textView49" />
+
+                        <View
+                            android:id="@+id/view28"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/height_1sdp"
+                            android:layout_marginTop="@dimen/marginPaddingSize_3sdp"
+                            android:background="@color/view_all_divider"
+                            app:layout_constraintEnd_toEndOf="@+id/textView65"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="@+id/textView65"
+                            app:layout_constraintTop_toBottomOf="@+id/textView65" />
+
+                        <TextView
+                            android:id="@+id/textView81"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/marginPaddingSize_3sdp"
+                            android:text="@string/team_quoteKarinK"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xxsmall"
+                            app:layout_constraintEnd_toEndOf="@+id/view28"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="@+id/view28"
+                            app:layout_constraintTop_toBottomOf="@+id/view28" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView_johanna_hanichen"
+                    android:layout_width="@dimen/width_team_cardView"
+                    android:layout_height="@dimen/height_team_cardView"
+                    android:layout_marginLeft="@dimen/margin_team_tableRow"
+                    app:cardCornerRadius="10dp"
+                    app:layout_constraintTop_toBottomOf="@+id/cardView_karl">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/imageView26"
+                            android:layout_width="@dimen/imageView_team_width_medium"
+                            android:layout_height="@dimen/imageView_team_height_large"
+                            android:layout_marginStart="@dimen/imageView_all_marginStart_8sdp"
+                            android:layout_marginTop="@dimen/imageView_all_marginTop_5sdp"
+                            android:layout_marginEnd="@dimen/imageView_all_marginEnd_8sdp"
+                            android:src="@drawable/gardify_johanna_hanichen_x"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/imageView49"
+                            android:layout_width="@dimen/imageView_team_width_xsmall"
+                            android:layout_height="@dimen/imageView_team_height_20sdp"
+                            android:layout_marginStart="@dimen/imageView_all_marginStart_8sdp"
+                            android:src="@drawable/gardify_team_geschaftsfuhrer"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView50"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView50" />
+
+                        <TextView
+                            android:id="@+id/textView50"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="@dimen/marginPaddingSize_8sdp"
+                            android:gravity="center_vertical"
+                            android:minLines="2"
+                            android:text="@string/team_nameJohonna"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xsmall"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/imageView49"
+                            app:layout_constraintTop_toBottomOf="@+id/imageView26" />
+
+                        <TextView
+                            android:id="@+id/textView66"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+                            android:gravity="center_vertical"
+                            android:minLines="2"
+                            android:text="@string/team_qualificationManagingDirector"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xxsmall"
+                            app:layout_constraintEnd_toEndOf="@+id/textView50"
+                            app:layout_constraintStart_toStartOf="@+id/imageView49"
+                            app:layout_constraintTop_toBottomOf="@+id/textView50" />
+
+                        <View
+                            android:id="@+id/view29"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/height_1sdp"
+                            android:layout_marginTop="@dimen/marginPaddingSize_3sdp"
+                            android:background="@color/view_all_divider"
+                            app:layout_constraintEnd_toEndOf="@+id/textView66"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="@+id/textView66"
+                            app:layout_constraintTop_toBottomOf="@+id/textView66" />
+
+                        <TextView
+                            android:id="@+id/textView82"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/marginPaddingSize_3sdp"
+                            android:text="@string/team_quoteJohanna"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xxsmall"
+                            app:layout_constraintEnd_toEndOf="@+id/view29"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="@+id/view29"
+                            app:layout_constraintTop_toBottomOf="@+id/view29" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/margin_team_tableRow"
+                android:layout_marginBottom="@dimen/margin_team_tableRow"
+                android:gravity="center">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView_andreas_grewe"
+                    android:layout_width="@dimen/width_team_cardView"
+                    android:layout_height="@dimen/height_team_cardView"
+                    android:layout_marginRight="@dimen/margin_team_tableRow"
+                    app:cardCornerRadius="10dp"
+                    app:layout_constraintTop_toBottomOf="@+id/cardView_karin_k">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/imageView27"
+                            android:layout_width="@dimen/imageView_team_width_medium"
+                            android:layout_height="@dimen/imageView_team_height_large"
+                            android:layout_marginStart="@dimen/imageView_all_marginStart_8sdp"
+                            android:layout_marginTop="@dimen/imageView_all_marginTop_5sdp"
+                            android:layout_marginEnd="@dimen/imageView_all_marginEnd_8sdp"
+                            android:src="@drawable/gardify_andreas_grewe_x"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/imageView46"
+                            android:layout_width="@dimen/imageView_team_width_xsmall"
+                            android:layout_height="@dimen/imageView_team_height_20sdp"
+                            android:layout_marginStart="@dimen/imageView_all_marginStart_8sdp"
+                            android:src="@drawable/gardify_team_geschaftsfuhrer"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView51"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView51" />
+
+                        <TextView
+                            android:id="@+id/textView51"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="@dimen/marginPaddingSize_8sdp"
+                            android:gravity="center_vertical"
+                            android:minLines="2"
+                            android:text="@string/team_nameAndreas"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xsmall"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/imageView46"
+                            app:layout_constraintTop_toBottomOf="@+id/imageView27" />
+
+                        <TextView
+                            android:id="@+id/textView67"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+                            android:gravity="center_vertical"
+                            android:minLines="2"
+                            android:text="@string/team_qualificationManagingDirector"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xxsmall"
+                            app:layout_constraintEnd_toEndOf="@+id/textView51"
+                            app:layout_constraintStart_toStartOf="@+id/imageView46"
+                            app:layout_constraintTop_toBottomOf="@+id/textView51" />
+
+                        <View
+                            android:id="@+id/view30"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/height_1sdp"
+                            android:layout_marginTop="@dimen/marginPaddingSize_3sdp"
+                            android:background="@color/view_all_divider"
+                            app:layout_constraintEnd_toEndOf="@+id/textView67"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="@+id/textView67"
+                            app:layout_constraintTop_toBottomOf="@+id/textView67" />
+
+                        <TextView
+                            android:id="@+id/textView83"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/marginPaddingSize_3sdp"
+                            android:text="@string/team_quoteAndreas"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xxsmall"
+                            app:layout_constraintEnd_toEndOf="@+id/view30"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="@+id/view30"
+                            app:layout_constraintTop_toBottomOf="@+id/view30" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView_ralf"
+                    android:layout_width="@dimen/width_team_cardView"
+                    android:layout_height="@dimen/height_team_cardView"
+                    android:layout_marginLeft="@dimen/margin_team_tableRow"
+                    app:cardCornerRadius="10dp"
+                    app:layout_constraintTop_toBottomOf="@+id/cardView_johanna_hanichen">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/imageView28"
+                            android:layout_width="@dimen/imageView_team_width_medium"
+                            android:layout_height="@dimen/imageView_team_height_large"
+                            android:layout_marginStart="@dimen/imageView_all_marginStart_8sdp"
+                            android:layout_marginTop="@dimen/imageView_all_marginTop_5sdp"
+                            android:layout_marginEnd="@dimen/imageView_all_marginEnd_8sdp"
+                            android:src="@drawable/gardify_ralf_joest_x"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/imageView47"
+                            android:layout_width="@dimen/imageView_team_width_xsmall"
+                            android:layout_height="@dimen/imageView_team_height_20sdp"
+                            android:layout_marginStart="@dimen/imageView_all_marginStart_8sdp"
+                            android:src="@drawable/gardify_team_geschaftsfuhrer"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView52"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView52" />
+
+                        <TextView
+                            android:id="@+id/textView52"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="@dimen/marginPaddingSize_8sdp"
+                            android:gravity="center_vertical"
+                            android:minLines="2"
+                            android:text="@string/team_nameRalf"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xsmall"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/imageView47"
+                            app:layout_constraintTop_toBottomOf="@+id/imageView28" />
+
+                        <TextView
+                            android:id="@+id/textView68"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+                            android:gravity="center_vertical"
+                            android:minLines="2"
+                            android:text="@string/team_qualificationManagingDirector"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xxsmall"
+                            app:layout_constraintEnd_toEndOf="@+id/textView52"
+                            app:layout_constraintStart_toStartOf="@+id/imageView47"
+                            app:layout_constraintTop_toBottomOf="@+id/textView52" />
+
+                        <View
+                            android:id="@+id/view31"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/height_1sdp"
+                            android:layout_marginTop="@dimen/marginPaddingSize_3sdp"
+                            android:background="@color/view_all_divider"
+                            app:layout_constraintEnd_toEndOf="@+id/textView68"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="@+id/textView68"
+                            app:layout_constraintTop_toBottomOf="@+id/textView68" />
+
+                        <TextView
+                            android:id="@+id/textView84"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/marginPaddingSize_3sdp"
+                            android:text="@string/team_quoteRalf"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xxsmall"
+                            app:layout_constraintEnd_toEndOf="@+id/view31"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="@+id/view31"
+                            app:layout_constraintTop_toBottomOf="@+id/view31" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/margin_team_tableRow"
+                android:layout_marginBottom="@dimen/margin_team_tableRow"
+                android:gravity="center">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView_bob"
+                    android:layout_width="@dimen/width_team_cardView"
+                    android:layout_height="@dimen/height_team_cardView"
+                    app:cardCornerRadius="10dp"
+                    app:layout_constraintTop_toBottomOf="@+id/cardView_andreas_grewe">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/imageView29"
+                            android:layout_width="@dimen/imageView_team_width_medium"
+                            android:layout_height="@dimen/imageView_team_height_large"
+                            android:layout_marginStart="@dimen/imageView_all_marginStart_8sdp"
+                            android:layout_marginTop="@dimen/imageView_all_marginTop_5sdp"
+                            android:layout_marginEnd="@dimen/imageView_all_marginEnd_8sdp"
+                            android:src="@drawable/gardify_bob_the_digger_x"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/imageView48"
+                            android:layout_width="@dimen/imageView_team_width_xsmall"
+                            android:layout_height="@dimen/imageView_team_height_20sdp"
+                            android:layout_marginStart="@dimen/imageView_all_marginStart_8sdp"
+                            android:src="@drawable/gardify_team_maulwurf"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView53"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView53" />
+
+                        <TextView
+                            android:id="@+id/textView69"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+                            android:gravity="center_vertical"
+                            android:minLines="2"
+                            android:text="@string/team_qualificationSoilAnalysis"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xxsmall"
+                            app:layout_constraintEnd_toEndOf="@+id/textView53"
+                            app:layout_constraintStart_toStartOf="@+id/imageView48"
+                            app:layout_constraintTop_toBottomOf="@+id/textView53" />
+
+                        <TextView
+                            android:id="@+id/textView53"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="@dimen/marginPaddingSize_8sdp"
+                            android:gravity="center_vertical"
+                            android:minLines="2"
+                            android:text="@string/team_nameBob"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xsmall"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/imageView48"
+                            app:layout_constraintTop_toBottomOf="@+id/imageView29" />
+
+                        <View
+                            android:id="@+id/view32"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/height_1sdp"
+                            android:layout_marginTop="@dimen/marginPaddingSize_3sdp"
+                            android:background="@color/view_all_divider"
+                            app:layout_constraintEnd_toEndOf="@+id/textView69"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="@+id/textView69"
+                            app:layout_constraintTop_toBottomOf="@+id/textView69" />
+
+                        <TextView
+                            android:id="@+id/textView85"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/marginPaddingSize_3sdp"
+                            android:text="@string/team_quoteBob"
+                            android:textColor="@color/text_all_black"
+                            android:textSize="@dimen/textSize_body_xxsmall"
+                            app:layout_constraintEnd_toEndOf="@+id/view32"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="@+id/view32"
+                            app:layout_constraintTop_toBottomOf="@+id/view32" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+            </TableRow>
+
+        </TableLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

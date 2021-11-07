@@ -1,0 +1,60 @@
+﻿@model List<GardifyModels.Models.AdminEcoElementViewModel>
+
+@{
+    ViewBag.Title = "Öko-Elemente für Gärten";
+    Layout = "~/Views/Shared/_LayoutAdminArea.cshtml";
+}
+
+<h2>Öko-Elemente für Gärten</h2>
+<p>
+    @Html.ActionLink("Neu erstellen", "Create")
+</p>
+
+<table class="table">
+    <tr>
+        <th>Bild</th>
+        <th>
+            Name
+        </th>
+        <th>
+            Beschreibung
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        
+        <tr>
+            <td>
+                <div class="row">
+                    @if (item.EcoElementsImages != null && item.EcoElementsImages.Any())
+                    {
+                        <div class="image-wrapper col-md-3">
+                            <div class="title-image">
+                                <img title="@item.EcoElementsImages.FirstOrDefault().TitleAttr" src="@item.EcoElementsImages.FirstOrDefault().SrcAttr" alt="@item.EcoElementsImages.FirstOrDefault().AltAttr" />
+                            </div>
+                            @foreach (var img in item.EcoElementsImages.Skip(1))
+                            {
+                                <div class="thumbnail col-md-4">
+                                    <img title="@img.TitleAttr" src="@img.SrcAttr" alt="@img.AltAttr" />
+                                </div>
+                            }
+                        </div>
+                    }
+                </div>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.ActionLink("Bearbeiten", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Löschen", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,4 @@
+﻿@model GardifyModels.Models.PlantSearchViewModel
+@{Html.RenderPartial("_searchResultTable", Model.Plants); }
+<hr />
+@Html.ActionLink("Zuletzt angesehene Pflanzen", "Index", "LastViewed")

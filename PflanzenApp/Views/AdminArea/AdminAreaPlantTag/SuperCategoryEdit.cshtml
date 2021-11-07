@@ -1,0 +1,296 @@
+﻿@model GardifyModels.Models.PlantTagSuperCategory
+
+@{
+    ViewBag.Title = "View";
+    Layout = "~/Views/Shared/_LayoutAdminArea.cshtml";
+}
+
+<h2>Vorhandene Überkategorie ändern</h2>
+<div class="form-horizontal">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            @Html.Label("title", "Deutscher Name", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NameGerman, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NameGerman, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("title", "Botanischer Name", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NameLatin, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NameLatin, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("title", "Synonym", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Synonym, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Synonym, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("title", "Beschreibung", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Description, 6, 80, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Speichern" class="btn btn-default" />
+            </div>
+        </div>
+    }
+
+    <h3>Gruppen in dieser Kategorie</h3>
+    <table class="table">
+        <tr>
+            <th>
+                Name
+            </th>
+            <th></th>
+        </tr>
+        @if (Model != null && Model.Groups.Any())
+        {
+            foreach (var item in Model.Groups)
+            {
+                <tr>
+                    <td class="col-md-10">
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        <a href="~/i/groups/Edit/@item.Id">Bearbeiten</a> |
+                        @Html.ActionLink("Entfernen", "DeleteSuperCategoryGroup", new { groupId = item.Id, catId = Model.Id }, new { @class = "text-danger" })
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="4">Keine Gruppen in dieser Kategorie</td>
+            </tr>
+        }
+    </table>
+    <div>
+        @using (Html.BeginForm("supercategory-add-group", "AdminAreaPlantTag"))
+        {
+            @Html.Hidden("catId", Model.Id)
+            <div class="form-group" id="addGroup">
+                <label class="control-label col-md-2">Neue Gruppe</label>
+                @if (ViewBag.Groups != null)
+                {
+                    <div class="col-md-6">
+                        @Html.DropDownList("groupId", new SelectList(ViewBag.Groups, "Id", "Name"), new { @class = "form-control" })
+                    </div>
+                }
+                <div class="col-md-2">
+                    <input type="submit" name="addGroup" value="Hinzufügen" class="btn btn-default" />
+                </div>
+            </div>
+        }
+    </div>
+
+    <h3>Eigenschaften in dieser Kategorie</h3>
+    <table class="table">
+        <tr>
+            <th>
+                Name
+            </th>
+            <th></th>
+        </tr>
+        @if (Model != null && Model.TagsInThisCategory.Any())
+        {
+            foreach (var item in Model.TagsInThisCategory)
+            {
+                <tr>
+                    <td class="col-md-10">
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        <a href="~/i/plant-tag/Edit/@item.Id">Bearbeiten</a> |
+                        @Html.ActionLink("Entfernen", "DeleteSuperCategoryTag", new { tagId = item.Id, catId = Model.Id }, new { @class = "text-danger" })
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="4">Keine Eigenschaften in dieser Kategorie</td>
+            </tr>
+        }
+    </table>
+    <div>
+        @using (Html.BeginForm("supercategory-add-tag", "AdminAreaPlantTag"))
+        {
+            @Html.Hidden("catId", Model.Id)
+            <div class="form-group" id="addTag">
+                <label class="control-label col-md-2">Neue Eigenschaft</label>
+                @if (ViewBag.Tags != null)
+                {
+                    <div class="col-md-6">
+                        @Html.DropDownList("tagId", new SelectList(ViewBag.Tags, "Id", "Title"), new { @class = "form-control" })
+                    </div>
+                }
+                <div class="col-md-2">
+                    <input type="submit" name="addTag" value="Hinzufügen" class="btn btn-default" />
+                </div>
+            </div>
+        }
+    </div>
+
+    <h3>Zugehörige To-dos</h3>
+    <table class="table">
+        <tr>
+            <th>
+                Name
+            </th>
+            <th></th>
+        </tr>
+        @if (Model != null && Model.Todos.Any())
+        {
+            foreach (var item in Model.Todos)
+            {
+                <tr>
+                    <td class="col-md-10">
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        <a href="~/i/todo/Edit/@item.Id">Bearbeiten</a> |
+                        @Html.ActionLink("Entfernen", "DeleteSuperCategoryTodo", new { todoId = item.Id, catId = Model.Id }, new { @class = "text-danger" })
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="4">Keine Todos in dieser Kategorie</td>
+            </tr>
+        }
+    </table>
+    <div>
+        @using (Html.BeginForm("supercategory-add-todo", "AdminAreaPlantTag"))
+        {
+            @Html.Hidden("catId", Model.Id)
+            <div class="form-group" id="addTodo">
+                <label class="control-label col-md-2">Neue To-do</label>
+                @if (ViewBag.Todos != null)
+                {
+                    <div class="col-md-6">
+                        @Html.DropDownList("todoId", new SelectList(ViewBag.Todos, "Id", "Title"), new { @class = "form-control" })
+                    </div>
+                }
+                <div class="col-md-2">
+                    <input type="submit" name="addTodo" value="Hinzufügen" class="btn btn-default" />
+                </div>
+            </div>
+        }
+    </div>
+
+    <h3>Verknüpfte Bilder</h3>
+    <div class="form-group">
+        <label class="control-label col-md-2"></label>
+        <div class="image-wrapper col-md-10">
+            @if (ViewBag.Images != null && ViewBag.Images.Count > 0)
+            {
+                foreach (var img in ViewBag.Images)
+                {
+                    <div class="tumbnail col-md-3">
+                        <img title="@img.TitleAttr" src="@img.SrcAttr" alt="@img.AltAttr" />
+                        <div class="caption">
+                            <h3>@img.FullTitle</h3>
+                            <p>@img.FullDescription</p>
+                            @using (Html.BeginForm("delete-supercat-image", "AdminAreaPlantTag"))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.Hidden("imageId", (int)img.Id)
+                                @Html.Hidden("catId", Model.Id)
+                                <input type="submit" value="Bild löschen" class="btn btn-default" />
+                            }
+                            <button data-toggle="collapse" href="#editMode@(img.Id)" type="button" class="btn btn-success">Ändern</button>
+                            <div class="collapse" id="editMode@(img.Id)">
+                                @using (Html.BeginForm("edit-supercat-creds", "AdminAreaPlantTag"))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.Hidden("imageId", (int)img.Id)
+                                    @Html.Hidden("catId", Model.Id)
+                                    <input type="text" placeholder="Autor" value="@img.Author" name="imageAuthor" class="form-control" />
+                                    <input type="text" placeholder="Lizenz" value="@img.License" name="imageLicense" class="form-control" />
+                                    <input type="submit" value="Speichern" class="btn btn-success" />
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <p>Noch kein Bild hochgeladen</p>}
+        </div>
+    </div>
+    <h3>Bild hochladen (bis zu 4)</h3>
+    @using (Html.BeginForm("upload-supercat-image", "AdminAreaPlantTag", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.Hidden("catId", Model.Id)
+        <div class="form-group">
+            <label class="control-label col-md-2">Datei auswählen</label>
+            <div class="col-md-10">
+                <input type="file" name="imageFile" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Titel</label>
+            <div class="col-md-10">
+                <input class="form-control" name="imageTitle" type="text" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Bild-Autor</label>
+            <div class="col-md-10">
+                <input class="form-control" name="imageAuthor" type="text" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Lizenz-Quelle</label>
+            <div class="col-md-10">
+                <input class="form-control" name="imageLicense" type="text" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Beschreibung</label>
+            <div class="col-md-10">
+                <textarea class="form-control" name="imageDescription" rows="2" cols="80"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Hochladen" class="btn btn-default" />
+            </div>
+        </div>
+    }
+
+    <hr />
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            @using (Html.BeginForm("supercategory-delete", "AdminAreaPlantTag"))
+            {
+                @Html.AntiForgeryToken()
+                @Html.Hidden("id", Model.Id)
+                <input type="submit" value="Überkategorie Löschen" class="btn btn-danger" />
+            }
+        </div>
+    </div>
+</div>
+
+    <div>
+        @Html.ActionLink("Zurück", "SuperCategoriesIndex")
+    </div>

@@ -1,0 +1,34 @@
+﻿@model GardifyModels.Models.HomeViewModels.StartPageViewModel
+@{
+	ViewBag.Title = "Startseite";
+	Layout = "~/Views/Shared/_NewLayout.cshtml";
+}
+
+<div class="tabs-wrapper">
+	<!-- Nav tabs -->
+	<ul class="nav nav-tabs" role="tablist">
+		<li role="presentation" class="active"><a href="#weather" aria-controls="weather" role="tab" data-toggle="tab">Nachtfrostgefahr <i class="tab-header-warning">!</i></a></li>
+		<li role="presentation"><a href="#news" aria-controls="news" role="tab" data-toggle="tab">News</a></li>	
+	</ul>
+
+	<!-- Tab panes -->
+	<div class="tab-content">
+		<div role="tabpanel" class="tab-pane active" id="weather">
+			<b>ab Donnerstag, den 04.11.2016</b><br />
+			erwartete Temperatur in deinem Garten: -4 &deg;C<br />
+			betrifft: Dahlien (12); Oleander im Topf (1);<br />
+			Olivenbäume im Topf (2; größenabhängig)
+		</div>
+		<div role="tabpanel" class="tab-pane" id="news">News...</div>
+	</div>
+</div>
+
+@section Scripts {
+	
+	<script type="text/javascript">
+		$('#myTabs a').click(function (e) {
+			e.preventDefault()
+			$(this).tab('show')
+		});
+	</script>
+}

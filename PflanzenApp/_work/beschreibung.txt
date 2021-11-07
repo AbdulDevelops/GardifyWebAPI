@@ -1,0 +1,26 @@
+﻿Ein neuer Benutzer gibt am Anfang die Pflanzen ein, die er in seinem Garten hat. Das wird mit MyGarden für einen durchschnittlichen Garten in weniger als 5 Minuten gehen.
+Jetzt schlägt ihm die Anwendung vor, zu den Pflanzen bedingte Warnungen hinzuzufügen, wenn diese bei den entsprechenden Pflanzen hinterlegt sind.
+Warnungen betreffen zum Beispiel Wetterereignisse wie Frost, Hitze, Sturm, zu viel oder zu wenig Feuchtigkeit. Diese Warnungen hat ein Gartenfachmann,
+falls zutreffend, für den Benutzer bereits bei der Pflanze vorkonfiguriert und werden, wenn der Benutzer es wünscht, automatisch bei Vorliegen entsprechender
+Wetterlagen als Warnungen per E-Mail, SMS oder Messenger Nachricht an ihn verschickt.
+Die Anwendung fragt auch, ob Sie für den Nutzer Einträge in seine eigene To-Do-Liste für diese Pflanze erstellen soll. Diese To-Dos für Pflanzen können
+zum Beispiel Rückschnitt oder Düngung sein und werden selbstverständlich von Fachleuten so erstellt, dass der Benutzer diese nur noch übernehmen braucht.
+Ist alles eingegeben, hat der Benutzer mächtige Werkzeuge zur Verfügung, die ihn in seinem Garten unterstützen:
+
+- Ein Kalender zeigt ihm auf einen Blick, wann was erledigt werden sollte. Diese Liste wird aus den einzelnen To-Do’s von den Pflanzen
+  zusammengestellt und kann vom Nutzer beliebig geändert, verschoben oder ergänzt werden. Bei einigen Tätigkeiten helfen ihm Videos dabei, die Dinge richtig zu machen.
+- Bei den einzelnen Pflanzen kann er direkt nachlesen, wie MyGarden-Fachleute empfehlen, diese zum Beispiel zu pflanzen, zu pflegen, zu wässern, zu düngen oder zurückzuschneiden.
+- Er kann aber auch bei der Pflanze in einer Art Tagebuch festhalten, was er wann an dieser Pflanze gemacht hat und zu dem ganzen sogar Fotos hochladen.
+  Regelmäßig fotografiert, entstehen wundervolle Bildergalerien, in denen zu sehen ist, wie sich eine Pflanze über die Zeit entwickelt hat.
+- Tagebucheinträge kann er in der MyGarden-Community freigeben und andere Nutzer können freigegebene Tagebucheinträge kommentieren.
+- Ein Eintrag kann auch an den Pflanzendoktor von MyGarden mit der Bitte um Begutachtung weitergeleitet werden.
+- Zu jeder einzelnen Pflanze im System wird automatisch ein entsprechender Bereich im Forum angelegt, an dem sich Besitzer dieser Pflanzen austauschen können,
+- Aus allen Tagebucheinträgen und eigenen Fotos lässt sich in wenigen Schritten auch eine Gartenhomepage mit eigener Adresse im Netz erstellen, die dann entweder
+  nur an Freunde oder an alle freigegeben werden kann.
+- Wenn Arbeiten anstehen, können benötigte Materialen oft einfach per Click direkt auf der Webseite bestellt werden.
+- Mitarbeit in der Community (Pflanzenbeschreibungen ergänzen, eigene Bilder für die Allgemeinheit freigeben, How-To’s schreiben etc.) lohnt sich, weil es für viele Dinge Punkte gibt.
+  Punkte, die man einsetzen kann, um Produkte günstiger zu erhalten.
+- In der einzigartigen „rückwärtssuchenden“ Pflanzen-Datenbank lassen sich exakt passende Pflanzen passend zum Standort im Garten
+  (Sonne, Halbschatten, Schatten, saurer oder sandiger Boden z. B.), zum Verwendungszweck (Kletterpflanze, Hecke, Topfpflanze, Uferpflanze),
+  oder nach gestalterischen Kriterien wie Blütenfarbe, Blütezeit, Immergrün, Wuchshöhe, Blattfarbe etc.) suchen.
+- Suchergebnisse können auf Wunsch in einer Merkliste gespeichert werden.

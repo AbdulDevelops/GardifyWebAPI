@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/scrollView_all_white">
+
+        <LinearLayout
+            android:id="@+id/linear_layout_eco_scan_top_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/marginPaddingSize_24sdp"
+            android:layout_marginBottom="@dimen/marginPaddingSize_24sdp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/imprint_gardifyAddress"
+                android:textSize="@dimen/textSize_body_medium"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textIsSelectable="true"
+                android:text="E-Mail: info@bjvv.de"
+                android:textSize="@dimen/textSize_body_medium"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textIsSelectable="true"
+                android:text="Internet: www.bjvv.de"
+                android:textSize="@dimen/textSize_body_medium" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/imprint_gardifyImpressumRegistrationDetail"
+                android:textSize="@dimen/textSize_body_medium" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="@string/imprint_liabilityNotice"
+                android:textSize="@dimen/textSize_body_medium"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/imprint_liabilityNoticeText"
+                android:textSize="@dimen/textSize_body_medium"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="@string/imprint_disputeResolution"
+                android:textSize="@dimen/textSize_body_medium"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/imprint_disputeResolutionText"
+                android:textIsSelectable="true"
+                android:layout_marginBottom="@dimen/marginPaddingSize_24sdp"
+                android:textSize="@dimen/textSize_body_medium"/>
+        </LinearLayout>
+
+</ScrollView>

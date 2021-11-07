@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <import type="android.view.View" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/my_garden_todo_expand_icon"
+                android:padding="@dimen/marginPaddingSize_10sdp"
+                android:background="@drawable/ripple_circular"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/expand"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/my_garden_todo_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:fontFamily="@font/source_sans_pro"
+                android:textColor="@color/text_all_gunmetal"
+                android:textSize="@dimen/textSize_body_medium" />
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/checkbox_my_garden_todo"
+                android:layout_width="@dimen/width_height_18sdp"
+                android:layout_height="@dimen/width_height_18sdp"
+                android:background="@drawable/checkbox_layout"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="@dimen/marginPaddingSize_10sdp"
+                android:button="@null" />
+        </LinearLayout>
+
+</layout>

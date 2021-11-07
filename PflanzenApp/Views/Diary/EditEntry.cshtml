@@ -1,0 +1,134 @@
+﻿@model GardifyModels.Models.DiaryViewModels.DiaryEntryViewModel
+
+@{
+	ViewBag.Title = "EditEntry";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Model.StatusMessage != null)
+{
+	Html.RenderPartial("_modalStatusMessage", Model.StatusMessage);
+}
+
+<h2>Tagebucheintrag verändern</h2>
+<div class="form-horizontal">
+	@using (Html.BeginForm())
+	{
+		@Html.AntiForgeryToken()
+		@Html.Hidden("Id", Model.Id)
+		@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+		<div class="form-group">
+			<label class="control-label col-md-2">Titel</label>
+			<div class="col-md-10">
+				@Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+				@Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label col-md-2">Beschreibung</label>
+			<div class="col-md-10">
+				<textarea class="form-control" name="Description" rows="2" cols="80">@Model.Description</textarea>
+				@Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label col-md-2">Datum</label>
+			<div class="col-md-10">
+				@Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
+				@Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-md-offset-2 col-md-10">
+				<input type="submit" value="Speichern" class="btn btn-default" />
+			</div>
+		</div>
+	}
+	@using (Html.BeginForm("DeleteEntry", "Diary"))
+	{
+		<div class="form-group">
+			<div class="col-md-offset-2 col-md-10">
+				@Html.AntiForgeryToken()
+				@Html.Hidden("EntryId", Model.Id)
+				@Html.Hidden("ObjectId", Model.ObjectId)
+				@Html.Hidden("DiaryType", Model.DiaryType)
+				<input type="submit" value="Eintrag löschen" class="btn btn-default" />
+			</div>
+		</div>
+	}
+	<hr />
+	<h4>Verknüpfte Bilder</h4>
+	<div class="form-group">
+		<label class="control-label col-md-2"></label>
+		<div class="image-wrapper col-md-10">
+			@if (Model.EntryImages != null && Model.EntryImages.Any())
+			{
+				foreach (var img in Model.EntryImages)
+				{
+					<div class="tumbnail col-md-3">
+						<img title="@img.TitleAttr" src="@img.SrcAttr" />
+						<div class="caption">
+							<h3>@img.FullTitle</h3>
+							<p>@img.FullDescription</p>
+							@using (Html.BeginForm("delete-diary-entry-image", "Diary"))
+							{
+								@Html.AntiForgeryToken()
+								@Html.Hidden("ImageRefId", img.Id)
+								@Html.Hidden("EntryId", Model.Id)
+								<input type="submit" value="Bild löschen" class="btn btn-default" />
+							}
+						</div>
+					</div>
+				}
+			}
+			else
+			{
+				<p>Noch kein Bild hochgeladen</p>
+			}
+		</div>
+	</div>
+	<h4>Neues Bild hochladen</h4>
+	@using (Html.BeginForm("upload-user-plant-diary-image", "Diary", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+	{
+		@Html.AntiForgeryToken()
+		@Html.Hidden("diaryEntryId", Model.Id)
+		<div class="form-group">
+			<label class="control-label col-md-2">Datei auswählen</label>
+			<div class="col-md-10">
+				<input type="file" name="imageFile" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label col-md-2">Titel</label>
+			<div class="col-md-10">
+				<input class="form-control" name="ImageTitle" type="text" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label col-md-2">Beschreibung</label>
+			<div class="col-md-10">
+				<textarea class="form-control" name="ImageDescription" rows="2" cols="80"></textarea>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-md-offset-2 col-md-10">
+				<input type="submit" value="Hochladen" class="btn btn-default" />
+			</div>
+		</div>
+	}
+</div>
+
+<div>
+	@{
+		switch (Model.DiaryType)
+		{
+			case GardifyModels.Models.ModelEnums.ReferenceToModelClass.UserPlant:
+				@Html.ActionLink("Zurück", "Details", "UserPlant", new { id = Model.ObjectId }, null);
+				break;
+
+			case GardifyModels.Models.ModelEnums.ReferenceToModelClass.Garden:
+				@Html.ActionLink("Zurück", "Details", "Garden", new { id = Model.ObjectId }, null);
+				break;
+		}
+	}
+</div>

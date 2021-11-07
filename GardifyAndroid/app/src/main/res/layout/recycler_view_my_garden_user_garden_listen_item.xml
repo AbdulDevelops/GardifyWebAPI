@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <import type="android.view.View" />
+    </data>
+    <LinearLayout
+        android:id="@+id/linear_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/marginPaddingSize_10sdp"
+        android:paddingRight="@dimen/marginPaddingSize_10sdp"
+        android:paddingTop="@dimen/marginPaddingSize_5sdp"
+        android:paddingBottom="@dimen/marginPaddingSize_5sdp">
+
+            <TextView
+                android:id="@+id/textView_my_garden_listen_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:text="--"
+                android:textSize="@dimen/textSize_body_medium"/>
+
+            <ImageView
+                android:id="@+id/image_view_my_garden_more_options"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/imageView_all_marginEnd_5sdp"
+                android:src="@drawable/ic_more_dots_horizontal"
+                android:background="?attr/selectableItemBackgroundBorderless"/>
+
+            <ImageView
+                android:id="@+id/image_view_my_garden_listen_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/imageView_all_height_18sdp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_baseline_delete_x" />
+        </LinearLayout>
+</layout>

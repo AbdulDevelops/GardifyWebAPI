@@ -1,0 +1,48 @@
+<div class="wrapper {{mode}} {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+    <div class="container pt-3 pb-5 source-sans-pro text-colour">
+        <div class="row mt-5 mb-4">
+            <div class="col-12">
+                <h2 class=" t-26 {{mode === 'light'? 'text-grey' : 'text-white'}}"><span class="t-light">GARDIFY </span><span class="t-bold">TEAM</span></h2>
+            </div>
+        </div>
+        <div class="row mt-5 mb-4 " >
+            <ng-container  *ngFor="let em of employeeList">
+                <div  class="col-12 col-md-4 col-lg-3 mb-3 px-2">
+                    <div class="card rounded p-2">
+                        <div class="card-body pb-0">
+                            <p><img class=" img-fluid" [src]="getEmployeeImage(em.EmployeeId)" alt="card image"></p>
+                           <div class="d-inline-block" style="height: 60px;">
+                            <span><img class=" t-14" [src]="getIconSrc(em.PositionId)" style="height: 40px;margin-right: 0.5rem;
+                                margin-bottom: 2rem;" alt="icon"></span>
+                           </div> 
+                           <div class="d-inline-block">
+                                <span class="t-15 t-light d-inline-block position-relative" style="top: 1px;"><span *ngIf="em.Title">{{em.Title}} </span>{{em.Firstname}}</span><br>
+                                <span class="t-15 t-bold d-inline-block position-relative" style="top: -3px;">{{em.Lastname}}</span>
+                            </div>
+                            <h4 class="card-title t-light t-12-5">{{em.Position}}</h4>
+                            <hr class="my-0" style="background-color: #666; height: 1px; border: 0; opacity: 0.5;">
+                        </div>
+                        <div class="card-footer pt-2"> 
+                            <p *ngIf="em.FavouritPlantLatin || em.FavouritPlantGerman" class="card-text t-12"><span class="t-reg">Lieblingspflanze: </span><span class="t-light t-italic">{{em.FavouritPlantLatin}} </span> <span class="t-light">{{em.FavouritPlantGerman}}</span></p>
+                            <p *ngIf="em.FavouriteCitation" class="card-text t-13"><span class="t-reg">Lieblingszitat: </span><span class="t-light t-italic">{{em.FavouriteCitation}}</span></p>
+
+                        </div>
+                    </div>            
+                </div>
+            </ng-container>
+        </div>
+        <div class="row mt-5 mb-4 text-grey ">
+            <div class="col-12 col-lg-12"><h2 class="text-grey t-reg">Schreib uns!</h2></div>
+            <div class="col-8 mt-3 t-16 ">
+                <p>
+                    Wir freuen uns über deine Nachricht, dein Lob oder deine Kritik. Wir versuchen alle Mails zeitnah zu lesen. Wenn du neue Pflanzen vorschlagen willst oder Fragen an unsere Pflanzen-Doc hast, wende dich bitte an <a href="mailto:team@gardify.de?subject=Kontakt">team@gardify.de</a>.
+                </p>
+            </div>
+            <div class="col-4">
+                <a class="btn btn-secondary text-white btn_border075 t-16 w-75" style="margin-top: 2rem;" href="mailto:team@gardify.de?subject=Kontakt">Kontakt</a>
+            </div>
+
+        </div>
+    </div>
+
+</div>

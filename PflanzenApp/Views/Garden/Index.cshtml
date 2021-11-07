@@ -1,0 +1,195 @@
+﻿@model GardifyModels.Models.GardenViewModels.GardenIndexViewModel
+
+@{
+    ViewBag.Title = "Gartenbereiche";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<b>Ihr Punktestand: @Model.Points</b>
+<h2>Aktuelles Wetter in @Model.City</h2>
+<div class="alert alert-danger" role="alert" style="display:none" id="box_failure">
+    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+    <span class="sr-only">Fehler:</span>
+    Beim Ändern des Datums ist ein Fehler aufgetreten
+</div>
+<div class="alert alert-success" role="alert" style="display:none" id="box_success">
+    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+    <span class="sr-only">Erfolgreich:</span>
+    Das Datum wurde erfolgreich geändert
+</div>
+<table class="table">
+    <tr>
+        <th>Gültig am</th>
+        <th>Temperatur</th>
+        <th>Niederschlag (mm)</th>
+        <th>Luftdruck</th>
+        <th>Luftfeuchtigkeit</th>
+        <th>Windgeschwindigkeit</th>
+    </tr>
+    <tr>
+        @if (Model.CurrentWeather != null)
+        {
+            <td>@Model.CurrentWeather.ValidAt</td>
+            <td>@Model.CurrentWeather.AirTemperature.Value</td>
+            <td>@Model.CurrentWeather.PrecipitationPastInterval.Value</td>
+            <td>@Model.CurrentWeather.AirPressureInHpa</td>
+            <td>@Model.CurrentWeather.RelativeHumidityInPercent100Based</td>
+            <td>@Model.CurrentWeather.AverageWindSpeed.Value</td>}
+        else
+        {
+            <td>Die aktuellen Wetterwerte konnten nicht abgefragt werden.</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        }
+    </tr>
+</table>
+<h2>Meine Todoliste</h2>
+@Html.ActionLink("Neues Todo", "Create", "Todo")
+<br />
+@Html.Partial("_TodoList", Model.TodoList)
+<hr />
+
+<h2>Warnungen</h2>
+<div id="alerts-wrapper">
+    @if (Model.Alerts != null && Model.Alerts.Any())
+    {
+        foreach (var userPlantAlert in Model.Alerts)
+        {
+            <p><b>@userPlantAlert.UserPlantName</b></p>  if (userPlantAlert.AlertViewModels != null && userPlantAlert.AlertViewModels.Any())
+            {
+                foreach (var alert in userPlantAlert.AlertViewModels)
+                {
+                    <div class="row">
+                        <div class="col-md-4">
+                            @alert.Title
+                        </div>
+                        <div class="col-md-4">
+                            @alert.Text
+                        </div>
+                        <div class="col-md-4">
+                            @alert.ReadableCondition
+                        </div>
+                    </div>
+                    <hr />    }
+            }
+            <hr /> }
+    }
+    else
+    {
+        <p>Im Moment sind keine Warnungen vorhanden</p>
+    }
+</div>
+<hr />
+
+<h2>Gartenbereiche</h2>
+<table>
+    @foreach (var item in Model.Gardens)
+    {
+        <tr>
+            <td valign="top">
+                @if (item.Images != null && item.Images.Any())
+                {
+                    <div class="image-wrapper" style="width:300px">
+                        <div class="title-image">
+                            <img title="@item.Images.FirstOrDefault().TitleAttr" src="@item.Images.FirstOrDefault().SrcAttr" alt="@item.Images.FirstOrDefault().AltAttr" />
+                        </div>
+                        @foreach (var img in item.Images.Skip(1))
+                        {
+                            <div class="thumbnail col-md-4">
+                                <img title="@img.TitleAttr" src="@img.SrcAttr" alt="@img.AltAttr" />
+                            </div>
+                        }
+                    </div>
+                }
+            </td>
+            <td valign="top" style="padding-left:40px">
+                <div class="garden-class" gardenid="@Html.DisplayFor(modelItem => item.Id)">
+                    <b>@Html.ActionLink(item.Name, "Details", "Garden", new { id = item.Id }, null)</b>
+                    <div style="margin-left:20px">
+                        @foreach (var userPlant in item.Plants.UserPlants)
+                        {
+                            @Html.ActionLink(userPlant.CustomName, "Details", "UserPlant", new { id = userPlant.Id }, null)
+                            <br />
+                        }
+                    </div>
+                </div>
+            </td>
+
+            <td valign="top" style="padding-left:40px">
+                @*<table class="table">
+                        <tr>
+                            <th>
+                                Pflanze
+                            </th>
+                            <th style="padding-left:20px">
+                                Todo
+                            </th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        @{
+                            int count = 0;
+                            string rowcolour = "D9E6C4";
+                            bool nothing = true;
+                        }
+                        @foreach (var userPlant in item.Plants)
+                        {
+                            foreach (var todo in userPlant.Todos)
+                            {
+                                nothing = false;
+
+                                if (count % 2 == 0)
+                                {
+                                    rowcolour = "D9E6C4";
+                                }
+                                else
+                                {
+                                    rowcolour = "FFFFFF";
+                                }
+                                count++;
+                                <tr style="background-color:#@rowcolour">
+                                    <td>
+                                        @userPlant.Name
+                                    </td>
+                                    <td style="padding-left:20px">
+                                        @todo.Text
+                                    </td>
+                                    @Html.Partial("_TodoTableMarkActions", todo)
+                                </tr>
+                            }
+                        }
+                        @if (nothing)
+                        {
+                            <tr>
+                                <td colspan="4">Es gibt keine TODO's für diesen Gartenbereich</td>
+                            </tr>
+                        }
+                    </table>*@
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <hr />
+            </td>
+        </tr>
+    }
+</table>
+<hr />
+<p>
+    @Html.ActionLink("Neuen Gartenbereich hinzufügen", "Create") |
+    @Html.ActionLink("Nach neuen Pflanzen suchen", "Index", "PlantSearch")
+</p>
+<hr />
+<h2>Merkliste</h2>
+<div id="watchlist_wrapper">
+    @Html.Partial("_Watchlist", (IEnumerable<GardifyModels.Models.WatchlistEntry>)Model.WatchlistEntries)
+</div>
+<div id="modalWrapper"></div>
+
+@section Scripts {
+    @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.min.js")
+}

@@ -1,0 +1,63 @@
+#regCarousel {
+    overflow-y: hidden;
+    max-height: 1000px;
+}
+.carousel-caption {
+    text-align: unset;
+    bottom: 70px;
+}
+img.d-block {
+    height: 500px;
+    object-fit: cover;
+}
+.reg-caption {
+    max-width: 485px;
+    margin: 0 auto;
+}
+.reg-caption.dark {
+    color: white;
+}
+.reg-caption.light {
+    color: #000;
+}
+.btnProp{
+    width: 100%;
+    line-height: 11pt;
+}
+.BoxReg{
+    width: 960px;
+}
+.reg-caption.light .BoxReg{
+    background-color: rgba(255,255,255,0.8);
+}
+.reg-caption.dark .BoxReg{
+    background-color: rgba(50,50,50,0.8);
+}
+input, select {
+    height: 22px;
+    padding: 0;
+    max-width: 210px;
+    line-height: 7pt;
+    background-clip: border-box;
+    border: 1px solid #000 !important;
+    border-bottom: 1px solid #000 !important;
+}
+.reg-caption.light input, .reg-caption.light select {
+    background-color: white !important;
+}
+.reg-caption.dark input, .reg-caption.dark select {
+    background-color: black !important;
+}
+.checkmark.dark { background-color: transparent; border: 2px solid white; }
+.checkmark.light { background-color: transparent; border: 2px solid #494949; }
+
+.forgot-btn {
+    border: none;
+    background: none;
+}
+
+@media (max-width: 700px) {
+    input, select {
+        height: 26px;
+    }
+}

@@ -1,0 +1,89 @@
+.modal-content.dark { background-color: #494949; }
+.modal-content.light { background-color: #fff; }
+
+.btn-secondary {
+    height: 40px;
+    font-weight: 700;
+    font-size: 13pt;
+    color: white;
+    background: #494949;
+    border: none;
+}
+
+.tag-badge {
+    padding: 0.4rem;
+    margin: 0.4rem;
+    background: rgba(122, 157, 52, 0.5);
+    border-radius: 0.4rem;
+    display: inline-block;
+}
+
+.tag-badge:hover {
+    background: rgba(122, 157, 52, 0.6);
+}
+
+.plant-img {
+    height: 250px;
+}
+
+.plant-img img {
+    max-width:100%;
+    max-height:100%;
+    height: 230px;
+    width: 230px;
+    object-fit: cover;
+}
+
+.plant-img .pn-img {
+    max-width: 110px;
+    max-height: 110px;
+    margin: 5px;
+    object-fit: cover;
+}
+
+img.uploaded {
+    height: 60px;
+    width: 60px;
+}
+
+.pic-1 {
+    width: 140px !important;
+    height: 140px !important;
+    border-radius: 0;
+    margin: 0;
+}
+.pic-2 {
+    width: 66px !important;
+    margin: 3rem 2rem !important;
+}
+.pic-3 {
+    width: 140% !important;
+    height: 100% !important;
+    margin-left: -1.6rem;
+    margin-top: -.9rem;
+    object-fit: cover;
+}
+
+.modal-close {
+    position: relative;
+    top: 0.6rem;
+    right: -11.4rem;
+    background: #7a9d33;
+    border-radius: 6rem;
+    opacity: 1;
+}
+
+.modal-header .close {
+    padding: 0rem 0.3rem;
+}
+
+.btn-green {
+    height: 40px;
+    font-weight: 700;
+    font-size: 13pt;
+    color: white;
+    padding: 0 10px;
+}
+.br {
+    border-radius: 0.8rem;
+}

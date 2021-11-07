@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+tools:showIn="navigation_view">
+
+<group android:checkableBehavior="single">
+    <item
+        android:id="@+id/nav_team"
+        android:title="@string/menuActivityMainDrawerFooter_team" />
+    <item
+        android:id="@+id/nav_agb"
+        android:title="@string/menuActivityMainDrawerFooter_agb" />
+    <item
+        android:id="@+id/nav_warenkorb"
+        android:title="@string/menuActivityMainDrawerFooter_shoppingCart" />
+    <item
+        android:id="@+id/nav_wunschliste"
+        android:title="@string/menuActivityMainDrawerFooter_wishList" />
+    <item
+        android:id="@+id/nav_bestellungen"
+        android:title="@string/menuActivityMainDrawerFooter_order" />
+    <item
+        android:id="@+id/nav_settings"
+        android:title="@string/menuActivityMainDrawerFooter_settings" />
+    <item
+        android:id="@+id/nav_newsletter"
+        android:title="@string/menuActivityMainDrawerFooter_newsletter" />
+    <item
+        android:id="@+id/nav_contact"
+        android:title="@string/menuActivityMainDrawerFooter_contact" />
+    <item
+        android:id="@+id/nav_privacy_policy"
+        android:title="@string/menuActivityMainDrawerFooter_privacy" />
+    <item
+        android:id="@+id/nav_imprint"
+        android:title="@string/menuActivityMainDrawerFooter_imprint" />
+    <item
+        android:id="@+id/nav_logout"
+        android:title="@string/menuActivityMainDrawerFooter_logout" />
+</group>
+</menu>

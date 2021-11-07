@@ -1,0 +1,161 @@
+.area-input-container.flex-container {
+    display: flex;
+    align-items: center; /* Vertical center alignment */
+    justify-content: center; /* Horizontal center alignment */
+}
+
+.oko-container{
+    padding-bottom: 0 !important;
+}
+
+.wrapper-oeko.light{
+    background-color: #f0f0f0;
+}
+
+.scan-container .align-bottom{
+    align-items: flex-end;
+}
+
+.scan-container input, .scan-container textarea{
+    background-color: white !important;
+    border: 0 solid transparent !important; 
+    width: 100%;
+}
+
+.area-input-container{
+    background-color: rgb(178, 204, 143);
+    height: 100%;
+
+}
+
+.mat-tooltip-component .mat-tooltip{
+    font-size: 20px;
+}
+
+.info-icon-top{
+    left: -18px; top: 30px;cursor: help;
+}
+
+.info-icon-normal{
+    left: -10px; top: 2px;cursor: help;
+}
+
+.area-input-container .area-input-field{
+    background-color: white !important;
+    border: 0 solid transparent !important; 
+    width: 100%;
+    text-align: center;
+}
+.progress-outer{
+    background-color: white;
+    height: 70px;
+    padding: 15px
+}
+
+.progress-outer .progress-inner{
+    /* background-image: linear-gradient(90deg, red , yellow 45%, green); */
+    height: 100%;
+    width: 100%;
+    position: relative;
+    transition: background-image 0.5s;
+}
+
+.progress-inner.garden-rating{
+    background-image: linear-gradient(90deg, red , yellow 18%, green 42%);
+
+}
+
+.progress-inner.plants-rating{
+    background-image: linear-gradient(90deg, red 8% , yellow 43%, green 78%);
+}
+
+.progress-inner.area-rating-1{
+    background-image: linear-gradient(90deg, red  , yellow 21%, green 44%);
+}
+
+.progress-inner.area-rating-2{
+    background-image: linear-gradient(90deg, red 21% , yellow 47%, green 73%);
+}
+
+.progress-inner.area-rating-3{
+    background-image: linear-gradient(90deg, red 41% , yellow 60%, green 79%);
+}
+
+.progress-inner.area-rating-4{
+    background-image: linear-gradient(90deg, red 51% , yellow 70%, green 89%);
+}
+
+.progress-inner .progress-indicator{
+background-color: rgba(255,255,255,0.7);
+    height: 50px;
+    width: 20px;
+    border: 2px solid black;
+    position: absolute;
+    left: calc(0% - 10px);
+    top: -5px;
+    transition: left 0.5s;
+}
+
+.legend-block{
+    padding-left: 50px;
+    position: relative;
+    font-size: 8pt;
+}
+
+.legend-block span{
+    position: absolute;
+    left: 5px;
+    width: 0;
+    height: 0;
+    top: 2px;
+
+}
+
+.legend-block span.block-1{
+
+    border-top: 7px solid rgba(178, 204, 143, 0.2);
+    border-bottom: 7px solid rgba(178, 204, 143, 0.2);
+    border-left: 20px solid rgba(178, 204, 143, 0.2);
+    border-right: 20px solid rgba(178, 204, 143, 0.2);
+}
+
+.legend-block span.block-2{
+
+    /* border-top: 7px solid rgba(143, 194, 115, 1);
+    border-bottom: 7px solid rgba(143, 194, 115, 0);
+    border-left: 20px solid rgba(143, 194, 115, 1);
+    border-right: 20px solid rgba(143, 194, 115, 0); */
+
+    border-bottom: 7px solid rgba(143, 194, 115, 1);
+    border-top: 7px solid rgba(143, 194, 115, 0);
+    border-right: 20px solid rgba(143, 194, 115, 1);
+    border-left: 20px solid rgba(143, 194, 115, 0);
+}
+
+.legend-block span.block-4{
+    width: 40px;
+    height: 14px;
+    border: 1px solid rgba(143, 194, 115, 1);
+
+}
+
+.legend-block span.block-3{
+    width: 40px;
+    height: 14px;
+    border: 1px solid rgba(143, 194, 115, 1);
+ 
+}
+
+
+.email-textarea{
+    resize: none;
+    background: white;
+    border: 0px;
+    border-radius: 0px;
+
+}
+
+.email-textarea:last-child{
+    padding-bottom: 4rem;
+
+}

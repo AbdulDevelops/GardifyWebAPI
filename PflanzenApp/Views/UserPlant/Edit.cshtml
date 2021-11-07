@@ -1,0 +1,123 @@
+﻿@model GardifyModels.Models.UserPlantViewModels.UserPlantEditViewModel
+
+@{
+	ViewBag.Title = "Pflanzendetails Bearbeiten";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Pflanzendetails Bearbeiten</h2>
+<div class="form-horizontal">
+
+	@using (Html.BeginForm("Edit", "UserPlant", FormMethod.Post, new { enctype = "multipart/form-data" }))
+	{
+		@Html.AntiForgeryToken()
+
+		@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+		@Html.HiddenFor(model => model.Id, new { @Value = Model.Id })
+
+        <div class="form-group">
+            <div class="control-label col-md-2">
+                Name
+            </div>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="control-label col-md-2">
+                Anzahl
+            </div>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Count, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Count, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="control-label col-md-2">
+                Topfpflanze
+            </div>
+            <div class="col-md-10">
+                @Html.CheckBoxFor(model => model.IsInPot, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+		<div class="form-group">
+			<div class="control-label col-md-2">
+				Beschreibung
+			</div>
+			<div class="col-md-10">
+				@Html.TextAreaFor(model => model.Description, 10, 80, new { @class = "form-control" })
+				@Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-md-offset-2 col-md-10">
+				<input type="submit" value="Speichern" class="btn btn-default" />
+			</div>
+		</div>
+	}
+	<h4>Verknüpfte Bilder</h4>
+	<div class="form-group">
+		<label class="control-label col-md-2"></label>
+		<div class="image-wrapper col-md-10">
+			@if (Model.Images != null && Model.Images.Any())
+			{
+				foreach (var img in Model.Images)
+				{
+					<div class="tumbnail col-md-3">
+						<img title="@img.TitleAttr" src="@img.SrcAttr" />
+						<div class="caption">
+							<h3>@img.FullTitle</h3>
+							<p>@img.FullDescription</p>
+							@using (Html.BeginForm("delete-user-plant-image", "UserPlant"))
+							{
+								@Html.AntiForgeryToken()
+								@Html.Hidden("ImageRefId", img.Id)
+								@Html.Hidden("userPlantId", Model.Id)
+								<input type="submit" value="Bild löschen" class="btn btn-default" />
+							}
+						</div>
+					</div>
+				}
+			}
+			else
+			{
+				<p>Noch kein Bild hochgeladen</p>
+			}
+		</div>
+	</div>
+	<h4>Neues Bild hochladen</h4>
+	@using (Html.BeginForm("upload-user-plant-image", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+	{
+		@Html.AntiForgeryToken()
+		@Html.Hidden("userPlantId", Model.Id)
+		<div class="form-group">
+			<label class="control-label col-md-2">Datei auswählen</label>
+			<div class="col-md-10">
+				<input type="file" name="imageFile" />
+			</div>
+		</div>
+			<div class="form-group">
+				<label class="control-label col-md-2">Titel</label>
+				<div class="col-md-10">
+					<input class="form-control" name="ImageTitle" type="text" required="required"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-md-2">Beschreibung</label>
+				<div class="col-md-10">
+					<textarea class="form-control" name="ImageDescription" rows="2" cols="80" required="required"></textarea>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-md-offset-2 col-md-10">
+					<input type="submit" value="Hochladen" class="btn btn-default" />
+				</div>
+			</div>
+	}
+</div>
+
+<div>
+	@Html.ActionLink("Zurück zur Pflanzenübersicht", "Index")
+</div>

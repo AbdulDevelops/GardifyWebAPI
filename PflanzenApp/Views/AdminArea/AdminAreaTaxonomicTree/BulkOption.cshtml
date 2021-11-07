@@ -1,0 +1,114 @@
+﻿@model GardifyModels.Models.AdminAreaViewModels.TaxonomicBulkOptionViewModel
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LayoutAdminArea.cshtml";
+}
+@using GardifyModels.Models
+<h2>Eigenschaften zuordnen oder Todo für  "@Model.Name" setzen</h2>
+
+
+<h2>@*Eigenschaften des gewählten Baumes "@Model.Name" unterliegenden Pflanzen zuordnen*@</h2>
+<div class="form-horizontal">
+
+
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <label class="control-label col-md-2" for="">Eigenschaft</label>
+        <div class="col-md-10">
+            @Html.ActionLink("Eigenschaften", "BulkEdit", "AdminAreaTaxonomicTree", new { treeId = Model.TreeId }, new { @class = "btn btn-default" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2" for="">To-do</label>
+        <div class="col-md-10">
+            @Html.ActionLink("Neu erstellen", "Create", "AdminAreaTodo", new { selectedTaxonId = Model.TreeId }, new { @class = "btn btn-default" })
+
+        </div>
+    </div>
+    <table class="table">
+        <tr>
+            <th>Text</th>
+        </tr>
+
+        @foreach (var item in Model.todoTemplates)
+        {
+            <tr>
+                <td>
+                    <b>@Html.DisplayFor(modelItem => item.Title)</b> 
+                </td>
+                <td>
+                    @Html.ActionLink("Bearbeiten", "Edit","AdminAreaTodo", new { id = item.Id }, null) |
+                    @Html.ActionLink("Löschen", "Delete", "AdminAreaTodo", new { id = item.Id }, null)
+                </td>
+            </tr>
+        }
+
+    </table>
+
+
+
+
+
+    @*<h4>Neues Merkmal hinzufügen</h4>
+        @using (Html.BeginForm("add-characteristic", "AdminAreaTaxonomicTree"))
+        {
+            @Html.AntiForgeryToken()
+            @Html.Hidden("treeId", Model.TreeId)
+            <div class="form-group">
+                <label class="control-label col-md-2" for="">Merkmal</label>
+                <div class="col-md-10">
+                    @Html.DropDownList("characteristicId", new SelectList(Model.characteristicCategories, "id", "title", 0), new { @class = "form-control", @style = "display:inline-block" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.SelectedCharacteristic.Min, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.SelectedCharacteristic.Min, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SelectedCharacteristic.Min, "", new { @class = "text-danger" })
+                </div>
+                @Html.LabelFor(model => model.SelectedCharacteristic.Max, htmlAttributes: new { @class = "control-label col-md-1" })
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.SelectedCharacteristic.Max, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SelectedCharacteristic.Max, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Hinzufügen" class="btn btn-default" />
+                </div>
+            </div>
+        }
+        <h4>Neue Warnung erstellen</h4>
+        @using (Html.BeginForm("add-alert", "AdminAreaTaxonomicTree", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.Hidden("treeId", Model.TreeId)
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.NewAlert, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.NewAlert.Title, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.NewAlert.Title, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">Beschreibung</label>
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.NewAlert.Text, 10, 80, new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Hinzufügen" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }*@
+</div>
+
+<div>
+    @Html.ActionLink("Zurück", "Index", new { taxonId = Model.TreeId })
+</div>

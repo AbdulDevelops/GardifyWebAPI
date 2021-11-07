@@ -1,0 +1,324 @@
+﻿@model GardifyModels.Models.TodoTemplateViewModels.TodoTemplateEditViewModel
+
+@{
+    ViewBag.Title = "Vorlage bearbeiten";
+    Layout = "~/Views/Shared/_LayoutAdminArea.cshtml";
+}
+
+<h2>Vorlage bearbeiten</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+        <div class="form-group">
+            <p class="control-label col-md-2">Titel</p>
+            <div class="col-md-10">
+                @*@Html.DisplayFor(model => model.Title)*@
+                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <p class="control-label col-md-2">Beschreibung</p>
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Description, new { @class = "form-control", rows = 10, cols = 10 })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <p class="control-label col-md-2">Zu erledigen von/am</p>
+            <div class="col-md-10">
+                <select name="DateStartDay" id="DateStartDay" value="@Model.DateStart.Day">
+                    <option value="0">-</option>
+                    <option value="1" selected="@(Model.DateStart.Day == 1 ? true : false)">Anfang</option>
+                    <option value="11" selected="@(Model.DateStart.Day == 11 ? true : false )">Mitte</option>
+                    <option value="21" selected="@(Model.DateStart.Day == 21 ? true : false)">Ende</option>
+                </select>
+                <select name="DateStartMonth" id="DateStartMonth" value="@Model.DateStart.Month">
+                    <option value="0">-</option>
+                    <option value="1" selected="@(Model.DateStart.Month == 1 ? true : false)">Januar</option>
+                    <option value="2" selected="@(Model.DateStart.Month == 2 ? true : false)">Februar</option>
+                    <option value="3" selected="@(Model.DateStart.Month == 3 ? true : false)">März</option>
+                    <option value="4" selected="@(Model.DateStart.Month == 4 ? true : false)">April</option>
+                    <option value="5" selected="@(Model.DateStart.Month == 5 ? true : false)">Mai</option>
+                    <option value="6" selected="@(Model.DateStart.Month == 6 ? true : false)">Juni</option>
+                    <option value="7" selected="@(Model.DateStart.Month == 7 ? true : false)">Juli</option>
+                    <option value="8" selected="@(Model.DateStart.Month == 8 ? true : false)">August</option>
+                    <option value="9" selected="@(Model.DateStart.Month == 9 ? true : false)">September</option>
+                    <option value="10" selected="@(Model.DateStart.Month == 10 ? true : false)">Oktober</option>
+                    <option value="11" selected="@(Model.DateStart.Month == 11 ? true : false)">November</option>
+                    <option value="12" selected="@(Model.DateStart.Month == 12 ? true : false)">Dezember</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group bis">
+            <p class="control-label col-md-2">Zu erledigen bis</p>
+            <div class="col-md-10">
+                <select name="DateEndDay" id="DateEndDay" value="@Model.DateEnd.Day">
+                    <option value="0">-</option>
+                    <option value="1" selected="@(Model.DateEnd.Day == 1 ? true : false)">Anfang</option>
+                    <option value="11" selected="@(Model.DateEnd.Day == 11 ? true : false )">Mitte</option>
+                    <option value="21" selected="@(Model.DateEnd.Day == 21 ? true : false)">Ende</option>
+                </select>
+                <select name="DateEndMonth" id="DateEndMonth" value="@Model.DateEnd.Month">
+                    <option value="0">-</option>
+                    <option value="1" selected="@(Model.DateEnd.Month == 1 ? true : false)">Januar</option>
+                    <option value="2" selected="@(Model.DateEnd.Month == 2 ? true : false)">Februar</option>
+                    <option value="3" selected="@(Model.DateEnd.Month == 3 ? true : false)">März</option>
+                    <option value="4" selected="@(Model.DateEnd.Month == 4 ? true : false)">April</option>
+                    <option value="5" selected="@(Model.DateEnd.Month == 5 ? true : false)">Mai</option>
+                    <option value="6" selected="@(Model.DateEnd.Month == 6 ? true : false)">Juni</option>
+                    <option value="7" selected="@(Model.DateEnd.Month == 7 ? true : false)">Juli</option>
+                    <option value="8" selected="@(Model.DateEnd.Month == 8 ? true : false)">August</option>
+                    <option value="9" selected="@(Model.DateEnd.Month == 9 ? true : false)">September</option>
+                    <option value="10" selected="@(Model.DateEnd.Month == 10 ? true : false)">Oktober</option>
+                    <option value="11" selected="@(Model.DateEnd.Month == 11 ? true : false)">November</option>
+                    <option value="12" selected="@(Model.DateEnd.Month == 12 ? true : false)">Dezember</option>
+                </select>
+            </div>
+        </div>
+        @*<div class="form-group">
+                <p class="control-label col-md-2">Zu erledigen in/am</p>
+                <div class="col-md-10">
+                    @{ Model.DateEnd = DateTime.Now; }
+                    @Html.TextBoxFor(model => model.DateStart, "{0:dd/MM}", new { @class = "form-control datepicker", placeholder = "Bitte Datum Wählen" })
+                    @Html.ValidationMessageFor(model => model.DateStart, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group bis @((int)Model.Cycle > 2 ? "hidden" : "")">
+                <p class="control-label col-md-2">Bis</p>
+                <div class="col-md-10">
+                    @{ Model.DateEnd = DateTime.Now; }
+                    @Html.TextBoxFor(model => model.DateEnd, "{0:dd/MM}", new { @class = "form-control datepicker", placeholder = "Bitte Datum Wählen" })
+                    @Html.ValidationMessageFor(model => model.DateEnd, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+        <div class="form-group">
+            <p class="control-label col-md-2">Wiederholungsart</p>
+            <div class="col-md-10">
+                @Html.DropDownList("Cycle", new List<SelectListItem>(){
+               new SelectListItem() { Text="-",Value="0", Selected = true },
+        new SelectListItem() { Text="Wöchentlich",Value="1" },
+        new SelectListItem() { Text="Monatlich",Value="2" },
+        new SelectListItem() { Text="Jährlich",Value="3" },
+        new SelectListItem() { Text="Alle 2 Jahre",Value="4" } })
+            </div>
+        </div>
+        <div class="form-group">
+            <p class="control-label col-md-2">Gehört zu</p>
+            <div class="col-md-10">
+                @Html.DropDownList("ReferenceTypeValue", new List<SelectListItem>(){
+        new SelectListItem() { Text="Pflanze", Value = "4", Selected = true},
+        new SelectListItem() { Text="Tool",Value="5" }}, new { @onchange = "ondropdownselect(this.value)", @disabled = "true" })
+            </div>
+        </div>
+        <div class="form-group" id="reference-list">
+            <p class="control-label col-md-2">Wähle zugehöriges Objekt</p>
+            <div class="col-md-10" id="dropdowns">
+                <select name="ReferenceId[0]" disabled>
+                    <option value="-1">Bitte auswählen</option>
+                    @foreach (var m in Model.InfoObjects)
+                    {
+                        var select = m.Id == Model.ReferenceId[0] ? "selected" : "";
+                        <option name="@m.Name" value="@m.Id" @select>@m.Name</option>
+                    }
+                </select>
+                @*<button type="button" onclick="addDropdown()">+</button>*@
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Speichern" class="btn btn-default" />
+            </div>
+        </div>
+        <h4>Verknüpfte Shop-Artikeln</h4>
+        <div class="form-group">
+            <div class="image-wrapper col-md-10">
+                @if (ViewBag.ArticleReferences != null)
+                {
+                    <table class="table">
+                        <tr>
+                            <th>
+                                Name
+                            </th>
+                            <th></th>
+                        </tr>
+                        @foreach (GardifyModels.Models.ArticleReference reference in ViewBag.ArticleReferences)
+                        {
+                            <tr>
+                                <td>
+                                    @reference.Article.Name
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Löschen", "DeleteArticleReference", new { articleId = reference.ArticleId, articleReferenceId = Model.Id })
+                                </td>
+                            </tr>
+                        }
+                    </table>
+
+                }
+                else
+                {
+                    <div>
+                        Keine Referenzen verfügbar.
+                    </div>
+                }
+            </div>
+        </div>
+        <h4>Artikeln hinzufügen</h4>
+        @using (Html.BeginForm("AddArticleReference", "AdminAreaTodo"))
+        {
+            @Html.AntiForgeryToken()
+            @Html.Hidden("todotemplateId", Model.Id)
+            <div class="form-group" id="group-plant">
+                <label class="control-label col-md-2">Artikeln</label>
+                @if (ViewBag.ArticlesList != null)
+                {
+                    <div class="col-md-10">
+                        @Html.DropDownList("articleId", new SelectList(ViewBag.ArticlesList, "Id", "Name"), new { @class = "form-control" })
+                    </div>
+                }
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" name="addArticle" value="Hinzufügen" class="btn btn-default" />
+                </div>
+            </div>
+        }
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Zurück zur Übersicht", "Index")
+</div>
+
+@section scripts
+    {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script>
+        var index = 1;
+        function addDropdown() {
+                    console.log('@Url.Action("AddDropDown","AdminAreaTodo")');
+
+            $.ajax({
+                url: '@Url.Action("AddDropDown","AdminAreaTodo")?index='+index,
+            }).done(function (obj) {
+                console.log(obj);
+                index++;
+                $("#dropdowns").append(obj);
+            });
+        }
+    </script>
+
+    <script type="text/javascript">
+
+
+    $(document).ready(() => {
+        //if ($("select[name=Cycle]").val() == 3 || $("select[name=Cycle]").val() == 4) $("body").addClass("hide-year")
+        @if(Model.DateStart.Day < 11)
+        {
+            @:$("#DateStartDay").val("1");
+        }else if(Model.DateStart.Day < 21)
+        {
+            @:$("#DateStartDay").val("11");
+        }else
+        {
+            @:$("#DateStartDay").val("21");
+        }
+        @if(Model.DateEnd.Day < 11)
+        {
+            @:$("#DateEndDay").val("1");
+        }else if(Model.DateEnd.Day < 21)
+        {
+            @:$("#DateEndDay").val("11");
+        }else
+        {
+            @:$("#DateEndDay").val("21");
+        }
+        $("#DateStartMonth").val("@Model.DateStart.Month");
+        $("#DateEndMonth").val("@Model.DateEnd.Month");
+    })
+
+    @*$("select[name=Cycle]").on("change", () => {
+        if ($("select[name=Cycle]").val() == 3 || $("select[name=Cycle]").val() == 4) {
+            $("div.bis").addClass("hidden");
+            $("body").addClass("hide-year");
+        @{ Model.DateEnd = DateTime.Now.AddYears(100); }
+        } else {
+            $("div.bis").removeClass("hidden");
+            $("body").removeClass("hide-year");
+        @{ Model.DateEnd = DateTime.Now; }
+        }
+    });*@
+
+    /* German initialisation for the jQuery UI date picker plugin. */
+    jQuery(function (el) {
+                el.datepicker.regional['de'] = {
+                closeText: 'schließen',
+            prevText: '&#x3c;zurück',
+            nextText: 'Vor&#x3e;',
+            currentText: 'heute',
+            monthNames: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni',
+            'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
+            monthNamesShort: ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun',
+            'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'],
+            dayNames: ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'],
+            dayNamesShort: ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'],
+            dayNamesMin: ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'],
+            weekHeader: 'Wo',
+            dateFormat: 'dd.mm.yy',
+            firstDay: 1,
+            isRTL: false,
+            showMonthAfterYear: false,
+            yearSuffix: ''
+                };
+        $.datepicker.setDefaults($.datepicker.regional['de']);
+            });
+    $(function () { // will trigger when the document is ready
+        $(".datepicker").datepicker($.datepicker.regional["de"]);
+        });
+    $(document).ready(function () {
+            ondropdownselect(@((int)Model.ReferenceType));
+        });
+    function ondropdownselect(index) {
+            var list = $('#reference-list');
+            var dd = $('#ReferenceId');
+            console.log(list);
+            if (index == 0) {
+                list.hide();
+            } else {
+                list.show();
+                removeoptions(dd);
+            @{ int counter = 0;}
+                @foreach (var obj in Model.InfoObjects)
+                {
+                    int modRefType = (int)obj.ReferenceType;
+                    counter++;
+                @:var refType = @modRefType
+                @:if (refType == index){
+                               @:addoption(dd, @obj.Id, "@obj.Name");
+                            @:}
+                                                }
+            dd.val(@Model.ReferenceId[0]);
+        }
+    }
+
+    function addoption(dropdown, index, text) {
+        var newOption = "<option value='" + index + "'>"+text+"</option>";
+        dropdown.append(newOption);
+    }
+
+    function removeoptions(dropdown) {
+        $(dropdown).find("option").remove();
+    }
+
+    </script>
+}

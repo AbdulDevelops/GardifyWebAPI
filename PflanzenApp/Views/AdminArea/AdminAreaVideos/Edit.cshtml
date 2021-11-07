@@ -1,0 +1,62 @@
+﻿@model GardifyModels.Models.VideoEntryViewModel
+
+@{
+	ViewBag.Title = "Video ändern";
+	Layout = "~/Views/Shared/_LayoutAdminArea.cshtml";
+}
+<h2>Video ändern</h2>
+<div class="form-horizontal">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken();
+        @Html.Hidden("id", Model.Id);
+        <div class="form-group">
+            <label for="title" class="control-label col-md-2">Titel</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="subtitle" class="control-label col-md-2">Thema</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SubTitle, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SubTitle, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="text" class="control-label col-md-2">Text</label>
+            <div class="col-md-10">
+                <textarea class="form-control" name="text" rows="5" cols="80">@Model.Text</textarea>
+                @Html.ValidationMessageFor(model => model.Text, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="author" class="control-label col-md-2">YouTube-Link</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.YTLink, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.YTLink, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Speichern" class="btn btn-default" />
+            </div>
+        </div>
+    }
+    @using (Html.BeginForm("delete-news-entry", "AdminAreaNews"))
+    {
+        @Html.AntiForgeryToken()
+        @Html.Hidden("entryId", Model.Id)
+        <br />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Löschen" class="btn btn-danger" />
+            </div>
+        </div>
+    }
+</div>
+<p>
+	@Html.ActionLink("Zurück", "Index")
+</p>

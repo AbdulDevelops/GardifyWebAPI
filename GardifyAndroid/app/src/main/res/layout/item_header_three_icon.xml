@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="horizontal"
+        android:foreground="?android:attr/selectableItemBackground">
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:gravity="bottom"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textColor="@color/text_all_gunmetal"
+            tools:text="This is text here" />
+
+        <ImageView
+            android:id="@+id/image_one"
+            android:layout_width="@dimen/imageView_all_width_18sdp"
+            android:layout_height="@dimen/imageView_all_height_18sdp"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="@dimen/marginPaddingSize_10sdp"
+            android:tintMode="@color/imageView_all_dawn"
+            android:src="@mipmap/ic_launcher"/>
+        <View
+            android:layout_width="1dp"
+            android:layout_height="@dimen/width_height_18sdp"
+            android:layout_gravity="center_vertical" />
+
+        <ImageView
+            android:id="@+id/image_two"
+            android:layout_width="@dimen/imageView_all_width_18sdp"
+            android:layout_height="@dimen/imageView_all_height_18sdp"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="@dimen/marginPaddingSize_10sdp"
+            android:backgroundTint="@color/imageView_all_dawn"
+            android:src="@mipmap/ic_launcher"/>
+        <View
+            android:layout_width="1dp"
+            android:layout_height="@dimen/width_height_18sdp"
+            android:layout_gravity="center_vertical" />
+
+        <ImageView
+            android:id="@+id/image_three"
+            android:layout_width="@dimen/imageView_all_width_18sdp"
+            android:layout_height="@dimen/imageView_all_height_18sdp"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="@dimen/marginPaddingSize_10sdp"
+            android:backgroundTint="@color/imageView_all_dawn"
+            android:src="@mipmap/ic_launcher"/>
+    </LinearLayout>
+</layout>

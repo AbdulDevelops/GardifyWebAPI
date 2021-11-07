@@ -1,0 +1,67 @@
+﻿@model GardifyModels.Models.AdminAreaViewModels.PlantTagViewModel
+
+@{
+    ViewBag.Title = "Edit tag";
+    Layout = "~/Views/Shared/_LayoutAdminArea.cshtml";
+}
+
+<h2>Vorhandenes Tag ändern</h2>
+<div class="form-horizontal">
+    <hr />
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.PlantTag.Id)
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="plantTag.categoryId">
+                Kategorie
+            </label>
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.PlantTag.CategoryId, new SelectList(Model.CategoryList, "id", "title", Model.PlantTag.CategoryId), new { @class = "form-control", @style = "display:inline-block", @onchange = "changeCategory(this.value)" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="plantTag.title">
+                Name
+            </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PlantTag.Title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PlantTag.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="plantTag.tagImage">
+                Bilddatei
+            </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PlantTag.TagImage, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PlantTag.TagImage, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Speichern" class="btn btn-default" />
+            </div>
+        </div>
+    }
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            @using (Html.BeginForm("Delete", "AdminAreaPlantTag"))
+            {
+                @Html.AntiForgeryToken()
+                @Html.Hidden("id", Model.PlantTag.Id)
+                @Html.Hidden("categoryId", Model.PlantTag.CategoryId)
+                <input type="submit" value="Löschen" class="btn btn-default" />
+            }
+        </div>
+    </div>
+</div>
+
+<div>
+    @Html.ActionLink("Zurück", "Index", new { categoryId = Model.PlantTag.CategoryId })
+</div>

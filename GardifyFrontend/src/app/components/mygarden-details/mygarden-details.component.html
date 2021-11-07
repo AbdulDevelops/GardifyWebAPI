@@ -1,0 +1,1072 @@
+<div class="row" >
+  <div class="col-1" style="top:0;">
+    <app-ad [ad]="adSides"></app-ad>
+  </div>
+  <div class="col-10" >
+    <div class="overlay-loading" [hidden]="!loading">
+      <svg class="spinner position-relative" viewBox="25 25 50 50">
+        <circle class="path" cx="50" cy="50" r="24" fill="none" stroke-width="2" stroke-miterlimit="10" />
+      </svg>
+    </div>
+    <!-- <div class="wrapper pt-5 overflow-hidden {{mode}} pb-5" *ngIf="garden.Id"> -->
+      <div class="wrapper pt-5 overflow-hidden {{mode}} pb-5" >
+      <div class="container">
+        <div class="row col-12">
+          <app-ad [ad]="ad" ></app-ad>
+        </div>  
+       
+    
+      
+        <div class="row mb-2 px-1">
+          <div class="col-12 col-md-3 px-1 text-darkgrey text-center">
+            <div class="col-12 px-1  btn_border075 btn-list t-bold "style="height: 40px;"  [ngClass]="{'bg-greenforest':showGarden,'text-white':showGarden, 'bg-white':!showGarden}">
+              <h2 *ngIf="currentList" (click)="navigateToMyPlants();currentList=!currentList"
+                class="ptr d-inline-block t-bold t-16 m-1">
+                {{currentListName}} ({{listTotalItem}})
+              </h2>
+              <h2 *ngIf="!currentList"
+                class="d-inline-block t-bold t-16 ptr m-1" (click)="navigateToMyPlants()">
+                Pflanzen ({{plantsCount.Sorts}}/{{plantsCount.Total}})
+              </h2>
+            
+            </div>
+          </div>
+          <div class="col-12 col-md-3 px-1 text-darkgrey text-center " >
+            
+            <div class="col-12 px-1 btn_border075 btn-list t-bold" [ngClass]="{'bg-greenish':showDevicelist, 'bg-white':!showDevicelist}" style="height: 40px;">
+              <div class="d-flex">
+                <div class="mr-auto">
+                  <h2 class="ptr d-inline-block t-bold t-16 m-1" [ngClass]="{'text-white':showDevicelist}" [routerLink]="'/meingarten/myDevices/'+garden.Id">
+                    Geräte ({{deviceCount}})
+                  </h2>
+                  
+                </div>
+                <div>
+                  <span class="ptr d-inline-block t-reg t-16 ml-2" (click)="showAddDevMenu = !showAddDevMenu; showLists = false" 
+                  data-toggle="tooltip" data-placement="top"
+                  [routerLink]="'/meingarten/myDevices/'+garden.Id">
+                  <img src="assets/images/Mein_Garten_Meine_Pflanzen_Hinzufügen_X.svg" style="height: 25px; " >
+                </span>
+                </div>
+              </div>
+              
+              <div class="d-flex btn-group ">
+                
+                <ng-container *ngIf="showAddDevMenu">
+                  <div (mouseleave)="showAddDevMenu=false">
+                    
+                   
+                    <ul class="dropdown-list {{mode}} ">
+                      <li> 
+                        
+                        <div class="dropdown dropright">
+                          <span type="button" class=" dropdown-toggle" data-toggle="dropdown" >
+                            Neues Gerät/Zubehör hinzufügen                         
+                           </span>
+                          <form class="dropdown-menu" >
+                            <mat-selection-list #devices [(ngModel)]="selectedDevices" (ngModelChange)="onSelectDeviceNgModelChange($event)" name="selectedDevices" >
+                              <mat-list-option *ngFor="let device of listOfDevices" class="dropdown-item" [value]="device">
+                                {{device.Name}}
+                              </mat-list-option>
+                            </mat-selection-list>
+                            
+                            <a class="ptr t-12 mt-4 {{mode === 'light'? 'text-blackish' : 'text-white'}} dropdown-item" > <button class="btn btn-green text-white btn_border075 " style="width: 200px;" (click)="addAdminDevice = false; showAddDevMenu = false; postSelectedDevice()" >Hinzufügen</button></a>
+
+                          </form>
+                        </div>  
+                      </li>
+                      <li>
+                        <div class="dropdown dropright">
+                          <span type="button" class=" dropdown-toggle" data-toggle="dropdown" >
+                            Eigenes Gerät/Zubehör hinzufügen                         
+                           </span>
+                          <div class="dropdown-menu" >
+                            <a class="dropdown-item"><input id="add" type="search"   class="form-control text-input t-12"></a>
+                            <a class="ptr t-12 mt-4 {{mode === 'light'? 'text-blackish' : 'text-white'}} dropdown-item" > <button class="btn btn-green text-white btn_border075 " style="width: 200px;" (click)="addAdminDevice = false; showAddDevMenu = false">Hinzufügen</button></a>
+
+                          </div>
+                        </div>  
+                      </li>
+                     
+                  </ul>
+                  </div>
+                </ng-container>
+               
+
+              </div>
+              
+              
+            </div>
+          </div>
+          <div class="col-12 col-md-3 px-1 text-darkgrey text-center ">
+            <div class="col-12 px-1 btn_border075 btn-list t-bold" [ngClass]="{'bg-green':showChecklist,'text-white':showChecklist, 'bg-white':!showChecklist}" style="height: 40px;">
+              <div class="d-flex">
+                <div class="mr-auto">
+                  <h2 class="ptr t-bold t-16 m-1" [routerLink]="'/meingarten/ecolist'">
+                    Öko-Elemente ({{ecoCount}})
+                  </h2>
+                </div>
+                <!-- <div>
+                  <img src="assets/images/Mein_Garten_Meine_Pflanzen_Hinzufügen_X.svg" style="height: 25px; " >
+                </div> -->
+              </div>
+              
+            </div>
+          </div>
+          <div class="col-12 col-md-3 px-1 text-darkgrey text-center btn_border075">
+            <div class="col-12 px-1  btn_border075 btn-list"[ngClass]="{'bg-green':showChecklist,'text-white':showChecklist, 'bg-white':!showChecklist}" style="height: 40px;">
+              <div class="ptr d-inline-block t-bold t-16  d-flex" (click)="showLists = !showLists ; showAddMenu = false" 
+              data-toggle="tooltip" data-placement="top">
+                <div class="mr-auto">
+                  Listen
+                </div>
+                <div>
+                  <img src="assets/images/Mein_Garten_Meine_Pflanzen_Hinzufügen_X.svg" style="height: 25px; " >
+                </div>
+              </div>
+             
+              
+              <ng-container *ngIf="showLists">
+                <ul class="dropdown-list {{mode}}" (mouseleave)="showLists = false">
+                  <li class="ptr" (click)="navigateToMyPlants()">
+                    <div class="d-flex">
+                      <div class="mr-auto">
+                        Meine Pflanzen
+
+                      </div>
+                      <div></div>
+                    </div>
+                  </li>
+                  <!-- <li *ngIf="!showDevicelist" class="ptr" [routerLink]="'/meingarten/myDevices/'+garden.Id">Geräte und Zubehör</li>
+                  <li class="ptr" [routerLink]="'/warnungen'">Frost- & Sturmwarnungen</li> -->
+                  <li class="ptr" *ngFor="let list of lists">
+                    <div class="d-flex">
+                      <div class="mr-auto">
+                        <span (click)="viewListWithListId(list);showLists = false;hiddeFilter=true; showPlantInList=true;currentList=list">{{list.Name}}</span>
+                      </div>
+                      
+                      <div class="px-2">
+                        <span (click)="selectedList=list" title="Edit Listname" class="t-15  ptr" data-toggle="modal" data-target="#editList">
+                          <img src="assets/images/Mein_Garten_Bearbeiten Punkte.svg" style="height: 15px; ">
+                        </span>
+                      </div>
+                      <div class="px-2">
+                        <span class="ptr t-bold float-right t-16" data-toggle="modal" data-target="#deleteList"(click)="selectedList=list"
+                          title="Liste löschen"><img src="assets/images/Löschen_rot.svg" style="height: 10px; "></span>
+                      </div>
+                    </div>
+                  </li>
+                  
+                  <li >
+                    <div class="d-flex">
+                      <div class="mr-auto">
+                        <span >Neue Liste erstellen</span>
+                      </div>
+                      <div class="px-2">
+                        <img src="assets/images/Mein_Garten_Meine_Pflanzen_Hinzufügen_X.svg" class="ptr" data-toggle="modal" data-target="#newList" style="height: 10px; " >
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-5 {{mode}}">
+          <div class="col-12">
+              <h2><span class="t-bold">MEIN </span> <span class="t-reg">GARTEN</span></h2>
+          </div>
+         <div class="col-12">
+           <div class="d-flex">
+              <div *ngIf="showGarden" class="mr-auto t-bold t-16">Meine Pflanzen</div>
+              <div *ngIf="showDevicelist" class="mr-auto t-bold t-16">Meine Geräte</div>
+              <div *ngIf="showChecklist" class="mr-auto t-bold t-16">Öko-Elemente</div>
+              <div *ngIf="showGarden" class="m-2 "> 
+                <span class="ptr"> <img src="assets/images/Mein_Garten_Meine_Pflanzen_Hinzufügen_X.svg" style="height: 25px; "  (click)="showAddMenu = !showAddMenu " data-toggle="tooltip" data-placement="top"></span>
+              
+                <ng-container *ngIf="showAddMenu">
+                  <ul class="dropdown-list {{mode}}" (mouseleave)="showAddMenu = false">
+                    <li class="ptr t-12 {{mode === 'light'? 'text-blackish' : 'text-white'}}" [routerLink]="['/suche']">Pflanze hinzufügen über Pflanzenliste</li>
+                    <li class="ptr t-12 {{mode === 'light'? 'text-blackish' : 'text-white'}}" [routerLink]="['/scanner']">Pflanze hinzufügen über Pflanzenscan</li>
+                  </ul>
+                </ng-container>
+              </div>
+              <div *ngIf="showGarden" class="m-2">
+                <span class="ptr"> <img src="assets/images/Mein_Garten_Meine_Pflanzen_Filter_X.svg" style="height: 25px; "(click)="showFilterMenu = !showFilterMenu " data-toggle="tooltip" data-placement="top"></span>
+                <ng-container *ngIf="showFilterMenu">
+                  <ul class="dropdown-list {{mode}}" (mouseleave)="showFilterMenu = false">
+                    <li class="ptr t-14 {{mode === 'light'? 'text-blackish' : 'text-white'}}" >
+                      <div class="d-flex">
+                        <div class="mr-2"><img src="assets/images/Mein_Garten_Meine_Pflanzen_Bienenfreundlich_ohne_Kontur.svg" style="height: 30px; "></div>
+                        <div class="mr-auto">Bienenfreundlich ({{gardenBadges.Bees.Count}})</div>
+                        <div  class="ml-2"><mat-slide-toggle [checked]="gardenBadges.Bees.checked" (change)="gardenBadges.Bees.checked = !gardenBadges.Bees.checked; filter()"></mat-slide-toggle></div>
+                      </div>
+                    </li>
+                    <li class="ptr t-14 {{mode === 'light'? 'text-blackish' : 'text-white'}}" >
+                      <div class="d-flex">
+                        <div class="mr-2"><img src="assets/images/Mein_Garten_Meine_Pflanzen_Insektenfreundlich_ohne_Kontur.svg" style="height: 30px; "></div>
+                        <div class="mr-auto">Insektenfreundlich ({{gardenBadges.Insects.Count}})  </div>
+                        <div  class="ml-2"><mat-slide-toggle [checked]="gardenBadges.Insects.checked" (change)="gardenBadges.Insects.checked = !gardenBadges.Insects.checked; filter()" ></mat-slide-toggle></div>
+                      </div>
+                    </li>
+                    <li class="ptr t-14 {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+                      <div class="d-flex">
+                        <div class="mr-2"><img src="assets/images/Mein_Garten_Meine_Pflanzen_Schmetterlingsfreundlich_ohne_Kontur.svg" style="height: 30px; "></div>
+                        <div class="mr-auto">Schmetterlingsfreundlich ({{gardenBadges.Butterflies.Count}})  </div>
+                        <div  class="ml-2"><mat-slide-toggle [checked]="gardenBadges.Butterflies.checked" (change)="gardenBadges.Butterflies.checked = !gardenBadges.Butterflies.checked; filter()"></mat-slide-toggle></div>
+                      </div>
+                    </li>
+                    <li class="ptr t-14 {{mode === 'light'? 'text-blackish' : 'text-white'}}" >
+                      <div class="d-flex">
+                        <div class="mr-2"><img src="assets/images/Mein_Garten_Meine_Pflanzen_Vogelfreundlich_ohne_Kontur.svg" style="height: 30px; "></div>
+                        <div class="mr-auto">Vogelfreundlich ({{gardenBadges.Birds.Count}})  </div>
+                        <div  class="ml-2"><mat-slide-toggle [checked]="gardenBadges.Birds.checked" (change)="gardenBadges.Birds.checked = !gardenBadges.Birds.checked; filter()" ></mat-slide-toggle></div>
+                      </div>
+                    </li>
+                    <li class="ptr t-14 {{mode === 'light'? 'text-blackish' : 'text-white'}}" >
+                      <div class="d-flex">
+                        <div class="mr-2"><img src="assets/images/Mein_Garten_Meine_Pflanzen_Wassersparende_Pflanze_ohne_Kontur.svg" style="height: 30px; "></div>
+                        <div class="mr-auto">Wassersparende Pflanzen ({{gardenBadges.Birds.Count}})  </div>
+                        <div  class="ml-2"><mat-slide-toggle [checked]="gardenBadges.WaterSaving.checked" (change)="gardenBadges.Birds.checked = !gardenBadges.WaterSaving.checked; filter()"></mat-slide-toggle></div>
+                      </div>
+                    </li>
+                    <li class="ptr t-14 {{mode === 'light'? 'text-blackish' : 'text-white'}}" >
+                      <div class="d-flex">
+                        <div class="mr-2"><img src="assets/images/Mein_Garten_Meine_Pflanzen_heimische_Pflanze_ohne_Kontur.svg" style="height: 30px; "></div>
+                        <div class="mr-auto">Heimische Pflanzen ({{gardenBadges.Domestic.Count}}) </div>
+                        <div  class="ml-2"><mat-slide-toggle [checked]="gardenBadges.Domestic.checked" (change)="gardenBadges.Domestic.checked = !gardenBadges.Domestic.checked; filter()" ></mat-slide-toggle></div>
+                      </div>
+                    </li>
+                    <li class="ptr t-14 {{mode === 'light'? 'text-blackish' : 'text-white'}}" >
+                      <div class="d-flex">
+                        <div class="mr-2"><img src="assets/images/Mein_Garten_Meine_Pflanzen_Ökologisch_wertvoll_ohne_Kontur.svg" style="height: 30px; "></div>
+                        <div class="mr-auto">Ökologisch wertvoll ({{gardenBadges.Bio.Count}})  </div>
+                        <div  class="ml-2"><mat-slide-toggle [checked]="gardenBadges.Bio.checked" (change)="gardenBadges.Bio.checked = !gardenBadges.Bio.checked; filter()" ></mat-slide-toggle></div>
+                      </div>
+                    </li>
+                    <li class="ptr t-14 {{mode === 'light'? 'text-blackish' : 'text-white'}}" >
+                      <div class="d-flex">
+                        <div class="mr-2"><img src="assets/images/Mein_Garten_Meine_Pflanzen_Nicht_frosthart_ohne_Kontur.svg" style="height: 30px; "></div>
+                        <div class="mr-auto">nicht frosthart ({{searchFilters.freezeLvl0.Count}})  </div>
+                        <div  class="ml-2"><mat-slide-toggle [checked]="searchFilters.freezeLvl0.checked" (change)="searchFilters.freezeLvl0.checked = !searchFilters.freezeLvl0.checked; filter()"></mat-slide-toggle></div>
+                      </div>
+                    </li>
+                    <li class="ptr t-14 {{mode === 'light'? 'text-blackish' : 'text-white'}}" >
+                      <div class="d-flex">
+                        <div class="mr-2"><img src="assets/images/Mein_Garten_Meine_Pflanzen_Frosthart_-5Grad_ohne_Kontur.svg" style="height: 30px; "></div>
+                        <div class="mr-auto">frosthart bis -5 ºC ({{searchFilters.freezeLvl1.Count}}) </div>
+                        <div  class="ml-2"><mat-slide-toggle [checked]="searchFilters.freezeLvl1.checked" (change)="searchFilters.freezeLvl1.checked = !searchFilters.freezeLvl1.checked; filter()" ></mat-slide-toggle></div>
+                      </div>
+                    </li>
+                    <li class="ptr t-14 {{mode === 'light'? 'text-blackish' : 'text-white'}}" >
+                      <div class="d-flex">
+                        <div class="mr-2"><img src="assets/images/Mein_Garten_Meine_Pflanzen_Frosthart_-10Grad_ohne_Kontur.svg" style="height: 30px; "></div>
+                        <div class="mr-auto">frosthart bis -10 ºC ({{searchFilters.freezeLvl2.Count}}) </div>
+                        <div  class="ml-2"><mat-slide-toggle [checked]="searchFilters.freezeLvl2.checked" (change)="searchFilters.freezeLvl2.checked = !searchFilters.freezeLvl2.checked; filter()"></mat-slide-toggle></div>
+                      </div>
+                    </li>
+                    <li class="ptr t-14 {{mode === 'light'? 'text-blackish' : 'text-white'}}" >
+                      <div class="d-flex">
+                        <div class="mr-2"><img src="assets/images/Mein_Garten_Meine_Pflanzen_Voll_Frosthart_ohne_Kontur.svg" style="height: 30px; "></div>
+                        <div class="mr-auto">voll frosthart ({{searchFilters.freezeLvl3.Count}}) </div>
+                        <div  class="ml-2"><mat-slide-toggle [checked]="searchFilters.freezeLvl3.checked" (change)="searchFilters.freezeLvl3.checked = !searchFilters.freezeLvl3.checked; filter()"></mat-slide-toggle></div>
+                      </div>
+                    </li>
+                    <li class="ptr t-14 {{mode === 'light'? 'text-blackish' : 'text-white'}}" >
+                      <div class="d-flex">
+                        <div class="mr-2"><img src="assets/images/Mein_Garten_Meine_Pflanzen_Bedingt_giftig_ohne_Kontur.svg" style="height: 30px; "></div>
+                        <div class="mr-auto">bedingt giftig ({{searchFilters.partToxic.Count}}) </div>
+                        <div  class="ml-2"><mat-slide-toggle [checked]="searchFilters.partToxic.checked" (change)="searchFilters.partToxic.checked = !searchFilters.partToxic.checked; filter()" ></mat-slide-toggle></div>
+                      </div>
+                    </li>
+                    <li class="ptr t-14 {{mode === 'light'? 'text-blackish' : 'text-white'}}" >
+                      <div class="d-flex">
+                        <div class="mr-2"><img src="assets/images/Mein_Garten_Meine_Pflanzen_stark_giftig_ohne_Kontur.svg" style="height: 30px; "></div>
+                        <div class="mr-auto">stark giftig ({{searchFilters.toxic.Count}}) </div>
+                        <div class="ml-2"><mat-slide-toggle [checked]="searchFilters.toxic.checked" (change)="searchFilters.toxic.checked = !searchFilters.toxic.checked; filter()" ></mat-slide-toggle></div>
+                      </div>
+                    </li>
+                    <li class="ptr t-12 {{mode === 'light'? 'text-blackish' : 'text-white'}}" >
+                      <div class="d-flex">
+                        
+                        <div class="t-14 my-2" style="color: rgb(102, 24, 24);" (click)="resetSearch()">Filter zurücksetzen  </div>
+                      </div>
+                    </li>
+                  </ul>
+                </ng-container> 
+              </div>
+              <div *ngIf="showGarden" class="m-2 ptr"> <span> <img src="assets/images/Mein_Garten_Meine_Pflanzen_Suche_X.svg" style="height: 25px; " (click)="showSearchBar = !showSearchBar " data-toggle="tooltip" >
+                </span>
+                <ng-container *ngIf="showSearchBar">
+                  <ul class="dropdown-list {{mode}}" (mouseleave)="showSearchBar = false">
+                    <li class="ptr t-14 {{mode === 'light'? 'text-blackish' : 'text-white'}}" > <input id="search" type="search"   class="form-control text-input t-12"></li>
+                    <li class="ptr t-12mt-4 {{mode === 'light'? 'text-blackish' : 'text-white'}}" > <button class="btn btn-green text-white btn_border075 " style="width: 200px;">Suchen</button></li>
+                  </ul>
+                </ng-container>
+               
+              </div>
+              <div *ngIf="showGarden" class="m-2 ptr"> <span> <img src="assets/images/Mein_Garten_Meine_Pflanzen_Sortieren_X.svg" style="height: 25px; " (click)="showSortMenu = !showSortMenu "></span>
+                <ng-container *ngIf="showSortMenu">
+                  <ul class="dropdown-list {{mode}}" (mouseleave)="showSortMenu = false">
+                    <li class="t-bold t-14 {{mode === 'light'? 'text-blackish' : 'text-white'}}" >Sortieren nach</li>
+                    <li class="ptr t-reg t-14 {{mode === 'light'? 'text-blackish' : 'text-white'}}" (click)="sortPlantsAsc()">Neuesten Einträge nach oben</li>
+                    <li class="ptr t-reg t-14 {{mode === 'light'? 'text-blackish' : 'text-white'}}" (click)="sortPlantsDesc()">Ältesten Einträge nach oben</li>
+                  </ul>
+                </ng-container>
+              </div>
+              <div *ngIf="showGarden" class="ml-5 ptr" (click)="galerieView=true"> 
+                <span *ngIf="galerieView"> <img src="assets/images/Mein_Garten_Meine_Pflanzen_Kachelansicht_On-02.svg" style="height: 30px; "></span>
+                <span *ngIf="!galerieView"> <img src="assets/images/Mein_Garten_Meine_Pflanzen_Kachelansicht_Off-01.svg" style="height: 30px; "></span>
+
+              </div>
+              <div *ngIf="showGarden" class="ml-2 ptr" (click)="galerieView=false"> 
+                <span *ngIf="!galerieView">  <img src="assets/images/Mein_Garten_Meine_Pflanzen_Einzelansicht_On-04.svg" style="height: 30px; "></span>
+                <span *ngIf="galerieView"> <img src="assets/images/Mein_Garten_Meine_Pflanzen_Einzelansicht_off-03.svg" style="height: 30px; "></span>
+
+              </div>
+           </div>
+         </div>
+        </div>
+
+        
+        
+        <button type="button" class="btn-orange hideSticky" title="Suchkriterien ein/ausblenden" (click)="toggleStickyCtrls()">
+          <fa-icon [icon]="faEye"></fa-icon>
+        </button>
+       
+        <ng-container *ngIf="showGarden ">
+          <ng-container *ngIf="galerieView && displayedPlants?.length>0 ;else noPlants">
+            <div class="row mb-4">
+              
+              <div class="d-flex flex-wrap" >
+                <ng-container *ngFor="let item of displayedPlants">
+                  <div class="">
+                    <a [routerLink]="'/pflanze/'+item.UserPlant.PlantId+'/'+item.UserPlant.PlantUrl" [queryParams]="{o: 'grdn'}" target="_blank" (click)="updateSelectedPlant(item)"> 
+                      <img *ngIf="item.UserPlant.Images?.length >=1" class="ptr plant-img" style="padding-top: 2rem; padding-right: 2rem;" [title]=" ' '+'Autor: '+item.UserPlant.Images[0]?.Author +'\n'+'Kommentare: '+ item.UserPlant.Images[0]?.Comments" [src]="toUrl(item.UserPlant.Images[0]?.SrcAttr, true)" [alt]=item.UserPlant.Name>
+                       
+                    </a>
+                    <div *ngIf="currentList" class="plantNamedummy mt-3" style="width: 350px;"> 
+                      <h2 *ngIf="item.UserPlant.NameLatin"
+                        class="t-reg t-italic t-16 mb-0 {{mode === 'light'?'text-darkgrey':'text-white'}}">
+                        <a [routerLink]="'/pflanze/'+item.UserPlant.PlantId+'/'+item.UserPlant.PlantUrl" [queryParams]="{o: 'grdn'}" target="_blank" (click)="updateSelectedPlant(item)">
+                          {{item.UserPlant.NameLatin.replace(myRegex4,'')}} 
+                        </a>
+                      </h2>
+                      <h2 class="ptr t-bold t-16 mb-0 {{mode === 'light'?'text-darkgrey':'text-white'}}">
+                        <a [routerLink]="'/pflanze/'+item.UserPlant.PlantId+'/'+item.UserPlant.PlantUrl" [queryParams]="{o: 'grdn'}" target="_blank" (click)="updateSelectedPlant(item)">{{item.UserPlant.Name}}</a>
+                      </h2>
+                  
+                      <ng-container *ngIf="!(item.UserPlant.Synonym==null)">
+                        <h2 class="t-reg t-14 {{mode === 'light'? 'text-darkgrey' : 'text-white'}}" [innerHTML]="item.UserPlant.Synonym"></h2>
+                      </ng-container >
+                     
+                    </div>
+                  </div>              
+                </ng-container>
+              </div>
+              
+            </div>
+            
+            <div class="row">
+              <div class="col-12">
+                <hr class="{{mode}}">
+              </div>
+             
+            </div>
+             
+              <div class="d-flex flex-row-reverse">
+                <div class="shareImgdummy"><img src="assets/images/Teilen.svg" class=" ml-2 ptr" style="height: 30px;" (click)="showShareMenu = !showShareMenu ;"  >
+                  <ng-container *ngIf="showShareMenu">
+                    <ul class="dropdown-list {{mode}}" (mouseleave)="showShareMenu = false">
+                      <li class="ptr t-14 {{mode === 'light'? 'text-blackish' : 'text-white'}}" >Diese Pflanze teilen</li>
+                      <li class="ptr t-14 {{mode === 'light'? 'text-blackish' : 'text-white'}}" >Alle Pflanzen aus meinem Garten teilen</li>
+                    </ul>
+                  </ng-container>
+                </div>
+              </div>
+            
+            
+          </ng-container>
+          <ng-container *ngIf="!galerieView && displayedPlants?.length>0;else noPlants">
+            
+            <div  class="row pt-3 mb-md-5 mt-5 mb-5 top-border {{mode}}" *ngFor="let item of displayedPlants; let j=index">
+              <div class="col-10"></div><div  class="col-2 "><span class=" ml-4 offset-top-extra position-relative t-12 t-bold text-darkgrey">Bearbeiten</span></div>
+              
+              <div class="col-12">
+                  <div class="row">
+                    <div class="col-12 col-md-6">
+                     
+                        <div class="arrowcircle" style="width: 100%; "  *ngIf="item.UserPlant.Images?.length>0 " > 
+                         
+                          <div id="carouselExampleControls{{j}}" data-interval="false" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                              <div class="carousel-item" *ngFor="let img of item.UserPlant.Images let i = index"
+                                [ngClass]="{'active': i == 0 }">
+                                <a [routerLink]="'/pflanze/'+item.UserPlant.PlantId+'/'+item.UserPlant.PlantUrl" [queryParams]="{o: 'grdn'}" target="_blank" (click)="updateSelectedPlant(item)"></a>
+                                <img [src]="toUrl(img.SrcAttr,true)" class="d-block plant-img-big" [title]=" ' '+'Autor: '+img.Author +'\n'+'Kommentare: '+ img.Comments" >
+                              </div>
+                              <a *ngIf="item.UserPlant.Images?.length>1" class="carousel-control-prev" href="#carouselExampleControls{{j}}" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only"></span>
+                              </a>
+                              <a *ngIf="item.UserPlant.Images?.length>1" class="carousel-control-next" href="#carouselExampleControls{{j}}" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only"></span>
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="row">
+                      
+                        <div class="col-12">
+                          <div class="row">
+                            <div class="col-10">
+                              <div class="d-flex d-flex-wrap">
+                                 <ng-container *ngIf="item.UserPlant.Images?.length >= 1">
+                                   <div *ngFor="let pnImg of item.UserPlant.Images" >
+                                     <img  class="ptr plant-img-small" style="padding-bottom: 2rem; padding-right: 2rem;" [title]=" ' '+'Autor: '+pnImg.Author +'\n'+'Kommentare: '+ pnImg.Comments" [src]="toUrl(pnImg.SrcAttr, true)" [alt]=item.UserPlant.Name>
+       
+                                   </div>
+                                 </ng-container>
+                                 
+                               </div>
+                            </div>
+                            <div class="col-2">
+                              <div class="shareImgdummy"><img src="assets/images/Teilen.svg" class=" ml-2 ptr" style="height: 30px; margin-top: 2rem;" (click)="showShareMenu = !showShareMenu ;"  >
+                                
+                                  <ng-container *ngIf="showShareMenu">
+                                    <ul class="dropdown-list {{mode}}" (mouseleave)="showShareMenu = false">
+                                      <li class="ptr t-14 {{mode === 'light'? 'text-blackish' : 'text-white'}}" >Diese Pflanze teilen</li>
+                                      <li class="ptr t-14 {{mode === 'light'? 'text-blackish' : 'text-white'}}" >Alle Pflanzen aus meinem Garten teilen</li>
+                                    </ul>
+                                  </ng-container>
+                                
+                              </div>
+
+                            </div>
+                          </div>
+                          
+                          
+                          
+                        </div>
+                        <div class="col-12">
+                          <div class="d-flex">
+                            <div class="plantNamedummy" style="width: 350px;"> 
+                              <h2 *ngIf="item.UserPlant.NameLatin"
+                                class="t-reg t-italic t-16 mb-0 {{mode === 'light'?'text-darkgrey':'text-white'}}">
+                                <a [routerLink]="'/pflanze/'+item.UserPlant.PlantId+'/'+item.UserPlant.PlantUrl" [queryParams]="{o: 'grdn'}" target="_blank" (click)="updateSelectedPlant(item)">
+                                  {{item.UserPlant.NameLatin.replace(myRegex4,'')}} 
+                                </a>
+                              </h2>
+                              <h2 class="ptr t-bold t-16 mb-0 {{mode === 'light'?'text-darkgrey':'text-white'}}">
+                                <a [routerLink]="'/pflanze/'+item.UserPlant.PlantId+'/'+item.UserPlant.PlantUrl" [queryParams]="{o: 'grdn'}" target="_blank" (click)="updateSelectedPlant(item)">{{item.UserPlant.Name}}</a>
+                              </h2>
+                          
+                              <ng-container *ngIf="!(item.UserPlant.Synonym==null)">
+                                <h2 class="t-reg t-14 {{mode === 'light'? 'text-darkgrey' : 'text-white'}}" [innerHTML]="item.UserPlant.Synonym"></h2>
+                              </ng-container >
+                             <!--  <ng-container *ngIf="item.ListNames.length>0">
+                                <p class="t-13 text-muted t-light">(Liste: <span *ngFor="let name of item.ListNames; let lastItem=last" >
+                                  <span *ngIf="!lastItem">{{name}}, </span>
+                                    <span *ngIf="lastItem">{{name}}</span>
+                                  </span>)
+                                </p>
+                                <h2 class="t-13 text-muted t-light">({{item.UserPlant.IsInPot ? '':'keine'}} Topfpflanze)</h2>
+                              </ng-container> -->
+                            </div>
+                            <div class="text-center plantCountDummy"  style="width: 150px;">
+                              <span
+                                class="t-reg t-16 d-block {{mode === 'light'?'text-darkgrey':'text-white'}}  ">Anzahl</span>
+                              <span class="t-bold {{mode === 'light'?'text-darkgrey':'text-white'}} t-15  offset-top">
+                                {{item.UserPlant.Count}}
+                              </span>
+                            </div>
+                            <div class="editplantdummy t-15"  >
+                              <span (click)="togglePlantMenu(item)" class="px-2 ptr t-bold t-12 position-relative">
+                                <fa-icon [icon]="faMenu" class="{{mode === 'light'?'text-darkgrey':'text-white'}} t-14"></fa-icon>
+                              </span>
+                              <ng-container *ngIf="item.showMenu">
+                                <ul class="dropdown-list {{mode}} " (mouseleave)="item.showMenu = false">
+                                  <li class="ptr my-2" data-toggle="modal" (click)="selectedPlant = item; item.showMenu = false;"
+                                  data-target="#movePlantToList">Pflanzeninfos</li>
+                                  <li class="ptr my-2" data-toggle="modal" (click)="selectedPlant = item; item.showMenu = false;"
+                                    data-target="#movePlantToList">Pflanze verschieben</li>
+                                  
+                                  <li class="ptr my-2" data-toggle="modal"
+                                    (click)="selectedPlant = item.UserPlant; item.showMenu = false; updatePlantMode='notes'"
+                                    data-target="#updatePlant">Notiz zur Pflanze</li>
+                                  <ng-container>
+                                     <!--  <li *ngIf="item.UserPlant.CyclicTodos?.length > 0" class="ptr" data-toggle="modal"
+                                        (click)="selectedPlant = item.UserPlant; item.showMenu = false;" data-target="#editTodo">To-dos bearbeiten
+                                      </li> -->
+                                      <li class="ptr my-2" data-toggle="modal"
+                                      (click)="selectedPlant = item.UserPlant; item.UserPlant.showMenu = false; updatePlantMode='count'"
+                                      data-target="#updatePlant">Anzahl angeben
+                                      </li>
+                                    
+                                    <li  class="ptr text-danger my-2" data-toggle="modal" data-target="#deletePlant" (click)="selectedPlant = item; item.showMenu = false;">Löschen</li>
+                                  </ng-container>
+                    
+                                </ul>
+                              </ng-container>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-12" *ngIf="item.UserPlant.Badges?.length>0">
+                          <mat-divider class="my-2" > </mat-divider>
+                        </div>
+                        
+                        <div class="col-12">
+                          <div class="d-flex">
+                            <div class="" *ngIf="hasBee(item.UserPlant)">
+                              <img class="g-badge"  src="assets/images/Mein_Garten_Meine_Pflanzen_Bienenfreundlich_Mit_Kontur.svg"
+                              title="Bienenfreundlich" alt="Bienenfreundlich">
+                            </div>
+                            <div class="" *ngIf="hasInsect(item.UserPlant)">
+                              <img class="g-badge"  src="assets/images/Mein_Garten_Meine_Pflanzen_Insektenfreundlich_Mit_Kontur.svg"
+                              title="Insektenfreundlich" alt="Insektenfreundlich">
+                            </div>
+                            <div class="" *ngIf="hasBird(item.UserPlant)">
+                              <img class="g-badge"  src="assets/images/Mein_Garten_Meine_Pflanzen_Vogelfreundlich_Mit_Kontur.svg"
+                              title="Vogelfreundlich" alt="Vogelfreundlich">
+                            </div>
+                            <div class="" *ngIf="hasButterfly(item.UserPlant)">
+                              <img class="g-badge"  src="assets/images/Mein_Garten_Meine_Pflanzen_Schmetterlingsfreundlich_Mit_Kontur.svg"
+                              title="Schmetterlingsfreundlich" alt="Schmetterlingsfreundlich">
+                            </div>
+                            <div class="" *ngIf="hasBio(item.UserPlant)">
+                              <img class="g-badge"  src="assets/images/Mein_Garten_Meine_Pflanzen_Ökologisch_wertvoll_Mit_Kontur.svg"
+                              title="Ökologisch wertvoll" alt="Ökologisch wertvoll">
+                            </div>
+                            <div class="" *ngIf="hasDomestic(item.UserPlant)">
+                              <img class="g-badge"  src="assets/images/Mein_Garten_Meine_Pflanzen_heimische_Pflanze_Mit_Kontur.svg"
+                              title="Heimische Pflanze" alt="Heimische Pflanze">
+                            </div>
+                            <div class="" *ngIf="hasWaterSaving (item.UserPlant)">
+                              <img class="g-badge"  src="assets/images/Mein_Garten_Meine_Pflanzen_Wassersparende_Pflanze_Mit_Kontur.svg"
+                              title="Wassersparende Pflanze" alt="Wassersparende Pflanze">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-12">
+                          <mat-divider class="mt-2 " > </mat-divider>
+                        </div>
+                        <div class="col-12">
+                          <div class="todoDummy ">
+                            <h2 *ngIf="item.UserPlant.CyclicTodos?.length==0 || item.UserPlant.CyclicTodos==null " class="t-bold t-16 mt-4 {{mode === 'light'?'text-darkgrey':'text-white'}}">To-dos:</h2>
+                            <h3 *ngIf="item.UserPlant.CyclicTodos?.length==0 || item.UserPlant.CyclicTodos==null"
+                              class="t-reg t-reg t-14 {{mode === 'light'?'text-darkgrey':'text-grey'}}">
+                              Es gibt noch keine Todos.
+                            </h3>
+                            <ng-container *ngIf="item.UserPlant.CyclicTodos?.length >0">
+                              <!--  <h3  *ngIf="countActiveTodo(item.UserPlant.CyclicTodos)==0 "
+                                class="t-reg t-14 ptr {{mode === 'light'?'text-darkgrey':'text-white'}}">
+                                - To-dos nicht mehr aktiv
+                              </h3> -->
+                              <!-- <div *ngIf="countActiveTodo(item.UserPlant.CyclicTodos)>0"> -->
+                              <div class="row">
+                                <div class="col-8"><span class="t-bold t-16 mt-4 {{mode === 'light'?'text-darkgrey':'text-white'}}">To-dos:</span></div>
+                                <div class="col-4"><span class="t-bold t-16 mt-4 text-green">Erledigt</span></div>
+              
+                              </div>
+                              <ng-container *ngFor="let todo of item.UserPlant.CyclicTodos; let i=index">
+                                <div class="row">
+                                  <div class="col-8">
+                                    <ul>
+                                      <li [title]="todo.Description" [routerLink]="'/todo/' + (todo.DateStart | date:'yyyy') + '/' + (todo.DateStart | date: 'MM') "
+                                      class="t-reg t-14 ptr {{mode === 'light'?'text-darkgrey':'text-white'}}">
+                                        {{todo.Title.replace(myRegex4,'')}}
+                                      </li>
+                                    </ul>
+                                   
+                                  </div>
+                                  <div class="col-4">
+                                    
+                                      <div class="form-group col-2 ch-container mb-0 ">
+                                        <label class="t-reg t-12" *ngIf="todo.DateStart && isActive(todo)">
+                                          <input type="checkbox" name="ViewedFinished" [(ngModel)]="todo.Finished"
+                                                (change)="markDone(todo,item.UserPlant.Gardenid)">
+                                          <span class="checkmark cr ml-3"></span>
+                                        </label>
+                                        <label class="t-reg t-12" *ngIf="!isActive(todo)" matTooltip="To-do liegt schon in der vergangenheit"
+                                        matTooltipHideDelay="0" #markdone="matTooltip" [matTooltipPosition]="'above'" matTooltipClass="tooltip-text" (click)="markdone.toggle()">
+                                          <input type="checkbox" name="ViewedFinished" [(ngModel)]="todo.Finished"
+                                                (change)="markDone(todo,item.UserPlant.Gardenid)" disabled>
+                                          <span class="checkmark cr ml-3" disabled></span>
+                                        </label>
+                                      </div>
+                                  </div>
+                                </div>
+                              </ng-container>
+                            </ng-container>
+                          </div>
+                        </div>
+                        <div class="col-12">
+                          <div class="notesDummy ">
+                            <div class="t-bold t-14 mt-4 {{mode === 'light'?'text-darkgrey':'text-white'}}">Notizen:</div>
+                            <ng-container *ngIf="!item.UserPlant.Notes">
+                              <div class="t-italic t-reg t-14 {{mode === 'light'?'text-darkgrey':'text-grey'}}">
+                                <ul>
+                                  <li>
+                                    {{item.UserPlant.CreatedNotes}}
+                                  </li>
+                                </ul>
+                                
+                              </div>
+                            </ng-container>
+                            <ng-container *ngIf="item.UserPlant.Notes">
+                              <div class="t-reg t-14 {{mode === 'light'?'text-darkgrey':'text-grey'}}">
+                                <ul>
+                                  <li>
+                                    {{item.UserPlant.CreatedNotes}}
+                                  </li>
+                                </ul>
+                              </div>
+                              <div class="t-reg t-14 {{mode === 'light'?'text-darkgrey':'text-grey'}}"><p [innerHtml]="item.UserPlant.Notes"></p></div>
+                            </ng-container>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+             
+            <ng-container *ngIf="((i+1) % 5) == 0 " >
+              <div class=" col-12">
+                <app-ad [ad]="ad" ></app-ad>
+              </div> 
+            </ng-container>
+              
+            
+        </ng-container>
+        <ng-template *ngIf="showGarden" #noPlants>
+          <div class="row pt-3 mb-5 top-border {{mode}}">
+            <div class="col-12">
+              <h3 class="py-3 t-italic text-center t-reg t-14 {{mode === 'light'?'text-darkgrey':'text-grey'}}">
+                Es gibt noch keine Pflanze hier. Pflanzen hinzufügen kannst du unter <a class="text-green" routerLink="/suche">Pflanzensuche</a>. <br>
+                Gartenbereiche anlegen kannst du hier auf der Seite unter Listen.
+              </h3>
+            </div>
+          </div>
+        </ng-template>
+      </ng-container>
+     
+          
+        <!-- Eco Checklist -->
+        <router-outlet></router-outlet>
+         <!-- Devicelist -->
+         <app-ad [ad]="ad" ></app-ad>
+  </div>
+</div>
+    
+    <div class="modal fade" id="editGarden" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content {{mode}}">
+          <div class="modal-header">
+            <h5 class="modal-title">Bilder hochladen</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span class="{{mode==='dark'?'text-ltgrey':'text-blackish'}}" aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form class="modal-body" ngNativeValidate>
+    
+            <div class="form-group pl-0 col-12 mb-3 d-inline-block">
+              <label class="text-darkgrey">Bild auswählen</label>
+              <input class="form-control" type="file" accept="image/*, .heic, .heics, .heif, .heifs" (change)="imageUpload($event)">
+            </div>
+            <div class="{{frameOptions.stroke}} {{frameOptions.color}}">
+              <img style="max-width: 100%;" id="uploaded-img" [src]="imgObj.Src">
+            </div>
+            <div class="mt-3" *ngIf="imgObj.Src">
+              <div class="mb-3">
+                <span class="mx-1 {{mode==='dark'?'text-ltgrey':'text-blackish'}}">AspectRatio</span>
+                <button title="Links umdrehen" class="btn btn-green mx-2 btn_border075" (click)="setAspectRatio(1/1)">
+                  <span>1:1</span>
+                </button>
+                <button title="Rechts umdrehen" class="btn btn-green mx-2 btn_border075" (click)="setAspectRatio(16/9)">
+                  <span>16:9</span>            
+                </button>
+                <button title="Rechts umdrehen" class="btn btn-green mx-2 btn_border075" (click)="setAspectRatio(9/16)">
+                  <span>9:16</span>            
+                </button>
+              </div>
+              <div class="mb-3">
+                <span class="mx-1 {{mode==='dark'?'text-ltgrey':'text-blackish'}}">Bild drehen</span>
+                <button title="Links umdrehen" class="btn btn-green mx-2 btn_border075" (click)="rotateImage(-45)">
+                  <fa-icon [icon]="faUndo"></fa-icon>
+                </button>
+                <button title="Rechts umdrehen" class="btn btn-green mx-2 btn_border075" (click)="rotateImage(45)">
+                  <fa-icon [icon]="faRedo"></fa-icon>
+                </button>
+              </div>
+              <div class="mb-3">
+                <span class="mx-1 mr-2 {{mode==='dark'?'text-ltgrey':'text-blackish'}}">Bilderrahmen</span>
+                <select class="col-4" (change)="frameOptions.stroke = $event.target.value">
+                  <option value="none">kein Rahmen</option>
+                  <option value="framed thin">dünn</option>
+                  <option value="framed normal">normal</option>
+                  <option value="framed thick">dick</option>
+                </select>
+                <fa-icon class="px-2 input-icon" [icon]="faChevronDown"></fa-icon>
+                <select class="col-3" (change)="frameOptions.color = $event.target.value">
+                  <option value="white">weiß</option>
+                  <option value="black">schwarz</option>
+                </select>
+                <fa-icon class="px-2 input-icon" [icon]="faChevronDown"></fa-icon>
+              </div>
+              <div class="mb-3">
+                <span class="mx-1 mr-2 {{mode==='dark'?'text-ltgrey':'text-blackish'}}">Überschrift</span>
+                <input type="text" class="form-control" [value]="imgObj.description" (change)="imgObj.description = $event.target.value">
+              </div>
+              <div class="mb-3">
+                <span class="mx-1 mr-2 {{mode==='dark'?'text-ltgrey':'text-blackish'}}">Anmerkung</span>
+                <input type="text" class="form-control" [value]="imgObj.note" (change)="imgObj.note = $event.target.value">
+              </div>
+              <div class="mb-3">
+                <span class="mx-1 mb-1 d-block {{mode==='dark'?'text-ltgrey':'text-blackish'}}">Stichworte / Verschlagwortung</span>
+                <textarea class="form-control" placeholder="z.B. Rosen,Frühling" [value]="imgObj.tags" (change)="imgObj.tags = $event.target.value"></textarea>
+              </div>
+            </div>
+            <div class="form-group mt-3">
+              <label class="text-darkgrey d-block t-16 t-reg">Deine Bilder
+              </label>
+             
+                <div *ngFor="let image of garden.Images" class="m-2 d-inline-block" >
+                  <ng-container *ngIf="image.Id !== 0">
+                    <img [src]=toUrl(image.SrcAttr) [alt]=image.TitleAttr class="img-sm ptr">
+      
+                    <span class="text-danger t-black t-18 ptr ml-1" title="Löschen"
+                      (click)="deleteGardenImage(image.Id)">&times;</span>
+                  </ng-container>
+                </div>
+              
+              
+            </div>
+          </form>
+    
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary btn_border075 text-white" data-dismiss="modal" (click)="cancelEdit()">Abbrechen</button>
+            <button type="button" class="btn btn-green btn_border075 text-white" data-dismiss="modal" data-target="#sortGardenImg"
+              data-toggle="modal">Bilder Sortieren</button>
+            <button type="button" class="btn btn-green btn_border075 text-white" data-dismiss="modal" [disabled]="invalidImg"
+              (click)="editGarden()">Speichern</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="sortGardenImg" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content {{mode}}">
+          <div class="modal-header">
+            <h5 class="modal-title">Bilder sortieren</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span class="{{mode==='dark'?'text-ltgrey':'text-blackish'}}" aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" ngNativeValidate>
+            <div class="mt-3">
+              <label class="text-darkgrey d-block">Deine Bilder <span class="ml-4 ptr">Sortieren</span></label>
+              <!-- (click)="sortMode = !sortMode" -->
+              <div cdkDropList (cdkDropListDropped)="drop($event)" class="image-list"> 
+                <div *ngFor="let image of garden.Images; let j=index" class="m-2 image-block" cdkDrag>
+                  <ng-container *ngIf="image.Id !== 0">
+                    <img [src]=toUrl(image.SrcAttr) [alt]=image.TitleAttr class="img-sm ptr " title="Als Hauptbild setzen"
+                      [class.isMain]=isMain(image) (click)="setImageMain(image)">
+                      <span class="text-darkgrey t-15 ptr ml-1">{{image.TitleAttr}}</span>
+                    <span class="text-danger t-18 ptr ml-1" title="Löschen"(click)="deleteGardenImage(image.Id)">&times;</span>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+            <ng-container *ngIf="sortMode">
+              <form class="form-group mt-2">
+                <div *ngFor="let image of garden.Images" class="form-group">
+                  <label class="{{mode==='light'?'text-blackish':'text-white'}} col-10">{{image.TitleAttr}}</label>
+                  <select class="col-2 custom-select" name="select" [(ngModel)]="image.Sort">
+                    <option *ngFor="let item of garden.Images; let i = index" [ngValue]="i">
+                      {{i}}</option>
+                  </select>
+                </div>
+              </form>
+            </ng-container>
+          </div>
+    
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
+            <button type="button" class="btn btn-green" data-dismiss="modal" (click)="updateSorting()">Speichern</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <ng-container *ngIf="selectedPlant">
+      <div class="modal fade" id="editTodo" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content {{mode}}">
+            <div class="modal-header">
+              <h5 class="modal-title">To-dos bearbeiten</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span class="{{mode==='dark'?'text-white':'text-darkgrey'}}" aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form class="modal-body pb-0" ngNativeValidate>
+              <div class="row" *ngFor="let todo of selectedPlant.CyclicTodos; let i = index">
+                <div class="form-group col-12 col-md-6 px-2">
+                  <label class="text-darkgrey mb-0">Titel des To-dos</label>
+                  <input [(ngModel)]="todo.Title" type="text" class="form-control" [name]="'Title'+i" required>
+                  <small class="text-danger" [hidden]="!todo.invalid || !(todo.dirty || todo.touched)">
+                    Titel des Todos ist ein Pflichtfeld!
+                  </small>
+                </div>
+                <div class="form-group col-12 col-md-6 px-2">
+                  <label class="text-darkgrey mb-0">Beschreibung (optional)</label>
+                  <input [(ngModel)]="todo.Description" type="text" class="form-control"
+                    placeholder="Beschreibung (optional)" [name]="'Description'+i">
+                </div>
+                <div class="form-group col-12 px-0">
+                  <div class="col-12 col-md-6 d-inline-block px-2">
+                    <label class="text-darkgrey mb-0">Startdatum:</label>
+                    <input [(ngModel)]="todo.DateStart" useValueAsDate class="input-field form-control mb-2" type="date"
+                      class="form-control" [name]="'SDate'+i" placeholder="DateStart tt.mm.jjjj">
+                  </div>
+                  <div class="col-12 col-md-6 d-inline-block px-2">
+                    <label class="text-darkgrey mb-0">Enddatum:</label>
+                    <input [(ngModel)]="todo.DateEnd" useValueAsDate class="input-field form-control mb-2" type="date"
+                      class="form-control" [name]="'EDate'+i" placeholder="DateEnd tt.mm.jjjj">
+                  </div>
+                  <div class="form-group mt-3 pb-3 bt-border {{mode}} pt-1 pl-5 col-12 d-inline-block px-2">
+                    <div (click)="todo.Ignored = !todo.Ignored;">
+                      <fa-icon [icon]="faCircle" class="{{todo.Ignored?'text-ltgrey':'text-green'}} t-11"></fa-icon>
+                      <label class="text-darkgrey mb-0 mx-2">Aktiv?</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group mb-0 pt-1 pl-5 col-12 d-inline-block px-2">
+                <a routerLink="/newtodo" class="text-green" data-dismiss="modal">Eigenes To-do eintragen</a>
+              </div>
+            </form>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary btn_border075 text-white" data-dismiss="modal">Abbrechen</button>
+              <button type="button" class="btn btn-green btn_border075 text-white" data-dismiss="modal"
+                (click)="editTodo(selectedPlant)">Speichern</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    
+    <ng-container *ngIf="selectedPlant">
+      <div class="modal fade" id="updatePlant" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content {{mode}}">
+            <div class="modal-header">
+              <h5 class="modal-title">{{updatePlantMode=='count'?'Anzahl angeben':'Notizen bearbeiten'}}</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span class="{{mode==='dark'?'text-white':'text-darkgrey'}}" aria-hidden="true">&times;</span>
+              </button>
+            </div>
+              
+            <form class="modal-body" ngNativeValidate>
+              <!-- <div *ngIf="updatePlantMode!='notes' || updatePlantMode!='count' " class="row">
+                <label class="{{mode==='dark'?'text-white':'text-blackish'}} mb-0">Liste auswählen:</label>
+                <ng-multiselect-dropdown class="{{mode==='dark'?'text-white':'text-blackish'}} "
+                  [placeholder]="'Meine Listen'" 
+                  [settings]="dropdownSettings" 
+                  [data]="dropdownList"
+                  [(ngModel)]="selectedItems"
+                  (onSelect)="selectedCountList=$event">
+                </ng-multiselect-dropdown>
+              </div> -->
+              <div class="row mb-3">
+                <div *ngIf="updatePlantMode=='count'" class="form-group col-12 px-2">
+                  <label class="text-darkgrey">Anzahl</label>
+                  <input [(ngModel)]="selectedPlant.Count" type="number" class="form-control" name="Count" required>
+                </div>
+                <div *ngIf="updatePlantMode=='notes'" class="form-group col-12 px-2">
+                  <label class="text-darkgrey">Deine Notizen</label>
+                  <!-- <textarea [(ngModel)]="selectedPlant.Notes" type="text" class="form-control" name="Notes">
+                  </textarea> -->
+                  <quill-editor 
+                  [(ngModel)]="selectedPlant.Notes"
+                  name="Notes"
+                  (blur)="onEditorBlured($event)"
+                  (onFocus)="onEditorFocused($event)"
+                  (onEditorCreated)="onEditorCreated($event)"
+                  (onEditorChanged)="onContentChanged($event)"
+                  [styles]="{height: '200px'}"[modules]="editor" >
+                </quill-editor>
+                <pre><code>{{ selectedPlant.Notes }}</code></pre>
+                </div>
+              </div>
+            </form>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary btn_border075" data-dismiss="modal">Abbrechen</button>
+              <button *ngIf="updatePlantMode!=='count'" type="button" class="btn btn-green btn_border075 text-white" data-dismiss="modal" (click)="updatePlant()">Speichern</button>
+              <button *ngIf="updatePlantMode==='count'" type="button" class="btn btn-green btn_border075 text-white" data-dismiss="modal" (click)="updatePlant(true)">Speichern</button>
+    
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    
+    <ng-container *ngIf="selectedPlant">
+      <!-- Add to list Modal -->
+     <app-moveplant-to-list  [dropdownList]="dropdownList" [selectedPlant]="selectedPlant" (moveplantEvent)="moveplantEvent($event)"></app-moveplant-to-list>
+    </ng-container>
+    
+    <ng-container>
+      <!-- New List Modal -->
+      <div class="modal fade" id="newList" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content {{mode}}">
+            <div class="modal-header">
+              <h5 class="modal-title">Neue Liste erstellen</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span class="{{mode==='dark'?'text-ltgrey':'text-blackish'}}" aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form [formGroup]="newList" class="modal-body" ngNativeValidate>
+              <div class="row mb-3">
+                <div class="form-group col-12 mb-3">
+                  <input formControlName="Name" type="text" class="form-control" placeholder="Name der Liste" required>
+                </div>
+                <div class="form-group col-12">
+                  <input formControlName="Description" type="text" class="form-control"
+                    placeholder="Beschreibung (optional)">
+                </div>
+              </div>
+            </form>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary btn_border075 text-white" data-dismiss="modal">Abbrechen</button>
+              <button type="button" class="btn btn-green btn_border075 text-white" data-dismiss="modal" [disabled]="!listIsValid"
+                (click)="createNewList();showLists = false;">Erstellen</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    <!-- delete list Modal -->
+    <ng-container *ngIf="selectedList">
+      <div class="modal fade" id="deleteList" tabindex="-1" role="dialog" aria-hidden="true" #dm>
+        <div class="modal-dialog" role="document">
+          <div class="modal-content {{mode}}">
+            <div class="modal-header">
+              <h5 class="modal-title"><b>{{selectedList.Name}}</b> löschen</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span class="{{mode==='dark'?'text-ltgrey':'text-blackish'}}" aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p class="{{mode==='dark'?'text-ltgrey':'text-blackish'}}"><strong>Achtung! Es werden alle Pflanzen dieser Liste aus deinem Garten gelöscht.</strong><br><br>
+                Bist du sicher, dass du diese Liste löschen möchtest?
+               
+              </p>
+              <button type="button" class="btn btn-danger" data-toggle="collapse" data-target="#movePlants" (click)="setDropdownList()" > Pflanzen in eine andere Liste hinzufügen und löschen</button>
+              <div id="movePlants" class="collapse">
+                <label class="{{mode==='dark'?'text-white':'text-blackish'}} mb-0">Liste auswählen:</label>
+    
+                <ng-multiselect-dropdown class="{{mode==='dark'?'text-white':'text-blackish'}} "
+                  [placeholder]="'Meine Listen'" 
+                  [settings]="dropdownSettings" 
+                  [data]="dropdownList"
+                   [(ngModel)]="selectedItems"
+                  (onSelect)="onItemSelect($event)">
+                </ng-multiselect-dropdown>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="moveAllPlants(selectedList)">Änderungen Speichern</button>
+    
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary btn_border075 text-white" data-dismiss="modal">Abbrechen</button>
+              <button type="button" class="btn btn-danger btn_border075 text-white" data-dismiss="modal" (click)="deleteUserList(selectedList)">Löschen</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      </ng-container>
+      <!-- edit list Modal -->
+    <ng-container *ngIf="selectedList">
+      <div class="modal fade" id="editList" tabindex="-1" role="dialog" aria-hidden="true" #dm>
+        <div class="modal-dialog" role="document">
+          <div class="modal-content {{mode}}">
+            <div class="modal-header">
+              <h5 class="modal-title"><b>{{selectedList.Name}}</b> bearbeiten</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span class="{{mode==='dark'?'text-ltgrey':'text-blackish'}}" aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form class="modal-body" ngNativeValidate>
+                <div class="row mb-3">
+                  <div  class="form-group col-12 px-2">
+                    <label class="text-darkgrey">Neuer Name</label>
+                    <input [(ngModel)]="selectedList.Name" type="text" class="form-control" name="Name"/>
+                  
+                  </div>
+                  <div  class="form-group col-12 px-2">
+                    <label class="text-darkgrey">Beschreibung (optional)</label>
+                    <textarea [(ngModel)]="selectedList.Description" type="text" class="form-control" name="Description"></textarea>
+                  
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary btn_border075 text-white" data-dismiss="modal">Abbrechen</button>
+              <button type="button" class="btn btn-green btn_border075 text-white" data-dismiss="modal" (click)="updateList(selectedList)">Speichern</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      </ng-container>
+      <!-- delete userplant Modal -->
+    <ng-container *ngIf="selectedPlant">
+      <div class="modal fade" id="deletePlant" tabindex="-1" role="dialog" aria-hidden="true" #dm>
+        <div class="modal-dialog" role="document">
+          <div class="modal-content {{mode}}">
+            <div class="modal-header">
+              <h5 class="modal-title"><b>{{selectedPlant?.UserPlant?.Name}}</b> löschen</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span class="{{mode==='dark'?'text-ltgrey':'text-blackish'}}" aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p class="{{mode==='dark'?'text-ltgrey':'text-blackish'}}">Bist du sicher, dass du diese Pflanze löschen möchtest?</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary btn_border075 text-white" data-dismiss="modal">Abbrechen</button>
+              <button *ngIf="currentList" type="button" class="btn btn-danger btn_border075 text-white" data-dismiss="modal" (click)="deleteUserPlantInUserList(selectedPlant.UserPlant.Id, selectedList.Id)">Löschen</button>
+              <button *ngIf="!currentList" type="button" class="btn btn-danger btn_border075 text-white" data-dismiss="modal" (click)="deleteUserPlantFromAllUserlists(selectedPlant.UserPlant.PlantId, selectedPlant.UserPlant.Gardenid)">Löschen</button>
+    
+            </div>
+          </div>
+        </div>
+      </div>
+      </ng-container>
+      <div class="modal fade" id="gardenImageModal" tabindex="-1" role="dialog" aria-labelledby="gardenImageModal" aria-hidden="true">
+        <div class="modal-dialog" role="document" style="max-width: 800px;">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <img class=""  [src]="gardenImageModal" >
+    
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+  </div>
+  <div class="col-1" style="top:0;">
+    <app-ad [ad]="adSides" ></app-ad>
+  </div>
+</div>

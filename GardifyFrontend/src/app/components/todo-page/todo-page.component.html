@@ -1,0 +1,445 @@
+<ng-container *ngIf="loadingTodos || loadingScans || loadingDiary">
+  <div class="overlay-loading" [hidden]="!(loadingTodos || loadingScans || loadingDiary)">
+    <svg class="spinner position-relative" viewBox="25 25 50 50">
+      <circle class="path" cx="50" cy="50" r="24" fill="none" stroke-width="2" stroke-miterlimit="10" />
+    </svg>
+  </div>
+</ng-container>
+
+<div class="wrapper {{mode}} pt-4">
+  <div class="container pt-4 pb-5">
+    <app-ad [ad]="ad"></app-ad>
+    <div class="row mb-2 bt-border {{mode}}">
+      <div class="col-9">
+        <h2 class="ptr t-light {{isMobile?'t-20':'t-26'}} {{mode === 'light'? 'text-grey' : 'text-white'}}">
+          TO-DO-KALENDER
+        </h2>
+        
+      </div>
+      <div class="col-3   d-flex justify-content-end">
+        <fa-icon (click)="showCal = !showCal; showAllTodoImg = !showAllTodoImg" [icon]="showCal?faCalendar:faListOl" 
+          class="mr-2 ptr t-bold t-22 {{mode === 'light'? 'text-darkgrey' : 'text-white'}}" [title]="showCal?'Kalender Ansicht':'Liste Ansicht'"></fa-icon>
+        <span class="ptr px-2 t-bold t-22 {{mode === 'light'? 'text-darkgrey' : 'text-white'}}"
+              (click)="showAddMenu = !showAddMenu">
+          +
+        </span>
+        <ng-container *ngIf="showAddMenu">
+          <ul class="dropdown-list {{mode}}" (mouseleave)="showAddMenu = false">
+            <li class="ptr {{mode === 'light'? 'text-darkgrey' : 'text-white'}}" [routerLink]="['/newtodo']"><fa-icon [icon]="faCircle" class="text-ownTodo mr-2"></fa-icon>Eigenes To-do anlegen</li>
+            <li class="ptr {{mode === 'light'? 'text-darkgrey' : 'text-white'}}" [routerLink]="['/newdiary']"><fa-icon [icon]="faCircle" class="text-diary mr-2"></fa-icon>Eintrag in mein Tagebuch</li>
+            <li class="ptr {{mode === 'light'? 'text-darkgrey' : 'text-white'}}" [routerLink]="['/oekoscan']"><fa-icon [icon]="faCircle" class="text-bioscan mr-2"></fa-icon>Ökoscan</li>
+          </ul>
+        </ng-container>
+      </div>
+    </div>
+    <div class="row">
+
+      <div class="col-12" >
+        <div *ngIf="!todoIsReset" class="alert alert-success" role="alert">
+          <h4 class="alert-heading">To-Dos wurden aktualisiert!</h4>
+          <p>Bitte auf "To-Dos aktualisieren" klicken, wenn du deine To-dos auf den neuesten Stand bringen willst. Die eigene To-Dos bleiben unverändert</p>
+          <hr>
+          <button class="btn btn-green ptr t-13" (click)="resetTodos()">Todos aktualisieren</button>
+          <button type="button" class="close" t-13 (click)="hideResetButton=!hideResetButton" data-dismiss="alert" aria-label="Close">
+            Nicht Jetzt
+          </button>
+        </div>
+        <button *ngIf="!todoIsReset && !hideResetButton" class="btn btn-green ptr t-13 btn_border075" (click)="resetTodos()">Todos aktualisieren</button>
+      </div>
+    </div>
+    <div class="row  pb-3 pt-5  pl-0 pl-md-5 ">
+      <div class="col-7 col-xl-3 col-lg-4 col-md-4 text-center  pl-0 pr-0 ">
+        <div class="container d-flex justify-content-start pr-0 ml-lg-3 ">
+          <div class="row">
+            <div class="col-12 d-flex justify-content-center px-0">
+              <span class="t-19 mx-1 mt-1 {{mode === 'light'? 'text-blackish' : 'text-white'}} Hover" (click)="setMonth(-1);closeOpenMonthViewDay()">
+                <img src="./assets/main-icons/pfeilTodoKalendarL.png" width="10">
+              </span>
+              <select style="border-bottom: none !important;" class="t-bold t-19 month-view {{mode === 'light'? 'text-blackish' : 'text-white'}}" (change)="onMonthChange($event.target.value)">
+                <option [selected]="month.str === (viewDate | date:'MMMM')" *ngFor="let month of months" [value]="month.date">{{month.str}}</option>
+              </select>
+              <!-- <span style="pointer-events: none;margin-left: -10px;margin-top: 8px;" class="t-18 {{mode === 'light'? 'text-blackish' : 'text-white'}} Hover">
+                <img style="transform: rotate(90deg); pointer-events: none;" src="./assets/main-icons/pfeilTodoKalendarR.png" width="10">
+              </span> -->
+              <span class="t-19 mx-1 mt-1 {{mode === 'light'? 'text-blackish' : 'text-white'}} Hover" (click)="setMonth(1);closeOpenMonthViewDay()">
+                <img src="./assets/main-icons/pfeilTodoKalendarR.png" width="10">
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-5 col-md-4 pl-0 " >
+        <span class="t-19 mx-1 {{mode === 'light'? 'text-blackish' : 'text-white'}} Hover" (click)="hide=false;setYear(-1);closeOpenMonthViewDay()">
+          <img src="./assets/main-icons/pfeilTodoKalendarL.png" width="10">
+        </span>
+         <span *ngIf="!hide"style="width: 80px;" class="inline-block t-bold t-19 month-view {{mode === 'light'? 'text-blackish' : 'text-white'}} text-center" mwlCalendarToday [(viewDate)]="viewDate" (click)="hide=true">
+          {{ viewDate | date:'yyyy' }}
+        </span> 
+        <select *ngIf="hide" style="border-bottom: none !important;" class="t-bold t-19 month-view {{mode === 'light'? 'text-blackish' : 'text-white'}}" (change)="onYearChange($event.target.value)">
+          <option  [selected]="year.date === (viewDate | date:'yyyy')" *ngFor="let year of years" [value]="year.date">{{ year.date }}</option>
+        </select>
+        <span class="t-19 mx-1 {{mode === 'light'? 'text-blackish' : 'text-white'}} Hover" (click)="hide=false;setYear(1);closeOpenMonthViewDay()">
+          <img src="./assets/main-icons/pfeilTodoKalendarR.png" width="10">
+        </span>
+      </div>
+      <div class="col-12 col-md-12 col-lg-3 ml-auto set-mt">
+        <label class="t-bold t-13 {{mode === 'light'? 'text-blackish' : 'text-white'}}" >Gartenbereich</label>
+        <span class="subtext {{mode === 'light'? 'text-blackish' : 'text-white'}}">({{userLists?.length || 0}})</span>
+        <select [(ngModel)]="selectedUserListId" class="custom-select ptr col-12 bordered" style="height: 30px;" (change)="getTodos()">
+          <option [ngValue]="0">Gesamt</option>
+          <option *ngFor="let l of userLists" [ngValue]="l.Id">{{l.Name}}</option>
+        </select>
+        <fa-icon class="px-2 input-icon" style="padding-bottom: 5px;" [icon]="faChevronDown"></fa-icon>
+      </div>
+     
+    </div>
+    <div [hidden]="showCal && events">
+      <mwl-calendar-month-view class="calendar"
+                               [viewDate]="viewDate"
+                               [events]="events"
+                               [weekStartsOn]="weekStartsOn"
+                               [refresh]="refresh"
+                               [activeDayIsOpen]="activeDayIsOpen"
+                               (dayClicked)="dayClicked($event.day.date)">
+      </mwl-calendar-month-view>
+      <!--(eventClicked)="handleEvent('Clicked', $event.event)"-->
+
+      <div *ngIf="showTodoMode && todoToView" class="mt-4">
+        <div class="container wrapper {{mode}} pb-5">
+          <div class="row bt-border" *ngFor="let todo of todoToView; let n = index;">
+            <ng-container *ngIf="isMobile">
+              <div class="col-12 pt-3 px-0">
+                <h3 *ngIf="n === 0" class="col-12 t-bold t-16 py-3 bt-border text-greenLemon mb-0 {{mode}}">{{todo.DateStart || todo.Date | date:'EE dd. LLLL'}}</h3>
+                <div class="row {{mode}} mx-0">
+                  <div class="col-12 col-md-2 col-lg-4 todolist-item {{todo.ReferenceId?'todo':todo.ObjectId?(todo.DiaryType == 3 ?'diary':'bioscan'):'ownTodo'}} todo-img-wrapper p-0">
+                    <a [routerLink]="['/pflanze/', todo.RelatedPlantId, todo.RelatedPlantName]"><img style="width: 100%;" [src]="toUrl(todo.EntryImages[0]?.SrcAttr)" [alt]=todo.Title ></a>
+                  </div>
+                  <div class="col-12 col-md-10 col-lg-8 pt-1 {{todo.Description?'':'d-flex align-items-center'}}">
+                      <h3 class="t-reg t-16 {{mode === 'light'? 'text-blackish' : 'text-white'}}">{{todo.Title}}</h3>
+                        <details *ngIf="todo.Description" class="t-light t-14 {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+                          <summary [innerHTML]="todo.Description.substring(0,170)" class="d-inline"></summary>
+                          <span [innerHTML]="todo.Description.substring(170)"></span>
+                        </details>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6 pt-3 px-0 ">
+                <div class="container">
+                  <div class="row pt-1 pt-md-0">
+                    <div  class="col pl-0 pr-0 mt-2 bt-border mt-md-0 ">
+                      <h3 class=" t-bold t-16 mt-3 mb-3 pl-0 pr-0   mb-0 text-center {{mode}} {{mode === 'light'? 'text-blackish' : 'text-white'}} ">
+                        Erledigt
+                      </h3>
+                    </div>
+                    <div class="col-12 d-flex align-items-center {{mode}} h-140 justify-content-center ">
+                      <div class="form-group col-2 ch-container mb-0 ">
+                        <label class="t-reg t-12" *ngIf="todo.DateStart">
+                          <input type="checkbox" name="ViewedFinished" [(ngModel)]="todo.Finished"
+                                 (change)="markDone(todo)">
+                          <span class="checkmark cr ml-3"></span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6 pt-3 px-0">
+                <div class="container">
+                  <div class="row pt-1 pt-md-0">
+                    <div  class="col bt-border pl-0 pr-0 mt-2 mt-md-0 ">
+                      <h3 class=" t-bold t-16 py-3 pl-0 pr-0 mb-0 text-center  {{mode}} {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+                        Bearbeiten
+                      </h3>
+                    </div>
+                    <div class="col-12 d-flex align-items-center {{mode}} h-140 justify-content-center">
+                      <fa-icon [icon]="faMenu" class="ptr {{mode === 'light'? 'text-blackish' : 'text-white'}}"
+                               (click)="todo.showTodoMenuCal = !todo.showTodoMenuCal" tabindex="0"></fa-icon>
+                    </div>
+                    <ng-container *ngIf="todo.showTodoMenuCal">
+                      <ul [ngStyle]="{'margin-top.px': n === 0 ? '34' : '-14' }" class="dropdown-list view {{mode}}" (mouseleave)="todo.showTodoMenuCal = false">
+                        <li class="ptr" data-toggle="modal" (click)="selectedTodo = todo; todo.showTodoMenuCal = false;" data-target="#updateTodo">Bearbeiten</li>
+                        <li class="ptr text-danger" data-toggle="modal"
+                            (click)="selectTodo(todo);" data-target="#deleteTodo">Löschen</li>
+                      </ul>
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+            <ng-container *ngIf="!isMobile">
+            <div class="col-8 pt-3 px-0">
+              <h3 *ngIf="n === 0" class="col-12 t-bold t-16 py-3 bt-border text-greenLemon mb-0 {{mode}}">{{todo.DateStart || todo.Date | date:'EE dd. LLLL'}}</h3>
+              <div class="row {{mode}} mx-0">
+                <div class="col-12 col-md-2 col-lg-4 todolist-item {{todo.ReferenceId?'todo':todo.ObjectId?(todo.DiaryType == 3 ?'diary':'bioscan'):'ownTodo'}} todo-img-wrapper p-0">
+                  <a [routerLink]="['/pflanze/', todo.RelatedPlantId, todo.RelatedPlantName]"><img style="width: 100%;" [src]="toUrl(todo.EntryImages[0]?.SrcAttr)" [alt]=todo.Title></a>
+                </div>
+                <div class="col-12 col-md-10 col-lg-8 pt-1 {{todo.Description?'':'d-flex align-items-center'}}">
+                    <h3 class="t-reg t-16 {{mode === 'light'? 'text-blackish' : 'text-white'}}">{{todo.Title}}</h3>
+                      <details *ngIf="todo.Description && todo.DiaryType == 3" class="t-light t-14 {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+                        <summary [innerHTML]="todo.Description.substring(0,170)" class="d-inline"></summary>
+                        <span [innerHTML]="todo.Description.substring(170)"></span>
+                      </details>
+                      <details *ngIf="todo.Description && !todo.DiaryType" class="t-light t-14 {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+                        <summary [innerHTML]="todo.Description.substring(0,170)" class="d-inline"></summary>
+                        <span [innerHTML]="todo.Description.substring(170)"></span>
+                      </details>
+                        <a target="_blank" [routerLink]="['/oekoscan-result']" [queryParams]="{data:todo.Description}"   *ngIf="todo.Description && todo.DiaryType == 20" class="t-light t-14 {{mode === 'light'? 'text-blackish' : 'text-white'}}">Ökoscan</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-2 pt-3 px-0 ">
+              <div class="container">
+                <div class="row pt-1 pt-md-0">
+                  <div *ngIf="n === 0" class="col pl-0 pr-0 mt-2 bt-border mt-md-0 ">
+                    <h3 class=" t-bold t-16 mt-3 mb-3 pl-0 pr-0   mb-0 text-center {{mode}} {{mode === 'light'? 'text-blackish' : 'text-white'}} ">
+                      Erledigt
+                    </h3>
+                  </div>
+                  <div class="col-12 d-flex align-items-center {{mode}} h-140 justify-content-center ">
+                    <div class="form-group col-2 ch-container mb-0 ">
+                      <label class="t-reg t-12" *ngIf="todo.DateStart">
+                        <input type="checkbox" name="ViewedFinished" [(ngModel)]="todo.Finished"
+                               (change)="markDone(todo)">
+                        <span class="checkmark cr ml-3"></span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-2 pt-3 px-0">
+              <div class="container">
+                <div class="row pt-1 pt-md-0">
+                  <div *ngIf="n === 0" class="col bt-border pl-0 pr-0 mt-2 mt-md-0 ">
+                    <h3 class=" t-bold t-16 py-3 pl-0 pr-0 mb-0 text-center  {{mode}} {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+                      Bearbeiten
+                    </h3>
+                  </div>
+                  <div class="col-12 d-flex align-items-center {{mode}} h-140 justify-content-center">
+                    <fa-icon [icon]="faMenu" class="ptr {{mode === 'light'? 'text-blackish' : 'text-white'}}"
+                             (click)="todo.showTodoMenuCal = !todo.showTodoMenuCal" tabindex="0"></fa-icon>
+                  </div>
+                  <ng-container *ngIf="todo.showTodoMenuCal">
+                    <ul [ngStyle]="{'margin-top.px': n === 0 ? '34' : '-14' }" class="dropdown-list view {{mode}}" (mouseleave)="todo.showTodoMenuCal = false">
+                      <li class="ptr" *ngIf="todo.DiaryType != 20" data-toggle="modal" (click)="selectedTodo = todo; todo.showTodoMenuCal = false;" data-target="#updateTodo">Bearbeiten</li>
+                      <li class="ptr" *ngIf="todo.DiaryType == 20" [routerLink]="['/oekoscan-result']" [queryParams]="{data:todo.Description}">Ökoscan</li>
+                      <li class="ptr text-danger" data-toggle="modal"
+                          (click)="selectTodo(todo);" data-target="#deleteTodo">Löschen</li>
+                    </ul>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+            </ng-container>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div [hidden]="showAllTodoImg">
+      <ng-container *ngIf="todoImages?.length>0">
+        <div class="row" *ngFor="let image of todoImages">
+
+          <div class="col-6 col-md-6">
+            <img [src]="toUrl(image.EntryImages?.SrcAttr)">
+          </div>
+        </div>
+      </ng-container>
+      <!-- <ng-template #noImages>
+        <h2 class="t-reg {{mode === 'light'? 'text-darkgrey' : 'text-white'}}"> Diese Todo besitzt noch keine Bilder</h2>
+      </ng-template> -->
+    </div>
+    <div class="row d-flex justify-content-between bt-border">
+      
+      <ng-container *ngIf="!isMobile">
+        <div class="col-7 pt-3 px-0  pl-4">
+          <div class="row pl-4">
+            <h3 class="t-bold t-16 py-3 text-green mb-0 light {{mode}}">{{viewDate | date:'LLLL yyyy'}}</h3>
+          </div>
+        </div>
+        <div class="col-2 pt-3 pr-0">
+          <h3 class=" t-bold t-16 mt-4 mt-md-3  mb-0 text-center {{mode}} {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+            Erledigt
+          </h3>
+        </div>
+        <div class="col-3 col-md-2 pt-3 px-0">
+          <h3 class=" t-bold t-16 mt-4 mt-md-3  mb-0 text-center {{mode}} {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+            Bearbeiten
+          </h3>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="isMobile">
+        <div class="col-7 pt-3 px-0  pl-4">
+          <div class="row pl-4">
+            <h3 class="t-bold t-13 py-3 text-green mb-0 light {{mode}}">{{viewDate | date:'LLLL yyyy'}}</h3>
+          </div>
+        </div>
+        <div class="col-2 pt-3 pr-0">
+          <h3 class=" t-bold t-10 mt-4 mt-md-3  mb-0 text-center {{mode}} {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+            Erledigt
+          </h3>
+        </div>
+        <div class="col-3 col-md-2 pt-3 px-0">
+          <h3 class=" t-bold t-10 mt-4 mt-md-3  mb-0 text-center {{mode}} {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+            Bearbeiten
+          </h3>
+        </div>
+      </ng-container>
+     
+    </div>
+
+    <div class="row mb-4" *ngFor="let group of groupedTasks().values(); let t=index">
+      <div class="col-12 ">
+        <h3 class="col-12 t-bold t-16 py-3 mb-0 {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+          ab {{group[0].DateStart || group[0].Date | date:'EE dd. LLLL'}}
+        </h3>
+      </div>
+      
+      <div  *ngFor="let todo of group; let j=index" class="col-12 ">
+        <div  class="row todolist-item {{todo.ReferenceId?'todo':todo.ObjectId? (todo.DiaryType == 3 ?'diary':'bioscan'):'ownTodo'}}  d-flex justify-content-between pr-0">
+            <div  class="col-7 col-md-7 ">
+                <a data-toggle="collapse" [attr.data-target]="'#collapseDetail'+j+t" aria-expanded="false"
+                [attr.aria-controls]="'collapseDetail'+j+t" class=" d-inline-block t-reg t-16 py-3 mb-0 {{mode === 'light'? 'text-blackish' : 'text-white'}} " >
+                  {{todo.Title}}
+                </a>
+                <div [attr.id]="'collapseDetail'+j+t" class="row collapse mb-2">
+                  <div class="col-12 col-md-5"*ngIf="todo.EntryImages?.length>0">
+                    <a *ngIf="!todo.DiaryType" [routerLink]="['/pflanze/', todo.RelatedPlantId, todo.RelatedPlantName]"><img style="width: 100%;" [src]="toUrl(todo.EntryImages[0].SrcAttr)" [alt]=todo.Title class="plant-img"></a>
+                    <a *ngIf="todo.DiaryType " ><img style="width: 100%;" [src]="toUrl(todo.EntryImages[0].SrcAttr)" [alt]=todo.Title class="plant-img"></a>
+
+                  </div>
+                  <div class="mb-2 col-12 col-md-7">
+                    <p *ngIf="todo.Description && !todo.DiaryType" [innerHTML]="todo.Description" class="d-block t-light t-14 {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+                    </p>
+                    <p *ngIf="todo.Description && todo.DiaryType == 3" [innerHTML]="todo.Description" class="d-block t-light t-14 {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+                    </p>
+                    <p *ngIf="todo.Description && todo.DiaryType == 20"
+                      [innerHTML]="todo.DescriptionStr" 
+                      class="t-light t-14 {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+                    </p>
+                    <a target="_blank" *ngIf="todo.Description && todo.DiaryType == 20" [routerLink]="['/oekoscan-result']" [queryParams]="{data:todo.Description}" class="d-block t-light t-14 text-green">
+                      Details
+                    </a>
+                    <p *ngIf="todo.Notes" class="t-light t-14 {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+                      {{todo.Notes}}
+                    </p> 
+                    <p *ngIf="!todo.DiaryType" class="t-14 t-bold {{mode === 'light'? 'text-green' : 'text-green'}}">  Zu erledigen bis: {{ todo.DateEnd | date:'dd/MM/yyyy' }}</p>
+                  </div>
+              </div>
+            </div>
+              <div class="col-2 d-inline-block ">
+                  <div class="form-group col-2 ch-container mb-0 mx-auto">
+                    <label class="t-reg t-12" *ngIf="todo.DateStart">
+                      <input type="checkbox" name="ViewedFinished" [(ngModel)]="todo.Finished" (change)="markDone(todo)">
+                      <span class="checkmark cr ml-0 ml-md-3 mt-3 "></span>
+                    </label>
+                  </div>
+              </div>
+              <div class="col-2 d-inline-block text-center  mt-3">
+                <fa-icon [icon]="faMenu" class="ptr {{mode === 'light'? 'text-blackish' : 'text-white'}} " 
+                (click)="todo.showTodoMenu = !todo.showTodoMenu"></fa-icon>
+              </div>
+              <ng-container *ngIf="todo.showTodoMenu">
+                <ul class="dropdown-list {{mode}} to-right" (mouseleave)="todo.showTodoMenu = false">
+                  <li class="ptr" *ngIf="todo.DiaryType != 20" data-toggle="modal" (click)="selectedTodo = todo; todo.showTodoMenu = false;" data-target="#updateTodo">Bearbeiten</li>
+                  <li class="ptr" *ngIf="todo.DiaryType == 20" [routerLink]="['/oekoscan-result']" [queryParams]="{data:todo.Description}">Ökoscan</li>
+                  <li class="ptr text-danger" data-toggle="modal" (click)="selectedTodo = todo; todo.showTodoMenu = false;" data-target="#deleteTodo">Löschen</li>
+                </ul>
+              </ng-container>
+        </div>
+      </div>
+      <ng-container *ngIf="((t+1) % 5) == 0 " >
+            <app-ad [ad]="ad"></app-ad>
+
+          <!-- <app-ad [ad]="adBetween" ></app-ad> -->
+      </ng-container>
+    </div>
+    <ng-container *ngIf="!tasksInCurrentMonth?.length">
+      <div class="row my-3">
+        <div class="col-12 text-center">
+          <p class="t-16 {{mode==='dark'?'text-white':'text-darkgrey'}}">
+            Noch keine To-dos vorhanden. <br> To-dos werden automatisch angezeigt, wenn du Pflanzen in deinen Garten hinzufügst.<br>
+            Du kannst auch eigene To-dos hier anlegen. Pflanzen hinzufügen kannst du unter <a class="text-green" routerLink="/suche">Pflanzensuche</a>.
+          </p>
+        </div>
+      </div>
+    </ng-container>
+    <app-ad [ad]="ad" ></app-ad>
+
+  </div>
+</div>
+
+<ng-container *ngIf="selectedTodo">
+  <div class="modal fade" id="updateTodo" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content {{mode}}">
+        <div class="modal-header">
+          <h5 class="modal-title">{{selectedTodo.ObjectId?'Eintrag':'To-do'}} bearbeiten</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span class="{{mode==='dark'?'text-white':'text-darkgrey'}}" aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form class="modal-body">
+          <div class="row mb-3">
+            <div class="form-group col-12 px-2">
+              <label class="{{mode==='light'?'text-darkgrey':'text-white'}}">Titel</label>
+              <input [(ngModel)]="selectedTodo.Title" type="text" class="form-control" name="TodoTitle">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="form-group col-12 px-2">
+              <label class="{{mode==='light'?'text-darkgrey':'text-white'}}">Beschreibung</label>
+              <textarea [(ngModel)]="selectedTodo.Description" type="text" class="form-control" name="TodoDesc"></textarea>
+            </div>
+          </div>
+          <!--
+             <div class="row mb-3" >
+            <div class="form-group col-12 px-2">
+              <label class="{{mode==='light'?'text-darkgrey':'text-white'}}">Datum ändern</label>
+              <input *ngIf="selectedTodo.ObjectId" [(ngModel)]="selectedTodo.Date" type="date" class="form-control" name="TodoDate">
+              <input *ngIf="!selectedTodo.ObjectId" [(ngModel)]="selectedTodo.DateStart" type="date" class="form-control" name="TodoDate">
+            </div>
+          </div>
+          -->
+
+          <div class="row mb-3">
+            <div class="form-group col-12 px-2">
+              <label class="{{mode==='light'?'text-darkgrey':'text-white'}}">Meine Notizen</label>
+              <textarea *ngIf="selectedTodo.ObjectId" [(ngModel)]="selectedTodo.Description"
+                        type="text" class="form-control" name="TodoNotes">
+              </textarea>
+              <textarea *ngIf="!selectedTodo.ObjectId" [(ngModel)]="selectedTodo.Notes"
+                        type="text" class="form-control" name="TodoNotes">
+              </textarea>
+            </div>
+          </div>
+        </form>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn_border075 text-white" data-dismiss="modal">Abbrechen</button>
+          <button type="button" class="btn btn-green btn_border075 text-white" data-dismiss="modal" (click)="updateTodo(selectedTodo)">Speichern</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="selectedTodo">
+  <div class="modal fade" id="deleteTodo" tabindex="-1" role="dialog" aria-hidden="true" #dm>
+    <div class="modal-dialog" role="document">
+      <div class="modal-content {{mode}}">
+        <div class="modal-header">
+          <h5 class="modal-title">Bist du sicher, dass du dieses To-do löschen möchtest?</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span class="{{mode==='dark'?'text-ltgrey':'text-blackish'}}" aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body"></div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn_border075" data-dismiss="modal">Abbrechen</button>
+          <button type="button" class="btn btn-danger btn_border075 {{selectedTodo.CyclicId? 't-12':''}}" data-dismiss="modal" (click)="deleteTodo(selectedTodo)">Diesen Termin löschen</button>
+          <button *ngIf="selectedTodo.CyclicId" type="button" class="btn btn-danger t-12 btn_border075" data-dismiss="modal" (click)="deleteTodo(selectedTodo, true)">Alle Termine löschen</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>

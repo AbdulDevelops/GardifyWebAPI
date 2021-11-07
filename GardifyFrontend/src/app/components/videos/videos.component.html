@@ -1,0 +1,65 @@
+<div class="wrapper {{mode}}">
+  <div class="container pt-3 pb-5 text-darkgrey">
+    <app-ad [ad]="ad"></app-ad>
+    <div class="row mt-5 mb-4 bt-border pb-4">
+      <div class="col-12 col-md-12 col-lg-2">
+        <h2 class="t-light t-26 {{mode === 'light'? 'text-grey' : 'text-white'}}">VIDEOS</h2>
+      </div>
+      <div class="col-12 col-md-5 pl-md-5">
+        <label class="t-16 mr-2 {{mode === 'light'? 'text-blackish' : 'text-white'}}">Sortieren</label>
+        <select class="custom-select d-inline ptr col-11 col-md-12 col-lg-10 col-xl-12 bordered" (change)="sort($event.target.value)">
+          <option value="">-</option>
+          <option value="view">Beliebtheit</option>
+          <option value="date">Datum</option>
+        </select>
+        <fa-icon class="px-2 input-icon" [icon]="faChevronDown"></fa-icon>
+      </div>
+      <div class="col-12 col-md-5 pl-md-3">
+        <label class="t-16 mr-2 {{mode === 'light'? 'text-blackish' : 'text-white'}}">Themensuche</label>
+        <select class="custom-select d-inline ptr col-11 col-md-12 col-lg-10 col-xl-12 bordered" (change)="search($event.target.value)">
+          <option value="">-</option>
+          <option *ngFor="let topic of uniqueTopics" [ngValue]="topic">{{topic}}</option>
+        </select>
+        <fa-icon class="px-2 input-icon" [icon]="faChevronDown"></fa-icon>
+      </div>
+    </div>
+    <ng-container *ngIf="displayedVideos.length > 0; else novideos">
+      <div *ngFor="let video of displayedVideos; let i = index">
+        <ng-container *ngIf="((i) % 5) == 0 && i > 0" >
+          <app-ad [ad]="ad"></app-ad>
+
+        <!-- <app-ad [ad]="adBetween" ></app-ad> -->
+    </ng-container>
+        <div class="row py-5 bt-border {{mode}}">
+          <div class="col-12 col-md-12 col-lg-4 video-wrapper">
+            <iframe width="330" height="200" [src]="video.YTLink" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <div class="col-12 col-md-8 pl-md-5">
+            <h2 class="t-bold t-18 {{mode === 'light'? 'text-blackish' : 'text-white'}}">{{video.Title}}
+              <span class="t-13 t-light float-right">{{ video.Date | date:'dd.MM.yyyy' }}</span>
+            </h2>
+            <h2 class="t-light t-italic t-18 mb-3 mb-md-5 {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+              <span class="t-11 mx-1 vid-tag" *ngFor="let tag of video.Tags">{{tag}}</span>
+            </h2>
+            <div>
+              <span *ngIf="video.Text" class="t-light t-13 {{mode === 'light'? 'text-blackish' : 'text-white'}}" [innerHTML]="video.Text.substring(0,300)"></span>
+              <span *ngIf="!video.Details && video.Text.length > 300">...</span>
+              <span *ngIf="video.Details" class="t-light t-13 {{mode === 'light'? 'text-blackish' : 'text-white'}}" [innerHTML]="video.Text.substring(300)"></span>
+              <span *ngIf="video.Text.length > 300" (click)="video.Details = !video.Details" class="text-green t-bold ptr ml-2">{{video.Details ? 'weniger':'mehr'}}</span>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+  </ng-container>
+  <ng-template #novideos>
+    <div class="row">
+      <div class="col-12 {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+        <p>Kein Video gefunden.</p>
+      </div>
+    </div>
+  </ng-template>
+  <app-ad [ad]="ad"></app-ad>
+
+  </div>
+</div>

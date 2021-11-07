@@ -1,0 +1,174 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Intern</title>
+
+    <!-- loading these two from url to resolve navigation drop down issue -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/css/intern.css" />
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+
+    <!--
+        --
+        --
+        using ASP.NET Jquery File Upload Save and Delete don't work!
+        --
+        --
+        -->
+
+    <!--
+      <environment include="Development">
+          <!--  <script src="~/lib/jquery/dist/jquery.js"></script>
+          <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+      <script src="~/js/site.js" asp-append-version="true"></script>
+      </environment>
+      <environment include="Development">
+          <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.css" />
+          <link rel="stylesheet" href="~/css/intern.css" />
+      </environment>
+      <environment exclude="Development">
+          <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
+                  asp-fallback-src="~/lib/jquery/dist/jquery.js"
+                  asp-fallback-test="window.jQuery"
+                  crossorigin="anonymous"
+                  integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
+          </script>
+          <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+                  asp-fallback-src="~/lib/bootstrap/js/bootstrap.min.js"
+                  asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                  crossorigin="anonymous"
+                  integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
+          </script>
+          <script src="~/js/site.min.js" asp-append-version="true"></script>
+      </environment>
+    -->
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.css"
+              asp-fallback-href="~/lib/bootstrap/css/bootstrap.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/css/intern.css" asp-append-version="true" />
+    </environment>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+</head>
+<body>
+    <div class="container-fluid">
+        <header>
+            <nav class="navbar nav padding navbar-expand-md navbar-dark bg-dark fixed-top mb-2">
+                <!-- LOGO-->
+                <div class="col-2 align-middle" id="logo_jager">
+                    <a class="navbar-brand mb-1" href="~/Index">
+                        <img alt="" src="~/images/Gardify_Logo_Header_weiß.svg" height="60">
+                    </a>
+                </div>
+
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Newsletter
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a href="~/Newsletter/Index" class="nav-link">Newsletter</a>
+                                <a href="~/Newsletter/Subscribers" class="nav-link">Newsletter Abonnenten</a>
+                                <a href="~/Newsletter/SendNewsLetter" class="nav-link">Newsletter versenden</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a href="~/identity/Account/Logout" class="nav-link">Log out</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-8 ">
+                </div>
+                <div class="col-2 pr-0" id="logo_netzlab">
+                    <a class="navbar-brand mb-1 float-right" asp-page="/Index">
+                        <img alt="" src="~/images/netzlab_Logo.svg">
+                    </a>
+                </div>
+            </nav>
+
+        </header>
+
+        <div class="row">
+            @*<div class="col-2">
+                <nav class="topnav">
+                </nav>
+            </div>*@
+            <div class="col-12" style="position:relative">@RenderBody()</div>
+        </div>
+    </div>
+
+    @RenderSection("Scripts", required: false)
+    @*<script type="text/javascript" src="~/js/tiny_mce/tiny_mce.js"></script>*@
+    <script type="text/javascript" src="~/js/tinymce_4.8.5/tinymce/js/tinymce/tinymce.min.js"></script>
+    <script type="text/javascript">
+        tinyMCE.init({
+            oninit: "setPlainText",
+            language: "de",
+            mode: "specific_textareas",
+            editor_selector: "myTextEditor",
+            theme: "modern",
+            plugins: "preview,autosave,paste,autolink,link,code,image,charactercount",
+            width: "100%",
+            height: "500",
+
+            // Theme options - button# indicated the row# only
+            theme_advanced_buttons1: "bold,italic,underline,|,forecolor,charmap,|,formatselect,|,cut,copy,paste,|,cut,copy,paste,|,bullist,numlist,|,undo,redo,|,link,unlink,anchor,image,|,code,preview,|,removeformat, ",
+            theme_advanced_buttons2: "",
+            theme_advanced_buttons3: "",
+            theme_advanced_toolbar_location: "top",
+            theme_advanced_toolbar_align: "left",
+            theme_advanced_statusbar_location: "bottom",
+            theme_advanced_resizing: true,
+            invalid_elements: 'script'
+        });
+
+        function setPlainText() {
+            var ed = tinyMCE.get('elm1');
+
+            ed.pasteAsPlainText = true;
+
+            //adding handlers crossbrowser
+            if (tinymce.isOpera || /Firefox\/2/.test(navigator.userAgent)) {
+                ed.onKeyDown.add(function (ed, e) {
+                    if (((tinymce.isMac ? e.metaKey : e.ctrlKey) && e.keyCode == 86) || (e.shiftKey && e.keyCode == 45))
+                        ed.pasteAsPlainText = true;
+                });
+            } else {
+                ed.onPaste.addToTop(function (ed, e) {
+                    ed.pasteAsPlainText = true;
+                });
+            }
+        }
+    </script>
+    @RenderSection("Scripts2", required: false)
+
+    <div class="container-fluid">
+
+        <footer class="footer-copyright">
+            <div>
+                <!-- Copyright -->
+                <div class="text-black-50 py-3">
+                    &copy; 2020 -
+                    <a class="dark-grey-text text-dark" href="https://netzlab.de/"> netzlab GmbH</a>
+                </div>
+                <!-- Copyright -->
+            </div>
+        </footer>
+    </div>
+</body>
+
+
+</html>

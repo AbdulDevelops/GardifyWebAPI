@@ -1,0 +1,12 @@
+.article-img {
+    height: 320px;
+    width: 100%;
+    max-width: 320px;
+    object-fit: cover;
+}
+.article-sub-img {
+    height: 120px;
+    width: 120px;
+    object-fit: cover;
+    margin: 0 8px;
+}

@@ -1,0 +1,100 @@
+<footer  class="d-none d-lg-block container w-100 p-0">
+  <div  class="footer-oben {{mode}}">
+    <div class="row pl-5 pt-5">
+      <div class="col-2 pl-5 text-center">
+        <div class="row pb-3 text-left">
+            <div class="col-12 px-2 pb-3 {{mode === 'light' ? 'text-grey' : 'text-ltgrey'}}">
+                Du findest uns auch hier:
+            </div>
+            <div class="col p-1">
+                <a target="_blank" href="https://www.facebook.com/gardify/"><img class="social"  [src]="'/assets/images/social_fb.svg'"></a>
+            </div>
+        
+            <div class="col p-1">
+                <a target="_blank" href="https://www.instagram.com/gardify_official/"><img class="social"  [src]="'/assets/images/social_instagram.svg'"></a>
+            </div>
+            <div class="col p-1">
+                <a target="_blank" href="https://www.pinterest.de/gardify_official/"><img class="social"  [src]="'/assets/images/social_pinterest.svg'"></a>
+            </div>
+        
+        </div>
+        
+        <img [routerLink]="['/home']" [src]="mode==='dark'?'/assets/images/Gardify_Logo_weiss.svg':'/assets/images/Gardify_Logo_grau.svg'">
+      </div>
+      <div class="col-10 {{mode === 'light' ? 'text-grey' : 'text-ltgrey'}}">
+        <div class="row w-100 justify-content-between">
+          <ul class="col-3">
+            <div class="t-14 t-bold">Funktionen</div>
+            <li><a [routerLink]="['/meingarten']">Mein Garten</a></li>
+            <li><a [routerLink]="['/todo']">To-do-Kalender</a></li>
+            <li><a [routerLink]="['/wetter']">Wetter</a></li>
+            <li><a [routerLink]="['/suche']">Pflanzensuche</a></li>
+            <li><a [routerLink]="['/scanner']">Pflanzenscan</a></li>
+            <li><a [routerLink]="['/shop']">Shop</a></li>
+            <li><a data-toggle="modal" [attr.data-target]="isLoggedIn? '#suggest':''">Pflanze vorschlagen</a></li>
+            <li><a [routerLink]="['/vonAbisZ']">Gärtnern von A-Z</a></li>
+            <li><a [routerLink]="['/videos']">Videos</a></li>
+            <li><a [routerLink]="['/news']">News</a></li>
+            <li><a [routerLink]="['/oekoscan']">Ökoscan</a></li>
+          </ul>
+          <ul class="col-3">
+            <div class="t-14 t-bold">Hilfe/Support</div>
+            <li><a [routerLink]="['/team']">Team</a></li>
+            <li><a [routerLink]="['/start']">Quickstartanleitung</a></li>
+            <li><a class="ptr" role="button" (click)="startTour()">Guided Tour</a></li>
+            <li><a [routerLink]="['/pflanzendoc']">Pflanzen-Doc</a></li>
+            <li><a [routerLink]="['/community']">Community</a></li>
+            <li><a href="https://www.youtube.com/watch?v=zOc18eOb9Fg" target="_blank">gardify in 60 Sek</a></li>
+            <li><a [routerLink]="['/faq']">FAQ</a></li>
+            <li><a href="mailto:bugfix@gardify.de?subject=Fehlermeldung">Bugs melden</a></li>
+            <li *ngIf="!isLoggedIn"><a [routerLink]="['/']" [queryParams]="{mode:'lg'}">Login</a></li>
+            <li *ngIf="isLoggedIn"><a (click)="logout()">Logout</a></li>
+            <li><a [routerLink]="['/datenschutz']">Datenschutz</a></li>
+            <li><a [routerLink]="['/einstellungen']">Einstellungen</a></li>
+          </ul>
+          <ul class="col-3">
+            <div class="t-14 t-bold">Service</div>
+            <li><a [routerLink]="['/newsletter']">Newsletter</a></li>
+            <li><a [routerLink]="['/kontakt']">Kontakt</a></li>
+            <li><a [routerLink]="['/impressum']">Impressum</a></li>
+            <li><a [routerLink]="['/agb']">AGB</a></li>
+          </ul>
+          <ul class="col-3">
+            <div class="t-14 t-bold">Shop</div>
+            <li><a [routerLink]="['/warenkorb']">Warenkorb</a></li>
+            <li><a [routerLink]="['/warenkorb']" fragment="wunschliste">Wunschliste</a></li>
+            <li><a [routerLink]="['/bestellungen']">Bestellungen</a></li>
+            <li><a [routerLink]="['/agb']">AGB</a></li>
+            <li><a [routerLink]="['/widerruf']">Widerrufsbelehrung</a></li>
+            <li><a [routerLink]="['/agb']" fragment="abs6">Rücksendung</a></li>
+            <li><a [routerLink]="['/agb']" fragment="abs5">Porto/Versand</a></li>
+            <br/>
+            <li>Akzeptierte Zahlungsarten</li>
+            <img src="/assets/main-icons/paypal.png" class="payment-icon" title="PayPal"/>
+            <img src="/assets/main-icons/klarna.png" class="payment-icon" title="Klarna Sofortüberweisung"/>
+            <img src="/assets/main-icons/master-card.png" class="payment-icon" title="Mastercard"/>
+            <img src="/assets/main-icons/visa.png" class="payment-icon mr-0" title="Visa"/>
+            <img src="/assets/main-icons/rechnung.png" class="payment-icon rechnung" title="Rechnung"/>
+            <!-- statistik -->
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-unten {{mode}}">
+    <!-- Copyright -->
+    <p class="float-right t-11 text-white pr-4 mr-137 pt-2">&copy; gardify 2020</p>
+  </div>
+</footer>
+<div  class="container-fluid d-block d-lg-none sticky-bottom nav-unten-mobile {{mode}}">
+  <div class="row d-flex justify-content-around" style="margin-top:5px;">
+    <div routerLink="/" class="ctrl-icon home-icon d-inline col-2 {{mode}}"></div>
+    <div routerLink="/community" class="ctrl-icon msgs-icon d-inline col-2 {{mode}}"></div>
+
+    <div routerLink="/warenkorb" class="ctrl-icon cart-icon d-inline col-2 {{mode}}">
+      <span *ngIf="isLoggedIn" class="badge t-11 t-bold text-white {{mode}}">{{counter.shopCartCounter}}</span>
+      <span *ngIf="!isLoggedIn" class="badge t-11 t-bold text-white {{mode}}">0</span>
+    </div>
+    <div routerLink="/einstellungen" class="ctrl-icon setting-icon d-inline col-2 {{mode}}"></div>
+  </div>
+</div>

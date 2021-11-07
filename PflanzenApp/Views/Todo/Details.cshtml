@@ -1,0 +1,43 @@
+﻿@model GardifyModels.Models.TodoViewModels.TodoDetailsViewModel
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>@Model.Title</h2>
+<div>
+    <div class="alert alert-info">Zu erledigen bis spätestens @Model.DateEnd.ToString("dd/MM/yyyy")</div>
+    <hr />
+    <h4>Beschreibung:</h4>
+    <br />
+    <p>@Model.Description</p>
+    <hr />
+    @if (Model.VideoReferenceList.Count() > 0)
+    {
+        <h2>Dazugehörige Videos</h2>
+        foreach (var vid in Model.VideoReferenceList)
+        {
+            <h4>@vid.Title</h4>
+            @Html.Raw(vid.GetHmlCode())
+        }
+        <hr />
+    }
+    @if (Model.Finished)
+    {
+        <div class="alert alert-success">
+            @Html.Label("Ist erledigt")
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning">
+            @Html.Label("Noch ausstehend")
+        </div>
+    }
+</div>
+<hr />
+<p>
+    @Html.Partial("_TodoTableMarkActions", Model)
+    <br />
+    @Html.ActionLink("Dieses Todo bearbeiten", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Zurück zur Todoübersicht", "Index")
+</p>

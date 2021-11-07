@@ -1,0 +1,283 @@
+
+  <ng-container *ngIf="!isMobile; else mobile">
+    <ng-container *ngIf="userDevicesList?.length>0; else noDevice">
+      <div class="row mb-4" >
+        <div class="col-12 col_table">
+          <table class="table table-hover">
+            <thead class="t-bold t-18 backgrdColorGreenish">
+              <tr>
+                <th scope="col"></th>
+                <th scope="col">Anzahl</th>
+                <th scope="col">Frostwarnung</th>
+                <th scope="col">Sturmwarnung</th>
+                <th scope="col">Bearbeiten</th>
+  
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngFor="let device of userDevicesList">
+                <tr class="text-green t-reg t-16">
+                  <th scope="row">
+                    <div class="d-flex">
+                      <div *ngIf="device.EntryImages?.length>0" class="col-12 col-md-4 t-bold t-16 pl-0  {{mode === 'light'? 'text-darkgrey' : 'text-white'}}">
+                        <div class="d-inline-block ">
+                          <img *ngIf="device.AdminDevId"class="dev-img height_50 t-9 t-light" [src]="toUrl(device.EntryImages[0].SrcAttr,true,false,true)" [alt]="">
+                          <img *ngIf="!device.AdminDevId"class="dev-img height_50 t-9 t-light" [src]="toUrl(device.EntryImages[0].SrcAttr,true,false,false)" [alt]="">
+                        </div>
+                      </div>
+                      <div>
+                        <span class="ml-5 mt-1" style="line-height: 5rem;">{{device.Name}}</span>
+                      </div>
+                    </div>
+                  </th>
+                  <td><span class="text-green t-reg" style="line-height: 5rem;">{{device.Count}}</span></td>
+                  <td>
+                    
+                    <div class="form-group  p-4 {{mode}}  ">
+                      
+                        <mat-slide-toggle [checked]="device.notifyForFrost" (change)=" updateDeviceNotification(device,'notifyForFrost')" ></mat-slide-toggle>
+
+                      
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group  p-3 {{mode}} ">
+                      
+                      <mat-slide-toggle [checked]="device.notifyForWind" (change)=" updateDeviceNotification(device,'notifyForWind')"></mat-slide-toggle>
+
+                    </div>
+                  </td>
+                  <td>
+                    <span (click)="toggleDeviceMenu(device); selectedDevice=device" class="px-2 ptr t-bold t-12 position-relative offset-top">
+                      <fa-icon [icon]="faMenu" class="{{mode === 'light'?'text-darkgrey':'text-white'}} t-14" style="line-height: 5rem;"></fa-icon>
+                    </span>
+                    <ng-container *ngIf="device.showMenu">
+                      <ng-template [ngTemplateOutlet]="showDeviceMenu"></ng-template>
+                    </ng-container>
+                  </td>
+                </tr>
+              </ng-container>
+             
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </ng-container>
+      <ng-template #noDevice>
+        <p class="{{mode === 'light'? 'text-darkgrey' : 'text-white'}} my-3 text-center">Es gibt noch keine Geräte/ Zubehör in deinem Garten.</p>
+      </ng-template>
+     </ng-container>
+     <ng-template #mobile>
+      <ng-container *ngIf="userDevicesList?.length>0; else noDevice">
+        <div class="col-lg-12 mb-4" *ngFor="let device of userDevicesList">
+          <div class="row mt-3 mb-5 bt-border">
+            <div class="col-12 col-md-12 col-lg-4">
+               <div *ngIf="device.EntryImages?.length>0" class="col-12 col-md-12 col-lg-4 t-bold t-16 pl-0  {{mode === 'light'? 'text-darkgrey' : 'text-white'}}">
+                 <div class="d-inline-block "><img class="dev-img height_50 t-9 t-light" [src]="toUrl(device.EntryImages[0].SrcAttr,true,false,true)" [alt]="">
+                </div><span class="ml-5 mt-1">{{device.Name}}</span>
+              </div>
+            </div>
+              <div class="col-12 col-md-4 col-lg-2 t-bold t-14  {{mode === 'light'? 'text-darkgrey' : 'text-white'}}">
+                <div class="row">
+                  <div class="col-6 col-md-12">Frostwarnung </div>
+                  <div class=" col-6 col-md-12 pb-3 {{mode}} pt-1 pl-5  px-2 ptr"(click)="updateDeviceNotification(device,'notifyForFrost')">
+                      <fa-icon [icon]="faCircle" class="{{!device.notifyForFrost?'text-ltgrey':'text-green'}} t-11"></fa-icon>
+                  </div>
+                </div>
+              </div>
+            <div class="col-12 col-md-4 col-lg-2 t-bold t-14 {{mode === 'light'? 'text-darkgrey' : 'text-white'}} ">
+              <div class="row">
+                <div class="col-6 col-md-12">Sturmwarnung</div>
+                <div class="col-6 col-md-12  pb-3 {{mode}} pt-1 pl-5  px-2 ptr">
+                  <div (click)="updateDeviceNotification(device,'notifyForWind')">
+                    <fa-icon [icon]="faCircle" class="{{!device.notifyForWind?'text-ltgrey':'text-green'}} t-11"></fa-icon>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="col-12 col-md-2 ">
+              <div class="row">
+                <div class="col-6 t-bold t-14 {{mode === 'light'? 'text-darkgrey' : 'text-white'}}">To-do </div>
+                <div class=" col-6 pb-3 {{mode}} pt-1 pl-5  px-2 ">
+                  {{device.Note}}
+                </div>
+              </div>
+
+            </div> -->
+            <div class="col-12 col-md-4 col-lg-2 t-bold t-14 {{mode === 'light'? 'text-darkgrey' : 'text-white'}}">Bearbeiten
+              <span (click)="toggleDeviceMenu(device);selectedDevice = device " class="px-2 ptr t-bold t-12 position-relative offset-top">
+                <fa-icon [icon]="faMenu" class="{{mode === 'light'?'text-darkgrey':'text-white'}} t-14"></fa-icon>
+              </span>
+              <ng-container *ngIf="device.showMenu">
+                <ng-template [ngTemplateOutlet]="showDeviceMenu"></ng-template>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+     
+    </ng-template>
+      <!--Modal addnewOwndevice-->
+      
+          <div class="modal fade" id="addnewdevice" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content {{mode}}">
+                <div class="modal-header">
+                  <h5 class="modal-title">Geräte-Eigenschaften</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span class="{{mode==='dark'?'text-white':'text-darkgrey'}}" aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="ml-2 modal-body">
+                  
+                  <div>
+                    <p class="{{mode==='dark'?'text-white':'text-blackish'}} mb-2">Gerät(e) auswählen:</p>
+                    <ng-multiselect-dropdown class="{{mode==='dark'?'text-white':'text-blackish'}} "
+                      [placeholder]="'Geräte'"
+                      [data]="listOfDevices"
+                      [(ngModel)]="selectedDevices"
+                      [settings]="dropdownSettings"
+                      [ngModelOptions]="{standalone: true}"
+                      (onSelect)="onItemSelect($event)"
+                      >
+                    </ng-multiselect-dropdown>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button class="btn btn-green t-bold float-right m-2 text-white btn_border075" data-dismiss="modal" (click)=" postSelectedDevice()" type="submit">Hinzufügen</button>
+                </div>
+              </div>
+          </div>
+     </div>
+      <!--Modal updateDevice -->
+      <ng-container *ngIf="selectedDevice">
+          <div class="modal fade" id="updateDevice" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content {{mode}}">
+                <div class="modal-header">
+                  <h5 class="modal-title">{{updateDeviceMode=='date'?'Wartungszeitraum eintragen':'Inaktiv schalten'}}</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span class="{{mode==='dark'?'text-white':'text-darkgrey'}}" aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <form class="modal-body" ngNativeValidate>
+                  <div class="row mb-3">
+                    <div *ngIf="updateDeviceMode=='date'" class="form-group col-12 px-2">
+                      <label class="text-darkgrey">
+                      <input type="date" placeholder="tt.mm.jjjj" [(ngModel)]="selectedDevice.Date" class="form-control" name="Date" required>
+                    </label>
+                    </div>
+                    <!--
+                      <div *ngIf="updateDeviceMode=='deactivate'" class="form-group ch-container col-12 px-2">
+                      <label class="text-darkgrey">
+                      <input type="checkbox" [(ngModel)]="selectedDevice.isActive" class="form-control" name="isActive">
+                      <span class="checkmark mt-1 ml-3"></span>
+                    </label>    
+                     
+                    </div>
+                    -->
+                    
+                  </div>
+                </form>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
+                  <button type="button" class="btn btn-green" data-dismiss="modal" (click)="updateDevice()">Speichern</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="selectedDevice">
+          <!-- Add to list Modal -->
+          <div class="modal fade" id="saveToList" tabindex="-1" role="dialog" aria-hidden="true" #dm>
+            <div class="modal-dialog" role="document">
+              <div class="modal-content {{mode}}">
+                <div class="modal-header">
+                  <h5 class="modal-title"><b>{{selectedDevice.Name}}</b> zu einer Liste hinzufügen</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span class="{{mode==='dark'?'text-ltgrey':'text-blackish'}}" aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <label class="{{mode==='dark'?'text-white':'text-blackish'}} mb-0">Liste auswählen:</label>
+                  <select [(ngModel)]="selectedList" class="custom-select">
+                    <option *ngFor="let list of lists" [ngValue]="list.Id">{{list.Name}}</option>
+                  </select>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
+                  <button type="button" class="btn btn-green" data-dismiss="modal" (click)="addToList()">Speichern</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          </ng-container>
+          <!-- delete device Modal -->
+          <ng-container *ngIf="selectedDevice">
+            <div class="modal fade" id="deleteDevice" tabindex="-1" role="dialog" aria-hidden="true" #dm>
+              <div class="modal-dialog" role="document">
+                <div class="modal-content {{mode}}">
+                  <div class="modal-header">
+                    <h5 class="modal-title"><b>{{selectedDevice.Name}}</b> löschen</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span class="{{mode==='dark'?'text-ltgrey':'text-blackish'}}" aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <p class="{{mode==='dark'?'text-ltgrey':'text-blackish'}}">Bist du sicher, dass du dieses Gerät löschen möchtest?</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="deleteUserDevice()">löschen</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </ng-container>
+        <ng-container *ngIf="showLists">
+            <!-- New List Modal -->
+            <div class="modal fade" id="newList" tabindex="-1" role="dialog" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content {{mode}}">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Neue Liste Erstellen</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span class="{{mode==='dark'?'text-ltgrey':'text-blackish'}}" aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <form [formGroup]="newList" class="modal-body" ngNativeValidate>
+                    <div class="row mb-3">
+                      <div class="form-group col-12 mb-3">
+                        <input formControlName="Name" type="text" class="form-control" placeholder="Name der Liste" required>
+                      </div>
+                      <div class="form-group col-12">
+                        <input formControlName="Description" type="text" class="form-control"
+                          placeholder="Beschreibung (optional)">
+                      </div>
+                    </div>
+                  </form>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
+                    <button type="button" class="btn btn-green" data-dismiss="modal" [disabled]="!listIsValid"
+                      (click)="createList();showLists = false;">Erstellen</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+          <ng-template #showDeviceMenu>
+            <ul class="dropdown-list {{mode}}" (mouseleave)="selectedDevice.showMenu = false">
+              <!-- <li class="ptr" data-toggle="modal"><span  [routerLink]="'/newtodo/'+device.Id">To-do Text für Kalendareintrag</span></li> -->
+              <li class="ptr text-darkgrey" >Anzahl
+                <div class="d-inline-block ml-3" style="line-height: 18px;">
+                  <button (click)="stepCount(-1,selectedDevice)" class="ptr" style="width: 20px;border: none;background: #7a9d34;">-</button>
+                  <span class="t-reg t-13 mx-2">{{selectedDevice.Count}}</span>
+                  <button (click)="stepCount(1,selectedDevice)" class="ptr" style="width: 20px;border: none;background: #7a9d34;">+</button>
+              </div>
+              </li>
+              <li class="ptr text-danger" data-toggle="modal" (click)="selectedDevice = selectedDevice; selectedDevice.showMenu = false; " data-target="#deleteDevice">löschen</li>
+              <li class="ptr text-darkgrey" (click)="selectedDevice.showMenu = false">ausblenden</li>
+            </ul>
+          </ng-template>
+        
+      

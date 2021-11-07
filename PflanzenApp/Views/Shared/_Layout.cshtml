@@ -1,0 +1,145 @@
+﻿@model GardifyModels.Models._BaseViewModel
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - PflanzenApp</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+	@Scripts.Render("~/bundles/jquery")
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("PflanzenApp", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown">
+                            Menu
+                        </a>
+                        <div class="dropdown-menu">
+                            <ul class="nav navbar-nav">
+                                <li>@Html.ActionLink("Mein Garten", "Index", "Garden")</li>
+                                <li>@Html.ActionLink("Meine Pflanzen", "Index", "UserPlant")</li>
+                                <li>@Html.ActionLink("Meine Todoliste", "Index", "Todo")</li>
+                                <li>@Html.ActionLink("Pflanzenlexikon", "Index", "PlantSearch")</li>
+                                <li>@Html.ActionLink("Pflanzendoktor", "Index", "Faq")</li>
+                                @*<li>@Html.ActionLink("Garten-News", "Index", "News")</li>
+                                <li>@Html.ActionLink("Profil", "Index", "Profile")</li>
+                                <li>@Html.ActionLink("Forum", "Index", "Forum")</li>
+                                <li><a href="@Url.Action("Index", "Article")">Shop</a></li>
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <li><a href="~/intern/plant">Adminbereich</a></li>
+                                }*@
+                            </ul>
+                                
+                        </div>
+                    </li>
+					@*<li>@Html.ActionLink("Mein Garten", "Index", "Garden")</li>
+					<li>@Html.ActionLink("Meine Pflanzen", "Index", "UserPlant")</li>
+					<li>@Html.ActionLink("Meine Todoliste", "Index", "Todo")</li>
+					<li>@Html.ActionLink("Pflanzenlexikon", "Index", "PlantSearch")</li>
+					<li>@Html.ActionLink("Pflanzendoktor", "Index", "Faq")</li>*@
+					<li>@Html.ActionLink("Garten-News", "Index", "News")</li>
+					<li>@Html.ActionLink("Profil", "Index", "Profile")</li>
+					<li>@Html.ActionLink("Forum", "Index", "Forum")</li>
+					<li><a href="@Url.Action("Index", "Article")">Shop</a></li>
+					@if (User.IsInRole("Admin"))
+					{
+						<li><a href="~/i/home">Adminbereich</a></li>
+					}
+				</ul>
+                @Html.Partial("_LoginPartial", new ViewDataDictionary { { "shopcartCounter", Model.ShopcartCounter } })
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year</p>
+        </footer>
+    </div>    
+	@Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/globalize")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    <script type="text/javascript">
+        $.validator.methods.number = function (value, element) {
+            return this.optional(element) ||
+                !isNaN(Globalize.parseFloat(value));
+        }
+        $(document).ready(function () {
+           // Globalize.culture('@(System.Threading.Thread.CurrentThread.CurrentCulture.Name)');
+        });
+
+        jQuery.extend(jQuery.validator.methods, {
+            range: function (value, element, param) {
+                //Use the Globalization plugin to parse the value
+                var val = Globalize.parseFloat(value);
+                return this.optional(element) || (
+                    val >= param[0] && val <= param[1]);
+            }
+        });
+        $.validator.methods.date = function (value, element) {
+            return this.optional(element) ||
+                Globalize.parseDate(value) ||
+                Globalize.parseDate(value, "dd-MM-yyyy") ||
+                Globalize.parseDate(value, "dd.MM.yyyy");
+        }
+
+        function updateShopcartCounter() {
+        	$.ajax({
+        		url: '@Url.Action("getShopcartCounter", "Shopcart")',
+        		type: 'get',
+        		cache: false        		
+        	})
+			.done(function (result) {
+				$('#shopcart-counter').html(result);				
+			});
+        }
+
+        //------------------ ADD CSRF-TOKEN TO AJAX ----------------------
+        //function GetAntiForgeryToken() {
+        //    var tokenField = $("input[type='hidden'][name$='RequestVerificationToken']");
+        //    if (tokenField.length == 0) {
+        //        return null;
+        //    } else {
+        //        return {
+        //            name: tokenField[0].name,
+        //            value: tokenField[0].value
+        //        };
+        //    }
+        //}
+
+        //$.ajaxPrefilter(
+        //    function (options, localOptions, jqXHR) {
+        //        if (options.type !== "GET") {
+        //            var token = GetAntiForgeryToken();
+        //            if (token !== null) {
+        //                if (options.data.indexOf("X-Requested-With") === -1) {
+        //                    options.data = "X-Requested-With=XMLHttpRequest" + ((options.data === "") ? "" : "&" + options.data);
+        //                }
+        //                options.data = options.data + "&" + token.name + '=' + token.value;
+        //            }
+        //        }
+        //    }
+        // );
+    </script>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.gardify.android.ui.plantDoc.PlantDocRow xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="@dimen/cardCornerRadius_medium"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="20dp">
+
+                <ImageView
+                    android:id="@+id/imageView_plant_doc_plant_item_plant_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:id="@+id/view2"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="4dp"
+                    android:background="@color/view_all_black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView_plant_doc_row_item_header" />
+
+                <TextView
+                    android:id="@+id/textView_plant_doc_row_item_date"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/source_sans_pro"
+                    android:text="Datum"
+                    android:textSize="@dimen/textSize_body_medium"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView_plant_doc_plant_item_plant_image" />
+
+                <TextView
+                    android:id="@+id/textView_plant_doc_row_item_header"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Überschrift"
+                    android:textColor="@color/text_all_black"
+                    android:fontFamily="@font/source_sans_pro"
+                    android:textSize="@dimen/textSize_headline"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView_plant_doc_row_item_date" />
+
+                <TextView
+                    android:id="@+id/textView_plant_doc_row_item_answer"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Antworten"
+                    android:fontFamily="@font/source_sans_pro"
+                    android:textSize="@dimen/textSize_body_medium"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/view2" />
+
+                <ImageView
+                    android:id="@+id/imageView_plant_doc_row_item_button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView_plant_doc_row_item_answer"
+                    app:layout_constraintEnd_toEndOf="@+id/textView_plant_doc_row_item_answer"
+                    app:layout_constraintTop_toTopOf="@+id/textView_plant_doc_row_item_answer"
+                    app:srcCompat="@drawable/expand" />
+
+                <TextView
+                    android:id="@+id/textView_view_plant_doc_row_question_header"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/plantDoc_question"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/text_all_black"
+                    android:fontFamily="@font/source_sans_pro"
+                    android:textSize="@dimen/textSize_body_medium"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView_plant_doc_row_item_answer" />
+
+                <TextView
+                    android:id="@+id/textView_plant_doc_row_item_question"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="TextView"
+                    android:fontFamily="@font/source_sans_pro"
+                    android:textSize="@dimen/textSize_body_medium"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView_view_plant_doc_row_question_header" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.gardify.android.ui.plantDoc.PlantDocRow>

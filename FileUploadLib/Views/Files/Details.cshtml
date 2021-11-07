@@ -1,0 +1,268 @@
+﻿@model FileUploadLib.TagHelpers.FileDisplayTagHelper
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    var guid = "s" + Guid.NewGuid().ToString().Replace("-", "");
+    var imageCount = Model.Files.Count();
+}
+<link rel="stylesheet" href="~/Files/css/font-awesome.css" />
+<style>
+    .max-width{
+        max-width: @(Model.MaxWidth)px;
+    }
+
+    .position-relative{
+        position: relative;
+    }
+
+    .fit-content{
+        width: fit-content;
+    }
+
+    .zoom-icon{
+        color: white;
+        font-size: 100px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        text-align: center;
+    }
+</style>
+@{
+    if (Model.DisplaySlider)
+    {
+        Model.Files = Model.Files.Where(f => f.File.IsImageFile);
+    }
+}
+@if (imageCount == 0)
+{
+    @if (Model.DisplayErrors)
+    {
+        @: Es wurden keine Dateien gefunden
+    }
+}
+else
+{
+    @if (Model.DisplaySlider)
+    {
+        <div class="bd-example">
+            <div id="@guid" class="carousel slide" data-ride="carousel">
+                @if (Model.DisplaySliderIndicators)
+                {
+                    <ol class="carousel-indicators">
+                        <li data-target="#@guid" data-slide-to="0" class="active"></li>
+                        @if (Model.Files.Count() > 1)
+                        {
+                            for (int i = 1; i < Model.Files.Count(); i++)
+                            {
+                                <li data-target="#@guid" data-slide-to="@i"></li>
+                            }
+                        }
+                    </ol>
+                }
+                <div class="carousel-inner">
+                    <div class="carousel-item active zoomable">
+                        @{var path = Model.Files.First().File.Path.Replace("\\", "/"); }
+                        <img src="~/@path" class="d-block w-100 @Model.CssClasses" alt="@Model.Files.First().AltText">
+                        @if (Model.UsesZoom)
+                        {
+                            var file = Model.Files.First();
+                            path = file.File.Path.Replace("\\", "/");
+                            <div class="overlay" onclick='showZoom("@path", "@file.Title", "@file.Description", "@file.AltText")'>
+                                <a data-toggle="modal" id="open-zoom">
+                                    <i class="fas fa-search zoom-icon"></i>
+                                </a>
+                            </div>
+                        }
+                        @if (Model.UsesDescription || Model.UsesTitle)
+                        {
+                            <div class="carousel-caption d-none d-md-block">
+                                @if (Model.UsesTitle)
+                                {
+                                    <h5>@Model.Files.First().Title</h5>
+                                }
+                                @if (Model.UsesDescription)
+                                {
+                                    <p>@Model.Files.First().Description</p>
+                                }
+                            </div>
+                        }
+                    </div>
+                    @if (Model.Files.Count() > 1)
+                    {
+                        @foreach (var file in Model.Files.Skip(1))
+                        {
+
+                            <div class="carousel-item zoomable">
+                                <img src="~/@file.File.GetNearest(Model.MaxWidth)?.Path" class="d-block w-100 @Model.CssClasses" alt="@file.AltText">
+                                @if (Model.UsesZoom)
+                                {
+                                    path = file.File.Path.Replace("\\", "/");
+                                    <div class="overlay" onclick='showZoom("@path", "@file.Title", "@file.Description", "@file.AltText")'>
+                                        <a data-toggle="modal" id="open-zoom">
+                                            <i class="fas fa-search zoom-icon"></i>
+                                        </a>
+                                    </div>
+                                }
+                                @if (Model.UsesDescription || Model.UsesTitle)
+                                {
+                                    <div class="carousel-caption d-none d-md-block">
+                                        @if (Model.UsesTitle)
+                                        {
+                                            <h5>@file.Title</h5>
+                                        }
+                                        @if (Model.UsesDescription)
+                                        {
+                                            <p>@file.Description</p>
+                                        }
+                                    </div>
+                                }
+                            </div>
+                        }
+                    }
+                </div>
+                <a class="carousel-control-prev" href="#@guid" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Vorheriges</span>
+                </a>
+                <a class="carousel-control-next" href="#@guid" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Nächstes</span>
+                </a>
+            </div>
+
+        </div>
+    }
+    else if (Model.DisplayAsGrid)
+    {
+        <div class="row">
+            @foreach (var file in Model.Files)
+            {
+                <div class="position-relative zoomable col-@Model.GridWidth">
+                    @if (file.File.IsImageFile)
+                    {
+                        <img src="~/@file.File.GetNearest(Model.MaxWidth)?.Path" class="@Model.CssClasses" alt="@file.AltText">
+                        @if (Model.UsesZoom)
+                        {
+                            var path = file.File.Path.Replace("\\", "/");
+                            <div class="overlay" onclick='showZoom("@path", "@file.Title", "@file.Description", "@file.AltText")'>
+                                <a data-toggle="modal" id="open-zoom">
+                                    <i class="fas fa-search zoom-icon"></i>
+                                </a>
+                            </div>
+                        }
+                    }
+                    else if (file.File.IsPdfFile)
+                    {
+                        <div>
+                            <a asp-controller="File" asp-action="Download" asp-route-fileToModuleId="@file.FileToModuleId" target="_blank">
+                                <i class="far fa-file-pdf fa-4x"></i>
+                                <p>@file.File.OriginalFileName</p>
+                            </a>
+                        </div>
+                    }
+                    else if (file.File.IsExcelFile)
+                    {
+                        <div>
+                            <a asp-controller="File" asp-action="Download" asp-route-fileToModuleId="@file.FileToModuleId" target="_blank">
+                                <i class="far fa-file-excel fa-4x"></i>
+                                <p>@file.File.OriginalFileName</p>
+                            </a>
+                        </div>
+                    }
+                    @if (Model.UsesDescription || Model.UsesTitle)
+                    {
+                        <div class="card-body">
+                            @if (Model.UsesTitle)
+                            {
+                                <h5 class="card-title">@file.Title</h5>
+                            }
+                            @if (Model.UsesDescription)
+                            {
+                                <p class="card-text">@file.Description</p>
+                            }
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        @foreach (var file in Model.Files)
+        {
+            @*<div>
+                    File: @file.File
+                    FileId: @file.FileId
+                    ModuleId: @file.ModuleId
+                    FileToModuleId: @file.FileToModuleId
+                    ImageFile: @file.File.IsImageFile
+                    FilePath: @file.File.Path
+                    Nearest: @file.File.GetNearest(Model.MaxWidth)
+                    NearestPath: @file.File.GetNearest(Model.MaxWidth)?.Path
+                </div>*@
+            @if (file.File.IsImageFile)
+            {
+                <div class="position-relative zoomable fit-content">
+                    <img src="~/@file.File.GetNearest(Model.MaxWidth)?.Path" class="max-width @Model.CssClasses" alt="@file.AltText">
+                    @if (Model.UsesZoom)
+                    {
+                        var path = file.File.Path.Replace("\\", "/");
+                        <div class="overlay" onclick='showZoom("@path", "@file.Title", "@file.Description", "@file.AltText")'>
+                            <a data-toggle="modal" id="open-zoom">
+                                <i class="fas fa-search zoom-icon"></i>
+                            </a>
+                        </div>
+                    }
+                </div>
+            }
+            else if (file.File.IsPdfFile)
+            {
+                <div>
+                    <a asp-controller="File" asp-action="Download" asp-route-fileToModuleId="@file.FileToModuleId" target="_blank">
+                        <i class="far fa-file-pdf fa-4x"></i>
+                        <p>@file.File.OriginalFileName</p>
+                    </a>
+                </div>
+            }
+            else if (file.File.IsExcelFile)
+            {
+                <div>
+                    <a asp-controller="File" asp-action="Download" asp-route-fileToModuleId="@file.FileToModuleId" target="_blank">
+                        <i class="far fa-file-excel fa-4x"></i>
+                        <p>@file.File.OriginalFileName</p>
+                    </a>
+                </div>
+            }
+            @if (Model.UsesDescription || Model.UsesTitle)
+            {
+                @if (Model.UsesTitle)
+                {
+                    <h5>@file.Title</h5>
+                }
+                @if (Model.UsesDescription)
+                {
+                    <p>@file.Description</p>
+                }
+            }
+        }
+    }
+    @if (Model.UsesZoom)
+    {
+        <partial name="_ImageZoom" />
+    }
+}
+
+<script>
+    var privateFileModule@(Model.DetailId) = {};
+    var fileModule@(Model.DetailId) = new Proxy(privateFileModule@(Model.DetailId), {
+        set: function (target, key, value) {
+            target[key] = value;
+            if (key == "getImageCount" && typeof privateFileModule@(Model.DetailId).getImageCount === "function") {
+                console.log("From details page:",@imageCount, @Model.DetailId);
+                privateFileModule@(Model.DetailId).getImageCount(@imageCount, @Model.DetailId);
+            }
+        }
+    });
+</script>

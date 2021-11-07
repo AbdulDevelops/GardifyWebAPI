@@ -1,0 +1,1 @@
+﻿<a class="shopcart-link" href="@Url.Action("Index", "Shopcart")"><span class="glyphicon glyphicon-shopping-cart"></span><span class="shopcart-counter-span">@Html.Raw((ViewData["shopcartCounter"] != null && ViewData["shopcartCounter"].ToString() != "0") ? ViewData["shopcartCounter"] : "&nbsp;")</span></a>

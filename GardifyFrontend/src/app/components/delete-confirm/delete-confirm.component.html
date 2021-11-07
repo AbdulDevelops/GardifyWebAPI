@@ -1,0 +1,28 @@
+<div id="regCarousel" class="carousel slide pb-5 pb-md-0" data-ride="carousel" data-interval="70000">
+    <ol class="carousel-indicators pb-5 pb-md-2">
+      <li data-target="#regCarousel" data-slide-to="0" class="inactive"></li>
+    </ol>
+      <div class="carousel-inner">
+      <div class="carousel-item active">
+        <picture>
+            <source media="(max-width: 768px)" srcset="./assets/images/_JAY9125_Header_mobil.jpg">
+            <img class="d-block w-100" src="./assets/images/_JAY9125_Header_Desktop.jpg" alt="Erste Slide">
+        </picture>
+        <div class="carousel-caption reg-caption {{mode}} d-block">
+          <div class="container px-0 px-md-2">
+            <div class="row justify-content-center">
+              <div class="BoxReg mb-5 p-3 p-md-5">
+                <p class="{{mode==='light'?'text-darkgrey':'text-white'}} mb-5">
+                    Schade, dass du uns verlässt! <br>
+                    Dein Konto wurde erfolgreich gelöscht. <br>
+                    <span [routerLink]="['/news']"  class="ptr">News</span>, <span [routerLink]="['/suche']" class="ptr">Pflanzensuche</span>, <span [routerLink]="['/scanner']" class="ptr">Pflanzenscan</span>,<span [routerLink]="['/vonAbisZ']" class="ptr">Gärtnern von A-Z</span> und der <span [routerLink]="['/shop']" class="ptr">Shop</span> sind für dich weiterhin ohne Anmeldung nutzbar.
+                 
+                </p>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

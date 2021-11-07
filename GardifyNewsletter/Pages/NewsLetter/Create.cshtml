@@ -1,0 +1,76 @@
+﻿@page
+@model GardifyNewsletter.Areas.Intern.Pages.Newsletter.CreateModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Pages/Shared/_LayoutIntern.cshtml";
+}
+<p class="text-secondary mt-4 mb-4">Interner Bereich: Newsletter</p>
+
+<h3 class="mt-3">Newsletter erstellen</h3>
+<p class="mt-2 mb-4">
+    <a class="text-dark" asp-page="Index">Newsletter Übersicht</a>
+    <span> | </span>
+    <a class="text-dark" asp-page="Create">Newsletter erstellen</a>
+    <span> | </span>
+    <a class="text-dark" asp-page="Test">Newsletter testen</a>
+</p>
+<br />
+<div class="row">
+    <div class="col-md-6">
+        <div class="alert alert-info">
+            Hier können Sie die Grundeinstellungen zu diesem Newsletter vornehmen.<br />
+            Alle Inhalte können im nächsten Schritt bestimmt werden.
+        </div>
+        <form method="post">
+            <label class="control-label" style="color:red">
+
+                @Model.ErrorText
+            </label> <br />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label class="control-label">Überschrift im Header:</label>
+                <input asp-for="Newsletter.NewsletterHeaderText" class="form-control" />
+                <span asp-validation-for="Newsletter.NewsletterHeaderText" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">angezeigtes Datum des Newsletters:</label>
+                <input asp-for="Newsletter.NewsletterDateShownOnNewsletter" class="form-control" />
+                <span asp-validation-for="Newsletter.NewsletterDateShownOnNewsletter" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Absender(E-Mail): *</label>
+                <input asp-for="Newsletter.SenderEmail" class="form-control" type="email" required />
+                <span asp-validation-for="Newsletter.SenderEmail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Absender(Name):</label>
+                <input asp-for="Newsletter.SenderName" class="form-control" />
+                <span asp-validation-for="Newsletter.SenderName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Newsletter.SenderReplyTo" class="control-label"></label>
+                <input asp-for="Newsletter.SenderReplyTo" class="form-control" />
+                <span asp-validation-for="Newsletter.SenderReplyTo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Betreff</label>
+                <input asp-for="Newsletter.Subject" class="form-control" />
+                <span asp-validation-for="Newsletter.Subject" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Newsletter erstellen" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Zurück zur Übersicht</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

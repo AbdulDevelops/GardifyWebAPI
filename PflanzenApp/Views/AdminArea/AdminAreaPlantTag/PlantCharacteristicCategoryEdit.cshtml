@@ -1,0 +1,57 @@
+﻿@model GardifyModels.Models.PlantCharacteristicCategory
+
+@{
+    ViewBag.Title = "Merkmal ändern";
+    Layout = "~/Views/Shared/_LayoutAdminArea.cshtml";
+}
+
+<h2>Merkmal ändern</h2>    
+<div class="form-horizontal">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+        <div class="form-group">
+            @Html.Label("title", "Name", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("characteristicValueType", "Werttyp", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EnumDropDownListFor(model => model.CharacteristicValueType, htmlAttributes: new { @class = "form-control", @id = "enumDropDown" })
+                @Html.ValidationMessageFor(model => model.CharacteristicValueType, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("tagImage", "Bilddatei", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TagImage, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TagImage, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Speichern" class="btn btn-default" />
+            </div>
+        </div>
+    }
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            @using (Html.BeginForm("characteristic-category-delete", "AdminAreaPlantTag"))
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(Model => Model.Id)
+                <input type="submit" value="Löschen" class="btn btn-default" />
+            }
+        </div>
+    </div>
+</div>
+<div>
+    @Html.ActionLink("Zurück", "Index")
+</div>

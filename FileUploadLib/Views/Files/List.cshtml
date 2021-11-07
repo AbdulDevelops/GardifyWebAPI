@@ -1,0 +1,381 @@
+﻿@model FileUploadLib.Models.FileListViewModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+}
+<style>
+    .list-image {
+        width: 200px;
+        height: auto;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .float-right {
+        float: right;
+    }
+
+    .float-left {
+        float: left;
+    }
+
+    .mb-5 {
+        margin-bottom: 2rem;
+    }
+
+    .inline-block {
+        display: inline-block;
+    }
+
+    .overlay {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: 999;
+    }
+
+    #replace {
+        position: relative;
+    }
+
+    .btn-link-custom {
+        font-weight: 700;
+        border: 0;
+        background-color: transparent;
+        color: #D65F10;
+        padding: 0px;
+    }
+
+        .btn-link-custom:hover {
+            cursor: pointer;
+            color: #D65F10;
+        }
+
+    .loader,
+    .loader:before,
+    .loader:after {
+        border-radius: 50%;
+        width: 2.5em;
+        height: 2.5em;
+        -webkit-animation-fill-mode: both;
+        animation-fill-mode: both;
+        -webkit-animation: load7 1.8s infinite ease-in-out;
+        animation: load7 1.8s infinite ease-in-out;
+    }
+
+    .loader {
+        color: #007bff;
+        font-size: 10px;
+        margin: 0px auto;
+        position: relative;
+        text-indent: -9999em;
+        -webkit-transform: translateZ(0);
+        -ms-transform: translateZ(0);
+        transform: translateZ(0);
+        -webkit-animation-delay: -0.16s;
+        animation-delay: -0.16s;
+    }
+
+        .loader:before,
+        .loader:after {
+            content: '';
+            position: absolute;
+            top: 0;
+        }
+
+        .loader:before {
+            left: -3.5em;
+            -webkit-animation-delay: -0.32s;
+            animation-delay: -0.32s;
+        }
+
+        .loader:after {
+            left: 3.5em;
+        }
+
+    @@-webkit-keyframes load7 {
+        0%,
+        80%,
+        100% {
+            box-shadow: 0 2.5em 0 -1.3em;
+        }
+
+        40% {
+            box-shadow: 0 2.5em 0 0;
+        }
+    }
+
+    @@keyframes load7 {
+        0%,
+        80%,
+        100% {
+            box-shadow: 0 2.5em 0 -1.3em;
+        }
+
+        40% {
+            box-shadow: 0 2.5em 0 0;
+        }
+    }
+</style>
+<link rel="stylesheet" href="~/css/font-awesome.css" />
+
+<form asp-controller="FileSearch" asp-action="Post" method="post" class="file-search-form">
+    <input type="hidden" asp-for="ApplicationId" value="@Model.ApplicationId" />
+    <input type="hidden" asp-for="UsesTestEnvironment" value="@Model.UsesTestEnvironment" />
+    <div class="form-actions no-color row mb-2">
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="moduleId">Zeigen:</label>
+                <select asp-items='@new SelectList(Model.Modules, "Id", "Name")' asp-for="ModuleId" class="form-control">
+                    <option>Alle Module anzeigen</option>
+                </select>
+            </div>
+            <input type="submit" value="Filtern" class="btn btn-sm btn-orange" />
+
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="filterBy">
+                    Suchbegriff:
+                </label>
+                <input asp-for="FilterBy" type="text" placeholder="Suchbegriff eingeben" class="form-control" />
+            </div>
+            <input type="submit" value="Suchen" class="btn btn-sm btn-orange" />
+
+        </div>
+        <div class="col-md-4 d-flex justify-content-end d-flex align-items-end">
+            <p class="float-right text-secondary">Es wurden insgesamt @Model.FileCount Dateien gefunden</p>
+
+        </div>
+    </div>
+    <button onclick="showImages()" class="btn btn-sm btn-outline-primary float-right mb-2" type="button">Bilder ein-/ausblenden</button>
+</form>
+<br>
+<br>
+<div id="replace">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">
+                    <form asp-controller="FileSearch" asp-action="Post" method="post" class="file-search-form">
+                        <input type="hidden" asp-for="ApplicationId" value="@Model.ApplicationId" />
+                        <input type="hidden" asp-for="UsesTestEnvironment" value="@Model.UsesTestEnvironment" />
+                        <input type="hidden" asp-for="FilterBy" value="@Model.FilterBy" />
+                        <input type="hidden" asp-for="ModuleId" value="@Model.ModuleId" />
+                        <input type="hidden" asp-for="OrderBy" value="ID" />
+                        <button type="submit" class="btn-link-custom">ID</button>
+                    </form>
+                </th>
+                <th scope="col">
+                    <form asp-controller="FileSearch" asp-action="Post" method="post" class="file-search-form">
+                        <input type="hidden" asp-for="ApplicationId" value="@Model.ApplicationId" />
+                        <input type="hidden" asp-for="UsesTestEnvironment" value="@Model.UsesTestEnvironment" />
+                        <input type="hidden" asp-for="FilterBy" value="@Model.FilterBy" />
+                        <input type="hidden" asp-for="ModuleId" value="@Model.ModuleId" />
+                        <input type="hidden" asp-for="OrderBy" value="Description" />
+                        <button type="submit" class="btn-link-custom">Beschreibung</button>
+                    </form>
+                </th>
+                <th scope="col">
+                    <form asp-controller="FileSearch" asp-action="Post" method="post" class="file-search-form">
+                        <input type="hidden" asp-for="ApplicationId" value="@Model.ApplicationId" />
+                        <input type="hidden" asp-for="UsesTestEnvironment" value="@Model.UsesTestEnvironment" />
+                        <input type="hidden" asp-for="FilterBy" value="@Model.FilterBy" />
+                        <input type="hidden" asp-for="ModuleId" value="@Model.ModuleId" />
+                        <input type="hidden" asp-for="OrderBy" value="Path" />
+                        <button type="submit" class="btn-link-custom">Pfad</button>
+                    </form>
+                </th>
+                <th scope="col">
+                    <form asp-controller="FileSearch" asp-action="Post" method="post" class="file-search-form">
+                        <input type="hidden" asp-for="ApplicationId" value="@Model.ApplicationId" />
+                        <input type="hidden" asp-for="UsesTestEnvironment" value="@Model.UsesTestEnvironment" />
+                        <input type="hidden" asp-for="FilterBy" value="@Model.FilterBy" />
+                        <input type="hidden" asp-for="ModuleId" value="@Model.ModuleId" />
+                        <input type="hidden" asp-for="OrderBy" value="EditedDate" />
+                        <button type="submit" class="btn-link-custom">Bearbeitet</button>
+                    </form>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Files == null || !Model.Files.Any())
+            {
+                <tr>
+                    <th scope="row">
+                        Es wurden keine Ergebnisse gefunden.
+                    </th>
+                </tr>
+            }
+            else
+            {
+                @foreach (var file in Model.Files)
+                {
+        <tr>
+            <th scope="row">
+                @file.FileToModuleId
+
+                @if (file.File.IsImageFile)
+                {
+                    <img src="~/@file.File.Path" class="list-image hidden" alt="@file.AltText">
+                }
+                else if (file.File.IsPdfFile)
+                {
+                    <div class="list-image hidden">
+                        <a asp-controller="File" asp-action="Download" asp-route-fileToModuleId="@file.FileToModuleId" target="_blank">
+                            <i class="far fa-file-pdf fa-4x"></i>
+                            <p>@file.File.OriginalFileName</p>
+                        </a>
+                    </div>
+                }
+                else if (file.File.IsExcelFile)
+                {
+                    <div class="list-image hidden">
+                        <a asp-controller="File" asp-action="Download" asp-route-fileToModuleId="@file.FileToModuleId" target="_blank">
+                            <i class="far fa-file-excel fa-4x"></i>
+                            <p>@file.File.OriginalFileName</p>
+                        </a>
+                    </div>
+                }
+            </th>
+            <td>
+                @file.Description
+            </td>
+            <td>
+                @file.File.Path
+            </td>
+            <td>
+                @file.EditedDate.ToShortDateString()
+            </td>
+
+        </tr>
+                }
+            }
+        </tbody>
+    </table>
+    <div class="text-center">
+        @if (Model.Page > 0)
+        {
+            <form asp-controller="FileSearch" asp-action="Post" method="post" class="inline-block">
+                <input type="hidden" asp-for="ApplicationId" value="@Model.ApplicationId" />
+                <input type="hidden" asp-for="UsesTestEnvironment" value="@Model.UsesTestEnvironment" />
+                <input type="hidden" asp-for="FilterBy" value="@Model.FilterBy" />
+                <input type="hidden" asp-for="ModuleId" value="@Model.ModuleId" />
+                <input type="hidden" asp-for="OrderBy" value="@Model.OrderBy" />
+                <input type="hidden" asp-for="Page" value="0" />
+                <button type="submit" class="btn-link-custom"><i class="fas fa-angle-double-left"></i></button>
+            </form>
+            <form asp-controller="FileSearch" asp-action="Post" method="post" class="inline-block">
+                <input type="hidden" asp-for="ApplicationId" value="@Model.ApplicationId" />
+                <input type="hidden" asp-for="UsesTestEnvironment" value="@Model.UsesTestEnvironment" />
+                <input type="hidden" asp-for="FilterBy" value="@Model.FilterBy" />
+                <input type="hidden" asp-for="ModuleId" value="@Model.ModuleId" />
+                <input type="hidden" asp-for="OrderBy" value="@Model.OrderBy" />
+                <input type="hidden" asp-for="Page" value="@(Model.Page-1)" />
+                <button type="submit" class="btn-link-custom"><i class="fas fa-angle-left"></i></button>
+            </form>
+        }
+        <p class="inline-block">@(Model.Page + 1) von @(Model.PageCount)</p>
+        @if (Model.Page + 1 < Model.PageCount)
+        {
+            <form asp-controller="FileSearch" asp-action="Post" method="post" class="inline-block">
+                <input type="hidden" asp-for="ApplicationId" value="@Model.ApplicationId" />
+                <input type="hidden" asp-for="UsesTestEnvironment" value="@Model.UsesTestEnvironment" />
+                <input type="hidden" asp-for="FilterBy" value="@Model.FilterBy" />
+                <input type="hidden" asp-for="ModuleId" value="@Model.ModuleId" />
+                <input type="hidden" asp-for="OrderBy" value="@Model.OrderBy" />
+                <input type="hidden" asp-for="Page" value="@(Model.Page+1)" />
+                <button type="submit" class="btn-link-custom"><i class="fas fa-angle-right"></i></button>
+            </form>
+            <form asp-controller="FileSearch" asp-action="Post" method="post" class="inline-block">
+                <input type="hidden" asp-for="ApplicationId" value="@Model.ApplicationId" />
+                <input type="hidden" asp-for="UsesTestEnvironment" value="@Model.UsesTestEnvironment" />
+                <input type="hidden" asp-for="FilterBy" value="@Model.FilterBy" />
+                <input type="hidden" asp-for="ModuleId" value="@Model.ModuleId" />
+                <input type="hidden" asp-for="OrderBy" value="@Model.OrderBy" />
+                <input type="hidden" asp-for="Page" value="@(Model.PageCount-1)" />
+                <button type="submit" class="btn-link-custom"><i class="fas fa-angle-double-right"></i></button>
+            </form>
+        }
+    </div>
+</div>
+<div class="modal fade" id="file-upload-lib-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Schließen</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var hidden = true;
+    function showImages() {
+        if (hidden) {
+            $(".list-image").show();
+        } else {
+            $(".list-image").hide();
+        }
+        hidden = !hidden;
+    }
+
+    function showSpinner() {
+        $("#replace").html("<div class='overlay'><div class='loader'></div></div>");
+    }
+
+
+    $("body").on('submit', 'form', function (e) {
+        e.preventDefault();
+        console.log("submit");
+
+        if (window.FormData !== undefined)
+        //make sure that we can use FormData ie>9, chrome > 7, opera > 12 safari >5, android > 3  gecko mobile > 2, opera mobile >12 <- wil support XHR too
+        {
+            showSpinner(true);
+            var formData = new FormData(this);
+            $.ajax({
+                url: $(this).attr('action'),  //Path to the server script that process the data
+                type: 'POST',
+                data: formData,
+                success: function (response) {
+                    //Success
+                    if (response.responseCode == 1) {
+                        $("#replace").html(response.responseObject);
+                        if (!hidden) {
+                            $(".list-image").show();
+                        }
+                    } else { //Failure
+                        $("#file-upload-lib-modal").find('.modal-content').removeClass('border-success');
+                        $("#file-upload-lib-modal").find('.modal-header').removeClass('bg-success');
+                        $("#file-upload-lib-modal").find('.modal-content').addClass('border-danger');
+                        $("#file-upload-lib-modal").find('.modal-header').addClass('bg-danger');
+                        $("#file-upload-lib-modal").find('.modal-title').html("Fehler");
+                        $("#file-upload-lib-modal").find('.modal-body').html("<p>" + response.responseMessage + "</p>");
+                        $('#file-upload-lib-modal').modal('show');
+                    }
+                },
+                //Options to tell jQuery not to process data or worry about content-type.
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+        } else {
+            $("#file-upload-lib-modal").find('.modal-content').addClass('border-danger');
+            $("#file-upload-lib-modal").find('.modal-header').addClass('bg-danger');
+            $("#file-upload-lib-modal").find('.modal-title').html("Fehler");
+            $("#file-upload-lib-modal").find('.modal-body').html("Es ist ein Fehler bei Ihrer Eingabe aufgetreten");
+            $('#file-upload-lib-modal').modal('show');
+        }
+        return false;
+    });
+</script>

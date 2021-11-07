@@ -1,0 +1,109 @@
+<div class="row">
+  <div class="col-1">
+    <app-ad [ad]="adSides"></app-ad>
+  </div>
+  <div class="col-10">
+    <div class="wrapper {{mode}} pt-5 pb-5">
+      <div class="container px-5">
+       <app-ad [ad]="ad" ></app-ad>
+    
+        
+         <form [formGroup]="mainForm" (ngSubmit)="search()">
+          <div class="row justify-content-between pt-4 pb-2 bt-border {{mode}}">
+            <div class="col-12 col-md-6 pb-4">
+                <h2 class="t-light t-26 mt-3 {{mode==='light'?'text-grey':'text-white'}}">PFLANZENSCAN</h2>
+            </div>
+            <div class="mt-4 col-12 col-md-6 d-flex flex-column align-items-end">
+            <button *ngIf="isAdmin" [routerLink]="['/scanverlauf']" class="btn btn-secondary p-2 mb-3" type="button">
+              <fa-icon class="pr-1" [icon]="faSearch"></fa-icon>letzte Scans (Statistik)
+            </button>
+            <a href="#" data-toggle="modal" href="#infoPopup" role="button" aria-expanded="false" 
+            aria-controls="Info" class="t-11 t-light text-green">Info/Hilfe</a>
+            </div>
+            <div class="modal fade pr-0" tabindex="-1" role="dialog" aria-hidden="true" id="infoPopup" #infoPopup>
+              <div class="modal-dialog" role="document">
+                <div class="modal-content {{mode}} ">
+                  <div class="modal-header p-2">
+                    <a class="mb-2 ch-container t-9 ml-auto ptr {{mode==='dark'?'text-white':'text-white'}}">
+                      <label class="form-check-label pt-1">
+                        <input class="form-check-input check mx-2" type="checkbox" (change)="hidePopup()">
+                        BITTE NICHT MEHR ANZEIGEN!
+                        <span class="checkmark weiß " (click)="hidePopup()"></span>
+                      </label>
+                    </a>
+                  </div>
+                  <div class="modal-body px-5 pb-4 pt-0">
+                    <div class="row ml-1">
+                      <div class="col-4 p-0"><img class="pic-1" src="assets/main-icons/Scan_and_Find_Pflanzenfoto.jpg" alt="Blume"></div>
+                      <div class="col-4 p-0"><img class="pic-2" src="assets/main-icons/Scan_find_Pfeil.png" alt="Pfeil"></div>
+                      <div style="height:150px;" class="col-4 p-0"><img class="pic-3" src="assets/main-icons/Scan_find_dunkel.svg" alt="Scan & Find"></div>
+                    </div>
+                    <div class="row mt-3">
+                      <h3 class="t-bold t-18 text-green">
+                        Pflanzenfoto zur Pflanzenbestimmung hochladen: So gelingt es!
+                      </h3>
+                      <ul class="t-12 pl-3 text-white">
+                        <li>Es kann nur 1 Bild pro Scan upgeloaded und verarbeitet werden</li>
+                        <li>Bitte keine Fotos über 4 MB Dateigröße hochladen. Größere Bilder bitte beschneiden oder eine kleinere Auflösung verwenden</li>
+                        <li>Bitte haben Sie etwas Geduld, bis die Ergebnisse sichtbar werden</li>
+                      </ul>
+                      <p class="t-bold pt-2 t-12 text-white">
+                        Und so geht´s noch besser! Mehr ...
+                      </p>
+                      <div class="col-12 px-0">
+                        <button  data-dismiss="modal" aria-label="Close" class="px-3 btn btn-green btn_border075 t-bold text-white t-12" style="float: right;">weiter >></button>
+      
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      
+          <div class="row justify-content-between">
+            <div class="col-12 text-center py-0 main-wrapper mb-4">
+              <ng-container *ngIf="fileSrc; else logo">
+                <img [src]="fileSrc" alt="Ihr Bild" class="main sq">
+              </ng-container>
+              <ng-template #logo>
+                <!-- <img alt="Scan & Find" class="main {{mode}}" [src]="mode==='light'?'/assets/main-icons/Scan_find_hell.svg':'/assets/main-icons/Scan_find_dunkel.svg'"> -->
+                <img alt="Scan & Find" class="main {{mode}}" [src]="mode==='light'?'/assets/images/Fotoscan.jpg':'/assets/images/Fotoscan.jpg'">
+                
+              </ng-template>
+            </div>
+            <div class="col-12 bt-border {{mode}} text-center">
+              <label class="mb-4 input ptr mt-2">
+                <input type="file" (change)="imageUpload($event)" accept="image/*, .heic, .heics, .heif, .heifs"/>
+                Datei auswählen
+              </label>
+            </div>
+          </div>
+      
+          <div class="row justify-content-center mt-4">
+            <button type="button" [disabled]="!isValid" (click)="search()" class="btn btn-green col-md-4 col-10 {{mode==='light'?'text-darkgrey':'text-white'}}">Scannen mit PlantNet</button>
+          </div>
+          </form>
+          <div *ngIf="errorMessage" class="alert alert-warning my-3">
+            {{errorMessage}}
+          </div>
+      
+          <ng-container *ngIf="submitted">
+            <div class="row app-loading">
+              <svg class="spinner" viewBox="25 25 50 50">
+                  <circle class="path" cx="50" cy="50" r="15" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+              </svg>
+            </div>
+          </ng-container>
+         <app-ad [ad]="ad" ></app-ad>
+    
+      </div>
+      <hr>
+      
+      
+    </div>
+  </div>
+  <div class="col-1">
+    <app-ad [ad]="adSides" ></app-ad>
+  </div>
+ </div> 

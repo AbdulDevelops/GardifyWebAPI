@@ -1,0 +1,5 @@
+img.article {
+    width: 150px;
+    object-fit: cover;
+    height: 100%;
+}

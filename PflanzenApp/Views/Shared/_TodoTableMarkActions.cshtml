@@ -1,0 +1,10 @@
+﻿@model GardifyModels.Models.TodoViewModels.TodoDetailsViewModel
+
+<td>
+    <a href="@Url.Action("markFinished", "Todo", new { id = Model.Id})">Erledigt <i class="glyphicon glyphicon-ok"></i></a>
+</td>
+<td>
+    @Html.ActionLink("Löschen", "markIgnored", "Todo", new { id = Model.Id}, null)
+</td>
+
+

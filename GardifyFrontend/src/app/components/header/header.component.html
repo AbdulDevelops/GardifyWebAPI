@@ -1,0 +1,806 @@
+<header>
+  <nav class="navbar  d-lg-block w-100 pl-5 pt-0" [ngClass]="{'d-none': !isSocialPage}" >
+
+    <div class="row" style="max-width: 1092px; margin: 0 auto;">
+      <app-alert></app-alert>
+      <div class="col-md-5">
+        <a routerLink="/"><img style="position:relative;right:31px;" class="logo" src="assets/Header-icon/Gardify_Logo.svg" alt="Gardify Logo"></a>
+      </div>
+      <div class="col-md-6">
+        <div class="row notification-bar" >      
+          <div style="top:10px;width: 100%;text-align: center;" class="col">PFLANZEN<br><span  style="text-align: center;">{{counter.plantSorts}}/{{counter.plantsTotal}}</span></div>
+          <div style="top:10px;width: 100%;text-align: center;" class="col">TO-DO<br><span style="text-align: center;">{{counter.allTodosOfTheMonth}}/{{counter.allTodosOfTheYear}}</span></div>
+          <div style="top:10px;width: 100%;text-align: center;" class="col ptr"><a [routerLink]="['/warnungen']">WARNUNGEN</a><br>  
+            <div style="top: 34px;right: 58px;" class="notification-icon ptr"><a [routerLink]="['/warnungen']">{{countFrostAlert}}</a></div>
+          </div>
+        </div>
+      </div>
+    
+    </div>
+    <div class="subnav d-none d-lg-block">
+    <div class="container d-flex px-4 justify-content-start">
+      
+      <div class="ml-1 dropdown justify-content" title="Menü">
+        <a href="#" class="ctrl-icon navi-icon col-2 mr-3" style="background-size: 20px 30px;" data-toggle="dropdown"></a>
+        <div class="dropdown-menu {{mode}}">
+          <div class="row w-100 justify-content-between">
+            <ul class="col-3 pr-0">
+              <div class="t-14 t-bold text-grey">Funktionen</div>
+              <li><a [routerLink]="['/meingarten']">Mein Garten</a></li>
+              <li><a [routerLink]="['/todo']">To-do-Kalender</a></li>
+              <li><a [routerLink]="['/wetter']">Wetter</a></li>
+              <li><a [routerLink]="['/suche']">Pflanzensuche</a></li>
+              <li><a [routerLink]="['/scanner']">Planzenscan</a></li>
+              <li><a [routerLink]="['/shop']">Shop</a></li>
+              <li><a data-toggle="modal" [attr.data-target]="isLoggedIn? '#suggest':''" (click)="imageFromScan(false)">Pflanze vorschlagen</a></li>
+              <li><a [routerLink]="['/vonAbisZ']">Gärtnern von A-Z</a></li>
+              <li><a [routerLink]="['/videos']">Videos</a></li>
+              <li><a [routerLink]="['/news']">News</a></li>
+              <li><a [routerLink]="['/oekoscan']">Ökoscan</a></li>
+            </ul>
+            <ul class="col-3 pr-0">
+              <div class="t-14 t-bold text-grey">Hilfe/Support</div>
+              <li><a [routerLink]="['/team']">Team</a></li>
+              <li><a [routerLink]="['/start']">Quickstartanleitung</a></li>
+              <li><a class="ptr" role="button" data-toggle="modal" data-target="#tourModal">Guided Tour</a></li>
+              <li><a [routerLink]="['/pflanzendoc']">Pflanzen-Doc</a></li>
+              <li><a [routerLink]="['/community']">Community</a></li>
+              <li><a href="https://www.youtube.com/embed/ikmI3PKivnA" target="_blank">gardify in 60 Sek</a></li>
+              <li><a [routerLink]="['/glossar']">Glossar</a></li>
+              <li><a [routerLink]="['/faq']">FAQ</a></li>
+              <li><a data-toggle="modal" data-target="#bugsreport">Bugs melden</a></li>
+              <li><a [routerLink]="['/datenschutz']">Datenschutz</a></li>
+              <li><a [routerLink]="['/einstellungen']">Einstellungen</a></li>
+            </ul>
+            <ul class="col-3">
+              <div class="t-14 t-bold text-grey">Service</div>
+              <li><a [routerLink]="['/newsletter']">Newsletter</a></li>
+              <li><a [routerLink]="['/kontakt']">Kontakt</a></li>
+              <li><a [routerLink]="['/impressum']">Impressum</a></li>
+              <li><a [routerLink]="['/agb']">AGB</a></li>
+              <li class="mt-3" *ngIf="!isLoggedIn"><a [routerLink]="['/']" [queryParams]="{mode:'lg'}">Login</a></li>
+              <li class="mt-3" *ngIf="isLoggedIn"><a (click)="logout()">Logout</a></li>
+            </ul>
+            <ul class="col-3">
+              <div class="t-14 t-bold text-grey">Shop</div>
+              <li><a [routerLink]="['/warenkorb']">Warenkorb</a></li>
+              <li><a [routerLink]="['/warenkorb']" fragment="wunschliste">Wunschliste</a></li> 
+              <li><a [routerLink]="['/bestellungen']">Bestellungen</a></li>
+              <li><a [routerLink]="['/agb']">AGB</a></li>
+              <li><a [routerLink]="['/agb']" fragment="abs6">Rücksendung</a></li>
+              <li><a [routerLink]="['/agb']" fragment="abs5">Porto/Versand</a></li>
+              <!-- statistik -->
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="mx-1 justify-content">
+       <a routerLink="/profil" title="Einstellungen">
+          <div class="ctrl-icon einstellungen-icon col-2 mr-3" style="height: 19px;">
+            <span class="badge t-10 t-bold text-white"></span>
+          </div>
+        </a>
+      </div>
+
+      <div class="mx-1 justify-content">
+        <a routerLink="/pflanzendoc" title="Pflanzen-Doc">
+          <div class="ctrl-icon plDoc-icon col-2 mr-3" style="height: 19px;">
+            <span class="badge t-10 t-bold text-white {{mode}}"></span>
+          </div>
+        </a>
+      </div>
+
+      <div class="mx-1 justify-content" style="margin-top: 0.25rem;letter-spacing: 2px;">
+        <a role="button" data-toggle="modal" data-target="#tourModal" class="ptr">
+          <span class="text-white mr-3">GUIDED TOUR</span>
+        </a>
+      </div>
+
+      <div class="mx-1 justify-content" style="margin-top: 0.25rem;letter-spacing: 2px;">
+        <a routerLink="/start">
+          <!-- <div class="ctrl-icon quick-start-icon col-2 mr-3"></div>  -->
+          <span class="text-white mr-3">KURZ-ANLEITUNG</span> 
+        </a>
+      </div>
+
+      <div *ngIf="isLoggedIn" class="mx-1 justify-content" style="margin-top: 0.25rem;letter-spacing: 1px;">
+        <a *ngIf="!demoMode" (click)="logout()" id="loginBtn" class="text-white mr-3">LOGOUT</a>
+      </div>
+    
+      <div class="mx-1 justify-content-end" style="position: absolute; right: 21%;">
+        <a target="_blank" href="https://www.facebook.com/gardify/">
+          <img class="social" style="height: 20px; width: 20px;" [src]="'/assets/images/Facebook_Icon.svg'"></a>
+      </div>
+      <div class="mx-1 justify-content-end" style="position: absolute; right: 18%;">
+        <a target="_blank" href="https://www.instagram.com/gardify_official/">
+          <img class="social" style="height: 20px; width: 20px;" [src]="'/assets/images/Instagram_Icon.svg'"></a>
+      </div>
+      <div class="mx-1 justify-content-end" style="position: absolute; right: 15%;">
+        <a target="_blank" href="https://www.pinterest.de/gardify_official/">
+          <img class="social" style="height: 20px; width: 20px;" [src]="'/assets/images/Pinterest_Icon.svg'"></a>     
+      </div>
+     <!-- <div class="mx-1">
+        <a routerLink="/warenkorb" title="Warenkorb" class="t-12 t-light">
+          <div class="ctrl-icon cart-icon col-2 mr-3">
+            <span class="badge t-10 t-bold text-white {{mode}}">{{counter.shopCartCounter}}</span>
+          </div>
+        </a>
+      </div>
+      <div class="mx-1">
+        <a [routerLink]="['/warenkorb']" fragment="wunschliste" title="Wunschliste" class="t-12 t-light">
+          <div class="ctrl-icon wishlist-icon col-2 mr-3">
+            <span class="badge t-10 t-bold text-white {{mode}}">{{counter.wishListCount}}</span>
+          </div>
+        </a>
+      </div>
+    -->
+            
+      <ng-container *ngIf="showCart">
+        <app-cart [popup]="true"></app-cart>
+      </ng-container>
+    </div>
+
+  </div>
+  </nav>
+
+
+  <div *ngIf="!isSocialPage" class="mobNav d-lg-none">
+    <div class="">
+      <a *ngIf="!isLoggedIn" [routerLink]="['/']" [queryParams]="{mode:'lg'}" id="loginBtn" class="t-11 t-bold position-absolute" style="top: 3%;right: 66px;z-index: 3; padding: 10px 0 10px 10px; margin: -10px 0 -10px -10px">LOGIN</a>
+      <a *ngIf="isLoggedIn && !demoMode" (click)="logout()" id="loginBtn" class="t-11 t-bold position-absolute" style="top: 3%;right: 66px;z-index: 3;">LOGOUT</a>
+      <a href="#" class="ctrl-icon bg-icon navi-icon d-inline col" data-toggle="dropdown"></a>
+      <div class="dropdown-menu {{mode}}">
+        <div class="row w-100 justify-content-start">
+          <ul class="col-6 pr-0">
+            <div class="t-14 t-bold text-grey">Funktionen</div>
+            <li><a [routerLink]="['/meingarten']">Mein Garten</a></li>
+            <li><a [routerLink]="['/todo']">To-do-Kalendar</a></li>
+            <li><a [routerLink]="['/wetter']">Wetter</a></li>
+            <li><a [routerLink]="['/suche']">Pflanzensuche</a></li>
+            <li><a [routerLink]="['/scanner']">Planzenscan</a></li>
+            <li><a [routerLink]="['/shop']">Shop</a></li>
+            <li><a data-toggle="modal" [attr.data-target]="isLoggedIn? '#suggest':''" (click)="imageFromScan(false)">Pflanze vorschlagen</a></li>
+            <li><a [routerLink]="['/vonAbisZ']">Gärtnern von A-Z</a></li>
+            <li><a [routerLink]="['/videos']">Videos</a></li>
+            <li><a [routerLink]="['/news']">News</a></li>
+            <li><a [routerLink]="['/oekoscan']">Ökoscan</a></li>
+          </ul>
+          <ul class="col-6">
+            <div class="t-14 t-bold text-grey">Hilfe/Support</div>
+            <li><a [routerLink]="['/team']">Team</a></li>
+            <li><a [routerLink]="['/start']">Quickstartanleitung</a></li>
+            <li><a class="ptr" role="button" data-toggle="modal" data-target="#tourModal">Guided Tour</a></li>
+            <li><a [routerLink]="['/pflanzendoc']">Pflanzen-Doc</a></li>
+            <li><a [routerLink]="['/community']">Community</a></li>
+            <li><a href="https://www.youtube.com/embed/ikmI3PKivnA" target="_blank">gardify in 60 Sek</a></li>
+            <li><a [routerLink]="['/glossar']">Glossar</a></li>
+            <li><a [routerLink]="['/faq']">FAQ</a></li>
+            <li><a data-toggle="modal" data-target="#bugsreport">Bugs melden</a></li>
+            <li><a [routerLink]="['/datenschutz']">Datenschutz</a></li>
+            <li><a [routerLink]="['/einstellungen']">Einstellungen</a></li>
+          </ul>
+          <ul class="col-6">
+            <div class="t-14 t-bold text-grey">Service</div>
+            <li><a [routerLink]="['/newsletter']">Newsletter</a></li>
+            <li><a [routerLink]="['/kontakt']">Kontakt</a></li>
+            <li><a [routerLink]="['/impressum']">Impressum</a></li>
+            <li><a [routerLink]="['/agb']">AGB</a></li>
+            <li class="mt-3" *ngIf="!isLoggedIn"><a [routerLink]="['/']" [queryParams]="{mode:'lg'}">Login</a></li>
+            <li class="mt-3" *ngIf="isLoggedIn"><a (click)="logout()">Logout</a></li>
+          </ul>
+          <ul class="col-6">
+            <div class="t-14 t-bold text-grey">Shop</div>
+            <li><a [routerLink]="['/warenkorb']">Warenkorb</a></li>
+            <li><a [routerLink]="['/warenkorb']" fragment="wunschliste">Wunschliste</a></li>
+            <li><a [routerLink]="['/bestellungen']">Bestellungen</a></li>
+            <li><a [routerLink]="['/agb']">AGB</a></li>
+            <li><a [routerLink]="['/agb']" fragment="abs6">Rücksendung</a></li>
+            <li><a [routerLink]="['/agb']" fragment="abs5">Porto/Versand</a></li>
+            <!-- statistik -->
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+<ng-container *ngIf="!isMobile; else mobile">
+
+  <div *ngIf="!isSocialPage" class=" B d-none d-lg-block mainNav {{mode}} w-100">
+    <div class="container px-2">
+      <div id="navCarousel" class="carousel slide mainNav" data-interval="0" data-ride="carousel">
+        <ng-container>
+          <div class="carousel-inner" [ngStyle]="{'overflow': currentTourStep > 0 ? 'visible' : 'hidden' }">
+            <!-- first slide -->
+            <div class="carousel-item active px-4">
+              <div class="row justify-content-between" id="navIconsDiv">
+                <a [routerLink]="['/meingarten']" class="col-2 center px-0 {{mode}} caro-item navIcon" style="background-color: #2d786f;">
+                  <div routerLink="/meingarten" routerLinkActive="mygarden-iconClicked"
+                    class="feat-icon {{mode}} {{isLoggedIn? 'mygarden-iconLogin': 'mygarden-iconLogout'}}"
+                    alt="Mein Garten"></div>
+                   <div class="icon-text"><b>MEIN</b><br>GARTEN</div> 
+                  <!--  <h3 class="t-12 t-reg text-green">Mein Garten</h3> -->
+                  <div class="overlay">
+                    <div class="overlay-text t-10 t-reg text-white">
+                      Pflanzen und To-dos im eigenen Garten verwalten. Gartenbereiche anlegen
+                    </div>
+                  </div>
+                </a>
+                <app-tour *ngIf="currentTourStep === 1" (closeTour)="closeTour()" (changeStep)="changeTourStep($event)" [step]="steps[currentTourStep-1]"></app-tour>
+                <a [routerLink]="['/todo']" class="col-2 center px-0 {{mode}} caro-item navIcon"  style="background-color: #5c9022;">
+                  <div routerLink="/todo" routerLinkActive="todo-iconClicked"
+                    class="feat-icon {{mode}} {{isLoggedIn? 'todo-iconLogin': 'todo-iconLogout'}}" alt="To-dos"></div>
+                  <div class="icon-text"><b>TO-DO</b><br>KALENDER</div> 
+                  <!--  <h3 class="t-12 t-reg text-green">Mein Garten</h3> -->
+                  <div class="overlay">
+                    <div class="overlay-text t-10 t-reg text-white">
+                      To-dos im eigenen Garten verwalten. To-dos anlegen
+                    </div>
+                  </div>
+                </a>
+                <app-tour *ngIf="currentTourStep === 2" (closeTour)="closeTour()" (changeStep)="changeTourStep($event)" [step]="steps[currentTourStep-1]"></app-tour>            
+                <a routerLink="/suche" class="col-2 center px-0 {{mode}} caro-item navIcon" style="background-color: #89ab54;">
+                  <div routerLink="/suche" routerLinkActive="search-iconClicked"
+                    class="feat-icon {{mode}} {{isLoggedIn? 'search-iconLogin': 'search-iconLogout'}}"
+                    alt="Pflanzensuche"></div>
+                  <div class="icon-text"><b>PFLANZEN</b><br>SUCHE</div> 
+                  <div class="overlay">
+                    <div class="overlay-text t-10 t-reg text-white">
+                      Pflanzen finden, in eigenen Garten kopieren
+                    </div>
+                  </div>
+                </a>
+                <app-tour *ngIf="currentTourStep === 3" (closeTour)="closeTour()" (changeStep)="changeTourStep($event)" [step]="steps[currentTourStep-1]"></app-tour>
+                <a [routerLink]="['/scanner']" class="col-2 center px-0 {{mode}} caro-item navIcon" style="background-color: #40968b;">
+                  <div routerLink="/scanner" routerLinkActive="scan-iconClicked"
+                    class="feat-icon {{mode}} {{isLoggedIn? 'scan-iconLogin': 'scan-iconLogout'}}" alt="Scan & Find">
+                  </div>
+                  <div class="icon-text"><b>PFLANZEN</b><br>SCAN</div> 
+                  <div class="overlay">
+                    <div class="overlay-text t-10 t-reg text-white">
+                      Pflanzen per Foto erkennen
+                    </div>
+                  </div>
+                </a>   
+                <app-tour *ngIf="currentTourStep === 4" (closeTour)="closeTour()" (changeStep)="changeTourStep($event)" [step]="steps[currentTourStep-1]"></app-tour>           
+                <a [routerLink]="['/news']" class="col-2 center px-0 {{mode}} caro-item navIcon" style="background-color: #649572;">
+                  <div class="notification-icon">{{newsCount}}</div>
+                  <div  routerLinkActive="news-iconClicked"
+                    class="feat-icon {{mode}} {{isLoggedIn? 'news-iconLogin': 'news-iconLogout'}}" alt="News">
+                  </div>
+                  <div class="icon-text"><b>GARDIFY</b><br>NEWS</div> 
+                  <div class="overlay">
+                    <div class="overlay-text t-10 t-reg text-white">
+                      Richtig Gärtnern in Bild und Ton
+                    </div>
+                  </div>
+                </a>          
+                <app-tour *ngIf="currentTourStep === 5" (closeTour)="closeTour()" (changeStep)="changeTourStep($event)" [step]="steps[currentTourStep-1]"></app-tour>           
+                <a [routerLink]="['/videos']" class="col-2 center px-0 {{mode}} caro-item navIcon" style="background-color: #2d786f;">
+                  <div class="notification-icon">{{videosCount}}</div> 
+                  <div  routerLinkActive="videos-iconClicked"
+                    class="feat-icon {{mode}} {{isLoggedIn? 'videos-iconLogin': 'videos-iconLogout'}}" alt="Videos">
+                  </div>
+                  <div class="icon-text"><b>GARDIFY</b><br>VIDEOS</div> 
+                  <div class="overlay">
+                    <div class="overlay-text t-10 t-reg text-white">
+                      Richtig Gärtnern in Bild und Ton
+                    </div>
+                  </div>
+                </a>           
+                <app-tour *ngIf="currentTourStep === 6" (closeTour)="closeTour()" (changeStep)="changeTourStep($event)" [step]="steps[currentTourStep-1]"></app-tour>
+              </div>
+            </div>
+            <!-- second slide -->
+            <div class="carousel-item px-4">
+              <div class="row justify-content-between">
+                <a [routerLink]="['/wetter']" class="col-2 center px-0 {{mode}} caro-item navIcon" style="background-color: #3f7e84;">
+                  <div routerLink="/wetter" routerLinkActive="weather-iconClicked"
+                    class="feat-icon {{mode}} {{isLoggedIn? 'weather-iconLogin': 'weather-iconLogout'}}" alt="Wetter">
+                  </div>
+                  <div class="icon-text"><b>GARTEN</b><br>WETTER</div> 
+                  <div class="overlay">
+                    <div class="overlay-text t-10 t-reg text-white">
+                        <span class="mt-1 mb-1" *ngFor="let fc of forecastItem "> <img class="fc-iconBig" [src]="getWeatherIcon(fc).icon">
+                        </span><br>
+                        <span>Temperatur {{weather.currentTemp}} ° C </span>
+                    </div>
+                  </div>
+                </a>      
+                <app-tour *ngIf="currentTourStep === 7" (closeTour)="closeTour()" (changeStep)="changeTourStep($event)" [step]="steps[currentTourStep-1]"></app-tour>              
+                <a routerLink="/shop" class="col-2 center px-0 {{mode}} caro-item navIcon" style="background-color: #618327;">
+                  <div class="notification-icon">{{shopCount}}</div>
+                  <div routerLink="/shop" routerLinkActive="shop-iconClicked"
+                    class="feat-icon {{mode}} {{isLoggedIn? 'shop-iconLogin': 'shop-iconLogout'}}" alt="Shop"></div>
+                  <div class="icon-text"><b>GARDIFY</b><br>SHOP</div> 
+                  <div class="overlay">
+                    <div class="overlay-text t-10 t-reg text-white">
+                      Produkt- und Geschenkempfehlungen rund um den Garten
+                    </div>
+                  </div>
+                </a>
+                <app-tour *ngIf="currentTourStep === 8" (closeTour)="closeTour()" (changeStep)="changeTourStep($event)" [step]="steps[currentTourStep-1]"></app-tour>            
+                <a [routerLink]="['/oekoscan']" class="col-2 center px-0 {{mode}} caro-item navIcon" style="background-color: #76a31f;">
+                  <div routerLink="/oekoscan" routerLinkActive="oekoscan-iconClicked"
+                    class="feat-icon {{mode}} {{isLoggedIn?'oekoscan-iconLogin':'oekoscan-iconLogout'}}" alt="Ökoscan">
+                  </div>
+                  <div class="icon-text"><b>GARTEN</b><br>ÖKOSCAN</div> 
+                  <div class="overlay">
+                    <div class="overlay-text t-10 t-reg text-white">
+                     Ökoscan
+                    </div>
+                  </div>
+                </a>
+                <a [routerLink]="['/vonAbisZ']" class="col-2 center px-0 {{mode}} caro-item navIcon" style="background-color: #3daaa5;">
+                  <div  routerLinkActive="gardifyplus-iconClicked"
+                    class="feat-icon {{mode}} {{isLoggedIn? 'gardifyplus-iconLogin': 'gardifyplus-iconLogout'}}" alt="Gardify Plus">
+                  </div>
+                  <div class="icon-text"><b>GARIDFY</b><br>PLUS</div> 
+                  <div class="overlay">
+                    <div class="overlay-text t-10 t-reg text-white">
+                      Begriffe und Techniken vom Fachmann erklärt
+                    </div>
+                  </div>
+                </a>
+                <!-- <a data-toggle="modal" (click)="imageFromScan(false)" [attr.data-target]="isLoggedIn? '#suggest':''" class="col-2 center px-0 {{mode}} caro-item navIcon" style="background-color: #7bbaa7;">
+                  <div routerLinkActive="archiv-iconClicked"
+                    class="feat-icon {{mode}} {{isLoggedIn? 'archiv-iconLogin': 'archiv-iconLogout'}}" alt="Mein Garten Archiv">
+                  </div>
+                  <div class="icon-text"><b>MEIN</b><br>GARTEN ARCHIV</div> 
+                  <div class="overlay">
+                    <div class="overlay-text t-10 t-reg text-white">
+                      Mein Garten Archiv
+                    </div>
+                  </div>
+                </a> -->
+                <a  [routerLink]="['/gartenarchiv']" class="col-2 center px-0 {{mode}} caro-item navIcon" style="background-color: #7bbaa7;">
+                  <div routerLinkActive="archiv-iconClicked"
+                    class="feat-icon {{mode}} {{isLoggedIn? 'archiv-iconLogin': 'archiv-iconLogout'}}" alt="Mein Garten Archiv">
+                  </div>
+                  <div class="icon-text"><b>MEIN</b><br>GARTEN ARCHIV</div> 
+                  <div class="overlay">
+                    <div class="overlay-text t-10 t-reg text-white">
+                      Mein Garten Archiv
+                    </div>
+                  </div>
+                </a>
+                <a [routerLink]="['/community']" class="col-2 center px-0 {{mode}} caro-item navIcon" style="background-color: #9dc74b;">
+                  <div routerLinkActive="community-iconClicked"
+                    class="feat-icon {{mode}} {{isLoggedIn? 'community-iconLogin': 'community-iconLogout'}}" alt="Gardify Community">
+                  </div>
+                  <div class="icon-text"><b>GARDIFY</b><br>COMMUNITY</div>
+                  <div class="overlay">
+                    <div class="overlay-text t-10 t-reg text-white">
+                      Gardify Community
+                    </div>
+                  </div>
+                </a>        
+                <app-tour *ngIf="currentTourStep === 9" (closeTour)="closeTour()" (changeStep)="changeTourStep($event)" [step]="steps[currentTourStep-1]"></app-tour>
+              </div>
+            </div>
+            
+          </div>
+        </ng-container>
+
+
+        <a class="carousel-control-prev" href="#navCarousel" role="button" data-slide="prev">
+          <span class="carousel-control-prev {{mode}}" aria-hidden="true"></span>
+          <span><img src="./assets/images/Pfeil_Icon_links.svg" width="80px" style="max-width: 22px;right: 32px;top: 68px;position: absolute;"></span>
+        </a>
+        <a class="carousel-control-next" href="#navCarousel" role="button" data-slide="next" >
+          <span class="carousel-control-next {{mode}}" aria-hidden="true"></span>
+          <span><img  src="./assets/images/Pfeil_Icon_rechts.svg" width="80px" style="max-width: 22px;left: 32px;top: 68px;position: absolute;"></span>
+        </a>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-template #mobile>
+  <ng-container *ngIf="!isSocialPage">
+  <app-alert></app-alert>
+  <app-main-carousel></app-main-carousel>
+</ng-container>
+  <div *ngIf="!isSocialPage"  class="text-center d-block d-lg-none stat-wrapper-mobile {{mode}}">
+    <ng-container *ngIf="isLoggedIn">
+      <ul class="nav nav-pills nav-justified mb-0">
+        <li class="nav-item">
+          <a class="nav-link {{mode}} t-12 t-light" data-toggle="tab" href="#nav-news"><a
+              [routerLink]="['/meingarten']">MEINE PFLANZEN</a><br> <span
+              class="t-13 t-black ">{{counter.plantSorts}}/{{counter.plantsTotal}}</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {{mode}} t-12 t-light" data-toggle="tab" href="#nav-warnings"><a
+             >WARNUNGEN</a><br><span class="t-13 t-black pad-3 "  [routerLink]="['/warnungen']">{{countFrostAlert}}</span></a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/todo" class="nav-link {{mode}} t-12 t-light" data-toggle="tab" href="#nav-tipps"
+            (click)="show = !show">TO-DO<br><span class="t-13 t-black">{{counter.allTodosOfTheMonth}}/{{counter.allTodosOfTheYear}}</span></a>
+        </li>
+      </ul>
+    </ng-container>
+  </div>
+  <div *ngIf="!isSocialPage" class=" d-lg-block mainNav {{mode}}">
+    <div class="container-fluid px-2">
+      <div id="navCarousel" class="carousel slide mainNav" data-interval="20000" data-ride="carousel">
+
+        <div class="carousel-inner" [ngStyle]="{'overflow': currentTourStep > 0 ? 'visible' : 'hidden' }">
+          <ng-container>
+            <!-- first slide -->
+            <div class="carousel-item active px-3">
+              <div class="row justify-content-between">
+                <a [routerLink]="['/meingarten']" class="col-6 center px-0 {{mode}} caro-item caro-item-mobile navIcon">
+                  <div routerLink="/meingarten" routerLinkActive="mygarden-iconClicked" style="max-height: 55px;"
+                    class="feat-icon {{mode}} {{isLoggedIn?'mygarden-iconLogin':'mygarden-iconLogout'}}"
+                    alt="Mein Garten"></div>
+
+                  <div class="overlay">
+                    <div class="overlay-text t-10 t-reg text-white">
+                      Pflanzen und To-dos im eigenen Garten verwalten. Gartenbereiche anlegen
+                    </div>
+                  </div>
+                </a>
+                <app-tour *ngIf="currentTourStep === 1" (closeTour)="closeTour()" (changeStep)="changeTourStep($event)" [step]="steps[currentTourStep-1]"></app-tour>
+                <a [routerLink]="['/todo']" class="col-6 center px-0 {{mode}} caro-item caro-item-mobile">
+                  <div routerLink="/todo" routerLinkActive="todo-iconClicked" style="max-height: 55px;"
+                    class="feat-icon {{mode}} {{isLoggedIn?'todo-iconLogin':'todo-iconLogout'}}" alt="To-dos"></div>
+
+                  <div class="overlay">
+                    <div class="overlay-text t-10 t-reg text-white">
+                      To-dos im eigenen Garten verwalten. To-dos anlegen
+                    </div>
+                  </div>
+                </a>
+                <app-tour *ngIf="currentTourStep === 2" (closeTour)="closeTour()" (changeStep)="changeTourStep($event)" [step]="steps[currentTourStep-1]"></app-tour>
+              </div>
+            </div>
+            <!-- second slide -->
+            <div class="carousel-item px-3">
+              <div class="row justify-content-between">
+                <a [routerLink]="['/wetter']" class="col-6 center px-0 {{mode}} caro-item caro-item-mobile navIcon">
+                  <div routerLink="/wetter" routerLinkActive="weather-iconClicked" style="max-height: 55px;"
+                    class="feat-icon {{mode}} {{isLoggedIn?'weather-iconLogin':'weather-iconLogout'}}" alt="Wetter">
+                  </div>
+
+                  <div class="overlay">
+                    <div class="overlay-text t-10 t-reg text-white">
+                      Temperatur {{weather.currentTemp}}° C <br>
+                      Niederschlag {{weather.precipitation}} <br>
+                      Wind {{weather.wind}} <br>
+                      Luftdruck {{weather.pressure}} <br>
+                      Luftfeuchtigkeit {{weather.humidity}}% <br>
+                      Wetterabhängige Tipps
+                    </div>
+                  </div>
+                </a>
+                <app-tour *ngIf="currentTourStep === 3" (closeTour)="closeTour()" (changeStep)="changeTourStep($event)" [step]="steps[currentTourStep-1]"></app-tour>
+                <a routerLink="/suche" class="col-6 center px-0 {{mode}} caro-item caro-item-mobile navIcon">
+                  <div routerLink="/suche" routerLinkActive="search-iconClicked" style="max-height: 55px;"
+                    class="feat-icon {{mode}} {{isLoggedIn?'search-iconLogin':'search-iconLogout'}}"
+                    alt="Pflanzensuche"></div>
+
+                  <div class="overlay">
+                    <div class="overlay-text t-10 t-reg text-white">
+                      Pflanzen finden, in eigenen Garten kopieren
+                    </div>
+                  </div>
+                </a>
+                <app-tour *ngIf="currentTourStep === 4" (closeTour)="closeTour()" (changeStep)="changeTourStep($event)" [step]="steps[currentTourStep-1]"></app-tour>
+              </div>
+            </div>
+            <!-- third slide -->
+            <div class="carousel-item px-3">
+              <div class="row justify-content-between">
+                <a [routerLink]="['/scanner']" class="col-6 center px-0 {{mode}} caro-item caro-item-mobile navIcon">
+                  <div routerLink="/scanner" routerLinkActive="scan-iconClicked" style="max-height: 55px;"
+                    class="feat-icon {{mode}} {{isLoggedIn?'scan-iconLogin':'scan-iconLogout'}}" alt="Scan & Find">
+                  </div>
+
+                  <div class="overlay">
+                    <div class="overlay-text t-10 t-reg text-white">
+                      Pflanzen per Foto erkennen
+                    </div>
+                  </div>
+                </a>
+                <app-tour *ngIf="currentTourStep === 5" (closeTour)="closeTour()" (changeStep)="changeTourStep($event)" [step]="steps[currentTourStep-1]"></app-tour>
+                <a routerLink="/shop" class="col-6 center px-0 {{mode}} caro-item caro-item-mobile navIcon">
+                  <div routerLink="/shop" routerLinkActive="shop-iconClicked" style="max-height: 55px;"
+                    class="feat-icon {{mode}} {{isLoggedIn?'shop-iconLogin':'shop-iconLogout'}}" alt="Shop"></div>
+
+                  <div class="overlay">
+                    <div class="overlay-text t-10 t-reg text-white">
+                      Produkt- und Geschenkempfehlungen rund um den Garten
+                    </div>
+                  </div>
+                </a>
+                <app-tour *ngIf="currentTourStep === 6" (closeTour)="closeTour()" (changeStep)="changeTourStep($event)" [step]="steps[currentTourStep-1]"></app-tour>
+              </div>
+            </div>
+
+            <!-- forth slide -->
+            <div class="carousel-item px-3">
+              <div class="row justify-content-between">
+                 <a [routerLink]="['/oekoscan']" class="col-6 center px-0 {{mode}} caro-item caro-item-mobile navIcon">
+                  <div routerLink="/oekoscan" routerLinkActive="oeko-scanClicked" style="max-height: 55px;"
+                    class="feat-icon {{mode}} {{isLoggedIn?'oeko-scanLogin':'oeko-scanLogout'}}" alt="Ökoscan">
+                  </div>
+
+                  <div class="overlay">
+                    <div class="overlay-text t-10 t-reg text-white">
+                     Ökoscan
+                    </div>
+                  </div>
+                </a>
+                <app-tour *ngIf="currentTourStep === 7" (closeTour)="closeTour()" (changeStep)="changeTourStep($event)" [step]="steps[currentTourStep-1]"></app-tour>
+                <a [routerLink]="['/pflanzendoc']" class="col-6 center px-0 {{mode}} caro-item caro-item-mobile navIcon">
+                  <div routerLink="/pflanzendoc" routerLinkActive="doc-iconClicked" style="max-height: 55px;"
+                    class="feat-icon {{mode}} {{isLoggedIn?'doc-iconLogin':'doc-iconLogout'}}" alt="Pflanzen-Doc">
+                  </div>
+
+                  <div class="overlay">
+                    <div class="overlay-text t-10 t-reg text-white">
+                      Schadbilder fotografieren
+                    </div>
+                  </div>
+                </a>
+                <app-tour *ngIf="currentTourStep === 8" (closeTour)="closeTour()" (changeStep)="changeTourStep($event)" [step]="steps[currentTourStep-1]"></app-tour>
+              </div>
+            </div>
+            <!-- fifth slide -->
+            <div class="carousel-item px-3">
+              <div class="row justify-content-between">
+                <a [routerLink]="['/vonAbisZ']" class="col-6 center px-0 {{mode}} caro-item caro-item-mobile navIcon">
+                  <div routerLinkActive="az-iconClicked" style="max-height: 55px;"
+                    class="feat-icon {{mode}} {{isLoggedIn?'az-iconLogin':'az-iconLogout'}}" alt="Gärtnern von A-Z">
+                  </div>
+
+                  <div class="overlay">
+                    <div class="overlay-text t-10 t-reg text-white">
+                      Begriffe und Techniken vom Fachmann erklärt
+                    </div>
+                  </div>
+                </a>
+                <a data-toggle="modal" (click)="imageFromScan(false)" [attr.data-target]="isLoggedIn? '#suggest':''" class="col-6 center px-0 {{mode}} caro-item caro-item-mobile navIcon">
+                  <div routerLinkActive="doc-iconClicked" style="max-height: 55px;"
+                    class="feat-icon {{mode}} {{isLoggedIn? 'suggest-iconLogin': 'suggest-iconLogout'}}" alt="Pflanze vorschlagen">
+                  </div>
+
+                  <div class="overlay">
+                    <div class="overlay-text t-10 t-reg text-white">
+                      Pflanze für Datenbank vorschlagen
+                    </div>
+                  </div>
+                </a>
+                <app-tour *ngIf="currentTourStep === 9" (closeTour)="closeTour()" (changeStep)="changeTourStep($event)" [step]="steps[currentTourStep-1]"></app-tour>
+                <app-tour *ngIf="currentTourStep === 10" (closeTour)="closeTour()" (changeStep)="changeTourStep($event)" [step]="steps[currentTourStep-1]"></app-tour>
+              </div>
+            </div>
+            <!-- Sixth -->
+            <div class="carousel-item px-3">
+              <div class="row justify-content-between">
+                <a [routerLink]="['/community']" class="col-6 center px-0 {{mode}} caro-item caro-item-mobile navIcon">
+                  <div routerLinkActive="community-iconClicked" style="max-height: 55px;" 
+                    class="feat-icon {{mode}} {{isLoggedIn?'community-iconLogin':'community-iconLogout'}}" alt="Community">
+                  </div>
+
+                  <div class="overlay">
+                    <div class="overlay-text t-10 t-reg text-white">
+                      Garten „Live“
+                    </div>
+                  </div>
+                </a>
+                <a [routerLink]="['/videos']" class="col-6 center px-0 {{mode}} caro-item caro-item-mobile navIcon">
+                  <div routerLinkActive="videos-iconClicked" style="max-height: 55px;"
+                    class="feat-icon {{mode}} {{isLoggedIn?'videos-iconLogin':'videos-iconLogout'}}" alt="Videos">
+                  </div>
+
+                  <div class="overlay">
+                    <div class="overlay-text t-10 t-reg text-white">
+                      Dieser Bereich steht in Kürze zur Verfügung
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+           
+          </ng-container>
+
+          <a class="carousel-control-prev" href="#navCarousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon {{mode}}" aria-hidden="true"></span>
+            <span><img src="./assets/images/Pfeil_Icon_links.svg" width="25"></span>
+          </a>
+          <a class="carousel-control-next" href="#navCarousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon {{mode}}" aria-hidden="true"></span>
+            <span><img src="./assets/images/Pfeil_Icon_rechts.svg" width="25"></span>
+
+          </a>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<div class="modal fade" id="suggest" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content {{mode}}">
+      <div class="modal-header">
+        <h5 *ngIf="!getImageFromScanStatus()" class="modal-title">Pflanze vorschlagen</h5>
+        <h5 *ngIf="getImageFromScanStatus()" class="modal-title">Pflanze für Datenbank vorschlagen</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span class="{{mode==='dark'?'text-ltgrey':'text-blackish'}}" aria-hidden="true" (click)='close()'>&times;</span>
+        </button>
+      </div>
+      <div class="modal-body pb-1">
+        <small *ngIf="user && submittedPlant"class="mb-2 {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+          Hallo {{user.Name?.split(' ')[0] || ''}}, <br>
+          die Ergänzung der von Dir gewünschten Pflanzen mit all ihren To-Dos und Eigenschaften wird auf Grund des hohen Aufkommens einige Zeit in Anspruch nehmen.<br>
+          Wir bitten um etwas Geduld. Weiterhin viel Spaß mit Gardify.
+        </small>
+        <form [formGroup]="suggestForm" (submit)="submit()" class="mt-3">
+            <div class="row">
+              <div class="form-group col-12 mb-4">
+                <textarea formControlName="Name" class="form-control" placeholder="Name der Pflanze (falls bekannt)" id="textarea1"></textarea>
+              </div>
+              <!-- <div class="form-group col-12 mb-4 ch-container">
+                  <label class="t-reg mt-1 ml-3 {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+                    <input type="checkbox"  (change)='suggestAgree($event.target.checked)'>
+                      Bist du damit einverstanden, dass gardify dein Bild in die Datenbank aufnimmt und auf der Website verwendet?
+                    <span class="checkmark mt-1 ml-3"></span>
+                  </label>
+                </div> -->
+              <div class="form-group col-12">
+                <label class="file-input ptr mr-3">
+                  <input type="file" (change)="imageUpload($event)" id="file1" accept="image/*, .heic, .heics, .heif, .heifs"/>
+                  Datei auswählen
+                </label>
+                <label class="file-input ptr mr-3">
+                  <input type="file" accept="image/*;" capture="camera" (change)="imageUpload($event)" id="snap"/>
+                  Foto machen
+                </label>
+                <!-- <span class="mx-2 t-11 text-grey2">(4Mb max.)</span> -->
+                <ng-container *ngIf="suggestImgs.length>0">
+                  <div  *ngFor="let img of suggestImgs; let index = index" class="mt-2 d-inline-block">
+                    <img *ngIf="!getImageFromScanStatus()" class="suggest-img mx-1" style="height: 40px;"  [src]="img.src">
+                    <span *ngIf="!getImageFromScanStatus()" class="{{mode==='dark'?'text-ltgrey':'text-blackish'}} ptr" aria-hidden="true" (click)="removeSelectedFile(index)">&times;</span>
+                  </div>
+                </ng-container>
+               
+                <div *ngIf="uploadedPic && uploadedPic.src" class="mt-2 d-inline-block">
+                  <img class="suggest-img mx-1" style="height: 40px;"  [src]="uploadedPic.src">
+                </div>
+              </div>
+              <!-- <div class="col-12 mb-5" *ngIf="!getImageFromScanStatus()" >
+                <button class="btn btn green" (click)="startCamera()">Camera</button>
+                <div class="container vh-100">
+                  <div class="d-flex flex-column align-items-center">
+                     <div class="p-1">
+                        <video #video id="video" class="vid" autoplay></video>
+                     </div>
+                     <div class="pb-2">
+                        <button class="btn btn-primary" (click)="capture()">Capture Image</button>
+                     </div>
+                     <div class="p-1" >
+                        <canvas #canvas id="canvas"class="vid"></canvas>
+                     </div>
+                     <div class="p-1" >
+                        <span *ngFor="let image of captures" class="mx-3"> <img src="{{image}}" height="50"></span>
+                   </div>
+                  </div>
+                </div>
+              </div> -->
+              <div class="col-12 mt-2 {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+                  
+                <small>Wenn Du gardify® die übersendeten Fotos zur Veröffentlichung zur Verfügung stellen willst, lies und beachte bitte die Hinweise zum <a class="text-green" [routerLink]="[ '/info' ]">Urheberrecht</a>.</small>
+              </div>
+            </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn_border075 text-white" data-dismiss="modal" (click)='close()'>Abbrechen</button>
+        <button *ngIf="isLoggedIn && !demoMode" type="button" [disabled]="suggestForm.invalid " data-dismiss="modal" class="btn btn-green btn_border075 text-white" (click)="submit()">{{ignoreMatches ? 'senden':'Senden'}} 
+            <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+        </button>
+        <button *ngIf="!(isLoggedIn && !demoMode)" type="button" [disabled]="suggestForm.invalid " data-dismiss="modal" class="btn btn-green btn_border075 text-white" [routerLink]="['/new']" >{{ignoreMatches ? 'senden':'Senden'}} 
+          <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+      </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="bugsreport" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog {{mode==='dark'?'text-ltgrey':'text-blackish'}}" role="document">
+    <div class="modal-content {{mode}}">
+      <div class="modal-header">
+        <h5 class="modal-title">Bugs melden</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body pb-1">
+        <div class="row">
+          <div class="col-12">
+            <p>
+              Wir sind bemüht, gardify® fortlaufend zu verbessen. Wenn du also Fehler oder 
+              Schwachstellen entdeckst, freuen wir uns über deinen Hinweis.
+              Sende deine Fehlerbeschreibung oder deinen Hinweis bitte an <a class="text-green" href="mailto:bugfix@gardify.de?subject=Fehlermeldung">bugfix@gardify.de</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--- <div class="modal fade" id="tourModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content" style="border-radius: 12px; background-color: #e1ece3;">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Guided Tour</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body py-3">
+        <p>
+          Willkommen bei der gardify® Guided Tour. Hier bekommt ihr eine kurze Einführung in die wichtigsten Funktionen.
+
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" (click)="startTour()" data-dismiss="modal" style="background-color: #44835b;" class="btn text-white">Tour jetzt starten</button>
+      </div>
+    </div>
+  </div>
+</div>-->
+<div class="modal fade" id="tourModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content" style="border-radius: 12px; background-color: #e1ece3;height: 350px;">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Gardify Plus Subscription</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body py-3" style="max-height: 20%;">
+        <p>
+          Du möchtest alles aus gardify heraushohlen? Unbegrenzter Speicherplatz und exklusive Anwendungen jetzt mit gardify Plus!
+        </p>
+      </div>
+        <div *ngIf="!isLoggedIn" id="accordionbox" class="text-container"> 
+          <div class="card btn_border075 mt-2 card-width">
+            <div class="card-header relative" id="headingDemo" class="btn_border075" style="background-color: #7db2aa; height: 40px;"  data-toggle="collapse" data-target="#collapseSub" aria-expanded="false" aria-controls="collapseSub">
+              <h5 class="mb-0 text-white ml-3 mt-2 t-14 t-reg">
+                gardify Plus abonnieren
+              </h5>
+              <img class="togglebtn" src="./assets/images/Pfeil_Button_Demo_Login.svg"> 
+            </div>
+        
+            <div id="collapseSub" class="collapse btn_border075 {{pageMode == 'dm' ? 'show' : ''}}" aria-labelledby="headingDemo" data-parent="#accordionbox">
+              <button type="button" (click)="saveSubscription(0)" style="background-color: #44835b;margin: 10px;" class="btn btn_border075 text-white">monthly subscription for 5 € 
+              </button>
+              <button type="button" (click)="saveSubscription(1)" style="background-color: #44835b;" class="btn btn_border075 text-white">annual subscription for 49 €
+              </button>
+            </div>
+          </div>
+          <div class="card btn_border075 mt-2 card-width">
+            <div class="card-header" data-toggle="collapse" data-target="#collapseTest" class="btn_border075 ptr" style="background-color: #5b7878; height: 40px;">
+              <h5 class="mb-0 text-white ml-3 mt-2 t-14 t-reg">
+                gardify Plus testen
+              </h5>
+              <img class="togglebtn" src="./assets/images/Pfeil_Button_Guided_Tour.svg"> 
+            </div>
+            <div id="collapseTest" class="collapse btn_border075 t-13 p-3 text-center" data-parent="#accordionbox">
+              <button type="button" (click)="saveSubscription(2)" style="background-color: #44835b;margin: 10px;" class="btn btn_border075 text-white">possibilty to test gardify Plus for 2 months 
+              </button>
+            </div>
+          </div>          
+        </div>
+    </div>
+  </div>
+</div>

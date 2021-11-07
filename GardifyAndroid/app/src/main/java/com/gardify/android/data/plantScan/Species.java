@@ -1,0 +1,55 @@
+
+package com.gardify.android.data.plantScan;
+
+import java.util.List;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+public class Species {
+
+    @SerializedName("commonNames")
+    @Expose
+    private List<String> commonNames = null;
+    @SerializedName("scientificNameWithoutAuthor")
+    @Expose
+    private String scientificNameWithoutAuthor;
+    @SerializedName("family")
+    @Expose
+    private Family family;
+    @SerializedName("genus")
+    @Expose
+    private Genus genus;
+
+    public List<String> getCommonNames() {
+        return commonNames;
+    }
+
+    public void setCommonNames(List<String> commonNames) {
+        this.commonNames = commonNames;
+    }
+
+    public String getScientificNameWithoutAuthor() {
+        return scientificNameWithoutAuthor;
+    }
+
+    public void setScientificNameWithoutAuthor(String scientificNameWithoutAuthor) {
+        this.scientificNameWithoutAuthor = scientificNameWithoutAuthor;
+    }
+
+    public Family getFamily() {
+        return family;
+    }
+
+    public void setFamily(Family family) {
+        this.family = family;
+    }
+
+    public Genus getGenus() {
+        return genus;
+    }
+
+    public void setGenus(Genus genus) {
+        this.genus = genus;
+    }
+
+}

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/marginPaddingSize_10sdp"
+        app:cardCornerRadius="@dimen/cardCornerRadius_medium"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_margin="@dimen/marginPaddingSize_16sdp">
+
+            <ImageView
+                android:id="@+id/imageView_my_garden_plant_item_plant_image"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/imageView_all_height_200sdp"
+                android:scaleType="centerCrop"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_my_garden_plant_name_latin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+                    android:text="--"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:layout_weight="1"
+                    android:textStyle="italic"
+                    android:textSize="@dimen/textSize_title"/>
+                <TextView
+                    android:id="@+id/textview_my_garden_plant_options"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/marginPaddingSize_5sdp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_below="@id/linear_layout_my_garden_frost"
+                    android:text="&#8230;"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/textSize_icon"
+                    android:layout_marginRight="@dimen/marginPaddingSize_5sdp"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_my_garden_plant_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textColor="@color/text_all_gunmetal"
+                android:text="--"
+                android:textSize="@dimen/textSize_title"/>
+
+            <TextView
+                android:id="@+id/tv_my_garden_plant_name_synonyms"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="--"
+                android:textSize="@dimen/textSize_body_medium" />
+            <TextView
+                android:id="@+id/tv_my_garden_is_in_pot"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/marginPaddingSize_10sdp"
+                android:layout_marginBottom="@dimen/marginPaddingSize_5sdp"
+                android:textStyle="bold"
+                android:text="--"
+                android:textSize="@dimen/textSize_body_medium"/>
+
+            <LinearLayout
+                android:id="@+id/linear_layout_bio_icons"
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/view_all_divider" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_my_garden_todo_options"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/marginPaddingSize_10sdp"
+                    android:text="@string/myGarden_toDos"
+                    android:layout_weight="1"
+                    android:textColor="@color/text_all_gunmetal"
+                    android:textSize="@dimen/textSize_title"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/tv_my_garden_todo_done"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/marginPaddingSize_10sdp"
+                    android:text="@string/myGarden_done"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:textColor="@color/text_all_gunmetal"
+                    android:textSize="@dimen/textSize_title"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textview_my_garden_todo_status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+                android:layout_marginBottom="@dimen/marginPaddingSize_5sdp"
+                android:textStyle="bold"
+                android:text="--"
+                android:textSize="@dimen/textSize_body_medium"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/todo_mygarden_recycleview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/marginPaddingSize_10sdp"
+                android:textStyle="bold"
+                android:textColor="@color/text_all_gunmetal"
+                android:text="@string/myGarden_notes"
+                android:textSize="@dimen/textSize_title"/>
+            <TextView
+                android:id="@+id/tv_my_garden_plant_date_and_notes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+                android:textStyle="bold"
+                android:text="-"
+                android:textSize="@dimen/textSize_body_medium"/>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_itemGardenCard_detail"
+                android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/textSize_body_small"
+                style="@style/PrimaryButtonStyle"
+                android:text="@string/all_seeAllPlantInfos"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</layout>

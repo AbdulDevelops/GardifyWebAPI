@@ -1,0 +1,190 @@
+<div class="overlay-loading" [hidden]="!loading">
+    <svg class="spinner position-relative" viewBox="25 25 50 50">
+      <circle class="path" cx="50" cy="50" r="24" fill="none" stroke-width="2" stroke-miterlimit="10" />
+    </svg>
+  </div>
+  <div class="wrapper {{mode}} pt-5 overflow-hidden">
+    <div class="container px-4 px-md-5">
+    <div class="row justify-content-between pt-4 mb-2">
+        <div class="col-6">
+        <h2 class="t-light t-26 mt-3 {{mode==='light'?'text-grey':'text-white'}}">NEUE PFLANZEN</h2>
+        </div>
+    </div>
+  
+      <div class="row justify-content-between pt-3 mb-3">
+        <div class="col-12 py-3">
+          <button (click)=" getPlantsOfMonth(month.month, month.year)" [ngClass]="{'t-bold': month.month === selectedMonth}" *ngFor="let month of displayedMonths" class="t-light month-btn t-20 col-6 col-lg-2 {{mode==='light'?'text-darkgrey':'text-white'}}">
+            <span style="top: -12px; opacity: 50%;" class="position-absolute t-light t-12">{{month.year}}</span>
+            {{month.month}}
+            <span *ngIf="!loading && displayedPlants.length && selectedMonth === month.month" class="t-light t-14 {{mode==='light'?'text-darkgrey':'text-white'}}">({{displayedPlants.length}})</span>
+          </button>
+        </div>
+      </div>
+  
+      <ng-container *ngIf="!loading && displayedPlants.length">
+        <div class="row">
+          <div class="col-12 px-0 mb-4 bt-border {{mode}}" *ngFor="let plant of displayedPlants;trackBy: trackByFn">
+            <div class="row pb-4 mt-3 ml-1 ml-lg-2">
+              <div class="col-7 col-md-3 ml-3 ml-lg-0 text-center">
+                <a [routerLink]="['/pflanze/', plant.Id, plant.PlantUrl]">
+                  <img *ngIf="plant.Images?.length > 0" class="ptr" [title]="plant.Images[0]?.Author ? 'Autor: '+ plant.Images[0]?.Author:''" [src]=toUrl(plant.Images[0]?.SrcAttr) [alt]=plant.NameGerman>
+                </a>
+              </div>
+              <div class="col-12 col-md-9 pl-md-4 mt-2 plant-desc">
+                <h2  [ngClass]="{'mb-3': !plant.Synonym}"
+                  class="t-light t-16 mb-1 ptr {{mode==='light'?'text-darkgrey':'text-white'}}">
+                  <a *ngIf="isXsMobile" [routerLink]="['/pflanze/', plant.Id, plant.PlantUrl]">
+                    <span class="font-italic" [innerHTML]="plant.NameLatin"></span><br>
+                    <span class="t-bold ">{{plant.NameGerman}}</span>
+                  </a>
+                  <a *ngIf="!isXsMobile" [routerLink]="['/pflanze/', plant.Id, plant.PlantUrl]">
+                    <span class="font-italic" [innerHTML]="plant.NameLatin"></span>
+                    <span class="t-bold mx-2">{{plant.NameGerman}}</span>
+                  </a>
+                </h2>
+                <h2 *ngIf="plant.Synonym" class="t-light t-14 mb-3 ptr {{mode==='light'?'text-darkgrey':'text-white'}}">
+                  <a [routerLink]="['/pflanze/', plant.Id, plant.PlantUrl]" target="_blank" [innerHTML]="plant.Synonym"></a>
+                </h2>
+                <span class="d-inlineblock" [innerHTML]="plant.Description.substring(0, 300) + '...'"></span>
+                <a [routerLink]="['/pflanze/', plant.Id, plant.PlantUrl]" target="_blank"
+                  class="d-inlineblock t-bold text-green ptr">mehr</a><br>
+                 
+                <ng-container *ngIf="plant.Colors?.length > 0">
+                    <div class="row">
+                      <div class="col-12 col-md-6 col-lg-3 mt-3 pr-0">
+                         <span class="t-light t-13 {{mode === 'light'? 'text-darkgrey' : 'text-white'}}">Blütenfarbe erhältlich in:</span>
+                      </div> 
+                      <div class=" col-12 col-md-6 col-lg-7 pl-0 mt-2">
+                       <div  *ngFor="let color of plant.Colors " class="d-inline-block">
+                          <span [title]="color" class=" mt-2 ml-3 checkmark d-inline-block position-static {{color}} "></span> 
+                      </div>
+                      </div>
+                    </div>
+                </ng-container >
+                <ng-container *ngIf="plant.Badges?.length > 0">
+                  <div class="row">
+                    <div class="col-2 col-md-2 col-lg-1" *ngIf="hasBee(plant)">
+                      <img mat-raised-button matTooltipClass="tooltip-text" matTooltipPosition="above" matTooltipHideDelay="0"
+                      class="g-badge"  src="assets/main-icons/Bienenfreundlich.svg"
+                      matTooltip="Bienenfreundlich" alt="Bienenfreundlich">
+                    </div>
+                    <div class="col-2 col-md-2 col-lg-1" *ngIf="hasInsect(plant)">
+                      <img mat-raised-button matTooltipClass="tooltip-text" matTooltipPosition="above" matTooltipHideDelay="0"
+                      class="g-badge"  src="assets/main-icons/Insektenfreundlich.svg"
+                      matTooltip="Insektenfreundlich" alt="Insektenfreundlich">
+                    </div>
+                    <div class="col-2 col-md-2 col-lg-1" *ngIf="hasBird(plant)">
+                      <img mat-raised-button matTooltipClass="tooltip-text" matTooltipPosition="above" matTooltipHideDelay="0"
+                      class="g-badge"  src="assets/main-icons/Vogelfreundlich.svg"
+                      matTooltip="Vogelfreundlich" alt="Vogelfreundlich">
+                    </div>
+                    <div class="col-2 col-md-2 col-lg-1" *ngIf="hasButterfly(plant)">
+                      <img mat-raised-button matTooltipClass="tooltip-text" matTooltipPosition="above" matTooltipHideDelay="0"
+                      class="g-badge"  src="assets/main-icons/Schmetterlingsfreundlich.svg"
+                      matTooltip="Schmetterlingsfreundlich" alt="Schmetterlingsfreundlich">
+                    </div>
+                    <div class="col-2 col-md-2 col-lg-1" *ngIf="hasBio(plant)">
+                      <img mat-raised-button matTooltipClass="tooltip-text" matTooltipPosition="above" matTooltipHideDelay="0"
+                      class="g-badge"  src="assets/main-icons/Ökologisch_wertvoll.svg"
+                      matTooltip="Ökologisch wertvoll" alt="Ökologisch wertvoll">
+                    </div>
+                    <div class="col-2 col-md-2 col-lg-1" *ngIf="hasDomestic(plant)">
+                      <img mat-raised-button matTooltipClass="tooltip-text" matTooltipPosition="above" matTooltipHideDelay="0"
+                      class="g-badge"  src="assets/main-icons/Heimische_Pflanze.svg"
+                      matTooltip="Heimische Pflanze" alt="Heimische Pflanze">
+                    </div>
+                  </div>
+                </ng-container>
+                
+                <button *ngIf="isLoggedIn || demoMode" class="btn btn-green float-right mt-1 px-2" data-toggle="modal"
+                  data-target="#addPlantModal" (click)="selectedPlant = plant; getPlantLists()" style="width:auto;">
+                  in meinem Garten speichern
+                </button>
+                <button *ngIf="!isLoggedIn" class="btn btn-green float-right mt-1 px-2" [routerLink]="['/new']" style="width:auto;">
+                  in meinem Garten speichern
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+
+      <div *ngIf="!loading && displayedPlants.length" class="row justify-content-between pb-5">
+        <div class="col-12 py-3">
+          <button (click)="getPlantsOfMonth(month.month, month.year)" [ngClass]="{'t-bold': month.month === selectedMonth}" *ngFor="let month of displayedMonths" class="t-light month-btn t-20 col-6 col-lg-2 {{mode==='light'?'text-darkgrey':'text-white'}}">
+            <span style="top: -12px; opacity: 50%;" class="position-absolute t-light t-12">{{month.year}}</span>
+            {{month.month}}
+            <span *ngIf="!loading && displayedPlants.length && selectedMonth === month.month" class="t-light t-14 {{mode==='light'?'text-darkgrey':'text-white'}}">({{displayedPlants.length}})</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="!displayedPlants.length">
+        <div class="col-12 t-light py-5">
+          <p class="text-center">Es sind keine neue Pflanzen im {{selectedMonth}} hinzugefügt.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-container *ngIf="selectedPlant">
+    <div class="modal fade" id="addPlantModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content {{mode}}">
+          <div class="modal-header">
+            <h5 class="modal-title">{{selectedPlant.NameGerman}} zu meinem Gartenbereich hinzufügen</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span class="{{mode==='dark'?'text-ltgrey':'text-blackish'}}" aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form class="modal-body" [formGroup]="addForm" ngNativeValidate>
+            <div class="form-group mb-3">
+              <label class="mb-0 {{mode==='light'?'text-darkgrey':'text-white'}}">Mein Gartenbereich</label>
+  
+            </div>
+            <div class="form-group mb-3 ">
+              <label class="{{mode==='dark'?'text-white':'text-blackish'}} mb-0">Liste auswählen:</label>
+          
+              <ng-multiselect-dropdown class="{{mode==='dark'?'text-white':'text-blackish'}} "
+                [placeholder]="'Meine Listen'"
+                [data]="userLists"
+                [(ngModel)]="selectedLists"
+                [settings]="dropdownSettings"
+                [ngModelOptions]="{standalone: true}"
+                (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)" [required]='requiredField' [ngClass]='setClass()'
+                >
+              </ng-multiselect-dropdown>
+              <p *ngIf="!requiredField" class="text-danger">
+                Bitte eine Liste auswählen oder <a data-toggle="collapse" href="#addNewList"><u>eine neue Liste erstellen.</u></a>
+              </p>
+            </div>
+            <div class="collapse row mb-3 px-4" id="addNewList">
+              <form [formGroup]="addNewList" class="form-group col-12 py-2 border {{mode === 'light'?'border-dark':'border-white'}}">
+                <label class="mb-0 {{mode==='light'?'text-darkgrey':'text-white'}}">Neue Liste erstellen</label>
+                <input class="form-control" type="text" formControlName="Name" placeholder="Name der Liste">
+                <input class="form-control" type="text" formControlName="Description" placeholder="Beschreibung (optiona)">
+                <button type="button" class="btn btn-green mt-2 float-right" (click)="createList()">Erstellen</button>
+              </form>
+            </div>
+            <div class="row mb-3">
+              <div class="form-group col-12">
+                <label class="mb-0 {{mode==='light'?'text-darkgrey':'text-white'}}">Anzahl</label>
+                <input class="form-control" type="number" min="1" formControlName="Count">
+              </div>
+  
+            </div>
+            <div class="form-group mb-2 col-12 ch-container">
+              <label class="t-reg t-12 {{mode==='light'?'text-darkgrey':'text-white'}}">
+                <input type="checkbox" formControlName="IsInPot">
+                <p class="{{mode==='light'?'text-darkgrey':'text-white'}}">Topfpflanze?</p>
+                <span class="checkmark"></span>
+              </label>
+            </div>
+          </form>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary text-white btn_border075" data-dismiss="modal">Abbrechen</button>
+            <button type="button" class="btn btn-green" data-dismiss="modal" (click)="borrowPlant()">Hinzufügen</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>

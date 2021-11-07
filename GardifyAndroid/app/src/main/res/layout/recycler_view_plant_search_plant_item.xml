@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view_plant"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/marginPaddingSize_10sdp"
+        app:cardCornerRadius="@dimen/cardCornerRadius_medium"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_margin="@dimen/marginPaddingSize_16sdp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_plant_search_plant_name_latin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:maxLines="1"
+                    android:layout_weight="1"
+                    android:textStyle="italic"
+                    android:fontFamily="@font/source_sans_pro"
+                    android:textSize="@dimen/textSize_title"/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_plant_search_plant_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textColor="@color/text_all_gunmetal"
+                android:text=""
+                android:fontFamily="@font/source_sans_pro"
+                android:textSize="@dimen/textSize_title"/>
+            <TextView
+                android:id="@+id/tv_plant_search_plant_name_synonym"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:maxLines="2"
+                android:layout_weight="1"
+                android:fontFamily="@font/source_sans_pro"
+                android:layout_marginBottom="@dimen/marginPaddingSize_10sdp"
+                android:textSize="@dimen/textSize_body_medium"/>
+
+            <ImageView
+                android:id="@+id/imageView_plant_search_plant_image"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/imageView_all_height_200sdp"
+                android:src="@drawable/gardify_image_placeholder"
+                android:scaleType="centerCrop"/>
+            <TextView
+                android:id="@+id/tv_plant_search_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+                android:maxLines="4"
+                android:fontFamily="@font/source_sans_pro"
+                android:text="--"
+                android:textSize="@dimen/textSize_body_medium" />
+            <ImageView
+                android:id="@+id/expand_icon_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/imageView_all_marginTop_5sdp"
+                android:layout_marginBottom="@dimen/imageView_all_marginBottom_5sdp"
+                android:backgroundTint="@color/button_all_confirm"
+                android:text="@string/all_moreDetails"
+                android:layout_gravity="end"
+                android:src="@drawable/expand"
+                android:textSize="@dimen/textSize_body_medium" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/view_all_divider" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/marginPaddingSize_10sdp"
+                android:textStyle="bold"
+                android:fontFamily="@font/source_sans_pro"
+                android:textColor="@color/text_all_gunmetal"
+                android:text="@string/plantSearch_flowersAvailableIn"
+                android:textSize="@dimen/textSize_title"/>
+            <LinearLayout
+                android:id="@+id/linear_layout_flower_color"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+                android:orientation="horizontal">
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/view_all_divider" />
+            <LinearLayout
+                android:id="@+id/linear_layout_bio_icons"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            </LinearLayout>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_recyclerViewPLantSearchPlantItem_detail"
+                android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/textSize_body_small"
+                style="@style/SecondaryButtonStyle"
+                android:text="@string/all_seeAllPlantInfos"/>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_plant_search_save_to_garden"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/textSize_body_small"
+                android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+                style="@style/PrimaryButtonStyle"
+                android:text="@string/all_storeInMyGarden"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</layout>

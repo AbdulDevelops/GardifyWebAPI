@@ -1,0 +1,294 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="nfilesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Applications">
+          <Key>
+            <PropertyRef Name="ApplicationID" />
+          </Key>
+          <Property Name="ApplicationID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AplicationName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ApplicationRootPath" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ApplicationDescription" Type="nvarchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="Files">
+          <Key>
+            <PropertyRef Name="FileID" />
+          </Key>
+          <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FileID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Guid" Type="nvarchar" MaxLength="50" />
+          <Property Name="FilePath" Type="nvarchar" MaxLength="250" />
+          <Property Name="OriginalFileNameA" Type="nvarchar" MaxLength="250" />
+          <Property Name="OriginalFileNameB" Type="nvarchar" MaxLength="250" />
+          <Property Name="OriginalFileNameC" Type="nvarchar" MaxLength="250" />
+          <Property Name="OriginalFileNameD" Type="nvarchar" MaxLength="250" />
+          <Property Name="OriginalFileNameE" Type="nvarchar" MaxLength="250" />
+          <Property Name="OriginalFileNameF" Type="nvarchar" MaxLength="250" />
+          <Property Name="FileA" Type="nvarchar" MaxLength="250" />
+          <Property Name="FileB" Type="nvarchar" MaxLength="250" />
+          <Property Name="FileC" Type="nvarchar" MaxLength="250" />
+          <Property Name="FileD" Type="nvarchar" MaxLength="500" />
+          <Property Name="FileE" Type="nvarchar" MaxLength="500" />
+          <Property Name="FileF" Type="nvarchar" MaxLength="500" />
+          <Property Name="DescriptionDE" Type="nvarchar" MaxLength="250" />
+          <Property Name="TagsDE" Type="nvarchar" MaxLength="1000" />
+          <Property Name="DescriptionEN" Type="nvarchar" MaxLength="250" />
+          <Property Name="TagsEN" Type="nvarchar" MaxLength="1000" />
+          <Property Name="TestFile" Type="bit" Nullable="false" />
+          <Property Name="FilePublish" Type="bit" Nullable="false" />
+          <Property Name="PictureGalery" Type="bit" Nullable="false" />
+          <Property Name="DownloadArea" Type="bit" Nullable="false" />
+          <Property Name="WrittenDate" Type="datetime" />
+          <Property Name="UserCreatedDate" Type="datetime" />
+          <Property Name="WrittenBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="EditedDate" Type="datetime" />
+          <Property Name="EditedBy" Type="nvarchar" MaxLength="50" />
+	  <Property Name="IsMainImg" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FileToModule">
+          <Key>
+            <PropertyRef Name="FileToModuleID" />
+          </Key>
+          <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FileToModuleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ModuleID" Type="int" Nullable="false" />
+          <Property Name="FileID" Type="int" Nullable="false" />
+          <Property Name="DetailID" Type="int" />
+          <Property Name="Legend" Type="nvarchar" MaxLength="250" />
+          <Property Name="Description" Type="nvarchar" MaxLength="250" />
+          <Property Name="AltText" Type="nvarchar" MaxLength="250" />
+          <Property Name="TextLong" Type="nvarchar(max)" />
+          <Property Name="LinkFromPic" Type="nvarchar" MaxLength="250" />
+          <Property Name="LinkTitle" Type="nvarchar" MaxLength="250" />
+          <Property Name="LinkToPic" Type="nvarchar" MaxLength="250" />
+          <Property Name="Sort" Type="int" />
+          <Property Name="DestinationWidth" Type="int" />
+          <Property Name="DestinationWidthDetail" Type="int" />
+          <Property Name="DestinationWidthHeightModal" Type="int" />
+          <Property Name="Editable" Type="bit" Nullable="false" />
+          <Property Name="TestFile" Type="bit" Nullable="false" />
+          <Property Name="InsertedDate" Type="datetime" />
+          <Property Name="InsertedBy" Type="nvarchar" MaxLength="250" />
+          <Property Name="EditedDate" Type="datetime" />
+          <Property Name="EditedBy" Type="nvarchar" MaxLength="250" />
+	  <Property Name="IsMainImg" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Modules">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="nfilesModelStoreContainer">
+          <EntitySet Name="Applications" EntityType="Self.Applications" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Files" EntityType="Self.Files" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FileToModule" EntityType="Self.FileToModule" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Modules" EntityType="Self.Modules" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="nfilesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Files">
+          <Key>
+            <PropertyRef Name="FileID" />
+          </Key>
+          <Property Name="ApplicationId" Type="Guid" Nullable="false" />
+          <Property Name="FileID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Guid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FilePath" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="OriginalFileNameA" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="OriginalFileNameB" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="OriginalFileNameC" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="OriginalFileNameD" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="OriginalFileNameE" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="OriginalFileNameF" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="FileA" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="FileB" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="FileC" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="FileD" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="FileE" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="FileF" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="DescriptionDE" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="TagsDE" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="DescriptionEN" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="TagsEN" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="TestFile" Type="Boolean" Nullable="false" />
+          <Property Name="FilePublish" Type="Boolean" Nullable="false" />
+          <Property Name="PictureGalery" Type="Boolean" Nullable="false" />
+          <Property Name="DownloadArea" Type="Boolean" Nullable="false" />
+          <Property Name="WrittenDate" Type="DateTime" Precision="3" />
+          <Property Name="UserCreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="WrittenBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EditedDate" Type="DateTime" Precision="3" />
+          <Property Name="EditedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+	  <Property Name="IsMainImg" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FileToModule">
+          <Key>
+            <PropertyRef Name="FileToModuleID" />
+          </Key>
+          <Property Name="ApplicationId" Type="Guid" Nullable="false" />
+          <Property Name="FileToModuleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ModuleID" Type="Int32" Nullable="false" />
+          <Property Name="FileID" Type="Int32" Nullable="false" />
+          <Property Name="DetailID" Type="Int32" />
+          <Property Name="Legend" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="AltText" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="TextLong" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LinkFromPic" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="LinkTitle" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="LinkToPic" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Sort" Type="Int32" />
+          <Property Name="DestinationWidth" Type="Int32" />
+          <Property Name="DestinationWidthDetail" Type="Int32" />
+          <Property Name="DestinationWidthHeightModal" Type="Int32" />
+          <Property Name="Editable" Type="Boolean" Nullable="false" />
+          <Property Name="TestFile" Type="Boolean" Nullable="false" />
+          <Property Name="InsertedDate" Type="DateTime" Precision="3" />
+          <Property Name="InsertedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="EditedDate" Type="DateTime" Precision="3" />
+          <Property Name="EditedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+	  <Property Name="IsMainImg" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="nfilesEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Files" EntityType="Self.Files" />
+          <EntitySet Name="FileToModule" EntityType="Self.FileToModule" />
+          <EntitySet Name="Applications" EntityType="nfilesModel.Applications" />
+          <EntitySet Name="Modules" EntityType="nfilesModel.Modules" />
+        </EntityContainer>
+        <EntityType Name="Applications">
+          <Key>
+            <PropertyRef Name="ApplicationID" />
+          </Key>
+          <Property Name="ApplicationID" Type="Guid" Nullable="false" />
+          <Property Name="AplicationName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ApplicationRootPath" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ApplicationDescription" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Modules">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="nfilesModelStoreContainer" CdmEntityContainer="nfilesEntities">
+          <EntitySetMapping Name="Files">
+            <EntityTypeMapping TypeName="nfilesModel.Files">
+              <MappingFragment StoreEntitySet="Files">
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="FileID" ColumnName="FileID" />
+                <ScalarProperty Name="Guid" ColumnName="Guid" />
+                <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+                <ScalarProperty Name="OriginalFileNameA" ColumnName="OriginalFileNameA" />
+                <ScalarProperty Name="OriginalFileNameB" ColumnName="OriginalFileNameB" />
+                <ScalarProperty Name="OriginalFileNameC" ColumnName="OriginalFileNameC" />
+                <ScalarProperty Name="OriginalFileNameD" ColumnName="OriginalFileNameD" />
+                <ScalarProperty Name="OriginalFileNameE" ColumnName="OriginalFileNameE" />
+                <ScalarProperty Name="OriginalFileNameF" ColumnName="OriginalFileNameF" />
+                <ScalarProperty Name="FileA" ColumnName="FileA" />
+                <ScalarProperty Name="FileB" ColumnName="FileB" />
+                <ScalarProperty Name="FileC" ColumnName="FileC" />
+                <ScalarProperty Name="FileD" ColumnName="FileD" />
+                <ScalarProperty Name="FileE" ColumnName="FileE" />
+                <ScalarProperty Name="FileF" ColumnName="FileF" />
+                <ScalarProperty Name="DescriptionDE" ColumnName="DescriptionDE" />
+                <ScalarProperty Name="TagsDE" ColumnName="TagsDE" />
+                <ScalarProperty Name="DescriptionEN" ColumnName="DescriptionEN" />
+                <ScalarProperty Name="TagsEN" ColumnName="TagsEN" />
+                <ScalarProperty Name="TestFile" ColumnName="TestFile" />
+                <ScalarProperty Name="FilePublish" ColumnName="FilePublish" />
+                <ScalarProperty Name="PictureGalery" ColumnName="PictureGalery" />
+                <ScalarProperty Name="DownloadArea" ColumnName="DownloadArea" />
+                <ScalarProperty Name="WrittenDate" ColumnName="WrittenDate" />
+                <ScalarProperty Name="UserCreatedDate" ColumnName="UserCreatedDate" />
+                <ScalarProperty Name="WrittenBy" ColumnName="WrittenBy" />
+                <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+                <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+		<ScalarProperty Name="IsMainImg" ColumnName="IsMainImg" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FileToModule">
+            <EntityTypeMapping TypeName="nfilesModel.FileToModule">
+              <MappingFragment StoreEntitySet="FileToModule">
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="FileToModuleID" ColumnName="FileToModuleID" />
+                <ScalarProperty Name="ModuleID" ColumnName="ModuleID" />
+                <ScalarProperty Name="FileID" ColumnName="FileID" />
+                <ScalarProperty Name="DetailID" ColumnName="DetailID" />
+                <ScalarProperty Name="Legend" ColumnName="Legend" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="AltText" ColumnName="AltText" />
+                <ScalarProperty Name="TextLong" ColumnName="TextLong" />
+                <ScalarProperty Name="LinkFromPic" ColumnName="LinkFromPic" />
+                <ScalarProperty Name="LinkTitle" ColumnName="LinkTitle" />
+                <ScalarProperty Name="LinkToPic" ColumnName="LinkToPic" />
+                <ScalarProperty Name="Sort" ColumnName="Sort" />
+                <ScalarProperty Name="DestinationWidth" ColumnName="DestinationWidth" />
+                <ScalarProperty Name="DestinationWidthDetail" ColumnName="DestinationWidthDetail" />
+                <ScalarProperty Name="DestinationWidthHeightModal" ColumnName="DestinationWidthHeightModal" />
+                <ScalarProperty Name="Editable" ColumnName="Editable" />
+                <ScalarProperty Name="TestFile" ColumnName="TestFile" />
+                <ScalarProperty Name="InsertedDate" ColumnName="InsertedDate" />
+                <ScalarProperty Name="InsertedBy" ColumnName="InsertedBy" />
+                <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+                <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+		<ScalarProperty Name="IsMainImg" ColumnName="IsMainImg" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Applications">
+            <EntityTypeMapping TypeName="nfilesModel.Applications">
+              <MappingFragment StoreEntitySet="Applications">
+                <ScalarProperty Name="ApplicationDescription" ColumnName="ApplicationDescription" />
+                <ScalarProperty Name="ApplicationRootPath" ColumnName="ApplicationRootPath" />
+                <ScalarProperty Name="AplicationName" ColumnName="AplicationName" />
+                <ScalarProperty Name="ApplicationID" ColumnName="ApplicationID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Modules">
+            <EntityTypeMapping TypeName="nfilesModel.Modules">
+              <MappingFragment StoreEntitySet="Modules">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

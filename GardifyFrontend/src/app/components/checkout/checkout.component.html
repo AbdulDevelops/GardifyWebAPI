@@ -1,0 +1,377 @@
+<div class="overlay-loading" [hidden]="!loading">
+  <svg class="spinner position-relative" viewBox="25 25 50 50">
+    <circle class="path" cx="50" cy="50" r="24" fill="none" stroke-width="2" stroke-miterlimit="10" />
+  </svg>
+</div>
+<div class="wrapper {{mode}} {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+  <div class="container pt-3 pb-5">
+    <div class="row mt-5 mb-4">
+      <div class="col-12">
+        <h2 class="{{mode === 'light'? 'text-grey' : 'text-white'}} t-light t-26">DEINE BESTELLUNG</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-md-6">
+        <h3 class="t-bold t-14 text-green m-0 py-2 bt-border {{mode}}">Rechnungsadresse</h3>
+        <form [formGroup]="invoiceAddressForm" class="pt-2 px-3" width="400">
+          <div class="row mb-2 form-area-background justify-content-center {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+            <div class="col-12 col-lg-6 pt-1"><h2 class=" mb-0 t-bold t-14">Name:</h2></div>
+            <div class="col-12 col-lg-6  ">
+              <div class="row">
+                <div class="col-11 col-md-10">
+                  <input class="t-light text-ltgrey t-14 overflow-hidden" type="text" placeholder="Ihr Name" formControlName="InvoiceCustomerName">
+                </div>
+                <div class="col-4 col-md-2 pr-1 pl-0 pt-1">
+                  <a class="pl-2 setting-pencil"  >
+                      <fa-icon [icon]="faPencilAlt" class="text-ltgrey t-14"></fa-icon>
+                  </a>
+                </div>
+                <small class="text-danger d-block" *ngIf="orderSubmitted && f['InvoiceCustomerName'].invalid">
+                  Der Name fehlt
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-2 form-area-background justify-content-center {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+            <div class="col-12 col-lg-6 pt-1"><h2 class=" mb-0 t-bold t-14">Straße:</h2></div>
+            <div class="col-12 col-lg-6 ">
+              <div class="row">
+                <div class="col-11 col-md-10">
+                  <input class="t-light text-ltgrey t-14 overflow-hidden" type="text"placeholder="Straße" formControlName="InvoiceStreet">
+                </div>
+                <div class="col-4 col-md-2 pr-1 pl-0 pt-1">
+                  <a class="pl-2 setting-pencil"  >
+                      <fa-icon [icon]="faPencilAlt" class="text-ltgrey t-14"></fa-icon>
+                  </a>
+                </div>
+                <small class="text-danger d-block" *ngIf="orderSubmitted && f['InvoiceStreet'].invalid">
+                  Die Straße fehlt
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-2 form-area-background justify-content-center {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+            <div class="col-12 col-lg-6 pt-1"><h2 class=" mb-0 t-bold t-14">HausNr:</h2></div>
+            <div class="col-12 col-lg-6">
+              <div class="row">
+                <div class="col-11 col-md-10">
+                  <input class="t-light text-ltgrey t-14 overflow-hidden" type="text" placeholder="Hausnummer" formControlName="InvoiceHouseNr">
+                </div>
+                <div class="col-4 col-md-2 pr-1 pl-0 pt-1">
+                  <a class="pl-2 setting-pencil"  >
+                      <fa-icon [icon]="faPencilAlt" class="text-ltgrey t-14"></fa-icon>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <small class="text-danger d-block" *ngIf="orderSubmitted && f['InvoiceHouseNr'].invalid">
+            Die Hausnummer fehlt
+          </small>
+          <div class="row mb-2 form-area-background justify-content-center {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+            <div class="col-12 col-lg-6 pt-1"><h2 class=" mb-0 t-bold t-14">Ort:</h2></div>
+            <div class="col-12 col-lg-6 ">
+              <div class="row">
+                <div class="col-11 col-md-10">
+                  <input class="t-light text-ltgrey t-14 overflow-hidden" type="text" placeholder="Stadtname" formControlName="InvoiceCity">
+                </div>
+                <div class="col-4 col-md-2 pr-1 pl-0 pt-1">
+                  <a class="pl-2 setting-pencil"  >
+                      <fa-icon [icon]="faPencilAlt" class="text-ltgrey t-14"></fa-icon>
+                  </a>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+          <small class="text-danger d-block" *ngIf="orderSubmitted && f['InvoiceCity'].invalid">
+            Der Stadtname fehlt
+          </small>
+          <div class="row mb-2 form-area-background justify-content-center {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+            <div class="col-12 col-lg-6 pt-1"><h2 class=" mb-0 t-bold t-14">PLZ:</h2></div>
+            <div class="col-12 col-lg-6">
+              <div class="row">
+                <div class="col-11 col-md-10">
+                  <input class="t-light text-ltgrey t-14 overflow-hidden" type="text" placeholder="PLZ" formControlName="InvoiceZip">
+                </div>
+                <div class="col-4 col-md-2 pr-1 pl-0 pt-1">
+                  <a class="pl-2 setting-pencil"  >
+                      <fa-icon [icon]="faPencilAlt" class="text-ltgrey t-14"></fa-icon>
+                  </a>
+                </div>
+               
+              </div>
+            </div>
+          </div>
+          <small class="text-danger d-block" *ngIf="orderSubmitted && f['InvoiceZip'].invalid">
+            Die PLZ fehlt
+          </small>
+          <div class="row mb-2 form-area-background justify-content-center {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+            <div class="col-12 col-lg-6 pt-1"><h2 class=" mb-0 t-bold t-14">Land:</h2></div>
+            <div class="col-12 col-lg-6">
+              <div class="row">
+                <div class="col-11 col-md-10">
+                  <select class="t-light text-ltgrey t-14 overflow-hidden col-md-10" formControlName="InvoiceCountry">
+                    <option [ngValue]="'DE'">Deutschland</option>
+                    <option [ngValue]="'AT'">Österreich</option>
+                  </select>
+                  <fa-icon class="input-icon" [icon]="faChevronDown"></fa-icon>
+                </div>
+                <div class="col-4 col-md-2 pr-1 pl-0 pt-1">
+                  <a class="pl-2 setting-pencil"  >
+                      <fa-icon [icon]="faPencilAlt" class="text-ltgrey t-14"></fa-icon>
+                  </a>
+                </div>
+                
+              </div>
+            </div>
+            
+          </div>
+          <small class="d-block my-3">Wenn Du aus dem Ausland bestellen möchtest, <a routerLink="/kontakt" class="text-green">dann schreibe uns eine Mail!</a></small>
+            <small class="text-danger d-block" *ngIf="orderSubmitted && f['InvoiceCountry'].invalid">
+              Das Land fehlt
+            </small>
+          
+        </form>
+      </div>
+      <div class="col-3 col-md-2"></div>
+      <div class="col-12 col-md-4 d-none d-md-inline-block">
+        <h3 class="t-bold t-14 text-green m-0 py-2 bt-border {{mode}}">Bestellungsübersicht</h3>
+        <div class="px-1 pt-2">
+          <span class="mt-2 mb-0">Zwischensumme:</span><span class="float-right">{{subTotal | currency:'EUR':'code'}}</span>
+        </div>
+        <div class="px-1">
+          <span class="mt-2 mb-0 ml-3">Enthaltene MwSt.:</span><span class="float-right">{{vat | currency:'EUR':'code'}}</span>
+        </div>
+        <div class="px-1">
+          <span class="mt-2 mb-0">Verpackung & Versand:</span><span class="float-right">{{shippingCosts | currency:'EUR':'code'}}</span>
+        </div>
+        <div class="px-1">
+          <span class="mt-2 mb-0">Rabatte: </span><span class="float-right">0,00 EUR</span>
+        </div>
+        <hr>
+        <div class="px-1">
+          <span class="t-bold">Gesamtsumme:</span><span class="float-right t-bold">{{totalNormal | currency:'EUR':'code'}}</span>
+          <small class="d-block">inklusive Mehrwertsteuer</small>
+          <small class="text-warning d-block mt-2" *ngIf="!enoughOrderAmount">Verbleibender Betrag bis zum Mindestbestellwert: {{minLeft | currency:'EUR':'code'}}</small>
+        </div>
+        <div class="px-1 my-3">
+          <input type="checkbox" [(ngModel)]="hasAgreed" class="d-inline-block mr-2">
+          <span [ngClass]="{'text-danger': orderSubmitted && !hasAgreed}" class="mt-2 mb-0 t-12">Die gardify® <a class="text-green" [routerLink]="['/agb']">Geschäftsbedingungen</a>, <a class="text-green" [routerLink]="['/datenschutz']">Datenschutz-Richtlinien</a> sowie die <a class="text-green" [routerLink]="['/widerruf']">Widerrufsbelehrung</a> habe ich gelesen und zur Kenntnis genommen und erkenne beides in der jeweils gültigen Fassung an.</span>
+        </div>
+        <div class="mt-2 text-center">
+          <button (click)="submitOrder()" class="t-reg btn btn-green t-13 text-white btn_border075">
+            Bestellung abschließen
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="row px-3 mb-1">
+      <label class="ptr">
+        <input type="checkbox" [(ngModel)]="diffAddress" class="d-inline-block mr-2">abweichende Lieferadresse
+      </label>
+    </div>
+    <div *ngIf="diffAddress" class="row my-2">
+      <div class="col-12 col-md-8">
+        <h3 class="t-bold t-14 text-green m-0 py-2 bt-border {{mode}}">Lieferadresse</h3>
+        <form [formGroup]="shipAddressForm" class="col-12 col-md-9 pt-2 px-3" width="400">
+          <div class="row mb-2 form-area-background justify-content-center {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+            <div class="col-12 col-lg-6 pt-1"><h2 class=" mb-0 t-bold t-14">Name:</h2></div>
+            <div class="col-12 col-lg-6  ">
+              <div class="row">
+                <div class="col-11 col-md-10">
+                  <input class="t-light text-ltgrey t-14 overflow-hidden" type="text" placeholder="Ihr Name" formControlName="Name">
+                </div>
+                <div class="col-4 col-md-2 pr-1 pl-0 pt-1">
+                  <a class="pl-2 setting-pencil"  >
+                      <fa-icon [icon]="faPencilAlt" class="text-ltgrey t-14"></fa-icon>
+                  </a>
+                </div>
+                <small class="text-danger d-block" *ngIf="orderSubmitted && sh['Name'].invalid">
+                  Der Name fehlt
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-2 form-area-background justify-content-center {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+            <div class="col-12 col-lg-6 pt-1"><h2 class=" mb-0 t-bold t-14">Straße:</h2></div>
+            <div class="col-12 col-lg-6 ">
+              <div class="row">
+                <div class="col-11 col-md-10">
+                  <input class="t-light text-ltgrey t-14 overflow-hidden" type="text"placeholder="Straße" formControlName="Street">
+                </div>
+                <div class="col-4 col-md-2 pr-1 pl-0 pt-1">
+                  <a class="pl-2 setting-pencil"  >
+                      <fa-icon [icon]="faPencilAlt" class="text-ltgrey t-14"></fa-icon>
+                  </a>
+                </div>
+                <small class="text-danger d-block" *ngIf="orderSubmitted && sh['Street'].invalid">
+                  Die Straße fehlt
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-2 form-area-background justify-content-center {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+            <div class="col-12 col-lg-6 pt-1"><h2 class=" mb-0 t-bold t-14">HausNr:</h2></div>
+            <div class="col-12 col-lg-6">
+              <div class="row">
+                <div class="col-11 col-md-10">
+                  <input class="t-light text-ltgrey t-14 overflow-hidden" type="text" placeholder="Hausnummer" formControlName="HouseNr">
+                </div>
+                <div class="col-4 col-md-2 pr-1 pl-0 pt-1">
+                  <a class="pl-2 setting-pencil"  >
+                      <fa-icon [icon]="faPencilAlt" class="text-ltgrey t-14"></fa-icon>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <small class="text-danger d-block" *ngIf="orderSubmitted && sh['HouseNr'].invalid">
+            Die Hausnummer fehlt
+          </small>
+          <div class="row mb-2 form-area-background justify-content-center {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+            <div class="col-12 col-lg-6 pt-1"><h2 class=" mb-0 t-bold t-14">Ort:</h2></div>
+            <div class="col-12 col-lg-6 ">
+              <div class="row">
+                <div class="col-11 col-md-10">
+                  <input class="t-light text-ltgrey t-14 overflow-hidden" type="text" placeholder="Stadtname" formControlName="City">
+                </div>
+                <div class="col-4 col-md-2 pr-1 pl-0 pt-1">
+                  <a class="pl-2 setting-pencil"  >
+                      <fa-icon [icon]="faPencilAlt" class="text-ltgrey t-14"></fa-icon>
+                  </a>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+          <small class="text-danger d-block" *ngIf="orderSubmitted && sh['City'].invalid">
+            Der Stadtname fehlt
+          </small>
+          <div class="row mb-2 form-area-background justify-content-center {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+            <div class="col-12 col-lg-6 pt-1"><h2 class=" mb-0 t-bold t-14">PLZ:</h2></div>
+            <div class="col-12 col-lg-6">
+              <div class="row">
+                <div class="col-11 col-md-10">
+                  <input class="t-light text-ltgrey t-14 overflow-hidden" type="text" placeholder="PLZ" formControlName="Zip">
+                </div>
+                <div class="col-4 col-md-2 pr-1 pl-0 pt-1">
+                  <a class="pl-2 setting-pencil"  >
+                      <fa-icon [icon]="faPencilAlt" class="text-ltgrey t-14"></fa-icon>
+                  </a>
+                </div>
+               
+              </div>
+            </div>
+          </div>
+          <small class="text-danger d-block" *ngIf="orderSubmitted && sh['Zip'].invalid">
+            Die PLZ fehlt
+          </small>
+          <div class="row mb-2 form-area-background justify-content-center {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+            <div class="col-12 col-lg-6 pt-1"><h2 class=" mb-0 t-bold t-14">Land:</h2></div>
+            <div class="col-12 col-lg-6">
+              <div class="row">
+                <div class="col-11 col-md-10">
+                  <select class="t-light text-ltgrey t-14 overflow-hidden col-md-10" formControlName="Country">
+                    <option [ngValue]="'DE'">Deutschland</option>
+                    <option [ngValue]="'AT'">Österreich</option>
+                  </select>
+                  <fa-icon class="input-icon" [icon]="faChevronDown"></fa-icon>
+                </div>
+                <div class="col-4 col-md-2 pr-1 pl-0 pt-1">
+                  <a class="pl-2 setting-pencil"  >
+                      <fa-icon [icon]="faPencilAlt" class="text-ltgrey t-14"></fa-icon>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <small class="text-danger d-block" *ngIf="orderSubmitted && sh['Country'].invalid">
+            Das Land fehlt
+          </small>
+        </form>
+      </div>
+    </div>
+    <div class="row mt-3 mt-md-0">
+      <div class="col-12 col-md-8">
+        <h3 class="t-bold t-14 text-green m-0 mb-2 py-2 bt-border {{mode}}">Zahlungsart</h3>
+        <form [formGroup]="invoiceAddressForm">
+          <div class="col-6 col-md-2 d-inline-block">
+            <input type="radio" formControlName="PaymentMethod" value="paypal">
+            <img src="assets/main-icons/paypal.png" class="ml-1 payment-icon" title="PayPal" alt="PayPal">
+            <small class="d-block ml-3">PayPal</small>
+          </div>
+          <div class="col-6 col-md-2 d-inline-block">
+            <input type="radio" formControlName="PaymentMethod" value="sofort">
+            <img src="assets/main-icons/klarna.png" class="ml-1 payment-icon" title="Klarna Sofortüberweisung" alt="Klarna Sofortüberweisung">
+            <small class="d-block ml-3">Klarna Sofort</small>
+          </div>
+          <div class="col-6 col-md-2 d-inline-block">
+            <input type="radio" formControlName="PaymentMethod" value="M">
+            <img src="assets/main-icons/master-card.png" class="ml-1 payment-icon" title="Mastercard" alt="Mastercard">
+            <small class="d-block ml-3">Mastercard</small>
+          </div>
+          <div class="col-6 col-md-2 d-inline-block">
+            <input type="radio" formControlName="PaymentMethod" value="V">
+            <img src="assets/main-icons/visa.png" class="ml-1 payment-icon" title="Visa" alt="Visa">
+            <small class="d-block ml-3">Visa</small>
+          </div>
+          <div class="col-6 col-md-2 d-inline-block">
+            <input type="radio" formControlName="PaymentMethod" value="rechnung">
+            <img src="assets/main-icons/rechnung.png" class="ml-1 payment-icon" title="Rechnung" alt="Rechnung">
+            <small class="d-block ml-3">Rechnung</small>
+          </div>
+        </form>
+        <small class="text-danger" *ngIf="orderSubmitted && f['PaymentMethod'].invalid">
+          Die Zahlungsart fehlt
+        </small>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-12 col-md-8">
+        <h3 class="t-bold t-14 text-green m-0 py-2 bt-border {{mode}}">Bestellung überprüfen</h3>
+      </div>
+    </div>
+    <div *ngIf="shopCartEntries">
+      <div *ngFor="let item of shopCartEntries">
+        <div class="row">
+          <div class="col-4 col-md-2 mt-3" *ngIf="item.ArticleView.ArticleImages?.length>0">
+            <img class="ptr article" [routerLink]="['/artikel/',item.ArticleView?.Id,item.ArticleView?.Name]"
+              [src]="item.ArticleView.Thumbnail || toUrl(item.ArticleView.ArticleImages[0].SrcAttr)" [alt]="item.Name">
+          </div>
+          <div class="col-8 col-md-10 mt-4 row">
+            <div class="col-md-12 underlined {{mode === 'light'? 'text-darkgrey' : 'text-white'}} ">
+              <h3 class="t-16"> {{item.ArticleView.Name}}</h3>
+              <h3 class="t-15"> <span class="t-reg  "> Preis:
+                </span>{{item.ArticleView.NormalPrice * item.Quantity | currency:'EUR':'code'}}
+              </h3>
+              <h3 class="t-14">
+                <span class="mr-2 pr-2 t-14" *ngIf="item.Quantity>1"><a
+                    (click)="changeQuantity(item.ArticleView.Id,false,true)" title="Anzahl reduzieren">
+                    <fa-icon [icon]="faMinus"></fa-icon>
+                  </a></span>
+                <span class="t-reg "> Anzahl: </span> {{item.Quantity}}
+                <span class="ml-2 pl-2 t-14"><a (click)="changeQuantity(item.ArticleView.Id,true,false)"
+                    title="Anzahl erhöhen">
+                    <fa-icon [icon]="faPlus"></fa-icon>
+                  </a></span>
+              </h3>
+            </div>
+            <div class="col-md-12 mt-2">
+              <button class="btn btn-green t-13 text-white {{mode}}" (click)="removeItem(item.ArticleView.Id)">
+                Löschen
+              </button>
+            </div>
+          </div>
+          <hr>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row my-5">
+      <div class="col-12">
+        <a class=" t-light t-14 text-green m-0 py-2 bt-border {{mode}}" [routerLink]="['/shop']">Weiter einkaufen >></a>
+      </div>
+    </div>
+  </div>
+</div>

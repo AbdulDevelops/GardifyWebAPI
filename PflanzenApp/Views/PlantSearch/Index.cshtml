@@ -1,0 +1,344 @@
+﻿@model GardifyModels.Models.PlantSearchViewModel
+@using PflanzenApp.HtmlHelpers;
+@{
+    ViewBag.Title = "Plant Search";
+}
+<div id="modalWrapper"></div>
+<h2>Pflanzensuche</h2>
+@{Html.RenderPartial("_searchField", Model); }
+<div id="search-controls" class="form-horizontal">
+    <hr />
+    @{Html.RenderPartial("_searchControls", Model);}
+</div>
+<div id="search-content">
+    @{Html.RenderPartial("_searchPageContent", Model); }
+</div>
+@section Scripts {
+    <link rel="stylesheet" href="~/Content/jquery-ui.min.css">
+    <script src="~/Scripts/jquery.js"></script>
+    <script src="~/Scripts/jquery-ui-1.11.4.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/bootstrap.js"></script>
+    <script type="text/javascript">
+        // search
+        var searchValue;
+        $(document).ready(function () {
+            // targets input elements with the 'data-' attributes and each time the input changes
+            // it calls the 'createAutocomplete' function
+            $("input[data-autocomplete]").each(createAutocomplete);
+        });
+
+        $('#btn-search').click(function(){
+            updateFilterCookie();
+            updateControlContent();
+            updateContent();
+        });
+        // submits form upon selecting a value
+        var submitAutocompleteForm = function (event, ui) {
+            console.log(ui.item.label);
+            var currentValue = $('#input_search').val();
+            if (currentValue != searchValue && (currentValue == '' || currentValue.length > 2)) {
+                searchValue = $('#input_search').val();
+                taxonId = -1;
+                // move caret to end of input
+                $('#input_search').focus();
+                var tmpStr = $('#input_search').val();
+                $('#input_search').val('');
+                $('#input_search').val(tmpStr);
+            }
+            $('#input_search').text=currentValue;
+            $('#input_search').val(ui.item.label);
+            updateFilterCookie();
+            updateControlContent();
+            updateContent();
+        };
+
+        var createAutocomplete = function () {
+            console.log("create");
+            var $input = $(this); // the HTML element (Textbox)
+
+            var options = {
+                // selecting the source by finding elements with the 'data-' attribute
+                source: $input.attr("data-autocomplete"), // Required
+                select: submitAutocompleteForm, // Optional
+                minLength: 3
+            };
+            // apply options
+            $input.autocomplete(options);
+        };
+
+        function taxonClick(link) {
+            console.log($(link));
+            console.log($(link).data('taxonid'));
+            $('#input_search').val('');
+
+            // undo selection of a taxon
+            if(_taxonId == $(link).data('taxonid')) {
+                //               //<a>   <li>     <ul>     <li> or <div>
+                var $listParent = $(link).parent().parent().parent();
+
+                // nested node
+                if($listParent.prop("tagName") == 'LI') {
+                    _taxonId = $listParent.children('a').data('taxonid');
+                    // root node
+                } else {
+                    _taxonId = -1;
+                }
+            } else {
+                _taxonId = $(link).data('taxonid');
+            }
+            console.log(_taxonId);
+            updateFilterCookie();
+            updateControlContent();
+            updateContent();
+        }
+
+        function updateControlContent(){
+            $.ajax({
+                url:'@Url.Action("ajaxGetPlantSearchControls", "PlantSearch")',
+                type: 'get',
+                cache: false
+            })
+            .done(function(result){
+                $('#search-controls').html(result);
+            });
+        }
+
+        function updateContent() {
+            $('.plant-search-table-wrapper .loading-div').show();
+            $.ajax({
+                url: '@Url.Action("ajaxGetPlantSearchResult", "PlantSearch")',
+                type: 'get',
+                cache: false,
+            })
+			.done(function(result) {
+			    $('#search-content').html(result);
+			    updateListeners();
+			    $('.plant-search-table-wrapper .loading-div').hide();
+			});
+        }
+
+        var sliderMin = @Model.HeightMin;
+        var sliderMax = @Model.HeightMax;
+        var sliderSelMin = @Model.SelHmin;
+        var sliderSelMax = @Model.SelHmax;
+
+        function updateListeners() {
+            $("#slider-height").slider({
+                range: true,
+                min: sliderMin,
+                max: sliderMax,
+                step: 5,
+                values: [sliderSelMin, sliderSelMax],
+                slide: function (event, ui) {
+                    $("#selHmin").val($("#slider-height").slider("values", 0));
+                    $("#selHmax").val($("#slider-height").slider("values", 1));
+                },
+                change: function(event, ui){
+                    onSliderChanged( event, ui )
+                }
+            });
+            $("#selHmin").val($("#slider-height").slider("values", 0));
+            $("#selHmax").val($("#slider-height").slider("values", 1));
+
+            $('.month-checkbox').on('change', function() {
+                updateFilterCookie();
+                updateContent();
+            });
+        }
+
+        function onSliderChanged(event, ui) {
+            var val0 = $("#slider-height").slider("values", 0);
+            var val1 = $("#slider-height").slider("values", 1);
+            if(val0 != sliderSelMin || val1 != sliderSelMax) {
+                sliderSelMin = val0;
+                sliderSelMax = val1;
+                updateFilterCookie();
+                updateContent();
+            }
+        }
+
+        var _taxonId = @(Model.TaxonId > 0 ? Model.TaxonId.ToString() : "-1");
+        var _selectedTagId = -1;
+        function updateFilterCookie() {
+            console.log("Cookie geupdatet");
+            // height
+            var params = "selHmin=" + $("#selHmin").val();
+            params += "&selHmax=" + $("#selHmax").val();
+            // taxon
+            params += "&taxonId=" + _taxonId;
+            // categoryId
+            params += "&categoryId=" + $("#CategoryId").val();
+            // subCategoryId
+            params += "&subCategoryId=" + $("#SubCategoryId").val();
+            // flovering month
+            var fm = [];
+            $('input[name="month"]:checked').each(function() {
+                fm.push(this.value)
+            });
+            params += "&fm=" + fm.join(',');
+            // positiveTags
+            var positiveTags = [];
+            $('#positive-filter-tag-list a').each(function() {
+                positiveTags.push( $(this).data("tagid") );
+            });
+            if(_selectedTagId > 0) {
+                positiveTags.push( _selectedTagId );
+                _selectedTagId = -1;
+            }
+            params += "&positiveTags=" + positiveTags.join(',');
+            console.log(positiveTags.join(','));
+            // searchText
+            params += "&searchText=" + $("#input_search").val();
+            //var oldValue = readCookie('filter');
+            createCookie('filter', params, 99)
+        }
+
+        function createCookie(name,value,days) {
+            if (days) {
+                var date = new Date();
+                date.setTime(date.getTime()+(days*24*60*60*1000));
+                var expires = "; expires="+date.toGMTString();
+            }
+            else var expires = "";
+            document.cookie = name+"="+value+expires+"; path=/";
+        }
+
+        function readCookie(name) {
+            var nameEQ = name + "=";
+            var ca = document.cookie.split(';');
+            for(var i=0;i < ca.length;i++) {
+                var c = ca[i];
+                while (c.charAt(0)==' ') c = c.substring(1,c.length);
+                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+            }
+            return null;
+        }
+
+        function changeCategory(categoryId) {
+            updateFilterCookie();
+            updateControlContent();
+            //updateContent();
+        }
+
+        function changeSubCategory(subCategoryId) {
+            updateFilterCookie();
+            updateControlContent();
+            //updateContent();
+        }
+
+        function addPositiveTag() {
+            var tagId = $("#SelectedTagId").val();
+            _selectedTagId = tagId;
+            updateFilterCookie();
+            updateControlContent();
+            updateContent();
+        }
+
+        function removePositiveTag(toRemove) {
+            $(toRemove).parent().remove();
+            updateFilterCookie();
+            updateControlContent();
+            updateContent();
+        }
+
+        function updateSearchQueries() {
+            $('.search-queries-list .loading-div').show();
+            $.ajax({
+                url: '@Url.Action("Index", "SearchQuery")',
+                type: 'get',
+                cache: false
+            })
+			.done(function(result) {
+			    $('#search-queries-wrapper').html(result);
+			    $('.search-queries-list .loading-div').hide();
+			});
+        }
+
+        function UseSearchQuery(query) {
+            // update _taxonId
+            if(query.indexOf('taxonId') > -1) {
+                var re = /taxonId=(\d+)\S/ig;
+                var result = re.exec(query);
+                _taxonId = result[1];
+                console.log(result);
+            }
+            console.log(_taxonId);
+            createCookie('filter', query, 99);
+            updateContent();
+        }
+
+        function AddSearchQuery() {
+            var newQueryName = "";
+
+            console.log(_taxonId);
+            // taxonname
+            var taxonName = $('#taxonomic-tree a').filter(function(index) {
+                console.log($(this).data('taxonid'));
+                return $(this).data('taxonid') == _taxonId;
+            }).html();
+            console.log(taxonName);
+
+            if(taxonName) {newQueryName += taxonName;}
+            // min/max height
+            var val0 = $("#slider-height").slider("values", 0);
+            var val1 = $("#slider-height").slider("values", 1);
+            if(val0 !== sliderMin) {
+                if(newQueryName.length > 0) {newQueryName += ", ";}
+                newQueryName += "min. Höhe: " + val0;
+            }
+            if(val1 !== sliderMax) {
+                if(newQueryName.length > 0) {newQueryName += ", ";}
+                newQueryName += "max. Höhe: " + val1;
+            }
+            // flowering monthes
+            var monthes = [];
+            $('input[name="month"]:checked').each(function() {
+                monthes.push($(this).data('text'));
+            });
+            if(monthes.length > 0) {
+                if(newQueryName.length > 0) {newQueryName += ", ";}
+                newQueryName += "Blütezeit: " + monthes.join(', ');
+            }
+            // positiv tags
+            var positiveTags = [];
+            $('#positive-filter-tag-list a').each(function() {
+                positiveTags.push($(this).data('title'));
+            });
+            if(positiveTags.length > 0) {
+                if(newQueryName.length > 0) {newQueryName += ", ";}
+                newQueryName += "Tags: " + positiveTags.join(', ');
+            }
+
+            if(newQueryName.length > 0) {
+                $('.search-queries-list .loading-div').show();
+                $.ajax({
+                    url: '@Url.Action("Create", "SearchQuery")',
+                    data: { 'name': newQueryName, @Html.AjaxAntiForgeryTokenExtention() },
+                    type: 'post',
+                    cache: false
+                })
+				.done(function(result) {
+				    $('#search-queries-wrapper').html(result);
+				    $('.search-queries-list .loading-div').hide();
+				});
+            }
+        }
+
+        function RemoveSearchQuery(id) {
+            $('.search-queries-list .loading-div').show();
+            $.ajax({
+                url: '@Url.Action("Delete", "SearchQuery")',
+                data: { 'id': id, @Html.AjaxAntiForgeryTokenExtention() },
+                type: 'post',
+                cache: false
+            })
+			.done(function(result) {
+			    $('#search-queries-wrapper').html(result);
+			    $('.search-queries-list .loading-div').hide();
+			});
+        }
+
+
+    </script>
+    @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.min.js")
+}

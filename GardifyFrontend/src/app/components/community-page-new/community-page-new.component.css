@@ -1,0 +1,41 @@
+::ng-deep .form-control {
+    display: block;
+    width: 100%;
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff !important;
+    background-clip: padding-box;
+    border: 2px solid #e6e6e6;
+    border-radius: .5rem!important;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+::ng-deep .form-group {
+    margin-bottom: 0rem;
+}
+
+.active {
+    color: #73AD21;
+}
+
+.admin-name {
+    color: #73AD21;
+    display: inline-block;
+}
+
+.input-comment{
+    background-color: #F0F0F0!important
+}
+
+
+.gardify-icon {
+    background: url('/assets/FavIcon/Gardify_Favicon.png');
+    height: 15px;
+    width: 15px;
+    background-size: 15px;
+    display: block;
+}

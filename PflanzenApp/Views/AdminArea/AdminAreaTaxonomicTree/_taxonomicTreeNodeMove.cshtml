@@ -1,0 +1,34 @@
+﻿@model GardifyModels.Models.TaxonomicTree
+
+@if (Model != null)
+{
+    <ul>
+        @foreach (var childNode in Model.Childs.OrderBy(t => t.TitleLatin))
+        {
+        <li>
+
+
+            @if (childNode.Id == Model.MovingNodeId)
+            {
+                @: @childNode.TitleGerman (@childNode.TitleLatin)
+
+            }
+            else
+            {
+                @: <a class="@(childNode.IsParentOfOrSelectedTaxon ? "parent-taxon" : "")" href="@Url.Action("MoveNode", new { taxonId = childNode.Id, movedNodeId = Model.MovingNodeId })">@childNode.TitleLatin (@childNode.TitleGerman)</a>
+                if (childNode.Taxon != GardifyModels.Models.ModelEnums.TaxonomicRank.Variety)
+                {
+                    @:  / <a href="@Url.Action("MoveNodeConfirm", new { taxonId = childNode.Id, movedNodeId = Model.MovingNodeId })">Als Elternbaum festlegen</a>
+                }
+            }
+
+            @if (childNode.Childs != null && childNode.Childs.Any())
+            {
+                childNode.MovingNodeId = Model.MovingNodeId;
+
+                Html.RenderPartial("~/Views/AdminArea/AdminAreaTaxonomicTree/_taxonomicTreeNodeMove.cshtml", childNode);
+            }
+        </li>
+        }
+    </ul>
+}

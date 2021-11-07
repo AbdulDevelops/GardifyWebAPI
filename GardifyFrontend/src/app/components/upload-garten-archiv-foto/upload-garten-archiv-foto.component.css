@@ -1,0 +1,121 @@
+.radioBtn{
+    height: 30px;
+}
+.albumgreen{
+    height: 25px;
+}
+.form-control {
+    display: block;
+    width: 100%;
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 2px solid #e6e6e6;
+    border-radius: .5rem!important;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+input, select,.text-input {
+    padding: 5px !important;
+    border: 2px solid #e6e6e6 !important;
+     background-color: white !important; 
+    border-radius: 0.5rem !important;
+}
+input,select,.date-input{
+    padding: 0px !important;
+    border: 0px solid #e6e6e6 !important;
+     background-color: rgba(0,0,0,.00) !important; 
+   
+}
+.savebutton{
+width: 200px;
+}
+.radioBtnChecked{
+    height: 20px;
+}
+input[type=radio] {
+    display: none;
+  }
+  
+  img:hover {
+    opacity:0.6;
+    cursor: pointer;
+  }
+  
+  img:active {
+    opacity:0.4;
+    cursor: pointer;
+  }
+  .image-upload.input {
+    display: none;
+  }
+  /* input[type=radio]:checked + label > img {
+    
+    background-image: url('/assets/images/Ausgewählt.svg');
+  } */
+  ::ng-deep .mat-radio-button.mat-accent  .mat-ripple-element {
+    opacity: 0 !important;     /*click effect color change*/
+    background-color: rgb(126, 126, 134) !important;
+  }
+  
+  ::ng-deep .mat-radio-button.mat-accent .mat-radio-inner-circle {
+    background-color: rgb(126, 126, 134)!important;   /*inner circle color change*/
+  }
+  
+  ::ng-deep.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+    border-color:rgb(126, 126, 134)!important; /*outer ring color change*/
+  }
+
+  ::ng-deep .mat-form-field-label{
+    color: #495057;
+  }
+
+  ::ng-deep .mat-focused .mat-form-field-label {
+    /*change color of label*/
+    color: #495057 !important;
+   }
+   
+   ::ng-deep.mat-form-field-underline {
+    /*change color of underline*/
+    background-color: #495057 !important;
+   } 
+   
+   ::ng-deep.mat-form-field-ripple {
+    /*change color of underline when focused*/
+    background-color: #495057 !important;;
+   }
+   
+   ::ng-deep .mat-form-field-label {
+    /*change color of label*/
+    color: #495057 !important;
+   }
+   
+   ::ng-deep .mat-icon-button{
+    color: #495057 !important;
+   }
+   .mat-datepicker-toggle {
+    color: white !important;
+   }
+
+  .radio-group {
+    display: inline-flex;
+    flex-direction: column;
+  }
+  
+  .radio-button {
+    margin: 5px;
+  }
+  
+  .selected-value {
+    margin: 15px 0;
+  }
+  .borderDanger {
+    border-color: crimson !important;
+}
+.wrapper.light input, .wrapper.light select {
+  border-bottom: 0px solid #444 !important}
+  

@@ -1,0 +1,127 @@
+﻿@model GardifyModels.Models.NewsViewModels.InstaNewsEntryListModel
+
+@{
+    ViewBag.Title = "EditInstaPostEntry";
+    Layout = "~/Views/Shared/_LayoutAdminArea.cshtml";
+}
+
+@if (Model.StatusMessage != null)
+{
+    Html.RenderPartial("_modalStatusMessage", Model.StatusMessage);
+}
+<head>
+    <link href="~/Scripts/jquery-te-1.4.0.css" rel="stylesheet" />
+    <script type="text/javascript" src="http://code.jquery.com/jquery.min.js" charset="utf-8"></script>
+    <script src="~/Scripts/jquery-te-1.4.0.min.js"></script>
+</head>
+<h2>EditInstaPostEntry</h2>
+
+<div class="form-horizontal">
+    @using (Html.BeginForm("EditInstaPost", "AdminAreaNews", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken();
+        @Html.Hidden("id", Model.id);
+        <div class="form-group">
+            <div class="row">
+
+            </div>
+            @if (Model.media_url != null)
+            {
+                <div class="image-wrapper col-md-3">
+                    @if (Model.media_type == "IMAGE" || Model.media_type == "CAROUSEL_ALBUM")
+                    {
+                        <div class="title-image">
+                            <img style="max-height: 400px;" title="@Model.media_url" src="@Model.media_url" alt="@Model.media_url" />
+                        </div>
+                    }
+                    @if (Model.media_type == "VIDEO")
+                    {
+                        <div class="title-image">
+                            <video controls width="330" height="250" src="@Model.media_url" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></video>
+                        </div>
+                    }
+
+                </div>
+            }
+
+        </div>
+        <div class="form-group">
+            <label for="title" class="control-label col-md-2">Datum</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.timestamp, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.timestamp, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="title" class="control-label col-md-2">Autor</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.username, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.username, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="text" class="control-label col-md-2">Text</label>
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.caption, new { @class = "form-control", @id = "editor", @rows = 5, cols = 80 })
+                @*<textarea class="form-control" name="text" rows="5" cols="80">@Model.caption</textarea>*@
+                @Html.ValidationMessageFor(model => model.caption, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="title" class="control-label col-md-2">Thumbnail_url</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.thumbnail_url, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.thumbnail_url, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="title" class="control-label col-md-2">Media_type</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.media_type, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.media_type, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="title" class="control-label col-md-2">Media_url</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.media_url, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.media_url, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="tipp" class="control-label col-md-2">Related Link</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.RelatedLink, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.RelatedLink, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Speichern" class="btn btn-default" />
+            </div>
+        </div>
+    }
+    @using (Html.BeginForm("delete-instaPost-entry", "AdminAreaNews"))
+    {
+        @Html.AntiForgeryToken()
+        @Html.Hidden("entryId", Model.id)
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Löschen" class="btn btn-default" />
+            </div>
+        </div>
+    }
+    <p>
+        @Html.ActionLink("Zurück", "GetInstaPost")
+    </p>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#editor").jqte();
+
+    });
+
+</script>

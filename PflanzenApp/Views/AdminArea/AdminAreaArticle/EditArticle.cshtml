@@ -1,0 +1,404 @@
+﻿@model GardifyModels.Models.ArticleViewModels.ArticleViewModel
+
+@{
+    ViewBag.Title = "Artikel bearbeiten";
+    Layout = "~/Views/Shared/_LayoutAdminArea.cshtml";
+}
+@if (Model.StatusMessage != null)
+{
+    Html.RenderPartial("_modalStatusMessage", Model.StatusMessage);
+}
+<h2>Artikel bearbeiten</h2>
+<div class="form-horizontal">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <label for="name" class="control-label col-md-2">Name</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="EANCode" class="control-label col-md-2">EAN-Code</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EANCode, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EANCode, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="description" class="control-label col-md-2">Beschreibung</label>
+            <div class="col-md-10">
+                <textarea class="form-control" name="description" rows="5" cols="80">@Model.Description</textarea>
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="experttip" class="control-label col-md-2">Expertentipp</label>
+            <div class="col-md-10">
+                <textarea class="form-control" name="experttip" rows="5" cols="80">@Model.ExpertTip</textarea>
+                @Html.ValidationMessageFor(model => model.ExpertTip, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="HazardNotice" class="control-label col-md-2">Gefahrenhinweis</label>
+            <div class="col-md-10">
+                <textarea class="form-control" name="HazardNotice" rows="5" cols="80">@Model.HazardNotice</textarea>
+                @Html.ValidationMessageFor(model => model.HazardNotice, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="brand" class="control-label col-md-2">Marke/Hersteller</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Brand, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Brand, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="MakerId" class="control-label col-md-2">Hersteller-ID</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MakerId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.MakerId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="ProductLink" class="control-label col-md-2">Affiliate-Link (optional)</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ProductLink, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ProductLink, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="PhotoLink" class="control-label col-md-2">Affiliate-Bild (optional)</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PhotoLink, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PhotoLink, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="normalPrice" class="control-label col-md-2">Preis</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NormalPrice, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NormalPrice, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="WeightInGrams" class="control-label col-md-2">Gewicht (g)</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.WeightInGrams, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.WeightInGrams, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="vat" class="control-label col-md-2">MwSt.</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.VAT, new { htmlAttributes = new { @class = "form-control", placeholder = "Bsp. 0,19" } })
+                @Html.ValidationMessageFor(model => model.VAT, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="category" class="control-label col-md-2">Kategorie(n)</label>
+            <div class="col-md-10">
+                @{
+                    if (ViewBag.ArticleCategories == null || ViewBag.ArticleCategories.Count == 0)
+                    {
+                        <div class="col-lg-4">
+                            <a href="~/AdminAreaArticleCategories">Neue Artikel-Kategorie erstellen</a>
+                        </div>
+                    }
+                    else
+                    {
+                        foreach (var arc in ViewBag.ArticleCategories)
+                        {
+                            string checkedAttribute = "checked=\"checked\"";
+                            <div class="col-lg-4">
+                                <label><input type="checkbox" checked="@arc.Selected" name="articleCategories" value="@arc.Value"> @arc.Text</label>
+                            </div>
+                        }
+                    }
+                }
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="Author" class="control-label col-md-2">Autor (für Bücher)</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Author, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Author, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="pricePercentagePayableWithPoints" class="control-label col-md-2">% bezahlbar mit Punkten</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PricePercentagePayableWithPoints, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PricePercentagePayableWithPoints, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="isAvailable" class="control-label col-md-2">Ist vorhanden</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.IsAvailable, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.IsAvailable, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="IsNotDeliverable" class="control-label col-md-2">Nicht lieferbar</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.IsNotDeliverable, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.IsNotDeliverable, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="BulkArticle" class="control-label col-md-2">Sperrgut?</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.BulkArticle, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.BulkArticle, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="AllowPublishment" class="control-label col-md-2">Veröffentlicht</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.AllowPublishment, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.AllowPublishment, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Speichern" class="btn btn-success" />
+            </div>
+        </div>
+    }
+
+    @using (Html.BeginForm("delete-article", "AdminAreaArticle"))
+    {
+        @Html.AntiForgeryToken()
+        @Html.Hidden("id", Model.Id)
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Löschen" class="btn btn-danger" />
+            </div>
+        </div>
+    }
+
+    <hr />
+
+    <h4>Verknüpfte Gegenstände</h4>
+    <div class="form-group">
+        <div class="image-wrapper col-md-10">
+            @if (Model.ArticleReferences != null && Model.ArticleReferences.Any())
+            {
+                <table class="table">
+                    <tr>
+                        <th>
+                            Referenz
+                        </th>
+                        <th>
+                            Titel
+                        </th>
+                        <th></th>
+                    </tr>
+                    @foreach (var reference in Model.ArticleReferences)
+                    {
+                        <tr>
+                            <td>
+                                @reference.ReferenceType
+                            </td>
+                            @switch (reference.ReferenceType)
+                            {
+                                case GardifyModels.Models.ModelEnums.ArticleReferenceType.Plant:
+                                    <td>
+                                        @reference.Plant.Name
+                                    </td>
+                                    break;
+                                case GardifyModels.Models.ModelEnums.ArticleReferenceType.Todotemplate:
+                                    <td>
+                                        @reference.TodoTemplate.Title
+                                    </td>
+                                    break;
+                            }
+                            <td>
+                                @Html.ActionLink("Löschen", "DeleteArticleReference", new { articleId = reference.ArticleId, articleReferenceId = reference.Id })
+                            </td>
+                        </tr>
+                    }
+                </table>
+
+            }
+            else
+            {
+                <div>
+                    Keine Referenzen verfügbar.
+                </div>
+            }
+        </div>
+    </div>
+    <br />
+    <h4>Verknüpfung hinzufügen</h4>
+    @using (Html.BeginForm("AddArticleReference", "AdminAreaArticle"))
+    {
+        @Html.AntiForgeryToken()
+        @Html.Hidden("articleId", Model.Id)
+        <div class="form-group">
+            <label class="control-label col-md-2">Verknüpfungstyp</label>
+            <div class="col-md-10">
+                @Html.DropDownList("referenceType", EnumHelper.GetSelectList(typeof(GardifyModels.Models.ModelEnums.ArticleReferenceType)), new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group" id="group-plant">
+            <label class="control-label col-md-2">Pflanze</label>
+            @if (Model.PlantReferenceList != null && Model.PlantReferenceList.Any())
+            {
+                <div class="col-md-10">
+                    @Html.DropDownList("plantId", new SelectList(Model.PlantReferenceList, "Id", "Name"), new { @class = "form-control" })
+                </div>
+            }
+        </div>
+        <div class="form-group" id="group-todotemplate">
+            <label class="control-label col-md-2">Todotemplate</label>
+            @if (Model.TodotemplateReferenceList != null && Model.TodotemplateReferenceList.Any())
+            {
+                <div class="col-md-10">
+                    @Html.DropDownList("todotemplateId", new SelectList(Model.TodotemplateReferenceList, "Id", "Title"), new { @class = "form-control" })
+                </div>
+            }
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Hinzufügen" class="btn btn-default" />
+            </div>
+        </div>
+    }
+
+    <h4>Bulk-Verknüpfung hinzufügen</h4>
+    @using (Html.BeginForm("AddBulkReferences", "AdminAreaArticle"))
+    {
+        @Html.AntiForgeryToken()
+        @Html.Hidden("articleId", Model.Id)
+        <div class="form-group">
+            <label class="control-label col-md-2">Verknüpfungstyp</label>
+            <div class="col-md-10">
+                @Html.DropDownList("referenceType", EnumHelper.GetSelectList(typeof(GardifyModels.Models.ModelEnums.ArticleReferenceType)), new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group" id="group-plant">
+            <label class="control-label col-md-2">IDs zugehörigen Objekten</label>
+            <div class="col-md-10">
+                <input type="text" name="bulkIds" placeholder="z.B. 23,65,444" class="form-control">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Hinzufügen" class="btn btn-default" />
+            </div>
+        </div>
+    }
+
+    <hr />
+
+    <h4>Verknüpfte Bilder</h4>
+    <div class="form-group">
+        <label class="control-label col-md-2"></label>
+        <div class="image-wrapper col-md-10">
+            @if (Model.ArticleImages != null && Model.ArticleImages.Any())
+            {
+                foreach (var img in Model.ArticleImages)
+                {
+                    <div class="tumbnail col-md-3">
+                        <img title="@img.TitleAttr" src="@img.SrcAttr" alt="@img.AltAttr" />
+                        <div class="caption">
+                            <h3>@img.FullTitle</h3>
+                            <p>@img.FullDescription</p>
+                            @using (Html.BeginForm("delete-article-image", "AdminAreaArticle"))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.Hidden("imageId", img.Id)
+                                @Html.Hidden("objectId", Model.Id)
+                                <input type="submit" value="Bild löschen" class="btn btn-default" />
+                            }
+                            <button data-toggle="collapse" href="#editMode@(img.Id)" type="button" class="btn btn-success">Ändern</button>
+                            <div class="collapse" id="editMode@(img.Id)">
+                                @using (Html.BeginForm("edit-image-creds", "AdminAreaArticle"))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.Hidden("imageId", img.Id)
+                                    @Html.Hidden("objectId", Model.Id)
+                                    <input type="text" placeholder="Autor" value="@img.Author" name="imageAuthor" class="form-control" />
+                                    <input type="text" placeholder="Lizenz" value="@img.License" name="imageLicense" class="form-control" />
+                                    <input type="submit" value="Speichern" class="btn btn-success" />
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <p>Noch kein Bild hochgeladen</p>}
+        </div>
+    </div>
+    <h4>Bild hochladen</h4>
+    @using (Html.BeginForm("upload-article-image", "AdminAreaArticle", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.Hidden("objectId", Model.Id)
+        <div class="form-group">
+            <label class="control-label col-md-2">Datei auswählen</label>
+            <div class="col-md-10">
+                <input type="file" name="imageFile" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Titel</label>
+            <div class="col-md-10">
+                <input class="form-control" name="imageTitle" type="text" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Bild-Autor</label>
+            <div class="col-md-10">
+                <input class="form-control" name="imageAuthor" type="text" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Lizenz-Quelle</label>
+            <div class="col-md-10">
+                <input class="form-control" name="imageLicense" type="text" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Beschreibung</label>
+            <div class="col-md-10">
+                <textarea class="form-control" name="imageDescription" rows="2" cols="80"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Hochladen" class="btn btn-default" />
+            </div>
+        </div>
+    }
+</div>
+<p>
+    @Html.ActionLink("Zurück", "Index")
+</p>
+<script>
+    $(document).ready(function () {
+        updateView("Pflanze")
+    });
+
+    $("#referenceType").change(function () {
+        var selected = $('#referenceType').find(":selected").text();
+        updateView(selected);
+    });
+
+    function updateView(text) {
+        if (text == "Todovorlage") {
+            $("#group-plant").hide();
+            $("#group-todotemplate").show();
+        } else if (text == "Pflanze") {
+            $("#group-plant").show();
+            $("#group-todotemplate").hide();
+        }
+    }
+</script>

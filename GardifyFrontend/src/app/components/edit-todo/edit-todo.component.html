@@ -1,0 +1,108 @@
+<div class="wrapper {{mode}} py-5">
+  <div class="container">
+    <div class="row mb-2 {{mode}} bt-border">
+      <div class="col-12 col-md-5">
+        <h2 class="t-reg t-12 {{mode === 'light'? 'text-grey' : 'text-white'}}">TO-DO KALENDAR</h2>
+        <h2 class="t-light t-26 {{mode === 'light'? 'text-grey' : 'text-white'}}">
+          <span class="ptr" routerLink="/todo"><<</span> TO-DO BEARBEITEN<fa-icon [icon]="faCircle" class="text-ownTodo ml-2 t-12"></fa-icon>
+        </h2>
+      </div>
+    </div>
+
+    <div class="row mt-5"></div>
+    <form [formGroup]="newTodo">
+      <div class="row {{mode}} bt-border">
+        <div class="col-5 pt-2">
+          <h3 class="t-18 t-bold">Titel (*)</h3>
+        </div>
+        <div class="col-7">
+          <input type="text" class="inputWhite" formControlName="Title" placeholder="...">
+        </div>
+      </div>
+
+      <div class="row {{mode}} bt-border">
+        <div class="col-5 pt-2">
+          <h3 class="t-18 t-bold">Beschreibung (*)</h3>
+        </div>
+        <div class="col-7">
+          <input type="text" class="inputWhite" formControlName="Description" placeholder="...">
+        </div>
+      </div>
+      <div class="row {{mode}} bt-border">
+          <div class="col-5 pt-2">
+            <h3 class="t-18 t-reg">Wiederholungsart</h3>
+          </div>
+          <div class="col-7 ">
+            <select formControlName="Cycle">
+              <option [ngValue]="CycleType.Once">Niemals</option>
+              <option [ngValue]="CycleType.Daily">Täglich</option>
+              <option [ngValue]="CycleType.Weekly">Wöchentlich</option>
+              <option [ngValue]="CycleType.Monthly">Monatlich</option>
+              <option [ngValue]="CycleType.Yearly">Jährlich</option>
+              <option [ngValue]="CycleType.BiYearly">2-jährig</option>
+              <option [ngValue]="CycleType.TriYearly">3-jährig</option>
+              <option [ngValue]="CycleType.QuadYearly">4-jährig</option>
+              <option [ngValue]="CycleType.PentYearly">5-jährig</option>
+            </select>
+            <fa-icon class="input-icon" [icon]="faChevronDown"></fa-icon>
+          </div>
+        </div>
+      <div class="row {{mode}} bt-border">
+        <div class="col-5 pt-2">
+          <h3 class="t-18 t-bold">Fälligkeit von (*)</h3>
+        </div>
+        <div class="col-7">
+          <input type="date" class="inputWhite" formControlName="DateStart" required>
+        </div>
+      </div>
+      <ng-container *ngIf="loop">
+        <div class="row {{mode}} bt-border">
+          <div class="col-5 pt-2">
+            <h3 class="t-18 t-bold">Fälligkeit bis (*)</h3>
+          </div>
+          <div class="col-7"> 
+            <input  type="date" class="inputWhite" formControlName="DateEnd" required>
+          </div>
+        </div>
+      </ng-container>
+      
+
+      <div class="row {{mode}} bt-border">
+        <div class="col-5 pt-2">
+          <h3 class="t-18 t-reg" >Erinnerung</h3>
+        </div>
+        <div class="col-7">
+          <select formControlName="Notification">
+            <option [ngValue]="NotifyType.Entry">Kalendereintrag</option>
+            <option [ngValue]="NotifyType.EntryHighlight">Kalendereintrag hervorheben</option>
+            <option [ngValue]="NotifyType.Push">Pushnachricht</option>
+            <option [ngValue]="NotifyType.Email">Emailnachricht</option>
+          </select>
+          <fa-icon class="input-icon" [icon]="faChevronDown"></fa-icon>
+        </div>
+      </div>
+
+      <div class="row {{mode}} bt-border">
+        <div class="col-5 pt-2">
+          <h3 class="t-18 t-reg">Fotos hochladen
+          </h3>
+        </div>
+        <div class="col-7">
+          <label class="text-darkgrey diaryImageInput">
+            {{images.length || 0}} Bild(er) ausgewählt
+            <input class="form-control" type="file" accept="image/*, .heic, .heics, .heif, .heifs" (change)="onImageUpload($event)">
+          </label>
+          <fa-icon class="input-icon" [icon]="faChevronDown"></fa-icon>
+        </div>
+        <div class="col-12 px-3 px-md-2">
+          <img *ngFor="let img of toUpdate?.EntryImages" [src]=toUrl(img.SrcAttr) [alt]="img.TitleAttr" class="uploaded">
+          <img *ngFor="let img of images" [src]=img.src [alt]="img.title" class="uploaded">
+        </div>
+      </div>
+    </form>
+    (*) benötigte Felder
+    <br>
+
+    <button type="submit" [disabled]="newTodo.invalid || invalidImg" class="btn btn-green mt-3" (click)="editTodo()">Speichern</button>
+  </div>
+</div>

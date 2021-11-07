@@ -1,0 +1,202 @@
+﻿@model GardifyModels.Models.AdminAreaViewModels.TaxonomicBulkSelectViewModel
+
+@{
+    ViewBag.Title = "Bitte wählen Sie die Pflanzen aus, für die die Änderungen vorgenommen werden sollen";
+    Layout = "~/Views/Shared/_LayoutAdminArea.cshtml";
+}
+
+<h2>Bitte wählen Sie die Pflanzen aus, für die die Änderungen vorgenommen werden sollen</h2>
+<h4>Neue Eigenschaft: @Model.TagCategoryTitle: @Model.TagTitle</h4>
+<div class="alert alert-info">
+    Wenn Sie "Neue Eigenschaft hinzufügen" auswählen, werden keine Eigenschaften der selben Pflanzen ersetzt!
+</div>
+@if (ViewBag.ErrorMessage != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.ErrorMessage
+    </div>
+}
+@if (Model.TagList != null)
+{
+    using (Html.BeginForm("update-tags", "AdminAreaTaxonomicTree"))
+    {
+        @Html.AntiForgeryToken()
+        @Html.Hidden("TreeId", Model.TreeId)
+        @Html.Hidden("TagId", Model.TagId)
+        @Html.Hidden("TagTitle", Model.TagTitle)
+        @Html.Hidden("TagCategoryId", Model.TagCategoryId)
+        @Html.Hidden("TagCategoryTitle", Model.TagCategoryTitle)
+        <table class="table">
+            <tr>
+                <th>
+                    Pflanze
+                </th>
+                <th>
+                    Vorhandene Eigenschaft
+                </th>
+                <th>
+                    Neue Eigenschaft hinzufügen
+                </th>
+                <th>
+                    Diese Eigenschaft ersetzen
+                </th>
+            </tr>
+            @for (int i = 0; i < Model.TagList.Count(); i++)
+            {
+                var btvm = Model.TagList.ElementAt(i);
+                <tr>
+                    <td>
+                        @btvm.PlantName
+                        <input type="hidden" name="TagList[@i].PlantId" value="@Model.TagList.ElementAt(i).PlantId" />
+                        <input type="hidden" name="TagList[@i].PlantName" value="@Model.TagList.ElementAt(i).PlantName" />
+                    </td>
+                    <td></td>
+                    <td>
+                        @*@Html.CheckBoxFor(v => btvm.AddTagToPlant)*@
+                        @Html.CheckBox("TagList[" + i + "].AddTagToPlant", Model.TagList.ElementAt(i).AddTagToPlant)
+                    </td>
+                    <td></td>
+                </tr>
+                if (btvm.PlantTags != null)
+                {
+                    for (int j = 0; j < btvm.PlantTags.Count(); j++)
+                    {
+                        var tag = btvm.PlantTags.ElementAt(j);
+                        <tr>
+                            <td></td>
+                            <td>
+                                @tag.PlantTagTitle
+                                <input type="hidden" name="TagList[@i].PlantTags[@j].PlantTagId" value="@tag.PlantTagId" />
+                                <input type="hidden" name="TagList[@i].PlantTags[@j].PlantTagTitle" value="@tag.PlantTagTitle" />
+                            </td>
+                            <td></td>
+                            <td>
+                                @Html.CheckBox("TagList[" + i + "].PlantTags[" + j + "].AddTagToPlant", Model.TagList.ElementAt(i).AddTagToPlant)
+                            </td>
+                        </tr>
+                    }
+
+                }
+            }
+        </table>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Hinzufügen" class="btn btn-default" />
+            </div>
+        </div>
+    }
+    <br />
+}
+else if (Model.SelectedCharacteristic != null)
+{
+    @:Folgenden Pflanzen wird das Merkmal "@Model.SelectedCharacteristic.Category.Title" mit den Werten: Min = @Model.SelectedCharacteristic.Min und Max = @Model.SelectedCharacteristic.Max zugewiesen
+    <br />
+}
+else if (Model.NewAlert != null)
+{
+    @:Folgenden Pflanzen wird die Warnung "@Model.NewAlert.Title" zugewiesen.
+    <br />
+}
+    @*@if (Model.PlantList.Count() == 0)
+        {
+            @:Es wurde keine Pflanze für den angegebenen Baum gefunden.
+        }
+        else {
+            if (Model.PlantTag != null)
+            {
+                using (Html.BeginForm("update-tags", "AdminAreaTaxonomicTree", FormMethod.Post))
+                {
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Pflanze
+                                </th>
+                                <th>
+                                    Soll geändert werden
+                                </th>
+                            </tr>
+                        </thead>
+                        @foreach (var plant in Model.PlantList)
+                        {
+                            <tr>
+                                <td>
+                                    @plant.Name
+                                </td>
+                                <td></td>
+                            </tr>
+                        }
+                    </table>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Eigenschaften hinzufügen" class="btn btn-default" />
+                        </div>
+                    </div>
+                }
+            }
+            else if (Model.SelectedCharacteristic != null)
+            {
+                using (Html.BeginForm("update-characteristics", "AdminAreaTaxonomicTree", FormMethod.Post))
+                {
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Pflanze
+                                </th>
+                                <th>
+                                    Soll geändert werden
+                                </th>
+                            </tr>
+                        </thead>
+                        @foreach (var plant in Model.PlantList)
+                        {
+                            <tr>
+                                <td>
+                                    @plant.NameLatin
+                                </td>
+                                <td></td>
+                            </tr>
+                        }
+                    </table>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Merkmale hinzufügen" class="btn btn-default" />
+                        </div>
+                    </div>
+                }
+            }
+            else if (Model.NewAlert != null)
+            {
+                using (Html.BeginForm("update-alerts", "AdminAreaTaxonomicTree", FormMethod.Post))
+                {
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Pflanze
+                                </th>
+                                <th>
+                                    Soll geändert werden
+                                </th>
+                            </tr>
+                        </thead>
+                        @foreach (var plant in Model.PlantList)
+                        {
+                            <tr>
+                                <td>
+                                    @plant.NameLatin
+                                </td>
+                                <td></td>
+                            </tr>
+                        }
+                    </table>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Warnungen hinzufügen" class="btn btn-default" />
+                        </div>
+                    </div>
+                }
+            }
+
+        }*@

@@ -1,0 +1,105 @@
+﻿@model GardifyModels.Models.GardenViewModels.GardenCreateViewModel
+
+@{
+    ViewBag.Title = "Gartenbereich erstellen";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Neuen Gartenbereich erstellen</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <p class="control-label col-md-2">Name</p>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <p class="control-label col-md-2">Beschreibung</p>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <p class="control-label col-md-2">Privat</p>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.IsPrivate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.IsPrivate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <p class="control-label col-md-2">Himmelsrichtung</p>
+            <div class="col-md-10">
+                @Html.DropDownList("CardinalDirection", new List<SelectListItem>(){
+        new SelectListItem() { Text="Norden", Value = "0", Selected = true  },
+        new SelectListItem() { Text="Osten", Value = "1"},
+        new SelectListItem() { Text="Süden",Value="2" },
+        new SelectListItem() { Text="Westen",Value="3" },
+        new SelectListItem() { Text="Nordosten",Value="4" },
+        new SelectListItem() { Text="Nordwesten",Value="5" },
+        new SelectListItem() { Text="Südosten",Value="6" },
+        new SelectListItem() { Text="Südwesten",Value="7" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <p class="control-label col-md-2">Schatten-Intensität</p>
+            <div class="col-md-10">
+
+                @Html.DropDownList("ShadowStrength", new List<SelectListItem>(){
+        new SelectListItem() { Text= "Sonne", Value = "0" },
+        new SelectListItem() { Text= "Halbschatten", Value = "1", Selected = true },
+        new SelectListItem() {Text="Schatten",Value="2" } })
+            </div>
+        </div>
+        <div class="form-group">
+            <p class="control-label col-md-2">Bodentyp</p>
+            <div class="col-md-10">
+                @Html.DropDownList("GroundType", new List<SelectListItem>(){
+        new SelectListItem() { Text="Sandig", Value = "0"},
+        new SelectListItem() { Text="Lehmig", Value = "1"},
+        new SelectListItem() { Text="Humös",Value="2", Selected = true } })
+            </div>
+        </div>
+        <div class="form-group">
+            <p class="control-label col-md-2">pH-Typ</p>
+            <div class="col-md-10">
+                @Html.DropDownList("PhType", new List<SelectListItem>(){
+        new SelectListItem() { Text="Sauer", Value = "0"},
+        new SelectListItem() { Text="Neutral", Value = "1", Selected = true},
+        new SelectListItem() { Text="Basisch",Value="2"} })
+            </div>
+        </div>
+        <div class="form-group">
+            <p class="control-label col-md-2">Bodenfeuchtigkeit</p>
+            <div class="col-md-10">
+                @Html.DropDownList("Wetness", new List<SelectListItem>(){
+        new SelectListItem() { Text="Trocken", Value = "0"},
+        new SelectListItem() { Text="Normal", Value = "1", Selected = true},
+        new SelectListItem() { Text="Nass",Value="2"} })
+            </div>
+        </div>
+        @Html.HiddenFor(model => model.Inside, new { @Value = false })
+        @Html.HiddenFor(model => model.Temperature, new { @Value = -1 })
+        @Html.HiddenFor(model => model.Light, new { @Value = -1 })
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Erstellen" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Zurück zum Garten", "Index")
+</div>

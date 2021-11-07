@@ -1,0 +1,1246 @@
+<div class="row">
+  <div class="col-1">
+    <app-ad [ad]="adSides" ></app-ad>
+  </div>
+  <div class="col-10">
+
+      <div class="overlay-loading" [hidden]="!loading">
+        <svg class="spinner position-relative" viewBox="25 25 50 50">
+          <circle class="path" cx="50" cy="50" r="24" fill="none" stroke-width="2" stroke-miterlimit="10" />
+        </svg>
+      </div>
+      <div class="wrapper {{mode}} pt-5 overflow-hidden">
+        <div class="container px-4 px-md-5">
+          <app-ad [ad]="ad" ></app-ad>
+      
+      
+      
+          <form [formGroup]="mainForm" (ngSubmit)="search()">
+            <div class="row justify-content-between pt-4 mb-2">
+              <div class="col-6">
+                <h2 class="t-light t-26 mt-3 {{mode==='light'?'text-grey':'text-white'}}">PFLANZENSUCHE</h2>
+                <!-- <button *ngIf="isAdmin" (click)="ToggleShowImage()">{{ShowImageText()}}</button> -->
+              </div>
+      
+            </div>
+            <div class="container bg-yellowish">
+              <div class="row px-2 justify-content-between py-4">
+                <div class="col-12 col-lg-8 mr-md-5 mb-md-2">
+                  <label class="t-bold t-12" style="color: #494949;">Botanische Namen/Deutsche Namen/Synonyme</label>
+                  <input type="text" list="names" class="form-control inputWhite col-11 bordered {{mode==='light'?'text-darkgrey':'text-white'}}" placeholder="Suche ..."
+                  formControlName="searchText" (keyup)="searchText.next($event)">
+                  <datalist id="names">
+                    <option *ngFor="let plant of sortedPlants"
+                      [value]="decodeHtml(plant.Synonym?plant.NameGerman+' ('+plant.Synonym +')':plant.NameGerman)" >
+                    {{decodeHtml(plant.Synonym?plant.NameGerman+' ('+plant.Synonym +')':plant.NameGerman)}}
+                  </datalist>
+                </div>
+                <div class="col-12 col-lg-4">
+                  <label class="t-bold t-12" style="color: #494949;">Pflanzengruppe</label>
+                  <span class="subtext">({{_groups?.length || 0}})</span>
+                  <select formControlName="groups" class="custom-select ptr col-12 bordered" (change)="search()">
+                    <option [ngValue]=null [defaultSelected]=true disabled hidden>z.B. Immergrüne</option>
+                    <option [ngValue]=null>-</option>
+                    <option *ngFor="let gr of _groups" [ngValue]=gr>
+                      {{gr.Name}}
+                    </option>
+                  </select>
+                  <fa-icon class="px-2 input-icon" [icon]="faChevronDown"></fa-icon>
+                </div>
+                <div class="col-12 col-lg-4">
+                  <label class="t-bold t-12" style="color: #494949;">Pflanzenfamilie</label>
+                  <span class="subtext">({{_families?.length || 0}})</span>
+                  <select formControlName="family" class="custom-select ptr col-12 bordered" (change)="search()">
+                    <option [ngValue]=null [defaultSelected]=true disabled hidden>z.B. Ericaceae</option>
+                    <option [ngValue]=null>-</option>
+                    <option *ngFor="let gr of _families" [ngValue]=gr.val>
+                      {{gr.displayStr}}
+                    </option>
+                  </select>
+                  <fa-icon class="px-2 input-icon" [icon]="faChevronDown"></fa-icon>
+                </div>
+                <div class="col-12 col-lg-4">
+                  <label class="t-bold t-12" style="color: #494949;">Gärtnerische Gruppe</label>
+                  <span class="subtext">({{_gardenGroups?.length || 0}})</span>
+                  <select formControlName="gardenGroup" class="custom-select ptr col-12 bordered" (change)="search()">
+                    <option [ngValue]=null [defaultSelected]=true disabled hidden>z.B. Clematis</option>
+                    <option [ngValue]=null>-</option>
+                    <option *ngFor="let gg of _gardenGroups" [ngValue]=gg>
+                      {{gg.Name}}
+                    </option>
+                  </select>
+                  <fa-icon class="px-2 input-icon" [icon]="faChevronDown"></fa-icon>
+                </div>
+              </div>
+            </div>
+      
+            <div class="container bg-yellow">
+              <div class="row {{ecoSearch? 'mt-3 bt-border':'my-3'}} px-3 py-2">
+                <span class="t-bold t-12 ptr text-darkgrey" (click)="toggleEcoSearch()">
+                    {{ecoSearch? 'Filter ausblenden':'Filter nach ökologischen Kriterien'}}
+                </span>
+                <span class="subtext" [hidden]="ecoSearch">({{_ecoTags?.length || 0}})</span>
+                <div *ngIf="!ecoSearch" class="ml-auto">
+                  <fa-icon (click)="toggleEcoSearch()" class="py-1 px-2 ptr text-darkgrey" [icon]="faChevronDown"></fa-icon>
+                </div>
+                <div *ngIf="ecoSearch" class="ml-auto">
+                  <span *ngIf="appliedFilters.length>0 && !loading" class="t-bold t-12 text-orange mx-4"><fa-icon class="pr-2" [icon]="faSearch"></fa-icon>{{count || 0}} Treffer</span>
+                  <span class="t-bold t-12 text-blackish ptr" (click)="resetSearch()">Suche zurücksetzen</span>
+                  <span class="ptr t-light hide-filter-btn t-12 p-1" title="Filter ausblenden" (click)="toggleEcoSearch()">&times;</span>
+                </div>
+              </div>
+            </div>
+            <!-- Eco Search -->
+            <div class="details-search" [hidden]="!ecoSearch">
+              <div class="container pb-2">
+                <div class="row justify-content-between pt-4">
+                  <div class="col-12 mt-2 pr-0">
+                    <label class="t-bold t-12">Filter nach ökologischen Kriterien</label>
+                    <div formArrayName="ecoTags">
+                      <div class="row ml-2">
+                        <div class="col-12 col-md-5 col-lg-4 pl-0 eco-label ch-container d-inline-block "
+                        *ngFor="let cb of ecoTags.controls; let i = index">
+                        <input type="checkbox" [attr.id]="'ecoTags'+i" [formControlName]="i" (change)="search()">
+                        <label class="eco-label t-light t-12" [attr.for]="'ecoTags'+i">{{_ecoTags[i].t}}
+                          
+                        </label>
+                        <span>
+                          <img  [src]="_ecoTags[i].img" [alt]="_ecoTags[i].t">
+                        </span>
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+      
+            <div class="container bg-greenish">
+              <div class="row {{frostSearch? 'mt-3 bt-border':'my-3'}} px-3 py-2">
+                <span class="t-bold t-12 ptr text-darkgrey" (click)="toggleFrostSearch()">
+                    {{frostSearch? 'Filter ausblenden':'Frosthärte'}}
+                </span>
+                <span class="subtext" [hidden]="frostSearch">(9)</span>
+                <div *ngIf="!frostSearch" class="ml-auto">
+                  <fa-icon (click)="toggleFrostSearch()" class="py-1 px-2 ptr text-darkgrey" [icon]="faChevronDown"></fa-icon>
+                </div>
+                <div *ngIf="frostSearch" class="ml-auto">
+                  <span *ngIf="appliedFilters.length>0 && !loading" class="t-bold t-12 text-white mx-4"><fa-icon class="pr-2" [icon]="faSearch"></fa-icon>{{count || 0}} Treffer</span>
+                  <span class="t-bold t-12 text-blackish ptr" (click)="resetSearch()">Suche zurücksetzen</span>
+                  <span class="ptr t-light hide-filter-btn t-12 p-1" title="Filter ausblenden" (click)="toggleFrostSearch()">&times;</span>
+                </div>
+              </div>
+            </div>
+            <!-- Frost slider -->
+            <div class="details-search pb-3" [hidden]="!frostSearch">
+              <div class="container">
+                <div class="row justify-content-between pt-2">
+                  <div class="col-12 px-4 relative">
+                    <label class="t-bold t-12 d-block my-3">Temperaturempfindliche Pflanzen ausschließen
+                      <fa-icon class="info-icon" (click)="tooltip1.toggle()" mat-raised-button #tooltip1="matTooltip"
+                        matTooltip="Ziehe den Regler auf die durchschnittliche jährliche Tiefsttemperatur an deinen Gartenstandort (Siehe deine Winterhärtezone) .
+                        Der rote Bereich zeigt dann an, welche Frosthärtezonen aus deiner Suche ausgeschlossen werden, beginnend mit den sehr empfindlichen Pflanzen. Wird der Regler nicht genutzt, suchst du ohne Frosthärte-Einschränkungen."
+                        matTooltipClass="tooltip-text"
+                        [matTooltipPosition]="'right'"
+                        matTooltipHideDelay="5000" [icon]="faInfo">
+                      </fa-icon>
+                    </label>
+                    
+                    <!-- first slider -->
+                    <div class="custom-slider" [ngClass]="{'hide-arrow': mainForm.value.freezeLevels !== 10}">
+                      <ng5-slider [options]="freezeOpts" formControlName="freezeLevels" [manualRefresh]="manualRefresh" (userChangeEnd)="bindHardiness();search()"></ng5-slider>              
+                    </div>
+                  </div>
+                  <div class="col-12 mt-4 px-4">
+                    <!-- second slider -->
+                    <div class="custom-slider hardiness mb-1">
+                      <ng5-slider [(value)]="hardinessValue" [options]="hardinessOpts" [manualRefresh]="manualRefresh" (userChangeEnd)="bindFreezeLvl();search()"></ng5-slider>
+                    </div>
+                    <label class="t-bold t-12 mt-4">Einteilung nach Winterhärtezonen
+                      <fa-icon class="info-icon" (click)="tooltip2.toggle()" mat-raised-button #tooltip2="matTooltip"
+                        matTooltip="Profigärtner ordnen jede Pflanze einer Winterhärtezone (Z1-Z11) zu. Die Winterhärtezone hängt von den durchschnittlichen Tiefsttemperaturen am Naturstandort ab, bei denen noch 80 % der Pflanzen überleben.&#13;
+                        Deutschland liegt geografisch in den Winterhärtezonen Z6, Z7 und Z8. In welcher WInterhärtezone liegt mein Garten?"
+                        matTooltipClass="tooltip-text"
+                        [matTooltipPosition]="'right'"
+                        matTooltipHideDelay="5000" [icon]="faInfo">
+                      </fa-icon>
+                    </label>
+                    <span role="button" class="t-bold t-12 pt-4 d-block ptr" data-toggle="modal" data-target="#zonesMap">
+                      <fa-icon class="text-green mr-1" [icon]="faMarker"></fa-icon> Finde deine Winterhärtezone
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+      
+            <div class="container bg-green">
+              <div class="row {{detailSearch? 'mt-3 bt-border':'my-3'}} px-3 py-2">
+                <span class="t-bold t-12 ptr text-darkgrey" (click)="toggleDetailSearch()">
+                    {{detailSearch? 'Filter ausblenden':'Detailsuche'}}
+                </span>
+                <span class="subtext" [hidden]="detailSearch">(286)</span>
+                <div *ngIf="!detailSearch" class="ml-auto">
+                  <fa-icon (click)="toggleDetailSearch()" class="py-1 px-2 ptr text-darkgrey" [icon]="faChevronDown"></fa-icon>
+                </div>
+                <div *ngIf="detailSearch" class="ml-auto">
+                  <span *ngIf="appliedFilters.length>0 && !loading" class="t-bold t-12 text-white mx-4"><fa-icon class="pr-2" [icon]="faSearch"></fa-icon>{{count || 0}} Treffer</span>
+                  <span class="t-bold t-12 text-blackish ptr" (click)="resetSearch()">Suche zurücksetzen</span>
+                  <span class="ptr t-light hide-filter-btn t-12 p-1" title="Filter ausblenden" (click)="toggleDetailSearch()">&times;</span>
+                </div>
+              </div>
+            </div>
+      
+            <button type="button" class="btn-orange hideSticky" title="Suchkriterien ein/ausblenden" (click)="toggleStickyCtrls()">
+              <fa-icon [icon]="faEye"></fa-icon>
+            </button>
+      
+            <div [ngClass]="{'closed': !showStickyCtrls}" class="stickyCtrls">
+              <button class="d-none d-md-block btn-orange btn-count filter-btn t-11 ">
+                <fa-icon class="pr-0 pr-md-2" [icon]="faSearch"></fa-icon>
+                {{(queryParam || appliedFilters.length>0 && !loading) ? (count || 0) + ' Treffer' : 'Deine Suchkriterien'}}
+              </button>
+              <button class="d-block d-md-none btn-orange btn-count-mob filter-btn t-12" style="margin-bottom: 4px;">
+                <fa-icon class="pr-0 pr-md-2" [icon]="faSearch"></fa-icon>
+                {{count || 0}} Treffer
+              </button>
+              <div class="wrapper {{mode}} filter-header stickyBar" #stickyMenu>
+                <div class="container px-0">
+                  <div class="px-0 px-md-1 py-0 py-md-2 justify-content-between stickyBar-pad">
+                    <div class="col-12 px-2 d-none d-md-block">
+                      <h2 *ngIf="appliedFilters.length>0" class="t-11 {{mode==='light'?'text-darkgrey':'text-white'}}">Deine Suchkriterien</h2>
+                      <span class="d-inline-block py-0 px-3 my-1 apFilter t-bold t-12" *ngIf="appliedFilters.length==0">Keine
+                        Filter</span>
+                      <span title="Entfernen" class="d-inline-block py-0 px-2 my-1 apFilter ptr  {{f.pos == 'exclusions' ? 'redFilter' : ''}}"
+                        *ngFor="let f of appliedFilters" (click)="removeFilter(f)" [innerHtml]="decodeEntities(f.filter.t || f.filter.Name)">
+                        &times;</span>
+                    </div>
+                    <div class="col-12 px-0 px-md-2 d-block d-md-none" >
+                      <button data-toggle="collapse" href="#apFilters" type="button" role="button" class="w-100 t-11 d-block d-md-none bg-lt-orange filter-btn t-12">Deine Suchkriterien</button>
+                      <div class="collapse bg-lt-orange pb-2 pb-md-0 px-1 px-md-0" id="apFilters">
+                        <span *ngIf="appliedFilters.length==0" class="d-inline-block py-0 px-3 my-1 apFilter t-bold t-12">
+                          Keine Filter
+                        </span>
+                        <span title="Entfernen" class="d-inline-block py-0 px-2 my-1 apFilter ptr  {{f.pos == 'exclusions' ? 'redFilter' : ''}}"
+                        *ngFor="let f of appliedFilters" (click)="removeFilter(f)" [innerHtml]="decodeEntities(f.filter.t || f.filter.Name)">
+                        &times;</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button class="btn bg-yellowish filter-btn d-block mb-1 t-12" (click)="resetSearch()">
+                Suche zurücksetzen
+              </button>
+              <!-- <ng-container *ngIf="isLoggedIn">
+                <button type="button" class="btn bg-yellowish filter-btn d-block mb-1 t-12" (click)="saveQueries(appliedFilters)">
+                  Suche speichern
+                </button>
+              </ng-container> -->
+              
+            </div>
+      
+            <!-- Detailed Search -->
+            <div class="wrapper details-search" [hidden]="!detailSearch">
+              <div class="container pb-2">
+                <div class="row justify-content-between pt-4">
+                  <div class="col-12 col-md-6 mt-2" *ngIf="_places[0]">
+                    <label class="t-bold t-12">Standort</label>
+                    <span class="subtext">({{_places?.length || 0}})</span>
+                    <div class="ml-1 row" formArrayName="places">
+                      <div class="px-1 col-6 col-md-5 col-lg-4 ch-container "
+                        *ngFor="let cb of places.controls; let i = index">
+                        <input type="checkbox" [attr.id]="'places'+i" [formControlName]="i" (change)="search()">
+                        <label class="t-light t-12" [attr.for]="'places'+i">{{_places[i].t}}</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-6 mt-2" *ngIf="_foliage[0]">
+                  
+                    <label class="t-bold t-12">Top-Filter</label>
+                    <span class="subtext">(2)</span>
+                      <div class=" ml-1 row ">
+                        <ng-container  *ngFor="let cb of specifics.controls; let i = index" formArrayName="specifics">
+                          <div *ngIf="_specifics[i].t=='Sichtschutz'" class="px-1 col-6 col-md-6 col-lg-4 ch-container "  >
+                            <input  type="radio" [value]="cb" [name]="i" [attr.id]="'spe'+i" [formControlName]="i" (change)="search()">
+                            <label class="t-light t-12" [attr.for]="'spe'+i">{{_specifics[i].t}}</label>
+                          </div>
+                        </ng-container>
+                      
+                      <ng-container *ngFor="let cb of _foliage; let i = index">
+                        <div  *ngIf="cb.t=='immergrün'" class="px-1 col-6 col-md-6 col-lg-4 ch-container ">
+                          
+                            <input   type="radio" [value]="cb" name="foliage" [attr.id]="'fol'+i" formControlName="foliage" (change)="search()" (click)="checkFoliage(cb)">
+                            <label class="t-light t-12" [attr.for]="'fol'+i">{{cb.t}}</label>
+                        </div>
+                      </ng-container>
+                    </div>
+                  </div>
+                </div>
+      
+                <div class="row justify-content-between pt-4">
+                  <div class="col-12 col-md-6 my-3">
+                    <label class="t-bold t-12">Blühdauer</label>
+                    <ng5-slider [options]="monthRange" formControlName="monthRange" [manualRefresh]="manualRefresh" (userChangeEnd)="search()"></ng5-slider>
+                  </div>
+                  <div class="col-12 col-md-6 my-3">
+                    <label class="t-bold t-12">Wuchshöhe, cm</label>
+                    <ng5-slider [options]="growthRange" formControlName="growthRange" [manualRefresh]="manualRefresh" (userChangeEnd)="search()"></ng5-slider>
+                  </div>
+                </div>
+                <div class="row justify-content-between pt-4 mb-4">
+                  <div class="col-12 mt-2" *ngIf="_colors[0]">
+                    <label class="t-bold t-12 mb-3">Blütenfarbe
+                      <fa-icon class="info-icon" (click)="tooltip3.toggle()" mat-raised-button #tooltip3="matTooltip"
+                        matTooltip="Steigende Trefferzahl bei mehr Kriterien"
+                        matTooltipClass="tooltip-text"
+                        [matTooltipPosition]="'right'"
+                        matTooltipHideDelay="5000" [icon]="faInfo">
+                      </fa-icon>
+                    </label>
+                    <span class="subtext">({{_colors?.length || 0}})</span>
+                    <div class="ml-1 row" formArrayName="colors">
+                      <div class="col-6 col-md-4 col-lg-4 ch-container "
+                        *ngFor="let cb of colors.controls; let i = index">
+                        <label [ngClass]="{'d-none': _colors[i].index == 99}" class="t-light t-12" [attr.for]="'fruit'+i">
+                          <input type="checkbox" [attr.id]="'fruit'+i" [formControlName]="i" (change)="search()">
+                          {{_colors[i].t}}
+                          <span class="checkmark {{_colors[i].t}}"></span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 mt-3" *ngIf="_usage[0]">
+                    <label class="t-bold t-12 mb-3">Verwendung</label>
+                    <span class="subtext">({{_usage?.length || 0}})</span>
+                    <div class="row ml-1" formArrayName="usage">
+                      <div class="px-1 col-6 col-md-4 col-lg-3 ch-container"
+                        *ngFor="let cb of usage.controls; let i = index">
+                        <input type="checkbox" [attr.id]="'use'+i" [formControlName]="i" (change)="search() ">
+                        <label class="t-light t-12" [attr.for]="'use'+i">{{_usage[i].t}} </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+      
+                <div class="row justify-content-between pt-4">
+                  <h2 class="col-12 t-12 t-bold mb-4">Eigenschaften
+                  </h2>
+                  <div class="col-12 mt-2 ptr">
+                    <div class="t-light t-12 list-toggler" data-toggle="collapse" href="#ausschlusskriterien" role="button"
+                      aria-expanded="false" aria-controls="ausschlusskriterien">
+                      <div class="filter-icon">
+                        <img src="assets/search-icons/Ausschlusskriterien_Icon.svg" alt="Ausschlusskriterien">
+                      </div>
+                      Ausschlusskriterien
+                      <!-- <fa-icon class="px-1 input-icon" [icon]="faChevronDown"></fa-icon> -->
+                    </div>
+                  </div>
+                  <div class="col-12 mt-3 collapse" id="ausschlusskriterien" *ngIf="_exclusions[0]">
+                    <div formArrayName="exclusions">
+                      <div class="col-12 col-md-4 ch-container d-inline-block"
+                        *ngFor="let cb of exclusions.controls; let i = index">
+                        <label class="t-light t-12" [attr.for]="'ex'+i">
+                          <input type="checkbox" [attr.id]="'ex'+i" [formControlName]="i" (change)="search()">
+                          {{removeExcludeExtraText(i)}}
+                          <span class="checkmark cr"></span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 mt-2 ptr">
+                    <div class="t-light t-12 list-toggler" data-toggle="collapse" href="#besonderheiten" role="button"
+                      aria-expanded="false" aria-controls="besonderheiten">
+                      <div class="filter-icon">
+                        <img src="assets/search-icons/Besonderheiten_Icon.svg" alt="Besonderheiten">
+                      </div>
+                      Besonderheiten
+                      <!-- <fa-icon class="px-1 input-icon" [icon]="faChevronDown"></fa-icon> -->
+                    </div>
+                  </div>
+                  <div class="col-12 mt-3 collapse" id="besonderheiten" *ngIf="_specifics[0]">
+                    <div formArrayName="specifics">
+                      <div class="col-12 col-md-4 ch-container d-inline-block"
+                        *ngFor="let cb of specifics.controls; let i = index">
+                        <label class="t-light t-12" [attr.for]="'spe'+i">
+                          <input type="checkbox" [attr.id]="'spe'+i" [formControlName]="i" (change)="search()">
+                          {{_specifics[i].t}}
+                          <span class="checkmark cr"></span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+      
+                  <div class="col-12 mt-2 ptr">
+                    <div class="t-light t-12 list-toggler" data-toggle="collapse" href="#herbstfaerbung" role="button"
+                      aria-expanded="false" aria-controls="herbstfaerbung">
+                      <div class="filter-icon">
+                        <img src="assets/search-icons/Herbstfaerbung_Icon.svg" alt="Herbstfärbung">
+                      </div>
+                      Herbstfärbung
+                      <!-- <fa-icon class="px-1 input-icon" [icon]="faChevronDown"></fa-icon> -->
+                    </div>
+                  </div>
+                  <div class="col-12 mt-3 collapse" id="herbstfaerbung" *ngIf="_autumnClr[0]">
+                    <div formArrayName="autumnClr">
+                      <div class="col-12 col-md-4 ch-container d-inline-block"
+                        *ngFor="let cb of autumnClr.controls; let i = index">
+                        <label class="t-light t-12" [attr.for]="'aut'+i">
+                          <input type="checkbox" [attr.id]="'aut'+i" [formControlName]="i" (change)="search()">
+                          {{_autumnClr[i].t}}
+                          <span class="checkmark cr"></span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+      
+                  <div class="col-12 mt-2 ptr">
+                    <div class="t-light t-12 list-toggler" data-toggle="collapse" href="#wuchs" role="button"
+                      aria-expanded="false" aria-controls="wuchs">
+                      <div class="filter-icon">
+                        <img src="assets/search-icons/Wuchs_Icon.svg" alt="Wuchs">
+                      </div>
+                      Wuchs
+                      <!-- <fa-icon class="px-1 input-icon" [icon]="faChevronDown"></fa-icon> -->
+                    </div>
+                  </div>
+                  <div class="col-12 mt-3 collapse" id="wuchs" *ngIf="_growthType[0]">
+                    <div formArrayName="growthType">
+                      <div class="col-12 col-md-4 ch-container d-inline-block"
+                        *ngFor="let cb of growthType.controls; let i = index">
+                        <label class="t-light t-12" [attr.for]="'grow'+i">
+                          <input type="checkbox" [attr.id]="'grow'+i" [formControlName]="i" (change)="search()">
+                          {{_growthType[i].t}}
+                          <span class="checkmark cr"></span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+      
+                  <div class="col-12 mt-2 ptr">
+                    <div class="t-light t-12 list-toggler" data-toggle="collapse" href="#nutzpflanzen" role="button"
+                      aria-expanded="false" aria-controls="nutzpflanzen">
+                      <div class="filter-icon">
+                        <img src="assets/search-icons/Nutzpflanzen_Icon.svg" alt="Nutzpflanzen">
+                      </div>
+                      Nutzpflanzen
+                      <!-- <fa-icon class="px-1 input-icon" [icon]="faChevronDown"></fa-icon> -->
+                    </div>
+                  </div>
+                  <div class="col-12 mt-3 collapse" id="nutzpflanzen" *ngIf="_cropPlant[0]">
+                    <div formArrayName="cropPlant">
+                      <div class="col-12 col-md-4 ch-container d-inline-block"
+                        *ngFor="let cb of cropPlant.controls; let i = index">
+                        <label class="t-light t-12" [attr.for]="'cropPlant'+i">
+                          <input type="checkbox" [attr.id]="'cropPlant'+i" [formControlName]="i" (change)="search()">
+                          {{_cropPlant[i].t}}
+                          <span class="checkmark cr"></span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+      
+                  <div class="col-12 mt-2 ptr">
+                    <div class="t-light t-12 list-toggler" data-toggle="collapse" href="#dekoaspekte" role="button"
+                      aria-expanded="false" aria-controls="dekoaspekte">
+                      <div class="filter-icon">
+                        <img src="assets/search-icons/Dekoaspekte_Icon.svg" alt="Dekoaspekte">
+                      </div>
+                      Dekoaspekte
+                      <!-- <fa-icon class="px-1 input-icon" [icon]="faChevronDown"></fa-icon> -->
+                    </div>
+                  </div>
+                  <div class="col-12 mt-3 collapse" id="dekoaspekte" *ngIf="_deco[0]">
+                    <div formArrayName="deco">
+                      <div class="col-12 col-md-4 ch-container d-inline-block"
+                        *ngFor="let cb of deco.controls; let i = index">
+                        <label class="t-light t-12" [attr.for]="'deco'+i">
+                          <input type="checkbox" [attr.id]="'deco'+i" [formControlName]="i" (change)="search()">
+                          {{_deco[i].t}}
+                          <span class="checkmark cr"></span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+      
+                  <h2 class="col-12 t-12 t-bold mt-5">Blüten, Blätter, Früchte</h2>
+                  <div class="col-12 mt-2 ptr">
+                    <div class="t-light t-12 list-toggler" data-toggle="collapse" href="#blueten" role="button"
+                      aria-expanded="false" aria-controls="blueten">
+                      <div class="filter-icon">
+                        <img src="assets/search-icons/Blueten_Icon.svg" alt="Blüten">
+                      </div>
+                      Blüten
+                      <!-- <fa-icon class="px-1 input-icon" [icon]="faChevronDown"></fa-icon> -->
+                    </div>
+                  </div>
+                  <div class="col-12 mt-3 collapse" id="blueten" *ngIf="_blossoms[0]">
+                    <div formArrayName="blossoms">
+                      <div class="col-12 col-md-4 ch-container d-inline-block"
+                        *ngFor="let cb of blossoms.controls; let i = index">
+                        <label class="t-light t-12" [attr.for]="'blo'+i">
+                          <input type="checkbox" [attr.id]="'blo'+i" [formControlName]="i" (change)="search()">
+                          {{_blossoms[i].t}}
+                          <span class="checkmark cr"></span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+      
+                  <div class="col-12 mt-2 ptr">
+                    <div class="t-light t-12 list-toggler" data-toggle="collapse" href="#bluetenform" role="button"
+                      aria-expanded="false" aria-controls="bluetenform">
+                      <div class="filter-icon">
+                        <img src="assets/search-icons/Bluetenform_Icon.svg" alt="Blütenform">
+                      </div>
+                      Blütenform
+                      <!-- <fa-icon class="px-1 input-icon" [icon]="faChevronDown"></fa-icon> -->
+                    </div>
+                  </div>
+                  <div class="col-12 mt-3 collapse" id="bluetenform" *ngIf="_flShape[0]">
+                    <div formArrayName="flShape">
+                      <div class="col-12 col-md-4 ch-container d-inline-block"
+                        *ngFor="let cb of flShape.controls; let i = index">
+                        <label class="t-light t-12" [attr.for]="'shap'+i">
+                          <input type="checkbox" [attr.id]="'shap'+i" [formControlName]="i" (change)="search()">
+                          {{_flShape[i].t}}
+                          <span class="checkmark cr"></span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+      
+                  <div class="col-12 mt-2 ptr">
+                    <div class="t-light t-12 list-toggler" data-toggle="collapse" href="#Blütengröße" role="button"
+                      aria-expanded="false" aria-controls="Blütengröße">
+                      <div class="filter-icon">
+                        <img src="assets/search-icons/Blütengroeße_Icon.svg" alt="Blütengröße">
+                      </div>
+                      Blütengröße
+                      <!-- <fa-icon class="px-1 input-icon" [icon]="faChevronDown"></fa-icon> -->
+                    </div>
+                  </div>
+                  <div class="col-12 mt-3 collapse" id="Blütengröße" *ngIf="_blossomsSize[0]">
+                    <div>
+                      <div class="col-12 col-md-4 ch-container d-inline-block"
+                        *ngFor="let cb of _blossomsSize; let i = index">
+                        <label class="t-light t-12" [attr.for]="'bloSize'+i">
+                          <input type="radio" [value]="cb" [attr.id]="'bloSize'+i" name="blossomsSize" formControlName="blossomsSize" (change)="search()">
+                          {{cb.t}}
+                          <span class="checkmark cr"></span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+      
+                  <div class="col-12 mt-2 ptr">
+                    <div class="t-light t-12 list-toggler" data-toggle="collapse" href="#fruchtfarbe" role="button"
+                      aria-expanded="false" aria-controls="fruchtfarbe">
+                      <div class="filter-icon">
+                        <img src="assets/search-icons/Fruchtfarbe_Icon.svg" alt="Fruchtfarbe">
+                      </div>
+                      Fruchtfarbe
+                      <!-- <fa-icon class="px-1 input-icon" [icon]="faChevronDown"></fa-icon> -->
+                    </div>
+                  </div>
+                  <div class="col-12 mt-3 collapse" id="fruchtfarbe" *ngIf="_fruitClr[0]">
+                    <div formArrayName="fruitClr">
+                      <div class="col-12 col-md-4 ch-container d-inline-block"
+                        *ngFor="let cb of fruitClr.controls; let i = index">
+                        <label class="t-light t-12">
+                          <input type="checkbox" [formControlName]="i" (change)="search()">
+                          {{_fruitClr[i].t}}
+                          <span class="checkmark cr"></span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 mt-2 ptr">
+                    <div class="t-light t-12 list-toggler" data-toggle="collapse" href="#fruchttype" role="button"
+                      aria-expanded="false" aria-controls="fruchttype">
+                      <div class="filter-icon">
+                        <img src="assets/search-icons/Fruechte_Icon.svg" alt="Früchte">
+                      </div>
+                      Früchte
+                    </div>
+                  </div>
+                  <div class="col-12 mt-2 ptr collapse" id="fruchttype" *ngIf="_fruitType[0]">
+                    <div class=" ml-1 row">
+                      <div class="col-12 col-md-4 ch-container d-inline-block"
+                        *ngFor="let l of _fruitType; let i = index">
+                        <label class="t-light t-12" [attr.for]="'fru'+i">
+                          <input type="radio" [value]="l" name="fruitType" [attr.id]="'fru'+i" formControlName="fruitType" (change)="search()" >
+                          {{l.t}}
+                          <span class="checkmark cr"></span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- <div class="col-12 col-md-6 mt-2" *ngIf="_fruitType[0]">
+                    <div class="filter-icon">
+                      <img src="assets/search-icons/Fruechte_Icon.svg" alt="Früchte">
+                    </div>
+                    <label class="t-light t-12 mb-0">Früchte</label>
+                    <select formControlName="fruitType" class="custom-select" (change)="search()">
+                      <option [ngValue]=null [defaultSelected]=true disabled hidden>Auswählen..</option>
+                      <option *ngFor="let l of _fruitType" [ngValue]=l>
+                        {{l.t}}
+                      </option>
+                    </select>
+                    <fa-icon class="px-2 input-icon" [icon]="faChevronDown"></fa-icon>
+                  </div> -->
+                  <div class="col-12 mt-2 ptr">
+                    <div class="t-light t-12 list-toggler" data-toggle="collapse" href="#blossomStat" role="button"
+                      aria-expanded="false" aria-controls="blossomStat">
+                      <div class="filter-icon">
+                        <img src="assets/search-icons/Bluetenstand_Icon.svg" alt="Blütenstand">
+                      </div>
+                      Blütenstand
+                    </div>
+                  </div>
+                  <div class="col-12 mt-2 ptr collapse" id="blossomStat" *ngIf="_blossomStat[0]">
+                    <div class=" ml-1 row">
+                      <div class="col-12 col-md-4 ch-container d-inline-block"
+                        *ngFor="let bl of _blossomStat; let i = index">
+                        <label class="t-light t-12" [attr.for]="'blost'+i">
+                          <input type="radio" [value]="bl" name="blossomStat" [attr.id]="'blost'+i" formControlName="blossomStat" (change)="search()" >
+                          {{bl.t}}
+                          <span class="checkmark cr"></span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+      
+                  <div class="col-12 mt-5 ptr">
+                    <div class="t-light t-12 list-toggler" data-toggle="collapse" href="#blattfarbe" role="button"
+                      aria-expanded="false" aria-controls="blattfarbe">
+                      <div class="filter-icon">
+                        <img src="assets/search-icons/Blattfarbe_Icon.svg" alt="Blattfarbe">
+                      </div>
+                      Blattfarbe
+                      <fa-icon class="info-icon" (click)="tooltip4.toggle()" mat-raised-button #tooltip4="matTooltip"
+                        matTooltip="Steigende Trefferzahl bei mehr Kriterien"
+                        matTooltipClass="tooltip-text"
+                        [matTooltipPosition]="'right'"
+                        matTooltipHideDelay="5000" [icon]="faInfo">
+                      </fa-icon>
+                    </div>
+                  </div>
+                  <div class="col-12 mt-3 collapse" id="blattfarbe" *ngIf="_leafClr[0]">
+                    <div formArrayName="leafClr">
+                      <div class="col-12 col-md-4 ch-container d-inline-block"
+                        *ngFor="let cb of leafClr.controls; let i = index">
+                        <label class="t-light t-12" [attr.for]="'leaf'+i">
+                          <input type="checkbox" [attr.id]="'leaf'+i" [formControlName]="i" (change)="search()">
+                          {{_leafClr[i].t}}
+                          <span class="checkmark cr"></span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+      
+                  <div class="col-12 mt-2 ptr">
+                    <div class="t-light t-12 list-toggler" data-toggle="collapse" href="#blattrand" role="button"
+                      aria-expanded="false" aria-controls="blattrand">
+                      <div class="filter-icon">
+                        <img src="assets/search-icons/Blattrand_Icon.svg" alt="Blattrand">
+                      </div>
+                      Blattrand
+                      <!-- <fa-icon class="px-1 input-icon" [icon]="faChevronDown"></fa-icon> -->
+                    </div>
+                  </div>
+                  <div class="col-12 mt-3 collapse" id="blattrand" *ngIf="_leafMargin[0]">
+                    <div>
+                      <div class="col-12 col-md-4 ch-container d-inline-block"
+                        *ngFor="let cb of _leafMargin; let i = index">
+                        <label class="t-light t-12" [attr.for]="'leafMi'+i">
+                          <input type="radio" [value]="cb" name="leafMargin" [attr.id]="'leafMi'+i" formControlName="leafMargin" (change)="search()">
+                          {{cb.t}}
+                          <span class="checkmark cr"></span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 mt-2 ptr">
+                    <div class="t-light t-12 list-toggler" data-toggle="collapse" href="#blattpos" role="button"
+                      aria-expanded="false" aria-controls="blattpos">
+                      <div class="filter-icon mb-2">
+                        <img src="assets/search-icons/Blattstellung_Icon.svg" alt="Blattstellung">
+                      </div>
+                      Blattstellung
+                    </div>
+                  </div>
+                  <div class="col-12 mt-2 ptr collapse " id="blattpos" *ngIf="_leafPos[0]">
+                    <div class=" ml-1 row">
+                      <div class="col-12 col-md-4 ch-container d-inline-block"
+                        *ngFor="let l of _leafPos; let i = index">
+                        <label class="t-light t-12" [attr.for]="'leafpos'+i">
+                          <input type="radio" [value]="l" name="leafPos" [attr.id]="'leafpos'+i" formControlName="leafPos" (change)="search()" >
+                          {{l.t}}
+                          <span class="checkmark cr"></span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 mt-2 ptr">
+                    <div class="t-light t-12 list-toggler" data-toggle="collapse" href="#blattshape" role="button"
+                      aria-expanded="false" aria-controls="blattshape">
+                      <div class="filter-icon">
+                        <img src="assets/search-icons/Blattform_Icon.svg" alt="Blattform">
+                      </div>
+                      Blattform
+                    </div>
+                  </div>
+                  <div class="col-12  mt-2 collapse" id="blattshape" *ngIf="_leafShape[0]">
+                    <div class=" ml-1 row">
+                      <div class="col-12 col-md-4 ch-container d-inline-block"
+                        *ngFor="let l of _leafShape; let i = index">
+                        
+                        <label class="t-light t-12" [attr.for]="'leafShape'+i">
+                          <input type="radio" [value]="l" name="leafShape" [attr.id]="'leafShape'+i" formControlName="leafShape" (change)="search()" >
+                          {{l.t}}
+                          <span class="checkmark cr"></span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 mt-2 ptr">
+                    <div class="t-light t-12 list-toggler" data-toggle="collapse" href="#laubrythmus" role="button"
+                      aria-expanded="false" aria-controls="laubrythmus">
+                      <div class="filter-icon">
+                        <img src="assets/search-icons/Laubrythmus.svg" alt="Laubrythmus"> 
+                      </div>
+                    
+                      Laubrhythmus
+                    </div>
+                  </div>
+                  <div class="col-12  mt-2 collapse" id="laubrythmus" *ngIf="_foliage[0]">
+                    <div class=" ml-1 row">
+                      <div class="col-12 col-md-4 ch-container d-inline-block"
+                        *ngFor="let f of _foliage; let i = index">
+                        
+                        <label class="t-light t-12" [attr.for]="'foliage'+i">
+                          <input type="radio" [value]="f" name="foliage" [attr.id]="'foliage'+i" formControlName="foliage" (change)="search()" (click)="checkFoliage(f)">
+                          {{f.t}}
+                          <span class="checkmark cr"></span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <h2 class="col-12 t-12 t-bold mt-5">Standort & Pflege</h2>
+                  <div class="col-12 mt-2 ptr">
+                    <div class="t-light t-12 list-toggler" data-toggle="collapse" href="#Boden" role="button"
+                      aria-expanded="false" aria-controls="Boden">
+                      <div class="filter-icon">
+                        <img src="assets/search-icons/Boden_Icon.svg" alt="Boden">
+                      </div>
+                      Boden
+                      <!-- <fa-icon class="px-1 input-icon" [icon]="faChevronDown"></fa-icon> -->
+                    </div>
+                  </div>
+                  <div class="col-12 mt-3 collapse" id="Boden" *ngIf="_groundType[0]">
+                    <div formArrayName="groundType">
+                      <div class="col-12 col-md-4 ch-container d-inline-block"
+                        *ngFor="let cb of groundType.controls; let i = index">
+                        <label class="t-light t-12" [attr.for]="'grdType'+i">
+                          <input type="checkbox" [attr.id]="'grdType'+i" [formControlName]="i" (change)="search()">
+                          {{_groundType[i].t}}
+                          <span class="checkmark cr"></span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+      
+                  <div class="col-12 mt-2 ptr">
+                    <div class="t-light t-12 list-toggler" data-toggle="collapse" href="#Licht" role="button"
+                      aria-expanded="false" aria-controls="Licht">
+                      <div class="filter-icon">
+                        <img src="assets/search-icons/Licht_Icon.svg" alt="Licht">
+                      </div>
+                      Licht
+                      <!-- <fa-icon class="px-1 input-icon" [icon]="faChevronDown"></fa-icon> -->
+                    </div>
+                  </div>
+                  <div class="col-12 mt-3 collapse" id="Licht" *ngIf="_places[0]">
+                    <div formArrayName="places">
+                      <div class="col-12 col-md-4 ch-container d-inline-block"
+                        *ngFor="let cb of places.controls; let i = index">
+                        <label class="t-light t-12" [attr.for]="'plcs'+i">
+                          <input type="checkbox" [attr.id]="'plcs'+i" [formControlName]="i" (change)="search()">
+                          {{_places[i].t}}
+                          <span class="checkmark cr"></span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+      
+                  <div class="col-12 mt-2 ptr">
+                    <div class="t-light t-12 list-toggler" data-toggle="collapse" href="#Düngung" role="button"
+                      aria-expanded="false" aria-controls="Düngung">
+                      <div class="filter-icon">
+                        <img src="assets/search-icons/Duengung_Icon.svg" alt="Düngung">
+                      </div>
+                      Düngung
+                      <!-- <fa-icon class="px-1 input-icon" [icon]="faChevronDown"></fa-icon> -->
+                    </div>
+                  </div>
+                  <div class="col-12 mt-3 collapse" id="Düngung" *ngIf="_fertil[0]">
+                    <div formArrayName="fertil">
+                      <div class="col-12 col-md-4 ch-container d-inline-block"
+                        *ngFor="let cb of fertil.controls; let i = index">
+                        <label class="t-light t-12" [attr.for]="'fer'+i">
+                          <input type="checkbox" [attr.id]="'fer'+i" [formControlName]="i" (change)="search()">
+                          {{_fertil[i].t}}
+                          <span class="checkmark cr"></span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+      
+                  <div class="col-12 mt-2 ptr">
+                    <div class="t-light t-12 list-toggler" data-toggle="collapse" href="#Schnitt" role="button"
+                      aria-expanded="false" aria-controls="Schnitt">
+                      <div class="filter-icon">
+                        <img src="assets/search-icons/Schnitt_Icon.svg" alt="Schnitt">
+                      </div>
+                      Schnitt
+                      <!-- <fa-icon class="px-1 input-icon" [icon]="faChevronDown"></fa-icon> -->
+                    </div>
+                  </div>
+                  <div class="col-12 mt-3 collapse" id="Schnitt" *ngIf="_trim[0]">
+                    <div formArrayName="trim">
+                      <div class="col-12 col-md-4 ch-container d-inline-block"
+                        *ngFor="let cb of trim.controls; let i = index">
+                        <label class="t-light t-12" [attr.for]="'trim'+i">
+                          <input type="checkbox" [attr.id]="'trim'+i" [formControlName]="i" (change)="search()">
+                          {{_trim[i].t}}
+                          <span class="checkmark cr"></span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+      
+                  <div class="col-12 mt-2 ptr">
+                    <div class="t-light t-12 list-toggler" data-toggle="collapse" href="#Vermehrung" role="button"
+                      aria-expanded="false" aria-controls="Vermehrung">
+                      <div class="filter-icon">
+                        <img src="assets/search-icons/Vermehrung_Icon.svg" alt="Vermehrung">
+                      </div>
+                      Vermehrung
+                      <!-- <fa-icon class="px-1 input-icon" [icon]="faChevronDown"></fa-icon> -->
+                    </div>
+                  </div>
+                  <div class="col-12 mt-3 collapse" id="Vermehrung" *ngIf="_breeding[0]">
+                    <div formArrayName="breeding">
+                      <div class="col-12 col-md-4 ch-container d-inline-block"
+                        *ngFor="let cb of breeding.controls; let i = index">
+                        <label class="t-light t-12">
+                          <input type="checkbox" [formControlName]="i" (change)="search()">
+                          {{_breeding[i].t}}
+                          <span class="checkmark cr"></span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 mt-2 ptr">
+                    <div class="t-light t-12 list-toggler" data-toggle="collapse" href="#wasserbedarf" role="button"
+                      aria-expanded="false" aria-controls="wasserbedarf">
+                      <div class="filter-icon">
+                        <img src="assets/search-icons/Wasserbedarf_Icon.svg" alt="Wasserbedarf">
+                      </div>
+                      Wasserbedarf
+                    </div>
+                  </div>
+                  <div class="col-12  mt-2 collapse" id="wasserbedarf" *ngIf="_waterReq[0]">
+                    <div class=" ml-1 row">
+                      <div class="col-12 col-md-4 ch-container d-inline-block"
+                        *ngFor="let w of  _waterReq; let i = index">
+                        <label class="t-light t-12" [attr.for]="'waterReq'+i">{{w.t}}
+                          <input type="radio" [value]="w" name="waterReq" [attr.id]="'waterReq'+i" formControlName="waterReq" (change)="search()" >
+                          <span class="checkmark cr"></span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+            
+              <!-- <div class="container pb-2">
+                <div class="row  pt-4">
+                  <div class="col-12 col-md-6"></div>
+                    <div class="col-12 col-md-6">
+                      <label class="t-bold t-12" style="color: #494949;">Pflanzen sortieren</label>
+                      <span class="subtext">({{_sortTags?.length || 0}})</span>
+                      <select formControlName="sortTags" class="custom-select ptr col-12 bordered" (change)="search()">
+                        <option [ngValue]=null [defaultSelected]=true disabled hidden>z.B. Pflanzen von Z-A</option>
+                        <option [ngValue]=null>-</option>
+                        <option *ngFor="let s of  _sortTags" [ngValue]=s>
+                          {{s.t}}
+                        </option>
+                      </select>
+                      <fa-icon class="px-2 input-icon" [icon]="faChevronDown"></fa-icon>
+                    </div>
+                </div>
+              </div> -->
+            
+          <!--   <div class="container bg-green">
+              <div class="row {{sortPlant? 'mt-3 bt-border':'my-3'}} px-3 py-2">
+                <span class="t-bold t-12 ptr text-darkgrey" (click)="toggleSortPlant()">
+                    {{sortPlant? 'Filter ausblenden':'Pflanzen sortieren'}}
+                </span>
+                <span class="subtext" [hidden]="sortPlant">(4)</span>
+                <div *ngIf="!sortPlant" class="ml-auto">
+                  <fa-icon (click)="toggleSortPlant()" class="py-1 px-2 ptr text-darkgrey" [icon]="faChevronDown"></fa-icon>
+                </div>
+                <div *ngIf="sortPlant" class="ml-auto">
+                  <span *ngIf="appliedFilters.length>0 && !loading" class="t-bold t-12 text-white mx-4"><fa-icon class="pr-2" [icon]="faSearch"></fa-icon>{{count || 0}} Treffer</span>
+                  <span class="t-bold t-12 text-blackish ptr" (click)="resetSearch()">Filter zurücksetzen</span>
+                  <span class="ptr t-light hide-filter-btn t-12 p-1" title="Filter ausblenden" (click)="toggleSortPlant()">&times;</span>
+                </div>
+              </div>
+            </div>
+            <div class="wrapper details-search" [hidden]="!sortPlant">
+              <div class="container pb-2">
+                <div class="row ml-1 justify-content-between pt-4">
+                  <div class="col-12 col-md-6 ch-container d-inline-block"
+                  *ngFor="let s of  _sortTags; let i = index">
+                  <label class="t-light t-12" [attr.for]="'sortTags'+i">{{s.t}}
+                    <input type="radio" [value]="s" name="sortTags" [attr.id]="'sortTags'+i" formControlName="sortTags" (change)="search()" >
+                    <span class="checkmark cr"></span>
+                  </label>
+                </div>
+                </div>
+              </div>
+            </div> -->
+          </form>
+      
+          <div *ngIf="!isHideSearchResult" class="row justify-content-between pt-3 mb-3">
+            <div class="col-12 col-md-6">
+              <h2 class="t-light t-26 {{mode==='light'?'text-darkgrey':'text-white'}}">
+                Suchergebnisse
+                <span *ngIf="!loading && count > 0" class="ml-2">({{count}})</span>
+              </h2>
+            </div>
+      
+            <!-- pager -->
+            <div class="col-12 col-md-6">
+      
+              <ul *ngIf="plantsPager.pages && plantsPager.pages.length"
+                class="t-13 t-light pagination float-right mt-2 text-grey2">
+                <li [ngClass]="{disabled:currentPage === 1}">
+                  <a (click)="currentPage = 1; search(1);" title="Erste Seite" class="t-bold">&lt;&lt;</a>
+                </li>
+                <li [ngClass]="{disabled:currentPage === 1}" class="mx-2">
+                  <a (click)="currentPage = currentPage-1; search(currentPage);" title="Vorherige Seite" class="t-bold">&lt;</a>
+                </li>
+                <li *ngFor="let page of plantsPager.pages" [ngClass]="{'text-green t-bold':currentPage === page}"
+                  class="mx-2">
+                  <a (click)="currentPage = page;search(currentPage); ">{{page}}</a>
+                </li>
+                <li [ngClass]="{disabled:currentPage === plantsPager.totalPages}" class="mx-2">
+                  <a (click)="currentPage=currentPage+1; search(currentPage);" title="Nächste Seite" class="t-bold">&gt;</a>
+                </li>
+                <li [ngClass]="{disabled:currentPage === plantsPager.totalPages}">
+                  <a (click)="currentPage=plantsPager.totalPages; search(plantsPager.totalPages);" title="Letzte Seite" class="t-bold">&gt;&gt;</a>
+                </li>
+      
+              </ul>
+            </div>
+          </div>
+      
+          <ng-container *ngIf="!loading && !isHideSearchResult">
+            <div *ngIf="!loading && errorMsg" class="row text-center {{mode==='light'?'text-darkgrey':'text-white'}">
+              <p>{{errorMsg}}</p>
+            </div>
+            <div *ngIf="plants.length + superCategories.length > 0;" class="row">
+            
+              <div class="col-12 px-0 mb-4 bt-border {{mode}}" *ngFor="let plant of plants; let i=index;trackBy: trackByFn">
+                <ng-container *ngIf="((i) % 5) == 0 && i > 0 && plants.length > 10 " >
+                  <app-ad [ad]="ad" ></app-ad>
+              </ng-container>
+              <ng-container *ngIf="((i) % 2) == 0 && i > 0 && 11 > plants.length  " >
+                <app-ad [ad]="ad" ></app-ad>
+            </ng-container>
+                <div class="row pb-4 mt-3 ml-1 ml-lg-2">
+                  <div class="col-7 col-md-3 ml-3 ml-lg-0 text-center">
+                    <a data-toggle="modal" data-target="#plantImageModal" (click)="plantImageModal = ''; plantImageModal = toUrl(plant.Images[0]?.SrcAttr, false); selectedPlant = plant;">
+                      <img *ngIf="plant.Images?.length > 0 && !isCollectionCard(plant.Images) && checkIfAutor(plant.Images)" class="ptr" [title]=" ' '+'Autor: '+plant.Images[0]?.Author +'\n'+'Kommentare: '+ plant.Images[0]?.Comments "  [src]=toUrl(plant.Images[0]?.SrcAttr)  [alt]=plant.NameGerman>
+                      <img *ngIf="plant.Images?.length > 0 && isCollectionCard(plant.Images) || !checkIfAutor(plant.Images)" class="ptr"   [src]=toUrl(plant.Images[0]?.SrcAttr)  [alt]=plant.NameGerman>
+      
+                      <!-- <ng-container *ngIf="plant.Images?.length >= 4">
+                        <img class="ptr quarter-img" *ngFor="let pnImg of plant.Images | slice:0:4" 
+                          [src]="toUrl(pnImg.SrcAttr)" 
+                          [alt]=plant.NameGerman
+                          [title]="pnImg.Author ? 'Autor: '+ pnImg.Author: ''">
+                      </ng-container> -->
+                    </a>
+                  </div>
+                  <div class="col-12 col-md-9 pl-md-4 mt-2 plant-desc">
+                    <h2  [ngClass]="{'mb-3': !plant.Synonym}"
+                      class="t-light t-16 mb-1 ptr {{mode==='light'?'text-darkgrey':'text-white'}}">
+                      <a *ngIf="isXsMobile" [routerLink]="['/pflanze/', plant.Id, plant.PlantUrl]">
+                        <span class="font-italic">{{plant.NameLatin}}</span><br>
+                        <span class="t-bold ">{{plant.NameGerman}}</span>
+                      </a>
+                      <a *ngIf="!isXsMobile" [routerLink]="['/pflanze/', plant.Id, plant.PlantUrl]">
+                        <span class="font-italic">{{plant.NameLatin}}</span>
+                        <span class="t-bold mx-2">{{plant.NameGerman}}</span>
+                      </a>
+                      <span *ngIf="plant.IsInUserGarden" title="Diese Pflanze ist schon im Garten" class="opac50">&#9745;</span>
+                    </h2>
+                    <h2 *ngIf="plant.Synonym" class="t-light t-14 mb-3 ptr {{mode==='light'?'text-darkgrey':'text-white'}}">
+                      <a [routerLink]="['/pflanze/', plant.Id, plant.PlantUrl]" target="_blank" [innerHTML]="plant.Synonym"></a>
+                    </h2>
+                    <span class="d-inlineblock" [innerHTML]="plant.Description.substring(0, 300) + '...'"></span>
+                    <a [routerLink]="['/pflanze/', plant.Id, plant.PlantUrl]" target="_blank"
+                      class="d-inlineblock t-bold text-green ptr">mehr</a><br>
+                    
+                    <ng-container *ngIf="plant.Colors?.length > 0">
+                        <div class="row">
+                          <div class="col-12 col-md-6 col-lg-3 mt-3 pr-0">
+                            <span class="t-light t-13 {{mode === 'light'? 'text-darkgrey' : 'text-white'}}">Blütenfarbe erhältlich in:</span>
+                          </div> 
+                          <div class=" col-12 col-md-6 col-lg-7 pl-0 mt-2">
+                          <div  *ngFor="let color of plant.Colors " class="d-inline-block">
+                              <span [title]="color" class=" mt-2 ml-3 checkmark d-inline-block position-static {{color}} "></span> 
+                          </div>
+                          </div>
+                        </div>
+                    </ng-container >
+                    <ng-container *ngIf="plant.Badges?.length > 0">
+                      <div class="row">
+                        <div class="col-2 col-md-2 col-lg-1" *ngIf="hasBee(plant)">
+                          <img mat-raised-button matTooltipClass="tooltip-text" matTooltipPosition="above" matTooltipHideDelay="0"
+                          class="g-badge"  src="assets/main-icons/Bienenfreundlich.svg"
+                          matTooltip="Bienenfreundlich" alt="Bienenfreundlich">
+                        </div>
+                        <div class="col-2 col-md-2 col-lg-1" *ngIf="hasInsect(plant)">
+                          <img mat-raised-button matTooltipClass="tooltip-text" matTooltipPosition="above" matTooltipHideDelay="0"
+                          class="g-badge"  src="assets/main-icons/Insektenfreundlich.svg"
+                          matTooltip="Insektenfreundlich" alt="Insektenfreundlich">
+                        </div>
+                        <div class="col-2 col-md-2 col-lg-1" *ngIf="hasBird(plant)">
+                          <img mat-raised-button matTooltipClass="tooltip-text" matTooltipPosition="above" matTooltipHideDelay="0"
+                          class="g-badge"  src="assets/main-icons/Vogelfreundlich.svg"
+                          matTooltip="Vogelfreundlich" alt="Vogelfreundlich">
+                        </div>
+                        <div class="col-2 col-md-2 col-lg-1" *ngIf="hasButterfly(plant)">
+                          <img mat-raised-button matTooltipClass="tooltip-text" matTooltipPosition="above" matTooltipHideDelay="0"
+                          class="g-badge"  src="assets/main-icons/Schmetterlingsfreundlich.svg"
+                          matTooltip="Schmetterlingsfreundlich" alt="Schmetterlingsfreundlich">
+                        </div>
+                        <div class="col-2 col-md-2 col-lg-1" *ngIf="hasBio(plant)">
+                          <img mat-raised-button matTooltipClass="tooltip-text" matTooltipPosition="above" matTooltipHideDelay="0"
+                          class="g-badge"  src="assets/main-icons/Ökologisch_wertvoll.svg"
+                          matTooltip="Ökologisch wertvoll" alt="Ökologisch wertvoll">
+                        </div>
+                        <div class="col-2 col-md-2 col-lg-1" *ngIf="hasDomestic(plant)">
+                          <img mat-raised-button matTooltipClass="tooltip-text" matTooltipPosition="above" matTooltipHideDelay="0"
+                          class="g-badge"  src="assets/main-icons/Heimische_Pflanze.svg"
+                          matTooltip="Heimische Pflanze" alt="Heimische Pflanze">
+                        </div>
+                      </div>
+                    </ng-container>
+                    
+                    <button *ngIf="isLoggedIn || demoMode" class="btn btn-green float-right mt-1 px-2" data-toggle="modal"
+                      data-target="#addPlantModal" (click)="selectPlant(plant); getPlantLists()" style="width:auto;">
+                      in meinen Garten speichern
+                    </button>
+                    <button *ngIf="!isLoggedIn" class="btn btn-green float-right mt-1 px-2" [routerLink]="['/new']" style="width:auto;">
+                      in meinen Garten speichern
+                    </button>
+                  </div>
+      
+                </div>
+              
+              </div>
+      
+              <div class="col-12 px-0 mb-4 bt-border {{mode}}" *ngFor="let supercat of superCategories;trackBy: trackByFn">
+                <div class="row pb-3 mt-3">
+                  <div class="col-12 col-md-3 plant-img text-center">
+                    <a data-toggle="modal" data-target="#plantImageModal" (click)="plantImageModal = ''; plantImageModal = toUrl(supercat.Images[0]?.SrcAttr, false);">
+                      <img *ngFor="let img of supercat.Images" class="ptr zoom quarter" [title]="img?.Author ? 'Autor: '+ img?.Author:''" [src]=toUrl(img?.SrcAttr) [alt]=supercat.NameGerman>
+                    </a>
+                  </div>
+                  <div class="col-12 col-md-9 plant-desc">
+                    <h2 [ngClass]="{'mb-3': !supercat.Synonym}"
+                      class="t-light t-16 mb-1 {{mode==='light'?'text-darkgrey':'text-white'}}">
+                      <span class="font-italic">{{supercat.NameLatin}}</span>
+                      <span class="t-bold mx-2">{{supercat.NameGerman}}</span>
+                      <span *ngIf="supercat.IsInUserGarden" title="Diese Pflanze ist schon im Garten" class="opac50">&#9745;</span>
+                    </h2>
+                    <h2 *ngIf="supercat.Synonym" [innerHTML]="supercat.Synonym"
+                      class="t-light t-14 mb-3 {{mode==='light'?'text-darkgrey':'text-white'}}">
+                    </h2>
+                    <span class="d-inlineblock" [innerHTML]="supercat.Description"></span>
+                    <!-- <span class="d-inlineblock t-bold text-green ptr">mehr</span><br> -->
+                    
+                    <!-- <button *ngIf="isLoggedIn" class="btn btn-green float-right mt-1 px-2" data-toggle="modal"
+                      data-target="#addPlantModal" (click)="selectPlant(plant); getPlantLists()" style="width:auto;">
+                      in meinem Garten speichern
+                    </button>
+                    <button *ngIf="!isLoggedIn" class="btn btn-green float-right mt-1 px-2" [routerLink]="['/register']" style="width:auto;">
+                      in meinem Garten speichern
+                    </button> -->
+                  </div>
+      
+                </div>
+              </div>
+            </div>
+            
+            <div *ngIf="currentPage === plantsPager.totalPages || !plants.length || plants == null">
+              <p class="col-12 my-2 text-center t-reg t-italic {{count > 0 ? 'text-green':''}}">
+                {{count || 0}} Treffer
+              </p>
+              <div class="col-12 t-light">
+                <h3 class="t-16 t-reg">War deine gesuchte Pflanze nicht dabei?</h3>
+                <a class="t-bold t-16 p-1 px-2 btn btn-green text-white btn_border075 mb-2" style="width: unset !important;" data-toggle="modal" data-target="#suggest">Pflanze für Datenbank vorschlagen</a>
+                <p>
+                  Hinweis: In vielen Fällen ist es hilfreich, vorerst eine ähnliche Sorte auszuwählen. Die Pflegearbeiten sind in aller Regel übertragbar.
+                </p>
+              </div>
+            </div>
+          </ng-container>
+          <!-- pager -->
+          <div class="row pb-5">
+            <div class="col-12 pb-5 pb-md-3">
+      
+              <ul *ngIf="plantsPager.pages && plantsPager.pages.length"
+                class="t-13 t-light pagination float-right mt-2 text-grey2">
+                <li [ngClass]="{disabled:currentPage === 1}">
+                  <a (click)="currentPage = 1; search(1);" title="Erste Seite" class="t-bold">&lt;&lt;</a>
+                </li>
+                <li [ngClass]="{disabled:currentPage === 1}" class="mx-2">
+                  <a (click)="currentPage = currentPage-1; search(currentPage);" title="Vorherige Seite" class="t-bold">&lt;</a>
+                </li>
+                <li *ngFor="let page of plantsPager.pages" [ngClass]="{'text-green t-bold':currentPage === page}"
+                  class="mx-2">
+                  <a (click)="currentPage = page;search(currentPage); ">{{page}}</a>
+                </li>
+                <li [ngClass]="{disabled:currentPage === plantsPager.totalPages}" class="mx-2">
+                  <a (click)="currentPage=currentPage+1; search(currentPage);" title="Nächste Seite" class="t-bold">&gt;</a>
+                </li>
+                <li [ngClass]="{disabled:currentPage === plantsPager.totalPages}">
+                  <a (click)="currentPage=plantsPager.totalPages; search(plantsPager.totalPages);" title="Letzte Seite" class="t-bold">&gt;&gt;</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <app-ad [ad]="ad" ></app-ad>
+      
+        </div>
+      </div>
+      
+      <ng-container *ngIf="selectedPlant">
+        <div class="modal fade" id="addPlantModal" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content {{mode}}">
+              <div class="modal-header">
+                <h5 class="modal-title">{{selectedPlant.NameGerman}} zu meinem Gartenbereich hinzufügen</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span class="{{mode==='dark'?'text-ltgrey':'text-blackish'}}" aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <form class="modal-body" [formGroup]="addForm" ngNativeValidate>
+                <div class="form-group mb-3">
+                  <label class="mb-0 {{mode==='light'?'text-darkgrey':'text-white'}}">Mein Gartenbereich</label>
+      
+                </div>
+                <div class="form-group mb-3 ">
+                  <label class="{{mode==='dark'?'text-white':'text-blackish'}} mb-0">Liste auswählen:</label>
+              
+                  <ng-multiselect-dropdown class="{{mode==='dark'?'text-white':'text-blackish'}} "
+                    [placeholder]="'Meine Listen'"
+                    [data]="userLists"
+                    [(ngModel)]="selectedLists"
+                    [settings]="dropdownSettings"
+                    [ngModelOptions]="{standalone: true}"
+                    (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)" [required]='requiredField' [ngClass]='setClass()'
+                    >
+                  </ng-multiselect-dropdown>
+                  <p *ngIf="!requiredField" class="text-danger">
+                    Bitte eine Liste auswählen oder <a data-toggle="collapse" href="#addNewList"><u>eine neue Liste erstellen.</u></a>
+                  </p>
+                </div>
+                <div class="collapse row mb-3 px-4" id="addNewList">
+                  <form [formGroup]="addNewList" class="form-group col-12 py-2 border {{mode === 'light'?'border-dark':'border-white'}}">
+                    <label class="mb-0 {{mode==='light'?'text-darkgrey':'text-white'}}">Neue Liste erstellen</label>
+                    <input class="form-control" type="text" formControlName="Name" placeholder="Name der Liste">
+                    <input class="form-control" type="text" formControlName="Description" placeholder="Beschreibung (optional)">
+                    <button type="button" class="btn btn-green mt-2 float-right" (click)="createList()">Erstellen</button>
+                  </form>
+                </div>
+                <div class="row mb-3">
+                  <div class="form-group col-12">
+                    <label class="mb-0 {{mode==='light'?'text-darkgrey':'text-white'}}">Anzahl</label>
+                    <input class="form-control" type="number" min="1" formControlName="Count">
+                  </div>
+      
+                </div>
+                <div class="form-group mb-2 col-12 ch-container">
+                  <label class="t-reg t-12 {{mode==='light'?'text-darkgrey':'text-white'}}">
+                    <input type="checkbox" formControlName="IsInPot">
+                    <p class="{{mode==='light'?'text-darkgrey':'text-white'}}">Topfpflanze?</p>
+                    <span class="checkmark"></span>
+                  </label>
+                </div>
+              </form>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary text-white btn_border075" data-dismiss="modal">Abbrechen</button>
+                <button type="button" class="btn btn-green" data-dismiss="modal" (click)="borrowPlant()">Hinzufügen</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      
+      <ng-container *ngIf="selectedPlant">
+        <div class="modal fade" id="plantImageModal" tabindex="-1" role="dialog" aria-labelledby="plantImageModal" aria-hidden="true">
+          <div class="modal-dialog" role="document" style="max-width: 600px;">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <img *ngIf="selectedPlant.Images?.length < 4" style="width: 100%; height: 400px;" class="ptr" [title]="selectedPlant.Images[0]?.Author ? 'Autor: '+ selectedPlant.Images[0]?.Author:''" [src]="toUrl(selectedPlant.Images[0]?.SrcAttr, false)" [alt]=selectedPlant.NameGerman>
+                <ng-container *ngIf="selectedPlant.Images?.length >= 4">
+                  <img class="ptr quarter-img" *ngFor="let pnImg of selectedPlant.Images | slice:0:4" 
+                    [src]="toUrl(pnImg.SrcAttr, false)" 
+                    [alt]=selectedPlant.NameGerman
+                    [title]="pnImg.Author ? 'Autor: '+ pnImg.Author: ''">
+                </ng-container>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      
+      <div class="modal fade" id="zonesMap" tabindex="-1" role="dialog" aria-labelledby="Karte für Winterhärtezonen" aria-hidden="true">
+        <div class="modal-dialog" role="document" style="max-width: 700px;">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body pt-0">
+              <figure id="gardenMap">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 3297 3594" preserveAspectRatio="xMinYMin meet">
+                  <image width="3297" height="3594" xlink:href="assets/images/Deutschlandkarte_v8.jpg" />
+                  <g opacity="1" #gardenMarker></g>
+                </svg>
+              </figure>
+            </div>
+          </div>
+        </div>
+      </div>
+
+  </div>
+  <div class="col-1">
+    <app-ad [ad]="adSides" ></app-ad>
+  </div>
+</div>

@@ -1,0 +1,148 @@
+﻿@model GardifyModels.Models.PlantViewModels.PlantViewModel
+@using PflanzenApp.HtmlHelpers;
+@{
+    ViewBag.Title = (String.IsNullOrEmpty(Model.NameGerman) ? "" : Model.NameGerman + "-") + Model.NameLatin;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="plant-details-view">
+    <h1>
+        @Model.NameLatin
+        @if (!String.IsNullOrEmpty(Model.NameGerman))
+        {
+            <br /><span style="font-size:30px">@Model.NameGerman</span>}
+    </h1>
+
+    <div>
+        <div class="row">
+            <div class="col-md-3 plant-images clearfix">
+                @if (Model.Images != null && Model.Images.Any())
+                {
+                    <div class="title-image">
+                        <img title="@Model.Images.FirstOrDefault().TitleAttr" src="@Model.Images.FirstOrDefault().SrcAttr" alt="@Model.Images.FirstOrDefault().AltAttr" />
+                    </div>
+                    foreach (var img in Model.Images.Skip(1))
+                    {
+                        <div class="thumbnail col-md-4">
+                            <img title="@img.TitleAttr" src="@img.SrcAttr" alt="@img.AltAttr" />
+                        </div>
+                    }
+                }
+            </div>
+            <div class="col-md-9 plant-data">
+                <h2>Beschreibung</h2>
+                <p>
+                    @Html.DisplayFor(model => Model.Description)
+                </p>
+
+                @if (Model.PlantTags != null && Model.PlantTags.Any())
+                {
+                    <hr />
+                    <div class="plant-tags">
+                        <h2>Eigenschaften</h2>
+                        <ul>
+                            @foreach (var tag in Model.PlantTags)
+                            {
+                                <li>@(tag.Category.Title + ": " + tag.Title)</li>
+                            }
+                        </ul>
+                    </div>
+                }
+                @if (Model.PlantCharacteristics != null && Model.PlantCharacteristics.Any())
+                {
+                    <hr />
+                    <h2>Merkmale</h2>
+                    <ul>
+                        @foreach (var characteristic in Model.PlantCharacteristics)
+                        {
+                            @Html.Raw("<li>")
+                            @(characteristic.Category.Title + ": ")Html.RenderPartial("~/Views/Shared/_PlantCharacteristicValuePartial.cshtml", characteristic);
+                            @Html.Raw("</li>")
+                        }
+                    </ul>
+                }
+                @if (Model.Articles != null && Model.Articles.Any())
+                {
+                    <hr />
+                    <h2>Vorgeschlagene Artikel</h2>
+                    <ul>
+                        @foreach (var article in Model.Articles)
+                        {
+                            <li>
+                                @Html.ActionLink(article.Name, "details", "article", new { id = article.Id }, null)
+                            </li>
+                        }
+                    </ul>
+                }
+            </div>
+        </div>
+    </div>
+    <p>
+        @if (User.Identity.IsAuthenticated)
+        {
+            using (Ajax.BeginForm("get-add-plant-dialog", "PlantSearch", new AjaxOptions { UpdateTargetId = "modalWrapper" }))
+            {
+                @Html.AntiForgeryToken();
+                @Html.Hidden("plantId", Model.Id);
+                <input class="btn btn-default" type="submit" value="Zu meinem Garten hinzufügen" />}
+            <br />using (Ajax.BeginForm("get-add-plant-to-watchlist-dialog", "PlantSearch", new AjaxOptions { UpdateTargetId = "modalWrapper" }))
+            {
+                @Html.AntiForgeryToken();
+                @Html.Hidden("plantId", Model.Id);
+                <input class="btn btn-default" type="submit" value="Zu Merkliste hinzufügen" />}
+        }
+    </p>
+    <div id="modalWrapper"></div>
+</div>
+<hr />
+@if (Model.GenusTaxon != null)
+{
+    @Html.ActionLink("Foren von Geschwisterpflanzen anschauen (" + Model.GenusTaxon.TitleGerman + " - " + Model.GenusTaxon.TitleLatin + ")", "Index", "Forum", new { taxonId = Model.GenusTaxon.Id }, null);
+}
+<div id="forum-wrapper">
+    @Html.Action("PlantThread", "Forum", new { plantId = Model.Id })
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+
+
+        $(document).ready(function () {
+            var forum = new Forum('#forum-wrapper');
+            forum.updateControls();
+        });
+
+        function Forum(forumSelector) {
+            this.selector = forumSelector;
+            var root = this;
+
+            this.updateControls = function () {
+                console.log('updateControls');
+                $(this.selector + ' .add-post-btn').click(function (event) {
+                    event.preventDefault();
+                    root.addPost($(this).data('headerid'));
+                });
+            }
+
+            this.addPost = function (headerid) {
+                $(root.selector + ' .loading-div').show();
+                content = $(root.selector + " textarea[name=postcontent]").val();
+                console.log({ 'HeaderId': headerid, 'Content': content, @Html.AjaxAntiForgeryTokenExtention() });
+                $.ajax({
+                    url: '@Url.Action("CreatePlantPost", "Forum", new { plantId = Model.Id })',
+                    type: 'post',
+                    cache: false,
+                    data: { 'HeaderId': headerid, 'Content': content, @Html.AjaxAntiForgeryTokenExtention() },
+                })
+                .done(function (result) {
+                    console.log('check');
+                    $(root.selector).html(result);
+                    root.updateControls();
+                    $(root.selector + ' .loading-div').hide();
+                });
+            }
+        }
+    </script>
+
+    @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.min.js")
+
+}

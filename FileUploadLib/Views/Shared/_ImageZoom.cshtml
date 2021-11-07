@@ -1,0 +1,191 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<style>
+    /* Style the Image Used to Trigger the Modal */
+    #open-zoom {
+        border-radius: 5px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+        #open-zoom:hover {
+            cursor: pointer;
+        }
+
+    /* The Modal (background) */
+    .modal-zoom {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 999; /* Sit on top */
+        padding-top: 100px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+    }
+
+    /* Modal Content (Image) */
+    .modal-content-zoom {
+        margin: auto;
+        display: block;
+        width: 80%;
+        max-width: 1000px;
+        height: auto !important;
+    }
+
+    /* Caption of Modal Image (Image Text) - Same Width as the Image */
+    #caption-zoom {
+        margin: auto;
+        display: block;
+        width: 80%;
+        max-width: 700px;
+        text-align: center;
+        color: #ccc;
+        padding: 10px 0;
+        height: 150px;
+    }
+
+    /* Add Animation - Zoom in the Modal */
+    .modal-content-zoom, #caption-zoom {
+        animation-name: zoom;
+        animation-duration: 0.6s;
+    }
+
+    #image-zoom:hover {
+        cursor: pointer;
+    }
+
+    #image-zoom-img:hover {
+        cursor: default !important;
+    }
+
+    @@keyframes zoom {
+        from {
+            transform: scale(0)
+        }
+
+        to {
+            transform: scale(1)
+        }
+    }
+
+    /* The Close Button */
+    #close-zoom {
+        position: absolute;
+        top: 15px;
+        right: 35px;
+        color: #f1f1f1;
+        font-size: 40px;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+        #close-zoom:hover,
+        #close-zoom:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+    /* 100% Image Width on Smaller Screens */
+    @@media only screen and (max-width: 700px) {
+        .modal-content-zoom {
+            width: 100%;
+        }
+    }
+
+    /* The overlay effect (full height and width) - lays on top of the container and over the image */
+    .overlay {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 100%;
+        width: 100%;
+        opacity: 0;
+        transition: .3s ease;
+        background-color: white;
+    }
+
+    .overlay:hover{
+        cursor: pointer;
+    }
+
+    /* When you mouse over the container, fade in the overlay icon*/
+    .zoomable:hover .overlay {
+        opacity: 0.7;
+    }
+
+    /* The icon inside the overlay is positioned in the middle vertically and horizontally */
+    .zoom-icon {
+        color: gray;
+        font-size: 30px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        text-align: center;
+    }
+
+    /* When you move the mouse over the icon, change color */
+    .fa-user:hover {
+        color: gray;
+    }
+</style>
+
+<div id="image-zoom" class="modal-zoom">
+    <!-- The Close Button -->
+    <span class="close" id="close-zoom">&times;</span>
+
+    <!-- Modal Content (The Image) -->
+    <img class="modal-content-zoom" id="image-zoom-img">
+
+    <!-- Modal Caption (Image Text) -->
+    <div id="caption-zoom">
+        <h2 id="caption-zoom-headline"></h2>
+        <p id="caption-zoom-content"></p>
+    </div>
+</div>
+
+<script>
+    // Get the modal
+    var modal = document.getElementById("image-zoom");
+    var imageZoom = document.getElementById("image-zoom");
+    var image = document.getElementById("image-zoom-img");
+    var captionHeadline = document.getElementById("caption-zoom-headline");
+    var captionContent = document.getElementById("caption-zoom-content");
+
+    function showZoom(path, title, description, alt) {
+        console.log(path);
+        console.log(title);
+        var fullPath = "/" + path;
+        modal.style.display = "block";
+        image.src = fullPath;
+        image.alt = alt;
+        captionHeadline.innerHTML = title;
+        captionContent.innerHTML = description;
+    }
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementById("close-zoom");
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+
+    imageZoom.onclick = function (e) {
+        console.log(e);
+        if (e.srcElement != image) {
+            modal.style.display = "none";
+        }
+    }
+</script>

@@ -1,0 +1,24 @@
+.custom-select {
+    display: inline;
+    max-width: 200px;
+}
+.wrapper.light .custom-select { background-color: white !important; }
+.wrapper.dark .custom-select { 
+    background-color: black !important; 
+    color: white !important; 
+    border-bottom: none !important; 
+}
+.input-icon {
+    display: inline-block;
+    position: relative;
+    right: 30px;
+    top: 2px;
+    height: 38px;
+    padding-top: 8px;
+}
+.vid-tag {
+    background-color: #7a9d3488;
+    padding: 4px;
+    border-radius: 6px;
+    display: inline-block;
+}

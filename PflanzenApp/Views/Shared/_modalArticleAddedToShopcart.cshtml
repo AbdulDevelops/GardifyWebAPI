@@ -1,0 +1,45 @@
+﻿@model GardifyModels.Models.ShopcartViewModels._modalArticleAddedToShopcartViewModel
+@if (Model != null && !String.IsNullOrEmpty(Model.Message))
+{
+	string cssClass = "";
+
+	switch (Model.Status)
+	{
+		case GardifyModels.Models.ModelEnums.ActionStatus.Success:
+			cssClass = "alert-success";
+			break;
+		case GardifyModels.Models.ModelEnums.ActionStatus.Warning:
+			cssClass = "alert-warning";
+			break;
+		case GardifyModels.Models.ModelEnums.ActionStatus.Error:
+			cssClass = "alert-danger";
+			break;
+	}
+
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" data-backdrop="false" aria-labelledby="addDialogLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="@cssClass modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="addDialogLabel">Zum Warenkorb hinzufügen</h4>
+			</div>			
+			<div class="modal-body">
+				<p>@Html.Raw(Model.Message)</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Weiter einkaufen</button>
+				<a class="btn btn-default" href="@Url.Content("~/Shopcart")">Zum Warenkorb</a>
+			</div>			
+		</div>
+	</div>
+</div>
+
+<script>
+	$(document).ready(function () {
+		$('#modal').modal('toggle');
+		$('#modal').on('hidden.bs.modal', function (e) {
+			$('#modal-wrapper').remove();
+		});
+	});
+</script>
+}

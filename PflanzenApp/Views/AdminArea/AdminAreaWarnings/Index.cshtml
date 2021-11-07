@@ -1,0 +1,64 @@
+﻿@model List<GardifyModels.Models.Plant>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdminArea.cshtml";
+}
+    <style>        
+        .wrapper div.odd-bg:nth-of-type(2n+1) {
+            background-color: #f3f3f3;
+            padding: 4px;
+        }
+    </style>
+<h2>Alle Warnungen</h2>
+<p>@(ViewBag.Count) von @(Model.Count()) Pflanzen haben noch keine Warnungen. Diese werden zuerst angezeigt.</p>
+<hr />
+<div class="wrapper">
+    @if (Model != null && Model.Any())
+    {
+        foreach (var plant in Model.OrderBy(p => p.Alerts.Count()))
+        {
+            <div class="odd-bg">
+                <div>
+                    <h4>@plant.NameGerman</h4>
+                    @Html.ActionLink("ändern", "Edit", "AdminAreaPlant", new { id = plant.Id }, null)
+                </div>
+                @if (plant.Alerts.Any())
+                {
+                    <table class="table">
+                        <tr>
+                            <th>
+                                Warnungstitel
+                            </th>
+                            <th>
+                                Text
+                            </th>
+                            <th>
+                                Bedingung
+                            </th>
+                            <th></th>
+                        </tr>
+                        @foreach (var alert in plant.Alerts)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => alert.Title)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(m => alert.Text)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(m => alert.ReadableCondition)
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                }
+                else
+                {
+                    <p>@plant.NameGerman hat noch keine Warnungen.</p>
+                }
+            </div>
+        }
+    }
+</div>

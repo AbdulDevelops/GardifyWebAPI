@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+        Portrait mode w360dp
+
+        1.) Widths
+        2.) Heights
+        3.) Margins
+    -->
+
+    <!-- 1.) Widths -->
+    <dimen name="width_team_cardView">162dp</dimen>
+    <dimen name="width_todo_textView">80dp</dimen>
+
+    <dimen name="width_ecoScan_editText">50dp</dimen>
+    <dimen name="width_fragmentDialog">300dp</dimen>
+
+    <!-- 2.) Heights -->
+    <dimen name="height_team_cardView">230dp</dimen>
+    <dimen name="imageView_plantScan_height_layoutItem">120dp</dimen>
+    <dimen name="height_bottomSheet">600dp</dimen>
+    <dimen name="imageView_all_height_cameraGallery">50dp</dimen>
+
+    <!-- 3.) Margins -->
+    <dimen name="margin_team_tableLayout">12dp</dimen>
+    <dimen name="margin_team_tableRow">6dp</dimen>
+
+</resources>

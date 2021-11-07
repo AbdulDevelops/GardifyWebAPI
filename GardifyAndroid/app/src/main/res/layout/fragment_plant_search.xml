@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:background="@color/constraintLayout_all_seashell"
+    android:layout_height="match_parent">
+
+    <ProgressBar
+        android:id="@+id/progressBar_plant_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        style="@style/ProgressBar"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView_plant_search"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:paddingLeft="@dimen/marginPaddingSize_24sdp"
+        android:paddingRight="@dimen/marginPaddingSize_24sdp"
+        android:paddingTop="@dimen/marginPaddingSize_24sdp"
+        app:layout_constraintBottom_toTopOf="@id/cardview_plant_search_hit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/image_view_plant_search_go_to_top"
+        android:background="@color/colorPrimary"
+        android:padding="@dimen/imageView_all_padding_5sdp"
+        android:layout_width="@dimen/imageView_plantSearch_width_22sdp"
+        android:layout_height="@dimen/imageView_plantSearch_height_22sdp"
+        android:src="@drawable/gardify_icon_plant_search_go_to_top"
+        app:layout_constraintBottom_toTopOf="@id/image_view_plant_search_critera_visibility"
+        android:layout_marginBottom="@dimen/marginPaddingSize_10sdp"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <ImageView
+        android:id="@+id/image_view_plant_search_critera_visibility"
+        android:background="#FFA000"
+        android:padding="@dimen/imageView_all_padding_5sdp"
+        android:layout_width="@dimen/imageView_plantSearch_width_22sdp"
+        android:layout_height="@dimen/imageView_plantSearch_height_22sdp"
+        android:src="@drawable/gardify_icon_plant_search_eye"
+        app:layout_constraintBottom_toTopOf="@id/cardview_plant_search_criteria"
+        android:layout_marginBottom="@dimen/marginPaddingSize_10sdp"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardview_plant_search_hit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/height_40sdp"
+        app:cardBackgroundColor="#FFA000"
+        android:padding="@dimen/marginPaddingSize_5sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintWidth_percent="0.5">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView_plant_search_hit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_all_white"
+                android:textSize="@dimen/textSize_body_medium"
+                android:paddingStart="@dimen/marginPaddingSize_5sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageView6"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.551" />
+
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="@dimen/imageView_all_width_18sdp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@android:drawable/ic_menu_search" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardview_plant_search_criteria"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/height_40sdp"
+        app:cardBackgroundColor="#FBC02D"
+        android:padding="@dimen/marginPaddingSize_5sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/cardview_plant_search_hit"
+        app:layout_constraintWidth_percent="0.5">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView_plant_search_search_criteria"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_all_white"
+                android:layout_marginStart="@dimen/marginPaddingSize_5sdp"
+                android:textSize="@dimen/textSize_body_xsmall"
+                app:layout_constraintBottom_toTopOf="@+id/chipGroup_plant_search"
+                app:layout_constraintEnd_toStartOf="@+id/imageView_plant_search_reset_search"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.535" />
+
+            <ImageView
+                android:id="@+id/imageView_plant_search_reset_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_baseline_delete_x" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipGroup_plant_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

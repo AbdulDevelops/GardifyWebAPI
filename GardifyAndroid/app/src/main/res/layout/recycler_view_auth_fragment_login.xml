@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/cardView_all_white"
+        android:elevation="@dimen/elevation_2dp"
+        app:cardCornerRadius="@dimen/cardCornerRadius_medium">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/marginPaddingSize_16sdp">
+
+            <EditText
+                android:id="@+id/edit_text_login_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_edit_text_default"
+                android:ems="10"
+                android:textSize="@dimen/textSize_body_medium"
+                android:hint="@string/all_email"
+                android:clickable="false"
+                android:imeOptions="actionDone"
+                android:inputType="textEmailAddress"
+                android:padding="@dimen/marginPaddingSize_10sdp"
+                android:text="" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/textInput_passwordLayout"
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/marginPaddingSize_10sdp"
+                android:layout_height="wrap_content"
+                app:boxStrokeWidth="0dp"
+                app:hintEnabled="false"
+                app:passwordToggleEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edit_text_login_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/all_password"
+                    android:clickable="false"
+                    android:background="@drawable/custom_edit_text_default"
+                    android:ems="10"
+                    android:imeOptions="actionDone"
+                    android:padding="@dimen/marginPaddingSize_10sdp"
+                    android:textSize="@dimen/textSize_body_medium"
+                    android:inputType="textPassword"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout_rememberMe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/marginPaddingSize_16sdp"
+                android:orientation="horizontal">
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/check_box_remember_me"
+                    android:layout_width="@dimen/width_height_18sdp"
+                    android:layout_height="@dimen/width_height_18sdp"
+                    android:background="@drawable/checkbox_layout"
+                    android:button="@null" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/textSize_body_medium"
+                    android:layout_marginLeft="@dimen/marginPaddingSize_16sdp"
+                    android:text="@string/registerLogin_rememberMe" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/text_view_forgot_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/marginPaddingSize_16sdp"
+                android:text="@string/registerLogin_forgotPassword"
+                android:textSize="@dimen/textSize_body_medium"
+                android:textAlignment="center" />
+
+            <ProgressBar
+                android:id="@+id/progress_bar_authentication"
+                style="@style/ProgressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+                android:layout_marginBottom="@dimen/marginPaddingSize_5sdp"
+                android:visibility="gone" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                style="@style/PrimaryButtonStyle"
+                android:text="@string/all_login" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</layout>

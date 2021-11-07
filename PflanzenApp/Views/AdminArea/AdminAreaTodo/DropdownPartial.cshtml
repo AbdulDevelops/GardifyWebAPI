@@ -1,0 +1,12 @@
+﻿@model GardifyModels.Models.TodoTemplateViewModels.TodoTemplateCreateViewModel
+<div class="form-group" id="reference-list">
+    <div class="col-md-10">
+        <select name="ReferenceId[@Model.Index]">
+            <option value="-1">Bitte auswählen</option>
+            @foreach (var m in Model.InfoObjects)
+            {
+                <option name="@m.Name" value="@m.Id">@m.Name</option>
+            }
+        </select>
+    </div>
+</div>

@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_expandable_scroll_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/scrollView_all_seashell"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/marginPaddingSize_24sdp">
+
+        <ProgressBar
+            android:id="@+id/progressBar_weather"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_view_weather_today"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="@dimen/cardCornerRadius_medium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <!-- today weather  -->
+
+                <ImageView
+                    android:id="@+id/imageView_weather_icon"
+                    android:layout_width="@dimen/imageView_weather_width_100sdp"
+                    android:layout_height="@dimen/imageView_weather_height_100sdp"
+                    android:layout_margin="@dimen/imageView_all_margin_5sdp"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/marginPaddingSize_16sdp"
+                    app:layout_constraintBottom_toBottomOf="@id/imageView_weather_icon"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/imageView_weather_icon"
+                    app:layout_constraintTop_toTopOf="@id/imageView_weather_icon">
+
+                    <TextView
+                        android:id="@+id/textView_weather_city_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:text="City label"
+                        android:textSize="@dimen/textSize_body_medium"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textView_weather_celsius_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=", °C"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/textView_weather_city_label"
+                        android:textSize="@dimen/textSize_body_medium"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textView_weather_clarity_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@id/textView_weather_city_label"
+                        android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+                        app:layout_constraintTop_toBottomOf="@id/textView_weather_city_label"
+                        android:text="Clarity Label"
+                        android:layout_alignParentBottom="true"
+                        android:textSize="@dimen/textSize_body_medium" />
+
+                    <TextView
+                        android:id="@+id/textView_weather_date_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@id/textView_weather_clarity_label"
+                        android:layout_alignBottom="@id/textView_weather_clarity_label"
+                        android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+                        android:text="Date Label"
+                        android:textSize="@dimen/textSize_body_medium" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <View
+                    android:id="@+id/divider_weather"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_margin="@dimen/marginPaddingSize_10sdp"
+                    android:background="@color/view_all_divider"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/imageView_weather_icon" />
+                <!--
+                today weather vertical detailed icons
+                -->
+                <include
+                    layout="@layout/fragment_weather_forecast_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/divider_weather" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycleView_weather_hourly_forecast"
+            android:layout_marginTop="@dimen/marginPaddingSize_10sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/card_view_weather_today" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_view_charts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:cardCornerRadius="@dimen/cardCornerRadius_medium"
+            app:layout_constraintTop_toBottomOf="@id/recycleView_weather_hourly_forecast"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/marginPaddingSize_24sdp"
+                android:orientation="vertical">
+
+                <com.github.mikephil.charting.charts.CombinedChart
+                    android:id="@+id/combined_chart_weather"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_200sdp"
+                    android:layout_marginTop="@dimen/marginPaddingSize_5sdp" />
+
+                <com.github.mikephil.charting.charts.BarChart
+                    android:id="@+id/bar_chart_weather_sunshine"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_200sdp"
+                    android:layout_marginTop="10dp"/>
+
+                <!-- legends -->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/marginPaddingSize_10sdp"
+                    android:layout_marginStart="@dimen/marginPaddingSize_16sdp"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="@dimen/width_height_18sdp"
+                        android:layout_height="@dimen/width_height_18sdp"
+                        android:background="@color/view_gardenWeather_maxTemperature"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/marginPaddingSize_10sdp"
+                        android:text="@string/gardenWeather_legendMaxTemperature"
+                        android:textSize="@dimen/textSize_body_xsmall"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+                    android:layout_marginStart="@dimen/marginPaddingSize_16sdp"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="@dimen/width_height_18sdp"
+                        android:layout_height="@dimen/width_height_18sdp"
+                        android:background="@color/view_gardenWeather_minTemperature" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/marginPaddingSize_10sdp"
+                        android:text="@string/gardenWeather_legendMinTemperature"
+                        android:textSize="@dimen/textSize_body_xsmall" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+                    android:layout_marginStart="@dimen/marginPaddingSize_16sdp"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="@dimen/width_height_18sdp"
+                        android:layout_height="@dimen/width_height_18sdp"
+                        android:background="@color/view_gardenWeather_rainfall" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/marginPaddingSize_10sdp"
+                        android:text="@string/gardenWeather_legendRainFall"
+                        android:textSize="@dimen/textSize_body_xsmall"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+                    android:layout_marginStart="@dimen/marginPaddingSize_16sdp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="@dimen/width_height_18sdp"
+                        android:layout_height="@dimen/width_height_18sdp"
+                        android:background="@color/view_gardenWeather_sunshine" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/marginPaddingSize_10sdp"
+                        android:text="@string/gardenWeather_legendSunshine"
+                        android:textSize="@dimen/textSize_body_xsmall" />
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

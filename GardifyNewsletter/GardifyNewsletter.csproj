@@ -1,0 +1,107 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <Nullable>enable</Nullable>
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controller\**" />
+    <Compile Remove="Data\**" />
+    <Compile Remove="Files\**" />
+    <Compile Remove="NewsletterTemplates\**" />
+    <Compile Remove="Pages\Start\**" />
+    <Compile Remove="Repositories\**" />
+    <Compile Remove="wwwroot\files\58c28f0a-213b-4dae-a577-db3691499c7a\**" />
+    <Compile Remove="wwwroot\files\894e1dfb-23d8-44fa-a15b-0ee58e9a7e21\**" />
+    <Content Remove="Controller\**" />
+    <Content Remove="Data\**" />
+    <Content Remove="Files\**" />
+    <Content Remove="NewsletterTemplates\**" />
+    <Content Remove="Pages\Start\**" />
+    <Content Remove="Repositories\**" />
+    <Content Remove="wwwroot\files\58c28f0a-213b-4dae-a577-db3691499c7a\**" />
+    <Content Remove="wwwroot\files\894e1dfb-23d8-44fa-a15b-0ee58e9a7e21\**" />
+    <EmbeddedResource Remove="Controller\**" />
+    <EmbeddedResource Remove="Data\**" />
+    <EmbeddedResource Remove="Files\**" />
+    <EmbeddedResource Remove="NewsletterTemplates\**" />
+    <EmbeddedResource Remove="Pages\Start\**" />
+    <EmbeddedResource Remove="Repositories\**" />
+    <EmbeddedResource Remove="wwwroot\files\58c28f0a-213b-4dae-a577-db3691499c7a\**" />
+    <EmbeddedResource Remove="wwwroot\files\894e1dfb-23d8-44fa-a15b-0ee58e9a7e21\**" />
+    <None Remove="Controller\**" />
+    <None Remove="Data\**" />
+    <None Remove="Files\**" />
+    <None Remove="NewsletterTemplates\**" />
+    <None Remove="Pages\Start\**" />
+    <None Remove="Repositories\**" />
+    <None Remove="wwwroot\files\58c28f0a-213b-4dae-a577-db3691499c7a\**" />
+    <None Remove="wwwroot\files\894e1dfb-23d8-44fa-a15b-0ee58e9a7e21\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\css\font-awesome.css" />
+    <Content Remove="wwwroot\css\font-awesome.css.map" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ElmahCore" Version="1.2.4" />
+    <PackageReference Include="ElmahCore.Sql" Version="1.2.4" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="2.2.3" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.4" />
+    <PackageReference Include="morelinq" Version="3.3.2" />
+    <PackageReference Include="RestSharp" Version="106.11.4" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="2.2.4" />
+
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Identity\Services\" />
+    <Folder Include="wwwroot\files\Ansprechpartner\" />
+    <Folder Include="wwwroot\images\BadgeIcons\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\css\font-awesome.css" />
+    <None Include="wwwroot\css\font-awesome.css.map" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FileUploadLib\FileUploadLib.csproj" />
+    <ProjectReference Include="..\GardifyModels\GardifyModels.csproj">
+      <Project>{1e065f0c-5341-449b-92b1-6f6bdf892e66}</Project>
+      <Name>GardifyModels</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GardifyWebAPINew\GardifyWebAPI.csproj" />
+
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Web.Extensions">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\System.Web.Extensions.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Pages\Index.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Pages\_ViewImports.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Pages\_ViewStart.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+</Project>

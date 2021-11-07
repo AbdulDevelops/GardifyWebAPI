@@ -1,0 +1,198 @@
+.wrapper-content.dark{
+ background-color: #3e3e3e;
+ color: white
+}
+.warning-card {
+    background-color: #ff8d8d94;
+}
+.push-card {
+    background-color: silver;
+}
+.warning-ctrl-btn {
+    background-color: transparent;
+    outline: none;
+    border: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    opacity: 0.5;
+}
+.dismissed {
+    background-color: #c0c0c066;
+    text-decoration: line-through;
+}
+.switch input {display:none;}
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 65px;
+    height: 17px;
+    line-height: 15px;
+}
+.slider {
+    position: absolute;
+    cursor: pointer;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color:#bbb;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+      position: absolute;
+      z-index: 2;
+      content: "";
+      height: 17px;
+      width: 17px;
+      left: 1px;
+      background-color:#888;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.22);
+      -webkit-transition: .4s;
+      transition: all 0.4s ease-in-out;
+  }
+  
+  .slider:after {
+      position: absolute;
+      left: 0;
+      z-index: 1;
+      content: "AN";
+      font-size: 10px;
+      text-align: left !important;
+      padding-left: 0px;
+      width: 66px;
+      color: white;
+      height: 17px;
+      border-radius: 100px;
+      background-color: #afbb7a;
+      transform: translateX(-48px);
+      transition: all 0.4s ease-in-out;
+  }
+  
+  input:checked + .slider:after {
+    -webkit-transform: translateX(0px);
+    -ms-transform: translateX(0px);
+    transform: translateX(0px);
+    padding-left: 10px;
+    padding-top: 2px;
+  }
+  
+  input:checked + .slider:before {
+    background-color: #fff;
+    border: 1px solid silver;
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(47px);
+    -ms-transform: translateX(47px);
+    transform: translateX(47px);
+  }
+  
+/* Rounded sliders */
+.slider.round {
+    border-radius: 100px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
+  .absolute-no{
+      position: absolute;
+      left: 0;
+      color:#ffffff;
+      text-align: right !important;
+      font-size: 10px;
+      width: calc(100% - 10px);
+      height: 16px;
+      /* line-height: 95px; */
+      cursor: pointer;
+      padding-top: 2px;
+  }
+
+  .slider.setting {
+    position: absolute;
+    cursor: pointer;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color:#000000
+    ;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider.setting:before {
+      position: absolute;
+      z-index: 2;
+      content: "";
+      height: 17px;
+      width: 17px;
+      left: 1px;
+      /* bottom: 1px; */
+      background-color:#000000;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.22);
+      -webkit-transition: .4s;
+      transition: all 0.4s ease-in-out;
+  }
+  
+  
+  
+  .slider.setting:after {
+      position: absolute;
+      left: 0;
+      z-index: 1;
+      content: "WHITE";
+      font-size: 10px;
+      text-align: left !important;
+      /* line-height: 2px; */
+      padding-left: 0px;
+      width: 66px;
+      color: #000000;
+      height: 17px;
+      border-radius: 100px;
+      background-color: #ffffff;
+      transform: translateX(-48px);
+      transition: all 0.4s ease-in-out;
+  }
+ 
+.warnings-icon { 
+  background-image: url('/assets/images/2b_Warnungen_aktiv.svg'); 
+  background-repeat: no-repeat;
+  width: 20px;
+  height: 20px;
+  top: 4px;
+  position: relative;
+  display: inline-block;
+}
+.backgrdColorGreenish{
+  background-color: #bcd3cd
+}
+.col_table{
+  border: 2px solid #bcd3cd;
+  
+  padding: 0px!important;
+  border-radius: 0.5rem;
+}
+
+table thead td, .table thead th {
+  border-bottom: 1px solid #e0e0e0!important;
+  border-top: 0px solid #e0e0e0!important;
+}
+table td{
+  text-align: center;
+}
+
+@media only screen and (max-width: 700px) {
+  .col-header {
+      display: unset !important;
+  }
+}
+.tableHead{
+    line-height: 6rem;
+    padding-left: 3rem;
+}

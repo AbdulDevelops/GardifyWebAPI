@@ -1,0 +1,41 @@
+﻿@model GardifyModels.Models.TodoViewModels.TodoIndexViewModel
+
+@{
+    ViewBag.Title = "Todo Übersicht";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<b>Ihr Punktestand: @Model.Points</b>
+<h2>Todo Übersicht</h2>
+<hr />
+<div class="col-md-12">
+    @if (ViewBag.AlertMessage != null)
+    {
+        <div class="alert alert-warning" role="alert">
+            @ViewBag.AlertMessage
+        </div>
+    }
+    <div class="alert alert-info" role="alert">
+        Zeige Todos vom @Model.StartDate.ToString("dd.MM.yyyy") bis     @Model.EndDate.ToString("dd.MM.yyyy")
+    </div>
+    @Html.ActionLink("Diese Woche", "Index", new { period = "week" }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Dieser Monat", "Index", new { period = "month" }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Dieses Jahr", "Index", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Abgearbeitete Todos", "IndexFinished", null, new { @class = "btn btn-default", @style = "float:right" })
+    <hr />
+    <div class="alert alert-danger" role="alert" style="display:none" id="box_failure">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Fehler:</span>
+        Beim Ändern des Datums ist ein Fehler aufgetreten
+    </div>
+    <div class="alert alert-success" role="alert" style="display:none" id="box_success">
+        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+        <span class="sr-only">Erfolgreich:</span>
+        Das Datum wurde erfolgreich geändert
+    </div>
+</div>
+@Html.Partial("_TodoList", Model)
+<hr />
+<p>
+    @Html.ActionLink("Neues Todo", "Create")
+</p>

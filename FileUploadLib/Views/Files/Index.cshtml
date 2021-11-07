@@ -1,0 +1,170 @@
+﻿@model FileUploadLib.Models.FileUploadLibViewModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    var usesMultipleFiles = Model.MultipleFiles ? "multiple" : "";
+}
+
+    <form asp-controller="File" asp-action="Post" method="post" enctype="multipart/form-data" class="FileUploadLibForm">
+        @if (Model.ApplicationId != null)
+        {
+            <input type="hidden" asp-for="ApplicationId" />
+        }
+        @if (Model.ModuleId != null)
+        {
+            <input type="hidden" asp-for="ModuleId" />
+        }
+        @if (!string.IsNullOrEmpty(Model.ModuleName))
+        {
+            <input type="hidden" asp-for="ModuleName" />
+        }
+        <input type="hidden" asp-for="DetailId" />
+        <input type="hidden" asp-for="UsesTestEnvironment" />
+        <input type="hidden" asp-for="IsDeletable" />
+        <input type="hidden" asp-for="IsEditable" />
+        @if (!Model.CanDecideDownloadable)
+        {
+            <input type="hidden" asp-for="IsDownloadable" />
+        }
+        @if (!Model.CanDecidePublished)
+        {
+            <input type="hidden" asp-for="IsPublished" />
+        }
+        <input type="hidden" asp-for="ReplaceExisting" value="@Model.ReplaceExisting" />
+        <div class='form-group'>
+            <label for='FileUploadFileInput'>Dateien</label>
+            <input type='file' class='form-control border-0' name="Files" @usesMultipleFiles />
+        </div>
+        @if (Model.UsesTitle)
+        {
+            <div class='form-group'>
+                <label for='FileUploadTitleInput'>Titel</label>
+                <input type='text' value='' placeholder='Bitte Titel angeben' asp-for="Title" class='form-control' />
+            </div>
+        }
+        @if (Model.UsesDescription)
+        {
+            <div class='form-group'>
+                <label for='FileUploadDescriptionInput'>Beschreibung</label>
+                <input type='text' value='' placeholder='Bitte Beschreibung angeben' asp-for="Description" class='form-control' />
+            </div>
+        }
+        @if (Model.UsesAltText)
+        {
+            <div class='form-group'>
+                <label for='FileUploadDescriptionInput'>Alt-Text</label>
+                <input type='text' value='' placeholder='Bitte Alt-Text angeben' asp-for="AltText" class='form-check-input ml-4' />
+            </div>
+        }
+        @if (Model.UsesSort)
+        {
+            <div class='form-group'>
+                <label for='FileUploadSortInput'>Sortierung</label>
+                <input type='number' value='' placeholder='Bitte Sortierung angeben' asp-for="Sort" class='form-check-input ml-4' />
+
+            </div>
+        }
+        @if (Model.CanDecidePublished)
+        {
+            <div class='form-group'>
+                <label for='FileUploadPublishedInput'>Sollen diese Dateien veröffentlicht werden?</label>
+                <input asp-for="IsPublished" class='form-check-input ml-4' />
+            </div>
+        }
+        @if (Model.CanDecideDownloadable)
+        {
+            <div class='form-group'>
+                <label for='FileUploadDownloadableInput'>Können diese Dateien heruntergeladen werden?</label>
+                <input asp-for="IsDownloadable" class='form-check-input ml-4' />
+            </div>
+        }
+        <button type='submit' class='btn btn-primary'>Hochladen</button>
+        <input hidden />
+    </form>
+<div class="modal" id="file-upload-lib-modal-@Model.DetailId" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Schließen</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" id="uploadedFilesWrapper-@Model.DetailId">
+
+</div>
+<script>
+    $(".FileUploadLibForm").on('submit', function (e) {
+        e.preventDefault();
+
+        if (window.FormData !== undefined)
+        //make sure that we can use FormData ie>9, chrome > 7, opera > 12 safari >5, android > 3  gecko mobile > 2, opera mobile >12 <- wil support XHR too
+        {
+            var formData = new FormData(this);
+            // you can append aditional values:
+            //  formData.append("be",logmebehave);
+            $.ajax({
+                url: $(this).attr('action'),  //Path to the server script that process the data
+                type: 'POST',
+                data: formData,
+                success: function (response) {
+                    var suceeded = true;
+                    var htmlString = "";
+                    console.log(response);
+                    for (i = 0; i < response.length; i++) {
+                        var obj = response[i];
+                        if (obj.responseCode == -1) {
+                            suceeded &= false;
+                        }
+                        htmlString += "<p>" + obj.responseMessage + "</p>";
+                        if (!suceeded) {
+                            $("#file-upload-lib-modal-@Model.DetailId").find('.modal-content').removeClass('border-success');
+                            $("#file-upload-lib-modal-@Model.DetailId").find('.modal-header').removeClass('bg-success');
+                            $("#file-upload-lib-modal-@Model.DetailId").find('.modal-content').addClass('border-danger');
+                            $("#file-upload-lib-modal-@Model.DetailId").find('.modal-header').addClass('bg-danger');
+                            $("#file-upload-lib-modal-@Model.DetailId").find('.modal-title').html("Fehler");
+                            if (obj.responseObject !== null) {
+                                var htmlString = "<div class='col-6 card'>" + obj.responseObject + "</div>";
+                                $("#uploadedFilesWrapper-@Model.DetailId").append(htmlString);
+                            }
+                        } else {
+                            $("#file-upload-lib-modal-@Model.DetailId").find('.modal-content').removeClass('border-danger');
+                            $("#file-upload-lib-modal-@Model.DetailId").find('.modal-header').removeClass('bg-danger');
+                            $("#file-upload-lib-modal-@Model.DetailId").find('.modal-content').addClass('border-success');
+                            $("#file-upload-lib-modal-@Model.DetailId").find('.modal-header').addClass('bg-success');
+                            $("#file-upload-lib-modal-@Model.DetailId").find('.modal-title').html("Erfolg");
+                            $(':input', '#FileUploadLibForm')
+                                .not(':button, :submit, :reset, :hidden')
+                                .val('')
+                                .prop('checked', false)
+                                .prop('selected', false);
+                            if (document.onImageUploadSuccess) {
+                                document.onImageUploadSuccess();
+                            }
+                        }
+                        $('#file-upload-lib-modal-@Model.DetailId').modal('show');
+                    }
+                    $("#file-upload-lib-modal-@Model.DetailId").find('.modal-body').html(htmlString);
+                },
+                //Options to tell jQuery not to process data or worry about content-type.
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+        } else {
+            $("#file-upload-lib-modal-@Model.DetailId").find('.modal-content').addClass('border-danger');
+            $("#file-upload-lib-modal-@Model.DetailId").find('.modal-header').addClass('bg-danger');
+            $("#file-upload-lib-modal-@Model.DetailId").find('.modal-title').html("Fehler");
+            $("#file-upload-lib-modal-@Model.DetailId").find('.modal-body').html("Es ist ein Fehler bei Ihrer Eingabe aufgetreten");
+        }
+
+        return false;
+    });
+</script>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/card_view_top_corner"
+    app:behavior_peekHeight="32dp"
+    app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
+
+    <ProgressBar
+        android:id="@+id/progress_bar_bottom_nav"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:elevation="@dimen/elevation_20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_settings_profileImage_uploadNewProfil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_bottom_sheet_dialog_fragment"
+        android:backgroundTint="@color/button_settingsProfileImage_profile"
+        android:text="Neues Profilbild hochladen"
+        android:textAllCaps="false"
+        android:textColor="@color/text_all_black"
+        android:textSize="@dimen/textSize_body_medium"
+        app:cornerRadius="@dimen/cardCornerRadius_small"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_settings_profileImage_deleteProfil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/card_view_bottom_corner"
+        android:backgroundTint="@color/button_settingsProfileImage_profile"
+        android:text="Profilbild entfernen"
+        android:textAllCaps="false"
+        android:textColor="@color/text_all_black"
+        android:textSize="@dimen/textSize_body_medium"
+        app:cornerRadius="@dimen/cardCornerRadius_small"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_settings_profileImage_uploadNewProfil"
+        tools:ignore="MissingConstraints" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_settings_profileImage_close"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/button_all_sendClosePlusMinus"
+        android:text="Schließen"
+        android:textAllCaps="false"
+        android:textColor="@color/text_all_white"
+        android:textSize="@dimen/textSize_body_medium"
+        app:cornerRadius="@dimen/cardCornerRadius_small"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_settings_profileImage_deleteProfil"
+        tools:ignore="MissingConstraints" />
+</androidx.constraintlayout.widget.ConstraintLayout>

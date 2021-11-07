@@ -1,0 +1,124 @@
+<div class="overlay-loading" [hidden]="!loading">
+  <svg class="spinner position-relative" viewBox="25 25 50 50">
+    <circle class="path" cx="50" cy="50" r="24" fill="none" stroke-width="2" stroke-miterlimit="10" />
+  </svg>
+</div>
+<div class="wrapper solid-wrapper {{mode}} {{mode==='dark'?'text-white':'text-blackish'}}">
+  <div class="container pt-3 pb-5">
+      <div class="row justify-content-between mt-5 mb-4">
+        <div class="col-12">
+          <h3 class="t-light t-26 {{mode==='dark'?'text-white':'text-grey'}}">NEWSLETTER</h3>
+          <p class="t-reg t-14">
+            Gern senden wir dir aktuelle Neuigkeiten rund um Garten und Pflanzen. 
+            <br><br>
+            Den Newsletter kannst du jederzeit wieder abbestellen. In jedem versendeten Newsletter ist ein Link, über den Du den Newsletter wieder abbestellen kannst. 
+          </p>
+        </div>
+      </div>
+    
+      <div class="row justify-content-center align-content-center mt-4">
+        <div class="col-12">
+          <h2 class="text-ltgrey">Anmeldung für Newsletter </h2>
+        </div>
+         
+      </div>
+      <div class="row justify-content-center align-content-center mt-4">
+          <form [formGroup]="newsletterForm" (ngSubmit)="postNewsLetter()" class="col-xs-12 col-lg-8">
+            
+              <!-- <div class="form-group mb-2">
+                <label class="form-check-label {{mode==='dark'?'text-ltgrey':'text-blackish'}}">Vorname</label>
+                <input formControlName="FirstName" type="text" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.FirstName.errors }" >
+                <div *ngIf="submitted && f.FirstName?.errors" class="invalid-feedback">
+                  <div *ngIf="f.FirstName?.errors.required" class="t-16">Vorname ist erforderlich</div>
+                </div>
+              </div> -->
+              <!---->
+              <div class="form-group mb-2">
+                <div class="row mb-2 form-area-background justify-content-center {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+                  <div class="col-12 col-lg-2"><h2 class=" mb-0 t-bold t-14 mt-1">Vorname</h2></div>
+                  <div class="col-12 col-lg-8  text-ltgrey">
+                    <div class="row">
+                      <div class="col-10 ">
+                        <input formControlName="FirstName" type="text" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.FirstName.errors }" >
+                        <div *ngIf="submitted && f.FirstName?.errors" class="invalid-feedback">
+                          <div *ngIf="f.FirstName?.errors.required" class="t-16">Vorname ist erforderlich</div>
+                        </div>
+                      </div>
+                      <div class="col-2">
+                        <a class="pl-2 setting-pencil mt-1" >
+                            <fa-icon [icon]="faPencilAlt" class="text-ltgrey t-14"></fa-icon>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!---->
+              <div class="form-group mb-2">
+                <div class="row mb-2 form-area-background justify-content-center {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+                  <div class="col-12 col-lg-2"><h2 class=" mb-0 t-bold t-14 mt-1">Name</h2></div>
+                  <div class="col-12 col-lg-8  text-ltgrey">
+                    <div class="row">
+                      <div class="col-10 ">
+                        <input formControlName="LastName" type="text"  class="form-control" [ngClass]="{ 'is-invalid': submitted && f.LastName?.errors }" >
+                        <div *ngIf="submitted && f.LastName?.errors" class="invalid-feedback">
+                          <div *ngIf="f.LastName?.errors.required" class="t-16">Der Nachname ist erforderlich</div>
+                        </div>
+                      </div>
+                      <div class="col-2">
+                        <a class="pl-2 setting-pencil mt-1" >
+                            <fa-icon [icon]="faPencilAlt" class="text-ltgrey t-14"></fa-icon>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group mb-2 {{mode==='dark'?'text-ltgrey':'text-blackish'}}">
+                <div class="row mb-2 form-area-background justify-content-center {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+                  <div class="col-12 col-lg-2"><h2 class=" mb-0 t-bold t-14 mt-1">E-Mail</h2></div>
+                  <div class="col-12 col-lg-8  text-ltgrey">
+                    <div class="row">
+                      <div class="col-10 ">
+                        <input formControlName="Email" type="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.Email.errors }">
+                        <div *ngIf="submitted && f.Email?.errors" class="invalid-feedback">
+                          <div *ngIf="f.Email?.errors.required" class="t-16">E-Mail ist erforderlich</div>
+                          <div *ngIf="f.Email?.errors.email" class="t-16">E-Mail muss eine gültige E-Mail-Adresse sein</div>
+                        </div>
+                      </div>
+                      <div class="col-2">
+                        <a class="pl-2 setting-pencil mt-1" >
+                            <fa-icon [icon]="faPencilAlt" class="text-ltgrey t-14"></fa-icon>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--<div class="form-check-inline mb-3 {{mode==='dark'?'text-ltgrey':'text-blackish'}}">
+                <input class="form-check-input mx-2" type="checkbox" [(ngModel)]="inside">
+                <label class="form-check-label">Ja, ich bin mit der AGB einverstanden </label>
+                
+              </div>-->
+              <br>
+              <div class="form-group">
+                  <button [disabled]="loading" class="btn btn-green btn_border075 text-white float-right " type="submit">Newsletter Bestellen</button>
+                  <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                
+              </div>
+              <br>
+              
+          </form>
+      </div>
+      <div class="row justify-content-between">
+        <div class="col-12">
+          <h3 class="t-bold t-14 {{mode==='dark'?'text-ltgrey':'text-blackish'}}">Newsletter abstellen</h3>
+          <p class="t-reg t-14">
+            Wenn Du den Newsletter nicht mehr erhalten möchtest, klick bitte <a class="text-primary" (click)="unsubscribe()"><u>hier</u></a>.
+            <br><br>
+            Hast du Fragen zum Umgang mit Deinen Daten? Informiere dich über unsere <a class="text-primary" [routerLink]="['/datenschutz']"><u>Datenschutzgrundsätze</u></a> und unsere <a class="text-primary" [routerLink]="['/agb']"><u>Allgemeinen Geschäftsbedingungen</u></a>.</p>
+        </div>
+      </div>
+</div>
+</div>

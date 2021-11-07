@@ -1,0 +1,74 @@
+﻿@model GardifyModels.Models.AdminAreaViewModels.TaxonomicTreeViewModel
+
+@{
+    /**/
+
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutAdminArea.cshtml";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.CurrentNode.ParentId)
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <label class="control-label col-md-2">
+                Elternknoten
+            </label>
+            <div class="col-md-10">
+                @(Model.CurrentParentNode.TitleGerman + " (" + Model.CurrentParentNode.TitleLatin + ")")
+            </div>
+        </div>
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.CurrentNode.taxon, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DisplayFor(model => model.CurrentNode.taxon)
+                </div>
+            </div>*@
+        @if (Model.CurrentNode.Taxon == GardifyModels.Models.ModelEnums.TaxonomicRank.Species || Model.CurrentNode.Taxon == GardifyModels.Models.ModelEnums.TaxonomicRank.Genus || Model.CurrentNode.Taxon == GardifyModels.Models.ModelEnums.TaxonomicRank.Family || Model.CurrentNode.Taxon == GardifyModels.Models.ModelEnums.TaxonomicRank.Variety)
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.CurrentNode.PlantId, "ID der Pflanze", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CurrentNode.PlantId, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CurrentNode.PlantId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.CurrentNode.type, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DisplayFor(model => model.CurrentNode.type)
+                </div>
+            </div>*@
+        <div class="form-group">
+            @Html.LabelFor(model => model.CurrentNode.TitleLatin, "Lateinischer Name", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CurrentNode.TitleLatin, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CurrentNode.TitleLatin, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CurrentNode.TitleGerman, "Deutscher Name", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CurrentNode.TitleGerman, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CurrentNode.TitleGerman, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Erstellen" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Zurück", "Index", new { taxonId = Model.CurrentParentNode.Id })
+</div>

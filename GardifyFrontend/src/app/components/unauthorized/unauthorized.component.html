@@ -1,0 +1,43 @@
+<div id="regCarousel" class="carousel slide pb-5 pb-md-0" data-ride="carousel" data-interval="70000">
+  <ol class="carousel-indicators pb-5 pb-md-2">
+    <li data-target="#regCarousel" data-slide-to="0" class="inactive"></li>
+  </ol>
+    <div class="carousel-inner">
+    <div class="carousel-item active">
+      <picture>
+          <source media="(max-width: 768px)" srcset="./assets/images/_JAY9125_Header_mobil.jpg">
+          <img class="d-block w-100" src="./assets/images/_JAY9125_Header_Desktop.jpg" alt="Erste Slide">
+      </picture>
+      <div class="carousel-caption reg-caption {{mode}} d-block">
+        <div class="container px-0 px-md-2">
+          <div class="row justify-content-center">
+            <div class="BoxReg mb-5 p-3 p-md-5">
+              <h2 class="t-bold t-16 text-green">Lieber Gartenfreund,</h2>
+              <p *ngIf="origin" class="{{mode==='light'?'text-darkgrey':'text-white'}} mb-5">
+                {{customIntros[origin]}}
+                <span class="t-bold text-green">Die Nutzung ist kostenlos.</span>
+              </p>
+              <p *ngIf="!origin" class="{{mode==='light'?'text-darkgrey':'text-white'}} mb-5">
+                schön, dass du gardify kennenlernen möchtest. Nach der Registrierung kannst du alle Features nutzen. 
+                Pflanzen, die du kennst oder per Foto im Pflanzenscan identifiziert hast, speicherst du einfach in der Pflanzensuche für deinen (virtuellen) Garten. 
+                Du siehst danach in deinem „To-do-Kalender“, was gerade in deinem Garten zu tun ist, bekommst z. B. aktuelle Frostwarnungen für empfindliche Pflanzen und erfährst, welche und wie viele deiner Pflanzen ökologisch wertvoll sind. 
+                <span class="t-bold text-green">Die Nutzung ist kostenlos.</span>
+              </p>
+              <div class="row">
+                <div class="col-12 col-md-12 col-lg-4 text-center my-1">
+                  <button [routerLink]="['/']" [queryParams]="{mode:'lg'}" class="btn btn-green btnProp btn_border075 t-bold text-white t-12" type="button">Anmelden</button>
+                </div>
+                <div class="col-12 col-md-12 col-lg-4 text-center m y-1">
+                  <button [routerLink]="['/']" [queryParams]="{mode:'rg'}" class="btn btn-green btnProp btn_border075 t-bold text-white t-12" type="button">Kostenlos registrieren</button>
+                </div>
+                <div class="col-12 col-md-12 col-lg-4 text-center my-1">
+                  <button [routerLink]="['/premium']" class="btn btn-secondary btnProp btn_border075 t-bold text-white t-12" title="Dieser Bereich steht in Kürze zur Verfügung" type="button">Premiumbereich kennenlernen</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

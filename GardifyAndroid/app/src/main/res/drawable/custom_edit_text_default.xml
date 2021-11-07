@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+<item>
+    <layer-list>
+        <item android:state_focused="false" android:state_pressed="false">
+            <shape>
+                <gradient android:angle="270" android:centerColor="#65FFFFFF" android:centerY="0.1" android:endColor="#00FFFFFF" android:startColor="@color/mercury" />
+                <stroke android:width="1dp" android:color="@color/lightGray" />
+                <corners android:radius="@dimen/cardCornerRadius_small" />
+            </shape>
+        </item>
+
+    </layer-list>
+</item>
+</selector>

@@ -1,0 +1,181 @@
+﻿@model GardifyModels.Models.PlantViewModels.PlantListViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdminArea.cshtml";
+}
+@if (Model.StatusMessage != null)
+{
+    Html.RenderPartial("_modalStatusMessage", Model.StatusMessage);
+}
+<style>
+    a.disabled {
+        pointer-events: none;
+        cursor: default;
+        color: grey;
+    }
+    .mx-1 {
+        margin: 0 4px;
+    }
+</style>
+<h2>Pflanzendatenbank</h2>
+<p>
+    @Html.ActionLink("Pflanzen Galerie ", "Galerie")
+</p>
+<p>
+    @Html.ActionLink("Neue Pflanze erstellen", "Create")
+</p>
+<p>
+    @Html.ActionLink("Aktuelle Bemerkungen", "Index", "InternalComment")
+</p>
+</p>
+<p>
+    @Html.ActionLink("Nicht veröffentlichte Pflanzen", "Index", "AdminAreaPlant", new { statusMessage = "", notPublished = true }, null)
+</p>
+<p>
+    @Html.ActionLink("Veröffentlichte Pflanzen", "Index", "AdminAreaPlant", new { statusMessage = "", published = true }, null)
+</p>
+<p>
+    @Html.ActionLink("Offene Bemerkungen", "Index", "AdminAreaPlant", new { statusMessage = "", FilterBy="comments" }, null)
+</p>
+<p>
+    @Html.ActionLink("Alle Warnungen", "Index", "AdminAreaWarnings")
+</p>
+<p>
+    @Html.ActionLink("Pflanze Vorschlagen", "Index", "AdminAreaVorschlagen")
+</p>
+<hr />
+<form method="get" class="form-horizontal">
+    <div class="form-group row">
+        <div class="col-md-2">Botanischer Name/Name/Beschreibung</div>
+        @Html.TextBox("Name", (string)ViewBag.Name, new { @class = "form-control col-md-10" })
+    <input class="btn btn-default" type="submit" value="Suchen" />
+    </div>
+</form>
+
+<table class="table">
+    <tr>
+        <th>Bilder</th>
+        <th>
+            @Html.ActionLink("Botanischer Name", "Index", new {
+           Name=ViewBag.Name,
+           OrderBy="BotanicName",
+           Page = ViewBag.Page })
+        </th>
+        <th>
+            @Html.ActionLink("Deutscher Name", "Index", new {
+           Name=ViewBag.Name,
+           OrderBy="GermanName",
+           Page = ViewBag.Page })
+        </th>
+        <th>
+            Beschreibung
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.ListEntries)
+    {
+        <tr>
+            <td>
+                @if (item.Images != null && item.Images.Any())
+                {
+                    <div class="image-wrapper" style="width: 200px;padding: 0 5px;">
+                        <div class="title-image">
+                            <img title="@item.Images.FirstOrDefault().TitleAttr" src="@item.Images.FirstOrDefault().SrcAttr" alt="@item.Images.FirstOrDefault().AltAttr" />
+                        </div>
+                        @foreach (var img in item.Images.Skip(1))
+                        {
+                            <div class="thumbnail col-md-4">
+                                <img title="@img.TitleAttr" src="@img.SrcAttr" alt="@img.AltAttr" />
+                            </div>
+                        }
+                    </div>
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NameLatin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NameGerman)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+                @if (item.PlantTags != null && item.PlantTags.Any())
+                {
+                    <hr />
+                    for (int i = 0; i < item.PlantTags.Count(); i++)
+                    {
+                        @(i > 0 ? ", " : "")@(item.PlantTags.ElementAt(i).Category.Title + ": " + item.PlantTags.ElementAt(i).Title);
+                    }
+                }
+
+                @if (item.PlantCharacteristics != null && item.PlantCharacteristics.Any())
+                {
+                    <hr />
+                    for (int i = 0; i < item.PlantCharacteristics.Count(); i++)
+                    {
+                        @(i > 0 ? ", " : "")
+                        @(item.PlantCharacteristics.ElementAt(i).Category.Title + ": ")
+                        Html.RenderPartial("~/Views/Shared/_PlantCharacteristicValuePartial.cshtml", item.PlantCharacteristics.ElementAt(i));
+                    }
+                }
+                @if (!string.IsNullOrEmpty(item.Synonym))
+                {
+                    <hr />
+                    <b>Synonym:</b> @item.Synonym
+                }
+                @if (!string.IsNullOrEmpty(item.Herkunft))
+                {
+                    <hr />
+                    <b>Herkunft:</b> @item.Herkunft
+                }
+                @if (!string.IsNullOrEmpty(item.Family))
+                {
+                    <hr />
+                    <b>Familie:</b> @item.Family
+                }
+                @if (item.GardenCategory != null)
+                {
+                    <hr />
+                    <b>Gartenkategorie:</b> @item.GardenCategory.Name
+                }
+                @if (item.PlantGroupsOld != null && item.PlantGroupsOld.Any(g => !g.Deleted))
+                {
+                    <hr />
+                    <b>Gruppen:</b> @(string.Join(", ", item.PlantGroupsOld.Where(g => !g.Deleted).Select(g => g.Name)))
+                }
+            </td>
+            <td>
+                @Html.ActionLink("Bearbeiten", "Edit", new { id = item.Id }) |
+                @if (item.Published)
+                {
+                    @Html.ActionLink("Nicht mehr veröffentlichen", "SetPublishedState", new { id = item.Id, published = false })
+                }
+                else
+                {
+                    @Html.ActionLink("Veröffentlichen", "SetPublishedState", new { id = item.Id, published = true })
+                }
+                <br />
+                @(item.Comments?.Count()) Kommentare, @(item.TodoTemplates?.Count()) Todovorlagen
+            </td>
+        </tr>
+    }
+</table>
+<div>
+    @{
+        var prevDisabled = !ViewBag.HasPreviousPage;
+        var nextDisabled = !ViewBag.HasNextPage;
+    }
+
+    @Html.ActionLink("Zurück", "Index", "AdminAreaPlant", new { page = ViewBag.prevPage, NotPublished = ViewBag.notPublished, published = ViewBag.Published, name = ViewBag.Name, orderBy = ViewBag.OrderBy, filterBy = ViewBag.FilterBy }, new { @class = @prevDisabled ? "disabled" : "" })
+
+    @{
+        for (int p = 1; p < ViewBag.totalPages; p++)
+        {
+            @Html.ActionLink(p.ToString(), "Index", "AdminAreaPlant", new { page = p, NotPublished = ViewBag.notPublished, published = ViewBag.Published, name = ViewBag.Name, orderBy = ViewBag.OrderBy, filterBy = ViewBag.FilterBy }, new { @class = ViewBag.currentPage == p ? "disabled mx-1" : "mx-1" })
+        }
+    }
+
+    @Html.ActionLink("Weiter", "Index", "AdminAreaPlant", new { page = ViewBag.nextPage, NotPublished = ViewBag.notPublished, published = ViewBag.Published, name = ViewBag.Name, orderBy = ViewBag.OrderBy, filterBy = ViewBag.FilterBy }, new { @class = @nextDisabled ? "disabled" : "" })
+</div>

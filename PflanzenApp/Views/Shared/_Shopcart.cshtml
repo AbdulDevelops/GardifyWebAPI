@@ -1,0 +1,81 @@
+﻿@model GardifyModels.Models.ShopcartViewModels.ShopcartEntriesListViewModel
+<div class="shopcart-wrapper">
+	<div class="loading-div">
+		<img src="~/Images/ajax_loader_gray_48.gif" title="Loading..." />
+		<p>Loading...</p>
+	</div>
+	@if (Model.EntriesList != null && Model.EntriesList.Any())
+	{
+		<div class="row hidden-sm hidden-xs shopcart-header">
+			<div class="col-md-4 col-md-push-2">
+				Artikel
+			</div>
+			<div class="col-md-2 col-md-push-2">
+				Anzahl
+			</div>
+			<div class="col-md-1 col-md-push-2">
+				Preis
+			</div>
+			<div class="col-md-2 col-md-push-2">
+				Preis mit Punkten
+			</div>
+		</div>
+		foreach (var item in Model.EntriesList)
+		{
+		<div class="row shopcart-article">
+			<div class="col-md-2 shopcart-article-image">
+				@if (item.ArticleView.ArticleImages != null && item.ArticleView.ArticleImages.Any())
+				{
+					<img title="@item.ArticleView.ArticleImages.FirstOrDefault().TitleAttr" src="@item.ArticleView.ArticleImages.FirstOrDefault().SrcAttr" alt="@item.ArticleView.ArticleImages.FirstOrDefault().AltAttr" />
+				}
+			</div>
+			<div class="col-md-4 shopcart-article-description">
+				<h3>@item.ArticleView.Name</h3>
+				<p>
+					@(item.ArticleView.Description.Length > 200 ? item.ArticleView.Description.Substring(0, 200) + "..." : item.ArticleView.Description)<br />
+					<b>Einzelpreis: @item.ArticleView.NormalPrice€</b>
+				</p>
+			</div>
+			<div class="col-md-2 shopcart-article-quantity">
+				<div class="quantity-counter" data-articleid="@item.ArticleView.Id">
+					<span class="shopcart-control minus"><i class="glyphicon glyphicon-minus"></i></span>
+					<span class="quantity-span">@item.Quantity</span>
+					<span class="shopcart-control plus"><i class="glyphicon glyphicon-plus"></i></span>
+				</div>
+			</div>
+			<div class="col-md-1">
+				@(item.ArticleView.NormalPrice * item.Quantity)€
+			</div>
+			<div class="col-md-2">
+				@if (item.ArticleView.PointsToSpend > 0)
+					{
+						<span>
+							@(item.ArticleView.PricePartAfterPoints * item.Quantity)€ + @(item.ArticleView.PointsToSpend * item.Quantity) Punkt@((item.ArticleView.PointsToSpend * item.Quantity) > 1 ? "e" : "")
+							<br />
+							Sie sparen @(item.ArticleView.PointsValue * item.Quantity)€!
+						</span>
+					}
+			</div>
+			<div class="col-md-1">
+				<span class="shopcart-control remove" data-entryid="@item.Id"><i class="glyphicon glyphicon-remove"></i></span>
+			</div>	
+		</div>
+		<hr />
+		}
+		<div class="row shopcart-footer">
+			<div class="col-md-2 col-md-push-6" style="text-align:right;">
+				Gesamtpreis:
+			</div>
+			<div class="col-md-1 col-md-push-6">
+				@Model.TotalNormal€
+			</div>
+			<div class="col-md-3 col-md-push-6">
+				@Model.TotalWithPoints€ + @Model.TotalPoints Punkt@((Model.TotalPoints) > 1 ? "e" : "")
+			</div>
+		</div>
+	}
+	else
+	{
+		<p>Ihr Warenkorb ist leer</p>
+	}
+</div>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="wrap_content"
+        android:layout_margin="@dimen/marginPaddingSize_10sdp"
+        app:cardCornerRadius="0dp"
+        app:strokeWidth="1dp"
+        app:strokeColor="@color/cardView_plantSearch_stroke"
+        android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/plant_color_image"
+        android:layout_width="@dimen/imageView_all_width_18sdp"
+        android:layout_height="@dimen/imageView_all_height_18sdp"
+        android:background="@color/colorPrimary"/>
+    </com.google.android.material.card.MaterialCardView>
+</LinearLayout>

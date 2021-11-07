@@ -1,0 +1,28 @@
+﻿<style>
+    a, .green {
+        color: #7a9d34;
+    }
+
+        a:hover {
+            cursor: pointer;
+        }
+</style>
+<h3>Hallo @Model.UserName,</h3>
+
+<p>
+Vielen Dank für deine Mitarbeit!    <br><br>
+     Deine vorgeschlagene Pflanze @Model.PlantMergeName existiert bereits in der gardify Datenbank. 
+    <br>
+    <a href="https://gardify.de/pflanze/@(Model.PlantMergeId)/@Model.PlantMergeName">hier</a>
+        <br><br>
+        @Model.message     <br><br>
+    Wir wünschen Dir weiterhin viel Spaß mit gardify!
+</p>
+
+
+<h3>
+     Mit freundlichen Grüßen
+</h3>
+<h4>Das gardify-Team</h4>
+
+

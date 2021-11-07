@@ -1,0 +1,208 @@
+﻿@model GardifyNewsletter.Models.NewsletterComponents;
+
+@addTagHelper *, FileUploadLib
+@{
+    //SelectList NewsSelectList = new SelectList(ViewBag.NewsList, "Id", "NameGerman", Model.NewsId);
+    SelectList ShortArticleSelectList = new SelectList(ViewBag.ShortArticleList, "Id", "Name", Model.ShortArticleId);
+
+}
+
+@*Pages, Level, MenuId*@
+<h4>Komponente: @Html.DisplayFor(m => m.NewsletterComponentTemplateId)</h4>
+@if (Model.Sort != null)
+{
+    @if (Model.Sort > 0)
+    {
+        <a class="btn btn-info" asp-page-handler="SetComponentSort" asp-route-id="@Model.NewsletterComponentId" asp-route-sort="@(Model.Sort-1)">
+            Nach oben
+        </a>
+    }
+    @if (Model.Sort < Model.Newsletter.NewsletterComponents.Count(c => c.Sort != null) - 1)
+    {
+        <a class="btn btn-info" asp-page-handler="SetComponentSort" asp-route-id="@Model.NewsletterComponentId" asp-route-sort="@(Model.Sort+1)">
+            Nach unten
+        </a>
+    }
+}
+<div class="row" style="padding:20px">
+    @*<div class="col-md-6">*@
+
+    <form method="post" asp-page-handler="UpdateComponent">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="NewsletterComponentId" />
+        @if (Model.NewsletterComponentTemplateId == Models.ComponentType.NewsWithImage)
+        {
+            <div class="form-group">
+
+                <label asp-for="NewsId" class="control-label">Pflanzeartikel</label>
+                <!-- asp-items="NewsSelectList"-->
+                <select class="form-control Shoplist News-select" data-search="true" asp-for="NewsId">
+                    <option value="0">Loading...</option>
+                </select>
+                <span asp-for="NewsId" class="text-danger"></span>
+            </div>
+        }
+        else if (Model.NewsletterComponentTemplateId == Models.ComponentType.ArticleWithImage)
+        {
+            <div class="form-group">
+                <label asp-for="ShortArticleId" class="control-label">Produkt</label>
+                <select class="custom-select form-control Shoplist" data-search="true" asp-for="ShortArticleId" asp-items="ShortArticleSelectList">
+                    <option value="">Bitte auswählen</option>
+                </select>
+                <span asp-for="ShortArticleId" class="text-danger"></span>
+            </div>
+
+        }
+        else if (Model.NewsletterComponentTemplateId == Models.ComponentType.NewPlantWithImage)
+        {
+            <div class="form-group">
+
+                @{
+                    string newPlantMonth = "Bitte auswählen";
+                    var plant1Id = 0;
+                    var plant2Id = 0;
+                    var plant3Id = 0;
+                    if (Model.NewsletterNewPlants != null)
+                    {
+                        newPlantMonth = Model.NewsletterNewPlants.NewPlantMonth;
+                        plant1Id = (int)Model.NewsletterNewPlants.NewPlant1;
+                        plant2Id = (int)Model.NewsletterNewPlants.NewPlant2;
+                        plant3Id = (int)Model.NewsletterNewPlants.NewPlant3;
+
+                    }
+                }
+                <!-- asp-items="New plant SelectList"-->
+                <div class="form-group">
+                    <input type="hidden" asp-for="NewsletterNewPlants.NewPlantComponentId" />
+
+                    <label asp-for="NewsletterNewPlants.NewPlantMonth" class="control-label">Neue Pflanzen</label>
+                    <!-- asp-items="NewsSelectList"-->
+
+                    <select class="form-control Shoplist New_Plant_Month" data-search="true" asp-for="NewsletterNewPlants.NewPlantMonth">
+                        <option value="@newPlantMonth">@newPlantMonth</option>
+                    </select>
+
+                    <span asp-for="NewsletterNewPlants.NewPlantMonth" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="NewsletterComponentHeadline" class="control-label">Kopfzeile</label>
+                    <input asp-for="NewsletterComponentHeadline" id="newPlantHeadline" class="form-control myTextEditor" />
+                    <span asp-validation-for="NewsletterComponentHeadline" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="NewsletterMoreLink" class="control-label">Link</label>
+                    <input asp-for="NewsletterMoreLink" class="form-control" />
+                    <span asp-validation-for="NewsletterMoreLink" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CustomLinkText" class="control-label">Text für Link Button</label>
+                    <input asp-for="CustomLinkText" class="form-control" />
+                    <span asp-validation-for="CustomLinkText" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="NewsleterComponentText" class="control-label">Textinhalt</label>
+                    <textarea asp-for="NewsleterComponentText" class="form-control myTextEditor"></textarea>
+
+                    @*<p style="color:gray">zeichenbegrenzung 550</p>*@
+                    <span asp-validation-for="NewsleterComponentText" class="text-danger"></span>
+                </div>
+
+                <!-- asp-items="New plant SelectList"-->
+                <div class="form-group">
+
+                    <label asp-for="NewsletterNewPlants.NewPlant1" class="control-label">Pflanzeartikel</label>
+                    <!-- asp-items="NewsSelectList"-->
+                    <select class="form-control Shoplist News-plant-select_1" data-search="true" asp-for="NewsletterNewPlants.NewPlant1">
+                        <option value="@plant1Id">Bitte auswählen</option>
+                    </select>
+                    <span asp-for="NewsletterNewPlants.NewPlant1" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="NewsletterNewPlants.NewPlant1SubHeadline" class="control-label">Unterkopf</label>
+                    <input asp-for="NewsletterNewPlants.NewPlant1SubHeadline" class="form-control myTextEditor" />
+                    <span asp-validation-for="NewsletterNewPlants.NewPlant1SubHeadline" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+
+                    <label asp-for="NewsletterNewPlants.NewPlant2" class="control-label">Pflanzeartikel</label>
+                    <!-- asp-items="NewsSelectList"-->
+                    <select class="form-control Shoplist News-plant-select_2" data-search="true" asp-for="NewsletterNewPlants.NewPlant2">
+                        <option value="@plant2Id">Bitte auswählen</option>
+                    </select>
+                    <span asp-for="NewsletterNewPlants.NewPlant2" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="NewsletterNewPlants.NewPlant2SubHeadline" class="control-label">Unterkopf</label>
+                    <input asp-for="NewsletterNewPlants.NewPlant2SubHeadline" class="form-control" />
+                    <span asp-validation-for="NewsletterNewPlants.NewPlant2SubHeadline" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+
+                    <label asp-for="NewsletterNewPlants.NewPlant3" class="control-label">Pflanzeartikel</label>
+                    <!-- asp-items="NewsSelectList"-->
+                    <select class="form-control Shoplist News-plant-select_3" data-search="true" asp-for="NewsletterNewPlants.NewPlant3">
+                        <option value="@plant3Id">Bitte auswählen</option>
+                    </select>
+                    <span asp-for="NewsletterNewPlants.NewPlant3" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="NewsletterNewPlants.NewPlant3SubHeadline" class="control-label">Unterkopf</label>
+                    <input asp-for="NewsletterNewPlants.NewPlant3SubHeadline" class="form-control myTextEditor" />
+                    <span asp-validation-for="NewsletterNewPlants.NewPlant3SubHeadline" class="text-danger"></span>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="form-group">
+                <label asp-for="NewsletterComponentHeadline" class="control-label">Kopfzeile</label>
+                <input asp-for="NewsletterComponentHeadline" class="form-control myTextEditor" />
+                <span asp-validation-for="NewsletterComponentHeadline" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NewsletterMoreLink" class="control-label">Link</label>
+                <input asp-for="NewsletterMoreLink" class="form-control" />
+                <span asp-validation-for="NewsletterMoreLink" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CustomLinkText" class="control-label">Text für Link Button</label>
+                <input asp-for="CustomLinkText" class="form-control" />
+                <span asp-validation-for="CustomLinkText" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NewsleterComponentText" class="control-label">Textinhalt</label>
+                <textarea asp-for="NewsleterComponentText" class="form-control myTextEditor"></textarea>
+
+                @*<p style="color:gray">zeichenbegrenzung 550</p>*@
+                <span asp-validation-for="NewsleterComponentText" class="text-danger"></span>
+            </div>
+        }
+        <div class="form-group">
+            <input type="submit" value="Speichern" class="btn btn-primary" />
+            <a class="btn btn-danger" asp-page-handler="DeleteComponent" asp-route-id="@Model.NewsletterComponentId">Löschen</a>
+
+            @*Edit button only for visible for shopArticle and Planze*@
+
+            @if (Model.NewsletterComponentTemplateId == Models.ComponentType.NewsWithImage || Model.NewsletterComponentTemplateId == Models.ComponentType.ArticleWithImage)
+            {
+                <a class="btn btn-primary" href="https://gardify.de/intern/i/plant/Edit/@Model.NewsId">Edit</a>
+            }
+
+        </div>
+    </form>
+    @*</div>*@
+</div>
+@if (
+//Model.NewsletterComponentTemplateId == Models.ComponentType.ArticleWithImage ||
+Model.NewsletterComponentTemplateId == Models.ComponentType.FreeText ||
+//Model.NewsletterComponentTemplateId == Models.ComponentType.NewsWithImage ||
+Model.NewsletterComponentTemplateId == Models.ComponentType.PostText ||
+Model.NewsletterComponentTemplateId == Models.ComponentType.PreText)
+{
+    <h4>Zugehöriges Bild</h4>
+    <file-upload-form multiple-files="false" application-id='Utilities.APP_GUID' detail-id='@Model.NewsletterComponentId' module-name="Newsletter" uses-description="false" uses-title="false" uses-test-environment="false" can-decide-published="false" is-deletable="false" is-editable="false" uses-sort="false" can-decide-downloadable="false" replace-existing="true"></file-upload-form>
+    <br />
+    <file-display application-id="Utilities.APP_GUID" module-name="Newsletter" detail-id="@Model.NewsletterComponentId" uses-test-environment="false" multiple-files="false" max-items="1"> </file-display>
+}

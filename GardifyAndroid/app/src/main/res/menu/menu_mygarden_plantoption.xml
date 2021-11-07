@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/move_plant"
+        android:title="@string/myGarden_movePlant" />
+
+    <item
+        android:id="@+id/plant_note"
+        android:title="@string/myGarden_notesForThePlant" />
+
+    <item
+        android:id="@+id/specify_number"
+        android:title="@string/myGarden_specifyNumber" />
+
+    <item
+        android:id="@+id/delete_plant"
+        android:title="@string/all_delete" />
+</menu>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+<item>
+    <layer-list>
+
+        <item
+            android:state_focused="false"
+            android:state_pressed="false"
+            android:right="@dimen/marginPaddingSize_2sdp"
+            android:left="@dimen/marginPaddingSize_2sdp"
+            android:bottom="@dimen/marginPaddingSize_2sdp"
+            android:top="@dimen/marginPaddingSize_2sdp">
+            <shape>
+                <solid android:color="@android:color/white"/>
+                <stroke android:width="1dp" android:color="@color/lightGray" />
+                <corners android:radius="@dimen/cardCornerRadius_small" />
+            </shape>
+        </item>
+        <item
+            android:gravity="center|left">
+
+            <inset
+                android:insetTop="@dimen/marginPaddingSize_5sdp"
+                android:insetLeft="@dimen/marginPaddingSize_5sdp"
+                android:insetBottom="@dimen/marginPaddingSize_5sdp"
+                android:insetRight="@dimen/marginPaddingSize_5sdp"
+                android:drawable="@drawable/ic_search">
+            </inset>
+
+        </item>
+
+    </layer-list>
+</item>
+</selector>

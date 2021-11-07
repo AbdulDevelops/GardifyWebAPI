@@ -1,0 +1,40 @@
+<form [formGroup]="uploadForm" (ngSubmit)="onSubmit()">
+    <div class="row mb-5">
+        <div class="col-6 text-grey">
+
+            <div class="row">
+                <div class="col-12">
+                    <h2 for="comment" class="t-12 t-bold text grey">Frage an die {{ askAdmin ? 'Experten' : 'Community' }} stellen</h2>
+                    <textarea type="text" id="comment" class="form-control" rows="6" formControlName="commentText"></textarea>
+                </div>
+
+                <div class="col-12">
+                    <button type="submit"
+                        class="mt-3 btn-green btn btn_border075 t-bold text-white t-12 filterbtn savebutton">
+                        Speichern</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-6">
+            <div class="row">
+                <div class="col-6 ">
+                    <label for="file-input">
+                        <div class="btn_border075 text-center"
+                            style="height: 200px; width: 200px; background-color: #7bbaa7;">
+                            <img src="assets/images/Fotos_hochladen.svg" style="height: 100px;" class="mx-3 my-3"><br>
+                            <span class="t-bold text-white t-12"> Fotos</span> <br><span
+                                class="t-ligth text-white t-12">HOCHLADEN</span>
+                        </div>
+                    </label>
+                    <input id="file-input" type="file" style="display: none;" (change)="onFileChange($event)"
+                        accept=".png, .jpg, .jpeg, .gif, .svg" />
+                </div>
+                <div class="col-6">
+                    <img [src]="imageSrc" *ngIf="imageSrc" style="height: 200px; width: 200px;">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

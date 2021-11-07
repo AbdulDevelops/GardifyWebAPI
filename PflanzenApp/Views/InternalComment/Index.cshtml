@@ -1,0 +1,44 @@
+﻿@model GardifyModels.Models.InternalCommentViewModels.InternalCommentIndexViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdminArea.cshtml";
+}
+
+<h2>Übersicht</h2>
+<p>
+    @Html.ActionLink("Allgemeine Anmerkung hinzufügen", "CreateGenerallyComment", "AdminAreaPlant")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Zugehörig zu
+        </th>
+        <th>
+            Bemerkung
+        </th>
+        <th>
+            Benutzer
+        </th>
+        <th>
+        </th>
+    </tr>
+
+    @foreach (var item in Model.ListOfComments)
+    {
+        <tr>
+            <!---Hier neuen Link einfügen, sofern andere Typen verwendet werden-->
+            @if (item.ReferenceType == GardifyModels.Models.ModelEnums.ReferenceToModelClass.Plant)
+            {
+                <td>@Html.ActionLink(item.ReferenceName==null?"-":item.ReferenceName, "edit", "AdminAreaPlant", new { id = item.ReferenceId }, null)</td>
+            }else
+            {
+                <td>@item.ReferenceName</td>
+            }
+            <td>@item.Text</td>
+            <td>@item.UserName</td>
+            <td>@Html.ActionLink("Als erledigt markieren", "MarkFinished", new { id = item.Id }, null)</td>
+        </tr>
+    }
+
+</table>

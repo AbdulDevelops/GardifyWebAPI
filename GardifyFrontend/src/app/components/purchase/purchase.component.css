@@ -1,0 +1,8 @@
+img.article {
+    width: 160px;
+    object-fit: cover;
+    height: 160px;
+}
+.payment-icon {
+    width: 48px;
+}

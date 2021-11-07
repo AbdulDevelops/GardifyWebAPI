@@ -1,0 +1,401 @@
+.plantWidth{
+    width: 350px;
+}
+
+.schere{
+  height: 220px;
+  width: 100%;
+  max-width: 220px;
+}
+.dummy{
+  height: 40px;
+}
+.bot-carous{
+  width: 100vw !important;
+}
+.top-search{
+  height: 8%;
+}
+.caro-item-pho h4 {
+  font-size: 15pt;
+  top: -42px;
+  text-align: left;
+}
+.caro-item-pho a {
+  position: relative;
+  bottom: -180px;
+  line-height: 15pt;
+  display: block;
+}
+.caro-item-pho {
+  max-width: 360px;
+}
+.caro-item-pho:hover {
+  opacity: 0.9;
+}
+.caro-item-pho {
+  min-height: 150px;
+  background-size: cover;
+}
+.middle-search.light{
+  background-image: url(/assets/images/Verlauf_Hintergrund_hell_Desktop.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+  width: 100%;
+  height: 235px;
+  left: 15px;
+  margin-top: 70px;
+}
+.middle-search.dark{
+  height: 39%;
+  background-image:none;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+  width: 100%;
+  height: 225px;
+  left: 15px;
+  margin-top: 29px;
+}
+.bottom-search{
+  height: 8%;
+
+}
+.test{
+  width: 200px !important;
+}
+
+.carousel-control-prev {
+  left:10px;
+  z-index: 4;
+}
+.carousel-control-next {
+
+  right:10px;
+  z-index: 4;
+}
+ a[href="#carouselExampleControls"].carousel-control-prev, a[href="#carouselExampleControls"].carousel-control-next {
+  max-width: 15px;
+} 
+.carousel-control-next, .carousel-control-prev {
+  position: absolute;
+  top: 400px;
+  bottom: 0;
+  z-index: 1;
+  display: flex;
+   align-items: flex-start;
+  justify-content: center;
+  width: 15%;
+  color: #fff;
+  text-align: center;
+  opacity: .5;
+  transition: opacity .15s ease;
+}
+
+.pfeil{
+  width: 100%;
+  height: 100%;
+}
+
+
+.backgrdColorSenft{
+background-color: #c5bd00
+}
+.backgrdColorSenftLigth{
+  background-color: #e4dd71
+  }
+.bg-colorGreenForest{
+  background-color: #30786e;
+}
+.bg-greenforestLigth{
+  background-color: #bcd3cd;
+}
+
+.backgrdColorGreen{
+background-color: #89ab53
+}
+.backgrdColorGreenLigth{
+  background-color: #c1d3a5
+  }
+  
+.backgrdColorRosa{
+  background-color: #c94e47
+}
+.backgrdColorRosaLigth{
+  background-color: #e4a697
+}
+
+
+.just-padding {
+    padding: 15px;
+  }
+  
+  .list-group.list-group-root {
+    padding: 0;
+    overflow: hidden;
+  }
+  
+  .list-group.list-group-root .list-group {
+    margin-bottom: 0;
+  }
+  
+  .list-group.list-group-root .list-group-item {
+    border-radius: 0;
+    border-width: 1px 0 0 0;
+  }
+  
+  .list-group.list-group-root > .list-group-item:first-child {
+    border-top-width: 0;
+  }
+  
+  .list-group.list-group-root > .list-group > .list-group-item {
+    padding-left: 30px;
+  }
+  
+  .list-group.list-group-root > .list-group > .list-group > .list-group-item {
+    padding-left: 45px;
+  }
+  .nav-link.active.light {
+    border-radius: 0;
+    color: inherit;
+    background-color:white;
+}
+.nav-link.active.dark {
+    border-radius: 0;
+    color: green;
+    background-color: black;
+}
+.back_color.dark{
+  background-color: black;
+}
+.btn-green {
+  width: auto;
+  height: 39px;
+  border-radius: 0.8rem;
+  font-weight: 700;
+  font-size: 13pt;
+  color: white;
+  padding: 0 0.4rem;
+}
+.btn-greenLitle {
+  width: 200px;
+  height: 28px;
+  border-radius: 0.8rem;
+  font-weight: 700;
+  font-size: 13pt;
+  color: white;
+  background-color: #7a9d34;
+  padding: 0;
+}
+.input-iconprim {
+ padding: 0.25rem;
+  right: 1rem;
+  top: 0.3rem;
+  background-color: #7a9d34;
+  color: white;
+}
+p{
+  text-align: justify;
+text-justify: inter-word;
+}
+.img-container{
+  position:relative;
+  display:inline-block;
+}
+.img-container .overlay{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgb(61, 71, 41, 0.5);
+  opacity:0;
+  transition:opacity 500ms ease-in-out;
+}
+.img-container:hover .overlay{
+  opacity:1;
+}
+.plant-img {
+  height: 320px;
+  width: 100%;
+  max-width: 320px;
+  object-fit: cover;
+}
+.plant-img-big {
+  height: 920px;
+  width: 100%;
+  
+  object-fit: cover;
+}
+.img-sibling {
+  max-width:100%;
+  max-height:100%;
+  height: 230px;
+  width: 230px;
+  object-fit: cover;
+}
+.quarter-img {
+  height: 49%;
+  width: 49%;
+  object-fit: cover;
+  margin: 1px;
+}
+.caro-img{
+  position: static;
+    /* margin-top: 50rem; */
+    margin-top: 1.5rem;
+}
+.plant-img-sm {
+  height: 120px;
+  width: 120px;
+}
+img.plant-img-sm {
+  max-width:100%;
+  max-height:100%;
+  object-fit: cover;
+  margin: 0 6px;
+}
+.plant-img-wrapper {
+  width:100%;
+  max-width: 300px;
+  height: 300px;
+}
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  
+  .plant-img {
+      height:100%;
+      width: 100%;
+      object-fit: cover;
+  }
+  .plant-img-wrapper {
+      width: 100%;
+      max-width: 100%;
+  }
+}
+.g-badge {
+  width: 60px;
+  height: 60px;
+  margin-top: 1rem;
+}
+.g-badge-name {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  text-align: center;
+  font-weight: 700;
+}
+.badge-wrapper {
+  text-align: center;
+  min-width: 140px;
+  position: relative;
+}
+.overlay h2{
+  
+    position: absolute;
+    width: 200px;
+    height:100px;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+
+  color:#fff;
+}
+.testimonial-group > .row {
+  overflow-x: auto;
+  white-space: nowrap;
+}
+.testimonial-group > .row > .col-lg-3 {
+  display: inline-block;
+  float: none;
+}
+.checkmark {
+  top: unset;
+  left:0px;
+  width: 24px;
+  height: 24px;
+}
+tr {
+  line-height: normal;
+}
+table tbody td, .table tbody th {
+  padding: .75rem;
+  vertical-align: top;
+  border-top: 1px solid black;
+  width: 50%
+}
+table thead td, .table thead th {
+  border-bottom: 1px solid black!important;
+  border-top: 0px solid black!important;
+}
+table thead tr{
+  padding: 1rem;
+  height: 40px;
+ 
+}
+@media only screen and (max-width: 768px) {
+  .middle-search.light{
+    height: 39%;
+    background-image: url(/assets/images/Verlauf_Hintergrund_hell_Desktop.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    width: 100%;
+    height: 227px;
+    left: 15px;
+    margin-top: 30px;
+  }
+  .middle-search.dark{
+    height: 39%;
+    background-image:none;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    width: 100%;
+    height: 227px;
+    left: 15px;
+    margin-top: 30px;
+  }
+.carousel-control-prev {
+  left:-15px;
+  z-index: 4;
+}
+.carousel-control-next {
+
+  right:-15px;
+  z-index: 4;
+}
+.arrowcircle .carousel-control-next-icon {
+  background-image: url("/assets/images/Pfeil_nach_rechts_circle.svg")!important;
+}
+.arrowcircle .carousel-control-prev-icon {
+  background-image: url("/assets/images/Pfeil_nach_links_circle.svg")!important;
+}
+.dummy{
+  height: 70px;
+}
+}
+@media only screen and (max-width: 500px) {
+  .plantWidth{
+    width: 300px;
+}
+.carousel-control-prev {
+  left:-10px;
+  z-index: 4;
+}
+.carousel-control-next {
+
+  right:-10px;
+  z-index: 4;
+}
+.dummy{
+  height: 60px;
+}
+.mobileH{
+  height: 486px;
+}
+}

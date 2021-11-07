@@ -1,0 +1,125 @@
+﻿@model GardifyModels.Models.OrderViewModel
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_LayoutAdminArea.cshtml";
+}
+    <style>
+        p {
+            margin-top: 6px;
+        }
+    </style>
+@{ 
+    var statusStr = "";
+    switch (Model.Status)
+    {
+        case GardifyModels.Models.ModelEnums.OrderStatus.New: statusStr = "Neu"; break;
+        case GardifyModels.Models.ModelEnums.OrderStatus.Shipped: statusStr = "Versand"; break;
+        case GardifyModels.Models.ModelEnums.OrderStatus.Returned: statusStr = "Rückgabe"; break;
+        case GardifyModels.Models.ModelEnums.OrderStatus.Completed: statusStr = "Fertig"; break;
+    }
+    var resCodeStr = Model.TCResponseCode + ": ";
+    switch(Model.TCResponseCode)
+    {
+        case "Y": resCodeStr += "Erfolg"; break;
+        case "E001": resCodeStr += "Es wurden keine Daten übergeben."; break;
+        case "E010": resCodeStr += "Die Authentifizierung ist fehlgeschlagen."; break;
+        case "E101": resCodeStr += "Kein user-Parameter übergeben."; break;
+        case "E102": resCodeStr += "Kein key-Parameter übergeben."; break;
+        case "E103": resCodeStr += "Kein oder ungültiger amount-Parameter übergeben."; break;
+        case "E104": resCodeStr += "Kein hash-Parameter übergeben."; break;
+        case "E105": resCodeStr += "Hash-Parameter ist ungültig."; break;
+        case "E106": resCodeStr += "Kein orderID-Parameter übergeben"; break;
+        case "E107": resCodeStr += "orderID ist nicht plausibel."; break;
+        case "E108": resCodeStr += "Kein success-URL übergeben."; break;
+        case "E109": resCodeStr += "Kein abort-URL übergeben."; break;
+        case "E110": resCodeStr += "Ungültige Währung angegeben."; break;
+        case "E111": resCodeStr += "Keine Bezahlmethode übergeben."; break;
+        case "E112": resCodeStr += "Ungültige Bezahlmethode übergeben."; break;
+        case "E113": resCodeStr += "Ungültige Sprache übergeben."; break;
+    }
+}
+<h2>Bestellung @Model.OrderId</h2>
+
+<div class="form-horizontal">
+    @using (Html.BeginForm("Edit", "AdminAreaOrders", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken();
+        @Html.Hidden("ShopOrderId", Model.ShopOrderId);
+        <div class="form-group">
+            <label for="date" class="control-label col-md-2">Aufgegeben am</label>
+            <div class="col-md-10">
+                <p>@Model.Date</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="title" class="control-label col-md-2">TransaktionsNr.</label>
+            <div class="col-md-10">
+                <p>@Model.TransactionId</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="title" class="control-label col-md-2">Zahlungsart</label>
+            <div class="col-md-10">
+                <p>@Model.PaidWith</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="title" class="control-label col-md-2">Summe</label>
+            <div class="col-md-10">
+                <p>Summe: @Model.OrderAmount €</p>
+                <p>Versandkosten: @Model.ShippingAmount €</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="title" class="control-label col-md-2">E-mail-Adresse</label>
+            <div class="col-md-10">
+                <p>@Model.Email</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="title" class="control-label col-md-2">Rechnungsadresse</label>
+            <div class="col-md-10">
+                <p>@Model.InvoiceCustomerName</p>
+                <p>@Model.InvoiceStreet, @Model.InvoiceHouseNr</p>
+                <p>@Model.InvoiceZip, @Model.InvoiceCity</p>
+                <p>@Model.InvoiceCountry</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="title" class="control-label col-md-2">Lieferadresse</label>
+            <div class="col-md-10">
+                <p>@Model.CustomerName</p>
+                <p>@Model.Street, @Model.HouseNr</p>
+                <p>@Model.Zip, @Model.City</p>
+                <p>@Model.Country</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="title" class="control-label col-md-2">Status (@statusStr)</label>
+            <div class="col-md-10">
+                <select name="Status">
+                    <option value="1">Versand</option>
+                    <option value="2">Rückgabe</option>
+                    <option value="3">Fertig</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="title" class="control-label col-md-2">TeleCash-Code</label>
+            <div class="col-md-10">
+                <p>@resCodeStr</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="tipp" class="control-label col-md-2">Kommentar</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Comment, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Speichern" class="btn btn-default" />
+            </div>
+        </div>
+    }
+</div>

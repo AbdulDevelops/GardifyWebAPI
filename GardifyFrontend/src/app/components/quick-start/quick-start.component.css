@@ -1,0 +1,10 @@
+.info-icon {
+    line-height: 13px;
+    top: 5px;
+    left: -8px;
+    position: absolute;
+}
+p {
+    position: relative;
+    padding: 0 14px;
+}

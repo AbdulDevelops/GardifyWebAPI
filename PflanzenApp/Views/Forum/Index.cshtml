@@ -1,0 +1,26 @@
+﻿@model GardifyModels.Models.ForumViewModels.ForumIndexViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+@if (Model.Threads != null && Model.Threads.Any())
+{
+	<ul>
+		@foreach (var item in Model.Threads)
+		{
+		<li>
+			<a href="@Url.Action("Thread", "Forum", new { id = item.Id })">@item.Title (@item.PostCount)</a>
+		</li>
+		}
+	</ul>
+}
+
+@* 
+ taxon -|
+		|- plantForum
+		|- plantForum -|
+					   |- Thread
+					   |- Thread
+ *@

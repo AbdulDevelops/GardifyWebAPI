@@ -1,0 +1,1745 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1E065F0C-5341-449B-92B1-6F6BDF892E66}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GardifyModels</RootNamespace>
+    <AssemblyName>GardifyModels</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44307</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.2\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.2\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Http.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Http.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http.Features, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Http.Features.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Http.Features.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Extensions.Primitives, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Primitives.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Memory, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.1\lib\netstandard2.0\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.4.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.1\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Encodings.Web, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.4.5.0\lib\netstandard2.0\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Mvc, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.4\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Migrations\201608010844413_topfpflanzen.cs" />
+    <Compile Include="Migrations\201608010844413_topfpflanzen.Designer.cs">
+      <DependentUpon>201608010844413_topfpflanzen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608031011503_FaqUpdate.cs" />
+    <Compile Include="Migrations\201608031011503_FaqUpdate.Designer.cs">
+      <DependentUpon>201608031011503_FaqUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608031452135_faq-update-2.cs" />
+    <Compile Include="Migrations\201608031452135_faq-update-2.Designer.cs">
+      <DependentUpon>201608031452135_faq-update-2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608040822348_faq-model-update.cs" />
+    <Compile Include="Migrations\201608040822348_faq-model-update.Designer.cs">
+      <DependentUpon>201608040822348_faq-model-update.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608040922535_faq-model-update2.cs" />
+    <Compile Include="Migrations\201608040922535_faq-model-update2.Designer.cs">
+      <DependentUpon>201608040922535_faq-model-update2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608041034404_plant-update.cs" />
+    <Compile Include="Migrations\201608041034404_plant-update.Designer.cs">
+      <DependentUpon>201608041034404_plant-update.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608041112460_news-update.cs" />
+    <Compile Include="Migrations\201608041112460_news-update.Designer.cs">
+      <DependentUpon>201608041112460_news-update.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608041201052_shop-update.cs" />
+    <Compile Include="Migrations\201608041201052_shop-update.Designer.cs">
+      <DependentUpon>201608041201052_shop-update.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608251013446_isTestRemoval.cs" />
+    <Compile Include="Migrations\201608251013446_isTestRemoval.Designer.cs">
+      <DependentUpon>201608251013446_isTestRemoval.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608251507379_todochanges.cs" />
+    <Compile Include="Migrations\201608251507379_todochanges.Designer.cs">
+      <DependentUpon>201608251507379_todochanges.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608251700411_todo-update-2.cs" />
+    <Compile Include="Migrations\201608251700411_todo-update-2.Designer.cs">
+      <DependentUpon>201608251700411_todo-update-2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608301952222_db-update.cs" />
+    <Compile Include="Migrations\201608301952222_db-update.Designer.cs">
+      <DependentUpon>201608301952222_db-update.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609070901040_model-update.cs" />
+    <Compile Include="Migrations\201609070901040_model-update.Designer.cs">
+      <DependentUpon>201609070901040_model-update.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609070919150_model-update-todotemplate-hotfix.cs" />
+    <Compile Include="Migrations\201609070919150_model-update-todotemplate-hotfix.Designer.cs">
+      <DependentUpon>201609070919150_model-update-todotemplate-hotfix.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609071205513_db-update-2.cs" />
+    <Compile Include="Migrations\201609071205513_db-update-2.Designer.cs">
+      <DependentUpon>201609071205513_db-update-2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609270931484_addedInternalComment.cs" />
+    <Compile Include="Migrations\201609270931484_addedInternalComment.Designer.cs">
+      <DependentUpon>201609270931484_addedInternalComment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609271019119_addedInternalCommentFinished.cs" />
+    <Compile Include="Migrations\201609271019119_addedInternalCommentFinished.Designer.cs">
+      <DependentUpon>201609271019119_addedInternalCommentFinished.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609271352244_addedInternalCommentUserId.cs" />
+    <Compile Include="Migrations\201609271352244_addedInternalCommentUserId.Designer.cs">
+      <DependentUpon>201609271352244_addedInternalCommentUserId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609271652352_db-update-3.cs" />
+    <Compile Include="Migrations\201609271652352_db-update-3.Designer.cs">
+      <DependentUpon>201609271652352_db-update-3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610131406480_test-changes.cs" />
+    <Compile Include="Migrations\201610131406480_test-changes.Designer.cs">
+      <DependentUpon>201610131406480_test-changes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610131423101_db-update-4.cs" />
+    <Compile Include="Migrations\201610131423101_db-update-4.Designer.cs">
+      <DependentUpon>201610131423101_db-update-4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702101024084_added-simpleplant.cs" />
+    <Compile Include="Migrations\201702101024084_added-simpleplant.Designer.cs">
+      <DependentUpon>201702101024084_added-simpleplant.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702241021106_deleted-simplePlant.cs" />
+    <Compile Include="Migrations\201702241021106_deleted-simplePlant.Designer.cs">
+      <DependentUpon>201702241021106_deleted-simplePlant.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702241045151_added-import-history.cs" />
+    <Compile Include="Migrations\201702241045151_added-import-history.Designer.cs">
+      <DependentUpon>201702241045151_added-import-history.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702241305583_added-dange-to-history.cs" />
+    <Compile Include="Migrations\201702241305583_added-dange-to-history.Designer.cs">
+      <DependentUpon>201702241305583_added-dange-to-history.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702241335036_added-import-text.cs" />
+    <Compile Include="Migrations\201702241335036_added-import-text.Designer.cs">
+      <DependentUpon>201702241335036_added-import-text.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702241352534_added-publish-field.cs" />
+    <Compile Include="Migrations\201702241352534_added-publish-field.Designer.cs">
+      <DependentUpon>201702241352534_added-publish-field.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703031309244_added-article-references.cs" />
+    <Compile Include="Migrations\201703031309244_added-article-references.Designer.cs">
+      <DependentUpon>201703031309244_added-article-references.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810091321391_added-color.cs" />
+    <Compile Include="Migrations\201810091321391_added-color.Designer.cs">
+      <DependentUpon>201810091321391_added-color.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810111321224_make-parentId-nullable.cs" />
+    <Compile Include="Migrations\201810111321224_make-parentId-nullable.Designer.cs">
+      <DependentUpon>201810111321224_make-parentId-nullable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810150915467_added-parent-relation.cs" />
+    <Compile Include="Migrations\201810150915467_added-parent-relation.Designer.cs">
+      <DependentUpon>201810150915467_added-parent-relation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810241010104_group-and-gardencategory.cs" />
+    <Compile Include="Migrations\201810241010104_group-and-gardencategory.Designer.cs">
+      <DependentUpon>201810241010104_group-and-gardencategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810241307326_add-relation-group-plant.cs" />
+    <Compile Include="Migrations\201810241307326_add-relation-group-plant.Designer.cs">
+      <DependentUpon>201810241307326_add-relation-group-plant.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810291246514_add-planttagcategory.cs" />
+    <Compile Include="Migrations\201810291246514_add-planttagcategory.Designer.cs">
+      <DependentUpon>201810291246514_add-planttagcategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810291351494_remove-planttagcategory.cs" />
+    <Compile Include="Migrations\201810291351494_remove-planttagcategory.Designer.cs">
+      <DependentUpon>201810291351494_remove-planttagcategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810291409577_plantcharcats-add-tagcat.cs" />
+    <Compile Include="Migrations\201810291409577_plantcharcats-add-tagcat.Designer.cs">
+      <DependentUpon>201810291409577_plantcharcats-add-tagcat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811021549320_plant-add-synonym.cs" />
+    <Compile Include="Migrations\201811021549320_plant-add-synonym.Designer.cs">
+      <DependentUpon>201811021549320_plant-add-synonym.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811021650255_plant-make-herkunft-optional.cs" />
+    <Compile Include="Migrations\201811021650255_plant-make-herkunft-optional.Designer.cs">
+      <DependentUpon>201811021650255_plant-make-herkunft-optional.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811200909109_change-min-max-to-decimal.cs" />
+    <Compile Include="Migrations\201811200909109_change-min-max-to-decimal.Designer.cs">
+      <DependentUpon>201811200909109_change-min-max-to-decimal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811261222222_add-taxonomic-tree-id.cs" />
+    <Compile Include="Migrations\201811261222222_add-taxonomic-tree-id.Designer.cs">
+      <DependentUpon>201811261222222_add-taxonomic-tree-id.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902271232301_fix-baseEntity-createdDate.cs" />
+    <Compile Include="Migrations\201902271232301_fix-baseEntity-createdDate.Designer.cs">
+      <DependentUpon>201902271232301_fix-baseEntity-createdDate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903121504501_add-newsletter.cs" />
+    <Compile Include="Migrations\201903121504501_add-newsletter.Designer.cs">
+      <DependentUpon>201903121504501_add-newsletter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903130859101_test.cs" />
+    <Compile Include="Migrations\201903130859101_test.Designer.cs">
+      <DependentUpon>201903130859101_test.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903191647046_blacklist.cs" />
+    <Compile Include="Migrations\201903191647046_blacklist.Designer.cs">
+      <DependentUpon>201903191647046_blacklist.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904031452068_add-lexicon.cs" />
+    <Compile Include="Migrations\201904031452068_add-lexicon.Designer.cs">
+      <DependentUpon>201904031452068_add-lexicon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904150908258_uncomment-createdDate-baseEntity.cs" />
+    <Compile Include="Migrations\201904150908258_uncomment-createdDate-baseEntity.Designer.cs">
+      <DependentUpon>201904150908258_uncomment-createdDate-baseEntity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905061330211_add-devices.cs" />
+    <Compile Include="Migrations\201905061330211_add-devices.Designer.cs">
+      <DependentUpon>201905061330211_add-devices.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905071540259_devices-alter-date.cs" />
+    <Compile Include="Migrations\201905071540259_devices-alter-date.Designer.cs">
+      <DependentUpon>201905071540259_devices-alter-date.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905130840281_test1.cs" />
+    <Compile Include="Migrations\201905130840281_test1.Designer.cs">
+      <DependentUpon>201905130840281_test1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905131130404_add-image-scans.cs" />
+    <Compile Include="Migrations\201905131130404_add-image-scans.Designer.cs">
+      <DependentUpon>201905131130404_add-image-scans.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905131240194_update-scanimages.cs" />
+    <Compile Include="Migrations\201905131240194_update-scanimages.Designer.cs">
+      <DependentUpon>201905131240194_update-scanimages.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905210825074_remove-generating-property.cs" />
+    <Compile Include="Migrations\201905210825074_remove-generating-property.Designer.cs">
+      <DependentUpon>201905210825074_remove-generating-property.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905271137176_add-tempEmails.cs" />
+    <Compile Include="Migrations\201905271137176_add-tempEmails.Designer.cs">
+      <DependentUpon>201905271137176_add-tempEmails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905271357372_add-user-details.cs" />
+    <Compile Include="Migrations\201905271357372_add-user-details.Designer.cs">
+      <DependentUpon>201905271357372_add-user-details.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907011126226_add-MainImageId-to-garden.cs" />
+    <Compile Include="Migrations\201907011126226_add-MainImageId-to-garden.Designer.cs">
+      <DependentUpon>201907011126226_add-MainImageId-to-garden.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907260857377_add-userlists.cs" />
+    <Compile Include="Migrations\201907260857377_add-userlists.Designer.cs">
+      <DependentUpon>201907260857377_add-userlists.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907261518496_add-notes-to-userPlants.cs" />
+    <Compile Include="Migrations\201907261518496_add-notes-to-userPlants.Designer.cs">
+      <DependentUpon>201907261518496_add-notes-to-userPlants.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907291122262_add-nameLatin-toUserPlant.cs" />
+    <Compile Include="Migrations\201907291122262_add-nameLatin-toUserPlant.Designer.cs">
+      <DependentUpon>201907291122262_add-nameLatin-toUserPlant.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907301505213_add-notes-toTodos.cs" />
+    <Compile Include="Migrations\201907301505213_add-notes-toTodos.Designer.cs">
+      <DependentUpon>201907301505213_add-notes-toTodos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908011007181_userDevicesTest.cs" />
+    <Compile Include="Migrations\201908011007181_userDevicesTest.Designer.cs">
+      <DependentUpon>201908011007181_userDevicesTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908020735563_dev.cs" />
+    <Compile Include="Migrations\201908020735563_dev.Designer.cs">
+      <DependentUpon>201908020735563_dev.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908020846332_test3.cs" />
+    <Compile Include="Migrations\201908020846332_test3.Designer.cs">
+      <DependentUpon>201908020846332_test3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908021413586_AdminDevices.cs" />
+    <Compile Include="Migrations\201908021413586_AdminDevices.Designer.cs">
+      <DependentUpon>201908021413586_AdminDevices.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908050817176_add-foreignkey-to-adminDev.cs" />
+    <Compile Include="Migrations\201908050817176_add-foreignkey-to-adminDev.Designer.cs">
+      <DependentUpon>201908050817176_add-foreignkey-to-adminDev.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909051426419_add-userplant-to-userlist.cs" />
+    <Compile Include="Migrations\201909051426419_add-userplant-to-userlist.Designer.cs">
+      <DependentUpon>201909051426419_add-userplant-to-userlist.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909110820078_RemoveUserListId-From-Userplants.cs" />
+    <Compile Include="Migrations\201909110820078_RemoveUserListId-From-Userplants.Designer.cs">
+      <DependentUpon>201909110820078_RemoveUserListId-From-Userplants.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909131356543_update-imageScan.cs" />
+    <Compile Include="Migrations\201909131356543_update-imageScan.Designer.cs">
+      <DependentUpon>201909131356543_update-imageScan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909201436599_remove-generating-property.cs" />
+    <Compile Include="Migrations\201909201436599_remove-generating-property.Designer.cs">
+      <DependentUpon>201909201436599_remove-generating-property.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909201605364_empty-migration-20092019.cs" />
+    <Compile Include="Migrations\201909201605364_empty-migration-20092019.Designer.cs">
+      <DependentUpon>201909201605364_empty-migration-20092019.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909271239430_remove-old-tables.cs" />
+    <Compile Include="Migrations\201909271239430_remove-old-tables.Designer.cs">
+      <DependentUpon>201909271239430_remove-old-tables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910140959310_add-faq-answers.cs" />
+    <Compile Include="Migrations\201910140959310_add-faq-answers.Designer.cs">
+      <DependentUpon>201910140959310_add-faq-answers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910141414346_add-affiliateLinks-to-articles.cs" />
+    <Compile Include="Migrations\201910141414346_add-affiliateLinks-to-articles.Designer.cs">
+      <DependentUpon>201910141414346_add-affiliateLinks-to-articles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910171427373_add-generated-from-template-flag.cs" />
+    <Compile Include="Migrations\201910171427373_add-generated-from-template-flag.Designer.cs">
+      <DependentUpon>201910171427373_add-generated-from-template-flag.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910211316562_add-experttip-to-articles.cs" />
+    <Compile Include="Migrations\201910211316562_add-experttip-to-articles.Designer.cs">
+      <DependentUpon>201910211316562_add-experttip-to-articles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910211412240_lastViewedArticle.cs" />
+    <Compile Include="Migrations\201910211412240_lastViewedArticle.Designer.cs">
+      <DependentUpon>201910211412240_lastViewedArticle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910211424297_add-purchased-table.cs" />
+    <Compile Include="Migrations\201910211424297_add-purchased-table.Designer.cs">
+      <DependentUpon>201910211424297_add-purchased-table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910211442069_Add-UserId-To-Table-LastViewedArticle.cs" />
+    <Compile Include="Migrations\201910211442069_Add-UserId-To-Table-LastViewedArticle.Designer.cs">
+      <DependentUpon>201910211442069_Add-UserId-To-Table-LastViewedArticle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910230848166_add-article-category.cs" />
+    <Compile Include="Migrations\201910230848166_add-article-category.Designer.cs">
+      <DependentUpon>201910230848166_add-article-category.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910240742520_empty-migration.cs" />
+    <Compile Include="Migrations\201910240742520_empty-migration.Designer.cs">
+      <DependentUpon>201910240742520_empty-migration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910290932342_addCategoryToTableArticleCategory.cs" />
+    <Compile Include="Migrations\201910290932342_addCategoryToTableArticleCategory.Designer.cs">
+      <DependentUpon>201910290932342_addCategoryToTableArticleCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910300844097_addCategoryIdToTableArticles.cs" />
+    <Compile Include="Migrations\201910300844097_addCategoryIdToTableArticles.Designer.cs">
+      <DependentUpon>201910300844097_addCategoryIdToTableArticles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910300902380_removeCategoryId.cs" />
+    <Compile Include="Migrations\201910300902380_removeCategoryId.Designer.cs">
+      <DependentUpon>201910300902380_removeCategoryId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910280938144_add-previous-articleId.cs" />
+    <Compile Include="Migrations\201910280938144_add-previous-articleId.Designer.cs">
+      <DependentUpon>201910280938144_add-previous-articleId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910311158075_empty-migration-31-10-2019.cs" />
+    <Compile Include="Migrations\201910311158075_empty-migration-31-10-2019.Designer.cs">
+      <DependentUpon>201910311158075_empty-migration-31-10-2019.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911041030001_addAttributeIsInCartToTableShoCartEntry.cs" />
+    <Compile Include="Migrations\201911041030001_addAttributeIsInCartToTableShoCartEntry.Designer.cs">
+      <DependentUpon>201911041030001_addAttributeIsInCartToTableShoCartEntry.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911111618367_add-notification-types.cs" />
+    <Compile Include="Migrations\201911111618367_add-notification-types.Designer.cs">
+      <DependentUpon>201911111618367_add-notification-types.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911221414097_add-warning-related-tables.cs" />
+    <Compile Include="Migrations\201911221414097_add-warning-related-tables.Designer.cs">
+      <DependentUpon>201911221414097_add-warning-related-tables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912041140305_update-user-warnings.cs" />
+    <Compile Include="Migrations\201912041140305_update-user-warnings.Designer.cs">
+      <DependentUpon>201912041140305_update-user-warnings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912130910060_add-green24-details.cs" />
+    <Compile Include="Migrations\201912130910060_add-green24-details.Designer.cs">
+      <DependentUpon>201912130910060_add-green24-details.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001021435179_test2.cs" />
+    <Compile Include="Migrations\202001021435179_test2.Designer.cs">
+      <DependentUpon>202001021435179_test2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001150859229_add-dates-to-user.cs" />
+    <Compile Include="Migrations\202001150859229_add-dates-to-user.designer.cs">
+      <DependentUpon>202001150859229_add-dates-to-user.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001171047357_add-ecoelements.cs" />
+    <Compile Include="Migrations\202001171047357_add-ecoelements.designer.cs">
+      <DependentUpon>202001171047357_add-ecoelements.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001221052065_empty.cs" />
+    <Compile Include="Migrations\202001221052065_empty.designer.cs">
+      <DependentUpon>202001221052065_empty.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001291320108_add-orders-table.cs" />
+    <Compile Include="Migrations\202001291320108_add-orders-table.designer.cs">
+      <DependentUpon>202001291320108_add-orders-table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002181445545_add-completeSignup-tousers.cs" />
+    <Compile Include="Migrations\202002181445545_add-completeSignup-tousers.designer.cs">
+      <DependentUpon>202002181445545_add-completeSignup-tousers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002191258258_addUseridstoNewsletters.cs" />
+    <Compile Include="Migrations\202002191258258_addUseridstoNewsletters.designer.cs">
+      <DependentUpon>202002191258258_addUseridstoNewsletters.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002241109302_update-news-model.cs" />
+    <Compile Include="Migrations\202002241109302_update-news-model.designer.cs">
+      <DependentUpon>202002241109302_update-news-model.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002241327354_add-events.cs" />
+    <Compile Include="Migrations\202002241327354_add-events.designer.cs">
+      <DependentUpon>202002241327354_add-events.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002241425470_plantDoc.cs" />
+    <Compile Include="Migrations\202002241425470_plantDoc.designer.cs">
+      <DependentUpon>202002241425470_plantDoc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002250910424_addDescriptionToPlantDoc.cs" />
+    <Compile Include="Migrations\202002250910424_addDescriptionToPlantDoc.designer.cs">
+      <DependentUpon>202002250910424_addDescriptionToPlantDoc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002261019057_PlantDocAnswer.cs" />
+    <Compile Include="Migrations\202002261019057_PlantDocAnswer.designer.cs">
+      <DependentUpon>202002261019057_PlantDocAnswer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003111011096_AllowPubliscment.cs" />
+    <Compile Include="Migrations\202003111011096_AllowPubliscment.designer.cs">
+      <DependentUpon>202003111011096_AllowPubliscment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003111405541_add-videos.cs" />
+    <Compile Include="Migrations\202003111405541_add-videos.designer.cs">
+      <DependentUpon>202003111405541_add-videos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003131249099_add-article-sort.cs" />
+    <Compile Include="Migrations\202003131249099_add-article-sort.designer.cs">
+      <DependentUpon>202003131249099_add-article-sort.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003171026339_adminAllowsPublishment.cs" />
+    <Compile Include="Migrations\202003171026339_adminAllowsPublishment.designer.cs">
+      <DependentUpon>202003171026339_adminAllowsPublishment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003171152599_add-ignored-cyclictodos.cs" />
+    <Compile Include="Migrations\202003171152599_add-ignored-cyclictodos.designer.cs">
+      <DependentUpon>202003171152599_add-ignored-cyclictodos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003191252332_EmailConfirmed.cs" />
+    <Compile Include="Migrations\202003191252332_EmailConfirmed.designer.cs">
+      <DependentUpon>202003191252332_EmailConfirmed.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003201202210_add-cart-to-orders.cs" />
+    <Compile Include="Migrations\202003201202210_add-cart-to-orders.designer.cs">
+      <DependentUpon>202003201202210_add-cart-to-orders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003201345525_add-country-to-users.cs" />
+    <Compile Include="Migrations\202003201345525_add-country-to-users.designer.cs">
+      <DependentUpon>202003201345525_add-country-to-users.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003271151108_isAlreadyReaded.cs" />
+    <Compile Include="Migrations\202003271151108_isAlreadyReaded.designer.cs">
+      <DependentUpon>202003271151108_isAlreadyReaded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003301242201_add-details-to-orders.cs" />
+    <Compile Include="Migrations\202003301242201_add-details-to-orders.designer.cs">
+      <DependentUpon>202003301242201_add-details-to-orders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004061243040_add-article-details.cs" />
+    <Compile Include="Migrations\202004061243040_add-article-details.designer.cs">
+      <DependentUpon>202004061243040_add-article-details.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004201050127_rename-article-isDeliverable.cs" />
+    <Compile Include="Migrations\202004201050127_rename-article-isDeliverable.designer.cs">
+      <DependentUpon>202004201050127_rename-article-isDeliverable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004271217125_add-article-bulk-weight.cs" />
+    <Compile Include="Migrations\202004271217125_add-article-bulk-weight.designer.cs">
+      <DependentUpon>202004271217125_add-article-bulk-weight.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004271351498_add-answer-updatedAnswer.cs" />
+    <Compile Include="Migrations\202004271351498_add-answer-updatedAnswer.designer.cs">
+      <DependentUpon>202004271351498_add-answer-updatedAnswer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004271400540_add-post-UpdateField.cs" />
+    <Compile Include="Migrations\202004271400540_add-post-UpdateField.designer.cs">
+      <DependentUpon>202004271400540_add-post-UpdateField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004271413493_add-post-UpdateFields.cs" />
+    <Compile Include="Migrations\202004271413493_add-post-UpdateFields.designer.cs">
+      <DependentUpon>202004271413493_add-post-UpdateFields.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004291128215_add-invoice-address.cs" />
+    <Compile Include="Migrations\202004291128215_add-invoice-address.designer.cs">
+      <DependentUpon>202004291128215_add-invoice-address.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005040910264_rename-order-cancelled.cs" />
+    <Compile Include="Migrations\202005040910264_rename-order-cancelled.designer.cs">
+      <DependentUpon>202005040910264_rename-order-cancelled.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005060954265_publishWithImages-plantDoc.cs" />
+    <Compile Include="Migrations\202005060954265_publishWithImages-plantDoc.designer.cs">
+      <DependentUpon>202005060954265_publishWithImages-plantDoc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005131019246_add-preorder-to-carts.cs" />
+    <Compile Include="Migrations\202005131019246_add-preorder-to-carts.designer.cs">
+      <DependentUpon>202005131019246_add-preorder-to-carts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005131549508_add-stats.cs" />
+    <Compile Include="Migrations\202005131549508_add-stats.designer.cs">
+      <DependentUpon>202005131549508_add-stats.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006021259454_addcolshopcarEntrieToArticles.cs" />
+    <Compile Include="Migrations\202006021259454_addcolshopcarEntrieToArticles.designer.cs">
+      <DependentUpon>202006021259454_addcolshopcarEntrieToArticles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006101420517_add-demo-mode.cs" />
+    <Compile Include="Migrations\202006101420517_add-demo-mode.designer.cs">
+      <DependentUpon>202006101420517_add-demo-mode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006220908026_adduserplantsynonym.cs" />
+    <Compile Include="Migrations\202006220908026_adduserplantsynonym.designer.cs">
+      <DependentUpon>202006220908026_adduserplantsynonym.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202008190820063_addfieldcountdevice.cs" />
+    <Compile Include="Migrations\202008190820063_addfieldcountdevice.designer.cs">
+      <DependentUpon>202008190820063_addfieldcountdevice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202008241331460_add-supercategories.cs" />
+    <Compile Include="Migrations\202008241331460_add-supercategories.designer.cs">
+      <DependentUpon>202008241331460_add-supercategories.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202009151406276_add-fieldcountuserplantintouserlist.cs" />
+    <Compile Include="Migrations\202009151406276_add-fieldcountuserplantintouserlist.designer.cs">
+      <DependentUpon>202009151406276_add-fieldcountuserplantintouserlist.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202009230956469_addtagtoimage.cs" />
+    <Compile Include="Migrations\202009230956469_addtagtoimage.designer.cs">
+      <DependentUpon>202009230956469_addtagtoimage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202009231029010_test4.cs" />
+    <Compile Include="Migrations\202009231029010_test4.designer.cs">
+      <DependentUpon>202009231029010_test4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202009231058429_plantdoc-answer-increase.cs" />
+    <Compile Include="Migrations\202009231058429_plantdoc-answer-increase.designer.cs">
+      <DependentUpon>202009231058429_plantdoc-answer-increase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202009290819133_test5.cs" />
+    <Compile Include="Migrations\202009290819133_test5.designer.cs">
+      <DependentUpon>202009290819133_test5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010010910373_add-plantalert-to-usersetting.cs" />
+    <Compile Include="Migrations\202010010910373_add-plantalert-to-usersetting.designer.cs">
+      <DependentUpon>202010010910373_add-plantalert-to-usersetting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010051026306_empty_test.cs" />
+    <Compile Include="Migrations\202010051026306_empty_test.designer.cs">
+      <DependentUpon>202010051026306_empty_test.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010051041026_empty_test_2.cs" />
+    <Compile Include="Migrations\202010051041026_empty_test_2.designer.cs">
+      <DependentUpon>202010051041026_empty_test_2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010301138074_user_newsletter.cs" />
+    <Compile Include="Migrations\202010301138074_user_newsletter.designer.cs">
+      <DependentUpon>202010301138074_user_newsletter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011091047370_addNotifyForWindNotifyForFRost.cs" />
+    <Compile Include="Migrations\202011091047370_addNotifyForWindNotifyForFRost.designer.cs">
+      <DependentUpon>202011091047370_addNotifyForWindNotifyForFRost.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011201336369_add-publishdate-plants.cs" />
+    <Compile Include="Migrations\202011201336369_add-publishdate-plants.designer.cs">
+      <DependentUpon>202011201336369_add-publishdate-plants.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012101429186_make-housenr-string.cs" />
+    <Compile Include="Migrations\202012101429186_make-housenr-string.designer.cs">
+      <DependentUpon>202012101429186_make-housenr-string.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012170839030_ecoscan-count.cs" />
+    <Compile Include="Migrations\202012170839030_ecoscan-count.designer.cs">
+      <DependentUpon>202012170839030_ecoscan-count.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202102031220142_warning-setting-update.cs" />
+    <Compile Include="Migrations\202102031220142_warning-setting-update.designer.cs">
+      <DependentUpon>202102031220142_warning-setting-update.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202102031235163_warning-setting-update-defaultvalue.cs" />
+    <Compile Include="Migrations\202102031235163_warning-setting-update-defaultvalue.designer.cs">
+      <DependentUpon>202102031235163_warning-setting-update-defaultvalue.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202102031246255_warning-setting-update-2.cs" />
+    <Compile Include="Migrations\202102031246255_warning-setting-update-2.designer.cs">
+      <DependentUpon>202102031246255_warning-setting-update-2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103031046561_readd-premium-migration.cs" />
+    <Compile Include="Migrations\202103031046561_readd-premium-migration.designer.cs">
+      <DependentUpon>202103031046561_readd-premium-migration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103241057343_instaposts.cs" />
+    <Compile Include="Migrations\202103241057343_instaposts.designer.cs">
+      <DependentUpon>202103241057343_instaposts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202104191356466_album-image-extra.cs" />
+    <Compile Include="Migrations\202104191356466_album-image-extra.designer.cs">
+      <DependentUpon>202104191356466_album-image-extra.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202104201006584_apicalleventid.cs" />
+    <Compile Include="Migrations\202104201006584_apicalleventid.designer.cs">
+      <DependentUpon>202104201006584_apicalleventid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202104201040391_insta-child.cs" />
+    <Compile Include="Migrations\202104201040391_insta-child.designer.cs">
+      <DependentUpon>202104201040391_insta-child.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202104271349084_resettodo.cs" />
+    <Compile Include="Migrations\202104271349084_resettodo.designer.cs">
+      <DependentUpon>202104271349084_resettodo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202105041042353_relatedtodotemplateid.cs" />
+    <Compile Include="Migrations\202105041042353_relatedtodotemplateid.designer.cs">
+      <DependentUpon>202105041042353_relatedtodotemplateid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202105110907245_launch-page-2.cs" />
+    <Compile Include="Migrations\202105110907245_launch-page-2.designer.cs">
+      <DependentUpon>202105110907245_launch-page-2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202105201129500_user-plant-count.cs" />
+    <Compile Include="Migrations\202105201129500_user-plant-count.designer.cs">
+      <DependentUpon>202105201129500_user-plant-count.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202105201333047_user-plant-count-foreign.cs" />
+    <Compile Include="Migrations\202105201333047_user-plant-count-foreign.designer.cs">
+      <DependentUpon>202105201333047_user-plant-count-foreign.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202105270815373_usercount-userid.cs" />
+    <Compile Include="Migrations\202105270815373_usercount-userid.designer.cs">
+      <DependentUpon>202105270815373_usercount-userid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202105280840212_city-added.cs" />
+    <Compile Include="Migrations\202105280840212_city-added.designer.cs">
+      <DependentUpon>202105280840212_city-added.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202106151356250_plantdocquestionmainimg.cs" />
+    <Compile Include="Migrations\202106151356250_plantdocquestionmainimg.designer.cs">
+      <DependentUpon>202106151356250_plantdocquestionmainimg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202106171205263_add_community_and_album_fix.cs" />
+    <Compile Include="Migrations\202106171205263_add_community_and_album_fix.designer.cs">
+      <DependentUpon>202106171205263_add_community_and_album_fix.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202106231037018_plant-search-view.cs" />
+    <Compile Include="Migrations\202106231037018_plant-search-view.designer.cs">
+      <DependentUpon>202106231037018_plant-search-view.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202106231436235_plant-search-view-2.cs" />
+    <Compile Include="Migrations\202106231436235_plant-search-view-2.designer.cs">
+      <DependentUpon>202106231436235_plant-search-view-2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202106231609221_plant-search-view-3.cs" />
+    <Compile Include="Migrations\202106231609221_plant-search-view-3.designer.cs">
+      <DependentUpon>202106231609221_plant-search-view-3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202106291343224_presentation-album.cs" />
+    <Compile Include="Migrations\202106291343224_presentation-album.designer.cs">
+      <DependentUpon>202106291343224_presentation-album.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202107011002139_add-contact-tempplantsearch.cs" />
+    <Compile Include="Migrations\202107011002139_add-contact-tempplantsearch.designer.cs">
+      <DependentUpon>202107011002139_add-contact-tempplantsearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202107080941411_subscription-add.cs" />
+    <Compile Include="Migrations\202107080941411_subscription-add.designer.cs">
+      <DependentUpon>202107080941411_subscription-add.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202107121004100_plant-search-synonym.cs" />
+    <Compile Include="Migrations\202107121004100_plant-search-synonym.designer.cs">
+      <DependentUpon>202107121004100_plant-search-synonym.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202107190833490_permalink.cs" />
+    <Compile Include="Migrations\202107190833490_permalink.designer.cs">
+      <DependentUpon>202107190833490_permalink.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202107221029594_referral-url-user.cs" />
+    <Compile Include="Migrations\202107221029594_referral-url-user.designer.cs">
+      <DependentUpon>202107221029594_referral-url-user.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202107221330557_admin-todo-template-taxom.cs" />
+    <Compile Include="Migrations\202107221330557_admin-todo-template-taxom.designer.cs">
+      <DependentUpon>202107221330557_admin-todo-template-taxom.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202108031207536_presentationFileUpload.cs" />
+    <Compile Include="Migrations\202108031207536_presentationFileUpload.designer.cs">
+      <DependentUpon>202108031207536_presentationFileUpload.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202108041512548_GardenAlbumFileToModuleNewProperties.cs" />
+    <Compile Include="Migrations\202108041512548_GardenAlbumFileToModuleNewProperties.designer.cs">
+      <DependentUpon>202108041512548_GardenAlbumFileToModuleNewProperties.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202108091334060_addimagetagsproperty.cs" />
+    <Compile Include="Migrations\202108091334060_addimagetagsproperty.designer.cs">
+      <DependentUpon>202108091334060_addimagetagsproperty.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202108110841329_garden-upload-note.cs" />
+    <Compile Include="Migrations\202108110841329_garden-upload-note.designer.cs">
+      <DependentUpon>202108110841329_garden-upload-note.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202108190925112_plant-vorschlagen.cs" />
+    <Compile Include="Migrations\202108190925112_plant-vorschlagen.designer.cs">
+      <DependentUpon>202108190925112_plant-vorschlagen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202108201400508_plant-approve-added.cs" />
+    <Compile Include="Migrations\202108201400508_plant-approve-added.designer.cs">
+      <DependentUpon>202108201400508_plant-approve-added.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202108240505518_add-plant-suggestmerge2.cs" />
+    <Compile Include="Migrations\202108240505518_add-plant-suggestmerge2.designer.cs">
+      <DependentUpon>202108240505518_add-plant-suggestmerge2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202109020948511_taxom-todo-sorting.cs" />
+    <Compile Include="Migrations\202109020948511_taxom-todo-sorting.designer.cs">
+      <DependentUpon>202109020948511_taxom-todo-sorting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202109060918556_todotemplate-list2.cs" />
+    <Compile Include="Migrations\202109060918556_todotemplate-list2.designer.cs">
+      <DependentUpon>202109060918556_todotemplate-list2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202109091443153_add-ipaddress-statistic.cs" />
+    <Compile Include="Migrations\202109091443153_add-ipaddress-statistic.designer.cs">
+      <DependentUpon>202109091443153_add-ipaddress-statistic.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202109091532477_maintenance-setting.cs" />
+    <Compile Include="Migrations\202109091532477_maintenance-setting.designer.cs">
+      <DependentUpon>202109091532477_maintenance-setting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202109201251285_add-garden-article-contact-show.cs" />
+    <Compile Include="Migrations\202109201251285_add-garden-article-contact-show.designer.cs">
+      <DependentUpon>202109201251285_add-garden-article-contact-show.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202109211442248_completegardenpresimodel.cs" />
+    <Compile Include="Migrations\202109211442248_completegardenpresimodel.designer.cs">
+      <DependentUpon>202109211442248_completegardenpresimodel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202109301342218_app-version.cs" />
+    <Compile Include="Migrations\202109301342218_app-version.designer.cs">
+      <DependentUpon>202109301342218_app-version.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202109301347090_app-version-key.cs" />
+    <Compile Include="Migrations\202109301347090_app-version-key.designer.cs">
+      <DependentUpon>202109301347090_app-version-key.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202110011246479_planttag-count.cs" />
+    <Compile Include="Migrations\202110011246479_planttag-count.designer.cs">
+      <DependentUpon>202110011246479_planttag-count.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202110011250405_planttag-count-2.cs" />
+    <Compile Include="Migrations\202110011250405_planttag-count-2.designer.cs">
+      <DependentUpon>202110011250405_planttag-count-2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202110011304264_planttag-count-3.cs" />
+    <Compile Include="Migrations\202110011304264_planttag-count-3.designer.cs">
+      <DependentUpon>202110011304264_planttag-count-3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202110061336219_subscription-api.cs" />
+    <Compile Include="Migrations\202110061336219_subscription-api.designer.cs">
+      <DependentUpon>202110061336219_subscription-api.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202110061357317_subscription-api-2.cs" />
+    <Compile Include="Migrations\202110061357317_subscription-api-2.designer.cs">
+      <DependentUpon>202110061357317_subscription-api-2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202110071057223_setting-admin.cs" />
+    <Compile Include="Migrations\202110071057223_setting-admin.designer.cs">
+      <DependentUpon>202110071057223_setting-admin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\AccountBindingModels.cs" />
+    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AdminAreaViewModels.cs" />
+    <Compile Include="Models\AdminDevice.cs" />
+    <Compile Include="Models\AlbumImageComment.cs" />
+    <Compile Include="Models\AlbumImageInfo.cs" />
+    <Compile Include="Models\Alert.cs" />
+    <Compile Include="Models\AlertCondition.cs" />
+    <Compile Include="Models\AlertTrigger.cs" />
+    <Compile Include="Models\AlertViewModels.cs" />
+    <Compile Include="Models\Applications.cs">
+      <DependentUpon>NFilesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AppVersion.cs" />
+    <Compile Include="Models\Article.cs" />
+    <Compile Include="Models\ArticleCategory.cs" />
+    <Compile Include="Models\ArticleReference.cs" />
+    <Compile Include="Models\ArticleViewModels.cs" />
+    <Compile Include="Models\BetaKeys.cs" />
+    <Compile Include="Models\BetaMembers.cs" />
+    <Compile Include="Models\BlacklistedWord.cs" />
+    <Compile Include="Models\BonusHistory.cs" />
+    <Compile Include="Models\City.cs" />
+    <Compile Include="Models\CommunityAnswer.cs" />
+    <Compile Include="Models\CommunityPost.cs" />
+    <Compile Include="Models\ContactFormViewModel.cs" />
+    <Compile Include="Models\Device.cs" />
+    <Compile Include="Models\DiaryEntry.cs" />
+    <Compile Include="Models\DiaryViewModels.cs" />
+    <Compile Include="Models\EcoElement.cs" />
+    <Compile Include="Models\Error.cs" />
+    <Compile Include="Models\ErrorViewModels.cs" />
+    <Compile Include="Models\Event.cs" />
+    <Compile Include="Models\FaqAnswer.cs" />
+    <Compile Include="Models\FaqEntry.cs" />
+    <Compile Include="Models\FaqViewModels.cs" />
+    <Compile Include="Models\Files.cs">
+      <DependentUpon>NFilesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FileSystemObject.cs" />
+    <Compile Include="Models\FileToModule.cs">
+      <DependentUpon>NFilesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ForumHeader.cs" />
+    <Compile Include="Models\ForumPost.cs" />
+    <Compile Include="Models\ForumViewModels.cs" />
+    <Compile Include="Models\Garden.cs" />
+    <Compile Include="Models\GardenCategory.cs" />
+    <Compile Include="Models\GardenNote.cs" />
+    <Compile Include="Models\GardenViewModel.cs" />
+    <Compile Include="Models\GoogleAPI.cs" />
+    <Compile Include="Models\Group.cs" />
+    <Compile Include="Models\HelperClasses.cs" />
+    <Compile Include="Models\HomeViewModels.cs" />
+    <Compile Include="Models\ApplicationUser.cs" />
+    <Compile Include="Models\GardenAlbum.cs" />
+    <Compile Include="Models\ImageScan.cs" />
+    <Compile Include="Models\ImportContext.cs" />
+    <Compile Include="Models\ImportHistory.cs" />
+    <Compile Include="Models\InsatPostEntry.cs" />
+    <Compile Include="Models\InternalComment.cs" />
+    <Compile Include="Models\InternalCommentViewModels.cs" />
+    <Compile Include="Models\IReferencedObject.cs" />
+    <Compile Include="Models\LastViewed.cs" />
+    <Compile Include="Models\LastViewedArticle.cs" />
+    <Compile Include="Models\LastViewedViewModels.cs" />
+    <Compile Include="Models\LaunchPageContent.cs" />
+    <Compile Include="Models\LexiconTerm.cs" />
+    <Compile Include="Models\Like.cs" />
+    <Compile Include="Models\MaintenanceSetting.cs" />
+    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\ModelEnums.cs" />
+    <Compile Include="Models\Modules.cs">
+      <DependentUpon>NFilesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NewsEntry.cs" />
+    <Compile Include="Models\NewsLetter.cs" />
+    <Compile Include="Models\NewsViewModels.cs" />
+    <Compile Include="Models\NFilesModel.Context1.cs" />
+    <Compile Include="Models\NFilesModel.cs" />
+    <Compile Include="Models\NFilesModel.Designer.cs">
+      <DependentUpon>NFilesModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NFilesModel1.cs" />
+    <Compile Include="Models\NFilesModel1.Designer.cs">
+      <DependentUpon>NFilesModel1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NFilesModel2.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NFilesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NFilesModel2.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NFilesModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ParentGardenCategory.cs" />
+    <Compile Include="Models\PayoneAuthorization.cs" />
+    <Compile Include="Models\PayoneEnums.cs" />
+    <Compile Include="Models\PayoneGetFile.cs" />
+    <Compile Include="Models\PayoneRequest.cs" />
+    <Compile Include="Models\Plant.cs" />
+    <Compile Include="Models\PlantCharacteristic.cs" />
+    <Compile Include="Models\PlantCharacteristicCategory.cs" />
+    <Compile Include="Models\PlantCharacteristicViewModel.cs" />
+    <Compile Include="Models\ApplicationDbContext.cs" />
+    <Compile Include="Models\PlantDoc.cs" />
+    <Compile Include="Models\PlantDocAnswer.cs" />
+    <Compile Include="Models\PlantSearchProperty.cs" />
+    <Compile Include="Models\PlantSearchViewModels.cs" />
+    <Compile Include="Models\PlantSuggestMerge.cs" />
+    <Compile Include="Models\PlantTagCount.cs" />
+    <Compile Include="Models\PlantTagSuperCategory.cs" />
+    <Compile Include="Models\RatingEntry.cs" />
+    <Compile Include="Models\Setting.cs" />
+    <Compile Include="Models\StatisticEntry.cs" />
+    <Compile Include="Models\StatisticEvent.cs" />
+    <Compile Include="Models\PlantTag.cs" />
+    <Compile Include="Models\PlantTagCategory.cs" />
+    <Compile Include="Models\PlantViewModels.cs" />
+    <Compile Include="Models\PointsPending.cs" />
+    <Compile Include="Models\ProfileViewModels.cs" />
+    <Compile Include="Models\Property.cs" />
+    <Compile Include="Models\PropertyViewModels.cs" />
+    <Compile Include="Models\PurchasedArticle.cs" />
+    <Compile Include="Models\PushSubscription.cs" />
+    <Compile Include="Models\ReferencesToFileSystemObject.cs" />
+    <Compile Include="Models\SearchQuery.cs" />
+    <Compile Include="Models\SharedViewModels.cs" />
+    <Compile Include="Models\ShopCartEntry.cs" />
+    <Compile Include="Models\ShopcartViewModels.cs" />
+    <Compile Include="Models\SimplePlant.cs" />
+    <Compile Include="Models\SocialViewModels.cs" />
+    <Compile Include="Models\Subscriber.cs" />
+    <Compile Include="Models\Subscription.cs" />
+    <Compile Include="Models\Synonym.cs" />
+    <Compile Include="Models\SynonymViewModels.cs" />
+    <Compile Include="Models\TagToImage.cs" />
+    <Compile Include="Models\TaxonomicTree.cs" />
+    <Compile Include="Models\TempEmail.cs" />
+    <Compile Include="Models\TempTableSearch.cs" />
+    <Compile Include="Models\Todo.cs" />
+    <Compile Include="Models\TodoCyclic.cs" />
+    <Compile Include="Models\TodoTemplate.cs" />
+    <Compile Include="Models\TodoTemplateViewModels.cs" />
+    <Compile Include="Models\TodoViewModels.cs" />
+    <Compile Include="Models\UserContact.cs" />
+    <Compile Include="Models\UserDevicesList.cs" />
+    <Compile Include="Models\UserDevicesListViewModel.cs" />
+    <Compile Include="Models\UserEcoElement.cs" />
+    <Compile Include="Models\UserList.cs" />
+    <Compile Include="Models\UserListViewModel.cs" />
+    <Compile Include="Models\UserPlant.cs" />
+    <Compile Include="Models\UserPlantCount.cs" />
+    <Compile Include="Models\UserPlantToUserList.cs" />
+    <Compile Include="Models\UserPlantViewModels.cs" />
+    <Compile Include="Models\UserSettings.cs" />
+    <Compile Include="Models\UserWarning.cs" />
+    <Compile Include="Models\Video.cs" />
+    <Compile Include="Models\VideoReference.cs" />
+    <Compile Include="Models\VideoReferenceViewModels.cs" />
+    <Compile Include="Models\WarningViewModel.cs" />
+    <Compile Include="Models\WatchlistEntry.cs" />
+    <Compile Include="Models\WeatherHandler.cs" />
+    <Compile Include="Models\WeatherModels.cs" />
+    <Compile Include="Models\_BaseEntity.cs" />
+    <Compile Include="Models\_BaseViewModel.cs" />
+    <Compile Include="Models\_CustomValidations.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Models\NFilesModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>NFilesModel2.cs</LastGenOutput>
+    </Content>
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <EntityDeploy Include="Models\NFilesModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>NFilesModel2.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\NFilesModel.edmx.diagram">
+      <DependentUpon>NFilesModel.edmx</DependentUpon>
+    </Content>
+    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.3.1.js" />
+    <Content Include="Scripts\jquery-3.3.1.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <None Include="packages.config" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201608010844413_topfpflanzen.resx">
+      <DependentUpon>201608010844413_topfpflanzen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608031011503_FaqUpdate.resx">
+      <DependentUpon>201608031011503_FaqUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608031452135_faq-update-2.resx">
+      <DependentUpon>201608031452135_faq-update-2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608040822348_faq-model-update.resx">
+      <DependentUpon>201608040822348_faq-model-update.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608040922535_faq-model-update2.resx">
+      <DependentUpon>201608040922535_faq-model-update2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608041034404_plant-update.resx">
+      <DependentUpon>201608041034404_plant-update.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608041112460_news-update.resx">
+      <DependentUpon>201608041112460_news-update.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608041201052_shop-update.resx">
+      <DependentUpon>201608041201052_shop-update.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608251013446_isTestRemoval.resx">
+      <DependentUpon>201608251013446_isTestRemoval.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608251507379_todochanges.resx">
+      <DependentUpon>201608251507379_todochanges.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608251700411_todo-update-2.resx">
+      <DependentUpon>201608251700411_todo-update-2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608301952222_db-update.resx">
+      <DependentUpon>201608301952222_db-update.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609070901040_model-update.resx">
+      <DependentUpon>201609070901040_model-update.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609070919150_model-update-todotemplate-hotfix.resx">
+      <DependentUpon>201609070919150_model-update-todotemplate-hotfix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609071205513_db-update-2.resx">
+      <DependentUpon>201609071205513_db-update-2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609270931484_addedInternalComment.resx">
+      <DependentUpon>201609270931484_addedInternalComment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609271019119_addedInternalCommentFinished.resx">
+      <DependentUpon>201609271019119_addedInternalCommentFinished.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609271352244_addedInternalCommentUserId.resx">
+      <DependentUpon>201609271352244_addedInternalCommentUserId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609271652352_db-update-3.resx">
+      <DependentUpon>201609271652352_db-update-3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610131406480_test-changes.resx">
+      <DependentUpon>201610131406480_test-changes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610131423101_db-update-4.resx">
+      <DependentUpon>201610131423101_db-update-4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702101024084_added-simpleplant.resx">
+      <DependentUpon>201702101024084_added-simpleplant.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702241021106_deleted-simplePlant.resx">
+      <DependentUpon>201702241021106_deleted-simplePlant.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702241045151_added-import-history.resx">
+      <DependentUpon>201702241045151_added-import-history.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702241305583_added-dange-to-history.resx">
+      <DependentUpon>201702241305583_added-dange-to-history.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702241335036_added-import-text.resx">
+      <DependentUpon>201702241335036_added-import-text.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702241352534_added-publish-field.resx">
+      <DependentUpon>201702241352534_added-publish-field.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703031309244_added-article-references.resx">
+      <DependentUpon>201703031309244_added-article-references.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810091321391_added-color.resx">
+      <DependentUpon>201810091321391_added-color.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810111321224_make-parentId-nullable.resx">
+      <DependentUpon>201810111321224_make-parentId-nullable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810150915467_added-parent-relation.resx">
+      <DependentUpon>201810150915467_added-parent-relation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810241010104_group-and-gardencategory.resx">
+      <DependentUpon>201810241010104_group-and-gardencategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810241307326_add-relation-group-plant.resx">
+      <DependentUpon>201810241307326_add-relation-group-plant.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810291246514_add-planttagcategory.resx">
+      <DependentUpon>201810291246514_add-planttagcategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810291351494_remove-planttagcategory.resx">
+      <DependentUpon>201810291351494_remove-planttagcategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810291409577_plantcharcats-add-tagcat.resx">
+      <DependentUpon>201810291409577_plantcharcats-add-tagcat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811021549320_plant-add-synonym.resx">
+      <DependentUpon>201811021549320_plant-add-synonym.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811021650255_plant-make-herkunft-optional.resx">
+      <DependentUpon>201811021650255_plant-make-herkunft-optional.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811200909109_change-min-max-to-decimal.resx">
+      <DependentUpon>201811200909109_change-min-max-to-decimal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811261222222_add-taxonomic-tree-id.resx">
+      <DependentUpon>201811261222222_add-taxonomic-tree-id.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902271232301_fix-baseEntity-createdDate.resx">
+      <DependentUpon>201902271232301_fix-baseEntity-createdDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903121504501_add-newsletter.resx">
+      <DependentUpon>201903121504501_add-newsletter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903130859101_test.resx">
+      <DependentUpon>201903130859101_test.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903191647046_blacklist.resx">
+      <DependentUpon>201903191647046_blacklist.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904031452068_add-lexicon.resx">
+      <DependentUpon>201904031452068_add-lexicon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904150908258_uncomment-createdDate-baseEntity.resx">
+      <DependentUpon>201904150908258_uncomment-createdDate-baseEntity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905061330211_add-devices.resx">
+      <DependentUpon>201905061330211_add-devices.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905071540259_devices-alter-date.resx">
+      <DependentUpon>201905071540259_devices-alter-date.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905130840281_test1.resx">
+      <DependentUpon>201905130840281_test1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905131130404_add-image-scans.resx">
+      <DependentUpon>201905131130404_add-image-scans.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905131240194_update-scanimages.resx">
+      <DependentUpon>201905131240194_update-scanimages.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905210825074_remove-generating-property.resx">
+      <DependentUpon>201905210825074_remove-generating-property.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905271137176_add-tempEmails.resx">
+      <DependentUpon>201905271137176_add-tempEmails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905271357372_add-user-details.resx">
+      <DependentUpon>201905271357372_add-user-details.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907011126226_add-MainImageId-to-garden.resx">
+      <DependentUpon>201907011126226_add-MainImageId-to-garden.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907260857377_add-userlists.resx">
+      <DependentUpon>201907260857377_add-userlists.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907261518496_add-notes-to-userPlants.resx">
+      <DependentUpon>201907261518496_add-notes-to-userPlants.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907291122262_add-nameLatin-toUserPlant.resx">
+      <DependentUpon>201907291122262_add-nameLatin-toUserPlant.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907301505213_add-notes-toTodos.resx">
+      <DependentUpon>201907301505213_add-notes-toTodos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908011007181_userDevicesTest.resx">
+      <DependentUpon>201908011007181_userDevicesTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908020735563_dev.resx">
+      <DependentUpon>201908020735563_dev.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908020846332_test3.resx">
+      <DependentUpon>201908020846332_test3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908021413586_AdminDevices.resx">
+      <DependentUpon>201908021413586_AdminDevices.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908050817176_add-foreignkey-to-adminDev.resx">
+      <DependentUpon>201908050817176_add-foreignkey-to-adminDev.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909051426419_add-userplant-to-userlist.resx">
+      <DependentUpon>201909051426419_add-userplant-to-userlist.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909110820078_RemoveUserListId-From-Userplants.resx">
+      <DependentUpon>201909110820078_RemoveUserListId-From-Userplants.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909131356543_update-imageScan.resx">
+      <DependentUpon>201909131356543_update-imageScan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909201436599_remove-generating-property.resx">
+      <DependentUpon>201909201436599_remove-generating-property.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909201605364_empty-migration-20092019.resx">
+      <DependentUpon>201909201605364_empty-migration-20092019.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909271239430_remove-old-tables.resx">
+      <DependentUpon>201909271239430_remove-old-tables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910140959310_add-faq-answers.resx">
+      <DependentUpon>201910140959310_add-faq-answers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910141414346_add-affiliateLinks-to-articles.resx">
+      <DependentUpon>201910141414346_add-affiliateLinks-to-articles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910171427373_add-generated-from-template-flag.resx">
+      <DependentUpon>201910171427373_add-generated-from-template-flag.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910211316562_add-experttip-to-articles.resx">
+      <DependentUpon>201910211316562_add-experttip-to-articles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910211412240_lastViewedArticle.resx">
+      <DependentUpon>201910211412240_lastViewedArticle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910211424297_add-purchased-table.resx">
+      <DependentUpon>201910211424297_add-purchased-table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910211442069_Add-UserId-To-Table-LastViewedArticle.resx">
+      <DependentUpon>201910211442069_Add-UserId-To-Table-LastViewedArticle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910230848166_add-article-category.resx">
+      <DependentUpon>201910230848166_add-article-category.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910240742520_empty-migration.resx">
+      <DependentUpon>201910240742520_empty-migration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910290932342_addCategoryToTableArticleCategory.resx">
+      <DependentUpon>201910290932342_addCategoryToTableArticleCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910300844097_addCategoryIdToTableArticles.resx">
+      <DependentUpon>201910300844097_addCategoryIdToTableArticles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910300902380_removeCategoryId.resx">
+      <DependentUpon>201910300902380_removeCategoryId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910280938144_add-previous-articleId.resx">
+      <DependentUpon>201910280938144_add-previous-articleId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910311158075_empty-migration-31-10-2019.resx">
+      <DependentUpon>201910311158075_empty-migration-31-10-2019.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911041030001_addAttributeIsInCartToTableShoCartEntry.resx">
+      <DependentUpon>201911041030001_addAttributeIsInCartToTableShoCartEntry.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911111618367_add-notification-types.resx">
+      <DependentUpon>201911111618367_add-notification-types.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911221414097_add-warning-related-tables.resx">
+      <DependentUpon>201911221414097_add-warning-related-tables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912041140305_update-user-warnings.resx">
+      <DependentUpon>201912041140305_update-user-warnings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912130910060_add-green24-details.resx">
+      <DependentUpon>201912130910060_add-green24-details.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001021435179_test2.resx">
+      <DependentUpon>202001021435179_test2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001150859229_add-dates-to-user.resx">
+      <DependentUpon>202001150859229_add-dates-to-user.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001171047357_add-ecoelements.resx">
+      <DependentUpon>202001171047357_add-ecoelements.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001221052065_empty.resx">
+      <DependentUpon>202001221052065_empty.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001291320108_add-orders-table.resx">
+      <DependentUpon>202001291320108_add-orders-table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002181445545_add-completeSignup-tousers.resx">
+      <DependentUpon>202002181445545_add-completeSignup-tousers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002191258258_addUseridstoNewsletters.resx">
+      <DependentUpon>202002191258258_addUseridstoNewsletters.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002241109302_update-news-model.resx">
+      <DependentUpon>202002241109302_update-news-model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002241327354_add-events.resx">
+      <DependentUpon>202002241327354_add-events.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002241425470_plantDoc.resx">
+      <DependentUpon>202002241425470_plantDoc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002250910424_addDescriptionToPlantDoc.resx">
+      <DependentUpon>202002250910424_addDescriptionToPlantDoc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002261019057_PlantDocAnswer.resx">
+      <DependentUpon>202002261019057_PlantDocAnswer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003111011096_AllowPubliscment.resx">
+      <DependentUpon>202003111011096_AllowPubliscment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003111405541_add-videos.resx">
+      <DependentUpon>202003111405541_add-videos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003131249099_add-article-sort.resx">
+      <DependentUpon>202003131249099_add-article-sort.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003171026339_adminAllowsPublishment.resx">
+      <DependentUpon>202003171026339_adminAllowsPublishment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003171152599_add-ignored-cyclictodos.resx">
+      <DependentUpon>202003171152599_add-ignored-cyclictodos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003191252332_EmailConfirmed.resx">
+      <DependentUpon>202003191252332_EmailConfirmed.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003201202210_add-cart-to-orders.resx">
+      <DependentUpon>202003201202210_add-cart-to-orders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003201345525_add-country-to-users.resx">
+      <DependentUpon>202003201345525_add-country-to-users.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003271151108_isAlreadyReaded.resx">
+      <DependentUpon>202003271151108_isAlreadyReaded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003301242201_add-details-to-orders.resx">
+      <DependentUpon>202003301242201_add-details-to-orders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004061243040_add-article-details.resx">
+      <DependentUpon>202004061243040_add-article-details.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004201050127_rename-article-isDeliverable.resx">
+      <DependentUpon>202004201050127_rename-article-isDeliverable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004271217125_add-article-bulk-weight.resx">
+      <DependentUpon>202004271217125_add-article-bulk-weight.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004271351498_add-answer-updatedAnswer.resx">
+      <DependentUpon>202004271351498_add-answer-updatedAnswer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004271400540_add-post-UpdateField.resx">
+      <DependentUpon>202004271400540_add-post-UpdateField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004271413493_add-post-UpdateFields.resx">
+      <DependentUpon>202004271413493_add-post-UpdateFields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004291128215_add-invoice-address.resx">
+      <DependentUpon>202004291128215_add-invoice-address.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005040910264_rename-order-cancelled.resx">
+      <DependentUpon>202005040910264_rename-order-cancelled.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005060954265_publishWithImages-plantDoc.resx">
+      <DependentUpon>202005060954265_publishWithImages-plantDoc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005131019246_add-preorder-to-carts.resx">
+      <DependentUpon>202005131019246_add-preorder-to-carts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005131549508_add-stats.resx">
+      <DependentUpon>202005131549508_add-stats.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006021259454_addcolshopcarEntrieToArticles.resx">
+      <DependentUpon>202006021259454_addcolshopcarEntrieToArticles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006101420517_add-demo-mode.resx">
+      <DependentUpon>202006101420517_add-demo-mode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006220908026_adduserplantsynonym.resx">
+      <DependentUpon>202006220908026_adduserplantsynonym.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008190820063_addfieldcountdevice.resx">
+      <DependentUpon>202008190820063_addfieldcountdevice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008241331460_add-supercategories.resx">
+      <DependentUpon>202008241331460_add-supercategories.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009151406276_add-fieldcountuserplantintouserlist.resx">
+      <DependentUpon>202009151406276_add-fieldcountuserplantintouserlist.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009231058429_plantdoc-answer-increase.resx">
+      <DependentUpon>202009231058429_plantdoc-answer-increase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009230956469_addtagtoimage.resx">
+      <DependentUpon>202009230956469_addtagtoimage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009231029010_test4.resx">
+      <DependentUpon>202009231029010_test4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009290819133_test5.resx">
+      <DependentUpon>202009290819133_test5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010010910373_add-plantalert-to-usersetting.resx">
+      <DependentUpon>202010010910373_add-plantalert-to-usersetting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010051026306_empty_test.resx">
+      <DependentUpon>202010051026306_empty_test.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010051041026_empty_test_2.resx">
+      <DependentUpon>202010051041026_empty_test_2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010301138074_user_newsletter.resx">
+      <DependentUpon>202010301138074_user_newsletter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011091047370_addNotifyForWindNotifyForFRost.resx">
+      <DependentUpon>202011091047370_addNotifyForWindNotifyForFRost.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011201336369_add-publishdate-plants.resx">
+      <DependentUpon>202011201336369_add-publishdate-plants.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012101429186_make-housenr-string.resx">
+      <DependentUpon>202012101429186_make-housenr-string.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012170839030_ecoscan-count.resx">
+      <DependentUpon>202012170839030_ecoscan-count.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103031046561_readd-premium-migration.resx">
+      <DependentUpon>202103031046561_readd-premium-migration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103241057343_instaposts.resx">
+      <DependentUpon>202103241057343_instaposts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104191356466_album-image-extra.resx">
+      <DependentUpon>202104191356466_album-image-extra.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104201006584_apicalleventid.resx">
+      <DependentUpon>202104201006584_apicalleventid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104201040391_insta-child.resx">
+      <DependentUpon>202104201040391_insta-child.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104271349084_resettodo.resx">
+      <DependentUpon>202104271349084_resettodo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105110907245_launch-page-2.resx">
+      <DependentUpon>202105110907245_launch-page-2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105201129500_user-plant-count.resx">
+      <DependentUpon>202105201129500_user-plant-count.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105201333047_user-plant-count-foreign.resx">
+      <DependentUpon>202105201333047_user-plant-count-foreign.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105270815373_usercount-userid.resx">
+      <DependentUpon>202105270815373_usercount-userid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105280840212_city-added.resx">
+      <DependentUpon>202105280840212_city-added.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106151356250_plantdocquestionmainimg.resx">
+      <DependentUpon>202106151356250_plantdocquestionmainimg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106171205263_add_community_and_album_fix.resx">
+      <DependentUpon>202106171205263_add_community_and_album_fix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106231037018_plant-search-view.resx">
+      <DependentUpon>202106231037018_plant-search-view.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106231436235_plant-search-view-2.resx">
+      <DependentUpon>202106231436235_plant-search-view-2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106231609221_plant-search-view-3.resx">
+      <DependentUpon>202106231609221_plant-search-view-3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106291343224_presentation-album.resx">
+      <DependentUpon>202106291343224_presentation-album.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202107011002139_add-contact-tempplantsearch.resx">
+      <DependentUpon>202107011002139_add-contact-tempplantsearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202107080941411_subscription-add.resx">
+      <DependentUpon>202107080941411_subscription-add.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202107121004100_plant-search-synonym.resx">
+      <DependentUpon>202107121004100_plant-search-synonym.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202107190833490_permalink.resx">
+      <DependentUpon>202107190833490_permalink.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202107221029594_referral-url-user.resx">
+      <DependentUpon>202107221029594_referral-url-user.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202107221330557_admin-todo-template-taxom.resx">
+      <DependentUpon>202107221330557_admin-todo-template-taxom.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202108031207536_presentationFileUpload.resx">
+      <DependentUpon>202108031207536_presentationFileUpload.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202108041512548_GardenAlbumFileToModuleNewProperties.resx">
+      <DependentUpon>202108041512548_GardenAlbumFileToModuleNewProperties.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202108091334060_addimagetagsproperty.resx">
+      <DependentUpon>202108091334060_addimagetagsproperty.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202108110841329_garden-upload-note.resx">
+      <DependentUpon>202108110841329_garden-upload-note.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202108190925112_plant-vorschlagen.resx">
+      <DependentUpon>202108190925112_plant-vorschlagen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202108201400508_plant-approve-added.resx">
+      <DependentUpon>202108201400508_plant-approve-added.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202108240505518_add-plant-suggestmerge2.resx">
+      <DependentUpon>202108240505518_add-plant-suggestmerge2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202109020948511_taxom-todo-sorting.resx">
+      <DependentUpon>202109020948511_taxom-todo-sorting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202109060918556_todotemplate-list2.resx">
+      <DependentUpon>202109060918556_todotemplate-list2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202109091443153_add-ipaddress-statistic.resx">
+      <DependentUpon>202109091443153_add-ipaddress-statistic.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202109091532477_maintenance-setting.resx">
+      <DependentUpon>202109091532477_maintenance-setting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202109201251285_add-garden-article-contact-show.resx">
+      <DependentUpon>202109201251285_add-garden-article-contact-show.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202109211442248_completegardenpresimodel.resx">
+      <DependentUpon>202109211442248_completegardenpresimodel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202109301342218_app-version.resx">
+      <DependentUpon>202109301342218_app-version.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202109301347090_app-version-key.resx">
+      <DependentUpon>202109301347090_app-version-key.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202110011246479_planttag-count.resx">
+      <DependentUpon>202110011246479_planttag-count.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202110011250405_planttag-count-2.resx">
+      <DependentUpon>202110011250405_planttag-count-2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202110011304264_planttag-count-3.resx">
+      <DependentUpon>202110011304264_planttag-count-3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202110061336219_subscription-api.resx">
+      <DependentUpon>202110061336219_subscription-api.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202110061357317_subscription-api-2.resx">
+      <DependentUpon>202110061357317_subscription-api-2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202110071057223_setting-admin.resx">
+      <DependentUpon>202110071057223_setting-admin.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>54198</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:55465/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

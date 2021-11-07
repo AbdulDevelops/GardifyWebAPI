@@ -1,0 +1,14 @@
+p {
+    padding: 0 1rem;
+    margin-bottom: 0;
+}
+span {
+    display: block;
+    padding-left: 1rem;
+}
+.col-12 {
+    margin-bottom: 1rem;
+}
+a {
+    text-decoration: underline;
+}

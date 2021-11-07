@@ -1,0 +1,47 @@
+﻿@model GardifyModels.Models.DiaryViewModels.DiaryListViewModel
+<div class="diary-entries-list-wrapper">
+	<p>
+		@Html.ActionLink("Eintrag erstellen", "CreateEntry", "Diary", new { objectId = Model.ObjectId, diaryType = Model.DiaryType }, null)
+	</p>
+	@if (Model.ListEntries != null && Model.ListEntries.Any())
+	{
+		<table class="table">
+			@foreach (var item in Model.ListEntries)
+			{
+				<tr>
+					<td style="width: 20%;">
+						<div class="image-wrapper">
+							@if (item.EntryImages != null && item.EntryImages.Any())
+							{
+								<div class="title-image">
+									<img title="@item.EntryImages.FirstOrDefault().TitleAttr" src="@item.EntryImages.FirstOrDefault().SrcAttr" />
+								</div>
+								foreach (var img in item.EntryImages.Skip(1))
+								{
+									<div class="thumbnail col-md-4">
+										<img title="@img.TitleAttr" src="@img.SrcAttr" />
+									</div>
+								}
+							}
+						</div>
+					</td>
+					<td style="width: 70%;">
+						<a href="@Url.Action("DetailsEntry", "Diary", new { id = item.Id }, null)">
+							<h3>@Html.DisplayFor(modelItem => item.Title)</h3>
+						</a>
+						<br />
+						<b>@Html.DisplayFor(modelItem => item.Date)</b>
+						<br />
+						@Html.DisplayFor(modelItem => item.Description)
+
+					</td>
+				</tr>
+			}
+
+		</table>
+	}
+	else
+	{
+		<p>Keine Einträge gefunden</p>
+	}
+</div>

@@ -1,0 +1,8 @@
+﻿@using PflanzenApp.Controllers.AdminArea
+@model GardifyModels.Models.PlantTag
+
+<div class="col-xs-3">
+    @Html.HiddenFor(m => m.Id)
+    @Html.CheckBoxFor(m => m.Selected)
+    @Html.DisplayFor(m => m.Title)
+</div>

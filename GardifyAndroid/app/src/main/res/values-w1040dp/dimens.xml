@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+        Landscape mode w720dp
+
+        1.) Widths
+        2.) Heights
+        3.) Margins
+        4.) TextSizes
+    -->
+
+    <!-- 1.) Widths -->
+    <dimen name="width_team_cardView_landscape">390dp</dimen>
+
+    <!-- 2.) Heights -->
+    <dimen name="height_team_cardView_landscape">470dp</dimen>
+
+    <!-- 3.) Margins -->
+    <dimen name="margin_team_tableLayout_landscape">26dp</dimen>
+    <dimen name="margin_team_tableRow_landscape">13dp</dimen>
+
+    <!-- 4.) TextSizes -->
+    <dimen name="textSize_team_body_normal_landscape">26sp</dimen>
+    <dimen name="textSize_team_body_small_landscape">24sp</dimen>
+    <dimen name="textSize_team_quote_landscape">24sp</dimen>
+    <dimen name="textSize_team_name_landscape">26sp</dimen>
+
+</resources>

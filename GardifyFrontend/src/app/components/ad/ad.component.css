@@ -1,0 +1,14 @@
+.advertisement { width: 320px; height: 100px;}
+@media(min-width: 500px) { .advertisement { width: 480px; height: 60px; } }
+@media(min-width: 800px) { .advertisement{ width: 760px; height: 90px; } }
+@media(min-width: 1000px) { .advertisement{ width: 960px; height: 120px; } }
+
+@media(min-width: 1200px) { .advertisement{ width: 1120px; height: 120px; } } 
+
+
+
+.advertisementvertical {width: 120px; height: 1000px;z-index:-1;}
+@media(min-width: 60px) { .advertisementvertical{ height:500px; } }
+@media(min-width: 90px) { .advertisementvertical{  height:800px ; } }
+@media(min-width: 120px) { .advertisementvertical{  height:1000px; } }
+@media(min-width: 120px) { .advertisementvertical{  height: 1200px; } }

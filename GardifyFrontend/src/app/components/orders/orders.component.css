@@ -1,0 +1,11 @@
+.article-img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+}
+.light .order-header {
+    background-color: #cfcfcf;
+}
+.dark .order-header {
+    background-color: black;
+}

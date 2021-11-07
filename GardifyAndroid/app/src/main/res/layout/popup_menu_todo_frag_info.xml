@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_view_expandable_header"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:background="@color/cardView_all_white"
+    app:cardCornerRadius="10dp"
+    tools:context=".ui.MainActivity">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/marginPaddingSize_10sdp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/imageView_all_width_18sdp"
+                android:layout_height="@dimen/imageView_all_height_18sdp"
+                android:background="@drawable/red_circle"
+                android:backgroundTint="@color/imageView_todoCalendar_toDo" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/source_sans_pro"
+                android:layout_marginLeft="@dimen/marginPaddingSize_10sdp"
+                android:textSize="@dimen/textSize_body_xsmall"
+                android:text="@string/toDoCalendar_infoTodo" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+            android:background="@android:color/darker_gray" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/marginPaddingSize_10sdp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/imageView_all_width_18sdp"
+                android:layout_height="@dimen/imageView_all_height_18sdp"
+                android:background="@drawable/red_circle"
+                android:backgroundTint="@color/imageView_todoCalendar_ownToDo" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/source_sans_pro"
+                android:layout_marginLeft="@dimen/marginPaddingSize_10sdp"
+                android:textSize="@dimen/textSize_body_xsmall"
+                android:text="@string/toDoCalendar_infoTodoCustom"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+            android:background="@android:color/darker_gray" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/marginPaddingSize_10sdp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/imageView_all_width_18sdp"
+                android:layout_height="@dimen/imageView_all_height_18sdp"
+                android:background="@drawable/red_circle"
+                android:backgroundTint="@color/imageView_todoCalendar_diaryEntry" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/marginPaddingSize_10sdp"
+                android:fontFamily="@font/source_sans_pro"
+                android:textSize="@dimen/textSize_body_xsmall"
+                android:text="@string/toDoCalendar_infoTodoDiary" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+            android:background="@android:color/darker_gray" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/marginPaddingSize_10sdp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/imageView_all_width_18sdp"
+                android:layout_height="@dimen/imageView_all_height_18sdp"
+                android:background="@drawable/red_circle"
+                android:backgroundTint="@color/imageView_todoCalendar_ecoScan" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/marginPaddingSize_10sdp"
+                android:textSize="@dimen/textSize_body_xsmall"
+                android:text="@string/toDoCalendar_infoTodoScan"/>
+        </LinearLayout>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

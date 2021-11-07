@@ -1,0 +1,1536 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1A2AB57A2506825B00835C16 /* Video.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A2AB5792506825B00835C16 /* Video.storyboard */; };
+		1A3DD54724ED431400B6575D /* DailyWeatherViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3DD54624ED431400B6575D /* DailyWeatherViewCell.swift */; };
+		1A3EE27824F7D5DB00918344 /* DurationRatingPlantModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3EE27724F7D5DB00918344 /* DurationRatingPlantModel.swift */; };
+		1A518E91251CA2630014448E /* LocationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A518E90251CA2630014448E /* LocationInfo.swift */; };
+		1A518E94251CE7620014448E /* OwnTodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A518E93251CE7620014448E /* OwnTodoViewController.swift */; };
+		1A518E97251CE7800014448E /* TodoDiaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A518E96251CE7800014448E /* TodoDiaryViewController.swift */; };
+		1A62E8152508C89B00716675 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A62E8142508C89B00716675 /* VideoViewController.swift */; };
+		1A7B266A25028F5100F7A0A1 /* Community.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A7B266925028F5100F7A0A1 /* Community.storyboard */; };
+		1A7B266C25028FF600F7A0A1 /* CommunityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7B266B25028FF600F7A0A1 /* CommunityViewController.swift */; };
+		1A7B266F25029CFE00F7A0A1 /* CommunityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7B266E25029CFE00F7A0A1 /* CommunityTableViewCell.swift */; };
+		1AA9547C24DAD0EF0085BFAC /* WeatherViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA9547B24DAD0EF0085BFAC /* WeatherViewCell.swift */; };
+		1AED79E324E1819D006080DA /* EcoScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AED79E224E1819D006080DA /* EcoScanViewController.swift */; };
+		1AED79E524E181E9006080DA /* EcoScan.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AED79E424E181E9006080DA /* EcoScan.storyboard */; };
+		1AED79E724E18998006080DA /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AED79E624E18998006080DA /* UserInfo.swift */; };
+		1AED79ED24EA706A006080DA /* WeatherUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AED79EC24EA706A006080DA /* WeatherUpdateViewController.swift */; };
+		1AED79EF24EA8836006080DA /* WeatherUpdateViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AED79EE24EA8836006080DA /* WeatherUpdateViewCell.swift */; };
+		3F01DAF924D7FFEB00916BB2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F01DAF824D7FFEB00916BB2 /* AppDelegate.swift */; };
+		3F01DAFB24D7FFEB00916BB2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F01DAFA24D7FFEB00916BB2 /* SceneDelegate.swift */; };
+		3F01DB0524D7FFEB00916BB2 /* GardifyIOS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3F01DB0324D7FFEB00916BB2 /* GardifyIOS.xcdatamodeld */; };
+		3F01DB0724D7FFF000916BB2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F01DB0624D7FFF000916BB2 /* Assets.xcassets */; };
+		3F01DB2024D804C500916BB2 /* PlantDocDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F01DB1424D804C500916BB2 /* PlantDocDetailViewController.swift */; };
+		3F01DB2124D804C500916BB2 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F01DB1524D804C500916BB2 /* HomeController.swift */; };
+		3F01DB2224D804C500916BB2 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F01DB1624D804C500916BB2 /* FirstViewController.swift */; };
+		3F01DB2324D804C500916BB2 /* PlantScanResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F01DB1724D804C500916BB2 /* PlantScanResultViewController.swift */; };
+		3F01DB2424D804C500916BB2 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F01DB1824D804C500916BB2 /* MainTabBarController.swift */; };
+		3F01DB2524D804C500916BB2 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F01DB1924D804C500916BB2 /* ContainerViewController.swift */; };
+		3F01DB2624D804C500916BB2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F01DB1A24D804C500916BB2 /* LoginViewController.swift */; };
+		3F01DB2724D804C500916BB2 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F01DB1B24D804C500916BB2 /* SettingViewController.swift */; };
+		3F01DB2824D804C500916BB2 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F01DB1C24D804C500916BB2 /* MenuController.swift */; };
+		3F01DB2924D804C500916BB2 /* PlantDocViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F01DB1D24D804C500916BB2 /* PlantDocViewController.swift */; };
+		3F01DB2A24D804C500916BB2 /* PlantScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F01DB1E24D804C500916BB2 /* PlantScanViewController.swift */; };
+		3F01DB2B24D804C500916BB2 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F01DB1F24D804C500916BB2 /* TabBarController.swift */; };
+		3F01DB3A24D804D100916BB2 /* PlantDocCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F01DB2F24D804D100916BB2 /* PlantDocCell.swift */; };
+		3F01DB3B24D804D100916BB2 /* MenuViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F01DB3124D804D100916BB2 /* MenuViewCell.swift */; };
+		3F01DB3C24D804D100916BB2 /* ScanResultViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F01DB3324D804D100916BB2 /* ScanResultViewCell.swift */; };
+		3F01DB3D24D804D100916BB2 /* HomeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F01DB3524D804D100916BB2 /* HomeViewCell.swift */; };
+		3F01DB3E24D804D100916BB2 /* PlantDoc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F01DB3724D804D100916BB2 /* PlantDoc.swift */; };
+		3F01DB3F24D804D100916BB2 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F01DB3824D804D100916BB2 /* LoginModel.swift */; };
+		3F01DB4024D804D100916BB2 /* ScannerResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F01DB3924D804D100916BB2 /* ScannerResult.swift */; };
+		3F01DB4B24D804DA00916BB2 /* PlantDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F01DB4224D804DA00916BB2 /* PlantDetail.storyboard */; };
+		3F01DB4C24D804DA00916BB2 /* PlantDoc.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F01DB4324D804DA00916BB2 /* PlantDoc.storyboard */; };
+		3F01DB4D24D804DA00916BB2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F01DB4424D804DA00916BB2 /* LaunchScreen.storyboard */; };
+		3F01DB4E24D804DA00916BB2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F01DB4624D804DA00916BB2 /* Main.storyboard */; };
+		3F01DB4F24D804DA00916BB2 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F01DB4824D804DA00916BB2 /* Login.storyboard */; };
+		3F01DB5124D804DA00916BB2 /* PlantScan.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F01DB4A24D804DA00916BB2 /* PlantScan.storyboard */; };
+		3F01DB5E24D804E400916BB2 /* SlideInTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F01DB5324D804E400916BB2 /* SlideInTransition.swift */; };
+		3F01DB5F24D804E400916BB2 /* CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F01DB5524D804E400916BB2 /* CollectionView.swift */; };
+		3F01DB6024D804E400916BB2 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F01DB5624D804E400916BB2 /* String.swift */; };
+		3F01DB6124D804E400916BB2 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F01DB5724D804E400916BB2 /* UIImage.swift */; };
+		3F01DB6224D804E400916BB2 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F01DB5824D804E400916BB2 /* UIViewController.swift */; };
+		3F01DB6324D804E400916BB2 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F01DB5924D804E400916BB2 /* UIImageView.swift */; };
+		3F01DB6424D804E400916BB2 /* Links.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F01DB5B24D804E400916BB2 /* Links.swift */; };
+		3F01DB6524D804E400916BB2 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F01DB5C24D804E400916BB2 /* Networking.swift */; };
+		3F01DB6624D804E400916BB2 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F01DB5D24D804E400916BB2 /* UserDefaults.swift */; };
+		3F01DB6824D81DD400916BB2 /* Shop.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F01DB6724D81DD400916BB2 /* Shop.storyboard */; };
+		3F01DB6A24D824EB00916BB2 /* PlantDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F01DB6924D824EB00916BB2 /* PlantDetailViewController.swift */; };
+		3F01DB6C24D82B3600916BB2 /* PlantDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F01DB6B24D82B3600916BB2 /* PlantDetail.swift */; };
+		3F01DB6E24D83AE600916BB2 /* UserPlant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F01DB6D24D83AE600916BB2 /* UserPlant.swift */; };
+		3F01DB7024D8460C00916BB2 /* PlantGarden.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F01DB6F24D8460B00916BB2 /* PlantGarden.storyboard */; };
+		3F01DB7224D8467D00916BB2 /* PlantGardenAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F01DB7124D8467D00916BB2 /* PlantGardenAddViewController.swift */; };
+		3F01DB7424D84E5A00916BB2 /* MyGardenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F01DB7324D84E5A00916BB2 /* MyGardenModel.swift */; };
+		3F01DB7624D997F300916BB2 /* PlantSearch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F01DB7524D997F300916BB2 /* PlantSearch.storyboard */; };
+		3F01DB7824D9B46100916BB2 /* PlantSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F01DB7724D9B46100916BB2 /* PlantSearchViewController.swift */; };
+		3F01DB7A24D9B87000916BB2 /* PlantSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F01DB7924D9B87000916BB2 /* PlantSearch.swift */; };
+		3F01DB7C24D9C14D00916BB2 /* Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F01DB7B24D9C14D00916BB2 /* Parameters.swift */; };
+		3F01DB7F24DA893600916BB2 /* PlantSearchViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F01DB7E24DA893600916BB2 /* PlantSearchViewCell.swift */; };
+		3F01DB8124DAA7DE00916BB2 /* PlantSearchFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F01DB8024DAA7DE00916BB2 /* PlantSearchFilterViewController.swift */; };
+		3F1269BB25518862005D3159 /* UITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1269BA25518862005D3159 /* UITableViewCell.swift */; };
+		3F295E23255AA266006AC6E0 /* MyGardenPlantNoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F295E22255AA266006AC6E0 /* MyGardenPlantNoticeViewController.swift */; };
+		3F295E26255AA27E006AC6E0 /* MyGardenPlantMoveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F295E25255AA27E006AC6E0 /* MyGardenPlantMoveViewController.swift */; };
+		3F295E29255AA29F006AC6E0 /* MyGardenPlantCountChangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F295E28255AA29F006AC6E0 /* MyGardenPlantCountChangeViewController.swift */; };
+		3F2AE5DE25933A1300CFCFE6 /* UISwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2AE5DD25933A1300CFCFE6 /* UISwitch.swift */; };
+		3F30C91E24E67A160044F779 /* MyGardenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F30C91D24E67A160044F779 /* MyGardenViewController.swift */; };
+		3F30C92124EA12A90044F779 /* FullTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F30C92024EA12A90044F779 /* FullTableView.swift */; };
+		3F30C92524EBF6900044F779 /* FilterSelectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F30C92424EBF6900044F779 /* FilterSelectTableViewCell.swift */; };
+		3F30C92F24F000DA0044F779 /* PlantNameSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F30C92E24F000DA0044F779 /* PlantNameSearchViewController.swift */; };
+		3F30C93324F3B9790044F779 /* CustomNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F30C93124F3B9790044F779 /* CustomNavigationViewController.swift */; };
+		3F30C93624F3BC110044F779 /* CustomNavItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F30C93524F3BC110044F779 /* CustomNavItem.swift */; };
+		3F30C93824F3CE960044F779 /* UINavigationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F30C93724F3CE960044F779 /* UINavigationItem.swift */; };
+		3F30C93A24F3EA630044F779 /* TodoCountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F30C93924F3EA630044F779 /* TodoCountModel.swift */; };
+		3F30C93C24F507CA0044F779 /* NavView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F30C93B24F507CA0044F779 /* NavView.swift */; };
+		3F3C988B251E129B00B3AE98 /* DetailFilterFixedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3C988A251E129B00B3AE98 /* DetailFilterFixedTableViewCell.swift */; };
+		3F3C988E251E25A000B3AE98 /* DetailFilterFixedItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3C988D251E25A000B3AE98 /* DetailFilterFixedItemCollectionViewCell.swift */; };
+		3F3C98922523614300B3AE98 /* DetailFilterDropTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3C98912523614300B3AE98 /* DetailFilterDropTableViewCell.swift */; };
+		3F420D5C2502350200A5E5DE /* GardeningAZ.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F420D5B2502350200A5E5DE /* GardeningAZ.storyboard */; };
+		3F420D5F2502354700A5E5DE /* GardeningAZViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F420D5E2502354700A5E5DE /* GardeningAZViewController.swift */; };
+		3F420D6225024E6A00A5E5DE /* GardeningAZTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F420D6125024E6A00A5E5DE /* GardeningAZTableViewCell.swift */; };
+		3F420D6425027D4400A5E5DE /* GardeningAZModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F420D6325027D4400A5E5DE /* GardeningAZModel.swift */; };
+		3F45692325666552009E0CD9 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F45692225666552009E0CD9 /* UIFont.swift */; };
+		3F74B99F258A1719002767CD /* Contact.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F74B99E258A1719002767CD /* Contact.storyboard */; };
+		3F758EB2257F867300AA5196 /* EcoScanSendEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F758EB1257F867300AA5196 /* EcoScanSendEmailViewController.swift */; };
+		3F758EB72580E8B700AA5196 /* DropdownListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F758EB62580E8B700AA5196 /* DropdownListView.swift */; };
+		3F758EBA2580E8F400AA5196 /* DropdownListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F758EB92580E8F400AA5196 /* DropdownListView.xib */; };
+		3F758EBE2581022900AA5196 /* DropdownListViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F758EBC2581022800AA5196 /* DropdownListViewTableViewCell.swift */; };
+		3F758EBF2581022900AA5196 /* DropdownListViewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F758EBD2581022800AA5196 /* DropdownListViewTableViewCell.xib */; };
+		3F89D6692579032300B660F6 /* PlantSuggest.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F89D6682579032300B660F6 /* PlantSuggest.storyboard */; };
+		3F9523262535955800BA4A74 /* imageStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9523252535955800BA4A74 /* imageStorage.swift */; };
+		3F952330253EE1BA00BA4A74 /* PlantDocMyPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F95232F253EE1BA00BA4A74 /* PlantDocMyPostViewController.swift */; };
+		3F952368254836E800BA4A74 /* NewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F952367254836E800BA4A74 /* NewsTableViewCell.swift */; };
+		3F9D65872552EB3100F6E00C /* MyGardenAddNewGardenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9D65862552EB3100F6E00C /* MyGardenAddNewGardenViewController.swift */; };
+		3FBAEC382563B3ED00B30CCB /* MenuSideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBAEC372563B3EC00B30CCB /* MenuSideViewController.swift */; };
+		3FBAEC3B2563FC1F00B30CCB /* Calender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBAEC3A2563FC1E00B30CCB /* Calender.swift */; };
+		3FBAEC3E25640F6F00B30CCB /* TodoCalenderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBAEC3D25640F6F00B30CCB /* TodoCalenderCollectionViewCell.swift */; };
+		3FBAEC42256559AF00B30CCB /* TodoEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBAEC41256559AD00B30CCB /* TodoEditViewController.swift */; };
+		3FBAEC52256662B900B30CCB /* SourceSansPro-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FBAEC4E256661E200B30CCB /* SourceSansPro-Black.ttf */; };
+		3FBAEC54256662BC00B30CCB /* SourceSansPro-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FBAEC4C256661E100B30CCB /* SourceSansPro-BlackItalic.ttf */; };
+		3FBAEC55256662BF00B30CCB /* SourceSansPro-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FBAEC51256661E500B30CCB /* SourceSansPro-Bold.ttf */; };
+		3FBAEC56256662C300B30CCB /* SourceSansPro-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FBAEC4B256661E000B30CCB /* SourceSansPro-ExtraLightItalic.ttf */; };
+		3FBAEC57256662C300B30CCB /* SourceSansPro-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FBAEC49256661DF00B30CCB /* SourceSansPro-SemiBold.ttf */; };
+		3FBAEC58256662C300B30CCB /* SourceSansPro-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FBAEC46256661DD00B30CCB /* SourceSansPro-BoldItalic.ttf */; };
+		3FBAEC59256662C300B30CCB /* SourceSansPro-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FBAEC4F256661E300B30CCB /* SourceSansPro-Light.ttf */; };
+		3FBAEC5A256662C300B30CCB /* SourceSansPro-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FBAEC4A256661DF00B30CCB /* SourceSansPro-SemiBoldItalic.ttf */; };
+		3FBAEC5B256662C300B30CCB /* SourceSansPro-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FBAEC47256661DE00B30CCB /* SourceSansPro-Italic.ttf */; };
+		3FBAEC5C256662C300B30CCB /* SourceSansPro-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FBAEC50256661E500B30CCB /* SourceSansPro-ExtraLight.ttf */; };
+		3FBAEC5D256662C300B30CCB /* SourceSansPro-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FBAEC4D256661E100B30CCB /* SourceSansPro-LightItalic.ttf */; };
+		3FBAEC5E256662C300B30CCB /* SourceSansPro-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FBAEC48256661DE00B30CCB /* SourceSansPro-Regular.ttf */; };
+		3FBFFCAC256FD10700C07F8E /* PlantDocImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBFFCAB256FD10700C07F8E /* PlantDocImageCollectionViewCell.swift */; };
+		3FBFFCBB2575017A00C07F8E /* TodoCalenderPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBFFCBA2575017A00C07F8E /* TodoCalenderPickerViewController.swift */; };
+		3FBFFCBE2576797600C07F8E /* UITapGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBFFCBD2576797500C07F8E /* UITapGestureRecognizer.swift */; };
+		3FC03393255429F800E6E869 /* MyGardenDeviceDropdownTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC03392255429F800E6E869 /* MyGardenDeviceDropdownTableViewCell.swift */; };
+		3FC033962555992100E6E869 /* MyGardenEcoElementDropdownCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC033952555992100E6E869 /* MyGardenEcoElementDropdownCollectionViewCell.swift */; };
+		3FC033A425594F5800E6E869 /* MyGardenGridTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC033A325594F5800E6E869 /* MyGardenGridTableViewCell.swift */; };
+		3FC1D125256668B300E74555 /* fontHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC1D124256668B300E74555 /* fontHelper.swift */; };
+		3FE0E56225063354000328CF /* MyGardenListenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE0E56125063354000328CF /* MyGardenListenViewController.swift */; };
+		3FE0E56425063A25000328CF /* ListenListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE0E56325063A25000328CF /* ListenListTableViewCell.swift */; };
+		3FE0E56625064FBF000328CF /* PlantScanImageFinderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE0E56525064FBF000328CF /* PlantScanImageFinderViewController.swift */; };
+		3FE0E5682508BB26000328CF /* MyGardenListenEditGardenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE0E5672508BB26000328CF /* MyGardenListenEditGardenViewController.swift */; };
+		3FE0E56A250B776F000328CF /* FilterDropdownTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE0E569250B776F000328CF /* FilterDropdownTableViewCell.swift */; };
+		3FE0E56C2510FABF000328CF /* MyGardenEcoElementDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE0E56B2510FABF000328CF /* MyGardenEcoElementDetailViewController.swift */; };
+		3FE42A0824E188CB00DD5CC4 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE42A0724E188CB00DD5CC4 /* Array.swift */; };
+		4E0DF5DE25499025002D0018 /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0DF5DD25499025002D0018 /* ShopViewController.swift */; };
+		4E0EC8442566921100BECB4C /* ToDoPlantTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0EC8432566921100BECB4C /* ToDoPlantTableViewCell.swift */; };
+		4E0EC8472566D63A00BECB4C /* PlantSiblingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0EC8462566D63A00BECB4C /* PlantSiblingsTableViewCell.swift */; };
+		4E11E2772521DDF0004F7C6B /* DetailFilterFixedItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E11E2762521DDF0004F7C6B /* DetailFilterFixedItemTableViewCell.swift */; };
+		4E11E27A2521E387004F7C6B /* DetailFilterFixedDoubleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E11E2792521E387004F7C6B /* DetailFilterFixedDoubleTableViewCell.swift */; };
+		4E1256E624EA6DC50039344B /* Gardify_App_Neue_Farben_Kopf_v9.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 4E1256E224EA6DC40039344B /* Gardify_App_Neue_Farben_Kopf_v9.pdf */; };
+		4E1256E724EA6DC50039344B /* Gardify_App_Wetter_v1.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 4E1256E324EA6DC40039344B /* Gardify_App_Wetter_v1.pdf */; };
+		4E1256E824EA6DC50039344B /* Gardify_App_FarbtestsGarten_5.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 4E1256E424EA6DC40039344B /* Gardify_App_FarbtestsGarten_5.pdf */; };
+		4E1256E924EA6DC50039344B /* Gardify_App_Neue_Farben_Kopf_v11.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 4E1256E524EA6DC50039344B /* Gardify_App_Neue_Farben_Kopf_v11.pdf */; };
+		4E1256EB24EA765E0039344B /* MyGardenTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1256EA24EA765E0039344B /* MyGardenTableViewCell.swift */; };
+		4E1256ED24EAB20F0039344B /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1256EC24EAB20F0039344B /* UIView.swift */; };
+		4E1256EF24EAB5010039344B /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1256EE24EAB5010039344B /* TextField.swift */; };
+		4E1256F124EAB60E0039344B /* CALayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1256F024EAB60E0039344B /* CALayer.swift */; };
+		4E1256F324EABC0C0039344B /* MinimalTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1256F224EABC0C0039344B /* MinimalTextField.swift */; };
+		4E1256F524EABEFC0039344B /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1256F424EABEFC0039344B /* UIButton.swift */; };
+		4E1488AA2518B90600C7D9A9 /* UIWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1488A92518B90600C7D9A9 /* UIWindow.swift */; };
+		4E1B75412549AB78002890B2 /* WarningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1B75402549AB78002890B2 /* WarningViewController.swift */; };
+		4E1B75442549B39A002890B2 /* WarningTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1B75432549B39A002890B2 /* WarningTableViewCell.swift */; };
+		4E24F7A624E58E2C00F0CB83 /* MyGarden.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E24F7A524E58E2C00F0CB83 /* MyGarden.storyboard */; };
+		4E297A86255BEC2B008EC73A /* InstaVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E297A85255BEC2B008EC73A /* InstaVideoViewController.swift */; };
+		4E2C44102551527D005B082B /* News2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2C440F2551527D005B082B /* News2ViewController.swift */; };
+		4E2D56612513631C00F703AB /* ecoFilterAdditionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2D56602513631C00F703AB /* ecoFilterAdditionCollectionViewCell.swift */; };
+		4E30011D24F7E52800684DBA /* FilterCategoryListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E30011C24F7E52800684DBA /* FilterCategoryListViewCell.swift */; };
+		4E3D474F2579195E00701339 /* PlantSuggestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3D474E2579195E00701339 /* PlantSuggestViewController.swift */; };
+		4E3D475325794CF100701339 /* PlantSuggestImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3D475225794CF100701339 /* PlantSuggestImageCollectionViewCell.swift */; };
+		4E420CB9253D780700986558 /* PlantDocAskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E420CB8253D780700986558 /* PlantDocAskViewController.swift */; };
+		4E420CBC253D934900986558 /* PlantDocAskImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E420CBB253D934900986558 /* PlantDocAskImageCollectionViewCell.swift */; };
+		4E469455250F75160072649F /* SettingEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E469454250F75160072649F /* SettingEditViewController.swift */; };
+		4E469457250FA42D0072649F /* NewsletterRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E469456250FA42D0072649F /* NewsletterRegisterViewController.swift */; };
+		4E5425E02536F4E800147053 /* PlantScanLastImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5425DF2536F4E800147053 /* PlantScanLastImageCollectionViewCell.swift */; };
+		4E554B2A2552BCA70010249F /* NewsGridViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E554B292552BCA70010249F /* NewsGridViewCell.swift */; };
+		4E5577F02547015100E32E33 /* VideoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5577EF2547015100E32E33 /* VideoListViewController.swift */; };
+		4E5577F42547025B00E32E33 /* videoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5577F32547025B00E32E33 /* videoModel.swift */; };
+		4E5577F82547087E00E32E33 /* VideoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5577F72547087E00E32E33 /* VideoTableViewCell.swift */; };
+		4E5577FB25471C3200E32E33 /* News.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E5577FA25471C3100E32E33 /* News.storyboard */; };
+		4E5577FF2547272900E32E33 /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5577FE2547272900E32E33 /* NewsViewController.swift */; };
+		4E557802254729B600E32E33 /* NewsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E557801254729B600E32E33 /* NewsModel.swift */; };
+		4E5B9DBB2588CA1F008DFDC2 /* NewsLetter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E5B9DBA2588CA1E008DFDC2 /* NewsLetter.storyboard */; };
+		4E5B9DBF2588E93C008DFDC2 /* NewsLetterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5B9DBE2588E93C008DFDC2 /* NewsLetterViewController.swift */; };
+		4E73096B24FCED7400B092C2 /* Todo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E73096A24FCED7400B092C2 /* Todo.storyboard */; };
+		4E73096E24FCEE4300B092C2 /* TodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E73096D24FCEE4300B092C2 /* TodoViewController.swift */; };
+		4E73097024FCF58400B092C2 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E73096F24FCF58400B092C2 /* Date.swift */; };
+		4E73097324FD085C00B092C2 /* TodoViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E73097224FD085C00B092C2 /* TodoViewCell.swift */; };
+		4E73097524FD255200B092C2 /* TodoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E73097424FD255200B092C2 /* TodoDetailViewController.swift */; };
+		4E73097724FD44BA00B092C2 /* searchTagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E73097624FD44BA00B092C2 /* searchTagCollectionViewCell.swift */; };
+		4E73097924FD47AB00B092C2 /* CollectionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E73097824FD47AB00B092C2 /* CollectionLayout.swift */; };
+		4E7EC35124F68ADC00F12F0F /* deviceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7EC35024F68ADC00F12F0F /* deviceType.swift */; };
+		4E845B4825652B1700E5813B /* PlantDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E845B4725652B1700E5813B /* PlantDetailsTableViewCell.swift */; };
+		4E988E172500D589009222A7 /* MyGardenSelectOptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E988E162500D589009222A7 /* MyGardenSelectOptionViewController.swift */; };
+		4E988E192500F00E009222A7 /* MyGardenDeviceListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E988E182500F00E009222A7 /* MyGardenDeviceListTableViewCell.swift */; };
+		4E988E1B250117DC009222A7 /* MyGardenDeviceSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E988E1A250117DC009222A7 /* MyGardenDeviceSelectViewController.swift */; };
+		4E99707625877191002837B0 /* NewRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E99707525877191002837B0 /* NewRegisterViewController.swift */; };
+		4E9A6B122513A99E00805964 /* ColorTheme.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A6B112513A99E00805964 /* ColorTheme.xcassets */; };
+		4EA7043724E2B78D00D00653 /* PlantSearchFilterSliderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7043624E2B78D00D00653 /* PlantSearchFilterSliderViewController.swift */; };
+		4EA8BCBB25386B0E00864C52 /* PlantDocAnswerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA8BCBA25386B0E00864C52 /* PlantDocAnswerTableViewCell.swift */; };
+		4EB38EC0252618400037613A /* DetailFilterSliderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB38EBF252618400037613A /* DetailFilterSliderTableViewCell.swift */; };
+		4EB8B05924FFE67200589CE0 /* MyGardenEcoListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB8B05824FFE67200589CE0 /* MyGardenEcoListTableViewCell.swift */; };
+		4EBB2C492524874F00B41DA3 /* DetailFilterDropItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBB2C482524874F00B41DA3 /* DetailFilterDropItemTableViewCell.swift */; };
+		4ECA3E23250908130007A5C6 /* MyGardenListenDeleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ECA3E22250908130007A5C6 /* MyGardenListenDeleteViewController.swift */; };
+		4ECC360124EE891A00B79FC2 /* ToDoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ECC360024EE891A00B79FC2 /* ToDoTableViewCell.swift */; };
+		4ECC360324EE9BA200B79FC2 /* PlantCountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ECC360224EE9BA200B79FC2 /* PlantCountModel.swift */; };
+		4ECC360724EEAA6600B79FC2 /* EcoFilterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ECC360624EEAA6600B79FC2 /* EcoFilterCollectionViewCell.swift */; };
+		4ECFB812254AE4D600EC09DA /* GardeningAZListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ECFB811254AE4D600EC09DA /* GardeningAZListTableViewCell.swift */; };
+		4EDC2C44251CB9E1006D62D7 /* EcoDropdownTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EDC2C43251CB9E1006D62D7 /* EcoDropdownTableViewCell.swift */; };
+		4EDD4C9F254047730001B9F9 /* PlantDocSimpleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EDD4C9E254047730001B9F9 /* PlantDocSimpleCell.swift */; };
+		4EDF237924ED123F000A3296 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EDF237824ED123F000A3296 /* Colors.swift */; };
+		4EDF237B24ED1888000A3296 /* ColorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EDF237A24ED1888000A3296 /* ColorCollectionViewCell.swift */; };
+		4EDF237D24ED257B000A3296 /* ecoCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EDF237C24ED257B000A3296 /* ecoCategory.swift */; };
+		4EDF237F24ED2BDF000A3296 /* reusableCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EDF237E24ED2BDF000A3296 /* reusableCollectionView.swift */; };
+		4EDF238124ED2D25000A3296 /* EcoCategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EDF238024ED2D25000A3296 /* EcoCategoryCollectionViewCell.swift */; };
+		4EDF238324ED4E07000A3296 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EDF238224ED4E07000A3296 /* UILabel.swift */; };
+		4EDF238524ED73E9000A3296 /* checkListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EDF238424ED73E9000A3296 /* checkListTableViewCell.swift */; };
+		4EEFE17524D827B4003A5426 /* Weather.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4EEFE17424D827B4003A5426 /* Weather.storyboard */; };
+		4EEFE17924D82DE1003A5426 /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EEFE17824D82DE1003A5426 /* WeatherViewController.swift */; };
+		4EEFE17C24D83393003A5426 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EEFE17B24D83393003A5426 /* Weather.swift */; };
+		EDC7D872979D9200A5E5DF00 /* Pods_GardifyIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 576DD7C5DEB2E68BE4F09A4C /* Pods_GardifyIOS.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1A2AB5792506825B00835C16 /* Video.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Video.storyboard; sourceTree = "<group>"; };
+		1A3DD54624ED431400B6575D /* DailyWeatherViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DailyWeatherViewCell.swift; path = GardifyIOS/Controllers/DailyWeatherViewCell.swift; sourceTree = SOURCE_ROOT; };
+		1A3EE27724F7D5DB00918344 /* DurationRatingPlantModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DurationRatingPlantModel.swift; sourceTree = "<group>"; };
+		1A518E90251CA2630014448E /* LocationInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationInfo.swift; sourceTree = "<group>"; };
+		1A518E93251CE7620014448E /* OwnTodoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnTodoViewController.swift; sourceTree = "<group>"; };
+		1A518E96251CE7800014448E /* TodoDiaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoDiaryViewController.swift; sourceTree = "<group>"; };
+		1A62E8142508C89B00716675 /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
+		1A7B266925028F5100F7A0A1 /* Community.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Community.storyboard; sourceTree = "<group>"; };
+		1A7B266B25028FF600F7A0A1 /* CommunityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityViewController.swift; sourceTree = "<group>"; };
+		1A7B266E25029CFE00F7A0A1 /* CommunityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityTableViewCell.swift; sourceTree = "<group>"; };
+		1AA9547B24DAD0EF0085BFAC /* WeatherViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewCell.swift; sourceTree = SOURCE_ROOT; };
+		1AED79E224E1819D006080DA /* EcoScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoScanViewController.swift; sourceTree = "<group>"; };
+		1AED79E424E181E9006080DA /* EcoScan.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EcoScan.storyboard; sourceTree = "<group>"; };
+		1AED79E624E18998006080DA /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		1AED79EC24EA706A006080DA /* WeatherUpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherUpdateViewController.swift; sourceTree = "<group>"; };
+		1AED79EE24EA8836006080DA /* WeatherUpdateViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WeatherUpdateViewCell.swift; path = GardifyIOS/Controllers/WeatherUpdateViewCell.swift; sourceTree = SOURCE_ROOT; };
+		3F01DAF524D7FFEB00916BB2 /* GardifyIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GardifyIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F01DAF824D7FFEB00916BB2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		3F01DAFA24D7FFEB00916BB2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		3F01DB0424D7FFEB00916BB2 /* GardifyIOS.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GardifyIOS.xcdatamodel; sourceTree = "<group>"; };
+		3F01DB0624D7FFF000916BB2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3F01DB0B24D7FFF000916BB2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3F01DB1424D804C500916BB2 /* PlantDocDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlantDocDetailViewController.swift; sourceTree = "<group>"; };
+		3F01DB1524D804C500916BB2 /* HomeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
+		3F01DB1624D804C500916BB2 /* FirstViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
+		3F01DB1724D804C500916BB2 /* PlantScanResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlantScanResultViewController.swift; sourceTree = "<group>"; };
+		3F01DB1824D804C500916BB2 /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		3F01DB1924D804C500916BB2 /* ContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
+		3F01DB1A24D804C500916BB2 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		3F01DB1B24D804C500916BB2 /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		3F01DB1C24D804C500916BB2 /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
+		3F01DB1D24D804C500916BB2 /* PlantDocViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlantDocViewController.swift; sourceTree = "<group>"; };
+		3F01DB1E24D804C500916BB2 /* PlantScanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlantScanViewController.swift; sourceTree = "<group>"; };
+		3F01DB1F24D804C500916BB2 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		3F01DB2F24D804D100916BB2 /* PlantDocCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlantDocCell.swift; sourceTree = "<group>"; };
+		3F01DB3124D804D100916BB2 /* MenuViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewCell.swift; sourceTree = "<group>"; };
+		3F01DB3324D804D100916BB2 /* ScanResultViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanResultViewCell.swift; sourceTree = "<group>"; };
+		3F01DB3524D804D100916BB2 /* HomeViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewCell.swift; sourceTree = "<group>"; };
+		3F01DB3724D804D100916BB2 /* PlantDoc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlantDoc.swift; sourceTree = "<group>"; };
+		3F01DB3824D804D100916BB2 /* LoginModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
+		3F01DB3924D804D100916BB2 /* ScannerResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScannerResult.swift; sourceTree = "<group>"; };
+		3F01DB4224D804DA00916BB2 /* PlantDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PlantDetail.storyboard; sourceTree = "<group>"; };
+		3F01DB4324D804DA00916BB2 /* PlantDoc.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PlantDoc.storyboard; sourceTree = "<group>"; };
+		3F01DB4524D804DA00916BB2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		3F01DB4724D804DA00916BB2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		3F01DB4824D804DA00916BB2 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		3F01DB4A24D804DA00916BB2 /* PlantScan.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PlantScan.storyboard; sourceTree = "<group>"; };
+		3F01DB5324D804E400916BB2 /* SlideInTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideInTransition.swift; sourceTree = "<group>"; };
+		3F01DB5524D804E400916BB2 /* CollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionView.swift; sourceTree = "<group>"; };
+		3F01DB5624D804E400916BB2 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		3F01DB5724D804E400916BB2 /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
+		3F01DB5824D804E400916BB2 /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
+		3F01DB5924D804E400916BB2 /* UIImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
+		3F01DB5B24D804E400916BB2 /* Links.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Links.swift; sourceTree = "<group>"; };
+		3F01DB5C24D804E400916BB2 /* Networking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
+		3F01DB5D24D804E400916BB2 /* UserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
+		3F01DB6724D81DD400916BB2 /* Shop.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Shop.storyboard; sourceTree = "<group>"; };
+		3F01DB6924D824EB00916BB2 /* PlantDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantDetailViewController.swift; sourceTree = "<group>"; };
+		3F01DB6B24D82B3600916BB2 /* PlantDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantDetail.swift; sourceTree = "<group>"; };
+		3F01DB6D24D83AE600916BB2 /* UserPlant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPlant.swift; sourceTree = "<group>"; };
+		3F01DB6F24D8460B00916BB2 /* PlantGarden.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PlantGarden.storyboard; sourceTree = "<group>"; };
+		3F01DB7124D8467D00916BB2 /* PlantGardenAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantGardenAddViewController.swift; sourceTree = "<group>"; };
+		3F01DB7324D84E5A00916BB2 /* MyGardenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGardenModel.swift; sourceTree = "<group>"; };
+		3F01DB7524D997F300916BB2 /* PlantSearch.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PlantSearch.storyboard; sourceTree = "<group>"; };
+		3F01DB7724D9B46100916BB2 /* PlantSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantSearchViewController.swift; sourceTree = "<group>"; };
+		3F01DB7924D9B87000916BB2 /* PlantSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantSearch.swift; sourceTree = "<group>"; };
+		3F01DB7B24D9C14D00916BB2 /* Parameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parameters.swift; sourceTree = "<group>"; };
+		3F01DB7E24DA893600916BB2 /* PlantSearchViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantSearchViewCell.swift; sourceTree = "<group>"; };
+		3F01DB8024DAA7DE00916BB2 /* PlantSearchFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantSearchFilterViewController.swift; sourceTree = "<group>"; };
+		3F1269BA25518862005D3159 /* UITableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewCell.swift; sourceTree = "<group>"; };
+		3F295E22255AA266006AC6E0 /* MyGardenPlantNoticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGardenPlantNoticeViewController.swift; sourceTree = "<group>"; };
+		3F295E25255AA27E006AC6E0 /* MyGardenPlantMoveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGardenPlantMoveViewController.swift; sourceTree = "<group>"; };
+		3F295E28255AA29F006AC6E0 /* MyGardenPlantCountChangeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGardenPlantCountChangeViewController.swift; sourceTree = "<group>"; };
+		3F2AE5DD25933A1300CFCFE6 /* UISwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISwitch.swift; sourceTree = "<group>"; };
+		3F30C91D24E67A160044F779 /* MyGardenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGardenViewController.swift; sourceTree = "<group>"; };
+		3F30C92024EA12A90044F779 /* FullTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullTableView.swift; sourceTree = "<group>"; };
+		3F30C92424EBF6900044F779 /* FilterSelectTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSelectTableViewCell.swift; sourceTree = "<group>"; };
+		3F30C92E24F000DA0044F779 /* PlantNameSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantNameSearchViewController.swift; sourceTree = "<group>"; };
+		3F30C93124F3B9790044F779 /* CustomNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationViewController.swift; sourceTree = "<group>"; };
+		3F30C93524F3BC110044F779 /* CustomNavItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavItem.swift; sourceTree = "<group>"; };
+		3F30C93724F3CE960044F779 /* UINavigationItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationItem.swift; sourceTree = "<group>"; };
+		3F30C93924F3EA630044F779 /* TodoCountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCountModel.swift; sourceTree = "<group>"; };
+		3F30C93B24F507CA0044F779 /* NavView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavView.swift; sourceTree = "<group>"; };
+		3F3C988A251E129B00B3AE98 /* DetailFilterFixedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailFilterFixedTableViewCell.swift; sourceTree = "<group>"; };
+		3F3C988D251E25A000B3AE98 /* DetailFilterFixedItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailFilterFixedItemCollectionViewCell.swift; sourceTree = "<group>"; };
+		3F3C98912523614300B3AE98 /* DetailFilterDropTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailFilterDropTableViewCell.swift; sourceTree = "<group>"; };
+		3F420D5B2502350200A5E5DE /* GardeningAZ.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GardeningAZ.storyboard; sourceTree = "<group>"; };
+		3F420D5E2502354700A5E5DE /* GardeningAZViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GardeningAZViewController.swift; sourceTree = "<group>"; };
+		3F420D6125024E6A00A5E5DE /* GardeningAZTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GardeningAZTableViewCell.swift; sourceTree = "<group>"; };
+		3F420D6325027D4400A5E5DE /* GardeningAZModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GardeningAZModel.swift; sourceTree = "<group>"; };
+		3F45692225666552009E0CD9 /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
+		3F74B99E258A1719002767CD /* Contact.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Contact.storyboard; sourceTree = "<group>"; };
+		3F758EB1257F867300AA5196 /* EcoScanSendEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoScanSendEmailViewController.swift; sourceTree = "<group>"; };
+		3F758EB62580E8B700AA5196 /* DropdownListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownListView.swift; sourceTree = "<group>"; };
+		3F758EB92580E8F400AA5196 /* DropdownListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DropdownListView.xib; sourceTree = "<group>"; };
+		3F758EBC2581022800AA5196 /* DropdownListViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownListViewTableViewCell.swift; sourceTree = "<group>"; };
+		3F758EBD2581022800AA5196 /* DropdownListViewTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DropdownListViewTableViewCell.xib; sourceTree = "<group>"; };
+		3F89D6682579032300B660F6 /* PlantSuggest.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PlantSuggest.storyboard; sourceTree = "<group>"; };
+		3F9523252535955800BA4A74 /* imageStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imageStorage.swift; sourceTree = "<group>"; };
+		3F95232F253EE1BA00BA4A74 /* PlantDocMyPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantDocMyPostViewController.swift; sourceTree = "<group>"; };
+		3F952367254836E800BA4A74 /* NewsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewCell.swift; sourceTree = "<group>"; };
+		3F9D65862552EB3100F6E00C /* MyGardenAddNewGardenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGardenAddNewGardenViewController.swift; sourceTree = "<group>"; };
+		3FBAEC372563B3EC00B30CCB /* MenuSideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuSideViewController.swift; sourceTree = "<group>"; };
+		3FBAEC3A2563FC1E00B30CCB /* Calender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calender.swift; sourceTree = "<group>"; };
+		3FBAEC3D25640F6F00B30CCB /* TodoCalenderCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCalenderCollectionViewCell.swift; sourceTree = "<group>"; };
+		3FBAEC41256559AD00B30CCB /* TodoEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoEditViewController.swift; sourceTree = "<group>"; };
+		3FBAEC46256661DD00B30CCB /* SourceSansPro-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-BoldItalic.ttf"; sourceTree = "<group>"; };
+		3FBAEC47256661DE00B30CCB /* SourceSansPro-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Italic.ttf"; sourceTree = "<group>"; };
+		3FBAEC48256661DE00B30CCB /* SourceSansPro-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Regular.ttf"; sourceTree = "<group>"; };
+		3FBAEC49256661DF00B30CCB /* SourceSansPro-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-SemiBold.ttf"; sourceTree = "<group>"; };
+		3FBAEC4A256661DF00B30CCB /* SourceSansPro-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
+		3FBAEC4B256661E000B30CCB /* SourceSansPro-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
+		3FBAEC4C256661E100B30CCB /* SourceSansPro-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-BlackItalic.ttf"; sourceTree = "<group>"; };
+		3FBAEC4D256661E100B30CCB /* SourceSansPro-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-LightItalic.ttf"; sourceTree = "<group>"; };
+		3FBAEC4E256661E200B30CCB /* SourceSansPro-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Black.ttf"; sourceTree = "<group>"; };
+		3FBAEC4F256661E300B30CCB /* SourceSansPro-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Light.ttf"; sourceTree = "<group>"; };
+		3FBAEC50256661E500B30CCB /* SourceSansPro-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-ExtraLight.ttf"; sourceTree = "<group>"; };
+		3FBAEC51256661E500B30CCB /* SourceSansPro-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Bold.ttf"; sourceTree = "<group>"; };
+		3FBFFCAB256FD10700C07F8E /* PlantDocImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantDocImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		3FBFFCBA2575017A00C07F8E /* TodoCalenderPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCalenderPickerViewController.swift; sourceTree = "<group>"; };
+		3FBFFCBD2576797500C07F8E /* UITapGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITapGestureRecognizer.swift; sourceTree = "<group>"; };
+		3FC03392255429F800E6E869 /* MyGardenDeviceDropdownTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGardenDeviceDropdownTableViewCell.swift; sourceTree = "<group>"; };
+		3FC033952555992100E6E869 /* MyGardenEcoElementDropdownCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGardenEcoElementDropdownCollectionViewCell.swift; sourceTree = "<group>"; };
+		3FC033A325594F5800E6E869 /* MyGardenGridTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGardenGridTableViewCell.swift; sourceTree = "<group>"; };
+		3FC1D124256668B300E74555 /* fontHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fontHelper.swift; sourceTree = "<group>"; };
+		3FE0E56125063354000328CF /* MyGardenListenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGardenListenViewController.swift; sourceTree = "<group>"; };
+		3FE0E56325063A25000328CF /* ListenListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenListTableViewCell.swift; sourceTree = "<group>"; };
+		3FE0E56525064FBF000328CF /* PlantScanImageFinderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantScanImageFinderViewController.swift; sourceTree = "<group>"; };
+		3FE0E5672508BB26000328CF /* MyGardenListenEditGardenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGardenListenEditGardenViewController.swift; sourceTree = "<group>"; };
+		3FE0E569250B776F000328CF /* FilterDropdownTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterDropdownTableViewCell.swift; sourceTree = "<group>"; };
+		3FE0E56B2510FABF000328CF /* MyGardenEcoElementDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGardenEcoElementDetailViewController.swift; sourceTree = "<group>"; };
+		3FE42A0724E188CB00DD5CC4 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
+		4E0DF5DD25499025002D0018 /* ShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
+		4E0EC8432566921100BECB4C /* ToDoPlantTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoPlantTableViewCell.swift; sourceTree = "<group>"; };
+		4E0EC8462566D63A00BECB4C /* PlantSiblingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantSiblingsTableViewCell.swift; sourceTree = "<group>"; };
+		4E11E2762521DDF0004F7C6B /* DetailFilterFixedItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailFilterFixedItemTableViewCell.swift; sourceTree = "<group>"; };
+		4E11E2792521E387004F7C6B /* DetailFilterFixedDoubleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailFilterFixedDoubleTableViewCell.swift; sourceTree = "<group>"; };
+		4E1256E224EA6DC40039344B /* Gardify_App_Neue_Farben_Kopf_v9.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Gardify_App_Neue_Farben_Kopf_v9.pdf; sourceTree = "<group>"; };
+		4E1256E324EA6DC40039344B /* Gardify_App_Wetter_v1.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Gardify_App_Wetter_v1.pdf; sourceTree = "<group>"; };
+		4E1256E424EA6DC40039344B /* Gardify_App_FarbtestsGarten_5.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Gardify_App_FarbtestsGarten_5.pdf; sourceTree = "<group>"; };
+		4E1256E524EA6DC50039344B /* Gardify_App_Neue_Farben_Kopf_v11.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Gardify_App_Neue_Farben_Kopf_v11.pdf; sourceTree = "<group>"; };
+		4E1256EA24EA765E0039344B /* MyGardenTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MyGardenTableViewCell.swift; path = GardifyIOS/AppData/MyGardenTableViewCell.swift; sourceTree = SOURCE_ROOT; };
+		4E1256EC24EAB20F0039344B /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		4E1256EE24EAB5010039344B /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
+		4E1256F024EAB60E0039344B /* CALayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CALayer.swift; sourceTree = "<group>"; };
+		4E1256F224EABC0C0039344B /* MinimalTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimalTextField.swift; sourceTree = "<group>"; };
+		4E1256F424EABEFC0039344B /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
+		4E1488A92518B90600C7D9A9 /* UIWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIWindow.swift; sourceTree = "<group>"; };
+		4E1B75402549AB78002890B2 /* WarningViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarningViewController.swift; sourceTree = "<group>"; };
+		4E1B75432549B39A002890B2 /* WarningTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarningTableViewCell.swift; sourceTree = "<group>"; };
+		4E24F7A524E58E2C00F0CB83 /* MyGarden.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyGarden.storyboard; sourceTree = "<group>"; };
+		4E297A85255BEC2B008EC73A /* InstaVideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstaVideoViewController.swift; sourceTree = "<group>"; };
+		4E2C440F2551527D005B082B /* News2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News2ViewController.swift; sourceTree = "<group>"; };
+		4E2D56602513631C00F703AB /* ecoFilterAdditionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ecoFilterAdditionCollectionViewCell.swift; sourceTree = "<group>"; };
+		4E30011C24F7E52800684DBA /* FilterCategoryListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCategoryListViewCell.swift; sourceTree = "<group>"; };
+		4E3D474E2579195E00701339 /* PlantSuggestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantSuggestViewController.swift; sourceTree = "<group>"; };
+		4E3D475225794CF100701339 /* PlantSuggestImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantSuggestImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		4E420CB8253D780700986558 /* PlantDocAskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantDocAskViewController.swift; sourceTree = "<group>"; };
+		4E420CBB253D934900986558 /* PlantDocAskImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantDocAskImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		4E469454250F75160072649F /* SettingEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingEditViewController.swift; sourceTree = "<group>"; };
+		4E469456250FA42D0072649F /* NewsletterRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsletterRegisterViewController.swift; sourceTree = "<group>"; };
+		4E5425DF2536F4E800147053 /* PlantScanLastImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantScanLastImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		4E554B292552BCA70010249F /* NewsGridViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsGridViewCell.swift; sourceTree = "<group>"; };
+		4E5577EF2547015100E32E33 /* VideoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoListViewController.swift; sourceTree = "<group>"; };
+		4E5577F32547025B00E32E33 /* videoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = videoModel.swift; sourceTree = "<group>"; };
+		4E5577F72547087E00E32E33 /* VideoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTableViewCell.swift; sourceTree = "<group>"; };
+		4E5577FA25471C3100E32E33 /* News.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = News.storyboard; sourceTree = "<group>"; };
+		4E5577FE2547272900E32E33 /* NewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
+		4E557801254729B600E32E33 /* NewsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsModel.swift; sourceTree = "<group>"; };
+		4E5B9DBA2588CA1E008DFDC2 /* NewsLetter.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewsLetter.storyboard; sourceTree = "<group>"; };
+		4E5B9DBE2588E93C008DFDC2 /* NewsLetterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsLetterViewController.swift; sourceTree = "<group>"; };
+		4E73096A24FCED7400B092C2 /* Todo.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Todo.storyboard; sourceTree = "<group>"; };
+		4E73096D24FCEE4300B092C2 /* TodoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoViewController.swift; sourceTree = "<group>"; };
+		4E73096F24FCF58400B092C2 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		4E73097224FD085C00B092C2 /* TodoViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoViewCell.swift; sourceTree = "<group>"; };
+		4E73097424FD255200B092C2 /* TodoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoDetailViewController.swift; sourceTree = "<group>"; };
+		4E73097624FD44BA00B092C2 /* searchTagCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = searchTagCollectionViewCell.swift; sourceTree = "<group>"; };
+		4E73097824FD47AB00B092C2 /* CollectionLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionLayout.swift; sourceTree = "<group>"; };
+		4E7EC35024F68ADC00F12F0F /* deviceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = deviceType.swift; sourceTree = "<group>"; };
+		4E845B4725652B1700E5813B /* PlantDetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantDetailsTableViewCell.swift; sourceTree = "<group>"; };
+		4E988E162500D589009222A7 /* MyGardenSelectOptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGardenSelectOptionViewController.swift; sourceTree = "<group>"; };
+		4E988E182500F00E009222A7 /* MyGardenDeviceListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGardenDeviceListTableViewCell.swift; sourceTree = "<group>"; };
+		4E988E1A250117DC009222A7 /* MyGardenDeviceSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGardenDeviceSelectViewController.swift; sourceTree = "<group>"; };
+		4E99707525877191002837B0 /* NewRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRegisterViewController.swift; sourceTree = "<group>"; };
+		4E9A6B112513A99E00805964 /* ColorTheme.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ColorTheme.xcassets; sourceTree = "<group>"; };
+		4EA7043624E2B78D00D00653 /* PlantSearchFilterSliderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantSearchFilterSliderViewController.swift; sourceTree = "<group>"; };
+		4EA8BCBA25386B0E00864C52 /* PlantDocAnswerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantDocAnswerTableViewCell.swift; sourceTree = "<group>"; };
+		4EB38EBF252618400037613A /* DetailFilterSliderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailFilterSliderTableViewCell.swift; sourceTree = "<group>"; };
+		4EB8B05824FFE67200589CE0 /* MyGardenEcoListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGardenEcoListTableViewCell.swift; sourceTree = "<group>"; };
+		4EBB2C482524874F00B41DA3 /* DetailFilterDropItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailFilterDropItemTableViewCell.swift; sourceTree = "<group>"; };
+		4ECA3E22250908130007A5C6 /* MyGardenListenDeleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGardenListenDeleteViewController.swift; sourceTree = "<group>"; };
+		4ECC360024EE891A00B79FC2 /* ToDoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ToDoTableViewCell.swift; path = GardifyIOS/Models/ViewModels/General/ToDoTableViewCell.swift; sourceTree = SOURCE_ROOT; };
+		4ECC360224EE9BA200B79FC2 /* PlantCountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantCountModel.swift; sourceTree = "<group>"; };
+		4ECC360624EEAA6600B79FC2 /* EcoFilterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EcoFilterCollectionViewCell.swift; path = GardifyIOS/Models/AppModels/EcoFilterCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
+		4ECFB811254AE4D600EC09DA /* GardeningAZListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GardeningAZListTableViewCell.swift; sourceTree = "<group>"; };
+		4EDC2C43251CB9E1006D62D7 /* EcoDropdownTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoDropdownTableViewCell.swift; sourceTree = "<group>"; };
+		4EDD4C9E254047730001B9F9 /* PlantDocSimpleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantDocSimpleCell.swift; sourceTree = "<group>"; };
+		4EDF237824ED123F000A3296 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		4EDF237A24ED1888000A3296 /* ColorCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCollectionViewCell.swift; sourceTree = "<group>"; };
+		4EDF237C24ED257B000A3296 /* ecoCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ecoCategory.swift; sourceTree = "<group>"; };
+		4EDF237E24ED2BDF000A3296 /* reusableCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = reusableCollectionView.swift; sourceTree = "<group>"; };
+		4EDF238024ED2D25000A3296 /* EcoCategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoCategoryCollectionViewCell.swift; sourceTree = "<group>"; };
+		4EDF238224ED4E07000A3296 /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
+		4EDF238424ED73E9000A3296 /* checkListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = checkListTableViewCell.swift; sourceTree = "<group>"; };
+		4EEFE17424D827B4003A5426 /* Weather.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Weather.storyboard; sourceTree = "<group>"; };
+		4EEFE17824D82DE1003A5426 /* WeatherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
+		4EEFE17B24D83393003A5426 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
+		576DD7C5DEB2E68BE4F09A4C /* Pods_GardifyIOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GardifyIOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5CE032DF2B6E42859BFABC03 /* Pods-GardifyIOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GardifyIOS.debug.xcconfig"; path = "Target Support Files/Pods-GardifyIOS/Pods-GardifyIOS.debug.xcconfig"; sourceTree = "<group>"; };
+		AB88156D5B5E49AEFBD80E39 /* Pods-GardifyIOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GardifyIOS.release.xcconfig"; path = "Target Support Files/Pods-GardifyIOS/Pods-GardifyIOS.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3F01DAF224D7FFEB00916BB2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EDC7D872979D9200A5E5DF00 /* Pods_GardifyIOS.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1A7B266D25029CDD00F7A0A1 /* Community */ = {
+			isa = PBXGroup;
+			children = (
+				1A7B266E25029CFE00F7A0A1 /* CommunityTableViewCell.swift */,
+			);
+			path = Community;
+			sourceTree = "<group>";
+		};
+		3F01DAEC24D7FFEB00916BB2 = {
+			isa = PBXGroup;
+			children = (
+				A9CB27300A64FB52798FF28E /* Frameworks */,
+				3F01DAF724D7FFEB00916BB2 /* GardifyIOS */,
+				41D63A297C9A3B7382118397 /* Pods */,
+				3F01DAF624D7FFEB00916BB2 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3F01DAF624D7FFEB00916BB2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3F01DAF524D7FFEB00916BB2 /* GardifyIOS.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3F01DAF724D7FFEB00916BB2 /* GardifyIOS */ = {
+			isa = PBXGroup;
+			children = (
+				4E1256E124EA6DC40039344B /* AppData */,
+				3F01DB5224D804E400916BB2 /* Utilities */,
+				3F01DB1324D804C500916BB2 /* Controllers */,
+				3F01DB4124D804DA00916BB2 /* Storyboard */,
+				3F01DB2C24D804D100916BB2 /* Models */,
+				3F01DAF824D7FFEB00916BB2 /* AppDelegate.swift */,
+				3F01DAFA24D7FFEB00916BB2 /* SceneDelegate.swift */,
+				3F01DB0624D7FFF000916BB2 /* Assets.xcassets */,
+				3F01DB0B24D7FFF000916BB2 /* Info.plist */,
+				3F01DB0324D7FFEB00916BB2 /* GardifyIOS.xcdatamodeld */,
+			);
+			path = GardifyIOS;
+			sourceTree = "<group>";
+		};
+		3F01DB1324D804C500916BB2 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				4E5B9DBD2588E920008DFDC2 /* NewsLetter */,
+				3F758EB0257F865B00AA5196 /* EcoScan */,
+				4E3D474D257918F600701339 /* PlantSuggest */,
+				4E0DF5DC25499014002D0018 /* Shop */,
+				4E5577FD254726DC00E32E33 /* News */,
+				4E5577ED2546F73F00E32E33 /* Video */,
+				4E469453250F74D90072649F /* Setting */,
+				4EBA7B8125065C770057334F /* PlantDoc */,
+				3F420D5D2502350F00A5E5DE /* GardeningAZ */,
+				4E73096C24FCEE1300B092C2 /* Todos */,
+				3F30C93024F3B8E30044F779 /* Navigation */,
+				3F30C91C24E679340044F779 /* MyGarden */,
+				4EA7043924E2B7D600D00653 /* Plant Scan */,
+				3F01DB1924D804C500916BB2 /* ContainerViewController.swift */,
+				1AED79E224E1819D006080DA /* EcoScanViewController.swift */,
+				3F01DB1624D804C500916BB2 /* FirstViewController.swift */,
+				3F01DB1524D804C500916BB2 /* HomeController.swift */,
+				3F01DB1A24D804C500916BB2 /* LoginViewController.swift */,
+				4E99707525877191002837B0 /* NewRegisterViewController.swift */,
+				3F01DB1824D804C500916BB2 /* MainTabBarController.swift */,
+				3F01DB1C24D804C500916BB2 /* MenuController.swift */,
+				4EA7043824E2B79800D00653 /* Plant Search */,
+				3F01DB6924D824EB00916BB2 /* PlantDetailViewController.swift */,
+				3F01DB7124D8467D00916BB2 /* PlantGardenAddViewController.swift */,
+				3F01DB1F24D804C500916BB2 /* TabBarController.swift */,
+				4EEFE17824D82DE1003A5426 /* WeatherViewController.swift */,
+				1AED79EC24EA706A006080DA /* WeatherUpdateViewController.swift */,
+				1A7B266B25028FF600F7A0A1 /* CommunityViewController.swift */,
+				3FBAEC372563B3EC00B30CCB /* MenuSideViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		3F01DB2C24D804D100916BB2 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				3F01DB2D24D804D100916BB2 /* ViewModels */,
+				3F01DB3624D804D100916BB2 /* AppModels */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		3F01DB2D24D804D100916BB2 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				4E3D475125794CA600701339 /* PlantSuggest */,
+				3F952366254836B300BA4A74 /* News */,
+				4E5577F62547086600E32E33 /* Video */,
+				3F420D6025024E5100A5E5DE /* GardeningAZ */,
+				1A7B266D25029CDD00F7A0A1 /* Community */,
+				4E73097124FD084400B092C2 /* Todo */,
+				3F30C91F24EA09230044F779 /* MyGarden */,
+				3F01DB7D24DA890300916BB2 /* PlantSearch */,
+				3F01DB3424D804D100916BB2 /* HomeController */,
+				4EEFE17A24D82E92003A5426 /* Weather */,
+				3F01DB2E24D804D100916BB2 /* PlantDocController */,
+				3F01DB3024D804D100916BB2 /* General */,
+				3F01DB3224D804D100916BB2 /* PlantScanResultController */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		3F01DB2E24D804D100916BB2 /* PlantDocController */ = {
+			isa = PBXGroup;
+			children = (
+				3F01DB2F24D804D100916BB2 /* PlantDocCell.swift */,
+				4EA8BCBA25386B0E00864C52 /* PlantDocAnswerTableViewCell.swift */,
+				4E420CBB253D934900986558 /* PlantDocAskImageCollectionViewCell.swift */,
+				4EDD4C9E254047730001B9F9 /* PlantDocSimpleCell.swift */,
+				3FBFFCAB256FD10700C07F8E /* PlantDocImageCollectionViewCell.swift */,
+			);
+			path = PlantDocController;
+			sourceTree = "<group>";
+		};
+		3F01DB3024D804D100916BB2 /* General */ = {
+			isa = PBXGroup;
+			children = (
+				3F01DB3124D804D100916BB2 /* MenuViewCell.swift */,
+				4EDF237A24ED1888000A3296 /* ColorCollectionViewCell.swift */,
+				4EDF238024ED2D25000A3296 /* EcoCategoryCollectionViewCell.swift */,
+				4EDF238424ED73E9000A3296 /* checkListTableViewCell.swift */,
+				3F758EB62580E8B700AA5196 /* DropdownListView.swift */,
+				3F758EB92580E8F400AA5196 /* DropdownListView.xib */,
+				3F758EBC2581022800AA5196 /* DropdownListViewTableViewCell.swift */,
+				3F758EBD2581022800AA5196 /* DropdownListViewTableViewCell.xib */,
+			);
+			path = General;
+			sourceTree = "<group>";
+		};
+		3F01DB3224D804D100916BB2 /* PlantScanResultController */ = {
+			isa = PBXGroup;
+			children = (
+				3F01DB3324D804D100916BB2 /* ScanResultViewCell.swift */,
+				4E5425DF2536F4E800147053 /* PlantScanLastImageCollectionViewCell.swift */,
+			);
+			path = PlantScanResultController;
+			sourceTree = "<group>";
+		};
+		3F01DB3424D804D100916BB2 /* HomeController */ = {
+			isa = PBXGroup;
+			children = (
+				3F01DB3524D804D100916BB2 /* HomeViewCell.swift */,
+				3F30C93B24F507CA0044F779 /* NavView.swift */,
+			);
+			path = HomeController;
+			sourceTree = "<group>";
+		};
+		3F01DB3624D804D100916BB2 /* AppModels */ = {
+			isa = PBXGroup;
+			children = (
+				4EEFE17B24D83393003A5426 /* Weather.swift */,
+				3F01DB3724D804D100916BB2 /* PlantDoc.swift */,
+				3F01DB6B24D82B3600916BB2 /* PlantDetail.swift */,
+				3F01DB3924D804D100916BB2 /* ScannerResult.swift */,
+				3F01DB6D24D83AE600916BB2 /* UserPlant.swift */,
+				3F01DB7324D84E5A00916BB2 /* MyGardenModel.swift */,
+				3F01DB7924D9B87000916BB2 /* PlantSearch.swift */,
+				1AED79E624E18998006080DA /* UserInfo.swift */,
+				3F30C92024EA12A90044F779 /* FullTableView.swift */,
+				4E1256F224EABC0C0039344B /* MinimalTextField.swift */,
+				4EDF237E24ED2BDF000A3296 /* reusableCollectionView.swift */,
+				4ECC360224EE9BA200B79FC2 /* PlantCountModel.swift */,
+				3F30C93924F3EA630044F779 /* TodoCountModel.swift */,
+				1A3EE27724F7D5DB00918344 /* DurationRatingPlantModel.swift */,
+				3F420D6325027D4400A5E5DE /* GardeningAZModel.swift */,
+				1A518E90251CA2630014448E /* LocationInfo.swift */,
+				4E5577F32547025B00E32E33 /* videoModel.swift */,
+				4E557801254729B600E32E33 /* NewsModel.swift */,
+				3FBAEC3A2563FC1E00B30CCB /* Calender.swift */,
+			);
+			path = AppModels;
+			sourceTree = "<group>";
+		};
+		3F01DB4124D804DA00916BB2 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				3F01DB4224D804DA00916BB2 /* PlantDetail.storyboard */,
+				3F01DB4324D804DA00916BB2 /* PlantDoc.storyboard */,
+				3F01DB4424D804DA00916BB2 /* LaunchScreen.storyboard */,
+				3F01DB4624D804DA00916BB2 /* Main.storyboard */,
+				3F01DB4824D804DA00916BB2 /* Login.storyboard */,
+				3F01DB4A24D804DA00916BB2 /* PlantScan.storyboard */,
+				4EEFE17424D827B4003A5426 /* Weather.storyboard */,
+				3F01DB6724D81DD400916BB2 /* Shop.storyboard */,
+				3F01DB6F24D8460B00916BB2 /* PlantGarden.storyboard */,
+				3F01DB7524D997F300916BB2 /* PlantSearch.storyboard */,
+				1AED79E424E181E9006080DA /* EcoScan.storyboard */,
+				4E24F7A524E58E2C00F0CB83 /* MyGarden.storyboard */,
+				4E73096A24FCED7400B092C2 /* Todo.storyboard */,
+				3F420D5B2502350200A5E5DE /* GardeningAZ.storyboard */,
+				1A7B266925028F5100F7A0A1 /* Community.storyboard */,
+				1A2AB5792506825B00835C16 /* Video.storyboard */,
+				4E5577FA25471C3100E32E33 /* News.storyboard */,
+				3F89D6682579032300B660F6 /* PlantSuggest.storyboard */,
+				4E5B9DBA2588CA1E008DFDC2 /* NewsLetter.storyboard */,
+				3F74B99E258A1719002767CD /* Contact.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		3F01DB5224D804E400916BB2 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				3FBAEC452566619500B30CCB /* Font */,
+				4E9A6B102513A96C00805964 /* Colors */,
+				3F01DB5324D804E400916BB2 /* SlideInTransition.swift */,
+				3F01DB5424D804E400916BB2 /* Extension */,
+				3F01DB5A24D804E400916BB2 /* Networking */,
+				3F01DB5D24D804E400916BB2 /* UserDefaults.swift */,
+				4EDF237824ED123F000A3296 /* Colors.swift */,
+				4EDF237C24ED257B000A3296 /* ecoCategory.swift */,
+				4E7EC35024F68ADC00F12F0F /* deviceType.swift */,
+				3F9523252535955800BA4A74 /* imageStorage.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		3F01DB5424D804E400916BB2 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				3F01DB5524D804E400916BB2 /* CollectionView.swift */,
+				3F01DB5624D804E400916BB2 /* String.swift */,
+				3F01DB5724D804E400916BB2 /* UIImage.swift */,
+				3F01DB5824D804E400916BB2 /* UIViewController.swift */,
+				3F01DB5924D804E400916BB2 /* UIImageView.swift */,
+				3F01DB7B24D9C14D00916BB2 /* Parameters.swift */,
+				3FE42A0724E188CB00DD5CC4 /* Array.swift */,
+				4E1256EC24EAB20F0039344B /* UIView.swift */,
+				4E1256EE24EAB5010039344B /* TextField.swift */,
+				4E1256F024EAB60E0039344B /* CALayer.swift */,
+				4E1256F424EABEFC0039344B /* UIButton.swift */,
+				4EDF238224ED4E07000A3296 /* UILabel.swift */,
+				3F30C93724F3CE960044F779 /* UINavigationItem.swift */,
+				4E73096F24FCF58400B092C2 /* Date.swift */,
+				4E73097824FD47AB00B092C2 /* CollectionLayout.swift */,
+				4E1488A92518B90600C7D9A9 /* UIWindow.swift */,
+				3F1269BA25518862005D3159 /* UITableViewCell.swift */,
+				3F45692225666552009E0CD9 /* UIFont.swift */,
+				3FBFFCBD2576797500C07F8E /* UITapGestureRecognizer.swift */,
+				3F2AE5DD25933A1300CFCFE6 /* UISwitch.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		3F01DB5A24D804E400916BB2 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				3F01DB5B24D804E400916BB2 /* Links.swift */,
+				3F01DB5C24D804E400916BB2 /* Networking.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		3F01DB7D24DA890300916BB2 /* PlantSearch */ = {
+			isa = PBXGroup;
+			children = (
+				3F01DB7E24DA893600916BB2 /* PlantSearchViewCell.swift */,
+				3F30C92424EBF6900044F779 /* FilterSelectTableViewCell.swift */,
+				4E30011C24F7E52800684DBA /* FilterCategoryListViewCell.swift */,
+				4E73097624FD44BA00B092C2 /* searchTagCollectionViewCell.swift */,
+				4EDC2C43251CB9E1006D62D7 /* EcoDropdownTableViewCell.swift */,
+				3F3C988A251E129B00B3AE98 /* DetailFilterFixedTableViewCell.swift */,
+				3F3C988D251E25A000B3AE98 /* DetailFilterFixedItemCollectionViewCell.swift */,
+				4E11E2762521DDF0004F7C6B /* DetailFilterFixedItemTableViewCell.swift */,
+				4E11E2792521E387004F7C6B /* DetailFilterFixedDoubleTableViewCell.swift */,
+				3F3C98912523614300B3AE98 /* DetailFilterDropTableViewCell.swift */,
+				4EBB2C482524874F00B41DA3 /* DetailFilterDropItemTableViewCell.swift */,
+				4EB38EBF252618400037613A /* DetailFilterSliderTableViewCell.swift */,
+				4E845B4725652B1700E5813B /* PlantDetailsTableViewCell.swift */,
+				4E0EC8432566921100BECB4C /* ToDoPlantTableViewCell.swift */,
+				4E0EC8462566D63A00BECB4C /* PlantSiblingsTableViewCell.swift */,
+			);
+			path = PlantSearch;
+			sourceTree = "<group>";
+		};
+		3F30C91C24E679340044F779 /* MyGarden */ = {
+			isa = PBXGroup;
+			children = (
+				3F30C91D24E67A160044F779 /* MyGardenViewController.swift */,
+				4E988E162500D589009222A7 /* MyGardenSelectOptionViewController.swift */,
+				4E988E1A250117DC009222A7 /* MyGardenDeviceSelectViewController.swift */,
+				3FE0E56125063354000328CF /* MyGardenListenViewController.swift */,
+				3FE0E5672508BB26000328CF /* MyGardenListenEditGardenViewController.swift */,
+				4ECA3E22250908130007A5C6 /* MyGardenListenDeleteViewController.swift */,
+				3FE0E56B2510FABF000328CF /* MyGardenEcoElementDetailViewController.swift */,
+				3F9D65862552EB3100F6E00C /* MyGardenAddNewGardenViewController.swift */,
+				3F295E22255AA266006AC6E0 /* MyGardenPlantNoticeViewController.swift */,
+				3F295E25255AA27E006AC6E0 /* MyGardenPlantMoveViewController.swift */,
+				3F295E28255AA29F006AC6E0 /* MyGardenPlantCountChangeViewController.swift */,
+			);
+			path = MyGarden;
+			sourceTree = "<group>";
+		};
+		3F30C91F24EA09230044F779 /* MyGarden */ = {
+			isa = PBXGroup;
+			children = (
+				3FC033952555992100E6E869 /* MyGardenEcoElementDropdownCollectionViewCell.swift */,
+				4E1256EA24EA765E0039344B /* MyGardenTableViewCell.swift */,
+				4ECC360024EE891A00B79FC2 /* ToDoTableViewCell.swift */,
+				4ECC360624EEAA6600B79FC2 /* EcoFilterCollectionViewCell.swift */,
+				3F01DB3824D804D100916BB2 /* LoginModel.swift */,
+				4EB8B05824FFE67200589CE0 /* MyGardenEcoListTableViewCell.swift */,
+				4E988E182500F00E009222A7 /* MyGardenDeviceListTableViewCell.swift */,
+				3FE0E56325063A25000328CF /* ListenListTableViewCell.swift */,
+				3FE0E569250B776F000328CF /* FilterDropdownTableViewCell.swift */,
+				4E2D56602513631C00F703AB /* ecoFilterAdditionCollectionViewCell.swift */,
+				3FC03392255429F800E6E869 /* MyGardenDeviceDropdownTableViewCell.swift */,
+				3FC033A325594F5800E6E869 /* MyGardenGridTableViewCell.swift */,
+			);
+			path = MyGarden;
+			sourceTree = "<group>";
+		};
+		3F30C93024F3B8E30044F779 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				3F30C93124F3B9790044F779 /* CustomNavigationViewController.swift */,
+				3F30C93524F3BC110044F779 /* CustomNavItem.swift */,
+			);
+			path = Navigation;
+			sourceTree = "<group>";
+		};
+		3F420D5D2502350F00A5E5DE /* GardeningAZ */ = {
+			isa = PBXGroup;
+			children = (
+				3F420D5E2502354700A5E5DE /* GardeningAZViewController.swift */,
+			);
+			path = GardeningAZ;
+			sourceTree = "<group>";
+		};
+		3F420D6025024E5100A5E5DE /* GardeningAZ */ = {
+			isa = PBXGroup;
+			children = (
+				3F420D6125024E6A00A5E5DE /* GardeningAZTableViewCell.swift */,
+				4ECFB811254AE4D600EC09DA /* GardeningAZListTableViewCell.swift */,
+			);
+			path = GardeningAZ;
+			sourceTree = "<group>";
+		};
+		3F758EB0257F865B00AA5196 /* EcoScan */ = {
+			isa = PBXGroup;
+			children = (
+				3F758EB1257F867300AA5196 /* EcoScanSendEmailViewController.swift */,
+			);
+			path = EcoScan;
+			sourceTree = "<group>";
+		};
+		3F952366254836B300BA4A74 /* News */ = {
+			isa = PBXGroup;
+			children = (
+				3F952367254836E800BA4A74 /* NewsTableViewCell.swift */,
+				4E554B292552BCA70010249F /* NewsGridViewCell.swift */,
+			);
+			path = News;
+			sourceTree = "<group>";
+		};
+		3FBAEC452566619500B30CCB /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				3FBAEC4E256661E200B30CCB /* SourceSansPro-Black.ttf */,
+				3FBAEC4C256661E100B30CCB /* SourceSansPro-BlackItalic.ttf */,
+				3FBAEC51256661E500B30CCB /* SourceSansPro-Bold.ttf */,
+				3FBAEC46256661DD00B30CCB /* SourceSansPro-BoldItalic.ttf */,
+				3FBAEC50256661E500B30CCB /* SourceSansPro-ExtraLight.ttf */,
+				3FBAEC4B256661E000B30CCB /* SourceSansPro-ExtraLightItalic.ttf */,
+				3FBAEC47256661DE00B30CCB /* SourceSansPro-Italic.ttf */,
+				3FBAEC4F256661E300B30CCB /* SourceSansPro-Light.ttf */,
+				3FBAEC4D256661E100B30CCB /* SourceSansPro-LightItalic.ttf */,
+				3FBAEC48256661DE00B30CCB /* SourceSansPro-Regular.ttf */,
+				3FBAEC49256661DF00B30CCB /* SourceSansPro-SemiBold.ttf */,
+				3FBAEC4A256661DF00B30CCB /* SourceSansPro-SemiBoldItalic.ttf */,
+				3FC1D124256668B300E74555 /* fontHelper.swift */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
+		41D63A297C9A3B7382118397 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5CE032DF2B6E42859BFABC03 /* Pods-GardifyIOS.debug.xcconfig */,
+				AB88156D5B5E49AEFBD80E39 /* Pods-GardifyIOS.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		4E0DF5DC25499014002D0018 /* Shop */ = {
+			isa = PBXGroup;
+			children = (
+				4E0DF5DD25499025002D0018 /* ShopViewController.swift */,
+			);
+			path = Shop;
+			sourceTree = "<group>";
+		};
+		4E1256E124EA6DC40039344B /* AppData */ = {
+			isa = PBXGroup;
+			children = (
+				4E1256E224EA6DC40039344B /* Gardify_App_Neue_Farben_Kopf_v9.pdf */,
+				4E1256E324EA6DC40039344B /* Gardify_App_Wetter_v1.pdf */,
+				4E1256E424EA6DC40039344B /* Gardify_App_FarbtestsGarten_5.pdf */,
+				4E1256E524EA6DC50039344B /* Gardify_App_Neue_Farben_Kopf_v11.pdf */,
+			);
+			path = AppData;
+			sourceTree = "<group>";
+		};
+		4E3D474D257918F600701339 /* PlantSuggest */ = {
+			isa = PBXGroup;
+			children = (
+				4E3D474E2579195E00701339 /* PlantSuggestViewController.swift */,
+			);
+			path = PlantSuggest;
+			sourceTree = "<group>";
+		};
+		4E3D475125794CA600701339 /* PlantSuggest */ = {
+			isa = PBXGroup;
+			children = (
+				4E3D475225794CF100701339 /* PlantSuggestImageCollectionViewCell.swift */,
+			);
+			path = PlantSuggest;
+			sourceTree = "<group>";
+		};
+		4E469453250F74D90072649F /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				3F01DB1B24D804C500916BB2 /* SettingViewController.swift */,
+				4E469454250F75160072649F /* SettingEditViewController.swift */,
+				4E469456250FA42D0072649F /* NewsletterRegisterViewController.swift */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
+		4E5577ED2546F73F00E32E33 /* Video */ = {
+			isa = PBXGroup;
+			children = (
+				1A62E8142508C89B00716675 /* VideoViewController.swift */,
+				4E5577EF2547015100E32E33 /* VideoListViewController.swift */,
+			);
+			path = Video;
+			sourceTree = "<group>";
+		};
+		4E5577F62547086600E32E33 /* Video */ = {
+			isa = PBXGroup;
+			children = (
+				4E5577F72547087E00E32E33 /* VideoTableViewCell.swift */,
+			);
+			path = Video;
+			sourceTree = "<group>";
+		};
+		4E5577FD254726DC00E32E33 /* News */ = {
+			isa = PBXGroup;
+			children = (
+				4E5577FE2547272900E32E33 /* NewsViewController.swift */,
+				4E2C440F2551527D005B082B /* News2ViewController.swift */,
+				4E297A85255BEC2B008EC73A /* InstaVideoViewController.swift */,
+			);
+			path = News;
+			sourceTree = "<group>";
+		};
+		4E5B9DBD2588E920008DFDC2 /* NewsLetter */ = {
+			isa = PBXGroup;
+			children = (
+				4E5B9DBE2588E93C008DFDC2 /* NewsLetterViewController.swift */,
+			);
+			path = NewsLetter;
+			sourceTree = "<group>";
+		};
+		4E73096C24FCEE1300B092C2 /* Todos */ = {
+			isa = PBXGroup;
+			children = (
+				4E73096D24FCEE4300B092C2 /* TodoViewController.swift */,
+				4E73097424FD255200B092C2 /* TodoDetailViewController.swift */,
+				1A518E93251CE7620014448E /* OwnTodoViewController.swift */,
+				1A518E96251CE7800014448E /* TodoDiaryViewController.swift */,
+				4E1B75402549AB78002890B2 /* WarningViewController.swift */,
+				3FBAEC3D25640F6F00B30CCB /* TodoCalenderCollectionViewCell.swift */,
+				3FBAEC41256559AD00B30CCB /* TodoEditViewController.swift */,
+				3FBFFCBA2575017A00C07F8E /* TodoCalenderPickerViewController.swift */,
+			);
+			path = Todos;
+			sourceTree = "<group>";
+		};
+		4E73097124FD084400B092C2 /* Todo */ = {
+			isa = PBXGroup;
+			children = (
+				4E73097224FD085C00B092C2 /* TodoViewCell.swift */,
+				4E1B75432549B39A002890B2 /* WarningTableViewCell.swift */,
+			);
+			path = Todo;
+			sourceTree = "<group>";
+		};
+		4E9A6B102513A96C00805964 /* Colors */ = {
+			isa = PBXGroup;
+			children = (
+				4E9A6B112513A99E00805964 /* ColorTheme.xcassets */,
+			);
+			path = Colors;
+			sourceTree = "<group>";
+		};
+		4EA7043824E2B79800D00653 /* Plant Search */ = {
+			isa = PBXGroup;
+			children = (
+				4EA7043624E2B78D00D00653 /* PlantSearchFilterSliderViewController.swift */,
+				3F01DB8024DAA7DE00916BB2 /* PlantSearchFilterViewController.swift */,
+				3F01DB7724D9B46100916BB2 /* PlantSearchViewController.swift */,
+				3F30C92E24F000DA0044F779 /* PlantNameSearchViewController.swift */,
+			);
+			path = "Plant Search";
+			sourceTree = "<group>";
+		};
+		4EA7043924E2B7D600D00653 /* Plant Scan */ = {
+			isa = PBXGroup;
+			children = (
+				3F01DB1724D804C500916BB2 /* PlantScanResultViewController.swift */,
+				3F01DB1E24D804C500916BB2 /* PlantScanViewController.swift */,
+				3FE0E56525064FBF000328CF /* PlantScanImageFinderViewController.swift */,
+			);
+			path = "Plant Scan";
+			sourceTree = "<group>";
+		};
+		4EBA7B8125065C770057334F /* PlantDoc */ = {
+			isa = PBXGroup;
+			children = (
+				3F01DB1424D804C500916BB2 /* PlantDocDetailViewController.swift */,
+				3F01DB1D24D804C500916BB2 /* PlantDocViewController.swift */,
+				4E420CB8253D780700986558 /* PlantDocAskViewController.swift */,
+				3F95232F253EE1BA00BA4A74 /* PlantDocMyPostViewController.swift */,
+			);
+			path = PlantDoc;
+			sourceTree = "<group>";
+		};
+		4EEFE17A24D82E92003A5426 /* Weather */ = {
+			isa = PBXGroup;
+			children = (
+				1AA9547B24DAD0EF0085BFAC /* WeatherViewCell.swift */,
+				1AED79EE24EA8836006080DA /* WeatherUpdateViewCell.swift */,
+				1A3DD54624ED431400B6575D /* DailyWeatherViewCell.swift */,
+			);
+			path = Weather;
+			sourceTree = "<group>";
+		};
+		A9CB27300A64FB52798FF28E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				576DD7C5DEB2E68BE4F09A4C /* Pods_GardifyIOS.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3F01DAF424D7FFEB00916BB2 /* GardifyIOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3F01DB0E24D7FFF000916BB2 /* Build configuration list for PBXNativeTarget "GardifyIOS" */;
+			buildPhases = (
+				E41DD766DC49F510DF539DE1 /* [CP] Check Pods Manifest.lock */,
+				3F01DAF124D7FFEB00916BB2 /* Sources */,
+				3F01DAF224D7FFEB00916BB2 /* Frameworks */,
+				3F01DAF324D7FFEB00916BB2 /* Resources */,
+				CF63EC45F81CB905437EB8BE /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GardifyIOS;
+			productName = GardifyIOS;
+			productReference = 3F01DAF524D7FFEB00916BB2 /* GardifyIOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3F01DAED24D7FFEB00916BB2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1160;
+				LastUpgradeCheck = 1200;
+				ORGANIZATIONNAME = Netzlab;
+				TargetAttributes = {
+					3F01DAF424D7FFEB00916BB2 = {
+						CreatedOnToolsVersion = 11.6;
+					};
+				};
+			};
+			buildConfigurationList = 3F01DAF024D7FFEB00916BB2 /* Build configuration list for PBXProject "GardifyIOS" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 3F01DAEC24D7FFEB00916BB2;
+			productRefGroup = 3F01DAF624D7FFEB00916BB2 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3F01DAF424D7FFEB00916BB2 /* GardifyIOS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3F01DAF324D7FFEB00916BB2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4E5577FB25471C3200E32E33 /* News.storyboard in Resources */,
+				4E9A6B122513A99E00805964 /* ColorTheme.xcassets in Resources */,
+				4E73096B24FCED7400B092C2 /* Todo.storyboard in Resources */,
+				3FBAEC59256662C300B30CCB /* SourceSansPro-Light.ttf in Resources */,
+				3F01DB7024D8460C00916BB2 /* PlantGarden.storyboard in Resources */,
+				3FBAEC52256662B900B30CCB /* SourceSansPro-Black.ttf in Resources */,
+				4E24F7A624E58E2C00F0CB83 /* MyGarden.storyboard in Resources */,
+				3F01DB4F24D804DA00916BB2 /* Login.storyboard in Resources */,
+				1AED79E524E181E9006080DA /* EcoScan.storyboard in Resources */,
+				4EEFE17524D827B4003A5426 /* Weather.storyboard in Resources */,
+				3FBAEC5E256662C300B30CCB /* SourceSansPro-Regular.ttf in Resources */,
+				4E5B9DBB2588CA1F008DFDC2 /* NewsLetter.storyboard in Resources */,
+				1A2AB57A2506825B00835C16 /* Video.storyboard in Resources */,
+				3F01DB4E24D804DA00916BB2 /* Main.storyboard in Resources */,
+				3F01DB5124D804DA00916BB2 /* PlantScan.storyboard in Resources */,
+				1A7B266A25028F5100F7A0A1 /* Community.storyboard in Resources */,
+				3FBAEC5B256662C300B30CCB /* SourceSansPro-Italic.ttf in Resources */,
+				3FBAEC57256662C300B30CCB /* SourceSansPro-SemiBold.ttf in Resources */,
+				4E1256E724EA6DC50039344B /* Gardify_App_Wetter_v1.pdf in Resources */,
+				3FBAEC58256662C300B30CCB /* SourceSansPro-BoldItalic.ttf in Resources */,
+				3F89D6692579032300B660F6 /* PlantSuggest.storyboard in Resources */,
+				3F01DB6824D81DD400916BB2 /* Shop.storyboard in Resources */,
+				3F01DB0724D7FFF000916BB2 /* Assets.xcassets in Resources */,
+				3F01DB4C24D804DA00916BB2 /* PlantDoc.storyboard in Resources */,
+				3FBAEC5A256662C300B30CCB /* SourceSansPro-SemiBoldItalic.ttf in Resources */,
+				3F01DB4D24D804DA00916BB2 /* LaunchScreen.storyboard in Resources */,
+				4E1256E924EA6DC50039344B /* Gardify_App_Neue_Farben_Kopf_v11.pdf in Resources */,
+				4E1256E824EA6DC50039344B /* Gardify_App_FarbtestsGarten_5.pdf in Resources */,
+				3FBAEC5D256662C300B30CCB /* SourceSansPro-LightItalic.ttf in Resources */,
+				3F74B99F258A1719002767CD /* Contact.storyboard in Resources */,
+				4E1256E624EA6DC50039344B /* Gardify_App_Neue_Farben_Kopf_v9.pdf in Resources */,
+				3F758EBF2581022900AA5196 /* DropdownListViewTableViewCell.xib in Resources */,
+				3FBAEC55256662BF00B30CCB /* SourceSansPro-Bold.ttf in Resources */,
+				3F758EBA2580E8F400AA5196 /* DropdownListView.xib in Resources */,
+				3F01DB7624D997F300916BB2 /* PlantSearch.storyboard in Resources */,
+				3FBAEC54256662BC00B30CCB /* SourceSansPro-BlackItalic.ttf in Resources */,
+				3F01DB4B24D804DA00916BB2 /* PlantDetail.storyboard in Resources */,
+				3FBAEC5C256662C300B30CCB /* SourceSansPro-ExtraLight.ttf in Resources */,
+				3F420D5C2502350200A5E5DE /* GardeningAZ.storyboard in Resources */,
+				3FBAEC56256662C300B30CCB /* SourceSansPro-ExtraLightItalic.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		CF63EC45F81CB905437EB8BE /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GardifyIOS/Pods-GardifyIOS-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GardifyIOS/Pods-GardifyIOS-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GardifyIOS/Pods-GardifyIOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E41DD766DC49F510DF539DE1 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-GardifyIOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3F01DAF124D7FFEB00916BB2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4E1256ED24EAB20F0039344B /* UIView.swift in Sources */,
+				4E420CB9253D780700986558 /* PlantDocAskViewController.swift in Sources */,
+				3F3C98922523614300B3AE98 /* DetailFilterDropTableViewCell.swift in Sources */,
+				4EDF237924ED123F000A3296 /* Colors.swift in Sources */,
+				3F30C92124EA12A90044F779 /* FullTableView.swift in Sources */,
+				3FC03393255429F800E6E869 /* MyGardenDeviceDropdownTableViewCell.swift in Sources */,
+				4E1B75442549B39A002890B2 /* WarningTableViewCell.swift in Sources */,
+				3F295E23255AA266006AC6E0 /* MyGardenPlantNoticeViewController.swift in Sources */,
+				4E1488AA2518B90600C7D9A9 /* UIWindow.swift in Sources */,
+				3F30C93324F3B9790044F779 /* CustomNavigationViewController.swift in Sources */,
+				4EDF238524ED73E9000A3296 /* checkListTableViewCell.swift in Sources */,
+				3F01DB6224D804E400916BB2 /* UIViewController.swift in Sources */,
+				4E3D474F2579195E00701339 /* PlantSuggestViewController.swift in Sources */,
+				3FE0E56425063A25000328CF /* ListenListTableViewCell.swift in Sources */,
+				3F01DB7C24D9C14D00916BB2 /* Parameters.swift in Sources */,
+				4E1256EB24EA765E0039344B /* MyGardenTableViewCell.swift in Sources */,
+				3F30C92524EBF6900044F779 /* FilterSelectTableViewCell.swift in Sources */,
+				3F01DB3A24D804D100916BB2 /* PlantDocCell.swift in Sources */,
+				4E11E27A2521E387004F7C6B /* DetailFilterFixedDoubleTableViewCell.swift in Sources */,
+				4EB8B05924FFE67200589CE0 /* MyGardenEcoListTableViewCell.swift in Sources */,
+				3FE0E56225063354000328CF /* MyGardenListenViewController.swift in Sources */,
+				3F2AE5DE25933A1300CFCFE6 /* UISwitch.swift in Sources */,
+				3F30C93A24F3EA630044F779 /* TodoCountModel.swift in Sources */,
+				4E469457250FA42D0072649F /* NewsletterRegisterViewController.swift in Sources */,
+				3F01DB7424D84E5A00916BB2 /* MyGardenModel.swift in Sources */,
+				4E30011D24F7E52800684DBA /* FilterCategoryListViewCell.swift in Sources */,
+				3F01DB2624D804C500916BB2 /* LoginViewController.swift in Sources */,
+				4EDF238124ED2D25000A3296 /* EcoCategoryCollectionViewCell.swift in Sources */,
+				3FE0E56A250B776F000328CF /* FilterDropdownTableViewCell.swift in Sources */,
+				3F01DB3D24D804D100916BB2 /* HomeViewCell.swift in Sources */,
+				1AED79E724E18998006080DA /* UserInfo.swift in Sources */,
+				1A518E94251CE7620014448E /* OwnTodoViewController.swift in Sources */,
+				4E11E2772521DDF0004F7C6B /* DetailFilterFixedItemTableViewCell.swift in Sources */,
+				3F01DB6E24D83AE600916BB2 /* UserPlant.swift in Sources */,
+				4E73097924FD47AB00B092C2 /* CollectionLayout.swift in Sources */,
+				4E1256F524EABEFC0039344B /* UIButton.swift in Sources */,
+				4E73097724FD44BA00B092C2 /* searchTagCollectionViewCell.swift in Sources */,
+				4E988E192500F00E009222A7 /* MyGardenDeviceListTableViewCell.swift in Sources */,
+				1A518E91251CA2630014448E /* LocationInfo.swift in Sources */,
+				1A3EE27824F7D5DB00918344 /* DurationRatingPlantModel.swift in Sources */,
+				4E5577F42547025B00E32E33 /* videoModel.swift in Sources */,
+				4ECC360724EEAA6600B79FC2 /* EcoFilterCollectionViewCell.swift in Sources */,
+				3F9D65872552EB3100F6E00C /* MyGardenAddNewGardenViewController.swift in Sources */,
+				4E297A86255BEC2B008EC73A /* InstaVideoViewController.swift in Sources */,
+				4E5425E02536F4E800147053 /* PlantScanLastImageCollectionViewCell.swift in Sources */,
+				3F758EB2257F867300AA5196 /* EcoScanSendEmailViewController.swift in Sources */,
+				4E554B2A2552BCA70010249F /* NewsGridViewCell.swift in Sources */,
+				4E1256F324EABC0C0039344B /* MinimalTextField.swift in Sources */,
+				3F01DB6024D804E400916BB2 /* String.swift in Sources */,
+				3FBAEC3E25640F6F00B30CCB /* TodoCalenderCollectionViewCell.swift in Sources */,
+				4EEFE17924D82DE1003A5426 /* WeatherViewController.swift in Sources */,
+				4EDF237B24ED1888000A3296 /* ColorCollectionViewCell.swift in Sources */,
+				3FE0E56C2510FABF000328CF /* MyGardenEcoElementDetailViewController.swift in Sources */,
+				4E988E1B250117DC009222A7 /* MyGardenDeviceSelectViewController.swift in Sources */,
+				3F952330253EE1BA00BA4A74 /* PlantDocMyPostViewController.swift in Sources */,
+				4E3D475325794CF100701339 /* PlantSuggestImageCollectionViewCell.swift in Sources */,
+				3F01DB2424D804C500916BB2 /* MainTabBarController.swift in Sources */,
+				4E73097524FD255200B092C2 /* TodoDetailViewController.swift in Sources */,
+				4E5B9DBF2588E93C008DFDC2 /* NewsLetterViewController.swift in Sources */,
+				4ECFB812254AE4D600EC09DA /* GardeningAZListTableViewCell.swift in Sources */,
+				4E2C44102551527D005B082B /* News2ViewController.swift in Sources */,
+				4EA8BCBB25386B0E00864C52 /* PlantDocAnswerTableViewCell.swift in Sources */,
+				4E988E172500D589009222A7 /* MyGardenSelectOptionViewController.swift in Sources */,
+				3F01DB3B24D804D100916BB2 /* MenuViewCell.swift in Sources */,
+				4E469455250F75160072649F /* SettingEditViewController.swift in Sources */,
+				4ECC360324EE9BA200B79FC2 /* PlantCountModel.swift in Sources */,
+				3F420D5F2502354700A5E5DE /* GardeningAZViewController.swift in Sources */,
+				3F01DB4024D804D100916BB2 /* ScannerResult.swift in Sources */,
+				3F01DB2524D804C500916BB2 /* ContainerViewController.swift in Sources */,
+				3F30C91E24E67A160044F779 /* MyGardenViewController.swift in Sources */,
+				1A7B266C25028FF600F7A0A1 /* CommunityViewController.swift in Sources */,
+				3F01DB6C24D82B3600916BB2 /* PlantDetail.swift in Sources */,
+				4E845B4825652B1700E5813B /* PlantDetailsTableViewCell.swift in Sources */,
+				4E2D56612513631C00F703AB /* ecoFilterAdditionCollectionViewCell.swift in Sources */,
+				3F45692325666552009E0CD9 /* UIFont.swift in Sources */,
+				4E0DF5DE25499025002D0018 /* ShopViewController.swift in Sources */,
+				4E1256EF24EAB5010039344B /* TextField.swift in Sources */,
+				3F420D6225024E6A00A5E5DE /* GardeningAZTableViewCell.swift in Sources */,
+				3F01DB6424D804E400916BB2 /* Links.swift in Sources */,
+				3FBAEC3B2563FC1F00B30CCB /* Calender.swift in Sources */,
+				3F01DB5E24D804E400916BB2 /* SlideInTransition.swift in Sources */,
+				3F01DB7824D9B46100916BB2 /* PlantSearchViewController.swift in Sources */,
+				3F3C988B251E129B00B3AE98 /* DetailFilterFixedTableViewCell.swift in Sources */,
+				3F01DB6A24D824EB00916BB2 /* PlantDetailViewController.swift in Sources */,
+				4EA7043724E2B78D00D00653 /* PlantSearchFilterSliderViewController.swift in Sources */,
+				3FBAEC42256559AF00B30CCB /* TodoEditViewController.swift in Sources */,
+				3F01DB7A24D9B87000916BB2 /* PlantSearch.swift in Sources */,
+				3F01DB2124D804C500916BB2 /* HomeController.swift in Sources */,
+				4EB38EC0252618400037613A /* DetailFilterSliderTableViewCell.swift in Sources */,
+				4E0EC8472566D63A00BECB4C /* PlantSiblingsTableViewCell.swift in Sources */,
+				4E73096E24FCEE4300B092C2 /* TodoViewController.swift in Sources */,
+				1AED79EF24EA8836006080DA /* WeatherUpdateViewCell.swift in Sources */,
+				3F01DB6624D804E400916BB2 /* UserDefaults.swift in Sources */,
+				3F01DB2B24D804C500916BB2 /* TabBarController.swift in Sources */,
+				3F01DB6124D804E400916BB2 /* UIImage.swift in Sources */,
+				3FC033962555992100E6E869 /* MyGardenEcoElementDropdownCollectionViewCell.swift in Sources */,
+				3FBFFCBE2576797600C07F8E /* UITapGestureRecognizer.swift in Sources */,
+				3F01DB2724D804C500916BB2 /* SettingViewController.swift in Sources */,
+				4ECC360124EE891A00B79FC2 /* ToDoTableViewCell.swift in Sources */,
+				3F1269BB25518862005D3159 /* UITableViewCell.swift in Sources */,
+				3F01DB6324D804E400916BB2 /* UIImageView.swift in Sources */,
+				3F30C93824F3CE960044F779 /* UINavigationItem.swift in Sources */,
+				4E5577FF2547272900E32E33 /* NewsViewController.swift in Sources */,
+				3F01DB8124DAA7DE00916BB2 /* PlantSearchFilterViewController.swift in Sources */,
+				4E73097324FD085C00B092C2 /* TodoViewCell.swift in Sources */,
+				3F952368254836E800BA4A74 /* NewsTableViewCell.swift in Sources */,
+				4EDF238324ED4E07000A3296 /* UILabel.swift in Sources */,
+				1A3DD54724ED431400B6575D /* DailyWeatherViewCell.swift in Sources */,
+				3FC1D125256668B300E74555 /* fontHelper.swift in Sources */,
+				4EDD4C9F254047730001B9F9 /* PlantDocSimpleCell.swift in Sources */,
+				1AED79E324E1819D006080DA /* EcoScanViewController.swift in Sources */,
+				3F295E26255AA27E006AC6E0 /* MyGardenPlantMoveViewController.swift in Sources */,
+				3F01DB2224D804C500916BB2 /* FirstViewController.swift in Sources */,
+				4E7EC35124F68ADC00F12F0F /* deviceType.swift in Sources */,
+				3F01DB6524D804E400916BB2 /* Networking.swift in Sources */,
+				3F01DB2824D804C500916BB2 /* MenuController.swift in Sources */,
+				4E5577F82547087E00E32E33 /* VideoTableViewCell.swift in Sources */,
+				3F01DB7F24DA893600916BB2 /* PlantSearchViewCell.swift in Sources */,
+				3F758EB72580E8B700AA5196 /* DropdownListView.swift in Sources */,
+				4E420CBC253D934900986558 /* PlantDocAskImageCollectionViewCell.swift in Sources */,
+				3F01DB3F24D804D100916BB2 /* LoginModel.swift in Sources */,
+				3F758EBE2581022900AA5196 /* DropdownListViewTableViewCell.swift in Sources */,
+				3F01DB2924D804C500916BB2 /* PlantDocViewController.swift in Sources */,
+				3F01DB0524D7FFEB00916BB2 /* GardifyIOS.xcdatamodeld in Sources */,
+				4E557802254729B600E32E33 /* NewsModel.swift in Sources */,
+				3F01DB5F24D804E400916BB2 /* CollectionView.swift in Sources */,
+				4EEFE17C24D83393003A5426 /* Weather.swift in Sources */,
+				3FE0E56625064FBF000328CF /* PlantScanImageFinderViewController.swift in Sources */,
+				3F01DB2A24D804C500916BB2 /* PlantScanViewController.swift in Sources */,
+				3FC033A425594F5800E6E869 /* MyGardenGridTableViewCell.swift in Sources */,
+				3FBFFCBB2575017A00C07F8E /* TodoCalenderPickerViewController.swift in Sources */,
+				3F30C93624F3BC110044F779 /* CustomNavItem.swift in Sources */,
+				3FE42A0824E188CB00DD5CC4 /* Array.swift in Sources */,
+				3F9523262535955800BA4A74 /* imageStorage.swift in Sources */,
+				3F420D6425027D4400A5E5DE /* GardeningAZModel.swift in Sources */,
+				3F30C92F24F000DA0044F779 /* PlantNameSearchViewController.swift in Sources */,
+				1A518E97251CE7800014448E /* TodoDiaryViewController.swift in Sources */,
+				1AED79ED24EA706A006080DA /* WeatherUpdateViewController.swift in Sources */,
+				3FBAEC382563B3ED00B30CCB /* MenuSideViewController.swift in Sources */,
+				4ECA3E23250908130007A5C6 /* MyGardenListenDeleteViewController.swift in Sources */,
+				3F01DB2324D804C500916BB2 /* PlantScanResultViewController.swift in Sources */,
+				4E99707625877191002837B0 /* NewRegisterViewController.swift in Sources */,
+				3F01DAF924D7FFEB00916BB2 /* AppDelegate.swift in Sources */,
+				4EDF237F24ED2BDF000A3296 /* reusableCollectionView.swift in Sources */,
+				1A7B266F25029CFE00F7A0A1 /* CommunityTableViewCell.swift in Sources */,
+				4EDC2C44251CB9E1006D62D7 /* EcoDropdownTableViewCell.swift in Sources */,
+				4E0EC8442566921100BECB4C /* ToDoPlantTableViewCell.swift in Sources */,
+				3F01DB3E24D804D100916BB2 /* PlantDoc.swift in Sources */,
+				3F01DB7224D8467D00916BB2 /* PlantGardenAddViewController.swift in Sources */,
+				4E5577F02547015100E32E33 /* VideoListViewController.swift in Sources */,
+				3F01DB2024D804C500916BB2 /* PlantDocDetailViewController.swift in Sources */,
+				3F01DB3C24D804D100916BB2 /* ScanResultViewCell.swift in Sources */,
+				3F3C988E251E25A000B3AE98 /* DetailFilterFixedItemCollectionViewCell.swift in Sources */,
+				4E1256F124EAB60E0039344B /* CALayer.swift in Sources */,
+				4E1B75412549AB78002890B2 /* WarningViewController.swift in Sources */,
+				1A62E8152508C89B00716675 /* VideoViewController.swift in Sources */,
+				3F30C93C24F507CA0044F779 /* NavView.swift in Sources */,
+				3FBFFCAC256FD10700C07F8E /* PlantDocImageCollectionViewCell.swift in Sources */,
+				3FE0E5682508BB26000328CF /* MyGardenListenEditGardenViewController.swift in Sources */,
+				4EDF237D24ED257B000A3296 /* ecoCategory.swift in Sources */,
+				3F295E29255AA29F006AC6E0 /* MyGardenPlantCountChangeViewController.swift in Sources */,
+				3F01DAFB24D7FFEB00916BB2 /* SceneDelegate.swift in Sources */,
+				4E73097024FCF58400B092C2 /* Date.swift in Sources */,
+				4EBB2C492524874F00B41DA3 /* DetailFilterDropItemTableViewCell.swift in Sources */,
+				1AA9547C24DAD0EF0085BFAC /* WeatherViewCell.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		3F01DB4424D804DA00916BB2 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3F01DB4524D804DA00916BB2 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		3F01DB4624D804DA00916BB2 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3F01DB4724D804DA00916BB2 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		3F01DB0C24D7FFF000916BB2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		3F01DB0D24D7FFF000916BB2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		3F01DB0F24D7FFF000916BB2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5CE032DF2B6E42859BFABC03 /* Pods-GardifyIOS.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2ZAADY77J7;
+				INFOPLIST_FILE = GardifyIOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.56;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gardify.ios;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3F01DB1024D7FFF000916BB2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AB88156D5B5E49AEFBD80E39 /* Pods-GardifyIOS.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2ZAADY77J7;
+				INFOPLIST_FILE = GardifyIOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.56;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gardify.ios;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3F01DAF024D7FFEB00916BB2 /* Build configuration list for PBXProject "GardifyIOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3F01DB0C24D7FFF000916BB2 /* Debug */,
+				3F01DB0D24D7FFF000916BB2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3F01DB0E24D7FFF000916BB2 /* Build configuration list for PBXNativeTarget "GardifyIOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3F01DB0F24D7FFF000916BB2 /* Debug */,
+				3F01DB1024D7FFF000916BB2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		3F01DB0324D7FFEB00916BB2 /* GardifyIOS.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				3F01DB0424D7FFEB00916BB2 /* GardifyIOS.xcdatamodel */,
+			);
+			currentVersion = 3F01DB0424D7FFEB00916BB2 /* GardifyIOS.xcdatamodel */;
+			path = GardifyIOS.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 3F01DAED24D7FFEB00916BB2 /* Project object */;
+}

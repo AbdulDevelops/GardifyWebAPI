@@ -1,0 +1,51 @@
+﻿@model IEnumerable<GardifyModels.Models.WatchlistEntry>
+<table class="table">
+	<tr>
+		<th>
+			Pflanze
+		</th>
+		<th>
+			Anzahl
+		</th>
+		<th></th>
+	</tr>
+	@if (Model != null && Model.Any())
+	{
+		foreach (var watchlistEntry in Model)
+		{
+			<tr>
+				<td>
+					<a href="@Url.Action("PlantDetails", "PlantSearch", new { id = watchlistEntry.PlantId })">@watchlistEntry.Plant.NameGerman (@watchlistEntry.Plant.NameLatin)</a>
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => watchlistEntry.Count)
+				</td>
+				<td>
+					<div style="float:left">
+						@using (Ajax.BeginForm("get-add-plant-dialog", new AjaxOptions { UpdateTargetId = "modalWrapper" }))
+						{
+							@Html.AntiForgeryToken();
+							@Html.Hidden("plantId", watchlistEntry.PlantId);
+							<input class="btn btn-default" type="submit" value="Zu meinem Garten hinzufügen" />
+						}
+					</div>
+					<div style="float:left; margin: 0 0 0 20px;">
+						@using (Ajax.BeginForm("remove-plant-from-watchlist", new AjaxOptions { UpdateTargetId = "watchlist_wrapper", InsertionMode=InsertionMode.Replace, AllowCache=false }))
+						{
+							@Html.AntiForgeryToken();
+							<input name="watchlistEntryId" type="hidden" value="@watchlistEntry.Id" />
+							<input class="btn btn-default" type="submit" value="Löschen" />
+						}
+					</div>
+				</td>
+			</tr>
+		}
+	}
+	else
+	{
+		<tr>
+			<td colspan="3">Ihre Merkliste ist leer</td>
+		</tr>
+	}
+</table>
+

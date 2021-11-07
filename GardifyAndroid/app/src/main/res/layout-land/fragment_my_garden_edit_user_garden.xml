@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/constraintLayout_all_white"
+    android:padding="@dimen/marginPaddingSize_10sdp">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/my_garden_edit_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="@font/source_sans_pro"
+                android:text="@string/myGarden_editList"
+                android:textColor="@color/text_all_gunmetal"
+                android:textSize="@dimen/textSize_headline"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/source_sans_pro"
+                android:text="@string/myGarden_name"
+                android:textSize="@dimen/textSize_body_medium" />
+
+            <EditText
+                android:id="@+id/editText_my_garden_edit_user_garden_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/marginPaddingSize_10sdp"
+                android:background="@drawable/custom_edit_text_default"
+                android:padding="@dimen/marginPaddingSize_5sdp"
+                android:textSize="@dimen/textSize_body_medium" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/source_sans_pro"
+                android:text="@string/myGarden_descriptionOptional"
+                android:textSize="@dimen/textSize_body_medium" />
+
+            <EditText
+                android:id="@+id/editText_my_garden_edit_user_garden_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_edit_text_default"
+                android:gravity="top"
+                android:lines="4"
+                android:padding="@dimen/marginPaddingSize_10sdp"
+                android:textSize="@dimen/textSize_body_medium" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_my_garden_edit_user_garden_save"
+                style="@style/PrimaryButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_32sdp"
+                android:layout_marginTop="@dimen/marginPaddingSize_10sdp"
+                android:text="@string/all_save" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_my_garden_edit_user_garden_cancel"
+                style="@style/SecondaryButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_32sdp"
+                android:text="@string/all_cancel" />
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

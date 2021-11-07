@@ -1,0 +1,285 @@
+﻿@model GardifyModels.Models.PlantCharacteristic
+@switch (Model.Category.CharacteristicValueType)
+{
+    case GardifyModels.Models.ModelEnums.CharacteristicValueType.DoNotUse:
+        break;
+
+    case GardifyModels.Models.ModelEnums.CharacteristicValueType.LatinNumberRange:
+        switch ((int)Model.Min)
+        {
+            case 1:
+                @:I
+                break;
+            case 2:
+                @:II
+                break;
+            case 3:
+                @:III
+                break;
+            case 4:
+                @:IV
+                break;
+            case 5:
+                @:V
+                break;
+            case 6:
+                @:VI
+                break;
+            case 7:
+                @:VII
+                break;
+            case 8:
+                @:VIII
+                break;
+            case 9:
+                @:IX
+                break;
+            case 10:
+                @:X
+                break;
+            case 11:
+                @:XI
+                break;
+            case 12:
+                @:XII
+                break;
+            default:
+                @Model.Min
+                break;
+        }
+        if (Model.Min != Model.Max)
+        {
+
+            @:&nbsp;-&nbsp;
+            if (Model.Max != null)
+            {
+                switch ((int)Model.Max)
+                {
+                    case 1:
+                        @:I
+                        break;
+                    case 2:
+                        @:II
+                        break;
+                    case 3:
+                        @:III
+                        break;
+                    case 4:
+                        @:IV
+                        break;
+                    case 5:
+                        @:V
+                        break;
+                    case 6:
+                        @:VI
+                        break;
+                    case 7:
+                        @:VII
+                        break;
+                    case 8:
+                        @:VIII
+                        break;
+                    case 9:
+                        @:IX
+                        break;
+                    case 10:
+                        @:X
+                        break;
+                    case 11:
+                        @:XI
+                        break;
+                    case 12:
+                        @:XII
+                        break;
+                    default:
+                        @Model.Max
+                        break;
+                }
+            }
+        }
+        break;
+
+    case GardifyModels.Models.ModelEnums.CharacteristicValueType.SingleLatinNumber:
+        switch ((int)Model.Min)
+        {
+            case 1:
+                @:I
+                break;
+            case 2:
+                @:II
+                break;
+            case 3:
+                @:III
+                break;
+            case 4:
+                @:IV
+                break;
+            case 5:
+                @:V
+                break;
+            case 6:
+                @:VI
+                break;
+            case 7:
+                @:VII
+                break;
+            case 8:
+                @:VIII
+                break;
+            case 9:
+                @:IX
+                break;
+            case 10:
+                @:X
+                break;
+            case 11:
+                @:XI
+                break;
+            case 12:
+                @:XII
+                break;
+            default:
+                @Model.Min
+                break;
+        }
+        break;
+    case GardifyModels.Models.ModelEnums.CharacteristicValueType.MonthRange:
+        switch ((int)Model.Min)
+        {
+            case 1:
+                @:Jan
+                break;
+            case 2:
+                @:Feb
+                break;
+            case 3:
+                @:Mrz
+                break;
+            case 4:
+                @:Apr
+                break;
+            case 5:
+                @:Mai
+                break;
+            case 6:
+                @:Jun
+                break;
+            case 7:
+                @:Jul
+                break;
+            case 8:
+                @:Aug
+                break;
+            case 9:
+                @:Sep
+                break;
+            case 10:
+                @:Okt
+                break;
+            case 11:
+                @:Nov
+                break;
+            case 12:
+                @:Dez
+                break;
+            default:
+                @Model.Min
+                break;
+        }
+        if (Model.Min != Model.Max)
+        {
+            switch ((int)Model.Max)
+            {
+                case 1:
+                    @:Jan
+                    break;
+                case 2:
+                    @:Feb
+                    break;
+                case 3:
+                    @:Mrz
+                    break;
+                case 4:
+                    @:Apr
+                    break;
+                case 5:
+                    @:Mai
+                    break;
+                case 6:
+                    @:Jun
+                    break;
+                case 7:
+                    @:Jul
+                    break;
+                case 8:
+                    @:Aug
+                    break;
+                case 9:
+                    @:Sep
+                    break;
+                case 10:
+                    @:Okt
+                    break;
+                case 11:
+                    @:Nov
+                    break;
+                case 12:
+                    @:Dez
+                    break;
+                default:
+                    @Model.Max
+                    break;
+            }
+        }
+        break;
+    case GardifyModels.Models.ModelEnums.CharacteristicValueType.SingleMonth:
+        switch ((int)Model.Min)
+        {
+            case 1:
+                @:Jan
+                break;
+            case 2:
+                @:Feb
+                break;
+            case 3:
+                @:Mrz
+                break;
+            case 4:
+                @:Apr
+                break;
+            case 5:
+                @:Mai
+                break;
+            case 6:
+                @:Jun
+                break;
+            case 7:
+                @:Jul
+                break;
+            case 8:
+                @:Aug
+                break;
+            case 9:
+                @:Sep
+                break;
+            case 10:
+                @:Okt
+                break;
+            case 11:
+                @:Nov
+                break;
+            case 12:
+                @:Dez
+                break;
+            default:
+                @Model.Min
+                break;
+        }
+        break;
+    case GardifyModels.Models.ModelEnums.CharacteristicValueType.NumberRange:
+        @:@(Model.Min + (Model.Min != Model.Max ? " - " + Model.Max : ""))
+        break;
+    case GardifyModels.Models.ModelEnums.CharacteristicValueType.SingleNumber:
+        @:@(Model.Min)
+        break;
+}

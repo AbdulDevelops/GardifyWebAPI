@@ -1,0 +1,40 @@
+﻿=== TODO ===
+
++ Make it so that the plant with todo template cannot be deleted (07022019)
+
++ Todovorlagen: Bulk-Edit einfügen -> Wenn mehrere ausgewählt, für jede ausgewählte die Vorlage erstellen
+
+=== Erledigt ===
+
+* Importieren Bug fixen
+* Plant/edit: Remove standard values for characteristics
+* plant/index: Nach id suchen
+* tree: dafür sorgen, dass man auch 
+* plant/index: *Synonym, *Familie, *Herkunft, *Gärtnerische Kategorie und *Gruppe auch anzeigen
+* Fix plant import from other DB
+* Tell Karl where you can add plant tags
+* plant/edit: fehler beim ausfüllen von plantcharacteristics
+* Bei mehreren Zahlen wird nur ein Feld angezeigt
+* Bei Röm. Zahlen Dropdown zeigen
+* plant/edit: synonym/familie/herkunft kriegen den input von synonym
+* Felder in die DB
+* Herkunft zu einer Textarea machen
+* Fix typo in planttag
+* Pflanzen hinzufügen zum Tree auch ab Ebene 6 zulassen
+* Todovorlagen: Bulk-Create fixen
+
+=== MISC ===
+
+update-package Microsoft.CodeDom.Providers.DotNetCompilerPlatform -r
+
+das große view
+Kopie hochladen gp08a
+___
+Fertig:
+*3. Zeile im Layout wegmachen
+*^ und 2. auch
+*Filter veröffentlicht
+*Haken "veröffentlichen" auf Liste anzeigen
+*Auf Liste anzeigen, wie viele unbearbeiteten Kommentare existieren
+*Auch in Übersicht: Anzahl der Todos und Warnungen
+*filter nach Kommentaren

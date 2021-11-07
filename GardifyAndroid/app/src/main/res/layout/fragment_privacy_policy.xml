@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/scrollView_all_seashell">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/marginPaddingSize_24sdp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+            android:layout_marginBottom="@dimen/marginPaddingSize_5sdp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <ImageView
+                android:id="@+id/image_view_privacy_policy_info"
+                android:layout_width="@dimen/imageView_all_width_18sdp"
+                android:layout_height="@dimen/imageView_all_height_18sdp"
+                android:src="@drawable/ic_info"
+                app:tint="@color/colorPrimary" />
+
+            <TextView
+                android:id="@+id/text_view_privacy_policy_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/marginPaddingSize_10sdp"
+                android:text="@string/privacyPolicy_updateNotification"
+                android:textSize="@dimen/textSize_body_xsmall" />
+
+        </LinearLayout>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/cardView_all_white"
+            android:layout_marginBottom="@dimen/marginPaddingSize_32sdp">
+
+            <TextView
+                android:id="@+id/text_view_privacy_policy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/marginPaddingSize_10sdp"
+                android:text="sample text"
+                android:textSize="@dimen/textSize_body_medium" />
+        </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
+</ScrollView>

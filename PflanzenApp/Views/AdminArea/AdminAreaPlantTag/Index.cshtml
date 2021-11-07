@@ -1,0 +1,140 @@
+﻿@model GardifyModels.Models.AdminAreaViewModels.PlantTagViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdminArea.cshtml";
+}
+
+<h2>Pflanzeneigenschaften</h2>
+
+<div class="form-horizontal">
+    <div class="form-group">
+        <label class="control-label col-sm-3">Kategorie auswahl</label>
+        <div class="col-sm-9">
+            @Html.DropDownListFor(model => model.SelectedListEntryId, new SelectList(Model.CategoryList, "id", "title", Model.SelectedListEntryId), new { @class = "form-control", @style = "display:inline-block", @onchange = "changeCategory(this.value)" })
+            @Html.ActionLink("Ändern", "category-edit", new { id = Model.SelectedListEntryId }, new { @class = "btn btn-default" })
+            @Html.ActionLink("Neue Kategorie", "category-create", null, new { @class = "btn btn-default" })
+            @Html.ActionLink("Neue Überkategorie", "supercategory-create", null, new { @class = "btn btn-default" })
+        </div>
+    </div>
+</div>
+<h4>Eigenschaften in dieser Kategorie</h4>
+<p>
+    @Html.ActionLink("Neues Tag erstellen", "Create", new { categoryId = Model.SelectedListEntryId })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Bilddatei
+        </th>
+        <th>
+            Anzahl Pflanzen
+        </th>
+        <th></th>
+    </tr>
+    @if (Model.PlantTags != null && Model.PlantTags.Any())
+    {
+        foreach (var item in Model.PlantTags)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @if (!String.IsNullOrEmpty(item.TagImage))
+                    {
+                        <img class="tag-icon" src="@Url.Content("~/Images/Plant_tags/" + item.TagImage)" title="@item.Title" alt="@item.Title" /> @:( @(item.TagImage) )
+                    }
+                    else
+                    {
+                        @: kein Bild
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Count)
+                </td>
+                <td>
+                    @Html.ActionLink("Ändern", "Edit", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    }
+    else
+    {
+        <tr>
+            <td colspan="4">Keine Eigenschaften in dieser Kategorie</td>
+        </tr>
+    }
+</table>
+<hr />
+<h4>Merkmale mit Werten</h4>
+<p>
+    @Html.ActionLink("Neues Merkmal erstellen", "characteristic-category-create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Bilddatei
+        </th>
+        <th>
+            Werttyp
+        </th>
+        <th>
+            Anzahl Pflanzen
+        </th>
+        <th></th>
+    </tr>
+    @if (Model.CharacteristicCategories != null && Model.CharacteristicCategories.Any())
+    {
+        foreach (var item in Model.CharacteristicCategories)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @if (!String.IsNullOrEmpty(item.TagImage))
+                    {
+                        <img class="tag-icon" src="@Url.Content("~/Images/Plant_tags/" + item.TagImage)" title="@item.Title" alt="@item.Title" /> @:( @(item.TagImage) )
+                    }
+                    else
+                    {
+                        @: kein Bild
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CharacteristicValueType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Count)
+                </td>
+                <td>
+                    @Html.ActionLink("Ändern", "characteristic-category-edit", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    }
+    else
+    {
+        <tr>
+            <td colspan="5">Keine Merkmale vorhanden</td>
+        </tr>
+    }
+</table>
+
+
+
+
+
+<script>
+    function changeCategory(categoryId)
+    {
+        window.location.href = "@Url.Action("Index")?categoryId=" + categoryId;
+    }
+</script>

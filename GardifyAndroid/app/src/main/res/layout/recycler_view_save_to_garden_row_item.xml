@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="10dp">
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/checkBox_save_to_garden"
+        android:layout_width="@dimen/width_height_16sdp"
+        android:layout_height="@dimen/width_height_16sdp"
+        android:background="@drawable/checkbox_layout"
+        android:button="@null" />
+
+    <TextView
+        android:id="@+id/textView_save_to_garden_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:textSize="@dimen/textSize_body_medium" />
+
+</LinearLayout>

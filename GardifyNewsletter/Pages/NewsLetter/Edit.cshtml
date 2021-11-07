@@ -1,0 +1,341 @@
+﻿@page
+@model GardifyNewsletter.Areas.Intern.Pages.Newsletter.EditModel
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1 class="mt-3">Newsletter bearbeiten</h1>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-6">
+        <form method="post">
+
+            <input type="hidden" asp-for="Newsletter.NewsletterId" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <input type="hidden" asp-for="Newsletter.ApplicationId" />
+
+            <div class="form-group">
+                <label class="control-label">Überschrift im Header:</label>
+                <input asp-for="Newsletter.NewsletterHeaderText" class="form-control" />
+                <span asp-validation-for="Newsletter.NewsletterHeaderText" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">angezeigtes Datum des Newsletters:</label>
+                <input asp-for="Newsletter.NewsletterDateShownOnNewsletter" class="form-control" />
+                <span asp-validation-for="Newsletter.NewsletterDateShownOnNewsletter" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Absender(E-Mail): *</label>
+                <input asp-for="Newsletter.SenderEmail" class="form-control" type="email" required />
+                <span asp-validation-for="Newsletter.SenderEmail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Absender(Name):</label>
+                <input asp-for="Newsletter.SenderName" class="form-control" />
+                <span asp-validation-for="Newsletter.SenderName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Newsletter.SenderReplyTo" class="control-label" type="email"></label>
+                <input asp-for="Newsletter.SenderReplyTo" class="form-control" />
+                <span asp-validation-for="Newsletter.SenderReplyTo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Betreff</label>
+                <input asp-for="Newsletter.Subject" class="form-control" />
+                <span asp-validation-for="Newsletter.Subject" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Speichern" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<hr />
+
+<div class="row">
+
+
+    <div class="col-2">
+        <h3>Hinzufügen</h3>
+        @if (!Model.Newsletter.NewsletterComponents.Any(c => c.NewsletterComponentTemplateId == Models.ComponentType.PreText || c.NewsletterComponentTemplateId == Models.ComponentType.PreTextWithoutImage))
+        {
+            <a class="btn btn-info" asp-page-handler="AddComponent" asp-route-id="@Model.Newsletter.NewsletterId" asp-route-componentType="@Models.ComponentType.PreTextWithoutImage">Einleitung (ohne Bild)</a>
+            <br />
+            <br />
+        }
+        @if (!Model.Newsletter.NewsletterComponents.Any(c => c.NewsletterComponentTemplateId == Models.ComponentType.PreText || c.NewsletterComponentTemplateId == Models.ComponentType.PreTextWithoutImage))
+        {
+            <a class="btn btn-info" asp-page-handler="AddComponent" asp-route-id="@Model.Newsletter.NewsletterId" asp-route-componentType="@Models.ComponentType.PreText">Einleitung (mit Bild)</a>
+            <br />
+            <br />
+        }
+        <a class="btn btn-info" asp-page-handler="AddComponent" asp-route-id="@Model.Newsletter.NewsletterId" asp-route-componentType="@Models.ComponentType.FreeText">Freitext (mit Bild)</a>
+        <br />
+        <br />
+        <a class="btn btn-info" asp-page-handler="AddComponent" asp-route-id="@Model.Newsletter.NewsletterId" asp-route-componentType="@Models.ComponentType.FreeTextWithoutImage">Freitext (ohne Bild)</a>
+        <br />
+        <br />
+        <a class="btn btn-info" asp-page-handler="AddComponent" asp-route-id="@Model.Newsletter.NewsletterId" asp-route-componentType="@Models.ComponentType.NewsWithImage">Pflanze Artikel (mit Bild)</a>
+        <br />
+        <br />
+        <a class="btn btn-info" asp-page-handler="AddComponent" asp-route-id="@Model.Newsletter.NewsletterId" asp-route-componentType="@Models.ComponentType.ArticleWithImage">Shopartikel (mit Bild)</a>
+        <br />
+        <br />
+        <a class="btn btn-info" asp-page-handler="AddComponent" asp-route-id="@Model.Newsletter.NewsletterId" asp-route-componentType="@Models.ComponentType.NewPlantWithImage">Neue Pflanzen (mit Bild)</a>
+        <br />
+        <br />
+        @if (!Model.Newsletter.NewsletterComponents.Any(c => c.NewsletterComponentTemplateId == Models.ComponentType.PostText || c.NewsletterComponentTemplateId == Models.ComponentType.PostTextWithoutImage))
+        {
+            <a class="btn btn-info" asp-page-handler="AddComponent" asp-route-id="@Model.Newsletter.NewsletterId" asp-route-componentType="@Models.ComponentType.PostTextWithoutImage">Schlusssatz (ohne Bild)</a>
+            <br />
+            <br />
+        }
+        @if (!Model.Newsletter.NewsletterComponents.Any(c => c.NewsletterComponentTemplateId == Models.ComponentType.PostText || c.NewsletterComponentTemplateId == Models.ComponentType.PostTextWithoutImage))
+        {
+            <a class="btn btn-info" asp-page-handler="AddComponent" asp-route-id="@Model.Newsletter.NewsletterId" asp-route-componentType="@Models.ComponentType.PostText">Schlusssatz (mit Bild)</a>
+            <br />
+            <br />
+        }
+    </div>
+    <div class="col-5">
+        <h3>Vorhandene Inhalte bearbeiten</h3>
+        @{
+            int index = 0;
+        }
+        @if ((Model.Newsletter?.NewsletterComponents?.Any()).GetValueOrDefault(false))
+        {
+            var header = Model.Newsletter?.NewsletterComponents.FirstOrDefault(c => c.NewsletterComponentTemplateId == Models.ComponentType.PreText || c.NewsletterComponentTemplateId == Models.ComponentType.PreTextWithoutImage);
+            if (header != null)
+            {
+                index++;
+                <div style="background-color:@(index%2==0?"gray":"lightgray"); padding: 20px;">
+                    @await Html.PartialAsync("_NewsletterComponent", header)
+                </div>
+            }
+            @foreach (var content in Model.Newsletter.NewsletterComponents
+.Where(c => c.Sort != null)
+.OrderBy(c => c.Sort))
+            {
+                index++;
+                <div style="background-color:@(index%2==0?"gray":"lightgray"); padding: 20px;">
+                    @await Html.PartialAsync("_NewsletterComponent", content)
+                </div>
+            }
+
+            var footer = Model.Newsletter?.NewsletterComponents.FirstOrDefault(c => c.NewsletterComponentTemplateId == Models.ComponentType.PostText || c.NewsletterComponentTemplateId == Models.ComponentType.PostTextWithoutImage);
+            if (footer != null)
+            {
+                index++;
+                <div style="background-color:@(index%2==0?"gray":"lightgray"); padding: 20px;">
+                    @await Html.PartialAsync("_NewsletterComponent", footer)
+                </div>
+            }
+        }
+        else
+        {
+            <b>Noch keine Inhalte vorhanden</b>
+        }
+        <div>
+            <a class="btn btn-primary mt-3 mb-3" asp-page="Index">Fertig</a>
+        </div>
+    </div>
+    <div class="col-5">
+        <h3>Vorschau</h3>
+        <iframe class="fill-parent" src="@Url.Page(null, "ShowNewsLetterPreview", new { id=Model.Newsletter.NewsletterId })">
+        </iframe>
+        <a asp-page-handler="ShowNewsletterPreview" asp-route-id="@Model.Newsletter.NewsletterId" target="_blank" class="btn btn-orange">Vorschau auf neuer Seite anzeigen</a>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+
+    <script src="~/js/jquery-customselect.js"></script>
+    <link href="~/css/jquery-customselect.css" rel="stylesheet">
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            document.onImageUploadSuccess = function () {
+                document.location.reload();
+            };
+        });
+
+        $(document).ready(function () {
+            $(".Pflanzelist").customselect({
+                search: true,
+                hoveropen: false
+
+            });
+        });
+        $(document).ready(function () {
+            $(".Shoplist").customselect({
+                search: true,
+                hoveropen: false
+
+            });
+        });
+
+
+        //load plantList using jquery
+
+        var settings = {
+            "url": "https://gardifybackend.sslbeta.de/api/PlantSearchAPI/getall",
+            "method": "GET",
+            "timeout": 0,
+        };
+
+        $.ajax(settings).done(function (response) {
+            console.log(response);
+            $('.News-select').attr('disabled', false);
+
+            var opts = "";
+            var itemsList = response.Plants;
+
+            // sort array ascending orderl
+
+            itemsList.sort((a, b) => (a.NameGerman > b.NameGerman) ? 1 : ((b.NameGerman > a.NameGerman) ? -1 : 0));
+
+            var items = itemsList.map(function (item) {
+                $('.News-select').append($("<option>").val(item.Id).text(item.NameGerman));
+            });
+
+            $('.News-select').find('[value="0"]').text("Bitte auswählen");
+
+        });
+
+        function showDropDown(selectedMonth) {
+
+            console.log(selectedMonth);
+
+            var latestPlantApi = "https://gardifybackend.sslbeta.de/api/plantsearchapi/latest/" + selectedMonth;
+
+            var germanMonth;
+            var monthNumber = selectedMonth.split("/").pop();
+
+            switch (monthNumber) {
+                case '1':
+                    germanMonth = 'Januar';
+                    break;
+                case '2':
+                    germanMonth = 'Februar';
+                    break;
+                case "3":
+                    germanMonth = 'März';
+
+                    break;
+                case "4":
+                    germanMonth = 'April';
+
+                    break;
+                case "5":
+                    germanMonth = 'Mai';
+
+                    break;
+                case "6":
+                    germanMonth = 'Juni';
+
+                    break;
+                case "7":
+                    germanMonth = 'Juli';
+
+                    break;
+                case "8":
+                    germanMonth = 'August';
+                    break;
+                case "9":
+                    germanMonth = 'September';
+                    break;
+                case "10":
+                    germanMonth = 'Oktober';
+                    break;
+                case "11":
+                    germanMonth = 'November';
+                    break;
+                case "12":
+                    germanMonth = 'Dezember';
+                    break;
+                default:
+            }
+            console.log(latestPlantApi);
+
+            //add spinner
+            showNewPlantLoading("Loading...");
+
+            $.ajax({
+                type: 'GET',
+                url: latestPlantApi,
+                data: { get_param: 'value' },
+                success: function (data) {
+                    for (var i = 0; i < data.length; ++i) {
+                        console.log(data[i].NameGerman);
+
+                        $('.News-plant-select_1').append($("<option>").val(data[i].Id).text(data[i].NameGerman));
+                        $('.News-plant-select_2').append($("<option>").val(data[i].Id).text(data[i].NameGerman));
+                        $('.News-plant-select_3').append($("<option>").val(data[i].Id).text(data[i].NameGerman));
+                    }
+                    //remove loading
+                    showNewPlantLoading("Bitte auswählen");
+
+                    document.getElementById("newPlantHeadline").value = data.length + " neue Pflanzen im " + germanMonth;
+
+                },
+                error: function (data) {
+                    console.log(data.status + ':' + data.statusText, data.responseText);
+                    //remove loading
+                    showNewPlantLoading("Bitte auswählen");
+                }
+            });
+        }
+
+        function showNewPlantLoading(optionText) {
+            $('.News-plant-select_1').find('[value="0"]').text(optionText);
+            $('.News-plant-select_2').find('[value="0"]').text(optionText);
+            $('.News-plant-select_3').find('[value="0"]').text(optionText);
+        }
+
+
+        // show months
+        $(document).ready(function () {
+
+            var monthNames = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"];
+
+            var monthNumber = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"];
+
+            var today = new Date();
+            var d;
+            var month;
+            var year;
+
+            for (var i = 0; i < 12; i++) {
+                d = new Date(today.getFullYear(), today.getMonth() - i, 1);
+                monthName = monthNames[d.getMonth()];
+                monthNo = monthNumber[d.getMonth()];
+
+                year = d.getFullYear();
+                //console.log(year + "/" + monthNo);
+                var yearMonth = year + "/" + monthNo;
+                //console.log(monthName);
+                $('.New_Plant_Month').append($("<option>").val(yearMonth).text(monthName));
+            }
+
+            $('.New_Plant_Month')
+                .trigger('change');
+
+        });
+
+        $(".New_Plant_Month").change(function () {
+
+            // Fetching Value
+            var month = $(this).val();
+            showDropDown(month);
+
+        });
+
+    </script>
+
+}

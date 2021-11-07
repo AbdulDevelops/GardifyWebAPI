@@ -1,0 +1,157 @@
+@model GardifyModels.Models.PlantViewModels.PlantListViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdminArea.cshtml";
+}
+<style>
+    .wrapper div.odd-bg:nth-of-type(2n+1) {
+        background-color: #f3f3f3;
+        padding: 4px;
+    }
+</style>
+<hr />
+@*<form method="get" class="form-horizontal">
+        <div class="form-group row">
+            <div class="col-md-2">Botanischer Name/Name/Beschreibung</div>
+            @Html.TextBox("Name", (string)ViewBag.Name, new { @class = "form-control col-md-10" })
+            <input class="btn btn-default" type="submit" value="Suchen" />
+        </div>
+    </form>*@
+<h2>Vorschlagsliste</h2>
+<a href="~/i/plant">zum Pflanzendatenbank</a>  
+<br />
+<table class="table">
+    <tr>
+        <th>Bilder</th>
+        <th>
+            @Html.ActionLink("Botanischer Name", "Index", new
+            {
+           Name = ViewBag.Name,
+           OrderBy = ViewBag.currentOrder == "BotanicName" ? "BotanicNameR" : "BotanicName",
+           Page = ViewBag.Page
+            })
+        </th>
+        <th>
+            @Html.ActionLink("Deutscher Name", "Index", new
+            {
+           Name = ViewBag.Name,
+           OrderBy = ViewBag.currentOrder == "GermanName" ? "GermanNameR" : "GermanName",
+           Page = ViewBag.Page
+            })
+        </th>
+        <th>
+            @Html.ActionLink("Status", "Index", new
+            {
+           Name = ViewBag.Name,
+           OrderBy = ViewBag.currentOrder == "Status" ? "StatusR" : "Status",
+           Page = ViewBag.Page
+            })
+        </th>
+        @*<th>
+                Beschreibung
+            </th>*@
+        <th>
+            @Html.ActionLink("Datum", "Index", new
+       {
+           Name = ViewBag.Name,
+           OrderBy = ViewBag.currentOrder == "Datum" ? "DatumR" : "Datum",
+           Page = ViewBag.Page
+       })
+        </th>
+    </tr>
+
+    @foreach (var item in Model.ListEntries)
+    {
+        var isDeleted = item.Deleted;
+        var className = "";
+        if (isDeleted) {
+            className = "alert alert-danger";
+        }
+        <tr class="@className">
+            <td>
+                @if (item.Images != null && item.Images.Any())
+                {
+                <div class="image-wrapper" style="width: 200px;padding: 0 5px;">
+                    <div class="title-image">
+                        <img title="@item.Images.FirstOrDefault().TitleAttr" src="@item.Images.FirstOrDefault().SrcAttr" alt="@item.Images.FirstOrDefault().AltAttr"/>
+                    </div>
+                    @foreach (var img in item.Images)
+                    {
+                        var fixedURL = img.SrcAttr.ToLower().Replace("intern", "");
+
+                        <div class="thumbnail col-md-4">
+                            <img title="@img.TitleAttr" src="https://gardifybackend.sslbeta.de/@(fixedURL)"alt="@img.AltAttr" />
+                        </div>
+                    }
+                </div>
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NameLatin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NameGerman)
+            </td>
+            <td>
+                @item.SuggestionStatusText
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+                @if (item.PlantTags != null && item.PlantTags.Any())
+                {
+                    <hr />
+                    for (int i = 0; i < item.PlantTags.Count(); i++)
+                    {
+                        @(i > 0 ? ", " : "")@(item.PlantTags.ElementAt(i).Category.Title + ": " + item.PlantTags.ElementAt(i).Title);
+                    }
+                }
+
+                @if (item.PlantCharacteristics != null && item.PlantCharacteristics.Any())
+                {
+                    <hr />
+                    <hr />
+                    for (int i = 0; i < item.PlantCharacteristics.Count(); i++)
+                    {
+                        @(i > 0 ? ", " : "")
+                        @(item.PlantCharacteristics.ElementAt(i).Category.Title + ": ")
+                        Html.RenderPartial("~/Views/Shared/_PlantCharacteristicValuePartial.cshtml", item.PlantCharacteristics.ElementAt(i));
+                    }
+                }
+                @if (!string.IsNullOrEmpty(item.Synonym))
+                {
+                    <hr />
+                    <b>Synonym:</b> @item.Synonym
+                }
+                @if (!string.IsNullOrEmpty(item.Herkunft))
+                {
+                    <hr />
+                    <b>Herkunft:</b> @item.Herkunft
+                }
+                @if (!string.IsNullOrEmpty(item.Family))
+                {
+                    <hr />
+                    <b>Familie:</b> @item.Family
+                }
+                @if (item.GardenCategory != null)
+                {
+                    <hr />
+                    <b>Gartenkategorie:</b> @item.GardenCategory.Name
+                }
+                @if (item.PlantGroupsOld != null && item.PlantGroupsOld.Any(g => !g.Deleted))
+                {
+                    <hr />
+                    <b>Gruppen:</b> @(string.Join(", ", item.PlantGroupsOld.Where(g => !g.Deleted).Select(g => g.Name)))
+                }
+            </td>
+            <td>
+                @*@Html.ActionLink("Pflanzen Bearbeiten", "Edit2", "AdminAreaPlant", new { id = item.Id }) |*@
+                <a href="~/i/plant/Edit?id=@(item.Id)">Pflanzen Bearbeiten</a>  |
+                @Html.ActionLink("Vorschlag Bearbeiten", "Edit", new { id = item.Id }) |
+                <a href="~/i/plant/DeletePlant?plantId=@(item.Id)">Löschen</a>
+                <br />
+
+            </td>
+        </tr>
+    }
+</table>

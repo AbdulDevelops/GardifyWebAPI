@@ -1,0 +1,33 @@
+﻿@model GardifyModels.Models.NewsViewModels.NewsEntryViewModel
+
+@{
+    ViewBag.Title = Model.Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Html.DisplayFor(model => model.Title)</h2>
+<div class="row">
+	@if (Model.EntryImages != null && Model.EntryImages.Any())
+			{
+		<div class="col-md-3">
+			<div class="title-image">
+				<img title="@Model.EntryImages.FirstOrDefault().TitleAttr" src="@Model.EntryImages.FirstOrDefault().SrcAttr" alt="@Model.EntryImages.FirstOrDefault().AltAttr" />
+			</div>
+			@foreach (var img in Model.EntryImages.Skip(1))
+				{
+				<div class="thumbnail col-md-4">
+					<img title="@img.TitleAttr" src="@img.SrcAttr" alt="@img.AltAttr" />
+				</div>
+				}
+		</div>
+			}
+	<div class="col-md-9">		
+		<b>@Html.DisplayFor(model => Model.Date)</b>
+		<br />	
+		@Model.Text		
+	</div>
+</div>
+<br />
+<p>
+    @Html.ActionLink("Zurück", "Index")
+</p>

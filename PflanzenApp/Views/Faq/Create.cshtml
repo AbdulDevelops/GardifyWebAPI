@@ -1,0 +1,138 @@
+﻿@model GardifyModels.Models.FaqViewModels.FaqCreateViewModel
+
+@{
+    ViewBag.Title = "Frage erstellen";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*@if (Model.StatusMessage != null)
+    {
+        Html.RenderPartial("_modalStatusMessage", Model.StatusMessage);
+    }*@
+
+@using (Html.BeginForm("Create", "Faq", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <h2>Eine Frage stellen</h2>
+
+    <div class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-md-2">Bild auswählen</label>
+            <div class="col-md-10">
+                <input type="file" name="imageFile" />
+            </div>
+        </div>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <label class="control-label col-md-2">Text</label>
+            <div class="col-md-10">
+                <textarea class="form-control" name="questionText" rows="5" cols="80" required="required"></textarea>
+                @Html.ValidationMessageFor(model => model.QuestionText, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <p class="control-label col-md-2">Gehört zu</p>
+            <div class="col-md-10">
+                @Html.DropDownList("ReferenceType", new List<SelectListItem>(){
+        new SelectListItem() { Text="-", Value = "0", Selected = true  },
+        new SelectListItem() { Text="Pflanze", Value = "1"} }, new { @onchange = "ondropdownselect(this.value)" })
+            </div>
+        </div>
+        <div class="form-group" id="reference-list">
+            <p class="control-label col-md-2">Wähle zugehöriges Objekt</p>
+            <div class="col-md-10">
+                @Html.DropDownList("ReferenceId", new List<SelectListItem>() { })
+            </div>
+        </div>
+        <div class="alert alert-info">
+            Wenn Sie der Meinung sind, dass sich noch mehr Leute diese Frage stellen könnten, können Sie sie hier der Öffentlichkeit verfügbar machen.
+        </div>
+        <div class="form-group">
+            <p class="control-label col-md-2">Zustimmung zur Veröffentlichung</p>
+            <div class="col-md-10">
+                @Html.CheckBoxFor(v => v.UserAllowsPublishment)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Senden" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Zurück", "Index")
+</div>
+
+<script>
+
+    $(document).ready(function () {
+        @{ int type = (int)Model.ReferenceType;}
+        ondropdownselect(0);
+        @if (type != 0)
+        {
+            @:selectCorrectType();
+                }
+    });
+    function ondropdownselect(index) {
+        var list = $('#reference-list');
+        var dd = $('#ReferenceId');
+        console.log(list);
+        if (index == 0) {
+            list.hide();
+        } else {
+            list.show();
+            removeoptions(dd);
+            @{ int counter = 0;}
+            @foreach (var obj in Model.InfoObjects)
+            {
+                int modRefType = (int)obj.ReferenceType;
+                counter++;
+                @:var refType = @modRefType
+                @:if (refType == index){
+                            @:addoption(dd, @obj.Id, "@obj.Name");
+                            @:}
+                        }
+        }
+    }
+
+    function selectCorrectType(){
+        @{
+            int x = 0;
+            if(type == 0)
+            {
+                @:$("#ReferenceType option[value='0']").attr('selected', true);
+                        x = 0;
+            }
+            else if(type == 1)
+            {
+                @:$("#ReferenceType option[value='1']").attr('selected', true);
+                        x = 1;
+            }
+        }
+        var dd = $('#ReferenceId');
+        removeoptions(dd);
+        @{ int counter2 = 0;}
+        @foreach (var obj in Model.InfoObjects)
+        {
+            int modRefType = (int)obj.ReferenceType;
+            counter++;
+            @:var refType = @modRefType
+            @:if (refType == @x){
+                        @:addoption(dd, @obj.Id, "@obj.Name");
+                        @:}
+                }
+        $('#reference-list').show();
+        $("#reference-list option[value='@Model.ReferenceId']").attr('selected', true);
+    }
+
+    function addoption(dropdown, index, text) {
+        var newOption = "<option value='" + index + "'>"+text+"</option>";
+        dropdown.append(newOption);
+    }
+
+    function removeoptions(dropdown) {
+        $(dropdown).find("option").remove();
+    }
+</script>

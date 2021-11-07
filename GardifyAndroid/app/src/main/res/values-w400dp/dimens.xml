@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+        Portrait mode w400dp
+
+        1.) Widths
+        2.) Heights
+        3.) Margins
+    -->
+
+    <!-- 1.) Widths -->
+    <dimen name="width_team_cardView">185dp</dimen>
+
+    <!-- 2.) Heights -->
+    <dimen name="height_team_cardView">255dp</dimen>
+
+    <!-- 3.) Margins -->
+    <dimen name="margin_team_tableLayout">14dp</dimen>
+    <dimen name="margin_team_tableRow">7dp</dimen>
+
+</resources>

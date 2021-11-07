@@ -1,0 +1,32 @@
+﻿@model GardifyModels.Models.ErrorViewModels.ErrorDetailsViewModel
+
+@{
+    ViewBag.Title = "Entschuldigung, das hätte nicht passieren dürfen";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details zum Fehler</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            HTML Status Code:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HttpStatusCode)
+        </dd>
+
+        <dt>
+            Fehlernachricht: 
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ErrorMessage)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Zurück zur Startseite", "Index", "Garden")
+</p>

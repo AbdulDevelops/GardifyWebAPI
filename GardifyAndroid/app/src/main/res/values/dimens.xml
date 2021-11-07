@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+            # Intuit/sdp Library
+
+            An android lib that provides a new size unit - sdp (scalable dp).
+            This size unit scales with the screen size.
+            Intuit sizes are denoted by @dimen/_xx
+    -->
+
+    <!--
+        1.) library function
+        2.) one-time defined values
+        3.) Specially defined values
+    -->
+
+    <!--
+        1.) Widths
+        2.) Heights
+        3.) Widths + Heights
+        4.) Margins
+        5.) Elevations
+        6.) CornerRadius
+        7.) TextSizes
+    -->
+
+    <!-- image views -->
+    <dimen name="imageView_all_width_18sdp">@dimen/_18sdp</dimen>
+    <dimen name="imageView_all_width_50sdp">@dimen/_50sdp</dimen>
+    <dimen name="imageView_all_width_200sdp">@dimen/_200sdp</dimen>
+    <dimen name="imageView_team_width_xsmall">@dimen/_20sdp</dimen>
+    <dimen name="imageView_team_width_small">@dimen/_25sdp</dimen>
+    <dimen name="imageView_team_width_medium">@dimen/_60sdp</dimen>
+    <dimen name="imageView_team_width_large">@dimen/_70sdp</dimen>
+    <dimen name="imageView_plantSearch_width_22sdp">@dimen/_22sdp</dimen>
+    <dimen name="imageView_appBarMain_width_32sdp">@dimen/_32sdp</dimen>
+    <dimen name="imageView_weather_width_100sdp">@dimen/_100sdp</dimen>
+
+    <dimen name="imageView_all_height_18sdp">@dimen/_18sdp</dimen>
+    <dimen name="imageView_all_height_50sdp">@dimen/_50sdp</dimen>
+    <dimen name="imageView_all_height_200sdp">@dimen/_200sdp</dimen>
+    <dimen name="imageView_all_height_cameraGallery"/>
+    <dimen name="imageView_plantScan_height_layoutItem"/>
+    <dimen name="imageView_team_height_xxxsmall">@dimen/_16sdp</dimen>
+    <dimen name="imageView_team_height_20sdp">@dimen/_20sdp</dimen>
+    <dimen name="imageView_team_height_large">@dimen/_60sdp</dimen>
+    <dimen name="imageView_team_height_xlarge">@dimen/_70sdp</dimen>
+    <dimen name="imageView_team_height_25sdp">@dimen/_25sdp</dimen>
+    <dimen name="imageView_plantSearch_height_22sdp">@dimen/_22sdp</dimen>
+    <dimen name="imageView_splashScreen_height_150sdp">@dimen/_150sdp</dimen>
+    <dimen name="imageView_appBarMain_height_32sdp">@dimen/_32sdp</dimen>
+    <dimen name="imageView_weather_height_100sdp">@dimen/_100sdp</dimen>
+
+    <dimen name="imageView_toggleableHeader_marginEnd_2sdp">@dimen/_2sdp</dimen>
+
+
+    <dimen name="imageView_myGarden_marginStart_3sdp">@dimen/_3sdp</dimen>
+    <dimen name="imageView_guidedTour_padding_3sdp">@dimen/_3sdp</dimen>
+    <dimen name="imageView_all_marginStart_5sdp">@dimen/_5sdp</dimen>
+    <dimen name="imageView_all_marginEnd_5sdp">@dimen/_5sdp</dimen>
+    <dimen name="imageView_all_marginTop_5sdp">@dimen/_5sdp</dimen>
+    <dimen name="imageView_all_marginBottom_5sdp">@dimen/_5sdp</dimen>
+    <dimen name="imageView_all_marginLeft_5sdp">@dimen/_5sdp</dimen>
+    <dimen name="imageView_all_padding_5sdp">@dimen/_5sdp</dimen>
+    <dimen name="imageView_all_paddingRight_5sdp">@dimen/_5sdp</dimen>
+    <dimen name="imageView_all_margin_5sdp">@dimen/_5sdp</dimen>
+
+    <!-- switches -->
+    <dimen name="switch_all_width_xxsmall">@dimen/_30sdp</dimen>
+
+    <!-- 1.) Widths -->
+    <dimen name="width_80sdp">@dimen/_80sdp</dimen> <!-- switch -->
+    <dimen name="width_90sdp">@dimen/_90sdp</dimen> <!-- view -->
+    <dimen name="width_210sdp">@dimen/_210sdp</dimen> <!-- cardView -->
+    <dimen name="width_40dp">40dp</dimen> <!-- textView -->
+    <dimen name="width_team_cardView"/>
+    <dimen name="width_team_cardView_landscape"/>
+    <dimen name="width_todo_textView"/>
+    <dimen name="width_ecoScan_editText"/>
+    <dimen name="width_fragmentDialog"/>
+
+    <!-- 2.) Heights -->
+    <dimen name="height_1sdp">@dimen/_1sdp</dimen> <!-- view -->
+    <dimen name="height_8sdp">@dimen/_8sdp</dimen> <!-- switch -->
+    <dimen name="height_30sdp">@dimen/_30sdp</dimen> <!-- bottomNavigationView -->
+    <dimen name="height_32sdp">@dimen/_32sdp</dimen> <!-- button, cardView -->
+    <dimen name="height_35sdp">@dimen/_35sdp</dimen> <!-- seekBar, calendarView -->
+    <dimen name="height_40sdp">@dimen/_40sdp</dimen> <!-- BottomNavigationView, CardView -->
+    <dimen name="height_50sdp">@dimen/_50sdp</dimen> <!-- switch, seekBar, cardView -->
+    <dimen name="heightToolbar_70sdp">@dimen/_70sdp</dimen>
+    <dimen name="height_80sdp">@dimen/_80sdp</dimen> <!-- toolbar -->
+    <dimen name="height_130sdp">@dimen/_130sdp</dimen> <!-- recyclerView -->
+    <dimen name="height_150sdp">@dimen/_150sdp</dimen> <!-- listView -->
+    <dimen name="height_200sdp">@dimen/_200sdp</dimen> <!-- chart -->
+    <dimen name="height_20dp">20dp</dimen> <!-- seekBar -->
+    <dimen name="height_28dp">28dp</dimen> <!-- seekBar -->
+    <dimen name="height_team_cardView"/>
+    <dimen name="height_team_cardView_landscape"/>
+    <dimen name="height_bottomSheet" />
+
+
+
+    <!-- 3.) Widths + Heights -->
+    <dimen name="width_height_12sdp">@dimen/_12sdp</dimen> <!-- switch -->
+    <dimen name="width_height_13sdp">@dimen/_13sdp</dimen> <!-- textView -->
+    <dimen name="width_height_16sdp">@dimen/_16sdp</dimen> <!-- checkBox -->
+    <dimen name="width_height_18sdp">@dimen/_18sdp</dimen> <!-- view, textView, imageButton, toggleButton, checkBox -->
+    <dimen name="width_height_22sdp">@dimen/_22sdp</dimen> <!-- button -->
+    <dimen name="width_height_24sdp">@dimen/_24sdp</dimen> <!-- button -->
+    <dimen name="width_height_42sdp">@dimen/_42sdp</dimen> <!-- button -->
+
+    <!-- 4.) Margins -->
+    <dimen name="imageView_team_marginTop_6sdp">@dimen/_6sdp</dimen>
+    <dimen name="imageView_all_marginTop_8sdp">@dimen/_8sdp</dimen>
+    <dimen name="imageView_all_marginEnd_8sdp">@dimen/_8sdp</dimen>
+    <dimen name="imageView_all_marginStart_8sdp">@dimen/_8sdp</dimen>
+
+    <dimen name="marginPaddingSize_2sdp">@dimen/_2sdp</dimen>
+    <dimen name="marginPaddingSize_3sdp">@dimen/_3sdp</dimen>
+    <dimen name="marginPaddingSize_5sdp">@dimen/_5sdp</dimen>
+    <dimen name="marginPaddingSize_6sdp">@dimen/_6sdp</dimen>
+    <dimen name="marginPaddingSize_8sdp">@dimen/_8sdp</dimen>
+    <dimen name="marginPaddingSize_10sdp">@dimen/_10sdp</dimen> <!-- expandable list paddings -->
+    <dimen name="marginPaddingSize_16sdp">@dimen/_16sdp</dimen> <!--margin home-->
+    <dimen name="marginPaddingSize_24sdp">@dimen/_24sdp</dimen>
+    <dimen name="marginPaddingSize_32sdp">@dimen/_32sdp</dimen>
+    <dimen name="marginPaddingSize_40sdp">@dimen/_40sdp</dimen>
+    <dimen name="marginPaddingSize_60sdp">@dimen/_60sdp</dimen>
+    <dimen name="marginPaddingSize_80sdp">@dimen/_80sdp</dimen>
+    <dimen name="marginPaddingSize_120sdp">@dimen/_120sdp</dimen>
+    <dimen name="margin_team_tableLayout"/>
+    <dimen name="margin_team_tableLayout_landscape"/>
+    <dimen name="margin_team_tableRow"/>
+    <dimen name="margin_team_tableRow_landscape"/>
+
+    <!-- 5.) Elevations -->
+    <dimen name="elevation_2dp">2dp</dimen>
+    <dimen name="elevation_20dp">20dp</dimen> <!-- progressBar -->
+
+    <!-- 6.) CornerRadius -->
+    <dimen name="cardCornerRadius_small">@dimen/_5sdp</dimen> <!-- button -->
+    <dimen name="cardCornerRadius_medium">@dimen/_10sdp</dimen> <!-- cardView, switch -->
+
+    <!-- 7.) TextSizes -->
+    <dimen name="textSize_body_xxxsmall">@dimen/_8ssp</dimen>
+    <dimen name="textSize_body_xxsmall">@dimen/_10ssp</dimen>
+    <dimen name="textSize_body_xsmall">@dimen/_12ssp</dimen>
+    <dimen name="textSize_body_small">@dimen/_13ssp</dimen> <!-- button -->
+    <dimen name="textSize_body_medium">@dimen/_14ssp</dimen> <!-- button, expandable list inner-->
+    <dimen name="textSize_title">@dimen/_15ssp</dimen> <!-- expandable list header -->
+    <dimen name="textSize_subHeadline">@dimen/_16ssp</dimen>
+    <dimen name="textSize_headline">@dimen/_17ssp</dimen>
+    <dimen name="textSize_big">@dimen/_28sdp</dimen>
+    <dimen name="textSize_icon">@dimen/_18ssp</dimen>
+    <dimen name="textSize_team_quote_landscape">@dimen/_12ssp</dimen>
+    <dimen name="textSize_team_name_landscape">@dimen/_13ssp</dimen>
+    <dimen name="textSize_team_body_small_landscape">@dimen/_12ssp</dimen>
+    <dimen name="textSize_team_body_normal_landscape">@dimen/_13ssp</dimen>
+
+</resources>

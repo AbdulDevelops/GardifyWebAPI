@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/cardView_all_white"
+        android:elevation="@dimen/elevation_2dp"
+        app:cardCornerRadius="@dimen/cardCornerRadius_medium">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/marginPaddingSize_16sdp">
+
+            <EditText
+                android:id="@+id/edit_text_register_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_edit_text_default"
+                android:ems="10"
+                android:hint="@string/registerLogin_emailMandatory"
+                android:imeOptions="actionDone"
+                android:inputType="textEmailAddress"
+                android:padding="@dimen/marginPaddingSize_10sdp"
+                android:text=""
+                android:textSize="@dimen/textSize_body_medium" />
+
+            <EditText
+                android:id="@+id/edit_text_register_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/custom_edit_text_default"
+                android:ems="10"
+                android:imeOptions="actionDone"
+                android:hint="@string/registerLogin_usernameMandatory"
+                android:inputType="text"
+                android:padding="@dimen/marginPaddingSize_10sdp"
+                android:textSize="@dimen/textSize_body_medium" />
+
+            <Spinner
+                android:id="@+id/spinner_country"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/CustomSpinnerStyle"
+                android:layout_marginTop="10dp" />
+
+            <EditText
+                android:id="@+id/edit_text_register_postal_code"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/custom_edit_text_default"
+                android:ems="10"
+                android:imeOptions="actionDone"
+                android:hint="@string/registerLogin_postalCodeMandatory"
+                android:inputType="textPostalAddress"
+                android:padding="@dimen/marginPaddingSize_10sdp"
+                android:textSize="@dimen/textSize_body_medium" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                app:passwordToggleEnabled="true"
+                app:boxBackgroundMode="none"
+                app:hintEnabled="false"
+                android:textColorHint="@color/text_register_hint">
+                <EditText
+                    android:id="@+id/edit_text_register_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/custom_edit_text_default"
+                    android:ems="10"
+                    android:imeOptions="actionDone"
+                    android:hint="@string/registerLogin_passwordMandatory"
+                    android:inputType="textPassword"
+                    android:paddingTop="@dimen/marginPaddingSize_10sdp"
+                    android:paddingBottom="@dimen/marginPaddingSize_10sdp"
+                    android:paddingStart="@dimen/marginPaddingSize_10sdp"
+                    android:paddingEnd="@dimen/_35sdp"
+
+                    android:textSize="@dimen/textSize_body_medium" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                app:passwordToggleEnabled="true"
+                app:boxBackgroundMode="none"
+                app:hintEnabled="false"
+                android:textColorHint="@color/text_register_hint">
+            <EditText
+                android:id="@+id/edit_text_register_password_confirm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/custom_edit_text_default"
+                android:ems="10"
+                android:imeOptions="actionDone"
+                android:hint="@string/registerLogin_confirmPasswordMandatory"
+                android:inputType="textPassword"
+                android:paddingTop="@dimen/marginPaddingSize_10sdp"
+                android:paddingBottom="@dimen/marginPaddingSize_10sdp"
+                android:paddingStart="@dimen/marginPaddingSize_10sdp"
+                android:paddingEnd="@dimen/_35sdp"
+                android:textSize="@dimen/textSize_body_medium" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/password_register_validation_hint"
+                android:textColor="@color/text_all_jasper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textSize="@dimen/textSize_body_xxsmall"
+                android:text="@string/all_passwordValidationHint" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/marginPaddingSize_16sdp"
+                android:orientation="horizontal">
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/switch_newsletter_subscription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/marginPaddingSize_10sdp"
+                    android:text="@string/all_newsletterSubscribe"
+                    android:textSize="@dimen/textSize_body_medium" />
+            </LinearLayout>
+            <ProgressBar
+                android:id="@+id/progress_bar_authentication"
+                style="@style/ProgressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginBottom="@dimen/marginPaddingSize_5sdp"
+                android:layout_gravity="center_horizontal"/>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_register"
+                style="@style/PrimaryButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/registerLogin_register" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</layout>

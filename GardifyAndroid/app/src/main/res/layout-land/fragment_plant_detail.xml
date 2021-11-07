@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/scrollView_all_seashell">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/cardCornerRadius_medium"
+
+        android:layout_margin="@dimen/marginPaddingSize_24sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/marginPaddingSize_10sdp">
+
+            <ProgressBar
+                android:id="@+id/progressbar"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView_plants_details_plant_image"
+                android:layout_width="@dimen/imageView_all_width_200sdp"
+                android:layout_height="@dimen/imageView_all_height_200sdp"
+                android:scaleType="centerCrop"
+                app:layout_constraintDimensionRatio="1.0"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- plant name latin german -->
+            <LinearLayout
+                android:id="@+id/linearLayout_plant_details_plant_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/marginPaddingSize_10sdp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/imageView_plants_details_plant_image">
+
+                <TextView
+                    android:id="@+id/textView_plants_details_name_latin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/source_sans_pro"
+                    android:text=""
+                    android:textSize="@dimen/textSize_title"
+                    android:textStyle="italic" />
+
+                <TextView
+                    android:id="@+id/textView_plants_details_name_german"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/source_sans_pro"
+                    android:text=""
+                    android:textColor="@color/text_all_gunmetal"
+                    android:textSize="@dimen/textSize_title"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView_plants_details_name_synonym"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/source_sans_pro"
+                    android:text=""
+                    android:textSize="@dimen/textSize_body_medium"
+                    android:textStyle="italic" />
+            </LinearLayout>
+
+            <!-- plant group -->
+            <LinearLayout
+                android:id="@+id/linearLayout_plants_details_plant_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/marginPaddingSize_10sdp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/linearLayout_plant_details_plant_name">
+
+                <TextView
+                    android:id="@+id/textView_plants_details_group_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/source_sans_pro"
+                    android:text="@string/all_plantsGroup"
+                    android:textSize="@dimen/textSize_title" />
+
+                <TextView
+                    android:id="@+id/textView_plants_details_group_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/source_sans_pro"
+                    android:text=""
+                    android:textColor="@color/text_all_gunmetal"
+                    android:textSize="@dimen/textSize_body_medium" />
+            </LinearLayout>
+
+            <!-- plant family -->
+            <LinearLayout
+                android:id="@+id/linearLayout_plants_details_plant_family"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/marginPaddingSize_10sdp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/linearLayout_plants_details_plant_group">
+
+                <TextView
+                    android:id="@+id/textView_plants_details_family_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/source_sans_pro"
+                    android:text="@string/all_family"
+                    android:textSize="@dimen/textSize_title" />
+
+                <TextView
+                    android:id="@+id/textView_plants_details_family_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/source_sans_pro"
+                    android:text=""
+                    android:textColor="@color/text_all_gunmetal"
+                    android:textSize="@dimen/textSize_body_medium" />
+            </LinearLayout>
+
+            <!-- Herkunft -->
+            <LinearLayout
+                android:id="@+id/linearLayout_plants_details_plant_origin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/marginPaddingSize_10sdp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/linearLayout_plants_details_plant_family">
+
+                <TextView
+                    android:id="@+id/textView_plants_details_origin_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/source_sans_pro"
+                    android:text="@string/all_origin"
+                    android:textSize="@dimen/textSize_title" />
+
+                <TextView
+                    android:id="@+id/textView_plants_details_origin_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/source_sans_pro"
+                    android:text=""
+                    android:textColor="@color/text_all_gunmetal"
+                    android:textSize="@dimen/textSize_body_medium" />
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_plants_details_save_garden"
+                style="@style/PrimaryButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/marginPaddingSize_10sdp"
+                android:text="@string/all_storeInMyGarden"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/linearLayout_plants_details_plant_origin" />
+
+            <!-- plant description -->
+            <LinearLayout
+                android:id="@+id/linearLayout_plants_details_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/marginPaddingSize_10sdp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/button_plants_details_save_garden">
+
+                <TextView
+                    android:id="@+id/textView_plants_details_description_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/source_sans_pro"
+                    android:text="@string/all_description"
+                    android:textColor="@color/text_all_gunmetal"
+                    android:textSize="@dimen/textSize_title"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView_plants_details_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/source_sans_pro"
+                    android:text=""
+                    android:textSize="@dimen/textSize_body_medium" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear_layout_plant_detail_category_table"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/marginPaddingSize_10sdp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/linearLayout_plants_details_description" />
+
+            <LinearLayout
+                android:id="@+id/linear_layout_plant_detail_todo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/marginPaddingSize_10sdp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/linear_layout_plant_detail_category_table" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</ScrollView>

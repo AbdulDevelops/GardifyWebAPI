@@ -1,0 +1,47 @@
+﻿@model IEnumerable<GardifyModels.Models.ArticleViewModels.ArticleViewModel>
+<div class="articles-wrapper">
+	@if (Model != null && Model.Any())
+	{
+		<div class="row">
+			@{ int index = 0; }
+			@foreach(var item in Model)
+			{
+				<div class="tumbnail col-md-3">
+					@if (item.ArticleImages != null && item.ArticleImages.Any())
+					{
+						<img title="@item.ArticleImages.FirstOrDefault().TitleAttr" src="@item.ArticleImages.FirstOrDefault().SrcAttr" alt="@item.ArticleImages.FirstOrDefault().AltAttr" />
+					}				
+					<div class="caption">
+						<h3>@item.Name</h3>
+						<p>@(item.Description.Length > 255 ? item.Description.Substring(0, 252) + "..." : item.Description)</p>
+						<hr />
+						<p>
+							<b style="font-size:18px">@item.NormalPrice€</b>
+							@if(item.PointsToSpend > 0)
+							{
+								@:<b>oder</b>
+								<br />
+								<b style="font-size:18px">@item.PricePartAfterPoints€ + @item.PointsToSpend Punkt@(item.PointsToSpend > 1 ? "e" : "") 
+								<br />
+								Sie sparen @item.PointsValue€!</b>
+							}
+							<br />
+							<br />
+							<a style="float:right" data-articleid="@item.Id" href="#" class="btn btn-warning buy-btn" >Kaufen</a>
+						</p>				
+					</div>
+				</div>
+				index++;
+				if (index == 4)
+				{
+					@:</div>
+					@:<div class="row">
+				}
+			}					
+		</div>
+	} else
+	{
+		<p>Keine Artikel gefunden</p>
+	}
+</div>
+

@@ -1,0 +1,169 @@
+<div class="wrapper-oeko {{mode}} pt-5 pb-5">
+    <div class="container px-5 oko-container wrapper-oeko {{mode==='light'?'text-darkgrey':'text-white'}}" id="MyDIv">
+        <div class="row">
+            <div class="col-md-6">
+                <h2 class="t-26 t-light {{mode==='dark'?'text-white':'text-grey'}}">MEIN PERSÖNLICHER ÖKOSCAN</h2>
+                <!-- <ng-container *ngIf="userInfo"> -->
+                    <h2 class="t-18 t-light font-italic" *ngIf="userInfo">Garten von {{userInfo.UserName}}</h2>
+                <!-- </ng-container> -->
+            </div>
+            <div class="col-md-6 t-16 t-light text-right pt-3">
+                <span>{{currentDate| date:'dd.MM.yyyy' }}</span>
+            </div>
+        </div>
+        <div class="row justify-content-between pt-3 mb-3">
+            <div class="col-md-12 text-justify">
+                Mit deinem persönlichen Ökoscan bekommst du ein Gefühl dafür, wie ökologisch dein Garten ist und in welchem Bereich du noch etwas für die Natur tun kannst. Hierbei spielen die Verwendung deiner Außenfläche, die Auswahl und Blühdauer der Pflanzen sowie die Anzahl der Öko-Elemente eine Rolle.
+            </div>
+            <div class="col-12 t-italic">
+                Hinweis: Pflanzen, die über den Pflanzenscan in deinen Garten gespeichert wurden, beeinflussen auch die Pflanzenvielfalt und die Blühdauer im Ökoscan. Der Ökoscan passt sich automatisch an, sobald wir die Pflanzen vollständig in die Datenbank aufgenommen haben.
+            </div>
+        </div>
+            <div class="row justify-content-between pt-3 mb-3">
+                <div class="col-lg-6 col-md-9 pb-3">
+                    <div class="row mx-0 area-input-container flex-container p-2">
+                        <div class="col-9">
+                                Außenfläche =<br/>Bepflanzte + versiegelte Außenfläche 
+                        </div>
+                        <div class="col-2 px-0">
+                            <input type="text" readonly class="area-input-field" value="{{totalArea}}">
+                        </div>
+                        <div class="col-1 pr-0">
+                            m<sup>2</sup>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="col-lg-6 col-md-9 pb-3">
+                    <div class="row mx-0 area-input-container flex-container p-2">
+                        <div class="col-9">
+                                Begrünte Fläche                     
+                            </div>
+                        <div class="col-2 px-0">
+                            <input type="text" readonly class="area-input-field" value="{{gardenArea}}">
+                        </div>
+                        <div class="col-1 pr-0">
+                            m<sup>2</sup>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-between pt-3 mb-3">
+                <div class="col-12 ">
+                    <div class=" border-bottom border-dark">
+                        <h2 class="t-18 t-bold">
+                            Auswertung
+                        </h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 py-2 scan-container">
+                    <div class="row pb-3">
+                        <div class="col-md-3 my-3">
+                            <fa-icon class="info-icon position-absolute info-icon-normal" (click)="tooltip1.toggle()" mat-raised-button #tooltip1="matTooltip"
+                            matTooltip="{{flaechennutzungAlert}}"
+                            matTooltipClass="tooltip-text"
+
+                            [matTooltipPosition]="'right'"
+                            matTooltipHideDelay="5000"   [icon]="faInfo"></fa-icon>
+    
+                            Flächennutzung
+                        </div>
+                        <div class="col-md-9 progress-outer " >
+          
+                            <div class="progress-inner {{areaRatingClass}}">
+                                <div class="progress-indicator" [ngStyle]="{'left': 'calc('+areaRating+'% - 10px)'}">
+    
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="row pb-3">
+                        <div class="col-md-3 my-3">
+                            <fa-icon class="info-icon position-absolute info-icon-normal" (click)="tooltip2.toggle()" mat-raised-button #tooltip2="matTooltip"
+                            matTooltip="{{oekoAlert}}"
+                            matTooltipClass="tooltip-text"
+                            [matTooltipPosition]="'right'"
+                            matTooltipHideDelay="5000"  [icon]="faInfo"></fa-icon>
+    
+                            Öko-Elemente
+                        </div>
+                        <!-- <div class="col-9" *ngIf="plantsRating">
+                            <progress-bar [progress]="plantsRating" [color]="'#488aff'">
+                            </progress-bar>
+                        </div> -->
+                        <div class="col-md-9 progress-outer ">
+                            <!-- <progress-bar [progress]="gardenRating" [color]="'#488aff'">
+                            </progress-bar> -->
+                            <div class="progress-inner garden-rating">
+                                <div class="progress-indicator" [ngStyle]="{'left': 'calc('+gardenRating+'% - 10px)'}">
+    
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="row pb-3">
+                        <div class="col-md-3 my-3">
+                            <fa-icon class="info-icon position-absolute info-icon-normal" (click)="tooltip3.toggle()" mat-raised-button #tooltip3="matTooltip"
+                            matTooltip="{{plantAlert}}"
+                            matTooltipClass="tooltip-text"
+
+                            [matTooltipPosition]="'right'"
+                            matTooltipHideDelay="5000" [icon]="faInfo"></fa-icon>    
+                            Pflanzenvielfalt
+    
+                        </div>
+                        <div class="col-md-9 progress-outer ">
+          
+                            <div class="progress-inner plants-rating">
+                                <div class="progress-indicator" [ngStyle]="{'left': 'calc('+plantsRating+'% - 10px)'}">
+    
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="row pb-3">
+                        <div class="col-md-3 my-3 pb-4 mb-4">
+                            <fa-icon class="info-icon position-absolute info-icon-normal" (click)="tooltip4.toggle()" mat-raised-button #tooltip4="matTooltip"
+                            matTooltip="{{chartAlert}}"
+                            matTooltipClass="tooltip-text"
+
+                            [matTooltipPosition]="'right'"
+                            matTooltipHideDelay="5000" [icon]="faInfo"></fa-icon>    
+                            Blühdauer
+    
+                        </div>
+                        <div class="col-md-9 pt-5 px-md-3 px-0" *ngIf="barChartLabels">
+    
+                            <div style="display: block">
+                                <canvas baseChart
+                                        [datasets]="barChartData"
+                                        [labels]="barChartLabels"
+                                        [options]="barChartOptions"
+                                        [legend]="barChartLegend"
+                                        [chartType]="barChartType">
+                                </canvas>
+                                <div class="px-3 justify-content-center row mx-0">
+                                    <div class="col-md-4 pr-0 legend-block">
+                                           <span class="block-1"></span> Optimale Kurve der Blühdauer
+                                    </div>
+                                    <div class="col-md-5 pr-0 legend-block">
+                                            <span class="block-2"></span><span class="block-4"></span> Anzahl meiner blühenden Arten/Sorten
+                                    </div>
+                                    <div class="col-md-3 pr-0 legend-block">
+                                            <span class="block-3"></span>  Optimum erreicht
+                                    </div>
+                                  
+                                </div>
+                              </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    

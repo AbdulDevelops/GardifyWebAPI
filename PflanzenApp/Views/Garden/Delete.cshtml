@@ -1,0 +1,21 @@
+﻿@model GardifyModels.Models.GardenViewModels.GardenDeleteViewModel
+
+@{
+    ViewBag.Title = "Garten Löschen";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Garten Löschen</h2>
+
+<h3>Sind Sie sicher, dass Sie @Model.Name löschen möchten?</h3>
+<div>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Löschen" class="btn btn-default" /> |
+            @Html.ActionLink("Zurück zur Gartenliste", "Index")
+        </div>
+    }
+</div>

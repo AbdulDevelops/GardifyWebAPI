@@ -1,0 +1,22 @@
+﻿@model GardifyModels.Models.Plant
+
+@{
+    ViewBag.Title = "Löschen";
+    Layout = "~/Views/Shared/_LayoutAdminArea.cshtml";
+}
+
+<h2>Löschen</h2>
+
+<h3>Sind Sie sicher?</h3>
+<div>
+    @using (Html.BeginForm("delete-plant", "AdminAreaPlant"))
+    {
+        @Html.AntiForgeryToken()
+        @Html.Hidden("plantId", Model.Id)
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Pflanze löschen" class="btn btn-danger" />
+            </div>
+        </div>
+    }
+</div>

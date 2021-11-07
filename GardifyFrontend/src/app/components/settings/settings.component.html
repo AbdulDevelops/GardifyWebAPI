@@ -1,0 +1,419 @@
+<div class="wrapper solid-wrapper {{mode}} pt-5 pb-5">
+  <div class="container px-5">
+    <div class="row justify-content-between pt-4 pb-2 bt-border {{mode}}">
+      <div class="col-12 col-md-6 pb-4">
+        <h2 class="t-light t-26 mt-3 {{mode==='light'?'text-grey':'text-white'}}">EINSTELLUNGEN</h2>
+      </div>
+    </div>
+    <div class="row">
+    <div class="col-12 mt-4 order-2 order-md-1 col-lg-12">
+      <div class="row mb-2 justify-content-center {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+        <div class="col-12 col-lg-4"><h2 class=" t-bold t-14">UserName</h2></div>
+        <div class="col-12 col-lg-5">
+            <h2 class="t-reg t-14 ">{{userInfo?.UserName}}</h2>
+        </div>
+        <div class="col-12 col-lg-3">
+        </div>
+      </div>
+    </div>
+    <div class="mt-4 col-md-8 order-3 order-md-2">
+        <div class="row mb-2 form-area-background justify-content-center {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+          <div class="col-12 col-lg-6"><h2 class=" mb-0 t-bold t-14">E-Mail</h2></div>
+          <div class="col-12 col-lg-6  text-ltgrey">
+            <div class="row">
+              <div class="col-10">
+                <h2 class="t-reg t-14 overflow-hidden mb-0">{{user.Email || 'Loggen Sie sich bitte nochmal ein'}}</h2>
+              </div>
+              <div class="col-2">
+                <a class="pl-2 setting-pencil" *ngIf="!isTestAccount()" href="#" data-toggle="modal" data-target="#editDatenModal" >
+                    <fa-icon [icon]="faPencilAlt" class="text-ltgrey t-14"></fa-icon>
+                  <!-- <h2 class="text-green t-light t-14">Email ändern</h2> -->
+                </a>
+              </div>
+            </div>
+          </div>
+     
+        </div>
+        <div class="row mb-2 form-area-background justify-content-center {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+            <div class="col-12 col-lg-6"><h2 class=" mb-0 t-bold t-14">Passwort</h2></div>
+            <div class="col-12 col-lg-6  text-ltgrey">
+              <div class="row">
+                <div class="col-10">
+                  <h2 class="t-reg t-14 overflow-hidden mb-0">********</h2>
+                </div>
+                <div class="col-2">
+                  <a class="pl-2 setting-pencil" *ngIf="!isTestAccount()" href="#" data-toggle="modal" data-target="#changepasswordModal" >
+                      <fa-icon [icon]="faPencilAlt" class="text-ltgrey t-14"></fa-icon>
+                    <!-- <h2 class="text-green t-light t-14">Email ändern</h2> -->
+                  </a>
+                </div>
+              </div>
+            </div>
+       
+        </div>
+        <div class="row mb-2 form-area-background justify-content-center {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+            <div class="col-12 col-lg-6"><h2 class=" mb-0 t-bold t-14">Nutzerdaten</h2></div>
+            <div class="col-12 col-lg-6  text-ltgrey">
+              <div class="row">
+                <div class="col-10 pr-1">
+                  <h2 class="t-reg t-14 overflow-hidden mb-0">{{userAddressForm.value.FirstName}} {{userAddressForm.value.LastName}}</h2>
+                </div>
+                <div class="col-2">
+                  <a class="pl-2 setting-pencil" *ngIf="!isTestAccount()" href="#" data-toggle="modal" data-target="#editUserAddressModal" >
+                      <fa-icon [icon]="faPencilAlt" class="text-ltgrey t-14"></fa-icon>
+                    <!-- <h2 class="text-green t-light t-14">Email ändern</h2> -->
+                  </a>
+                </div>
+              </div>
+            </div>
+        
+        </div>
+        <div class="row mb-2 form-area-background justify-content-center {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+            <div class="col-12 col-lg-6"><h2 class=" mb-0 t-bold t-14">Gartenstandort</h2></div>
+            <div class="col-12 col-lg-6  text-ltgrey">
+              <div class="row">
+                <div class="col-10">
+                  <h2 class="t-reg t-14 overflow-hidden mb-0">{{editGardenForm.value.City || editGardenForm.value.Zip}}, {{editGardenForm.value.Country}}</h2>
+                </div>
+                <div class="col-2">
+                  <a class="pl-2 setting-pencil" href="#" data-toggle="modal" data-target="#editGardenLocationModal" >
+                      <fa-icon [icon]="faPencilAlt" class="text-ltgrey t-14"></fa-icon>
+                    <!-- <h2 class="text-green t-light t-14">Email ändern</h2> -->
+                  </a>
+                </div>
+              </div>
+            </div>
+        
+          </div>
+ 
+  
+      
+        <form [formGroup]="settings" class="mt-4 pt-4 form-hairline-top">
+          <div class="row mb-2 form-area-background justify-content-center {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+            <div class="col-12 col-lg-6"><h2 class=" mb-0 t-bold t-14 mt-2">Frostwarnung Puffer (°C)</h2></div>
+            <div class="col-12 col-lg-6  text-ltgrey">
+              <div class="row">
+                <div class="col-10">
+                    <input type="number" class="{{mode === 'light'? 'text-blackish' : 'text-white'}} temperature-input mt-1" formControlName="FrostDegreeBuffer" (change)="updateUserSettings()">
+                </div>
+                <div class="col-2">
+                  <div class="pl-2 setting-pencil" >
+                    <fa-icon [icon]="faUp" class="text-ltgrey t-14 ptr" (click)="stepBuffer(1); updateUserSettings()"></fa-icon>
+                    <fa-icon [icon]="faDown" class="text-ltgrey t-14 ptr" (click)="stepBuffer(-1); updateUserSettings()"></fa-icon>
+                  </div>
+                </div>
+              </div>
+            </div>
+        
+          </div>
+    
+          <div class="row mb-2  form-line-background {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+              <div class="col-12 col-lg-6"><h2 class=" t-bold t-14">Frostwarnungen</h2></div>
+              <div class="col-12 col-lg-6">
+                <label class="switch">
+                  <input type="checkbox" min="0" formControlName="ActiveFrostAlert" (change)="updateUserSettings()">
+                  <span class="slider round"></span>
+                  <span class="absolute-no">AUS</span>
+                </label>
+              </div>
+          </div>
+          <div class="row mb-2 form-line-background {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+              <div class="col-12 col-lg-6"><h2 class=" t-bold t-14">Sturmwarnungen</h2></div>
+              <div class="col-12 col-lg-6">
+                <label class="switch">
+                  <input type="checkbox" formControlName="ActiveStormAlert" (change)="updateUserSettings()">
+                  <span class="slider round"></span>
+                  <span class="absolute-no">AUS</span>
+                </label>
+              </div>
+          </div>
+          <div class="row mb-2 form-line-background {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+            <div class="col-12 col-lg-6"><h2 class=" t-bold t-14">Ergänzte Pflanzen Benachrichtigung</h2></div>
+            <div class="col-12 col-lg-6">
+              <label class="switch">
+                <input type="checkbox" formControlName="ActiveNewPlantAlert" (change)="updateUserSettings()">
+                <span class="slider round"></span>
+                <span class="absolute-no">AUS</span>
+              </label>
+            </div>
+          </div>
+          <div class="row mb-2 form-line-background {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+              <div class="col-12 col-lg-6"><h2 class=" t-bold t-14">Push-Benachrichtigung</h2></div>
+              <div class="col-12 col-lg-6">
+                <label class="switch">
+                  <input type="checkbox" disabled formControlName="AlertByPush" (change)="updateUserSettings();toggleNotifications()">
+                  <span class="slider round"></span>
+                  <span class="absolute-no">AUS</span>
+                </label>
+              </div>
+          </div>
+          <div class="row mb-2 form-line-background {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+              <div class="col-12 col-lg-6"><h2 class=" t-bold t-14">E-Mail-Benachrichtigung</h2></div>
+              <div class="col-12 col-lg-6">
+                <label class="switch">
+                  <input type="checkbox" formControlName="AlertByEmail" (change)="updateUserSettings()">
+                  <span class="slider round"></span>
+                  <span class="absolute-no">AUS</span>
+                </label>
+              </div>
+          </div>
+          <div class="row mb-3 form-line-background {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+            <div class="col-12 col-lg-6"><h2 class="t-bold t-14">Farbschema</h2></div>
+              <div class="col-12 col-lg-6">
+                <label class="switch">
+                  <input type="checkbox" checked>
+                  <span class="slider setting round" (click)="toggleTheme()"></span>
+                  <span class="absolute-no" (click)="toggleTheme()">BLACK</span>
+                </label>
+              </div>
+          </div>
+        </form>
+        <div class="row">
+          <div class="col-12 mb-4">
+            <a class="text-green t-15" [routerLink]="[ '/newsletter' ]">Newsletter bestellen</a>
+          </div>
+        </div>
+        <div class="row justify-content-center pb-3">
+          <div class="col-12">
+            <a href="#" data-toggle="modal" data-target="#deleteKontoModal" >
+              <h2 class="t-bold t-14 btn btn-secondary btn_border075" style="width: 200px;">Konto löschen</h2>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-4 order-1 order-md-3 mt-2 profilImgInput text-center">
+        <img [src]="toUrl(profilImg?.Images[0]?.SrcAttr)" height="200" class="ptr" width="200" style="border-radius: 50%">
+        <label>
+          <div class="overlay ptr">
+            <span *ngIf="profilImg?.Images[0]?.SrcAttr" class=" t-15 ptr">Porträt ändern</span>
+          </div>
+          <input class="form-control" type="file" accept="image/*, .heic, .heics, .heif, .heifs" (change)="onImageUpload($event)">
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Kontakt daten ändern-->
+<div class="modal fade" id="editDatenModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="wrapper modal-content {{mode}}">
+      <div class="modal-header">
+          <h5 class="modal-title">Neue Konto-Daten eingeben</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span class="{{mode==='dark'?'text-ltgrey':'text-blackish'}}" aria-hidden="true">&times;</span>
+          </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="editDatenForm" class="col-xs-12 col-lg-6" validate>
+          <div class="form-group">
+            <label class="t-bold t-12 {{mode==='light'?'text-darkgrey':'text-white'}}">Neue E-Mail-Adresse</label>
+            <input type="text" formControlName="NewEmail" class="form-control" />
+            <small class="text-danger" [hidden]="!f['NewEmail'].invalid || !(f['NewEmail'].dirty || f['NewEmail'].touched)">
+              Bitte geben Sie eine richtige E-Mailadresse ein
+            </small>
+          </div>
+          <div class="form-group">
+            <label class="t-bold t-12 {{mode==='light'?'text-darkgrey':'text-white'}}">Aktuelles Passwort</label>
+            <input type="password" formControlName="Password" class="form-control"/>
+            <small class="text-danger" [hidden]="!control['Password'].invalid || !(control['Password'].dirty || control['Password'].touched)">
+              Passwort muss mind. 6 Zeichen sein und Folgendes enthalten: Großbuchstaben, Nummer, Sonderzeichen
+            </small>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
+          <button type="button" class="btn btn-green" data-dismiss="modal" (click)="updateUserCreds()">Senden</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--PasswordÄndern-->
+<div class="modal fade" id="changepasswordModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="wrapper modal-content {{mode}}">
+      <div class="modal-header">
+          <h5 class="modal-title">Neues Passwort eingeben</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span class="{{mode==='dark'?'text-ltgrey':'text-blackish'}}" aria-hidden="true">&times;</span>
+          </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="changePassForm" class="col-xs-12 col-lg-6" validate>
+          <div class="form-group">
+            <label class="t-bold t-12 {{mode==='light'?'text-darkgrey':'text-white'}}">Aktuelles Passwort</label>
+            <input type="password" formControlName="OldPassword" class="form-control"/>
+            <small class="text-danger" [hidden]="!control['OldPassword'].invalid || !(control['OldPassword'].dirty || control['OldPassword'].touched)">
+              Passwort muss mind. 6 Zeichen sein und Folgendes enthalten: Großbuchstaben, Nummer, Sonderzeichen
+            </small>
+          </div>
+          
+          <div class="form-group">
+            <label class="t-bold t-12 {{mode==='light'?'text-darkgrey':'text-white'}}">Neues Passwort</label>
+            <input type="password" formControlName="Password" class="form-control"/>
+            <small class="text-danger" [hidden]="!control['Password'].invalid || !(control['Password'].dirty || control['Password'].touched)">
+              Passwort muss mind. 6 Zeichen sein und Folgendes enthalten: Großbuchstaben, Nummer, Sonderzeichen
+            </small>
+          </div>
+          <div class="form-group">
+            <label class="t-bold t-12 {{mode==='light'?'text-darkgrey':'text-white'}}">Neues Passwort bestätigen</label>
+            <input type="password" formControlName="ConfirmPassword" class="form-control" [pattern]="control['Password'].value"/>
+            <small class="text-danger" [hidden]="!control['ConfirmPassword'].invalid || !(control['ConfirmPassword'].dirty || control['ConfirmPassword'].touched)">
+              Passwortfelder stimmen nicht überein
+            </small>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
+          <button type="button" class="btn btn-green" data-dismiss="modal" (click)="changePassword()">Bestätigen</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--User daten ändern-->
+<div class="modal fade" id="editUserAddressModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="wrapper modal-content {{mode}}">
+      <div class="modal-header">
+          <h5 class="modal-title">Nutzerdaten ändern</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span class="{{mode==='dark'?'text-ltgrey':'text-blackish'}}" aria-hidden="true">&times;</span>
+          </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="userAddressForm" class="col-12" validate>
+          <div class="form-group w-100">
+            <div class="row mb-3">
+              <div class="col-6">
+                <label class="t-bold t-12 {{mode==='light'?'text-darkgrey':'text-white'}}">Vorname</label>
+                <input type="text" formControlName="FirstName" class="form-control" /> 
+                <small class="text-danger" [hidden]="!d['FirstName'].invalid || !(d['FirstName'].dirty || d['FirstName'].touched)">
+                  Pflichtfeld
+                </small>
+              </div>
+              <div class="col-6">
+                <label class="t-bold t-12 {{mode==='light'?'text-darkgrey':'text-white'}}">Nachname</label>
+                <input type="text" formControlName="LastName" class="form-control"/>
+                <small class="text-danger" [hidden]="!d['LastName'].invalid || !(d['LastName'].dirty || d['LastName'].touched)">
+                  Pflichtfeld
+                </small>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-12">
+                <label class="t-bold t-12 {{mode==='light'?'text-darkgrey':'text-white'}}">Neuer UserName</label>
+                <input type="text" formControlName="UserName" class="form-control" />
+                <small class="text-danger" [hidden]="!d['UserName'].invalid || !(d['UserName'].dirty || d['UserName'].touched)">
+                  Pflichtfeld
+                </small>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-8">
+                <label class="t-bold t-12 {{mode==='light'?'text-darkgrey':'text-white'}}">Straße</label>
+                <input type="text" formControlName="Street" class="form-control" /> 
+                <small class="text-danger" [hidden]="!d['Street'].invalid || !(d['Street'].dirty || d['Street'].touched)">
+                  Bitte gib die Straße ein
+                </small>
+              </div>
+              <div class="col-4">
+                <label class="t-bold t-12 {{mode==='light'?'text-darkgrey':'text-white'}}">Nr</label>
+                 <input type="text" formControlName="HouseNr" class="form-control"/>
+                <small class="text-danger" [hidden]="!d['HouseNr'].invalid || !(d['HouseNr'].dirty || d['HouseNr'].touched)">
+                  Bitte gib die Straßenummer ein
+                </small>
+              </div>
+            </div>    
+          </div>
+          <div class="form-group">
+            <label class="t-bold t-12 {{mode==='light'?'text-darkgrey':'text-white'}}">PLZ, Stadt</label>
+            <input type="text" list="names" class="form-control" placeholder="Suche ..."
+                       formControlName="Zip"  (ngModelChange)="searchZip(d['Zip'].value)">
+            <datalist id="names">
+              <option *ngFor="let p of cityoptions" [value]="p.ZipCode + ', '+ p.CityName">            
+            </datalist>
+          </div>
+          <div class="form-group">
+            <label class="t-bold t-12 {{mode==='light'?'text-darkgrey':'text-white'}}">Land</label>
+            <input type="text" formControlName="Country" class="form-control" />
+            <small class="text-danger" [hidden]="!d['Country'].invalid || !(d['Country'].dirty || d['Country'].touched)">
+              Bitte gib das Land ein
+            </small>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
+          <button type="button" class="btn btn-green" data-dismiss="modal" (click)="updateUserData();">Speichern</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Garten daten ändern-->
+<div class="modal fade" id="editGardenLocationModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="wrapper modal-content {{mode}}">
+      <div class="modal-header">
+          <h5 class="modal-title">Gartenstandort ändern</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span class="{{mode==='dark'?'text-ltgrey':'text-blackish'}}" aria-hidden="true">&times;</span>
+          </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="editGardenForm" class="col-12" validate>
+          <div class="form-group w-100">
+            <label class="t-bold t-12 {{mode==='light'?'text-darkgrey':'text-white'}}">Straße, Hausnummer</label>
+            <input type="text" formControlName="Street" class="form-control" /> 
+            <small class="text-danger" [hidden]="!gControls['Street'].invalid || !(gControls['Street'].dirty || gControls['Street'].touched)">
+              Bitte gib die Straße ein
+            </small>
+          </div>
+          <div class="form-group w-100">
+            <label class="t-bold t-12 {{mode==='light'?'text-darkgrey':'text-white'}}">PLZ, Stadt</label>
+            <input type="text" list="names" class="form-control" placeholder="Suche ..."
+                       formControlName="Zip"  (ngModelChange)="searchZip(gControls['Zip'].value)">
+            <datalist id="names">
+              <option *ngFor="let p of cityoptions" [value]="p">            
+            </datalist>
+          </div> 
+          <div class="form-group w-100">
+            <label class="t-bold t-12 {{mode==='light'?'text-darkgrey':'text-white'}}">Land</label>
+            <select formControlName="Country" [class.borderDanger]="gControls['Country'].invalid" class="form-control t-12 t-reg">
+              <option hidden value="" disabled selected>Land auswählen *</option>
+              <option [ngValue]="'DE'">Deutschland</option>
+              <option [ngValue]="'AT'">Österreich</option>
+              <option [ngValue]="'CH'">Schweiz</option>
+            </select>
+          </div>
+          
+        </form>
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
+          <button type="button" class="btn btn-green" data-dismiss="modal" (click)="updateGardenLocation();">Speichern</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Konto löschen-->
+<div class="modal fade" id="deleteKontoModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="wrapper modal-content {{mode}}">
+      <div class="modal-header">
+          <h5 class="modal-title">Sind Sie sicher?</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span class="{{mode==='dark'?'text-ltgrey':'text-blackish'}}" aria-hidden="true">&times;</span>
+          </button>
+      </div>
+      <div class="modal-body"></div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="onDeleteUser()">Konto Löschen</button>
+      </div>
+    </div>
+  </div>
+</div>

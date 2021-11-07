@@ -1,0 +1,168 @@
+<div class="overlay-loading" [hidden]="!loading">
+  <div class="app-loading center-screen">
+      <svg class="spinner" viewBox="25 25 50 50">
+          <circle class="path" cx="50" cy="50" r="24" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+      </svg>
+  </div>
+</div>
+<div class=" wrapper {{mode}} pt-5 ">
+  <div class="container px-5 pb-5 ">
+      <div class="row pt-4 pb-3  {{mode}}">
+          <div class="col-lg-12 bt-border">
+          <h2 routerLink="/pflanzendoc" class="ptr t-26 mt-3 t-light {{mode === 'light'? 'text-grey' : 'text-white'}}"><< PFLANZEN-DOC</h2>
+          </div>
+      </div>
+      <ng-container *ngIf="item">
+          <div class="row ">
+              <div class=" col-12 col-md-4  mt-2 mb-2 ">
+                  <img [src]="fotoUrl" class="ptr post-img">
+              </div>
+              <div class="col-md-8  mt-2 {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+                  <h2 class="t-14 t-light">{{item.PlantDocViewModel.PublishDate | date:'dd.MM.yyy'}}</h2>
+                  <h2 class="t-italic t-reg t-15">{{item.PlantDocViewModel.Thema}}</h2>
+                  <p class=" t-14 t-reg mt-3">
+                      {{item.PlantDocViewModel.Description}} 
+                  </p>
+              </div>
+          </div>
+          <hr class="{{mode}}">
+              <ng-container *ngIf="item.PlantDocViewModel.Images">
+              <div class="row mb-3">
+                <div *ngFor="let img of item.PlantDocViewModel.Images" class="col-lg-3" style="margin-top:2rem ;">
+                 
+                  <img *ngIf="isAdminImg(img.FullDescription)" class="post-imgMini ptr" [src]="toUrl(img?.SrcAttr,false,false,false,true)" (click)="fotoUrl=toUrl(img?.SrcAttr,false,true,false,true)">
+                  <img *ngIf="!isAdminImg(img.FullDescription)" class="post-imgMini ptr" [src]="toUrl(img?.SrcAttr,false,false,false,false)" (click)="fotoUrl=toUrl(img?.SrcAttr,false,true,false,false)">
+
+                </div>
+              </div>
+            </ng-container>
+            <div class="row mt-4 ">
+              <div class="col-lg-12">
+                <h2 class="t-15 text-green t-bold">
+                  Frage
+                </h2>
+                <p class="mt-2 {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+                  {{item.PlantDocViewModel.QuestionText}}
+                </p>
+              </div>
+              <div class="col-md-12 ">
+                <button *ngIf="item.PlantDocViewModel.isEdited" type="button" (click)="getPostById(item.PlantDocViewModel.QuestionId)"class="btn btn-green float-right btn-text collapsed" data-toggle="collapse" data-target="#originalPost" aria-expanded="false" aria-controls="originalPost" >
+                  <span class="if-collapsed">Original Post anzeigen</span>
+                  <span class="if-not-collapsed ">Original Post ausblenden</span></button>
+                <div class="collapse" id="originalPost">
+                  <div class="card card-body mt-5">
+                    <p *ngIf="postItem" class="t-light {{mode === 'light'? 'text-darkgrey' : 'text-white'}}">
+                      <span *ngIf="postItem.Thema" class="t-15 text-green t-reg">Thema: </span>{{postItem.Thema}}<br>
+                      <span *ngIf="postItem.Description" class="t-15 text-green t-reg">Beschreibung</span>: {{postItem.Description}} <br>
+                     <span class="t-15 text-green t-reg">Frage: </span>{{postItem.QuestionText}}<br>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr class="{{mode}} mt-3">
+            <ng-container *ngIf="answers?.length>0" >
+             
+              <div class="row {{mode === 'light'? 'text-blackish' : 'text-white'}}" *ngFor="let answer of answers ; let i=index" >
+                <div class="col-lg-12">
+                  <div class="row">
+                    <div class="col-md-12">
+                        <span class="t-15 text-green t-bold">
+                        <span>Antwort von </span>{{answer.AutorName}} 
+                        </span>
+                        <span *ngIf="answer.isEdited" class="d-inline-block t-light t-14 {{mode === 'light'? 'text-darkgrey' : 'text-ltgrey '}}">(bearbeitet)</span>
+                        <span class="t-light t-14 {{mode === 'light'? 'text-darkgrey' : 'text-ltgrey '}} float-right">{{answer.Date | date:'dd.MM.yyyy'}}</span><br>
+                        <span *ngIf="answer.EnableToEdit" data-toggle="modal" (click)="selectedAnswer = answer;" data-target="#updateAnswer"class="t-light ptr t-14 {{mode === 'light'? 'text-darkgrey' : 'text-ltgrey '}} float-right">Bearbeiten</span>
+                    </div>
+                    <div class="col-md-12 mt-2">
+                      <p>
+                        {{answer.AnswerText}}
+                       </p>
+                    </div>
+                  </div>
+                </div>
+                <ng-container *ngIf="answer.AnswerImages?.length>0">
+                  <div class="col-lg-12">
+                    <div class="row">
+                      <div *ngFor="let img of answer.AnswerImages" class="col-lg-3">
+                        <img class="post-imgMini" [src]="toUrl(img?.SrcAttr,false,true,answer.IsAdminAnswer)">
+                      </div>
+                    </div>
+                    
+                  </div>
+                </ng-container>
+                <div class="col-md-12 ">
+                  <button *ngIf="answer.IsEdited" type="button" (click)="getAnswerById(answer.AnswerId)"class="btn btn-green float-right" data-toggle="collapse" [attr.data-target]="'#originalAnswer'+answer.AnswerId" aria-expanded="false" aria-controls="originalAnswer" >originale Antwort anzeigen</button>
+                  <div class="collapse" [attr.id]="'originalAnswer'+answer.AnswerId">
+                    <div class="card card-body mt-5">
+                      <p *ngIf="answerItem">
+                        {{answerItem.AnswerText}}
+                      </p>
+                    </div>
+                  </div>
+                  <hr class="{{mode}} mt-5">
+                </div>
+              </div>
+              
+            </ng-container>
+            
+            <div class="row">
+              <div class="col-lg-12">
+                <button class="btn btn_border075 btn-green mb-3 text-center float-right {{mode === 'light'? 'text-white' : 'text-white'}} " (click)="toggleAnswerMode()">Auf diese Frage antworten</button>
+              </div>
+              <div *ngIf="answerMode" class="col-lg-12 mb-5">
+                <form [formGroup]="answerForm">
+                  <label class="t-15 t-bold {{mode === 'light'? 'text-blackish' : 'text-white'}}">Deine Antwort</label>
+                  <textarea style="background-color: white;" class="form-control" formControlName="AnswerText" rows="3"></textarea>
+                  <div class="row">
+                    <div class="col-7 col-lg-12">
+                      <label class="btn btn_border075 btn-green mt-3 text-center  {{mode === 'light'? 'text-white' : 'text-white'}} ">
+                        Bilder hochladen
+                        <input class="form-control" type="file" accept="image/*, .heic, .heics, .heif, .heifs" (change)="onImageUpload($event)">
+                      </label>
+                    </div>
+                    <div class="col-12 px-3 px-md-2">
+                      <img *ngFor="let img of images" [src]=img.src alt="img.title" class="uploaded">
+                    </div>
+                    <div class="col-12 d-flex justify-content-end mt-4">
+                      <button class="btn btn_border075 btn-secondary mb-3 text-center text-white mr-2" (click)="answerMode=false">abbrechen</button>
+                      <button class="btn btn_border075 btn-green mb-3 text-center float-right {{mode === 'light'? 'text-white' : 'text-white'}} " (click)="postAnswer()">senden</button>
+                    </div>
+                    
+                  </div>
+                </form>
+              </div>
+              <div class="col-lg-12">
+                <button class="btn btn_border075 btn-secondary mb-3 text-center text-white" [routerLink]="['/pflanzendoc']">zurück</button>
+              </div>
+            </div>
+    </ng-container>
+        
+    <ng-container *ngIf="selectedAnswer">
+      <div class="modal fade" id="updateAnswer" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content {{mode}}">
+            <div class="modal-header">
+              <h5 class="modal-title" *ngIf="item">Antwort zum Thema {{item.PlantDocViewModel.Thema}}bearbeiten</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span class="{{mode==='dark'?'text-white':'text-darkgrey'}}" aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form class="modal-body">
+              <div class="row mb-3">
+                <div class="form-group col-12 px-2">
+                  <label class="{{mode==='light'?'text-darkgrey':'text-white'}}">Antwort</label>
+                  <textarea [(ngModel)]="selectedAnswer.AnswerText" type="text" class="form-control" name="AnswerText"></textarea>
+                </div>
+              </div>
+            </form>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
+              <button type="button" class="btn btn-green" data-dismiss="modal" (click)="updateAnswer(selectedAnswer)">Speichern</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>

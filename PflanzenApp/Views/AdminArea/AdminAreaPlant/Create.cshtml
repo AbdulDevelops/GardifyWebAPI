@@ -1,0 +1,96 @@
+﻿@model GardifyModels.Models.AdminAreaViewModels.PlantCreateViewModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutAdminArea.cshtml";
+}
+@if (Model != null && Model.StatusMessage != null)
+{
+    Html.RenderPartial("_modalStatusMessage", Model.StatusMessage);
+}
+<h2>Neue Pflanze erstellen</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        <label class="control-label col-md-2">Botanischer Name</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.NameLatin, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.NameLatin, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Deutscher Name</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.NameGerman, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.NameGerman, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">Beschreibung</label>
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.Description, 10, 80, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Herkunft</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Herkunft, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Herkunft, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Gärtnerische Kategorie</label>
+        <div class="col-md-10">
+            @Html.DropDownList("GardenCategories", null, htmlAttributes: new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group" id="plantList">
+        <label class="control-label col-md-2">Interne Bemerkung</label>
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.InternalComment, 10, 50, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group" id="plantList">
+        <label class="control-label col-md-2">Eigenschaften von Pflanze kopieren (z.B. 123)</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.SelectedPlantId, new { htmlAttributes = new { @type = "number", @min = "0", @step = "1", @value = "0", @class = "form-control" }})
+        </div>
+    </div>
+
+    <div class="form-group" id="reference-list">
+        <label class="control-label col-md-2">Zugehörige Shop-Artikel(n) (IDs eingeben)</label>
+        <div class="col-md-10">
+            <input type="text" name="articlesRef" placeholder="Bsp. 126,129,34" class="form-control" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Erstellen" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Zurück zur Übersicht", "Index")
+</div>
+
+
+@section scripts
+    {
+
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
+}

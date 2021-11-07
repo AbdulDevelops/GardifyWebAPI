@@ -1,0 +1,184 @@
+<div class="overlay-loading" [hidden]="!loading">
+    <svg class="spinner position-relative" viewBox="25 25 50 50">
+      <circle class="path" cx="50" cy="50" r="24" fill="none" stroke-width="2" stroke-miterlimit="10" />
+    </svg>
+</div>
+<form [formGroup]="uploadForm" (ngSubmit)="onSubmit()">
+<div class="row mb-5">
+    <div class="col-12"><h3 class="t-bold text-grey t-15">Foto hinzufügen</h3></div>
+    <div class="col-6">
+        <div class="row">
+            <div class="col-6 " >
+               
+                    <label for="file-input">
+                        <div class="btn_border075 text-center" style="height: 200px; width: 200px; background-color: #7bbaa7;">
+                            <img src="assets/images/Fotos_hochladen.svg" style="height: 100px;" class="mx-3 my-3"><br>
+                            <span class="t-bold text-white t-12"> Fotos</span> <br><span class="t-ligth text-white t-12">HOCHLADEN</span>
+                        </div>
+                    </label>
+                    <input 
+                        
+                        id="file-input" 
+                        type="file" 
+                       style="display: none;"
+                        (change)="onFileChange($event)" accept=".png, .jpg, .jpeg, .gif, .svg" />
+                    <div *ngIf="f.file.touched && f.file.invalid" class="alert alert-danger">
+                        <div *ngIf="f.file.errors.required">File is required.</div>
+                    </div>
+                   
+            </div>
+            <div class="col-6">
+                <img [src]="imageSrc" *ngIf="imageSrc" style="height: 200px; width: 200px;">
+            </div>
+        </div>
+        <mat-divider class="mt-3"> </mat-divider>
+        <div class="row">
+            <div class="col-12 mt-3">
+                <h2 class="t-14 t-bold">Album zuweisen</h2>
+                <div *ngIf="listOfAlbums?.length>0">
+                    <ng-container  >
+                        <mat-radio-group aria-label="Select an option" required formControlName="albumName" class="radio-group">
+                       
+                            <mat-radio-button class="radio-button" *ngFor="let album of listOfAlbums;let i = index " [value]="album.Name" (click)="selectedAlbum=album"><img src="assets/images/Album_in_grün.svg" class="albumgreen ml-2"> <span class="t-12 text-grey ml-2">{{album.Name}}</span></mat-radio-button>
+      
+                          </mat-radio-group>
+                    </ng-container>
+                </div>
+                <span class="ml-5" ><a href="#" role="button " data-toggle="modal" data-target="#createNewAlbumModal"><img  src="assets/images/Neues_Album_erstellen.svg" class="albumgreen"> <span class="t-12 text-grey ml-2">Neue Album erstellen</span></a></span>
+            </div>
+        </div>
+        <mat-divider class="mt-3"> </mat-divider>
+        <div class="row">
+            <div class="col-12 mt-3">
+                <h2 class="t-14 t-bold">Präsentation zuweisen</h2>
+                <div *ngIf="listOfPresi?.length>0">
+                    <ng-container  >
+                        <mat-radio-group aria-label="Select an option" required formControlName="presiName" class="radio-group">
+                       
+                            <mat-radio-button class="radio-button" *ngFor="let presi of listOfPresi " [value]="presi.Headline" (click)="selectedPresi=presi"><img src="assets/images/Präsentationen.svg" class="albumgreen ml-2"> <span class="t-12 text-grey ml-2">{{presi.Headline}}</span></mat-radio-button>
+      
+                          </mat-radio-group>
+                    </ng-container>
+                    
+                </div>
+                <span class="ml-5 " ><a  [routerLink]="['/gartenarchiv/new/presentation']" ><img  src="assets/images/Neue_Präsentation_erstellen.svg" class="albumgreen"> <span class="t-12 text-grey ml-2">Neue Präsentation erstellen</span></a></span>
+
+            </div>
+        </div>
+        <mat-divider class="mt-3"> </mat-divider>
+        <div class="row">
+            <div class="col-12 mt-3">
+                <h2 class="t-14 t-bold">Sternebewertung</h2>
+                <mat-radio-group aria-label="Select an option" required formControlName="rating">
+                    <mat-radio-button [value]="1"><img src="assets/images/1_Stern.svg" class="albumgreen ml-2"></mat-radio-button><br>
+                    <mat-radio-button [value]="2"><img src="assets/images/2_Sterne.svg" class="albumgreen ml-2"></mat-radio-button><br>
+                    <mat-radio-button [value]="3"><img src="assets/images/3_Sterne.svg" class="albumgreen ml-2"></mat-radio-button><br>
+                    <mat-radio-button [value]="4"><img src="assets/images/4_Sterne.svg" class="albumgreen ml-2"></mat-radio-button><br>
+                    <mat-radio-button [value]="5"><img src="assets/images/5_Sterne.svg" class="albumgreen ml-2"></mat-radio-button>
+
+                  </mat-radio-group>
+              
+            </div>
+        </div>
+    </div>
+    <div class="col-6 text-grey">
+       
+            <div class="row">
+                <div class="col-12">
+                    <h2 for="headline" class="t-12 t-bold text grey">Bildunterschrift</h2> 
+                    <input id="headline" type="text" [class.borderDanger]="f['headline'].invalid" formControlName="headline" class="form-control text-input">
+                </div>
+                <div class="col-12 mt-2">
+                    <h2 for="location " class="t-12 t-bold text grey">Anmerkung/Standort</h2> 
+                    <input id="location" type="text" [class.borderDanger]="f['location'].invalid" formControlName="location" class="form-control text-input">
+                </div>
+                <div class="col-12 mt-2">
+                    <h2 for="keywords" class="t-12 t-bold text grey">Stichworte/Verschlagwortung</h2> 
+                    <textarea id="keywords" type="text" [class.borderDanger]="f['keywords'].invalid"  formControlName="keywords" class="form-control"></textarea>
+                </div>
+                <div class="col-12 mt-2">
+                    <h2 for="creationDate" class="t-12 t-bold text grey">Erstellungsdatum</h2> 
+                    <!-- <input id="creationDate" type="text" formControlName="creationDate"> -->
+                    <mat-form-field appearance="fill">
+                        <mat-label>Choose a date</mat-label>
+                        <input class="date-input" matInput [matDatepicker]="creationDate" [class.borderDanger]="f['creationDate'].invalid" formControlName="creationDate"  />
+                        <mat-datepicker-toggle matSuffix [for]="creationDate"></mat-datepicker-toggle>
+                        <mat-datepicker #creationDate></mat-datepicker>
+                      </mat-form-field>
+                </div>
+                <div class="col-12 mt-2">
+                    <h2 for="alternativeDate" class="t-12 t-bold text grey" >Belibiges Datum</h2> 
+                    <!-- <input id="alternativeDate" type="text" class="form-control" formControlName="alternativeDate"> -->
+                    <mat-form-field appearance="fill">
+                        <mat-label>Choose a date</mat-label>
+                        <input class="date-input" matInput [matDatepicker]="alternativeDate" [class.borderDanger]="f['alternativeDate'].invalid" formControlName="alternativeDate"  />
+                        <mat-datepicker-toggle matSuffix [for]="alternativeDate"></mat-datepicker-toggle>
+                        <mat-datepicker #alternativeDate></mat-datepicker>
+                      </mat-form-field>
+                      <h2 for="alternativeDate" class="t-10 mt-2 t-bold text grey" >Hier kannst du belibiges Datum eingeben</h2> 
+                </div>
+                <mat-divider class="mt-3 " > </mat-divider>
+                <div class="col-12" (click)="toggleradiobtn()">
+                    <h2 for="pictureOwner" class="t-12 t-bold text grey">Filter</h2> 
+                    
+                    <label class="mt-2 t-12" >
+                        <!-- <img src="assets/images/Kreis_zum_abhaken.svg" class="radioBtn"> -->
+                        <input id="pictureOwner" type="checkbox" [value]="true" [class.borderDanger]="f['pictureOwner'].invalid" formControlName="pictureOwner" > 
+                         Dieses Bild stammt nicht von mir</label> <br>
+                    <!-- <label class="mt-2 t-12" *ngIf="buttonSelected"><img src="assets/images/Ausgewählt.svg" class="radioBtnChecked" > Dieses Bild stammt nicht von mir</label> <br> -->
+
+                    <span class="t-10"> Diese Funktion schützt dich davor, aus Versehen in der Community Bilder zu veröffentlichen, deren Bildrechte du nicht hast</span>
+                </div>
+                <div class="col-12">
+                    <h2 for="pictureSource" class="t-12 t-bold text grey">Bildherkunft oder Urheber eintragen (optional)</h2> 
+                    <input id="pictureSource" type="text" class="form-control text-input" formControlName="pictureSource">
+            
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="mt-3 btn-green btn btn_border075 t-bold text-white t-12 filterbtn savebutton"> Speichern</button>
+
+                </div>
+            </div>
+            
+        
+    </div>
+
+</div>
+</form>
+<div class="modal fade" id="createNewAlbumModal" tabindex="-1" role="dialog" aria-labelledby="createNewAlbumModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="createNewAlbumModalLabel">New Album</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="albumForm" (ngSubmit)="createNewAlbum()">
+            <div class="row">
+                <div class="col-12">
+                    <h2 for="Name" class="t-12 t-bold text grey">Name</h2> 
+                    <input id="Name" type="text" formControlName="Name" class="form-control text-input">
+                </div>
+                <div class="col-12 mt-2">
+                    <h2 for="Description " class="t-12 t-bold text grey">Beschreibung</h2> 
+                    <input id="Description" type="text" formControlName="Description" class="form-control text-input">
+                </div>
+                <div class="dummy col-5"></div>
+                <div class="col-3">
+                    <button type="button" data-dismiss="modal"  class="mt-5 btn-secondary  btn btn_border075 t-bold text-white t-12  "> Abbrechen</button>
+
+                </div>
+                <div class="col-4">
+                    <button type="submit"   class="mt-5 btn-green btn btn_border075 t-bold text-white t-12"> Album erstellen</button>
+
+                </div>
+            </div>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+</div>
+

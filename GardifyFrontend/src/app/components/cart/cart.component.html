@@ -1,0 +1,126 @@
+<div class="overlay-loading" [hidden]="!loading">
+    <svg class="spinner position-relative" viewBox="25 25 50 50">
+        <circle class="path" cx="50" cy="50" r="24" fill="none" stroke-width="2" stroke-miterlimit="10" />
+    </svg>
+</div>
+<div [ngClass]="{'popupMode': popup, 'wrapper': !popup}" class="{{mode}} {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+    <div class="container py-3" [ngClass]="{'pb-5': !popup}">
+        <div *ngIf="!popup" class="row mt-5 mb-4">
+            <div class="col-3 col-md-2">
+                <h2 class="{{mode === 'light'? 'text-grey' : 'text-white'}} t-light t-18">WARENKORB</h2>
+            </div>
+        </div>
+        <div class="row">
+            <h3 class="col-12 t-bold t-14 text-green m-0 py-2 bt-border {{mode}}">Mein Warenkorb, 
+                <span *ngIf="shopCartEntries">{{shopCartEntries?.length || '0'}} Artikel</span>
+                <span>, {{totalCartItems || '0'}} insgesamt</span>
+                <button *ngIf="popup" (click)="closeCart()" type="button" class="close" title="Ausblenden">
+                    <span class="{{mode==='dark'?'text-ltgrey':'text-blackish'}}">&times;</span>
+                </button>
+            </h3>
+        </div>
+        <div *ngIf="shopCartEntries">
+            <div *ngFor="let item of shopCartEntries">
+                <div class="row">
+                    <div class="col-12 col-md-3 mt-4" *ngIf="item.ArticleView.ArticleImages?.length>0">
+                        <img style="width:220px;height: 220px; object-fit: cover;" class="ptr" [routerLink]="['/artikel/',item.ArticleView?.Id,item.ArticleView.Name]" [src]="item.ArticleView.Thumbnail || toUrl(item.ArticleView.ArticleImages[0].SrcAttr)" [alt]="item.Name">
+                    </div>
+                    <div class="col-12 col-md-9 mt-4">
+                        <div
+                            class="col-md-12 underlined t-bold t-16  {{mode === 'light'? 'text-darkgrey' : 'text-white'}} ">
+                            <h3> {{item.ArticleView.Name}}</h3>
+                            <h3 class="t-16"> <span class="t-reg  "> Preis: </span>{{item.ArticleView.NormalPrice * item.Quantity | currency:'EUR':'code'}}
+                            </h3>
+                            <h3 class="t-16">
+
+                                <span class="mr-2 pr-2 t-14" *ngIf="item.Quantity>1"><a
+                                        (click)="changeQuantity(item.ArticleView.Id,false,true)"
+                                        title="Anzahl reduzieren">
+                                        <fa-icon [icon]="faMinus"></fa-icon>
+                                    </a></span>
+                                <span class="t-reg "> Anzahl: </span> {{item.Quantity}}
+                                <span class="ml-2 pl-2 t-14"><a (click)="changeQuantity(item.ArticleView.Id,true,false)"
+                                        title="Anzahl erhöhen">
+                                        <fa-icon [icon]="faPlus"></fa-icon>
+                                    </a></span>
+                            </h3>
+                        </div>
+
+                        <div *ngIf="!popup" class="col-md-12 mt-2 ">
+                            <button class="btn btn-green mr-2 t-13 text-white {{mode}}" (click)="moveToWishlist(item.ArticleView.Id)">
+                                Auf meine Wunschliste
+                            </button>
+                            <button class="btn btn-secondary t-13 text-white {{mode}}" (click)="removeItem(item.ArticleView.Id)">
+                                Löschen
+                            </button>
+                        </div>
+                       <!--  <div *ngIf="!popup && item.ArticleView.PricePercentagePayableWithPoints > 0" class="col-md-12 mt-2 ">
+                            <small>Du kannst bis zu {{item.ArticleView.PricePercentagePayableWithPoints}}% mit Punkten bezahlen.</small>
+                        </div> -->
+                    </div>
+                    <hr>
+                </div>
+            </div>
+        </div>
+        <!-- <div *ngIf="!popup" class="row mt-4 px-3">
+            <h3 class="t-bold t-14 text-green">Du verfügst über: „{{userPoints}} Bonuspunkte“ 
+                <fa-icon [routerLink]="[ '/bonus' ]" class="ptr info-icon" [icon]="faInfo" 
+                title="Bonuspunkte als Dankeschön"></fa-icon>
+            </h3>
+        </div> -->
+        <div class="row mt-4 mb-5" [ngClass]="{'mb-5': !popup}">
+            <div *ngIf="shopCartEntries.length > 0 && !popup" class="col-md-6 "></div>
+            <div class="{{popup ? 'col-8': 'col'}}" *ngIf="shopCartEntries.length > 0; else noArticles">
+                <b class="d-inline-block t-13 {{mode === 'light'? 'text-darkgrey' : 'text-white'}} mr-2">
+                    Zwischensumme: <span class="mx-2">{{totalNormal | currency:'EUR':'code'}}</span></b>
+                <b class="d-inline-block t-13 {{mode === 'light'? 'text-darkgrey' : 'text-white'}} mr-2">
+                    Versandkosten: <span class="mx-2">{{shippingCosts | currency:'EUR':'code'}}</span></b>
+            </div>
+            <div class="{{popup ? 'col-4': 'col'}}" *ngIf="shopCartEntries.length > 0">
+                <a [routerLink]="['/kasse']" [ngClass]="{'disabled-link': !enoughOrderAmount}" class="btn btn-green t-13 text-white {{mode}}">
+                    Zur Kasse
+                </a>
+                <small class="text-danger d-block mt-2 mb-3" *ngIf="!enoughOrderAmount">Verbleibender Betrag bis zum Mindestbestellwert: {{minLeft | currency:'EUR':'code'}}</small>
+                <span *ngIf="!popup" class="t-light t-13 text-green m-0 py-2 bt-border {{mode}} d-block"><a
+                        [routerLink]="['/shop']">weiter einkaufen>></a></span>
+            </div>
+            <ng-template #noArticles>
+                <p class="pl-4">Dein Warenkorb ist noch leer. <span class="t-light t-13 text-green m-0 py-2 bt-border {{mode}} ml-5">
+                    <a *ngIf="!popup" [routerLink]="['/shop']">weiter einkaufen>></a></span></p>
+            </ng-template>
+        </div>
+        <div id="wunschliste" class="row" *ngIf="wishlist && !popup" #wunschliste>
+            <h3 class="col-12 t-bold t-14 text-green m-0 py-2 bt-border {{mode}}">Meine Wunschliste, 
+                <span>{{wishlist?.length || '0'}}</span> Artikel
+            </h3>
+        </div>
+        <div *ngIf="!popup">
+            <div *ngFor="let item of wishlist">
+                <div class="row">
+                    <div class="col-6 col-md-3 mt-4" *ngIf="item.ArticleView.ArticleImages?.length>0">
+                        <img style="width:220px; height: 220px;object-fit: cover;" class="ptr" [routerLink]="['/artikel/',item.ArticleView?.Id, item.ArticleView?.Name]" [src]="item.ArticleView.Thumbnail != null ? item.ArticleView.Thumbnail : toUrl(item.ArticleView.ArticleImages[0].SrcAttr)" [alt]="item.Name">
+                    </div>
+                    <div class="col-6 col-md-9 mt-4">
+                        <div
+                            class="col-md-12 underlined t-bold t-16  {{mode === 'light'? 'text-darkgrey' : 'text-white'}} ">
+                            <h3> {{item.ArticleView.Name}}</h3>
+                            <h3 class="t-16"> <span class="t-reg  "> Preis: </span>{{item.ArticleView.NormalPrice | currency:'EUR':'code'}}
+                            </h3>
+                        </div>
+
+                        <div class="col-md-12 mt-2 ">
+                                <a *ngIf="item.ArticleView.ProductLink" [href]="item.ArticleView.ProductLink" target="_blank" class="btn t-11 text-white btn-orange mr-3">Produkt kaufen</a>
+
+                            <button *ngIf="(!item.ArticleView.ProductLink)" (click)="addToCart(item.ArticleView.Id)" class="btn btn-green t-13 text-white">In den Warenkorb</button>
+                            
+                            <button class="ml-2 btn btn-secondary t-13 text-white {{mode}}" (click)="removeItem(item.ArticleView.Id)">
+                                Löschen
+                            </button>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

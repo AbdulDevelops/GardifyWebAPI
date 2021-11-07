@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/card_view_top_corner"
+    app:behavior_peekHeight="32dp"
+    app:layout_behavior="android.support.design.widget.BottomSheetBehavior"
+    android:padding="@dimen/marginPaddingSize_16sdp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/marginPaddingSize_10sdp"
+        android:layout_marginBottom="@dimen/marginPaddingSize_32sdp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/imageView_all_width_18sdp"
+                android:layout_height="@dimen/imageView_all_height_18sdp"
+                android:background="@drawable/red_circle"
+                android:backgroundTint="@color/imageView_todoCalendar_ownToDo" />
+
+            <TextView
+                android:id="@+id/textView_add_todo_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/marginPaddingSize_10sdp"
+                android:text="@string/toDoCalendar_addTodoEntry"
+                android:textSize="@dimen/textSize_body_medium"
+                android:textStyle="bold" />
+        </LinearLayout>
+        <!--upload images -->
+        <LinearLayout
+            android:id="@+id/linearLayout_add_upload_section"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/image_view_add_custom_todo_upload_icon"
+                    android:layout_width="@dimen/imageView_all_width_50sdp"
+                    android:layout_height="@dimen/imageView_all_height_50sdp"
+                    android:padding="@dimen/imageView_all_padding_5sdp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/all_upload_image" />
+
+                <TextView
+                    android:id="@+id/text_view_add_custom_todo_image_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/marginPaddingSize_16sdp"
+                    android:text="@string/toDoCalendar_uploadImages"
+                    android:textSize="@dimen/textSize_body_xsmall"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout_add_todo_recyclerView_section"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:visibility="gone"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view_add_todo_grid_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:id="@+id/image_view_add_custom_todo_delete_icon"
+                    android:layout_width="@dimen/imageView_all_width_50sdp"
+                    android:layout_height="@dimen/imageView_all_height_50sdp"
+                    android:layout_gravity="center_vertical"
+                    android:padding="@dimen/imageView_all_padding_5sdp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/all_delete_image_icon" />
+
+            </LinearLayout>
+        </LinearLayout>
+        <!--title -->
+        <LinearLayout
+            android:id="@+id/linearLayout_add_todo_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/toDoCalendar_title"
+                    android:textSize="@dimen/textSize_body_xsmall"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="*"
+                    android:textSize="@dimen/textSize_body_xsmall"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/editText_add_todo_title_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:background="@drawable/custom_edit_text_default"
+                android:padding="@dimen/marginPaddingSize_5sdp"
+                android:textSize="@dimen/textSize_body_xsmall" />
+        </LinearLayout>
+
+        <!--description -->
+        <LinearLayout
+            android:id="@+id/linearLayout_add_todo_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/all_description"
+                    android:textSize="@dimen/textSize_body_xsmall"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="*"
+                    android:textSize="@dimen/textSize_body_xsmall"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/editText_add_todo_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_edit_text_default"
+                android:gravity="top"
+                android:lines="3"
+                android:inputType="textMultiLine"
+                android:textSize="@dimen/textSize_body_xsmall"
+                android:padding="@dimen/marginPaddingSize_5sdp"
+                android:text="" />
+        </LinearLayout>
+
+        <!--notes -->
+        <LinearLayout
+            android:id="@+id/linearLayout_add_todo_notes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/toDoCalendar_myNotes"
+                android:textSize="@dimen/textSize_body_xsmall"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/editText_add_todo_notes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_edit_text_default"
+                android:gravity="top"
+                android:inputType="textMultiLine"
+                android:lines="2"
+                android:textSize="@dimen/textSize_body_xsmall"
+                android:padding="@dimen/marginPaddingSize_5sdp"
+                android:text="" />
+        </LinearLayout>
+
+        <!--repetition -->
+        <LinearLayout
+            android:id="@+id/linearLayout_add_todo_repetition"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/toDoCalendar_repetitionType"
+                android:textSize="@dimen/textSize_body_xsmall"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spinner_add_todo_cycle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/CustomSpinnerStyle" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+            <!--date from-->
+            <LinearLayout
+                android:id="@+id/linearLayout_add_todo_date_from"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/toDoCalendar_dueFrom"
+                    android:textSize="@dimen/textSize_body_xsmall"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/editText_add_todo_from_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/custom_edit_text_date"
+                    android:padding="@dimen/marginPaddingSize_5sdp"
+                    android:textColor="@color/text_todoCalendar_addDiary"
+                    android:textSize="@dimen/textSize_body_xsmall" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5" />
+            <!--date to-->
+            <LinearLayout
+                android:id="@+id/linearLayout_add_todo_date_to"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/toDoCalendar_dueTo"
+                    android:textSize="@dimen/textSize_body_xsmall"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/editText_add_todo_to_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/custom_edit_text_date"
+                    android:padding="@dimen/marginPaddingSize_5sdp"
+                    android:textColor="@color/text_todoCalendar_addDiary"
+                    android:textSize="@dimen/textSize_body_xsmall" />
+            </LinearLayout>
+
+        </LinearLayout>
+        <!-- Comment for later use -->
+        <!--erinnerung -->
+        <!--
+                <LinearLayout
+                    android:id="@+id/linearLayout_add_todo_notification"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/erinnerung"
+                        android:textSize="@dimen/textSize_body_xsmall"
+                        android:textStyle="bold" />
+
+                    <Spinner
+                        android:id="@+id/spinner_add_todo_notification"
+                        android:layout_width="match_parent"
+                        style="@style/CustomSpinnerStyle"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+        -->
+        <ProgressBar
+            android:id="@+id/progressbar_addTodoEntry"
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:layout_height="wrap_content" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_add_todo_save_todo"
+            style="@style/ButtonConfirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/all_save"
+            android:textAllCaps="false"
+            android:textSize="@dimen/textSize_body_medium"
+            app:cornerRadius="@dimen/cardCornerRadius_small" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_add_todo_cancel"
+            style="@style/ButtonCancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/all_cancel"
+            android:textAllCaps="false"
+            android:textSize="@dimen/textSize_body_medium"
+            android:layout_marginBottom="@dimen/marginPaddingSize_32sdp"
+            app:cornerRadius="@dimen/cardCornerRadius_small" />
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

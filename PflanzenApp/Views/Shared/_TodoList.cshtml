@@ -1,0 +1,124 @@
+﻿@model GardifyModels.Models.TodoViewModels.TodoIndexViewModel
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Todo
+            </th>
+            <th>
+                Gehört zu
+            </th>
+            <th>
+                Fällig von
+            </th>
+            <th>
+                Fällig bis
+            </th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    @{DateTime oldTime = DateTime.MinValue;}
+    @{int datepick_counter = 0;}
+    @{int lastMonth = 0;}
+    @foreach (var todo in Model.TodoList)
+    {
+        if (lastMonth != todo.DateStart.Month)
+        {
+            lastMonth = todo.DateStart.Month;
+            <tr style="background-color: #dddddd">
+                <td>
+                    <div class="h3">@todo.DateStart.ToString("MMMM")</div>
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        }
+        oldTime = todo.DateStart;
+        <tr>
+            <td>
+                @todo.Title
+            </td>
+            <td>
+                @todo.ReferenceText
+            </td>
+            <td>
+                @Html.TextBoxFor(model => todo.DateStart, "{0:dd/MM/yyyy}", new { data_tid = todo.Id, @class = "datepicker", dateStart = true, @id = "datepickerstart_" + datepick_counter, placeholder = "Bitte Datum Wählen" })
+            </td>
+            <td>
+                @Html.TextBoxFor(model => todo.DateEnd, "{0:dd/MM/yyyy}", new { data_tid = todo.Id, @class = "datepicker", dateStart = false, @id = "datepickerend_" + datepick_counter, placeholder = "Bitte Datum Wählen" })
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", "Todo", new { id = todo.Id }, null)
+            </td>
+            @Html.Partial("_TodoTableMarkActions", todo)
+        </tr>
+        datepick_counter++;
+    }
+    @if (Model.TodoList.Count() == 0)
+    {
+        @:Keine Todos gefunden.
+    }
+</table>
+@section Scripts {
+    @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.min.js")
+}
+
+<script type="text/javascript">
+    $('.date-hover').mouseenter(function (e) {
+        $(e.target).css("display", "block");
+    });
+    $('.date-hover').mouseleave(function (e) {
+        $(e.target).css("display", "none");
+    });
+    $(function () { // will trigger when the document is ready
+        $(".datepicker").datepicker($.datepicker.regional["de"]);
+    });
+    /* German initialisation for the jQuery UI date picker plugin. */
+    jQuery(function (el) {
+        el.datepicker.regional['de'] = {
+            closeText: 'schließen',
+            prevText: '&#x3c;zurück',
+            nextText: 'Vor&#x3e;',
+            currentText: 'heute',
+            monthNames: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni',
+            'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
+            monthNamesShort: ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun',
+            'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'],
+            dayNames: ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'],
+            dayNamesShort: ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'],
+            dayNamesMin: ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'],
+            weekHeader: 'Wo',
+            dateFormat: 'dd.mm.yy',
+            firstDay: 1,
+            isRTL: false,
+            showMonthAfterYear: false,
+            yearSuffix: '',
+            onSelect: function (date, instance) {
+                var id = $(this).attr('data-tid');
+                var url = '@Url.Action("ajaxUpdateTodoDate", "Todo")';
+                var dateStart = $(this).attr('dateStart');
+                var data = { id: id, date: date, dateStart: dateStart };
+                console.log($(this).attr('data-tid'));
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: data,
+                    success: function (data) {
+                        $("#box_success").show();
+                    },
+                    failure: function (data) {
+                        $("#box_failure").show();
+                    }
+                });
+            }
+        };
+        $.datepicker.setDefaults($.datepicker.regional['de']);
+    });
+
+</script>

@@ -1,0 +1,215 @@
+﻿@model GardifyModels.Models.NewsViewModels.NewsEntryViewModel
+
+@{
+    ViewBag.Title = "EditNewsEntry";
+    Layout = "~/Views/Shared/_LayoutAdminArea.cshtml";
+}
+@if (Model.StatusMessage != null)
+{
+    Html.RenderPartial("_modalStatusMessage", Model.StatusMessage);
+}
+<head>
+    <link href="~/Scripts/jquery-te-1.4.0.css" rel="stylesheet" />
+    <script type="text/javascript" src="http://code.jquery.com/jquery.min.js" charset="utf-8"></script>
+    <script src="~/Scripts/jquery-te-1.4.0.min.js"></script>
+</head>
+<h2>Beitrag ändern</h2>
+<div class="form-horizontal">
+    @using (Html.BeginForm("Edit", "AdminAreaNews", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken();
+        @Html.Hidden("id", Model.Id);
+        <div class="form-group">
+            <label for="date" class="control-label col-md-2">Datum</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="title" class="control-label col-md-2">Titel</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="subtitle" class="control-label col-md-2">Zweiter Titel</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SubTitle, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SubTitle, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="theme" class="control-label col-md-2">Thema</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Theme, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Theme, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="author" class="control-label col-md-2">Verfasser</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Author, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Author, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="timing" class="control-label col-md-2">Gültigkeitsdauer</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Timing, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Timing, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="text" class="control-label col-md-2">Text</label>
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Text, new { @class = "form-control", @id = "editortext", @rows = 5, cols = 80 })
+                @*<textarea class="form-control" name="text" rows="5" cols="80">@Model.Text</textarea>*@
+                @Html.ValidationMessageFor(model => model.Text, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="tipp" class="control-label col-md-2">Tipp</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Tipp, new { htmlAttributes = new { @class = "form-control", @id = "editortipp" } })
+                @Html.ValidationMessageFor(model => model.Tipp, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="validFrom" class="control-label col-md-2">Sichtbar von</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ValidFrom, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ValidFrom, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="validTo" class="control-label col-md-2">Sichtbar bis</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ValidTo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ValidTo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="isVisibleOnPage" class="control-label col-md-2">Sichtbar auf der Seite</label>
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.IsVisibleOnPage)
+                    @Html.ValidationMessageFor(model => model.IsVisibleOnPage, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Speichern" class="btn btn-default" />
+            </div>
+        </div>
+    }
+    @using (Html.BeginForm("delete-news-entry", "AdminAreaNews"))
+    {
+        @Html.AntiForgeryToken()
+        @Html.Hidden("entryId", Model.Id)
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Löschen" class="btn btn-default" />
+            </div>
+        </div>
+    }
+</div>
+<hr />
+<div class="form-horizontal">
+    <h4>Verknüpfte Bilder</h4>
+    <div class="form-group">
+        <label class="control-label col-md-2"></label>
+        <div class="image-wrapper col-md-10">
+            @if (Model.EntryImages != null && Model.EntryImages.Any())
+            {
+                foreach (var img in Model.EntryImages)
+                {
+                    <div class="tumbnail col-md-3">
+                        <img title="@img.TitleAttr" src="@img.SrcAttr" alt="@img.AltAttr" />
+                        <div class="caption">
+                            <h3>@img.FullTitle</h3>
+                            <p>@img.FullDescription</p>
+                            @using (Html.BeginForm("delete-news-entry-image", "AdminAreaNews"))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.Hidden("imageRefId", img.Id)
+                                @Html.Hidden("entryId", Model.Id)
+                                <input type="submit" value="Bild löschen" class="btn btn-default" />
+                            }
+                            <button data-toggle="collapse" href="#editMode@(img.Id)" type="button" class="btn btn-success">Ändern</button>
+                            <div class="collapse" id="editMode@(img.Id)">
+                                @using (Html.BeginForm("edit-image-creds", "AdminAreaNews"))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.Hidden("imageId", img.Id)
+                                    @Html.Hidden("entryId", Model.Id)
+                                    <input type="text" placeholder="Autor" value="@img.Author" name="imageAuthor" class="form-control" />
+                                    <input type="text" placeholder="Lizenz" value="@img.License" name="imageLicense" class="form-control" />
+                                    <input type="submit" value="Speichern" class="btn btn-success" />
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <p>Noch kein Bild hochgeladen</p>
+            }
+        </div>
+    </div>
+    <h4>Neues Bild hochladen</h4>
+    @using (Html.BeginForm("upload-news-image", "AdminAreaNews", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.Hidden("entryId", Model.Id)
+        <div class="form-group">
+            <label class="control-label col-md-2">Datei auswählen</label>
+            <div class="col-md-10">
+                <input type="file" name="imageFile" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Titel</label>
+            <div class="col-md-10">
+                <input class="form-control" name="imageTitle" type="text" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Bild-Autor</label>
+            <div class="col-md-10">
+                <input class="form-control" name="imageAuthor" type="text" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Lizenz-Quelle</label>
+            <div class="col-md-10">
+                <input class="form-control" name="imageLicense" type="text" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Beschreibung</label>
+            <div class="col-md-10">
+                <textarea class="form-control" name="imageDescription" rows="2" cols="80"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Hochladen" class="btn btn-default" />
+            </div>
+        </div>
+    }
+</div>
+<p>
+    @Html.ActionLink("Zurück", "Index")
+</p>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#editortext").jqte();
+        $("#editortipp").jqte();
+
+    });
+
+</script>

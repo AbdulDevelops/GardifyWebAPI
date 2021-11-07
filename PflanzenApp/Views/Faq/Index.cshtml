@@ -1,0 +1,56 @@
+﻿@model GardifyModels.Models.FaqViewModels.FaqIndexViewModel
+
+@{
+	ViewBag.Title = "Index";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*@if (Model.StatusMessage != null)
+{
+	Html.RenderPartial("_modalStatusMessage", Model.StatusMessage);
+}*@
+
+<h2>FAQ</h2>
+<p>
+	@Html.ActionLink("Neue Frage stellen", "Create")
+</p>
+
+<div>
+	@if (Model != null && Model.FaqList != null && Model.FaqList.Any())
+	{
+		foreach (var item in Model.FaqList)
+		{
+			<div class="row">
+				<div class="image-wrapper col-md-3">
+					@if (item.EntryImages != null && item.EntryImages.Any())
+					{
+						<div class="title-image">
+							<img title="@item.EntryImages.FirstOrDefault().TitleAttr" src="@item.EntryImages.FirstOrDefault().SrcAttr" />
+						</div>
+						foreach (var img in item.EntryImages.Skip(1))
+						{
+							<div class="thumbnail col-md-4">
+								<img title="@img.TitleAttr" src="@img.SrcAttr" />
+							</div>
+						}
+					}
+				</div>
+				<div class="col-md-9">
+					<div class="col-md-12">
+						@Html.DisplayFor(modelItem => item.Date)<br />
+						<b>Frage:</b><br />
+						@Html.DisplayFor(modelItem => item.QuestionText)
+					</div>
+					<div class="col-md-12">
+						<b>Antwort:</b><br />
+						@Html.DisplayFor(modelItem => item.AnswerText)
+					</div>
+				</div>
+			</div>
+			<hr />
+		}
+	}
+	else
+	{
+		<p>Es sind noch keine beantwortete Fragen vorhanden</p>
+	}
+</div>

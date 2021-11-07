@@ -1,0 +1,38 @@
+.popupMode {
+    z-index: 3;
+    position: fixed;
+    right: 2%;
+    top: 3%;
+    max-width: 420px;
+    max-height: 460px;
+    overflow-y: scroll;
+}
+.popupMode * {
+    font-size: 1rem !important;
+}
+.popupMode.light {
+    background-color: white;
+}
+.popupMode.dark {
+    background-color: #222;
+}
+
+.popupMode img {
+    width: 100px !important;
+    height: 100px !important;
+}
+@media (max-width: 990px) and (orientation:landscape) {
+    .col-md-3, .col-md-9 {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+    .btn-green {
+        display: block;
+        margin: 4px 0px;
+    }
+}
+@media (max-width: 990px) {
+    .popupMode {
+        top: 5%;
+    }
+}

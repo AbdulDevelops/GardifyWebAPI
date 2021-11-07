@@ -1,0 +1,88 @@
+﻿@model GardifyModels.Models.AdminAreaViewModels.TaxonomicTreeViewModel
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LayoutAdminArea.cshtml";
+}
+
+<h2>Knoten editieren</h2>
+<div class="form-horizontal">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.CurrentNode.Id)
+        @Html.HiddenFor(model => model.CurrentNode.ParentId)
+
+        <div class="form-group">
+            <label class="control-label col-md-2">
+                Elternknoten
+            </label>
+            <div class="col-md-10">
+                @if(Model.CurrentParentNode != null)
+                {
+                    @(Model.CurrentParentNode.TitleGerman + " (" + Model.CurrentParentNode.TitleLatin + ")")
+                } else
+                {
+                    @: Aktueller Knoten ist Root
+                }
+            </div>
+        </div>
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.CurrentNode.taxon, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.CurrentNode.taxon)
+            </div>
+        </div>*@
+        if (Model.CurrentNode.Taxon == GardifyModels.Models.ModelEnums.TaxonomicRank.Species || Model.CurrentNode.Taxon == GardifyModels.Models.ModelEnums.TaxonomicRank.Genus || Model.CurrentNode.Taxon == GardifyModels.Models.ModelEnums.TaxonomicRank.Family || Model.CurrentNode.Taxon == GardifyModels.Models.ModelEnums.TaxonomicRank.Variety)
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.CurrentNode.PlantId, "ID der Pflanze", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CurrentNode.PlantId, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CurrentNode.PlantId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+        <div class="form-group">
+            @Html.LabelFor(model => model.CurrentNode.TitleLatin, "Lateinischer Name", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CurrentNode.TitleLatin, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CurrentNode.TitleLatin, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.CurrentNode.TitleGerman, "Deutscher Name", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CurrentNode.TitleGerman, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CurrentNode.TitleGerman, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Speichern" class="btn btn-default" />
+            </div>
+        </div>
+    }
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            @if (Model.CurrentNode.Childs == null || !Model.CurrentNode.Childs.Any())
+            {
+                using (Html.BeginForm("Delete", "AdminAreaTaxonomicTree"))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.Hidden("Id", Model.CurrentNode.Id)
+                    <input type="submit" value="Löschen" class="btn btn-default" />
+                }
+            }
+            else
+            {
+                <div class="btn btn-default disabled">Löschen</div>
+                <br /><br />@:*Ein Knoten mit Kindern darf nicht gelöscht werden
+                }
+        </div>
+    </div>
+</div>
+<div>
+    @Html.ActionLink("Zurück", "Index", new { taxonId = Model.CurrentNode.Id })
+</div>

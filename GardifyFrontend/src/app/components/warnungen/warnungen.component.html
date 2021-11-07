@@ -1,0 +1,196 @@
+<div class="overlay-loading" [hidden]="!loading">
+  <svg class="spinner position-relative" viewBox="25 25 50 50">
+    <circle class="path" cx="50" cy="50" r="24" fill="none" stroke-width="2" stroke-miterlimit="10" />
+  </svg>
+</div>
+<ng-container>
+  <div class="wrapper {{mode}} py-5 {{mode === 'light'? 'text-darkgrey' : 'text-white'}}">
+    <div class="container pt-4">
+      <div class="row mb-2 {{mode}} bt-border">
+        <div class="col-12 col-md-6">
+          <span class="t-bold t-26 {{mode === 'light'? 'text-grey' : 'text-white'}}">WARNUNGEN</span>
+          <a>
+            <fa-icon matTooltip="Deaktivierte Frostwarnungen werden automatisch nächstes Jahr am 30.06. wieder aktiviert " 
+            matTooltipClass="tooltip-text" [matTooltipPosition]="'right'" 
+            (click)="tooltip1.toggle()" mat-raised-button #tooltip1="matTooltip"
+            matTooltipHideDelay="0" class="info-icon position-relative" 
+            style="left: 18px; cursor: help;" [icon]="faInfo">
+          </fa-icon>
+          </a>
+        </div>
+       
+      </div>
+      <div class="row justify-content-end mb-3">
+        <span (click)="resetWarnings()" style="background: transparent; border: none;" class="text-right t-bold text-danger col-5 ptr inline-block {{mode}}">
+          Warnungen zurücksetzen
+          <fa-icon matTooltip="Wir empfehlen das einmalige Zurücksetzen der Grundeinstellungen, wenn Teile deines Gartens vor dem 12.12.2020 angelegt wurden." 
+            matTooltipClass="tooltip-text" [matTooltipPosition]="'right'" 
+            (click)="tooltip2.toggle()" mat-raised-button #tooltip2="matTooltip"
+            matTooltipHideDelay="0" class="info-icon position-relative" 
+            style="top: -3px; cursor: help;" [icon]="faInfo">
+          </fa-icon>
+        </span>
+      </div>
+      <ng-container *ngIf="affectedPlants?.length > 0">
+        <div class="row mb-4" >
+          <div class="col-12 col_table">
+            <table class="table table-hover">
+              <thead class="t-bold t-18 backgrdColorGreenish">
+                <tr>
+                  <th scope="col"><span class="tableHead">Pflanzen</span></th>
+                  <th scope="col"><span style="line-height: 6rem;">bei Temperatur</span></th>
+                  <th scope="col"><span>Frostwarnung</span>
+                    <div class="" (click)="toggleAllPlants(true)" style="margin-left: 4.5rem;">
+                      <img [src]="!disabledPlantsFrost ? switchButtonOn : switchButtonOff" [title]="disabledPlantsFrost ? 'Alle aktivieren' : 'Alle deaktivieren'" class="ptr"style="height: 30px;">
+                    </div>
+                  </th>
+                  <th scope="col">Sturmwarnung
+                    <div class="" (click)="toggleAllPlants(false)" style="margin-left: 4.5rem;" >
+                      <img [src]="!disabledPlantsWind ? switchButtonOn : switchButtonOff" [title]="disabledPlantsWind ? 'Alle aktivieren' : 'Alle deaktivieren'" class="ptr"style="height: 30px;">
+                    </div>
+                  </th>
+                  <th scope="col-3"></th>
+                  <th scope="col-3"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngFor="let warningforPlant of affectedPlants; let i=index">
+                  <tr class="text-green t-reg t-16">
+                    <th scope="row">
+                      <div class="d-flex">
+                       
+                        <div>
+                          <span class="ml-5 mt-1" style="line-height: 5rem;">{{warningforPlant.RelatedObjectName}}</span>
+                        </div>
+                      </div>
+                    </th>
+                    <td><span class="text-green t-reg" style="line-height: 5rem;"><= {{warningforPlant.AlertConditionValue}} &#8451;</span></td>
+                    <td>
+                      
+                      <div (click)="warningforPlant.NotifyForFrost = !warningforPlant.NotifyForFrost; updateWarningPlantSettings(warningforPlant,true)" style="line-height: 5rem;">
+                        
+                         
+                          <img [src]="!warningforPlant.NotifyForFrost? switchButtonOff:switchButtonOn" class="ptr"style="height: 30px; line-height: 5rem" >
+                        
+                      </div>
+                    </td>
+                    <td>
+                      <div  (click)="warningforPlant.NotifyForWind = !warningforPlant.NotifyForWind; updateWarningPlantSettings(warningforPlant,false)" style="line-height: 5rem;">
+                        <img [src]="!warningforPlant.NotifyForWind? switchButtonOff:switchButtonOn" class="ptr" style="height: 30px; line-height: 5rem">
+                      </div>
+                    </td>
+                    <td>
+                      <div style="line-height: 5rem;">
+                        <img *ngIf="!warningforPlant.IsInPot" title="Beetpflanze" style="height: 30px;" src="./assets/images/Warnungen_Beetpflanzen.png">
+                      <img *ngIf="warningforPlant.IsInPot" title="Topfpflanze" style="height: 30px;" src="./assets/images/Warnungen_Topfpflanzen.png">
+                      </div>
+                      
+                    </td>
+                    <td>
+                      <a data-toggle="collapse" [attr.data-target]="'#warningAction'+ i"  [attr.aria-expanded]="false" [attr.aria-controls]="'warningAction'+ i" style="line-height: 5rem;">
+                        <img style="height: 30px;" src="./assets/images/Pfeil_nach_unten.svg">
+                      </a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="12" class="hiddenRow">
+                      <div class="collapse" [attr.id]="'warningAction'+ i">
+                        <div *ngIf="warningforPlant.Text">
+                          <p class="t-light t-15 px-3 pt-3" > - {{warningforPlant.Text}}</p>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </ng-container>
+               
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </ng-container>
+      
+        <div class="row mt-2 mb-4">
+          <div class="col-12">
+            <div class="d-flex">
+              <div >
+                <img style="height: 30px; width: 24px;" src="./assets/images/Warnungen_Topfpflanzen.png">
+                <span class="ml-2 t-12">Topfpflanze</span></div>
+              <div class="mx-3">
+                <img style="height: 30px; width: 24px;" src="./assets/images/Warnungen_Beetpflanzen.png">
+                <span class="ml-2 t-12">Beetpflanze</span>
+              </div>
+              <div>
+                <img style="height: 30px; width: 24px;" src="./assets/images/2b_Warnungen_aktiv.svg">
+                <span class="ml-2 t-12">Aktuelle Warnung</span>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      <ng-container *ngIf="affectedDevices?.length > 0">
+        <div class="row mb-4" >
+          <div class="col-12 col_table">
+            <table class="table table-hover">
+              <thead class="t-bold t-18 backgrdColorGreenish">
+                <tr>
+                  <th scope="col"><span class="tableHead">Geräte</span> </th>
+                  <th scope="col"><span style="line-height: 6rem;">bei Temperatur</span></th>
+                  <th scope="col" ><span >Frostwarnung</span>
+                    
+                    <div class="" (click)="toggleAllDevices(true)" style="margin-left: 1.5rem;">
+                      <img [src]="!disabledDevicesFrost ? switchButtonOn : switchButtonOff" [title]="disabledDevicesFrost ? 'Alle aktivieren' : 'Alle deaktivieren'" class="ptr"style="height: 30px;">
+                    </div>
+                  </th>
+                  <th scope="col">Sturmwarnung
+                    <div class="" (click)="toggleAllDevices(false)" style="margin-left: 1.5rem;">
+                      <img [src]="!disabledDevicesWind ? switchButtonOn : switchButtonOff" [title]="disabledDevicesWind ? 'Alle aktivieren' : 'Alle deaktivieren'" class="ptr"style="height: 30px;">
+                    </div>
+                  </th>
+                  <th scope="col-3"></th>
+                  <th scope="col-3"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngFor="let warningforDevice of affectedDevices; let j=index">
+                  <tr class="text-green t-reg t-16">
+                    <th scope="row">
+                      <div class="d-flex">
+                       
+                        <div >
+                          <span class="ml-5 mt-1" style="line-height: 5rem;">{{warningforDevice.RelatedObjectName}}</span>
+                        </div>
+                        <div *ngIf="!warningforDevice.Dismissed" (click)="setWarningAsReaded(warningforDevice.RelatedObjectId,warningforDevice.ObjectType)" class="warnings-icon mr-3 ptr mt-4"style="line-height: 5rem;"
+                          title="als gelesen markieren">
+                        </div>
+                      </div>
+                    </th>
+                    <td><span class="text-green t-reg" style="line-height: 5rem;"><= {{warningforDevice.AlertConditionValue}} &#8451;</span></td>
+                    <td>
+                      
+                      <div class="col-2 t-bold" (click)="warningforDevice.NotifyForFrost = !warningforDevice.NotifyForFrost; updateWarningDeviceSettings(warningforDevice,true)" style="line-height: 5rem;" >
+                        <img [src]="!warningforDevice.NotifyForFrost? switchButtonOff:switchButtonOn" class="ptr" style="height: 30px;">
+                      </div>
+                    </td>
+                    <td>
+                      <div class="col-2 t-bold" (click)="warningforDevice.NotifyForWind = !warningforDevice.NotifyForWind; updateWarningDeviceSettings(warningforDevice,false)" style="line-height: 5rem;">
+                        <img [src]="!warningforDevice.NotifyForWind? switchButtonOff:switchButtonOn"class="ptr" style="height: 30px;">
+                      </div>
+                    </td>
+                    
+                    
+                  </tr>
+                  
+                </ng-container>
+               
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </ng-container>
+
+     
+      
+    </div>
+    
+  </div>
+</ng-container>

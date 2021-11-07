@@ -1,0 +1,45 @@
+﻿@model IEnumerable<GardifyModels.Models.PointsPending>
+@{
+	ViewBag.Title = "Punkte";
+	Layout = "~/Views/Shared/_LayoutAdminArea.cshtml";
+}
+
+
+<div>
+	<h2>Punkte</h2>
+	<h3>Zu bestätigende Punkte</h3>
+	<table class="table">
+		<thead>
+			<tr>
+				<td>
+					Points
+				</td>
+				<td>
+					Origin
+				</td>
+				<td>
+					Action
+				</td>
+			</tr>
+		</thead>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					@item.Points
+				</td>
+				<td>
+					@item.Origin
+				</td>
+				<td>
+					<a href=@Url.Content("~/" + item.Origin)>Content</a> |
+					@Html.ActionLink("Approve", "Approve", "AdminAreaPoints", new { index = item.Id }, null) |
+					@Html.ActionLink("Decline", "Decline", "AdminAreaPoints", new { index = item.Id }, null)
+				</td>
+			</tr>
+		}
+	</table>
+</div>
+@section Scripts {
+	@Scripts.Render("~/scripts/jquery.unobtrusive-ajax.min.js")
+}

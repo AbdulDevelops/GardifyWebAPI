@@ -1,0 +1,37 @@
+.plant-img {
+    height: 320px;
+    width: 100%;
+    max-width: 320px;
+    object-fit: cover;
+  }
+
+.carousel-control-prev {
+    left:-15px;
+    z-index: 4;
+}
+.carousel-control-next {
+    right:-15px;
+    z-index: 4;
+}
+a.carousel-control-prev, a.carousel-control-next {
+    max-width: 15px;
+} 
+.carousel-control-next, .carousel-control-prev {
+    position: absolute;
+    top: 127px;
+    bottom: 0;
+    z-index: 1;
+    display: flex;
+     align-items: flex-start;
+    justify-content: center;
+    width: 15px;
+    color: #fff;
+    text-align: center;
+    opacity: .5;
+    transition: opacity .15s ease;
+}
+  
+.pfeil{
+    width: 100%;
+    height: 100%;
+}

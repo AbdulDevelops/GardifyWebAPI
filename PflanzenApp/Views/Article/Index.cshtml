@@ -1,0 +1,44 @@
+﻿@model GardifyModels.Models.ArticleViewModels.ArticleListViewModel
+@using PflanzenApp.HtmlHelpers;
+@{
+	ViewBag.Title = "Shop";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Unsere Artikel</h2>
+<div id="article-list-wrapper">
+	@Html.Partial("_ArticleList", Model.ListEntries)
+</div>
+<div id="status-message-wrapper">
+	@if (Model != null && Model.StatusMessage != null)
+	{
+		Html.RenderPartial("_modalStatusMessage", Model.StatusMessage);
+	}
+</div>
+@section Scripts {
+	@Scripts.Render("~/scripts/jquery.unobtrusive-ajax.min.js")
+	<script type="text/javascript">
+
+		$(document).ready(function () {
+			$('.buy-btn').click(function (event) {
+				event.preventDefault();
+				addToCart($(this).data('articleid'));
+			});
+		});	
+
+		function addToCart(articleId) {
+			$('#loading-div').show();
+			$.ajax({
+				url: '@Url.Action("addToShopcart", "Shopcart")',
+				type: 'post',
+				data: {'ArticleId':articleId, @Html.AjaxAntiForgeryTokenExtention()},
+				cache: false
+			})
+			.done(function (result) {
+				$('#status-message-wrapper').html(result);
+				$('#loading-div').hide();
+				updateShopcartCounter();
+			});
+		}
+	</script>
+}

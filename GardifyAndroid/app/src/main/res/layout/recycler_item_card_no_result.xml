@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <import type="android.view.View" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/linear_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/marginPaddingSize_8sdp"
+        android:padding="@dimen/marginPaddingSize_5sdp"
+        android:paddingTop="@dimen/marginPaddingSize_5sdp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/text_recyclerItemCardNoResult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="@dimen/textSize_body_medium" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_recyclerItemCardNoResult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+            android:text="@string/plantDoc_askQuestion"
+            style="@style/PrimaryButtonStyle"
+            android:letterSpacing=".025"
+            android:layout_marginBottom="@dimen/marginPaddingSize_8sdp"
+            android:backgroundTint="@color/button_all_confirm" />
+        <TextView
+            android:id="@+id/text_recyclerItemCardNoResultSuggestionHint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:textSize="@dimen/textSize_body_xsmall"
+            android:layout_marginBottom="@dimen/marginPaddingSize_60sdp"/>
+
+
+    </LinearLayout>
+</layout>

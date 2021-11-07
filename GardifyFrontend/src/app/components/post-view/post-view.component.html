@@ -1,0 +1,48 @@
+<div class="wrapper {{mode}}">
+    <div class="container pt-3" *ngIf="post">
+      <div class="row mt-5 mb-4 justify-content-between">
+        <div class="col-12 col-md-8">
+          <h2 class="t-light t-18 {{mode === 'light'? 'text-blackish' : 'text-white'}} " [innerHTML]=post.Title></h2>
+        </div>
+        <div class="col-12 col-md-4">
+            <p class="t-13 t-reg text-grey">
+              <span class="t-light t-13 {{mode === 'light'? 'text-blackish' : 'text-white'}}"><span class="text-danger">&hearts; </span>{{post.likes || 0}} mögen das</span>
+              <span class="t-light t-13 float-right {{mode === 'light'? 'text-blackish' : 'text-white'}}">{{post.PostCount}} Kommentare</span>
+            </p>
+        </div>
+      </div>
+    
+      <div class="row">
+          <h3 class="col-12 t-bold t-14 text-green m-0 py-2 bt-border {{mode}}">Kommentare</h3>
+      </div>
+    <ng-container *ngIf="post">
+      <div *ngFor="let comment of pagedComments; let i = index">
+          <div class="row py-0 my-1 bt-border {{mode}}">
+              <div class="col-12 my-2">
+                  <h2 class="t-reg t-18 pointer {{mode === 'light'? 'text-blackish' : 'text-white'}}">{{comment.Content}}</h2>
+                  <span class="t-light t-13 {{mode === 'light'? 'text-blackish' : 'text-white'}}"><span class="text-danger">&hearts; </span>{{comment.likes || 0}} mögen das</span>
+                  <h3 class="t-light t-11 {{mode === 'light'? 'text-ltgrey' : 'text-grey'}}">Erstellt: {{comment.CreatedDate | date:'dd.MM.yyyy'}} von
+                    <a [routerLink]="['/profil/'+comment.AuthorId]" 
+                    class="t-light t-11 d-inline {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+                    {{comment.AuthorName}}
+                    </a>
+                  </h3>
+              </div>
+          </div>
+      </div>
+    </ng-container>
+      <hr>
+      <ul *ngIf="commentsPager.pages && commentsPager.pages.length" class="t-14 t-bold pagination float-right text-grey2">
+        <li [ngClass]="{disabled:commentsPager.currentPage === 1}">
+            <a (click)="setComments(commentsPager.currentPage - 1)">Zurück</a>
+        </li>
+        <li *ngFor="let page of commentsPager.pages" [ngClass]="{'text-underline':commentsPager.currentPage === page}" class="px-1">
+            <a (click)="setComments(page)">{{page}}</a>
+        </li>
+        <li [ngClass]="{disabled:commentsPager.currentPage === commentsPager.totalPages}">
+            <a (click)="setComments(commentsPager.currentPage + 1)">Nächste anzeigen ></a>
+        </li>
+      </ul>
+    </div>
+    <hr class="mt-100">
+</div>

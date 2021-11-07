@@ -1,0 +1,55 @@
+﻿@page
+@model GardifyNewsletter.Pages.NewsLetter.Newsletter_SignupModel
+@{
+    ViewData["Title"] = "Newsletter";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 mt-5">
+            <h1 class="font-weight-normal font-25 orangecolor ">
+                anmeldung newsletter
+            </h1>
+            <p>
+                Wir halten Sie auf dem Laufenden: in unserem monatlichen Newsletter erfahren Sie alles über Neuerscheinungen oder Veranstaltungen aus dem ars vivendi verlag.
+
+            </p>
+            <form method="post">
+
+                <label class="control-label" style="color:red">
+                    @Model.ErrorText
+                </label> <br />
+                <div asp-validation-summary="ModelOnly" class="text-danger mt-5"></div>
+                <div class="form-group">
+                    <label asp-for="SelectedSector">Newsletter:</label>
+                    <!-- distribution list checkboxes -->
+                        @for (int i = 0; i < Model.AllDistributors.Count(); i++)
+
+                        {
+                <div class="form-check">
+                    <input asp-for="@Model.AllDistributors[i].IsChecked" class="form-check-input" />
+                    <label asp-for="@Model.AllDistributors[i].IsChecked">@Model.AllDistributors[i].Name</label>
+                    <input asp-for="@Model.AllDistributors[i].Id" type="hidden" value="@Model.AllDistributors[i].Id">
+                    <input asp-for="@Model.AllDistributors[i].Name" type="hidden" value="@Model.AllDistributors[i].Name">
+
+                </div>
+                        }
+                    <br />
+                    <!-- span asp-validation-for="NewsletterDistributionLists.NewsletterDistributionListName" class="text-danger"></!-span>-->
+                    <label class="control-label mt-2">
+                        E-Mail
+                    </label>
+                    <input class="form-control form-control-lg color-gray font-weight-normal font-20" asp-for="Email" />
+                    <div class="form-group mt-3">
+                        <input type="checkbox" data-val="true" data-val-required="The IsChecked field is required." id="IsChecked" name="IsChecked" value="true">
+                        <input name="IsChecked" type="hidden" value="false">
+                        <label class="form-check-label mr-2"> Ich habe die <a class="color-gray" href="/Unternehmen#AGB">Datenschutzerklärung </a> und akzeptiert!</label>
+                    </div>
+                </div>
+                <div class="form-group mt-5">
+                    <input type="submit" value="Für Newsletter anmelden" class="btn-abs btn-primary btn-lg align font-weight-bold  font-16 color white bg bgorange" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

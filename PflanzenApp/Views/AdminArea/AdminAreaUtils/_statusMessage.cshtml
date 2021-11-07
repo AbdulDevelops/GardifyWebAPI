@@ -1,0 +1,11 @@
+﻿@model GardifyModels.Models.AdminAreaViewModels.UtilsViewModel.Message
+
+@if (Model != null)
+{
+    <div class="panel @Model.MessageCssClass">
+        <div class="panel-heading">Status message</div>
+        <div class="panel-body">
+            @Model.MessageBody
+        </div>
+    </div>
+}

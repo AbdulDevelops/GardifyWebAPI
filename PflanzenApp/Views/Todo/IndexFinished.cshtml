@@ -1,0 +1,95 @@
+﻿@model GardifyModels.Models.TodoViewModels.TodoIndexViewModel
+@{
+    ViewBag.Title = "Todo Übersicht";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<b>Ihr Punktestand: @Model.Points</b>
+<h2>Todo Übersicht</h2>
+<hr />
+<div class="col-md-10">
+    @if (ViewBag.AlertMessage != null)
+    {
+        <div class="alert alert-warning" role="alert">
+            @ViewBag.AlertMessage
+        </div>
+    }
+    <div class="alert alert-info" role="alert">
+        Zeige Todos vom @Model.StartDate.ToString("dd.MM.yyyy") bis     @Model.EndDate.ToString("dd.MM.yyyy")
+    </div>
+    @Html.ActionLink("Diese Woche", "IndexFinished", new { period = "week" }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Dieser Monat", "IndexFinished", new { period = "month" }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Dieses Jahr", "IndexFinished", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Alle anzeigen", "Index", null, new { @class = "btn btn-default", @style = "float:right" })
+    <hr />
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Todo
+            </th>
+            <th>
+                Gehört zu
+            </th>
+            <th>
+                Fällig von
+            </th>
+            <th>
+                Fällig bis
+            </th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    @{DateTime oldTime = DateTime.MinValue;}
+    @{int datepick_counter = 0;}
+    @{int lastMonth = 0;}
+    @foreach (var todo in Model.TodoList)
+    {
+        if (lastMonth != todo.DateStart.Month)
+        {
+            lastMonth = todo.DateStart.Month;
+            <tr style="background-color: #dddddd">
+                <td>
+                    <div class="h3">@todo.DateStart.ToString("MMMM")</div>
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        }
+        oldTime = todo.DateStart;
+        <tr>
+            <td>
+                @todo.Title
+            </td>
+            <td>
+                @todo.ReferenceText
+            </td>
+            <td>
+                @Html.TextBoxFor(model => todo.DateStart, "{0:dd/MM/yyyy}", new { data_tid = todo.Id, @class = "datepicker", @dateStart = true, @id = "datepicker_" + datepick_counter, placeholder = "Bitte Datum Wählen" })
+            </td>
+            <td>
+                @Html.TextBoxFor(model => todo.DateEnd, "{0:dd/MM/yyyy}", new { data_tid = todo.Id, @class = "datepicker", @dateStart = false, @id = "datepicker_" + datepick_counter, placeholder = "Bitte Datum Wählen" })
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", "Todo", new { id = todo.Id }, null)
+            </td>
+            @Html.Partial("_TodoTableMarkActions", todo)
+        </tr>
+        datepick_counter++;
+    }
+    @if (Model.TodoList.Count() == 0)
+    {
+        @:Keine Todos gefunden.
+    }
+</table>
+<hr />
+<p>
+    @Html.ActionLink("Neues Todo", "Create")
+</p>

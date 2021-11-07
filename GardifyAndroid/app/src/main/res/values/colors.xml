@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+        1.) app colors
+        2.) gardify colors
+        3.) text colors
+        4.) constraint layouts
+        5.) linear layouts
+        6.) relative layouts
+        7.) scroll views
+        8.) navigation views
+        9.) text views
+        10.) edit texts
+        11.) buttons
+        12.) card views
+        13.) image views
+        14.) image buttons
+        15.) views
+        16.) toolbars
+        17.) expandable headers
+        18.) expandable groups
+        19.) card items
+        20.) sections
+        21.) calendar views
+        22.) seekbars
+        23.) chips
+        24.) bar charts
+     -->
+
+    <!-- 1.) app colors -->
+    <color name="colorPrimary">#6ba42a</color>
+    <color name="colorPrimaryDark">#619526</color>
+    <color name="colorAccent">#619526</color>
+
+    <!-- 2.) gardify colors -->
+    <color name="black">#000</color>
+    <color name="blackTransparentToolbar">#27121212</color>
+    <color name="darkGrey">#47151515</color>
+    <color name="gunmetal">#2C3135</color>
+    <color name="riverBed">#495057</color>
+    <color name="grey">#AD757575</color>
+    <color name="doveGrey">#6D6D6D</color>
+    <color name="dawn">#a4a4a4</color>
+    <color name="ashGrey">#a7bfb9</color>
+    <color name="softPeach">#eeeeef</color>
+    <color name="mercury">#e7e7e7</color>
+    <color name="lightGray">#D1D1D1</color>
+    <color name="seashell">#f0f0f0</color>
+    <color name="harp">#EBEFEE</color>
+    <color name="whiteSmoke">#F6F6F6</color>
+    <color name="white">#fff</color>
+    <color name="transparentWhite">#CCFFFFFF</color>
+    <color name="rossoCorsa">#d50000</color>
+    <color name="dustyRed">#bc444c</color>
+    <color name="jasper">#d64541</color>
+    <color name="deepChestnut">#b25852</color>
+    <color name="lipstickPink">#cf8588</color>
+    <color name="brownishGreen">#6b7200</color>
+    <color name="greenLeaf">#4d6815</color>
+    <color name="treeGreen">#277222</color>
+    <color name="wasabi">#748D32</color>
+    <color name="darkLime">#85b300</color>
+    <color name="greenTransparent">#819CFF2B</color>
+    <color name="oliveDrab">#619525</color>
+    <color name="greenOnion">#7A9D34</color>
+    <color name="sushi">#769A30</color>
+    <color name="androidGreen">#9dc74c</color>
+    <color name="darkMustard">#919B07</color>
+    <color name="barfGreen">#9aae06</color>
+    <color name="chelseaCucumber">#89ab53</color>
+    <color name="greenSmoke">#9BB461</color>
+    <color name="avocado">#8DAD30</color>
+    <color name="lightOliveGreen">#A3BC63</color>
+    <color name="greenishTan">#b6c87e</color>
+    <color name="viridian">#44835b</color>
+    <color name="greenHaze">#00a773</color>
+    <color name="bayLeaf">#84AC8A</color>
+    <color name="greenyGrey">#7F9E7C</color>
+    <color name="eagle">#a6bda3</color>
+    <color name="summerGreen">#9cbcb5</color>
+    <color name="berlyGreen">#dee9c4</color>
+    <color name="darkAqua">#006874</color>
+    <color name="midBlue">#1b70a0</color>
+    <color name="tealBlue">#0089ab</color>
+    <color name="coolBlue">#418aae</color>
+    <color name="smaltBlue">#4d8289</color>
+    <color name="greenishBlue">#2d786f</color>
+    <color name="seaTurtleGreen">#37877d</color>
+    <color name="greyishTurquoise">#578177</color>
+    <color name="steelGrey">#63868C</color>
+    <color name="hippieBlue">#6a9dae</color>
+    <color name="persianGreen">#00acab</color>
+    <color name="sea">#40968b</color>
+    <color name="Acapulco">#75AD94</color>
+    <color name="lightBlue">#b6e1ff</color>
+    <color name="yellow">#FF0</color>
+    <color name="birdFlower">#cbd100</color>
+    <color name="indianYellow">#eea24c</color>
+    <color name="harvestGold">#ddb863</color>
+    <color name="artyClickAmber">#fdc000</color>
+    <color name="Aureolin">#ffee00</color>
+
+    <!-- 3.) text colors -->
+    <color name="text_all_white">#fff</color>
+    <color name="text_all_black">#000</color>
+    <color name="text_all_gunmetal">#2C3135</color>
+    <color name="text_all_riverBed">#495057</color>
+    <color name="text_all_jasper">#d64541</color>
+    <color name="text_register_hint">#a4a4a4</color>
+    <color name="text_todoCalendar_addDiary">#1b70a0</color>
+    <color name="text_gardenWeather_forcastMin">#4d8289</color>
+    <color name="text_gardenWeather_forecastMax">#fdc000</color>
+    <color name="text_plantScan_resultNames">#619526</color>
+    <color name="text_suggestPlant_copyright">#89ab53</color>
+
+    <!-- 4.) constrain layouts -->
+    <color name="constraintLayout_all_seashell">#f0f0f0</color>
+    <color name="constraintLayout_all_white">#fff</color>
+
+    <!-- 5.) linear layouts -->
+    <color name="linearLayout_all_seashell">#f0f0f0</color>
+    <color name="linearLayout_all_whiteSmoke">#F6F6F6</color>
+    <color name="linearLayout_all_white">#fff</color>
+    <color name="linearLayout_bottomSheetDialog">#e7e7e7</color>
+    <color name="linearLayout_plantDetail_headerDetail">#D1D1D1</color>
+
+    <!-- 6.) relative layouts -->
+    <color name="relativeLayout_all_seashell">#f0f0f0</color>
+
+    <!-- 7.) scroll views -->
+    <color name="scrollView_all_seashell">#f0f0f0</color>
+    <color name="scrollView_all_white">#fff</color>
+
+    <!-- 8.) navigation views -->
+    <color name="navigationView_main_footer">#f0f0f0</color>
+
+    <!-- 9.) text views -->
+    <color name="textView_all_dawn">#a4a4a4</color>
+
+    <!-- 10.) edit texts -->
+    <color name="editText_ecoScan_surface">#e7e7e7</color>
+
+    <!-- 11.) buttons -->
+    <color name="button_all_confirm">#7a9d34</color>
+    <color name="button_all_sendClosePlusMinus">#a4a4a4</color>
+    <color name="button_all_negative">#d64541</color>
+    <color name="button_settingsProfileImage_profile">#000</color>
+
+    <!-- 12.) card views -->
+    <color name="cardView_all_white">#fff</color>
+    <color name="cardView_all_sea">#40968b</color>
+    <color name="cardView_all_greenishBlue">#2d786f</color>
+    <color name="cardView_all_suggestPlant">#84AC8A</color>
+    <color name="cardView_all_home">#578177</color>
+    <color name="cardView_home_todoCalender">#769A30</color>
+    <color name="cardView_home_plantSearch">#9BB461</color>
+    <color name="cardView_home_gardifyNews">#7F9E7C</color>
+    <color name="cardView_home_plantDoc">#75AD94</color>
+    <color name="cardView_home_gardenWeather">#63868C</color>
+    <color name="cardView_home_gardifyShop">#748D32</color>
+    <color name="cardView_home_gardenEcoScan">#8DAD30</color>
+    <color name="cardView_home_gardenGlossar">#919B07</color>
+    <color name="cardView_home_gardifyPlus">#9dc74c</color>
+    <color name="cardView_suggestPlant_photo">#9cbcb5</color>
+    <color name="cardView_gardifyNews_button">#a4a4a4</color>
+    <color name="cardView_plantSearch_stroke">#D1D1D1</color>
+    <color name="cardView_ecoScan_surface">#9aae06</color>
+
+    <!-- 13.) image views -->
+    <color name="imageView_all_dawn">#a4a4a4</color>
+    <color name="imageView_todoCalendar_toDo">#A3BC63</color>
+    <color name="imageView_todoCalendar_ownToDo">#9cbcb5</color>
+    <color name="imageView_todoCalendar_diaryEntry">#cf8588</color>
+    <color name="imageView_todoCalendar_ecoScan">#eea24c</color>
+    <color name="imageView_ecoScan_infoIcon">#AD757575</color>
+    <color name="imageView_guidedTour_image">#f0f0f0</color>
+
+    <!-- 14.) image Buttons -->
+    <color name="imageButton_all_dawn">#a4a4a4</color>
+
+    <!-- 15.) views -->
+    <color name="view_all_divider">#D1D1D1</color>
+    <color name="view_all_black">#000</color>
+    <color name="view_all_white">#fff</color>
+    <color name="view_gardenWeather_maxTemperature">#ddb863</color>
+    <color name="view_gardenWeather_minTemperature">#4d8289</color>
+    <color name="view_gardenWeather_rainfall">#b6e1ff</color>
+    <color name="view_gardenWeather_sunshine">#fdc000</color>
+
+    <!-- 16.) toolbars -->
+    <color name="toolbar_all_greyishTurquoise">#578177</color>
+    <color name="toolbar_plantScan_setupToolbar">#40968b</color>
+    <color name="toolbar_toDoCalendar_setupToolbar">#769A30</color>
+    <color name="toolbar_plantSearch_setupToolbar">#9BB461</color>
+    <color name="toolbar_gardifyNews_setupToolbar">#7F9E7C</color>
+    <color name="toolbar_plantDoc_setupToolbar">#75AD94</color>
+    <color name="toolbar_gardenWeather_setupToolbar">#63868C</color>
+    <color name="toolbar_gardenEcoScan_setupToolbar">#8DAD30</color>
+    <color name="toolbar_gardenGlossary_setupToolbar">#919B07</color>
+    <color name="toolbar_suggestPlant_setupToolbar">#84AC8A</color>
+
+    <!-- 17.) expandable headers -->
+    <color name="expandableHeader_all_white">#fff</color>
+    <color name="expandableHeader_plantSearch_ecoFilter">#b6c87e</color>
+    <color name="expandableHeader_plantSearch_frostHardy">#a6bda3</color>
+    <color name="expandableHeader_plantSearch_detailSearch">#6a9dae</color>
+    <color name="expandableHeader_todoCalendar_toDo">#A3BC63</color>
+    <color name="expandableHeader_todoCalendar_ownToDo">#9cbcb5</color>
+    <color name="expandableHeader_todoCalendar_diaryEntry">#cf8588</color>
+    <color name="expandableHeader_todoCalendar_ecoScan">#eea24c</color>
+    <color name="expandableHeader_todoCalendar_dawn">#a4a4a4</color>
+    <color name="expandableHeader_myGarden_ecoFilterPlants">#a7bfb9</color>
+    <color name="expandableHeader_login_guidedTour">#44835b</color>
+    <color name="expandableHeader_login_login">#619525</color>
+    <color name="expandableHeader_login_register">#89ab53</color>
+    <color name="expandableHeader_myGarden_plantsFilter">#EBEFEE</color>
+
+    <!-- 18.) expandable groups -->
+    <color name="expandableGroup_all_whiteSmoke">#F6F6F6</color>
+    <color name="expandableGroup_all_white">#fff</color>
+    <color name="expandableGroup_myGarden_plantsFilter">#EBEFEE</color>
+
+    <!-- 19.) card items -->
+    <color name="cardItem_myGarden_plantsFilter">#EBEFEE</color>
+
+    <!-- 20.) sections -->
+    <color name="section_myGarden_toDos">#fff</color>
+
+    <!-- 21.) calendar views -->
+    <color name="calendarView_todoCalendar_pointer">#7a9d34</color>
+    <color name="calendarView_todoCalendar_toDo">#A3BC63</color>
+    <color name="calendarView_todoCalendar_ownToDo">#9cbcb5</color>
+    <color name="calendarView_todoCalendar_diaryEntry">#cf8588</color>
+    <color name="calendarView_todoCalendar_ecoScan">#eea24c</color>
+
+    <!-- 22.) seekbars -->
+    <color name="seekbar_ecoScan_red">#b25852</color>
+    <color name="seekbar_ecoScan_yellow">#ffee00</color>
+    <color name="seekbar_ecoScan_green">#4d6815</color>
+
+    <!-- 23.) chips -->
+    <color name="chip_plantSearch_setupParamsDetail">#d50000</color>
+
+    <!-- 24.) bar charts -->
+    <color name="barChart_ecoScan_darkLime">#85b300</color>
+    <color name="barChart_ecoScan_berlyGreen">#dee9c4</color>
+
+</resources>

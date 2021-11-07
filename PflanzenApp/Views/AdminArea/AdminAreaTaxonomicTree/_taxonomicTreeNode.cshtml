@@ -1,0 +1,34 @@
+﻿@model GardifyModels.Models.TaxonomicTree
+
+@if (Model != null)
+{
+    <ul>
+        @foreach (var childNode in Model.Childs.OrderBy(t => t.TitleLatin))
+        {
+        <li>
+            <a class="@(childNode.IsParentOfOrSelectedTaxon ? "parent-taxon" : "")" href="@Url.Action("Index", new { taxonId = childNode.Id })">@childNode.TitleLatin (@childNode.TitleGerman)</a>
+            @Html.ActionLink("Editieren", "Edit", new { id = childNode.Id })  
+            /
+            @Html.ActionLink("Baum verschieben", "MoveNode", new { movedNodeId = childNode.Id })
+            @if (childNode.Taxon != GardifyModels.Models.ModelEnums.TaxonomicRank.Variety)
+            {
+                @: / <a href="@Url.Action("Create", new { parentId = childNode.Id })">Neue Ebene hierrunter</a>
+            }
+            @if (childNode.Taxon != GardifyModels.Models.ModelEnums.TaxonomicRank.Variety)
+            {
+                @: / <a href="@Url.Action("BulkOption", new { treeId = childNode.Id, treeName = childNode.TitleLatin })">Bulkoperation auf diesem Baum durchführen</a>
+            }
+
+            @*@if (childNode.taxon == GardifyModels.Models.ModelEnums.TaxonomicRank.Genus)
+        {
+            @: / <a href="@Url.Action("Create", "AdminAreaPlant", new { parentId = childNode.id })">Neue Pflanze erstellen</a>
+        }*@
+
+            @if (childNode.Childs != null && childNode.Childs.Any())
+            {
+                Html.RenderPartial("~/Views/AdminArea/AdminAreaTaxonomicTree/_taxonomicTreeNode.cshtml", childNode);
+            }
+        </li>
+        }
+    </ul>
+}

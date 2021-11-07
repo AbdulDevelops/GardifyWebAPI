@@ -1,0 +1,65 @@
+<div class="row my-3">
+  <div class="col-12 col-md-8">
+    <p class="t-14 t-reg {{mode === 'dark'?'text-white':'text-grey'}}">Bitte aktiviere die Öko-Elemente, die in deinem Garten vorhanden sind. Sie verbessern die ökologische Qualität deines Gartens und helfen Tieren und Pflanzen, sich wohlzufühlen.</p>
+  </div>
+</div>
+
+<div  class="row pt-2 mb-2  {{mode === 'dark'?'dark text-white':'light text-darkgrey'}}" id="heading">
+  <div class="col-12">
+    <table class="table table-hover">
+      <thead class="">
+        <tr>
+          <th scope="col"></th>
+          <th scope="col"></th>
+          <th scope="col">Vorhanden</th>
+          <th scope="col">Nicht vorhanden</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let item of listItems; let i=index">
+          <tr>
+            <th scope="row"><div class="d-flex">
+              <div>
+                <img class="height_50 t-9 t-reg" [src]="toUrl(item.EcoElementsImages[0].SrcAttr)" [alt]="">
+              </div>
+              <div>
+                <span class="t-bold t-18 text-green  ptr"style="line-height: 5rem;"  [routerLink]="'/meingarten/ecoelement/'+item.Name" (click)="ecoName= item.Name"> {{item.Name}} </span>
+              </div>
+            </div></th>
+            
+            <td> <p class="mt-1 t-14 t-reg">{{item.Description}} <a class="text-green t-bold ml-1" [routerLink]="'/meingarten/ecoelement/'+item.Name">...mehr Infos</a></p></td>
+            <td>
+              <div class="form-group  p-4 {{mode}}  ">
+                        
+                <mat-slide-toggle [checked]="item.Checked" (change)=" updateItem(item.Id, true)" ></mat-slide-toggle>
+  
+              </div>
+            </td>
+            <td>
+              <div class="form-group  p-4 {{mode}}  ">
+                        
+              <mat-slide-toggle [checked]="!item.Checked" (change)=" updateItem(item.Id, false)" ></mat-slide-toggle>
+  
+              </div>
+            </td>
+          </tr>
+        </ng-container>
+        
+      </tbody>
+      </table>
+  </div>
+  
+</div>
+<div class="row pt-2 top-border {{mode === 'dark'?'dark text-white':'light text-darkgrey'}}" style="margin-bottom: 3rem;">
+ 
+  <div class="col-12 col-md-8">
+    <p class="t-14 t-reg">
+      Fällt dir noch ein weiteres Element ein, welches du vermisst? Dann schicke uns einfach eine Mail, wir kümmern uns darum: <strong><a href="mailto:team@gardify.de?subject=Neues Öko-Element" class="t-bold text-green">team@gardify.de</a></strong>
+    </p>
+  </div>
+  <div class="pl-4 col-12 col-md-4 " >
+    <button class="w-100 btn_border075 btn btn-green text-white t-bold">
+      <a href="mailto:team@gardify.de?subject=Neues Öko-Element"> Neues Öko-Element vorschlagen</a>  
+    </button>
+  </div>
+</div>

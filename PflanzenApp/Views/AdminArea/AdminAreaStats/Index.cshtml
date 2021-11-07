@@ -1,0 +1,492 @@
+﻿@{
+    ViewBag.Title = "Statistik";
+    Layout = "~/Views/Shared/_LayoutAdminArea.cshtml";
+}
+
+<h2>Seiten-Statistik</h2>
+
+<div class="row">
+    <div class="col-md-12">
+        @using (Html.BeginForm("Index", "AdminAreaStats", null, FormMethod.Post))
+        {
+
+            <form class="form-horizontal">
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <label for="startDate">Startdatum</label>
+                        @Html.TextBox("startDate", (string)ViewBag.startDate, new { @type = "date", @class = "form-control col-lg-3 " })
+                    </div>
+                    <div class="col-md-3">
+                        <label for="endDate">Enddatum</label>
+                        @Html.TextBox("endDate", (string)ViewBag.endDate, new { @type = "date", @class = "form-control col-lg-3 " })
+                    </div>
+                    <div class="col-md-2">
+                        <label for="startDate">Ansicht</label>
+                        <select class="form-control" id="groupBy" name="groupBy">
+                            <option value="day">Tag</option>
+                            <option value="week">Woche</option>
+                            <option value="month">Monat</option>
+                            <option value="year">Jahr</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="demoOnly">Alle/Demo User</label>
+                        <select class="form-control" id="demoOnly" name="demoOnly">
+                            <option value="false" selected="@(ViewBag.DemoOnly == "False")">Alle</option>
+                            <option value="true" selected="@(ViewBag.DemoOnly == "True")">Nur Demo User</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2" style="padding-top:24px;">
+                        <input class="btn btn-default" type="submit" value="Filtern" />
+                    </div>
+                </div>
+            </form>
+        }
+        @using (Html.BeginForm("Index", "AdminAreaStats", null, FormMethod.Post))
+        {
+
+            <form class="form-horizontal">
+
+                <div class="form-group row" style="margin-top: 8px">
+                    <div class="col-md-12">
+                        <input class="btn btn-primary" type="submit" value="Zurücksetzen" />
+                    </div>
+                </div>
+            </form>
+        }
+    </div>
+
+    <h3>Bestellungen</h3>
+    <canvas id="ordersChart" width="800" height="400"></canvas>
+
+    <h3>Seitenaufrufe</h3>
+    <canvas id="viewsChart" width="800" height="400"></canvas>
+
+    <h3>Nutzung von "Pflanze ergänzen"</h3>
+    <canvas id="plantsSuggestedChart" width="800" height="400"></canvas>
+
+    <h3>Nutzung von "Pflanze ergänzen" über App und Web-Seite</h3>
+    <canvas id="typesOfplantsSuggestion" width="800" height="400"></canvas>
+
+    <h3>Nutzung von "Guided Tour"</h3>
+    <canvas id="guidedTourChart" width="800" height="400"></canvas>
+
+    <h3>Nutzung von "Ökoscan (Ergebnis speichern)"</h3>
+    <canvas id="bioScanChart" width="800" height="400"></canvas>
+
+    <h3>Werbung-Clicks</h3>
+    <canvas id="adClicksChart" width="800" height="400"></canvas>
+
+    <h3>Pflanzen-Doc</h3>
+    <canvas id="plantDocChart" width="800" height="400"></canvas>
+    <h3>Pflanzen-Doc Antworten Über App und Web-Seite</h3>
+    <canvas id="usersAnswers" width="800" height="400"></canvas>
+
+    <h3>Pflanzen-Doc Fragen Über App und Web-Seite</h3>
+    <canvas id="usersQuestions" width="800" height="400"></canvas>
+
+    <h3>To-dos- & Tagebucheinträge</h3>
+    <canvas id="todosDivEntriesChart" width="800" height="400"></canvas>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
+<script>
+        //Users suggestPlant App and webpage
+    var suggestPlantWebPage = @Html.Raw(Json.Encode(@ViewBag.SuggestPlantWebPage));
+    var suggestPlantIos= @Html.Raw(Json.Encode(@ViewBag.SuggestPlantIos));
+    var suggestPlantAndroid = @Html.Raw(Json.Encode(@ViewBag.SuggestPlantAndroid));
+    var suggestPlantsLabels = @Html.Raw(Json.Encode(@ViewBag.SuggestPlantsLabels));
+    var usersSuggestCtx = document.getElementById('typesOfplantsSuggestion').getContext('2d');
+    new Chart(usersSuggestCtx, {
+        type: 'bar',
+        data: {
+            labels: suggestPlantsLabels,
+            datasets: [{
+                label: 'IOS Pflanze-Ergänzung ',
+                data: suggestPlantIos,
+                backgroundColor: '#dde010',
+                borderColor: '#dde010',
+                borderWidth: 1
+            },
+            {
+                label: 'Android Pflanze-Ergänzung',
+                data: suggestPlantAndroid,
+                backgroundColor: '#10e08d',
+                borderColor: '#10e08d',
+                borderWidth: 1
+            },
+            {
+                label: 'Web-Seite Pflanze-Ergänzung',
+                data: suggestPlantWebPage,
+                backgroundColor: '#35733a',
+                borderColor: '#35733a',
+                borderWidth: 1
+            },
+
+            ]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    },
+                    stacked: true
+                }],
+                xAxes: [{
+                    stacked: true
+                }]
+            }
+        }
+    });
+    //Answers App and webpage
+    var submitAnswerWebPage = @Html.Raw(Json.Encode(@ViewBag.SubmitAnswerWebPage));
+    var submitAnswerIos= @Html.Raw(Json.Encode(@ViewBag.SubmitAnswerIos));
+    var submitAnswerAndroid = @Html.Raw(Json.Encode(@ViewBag.SubmitAnswerAndroid));
+    var submitAnswerLabels = @Html.Raw(Json.Encode(@ViewBag.SubmitAnswerLabels));
+    var usersAnswersCtx = document.getElementById('usersAnswers').getContext('2d');
+    new Chart(usersAnswersCtx, {
+        type: 'bar',
+        data: {
+            labels: submitAnswerLabels,
+            datasets: [{
+                label: 'IOS Pflanzen-Doc Antworten',
+                data: submitAnswerIos,
+                backgroundColor: '#dde010',
+                borderColor: '#dde010',
+                borderWidth: 1
+            },
+            {
+                label: 'Android Pflanzen-Doc Antworten',
+                data: submitAnswerAndroid,
+                backgroundColor: '#10e08d',
+                borderColor: '#10e08d',
+                borderWidth: 1
+            },
+            {
+                label: 'Web-Seite Pflanzen-Doc Antworten',
+                data: submitAnswerWebPage,
+                backgroundColor: '#35733a',
+                borderColor: '#35733a',
+                borderWidth: 1
+            },
+
+            ]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    },
+                    stacked: true
+                }],
+                xAxes: [{
+                    stacked: true
+                }]
+            }
+        }
+    });
+    //Fragen App and webpage
+    var submitQuestionWebPage = @Html.Raw(Json.Encode(@ViewBag.SubmitQuestionWebPage));
+    var submitQuestionIos= @Html.Raw(Json.Encode(@ViewBag.SubmitQuestionIos));
+    var submitQuestionAndroid = @Html.Raw(Json.Encode(@ViewBag.SubmitQuestionAndroid));
+    var submitQuestionLabels = @Html.Raw(Json.Encode(@ViewBag.SubmitQuestionLabels));
+    var usersQuestionsCtx = document.getElementById('usersQuestions').getContext('2d');
+    new Chart(usersQuestionsCtx, {
+        type: 'bar',
+        data: {
+            labels: submitQuestionLabels,
+            datasets: [{
+                label: 'IOS Pflanzen-Doc Fragen ',
+                data: submitQuestionIos,
+                backgroundColor: '#dde010',
+                borderColor: '#dde010',
+                borderWidth: 1
+            },
+            {
+                label: 'Android Pflanzen-Doc Fragen',
+                data: submitQuestionAndroid,
+                backgroundColor: '#10e08d',
+                borderColor: '#10e08d',
+                borderWidth: 1
+            },
+            {
+                label: 'Web-Seite Pflanzen-Doc Fragen',
+                data: submitQuestionWebPage,
+                backgroundColor: '#35733a',
+                borderColor: '#35733a',
+                borderWidth: 1
+            },
+
+            ]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    },
+                    stacked: true
+                }],
+                xAxes: [{
+                    stacked: true
+                }]
+            }
+        }
+    });
+    // ORDERS
+    var ordersLabels = @Html.Raw(Json.Encode(@ViewBag.Orders.Labels));
+    var ordersData = @Html.Raw(Json.Encode(@ViewBag.Orders.Values));
+    var ordersCtx = document.getElementById('ordersChart').getContext('2d');
+    new Chart(ordersCtx, {
+        type: 'bar',
+        data: {
+            labels: ordersLabels,
+            datasets: [{
+                label: 'Gesamtmenge gekauft (€)',
+                data: ordersData,
+                backgroundColor: 'rgba(65, 209, 152, 0.3)',
+                borderColor: 'rgba(65, 209, 152, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+
+
+    // PAGE VIEWS
+    const PAGES_LEGEND = {
+        LABELS: { 1: 'Homeseite', 2: 'News', 3: 'Shop', 4: 'Mein Garten', 5: 'A bis Z', 6: 'Todo-Kalender', 7: 'Suche', 8: 'Scanner', 9: 'Wetter', 10: 'PlantDoc', 11: 'Videos', 12: 'Ökoscan', 13: 'Einstellungen', 14: 'Team' },
+        COLORS: {
+            Homeseite: '#264653',
+            News: '#bc6c25',
+            Shop: '#2a9d8f',
+            'Mein Garten': '#90be6d',
+            'A bis Z': '#6d597a',
+            'Todo-Kalender': '#606c38',
+            Suche: '#ff006e',
+            Scanner: '#f8961e',
+            Wetter: '#9bf6ff',
+            PlantDoc: '#e63946',
+            Videos: '#ffa69e',
+            Ökoscan: '#4d7de6',
+            Einstellungen: '#b942ca',
+            Team: '#489f36'
+        }
+    };
+    var viewsLabels = @Html.Raw(Json.Encode(@ViewBag.Pageviews.labels));
+    var viewsDict = @Html.Raw(Json.Encode(@ViewBag.Pageviews.data)); //of type List<PageSeries>
+    var viewDatasets = makeDatasets(viewsDict, viewsLabels, PAGES_LEGEND);
+    var viewsCtx = document.getElementById('viewsChart').getContext('2d');
+    new Chart(viewsCtx, {
+        type: 'line',
+        data: {
+            labels: viewsLabels,
+            datasets: viewDatasets
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+
+    // SUGGEST PLANT
+    var suggestLabels = @Html.Raw(Json.Encode(@ViewBag.PlantsSuggested.Labels));
+    var suggestData = @Html.Raw(Json.Encode(@ViewBag.PlantsSuggested.Values));
+    var suggestCtx = document.getElementById('plantsSuggestedChart').getContext('2d');
+    new Chart(suggestCtx, {
+        type: 'line',
+        data: {
+            labels: suggestLabels,
+            datasets: [{
+                label: 'Pflanze ergänzen',
+                data: suggestData,
+                backgroundColor: '#f8961ea3',
+                borderColor: '#f8961e',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+
+    // GUIDED TOUR
+    var tourLabels = @Html.Raw(Json.Encode(@ViewBag.GuidedTour.Labels));
+    var tourData = @Html.Raw(Json.Encode(@ViewBag.GuidedTour.Values));
+    var tourCtx = document.getElementById('guidedTourChart').getContext('2d');
+    new Chart(tourCtx, {
+        type: 'line',
+        data: {
+            labels: tourLabels,
+            datasets: [{
+                label: 'Guided Tour',
+                data: tourData,
+                backgroundColor: '#44835b',
+                borderColor: '#44835b',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+
+    // SAVED BIOSCANS
+    var bioScanLabels = @Html.Raw(Json.Encode(@ViewBag.SavedBioScans.Labels));
+    var bioScanData = @Html.Raw(Json.Encode(@ViewBag.SavedBioScans.Values));
+    var bioScanCtx = document.getElementById('bioScanChart').getContext('2d');
+    new Chart(bioScanCtx, {
+        type: 'line',
+        data: {
+            labels: bioScanLabels,
+            datasets: [{
+                label: 'Ökoscan-Ergebnis speichern',
+                data: bioScanData,
+                backgroundColor: '#4d7de6a3',
+                borderColor: '#4d7de6',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+
+    // AD CLICKS
+    var adClicksLabels = @Html.Raw(Json.Encode(@ViewBag.AdClicks.Labels));
+    var adClicksData = @Html.Raw(Json.Encode(@ViewBag.AdClicks.Values));
+    var adClicksCtx = document.getElementById('adClicksChart').getContext('2d');
+    new Chart(adClicksCtx, {
+        type: 'line',
+        data: {
+            labels: adClicksLabels,
+            datasets: [{
+                label: 'Werbung-Clicks',
+                data: adClicksData,
+                backgroundColor: '#df3d52a3',
+                borderColor: '#df3d52',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+
+    // PLANT-DOC
+    const DOC_LEGEND = {
+        LABELS: { 9: 'Fragen', 10: 'Antworten' },
+        COLORS: { Fragen: 'rgba(104, 214, 255, 1)', Antworten: '#f8961e' }
+    };
+    var docLabels = @Html.Raw(Json.Encode(@ViewBag.PlantDoc.labels));
+    var docDict = @Html.Raw(Json.Encode(@ViewBag.PlantDoc.data)); //of type List<PageSeries>
+    var docDatasets = makeDatasets(docDict, docLabels, DOC_LEGEND, 'bar');
+    var plantDocCtx = document.getElementById('plantDocChart').getContext('2d');
+    new Chart(plantDocCtx, {
+        type: 'bar',
+        data: {
+            labels: docLabels,
+            datasets: docDatasets
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+     //TodosDiverseEntries
+    var todoLabels =@Html.Raw(Json.Encode(ViewBag.TodoDiverseEntries.Labels));
+    var todoData =@Html.Raw(Json.Encode(ViewBag.TodoDiverseEntries.Values));
+    var todosCtx = document.getElementById('todosDivEntriesChart').getContext('2d');
+    new Chart(todosCtx, {
+        type: 'bar',
+        data: {
+            labels: todoLabels,
+            datasets: [{
+                data: todoData,
+                backgroundColor: ['#f8961e', '#974ab3']
+            }]
+        }, options: {
+            legend: {
+                display: false
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+
+    })
+    // HELPER FUNCTIONS FOR MULTI-SERIES CHARTS
+    function makeDatasets(dict, labels, legend, type = 'line') {
+        // get unique page names from dict and create a dataset for each
+        var res = [...new Set(dict.map(g => legend.LABELS[g.Label]))].map(function (page) {
+            return {
+                label: page,
+                borderColor: legend.COLORS[page],
+                backgroundColor: type === 'bar' ? legend.COLORS[page] : '',
+                data: setData(page, dict, labels, legend)
+            }
+        });
+        return res;
+    }
+
+    // inits an empty array the size of labels array and sets the count at the right index based on the date
+    function setData(page, dict, labels, legend) {
+        var base = new Array(labels.length).fill(0);
+        dict.map(function (g) {
+            if (legend.LABELS[g.Label] == page) {
+                base[labels.indexOf(g.Date)] = g.Count;
+            }
+        });
+        return base;
+    }
+
+</script>

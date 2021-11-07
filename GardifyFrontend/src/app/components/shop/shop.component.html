@@ -1,0 +1,166 @@
+<div class="overlay-loading" [hidden]="!loading">
+    <svg class="spinner position-relative" viewBox="25 25 50 50">
+        <circle class="path" cx="50" cy="50" r="24" fill="none" stroke-width="2" stroke-miterlimit="10" />
+    </svg>
+</div>
+<div class="wrapper {{mode}}">
+    <div class="container pt-3">
+        <div class="mt-5 mb-4 pl-md-0">
+            <div class="col-12 col-md-12">
+                <h2 class="t-26 mt-3 t-light {{mode === 'light'? 'text-grey' : 'text-white'}}">WILLKOMMEN IM
+                    GARDIFY-SHOP!</h2>
+            </div>
+            <form class="row" [formGroup]="filterForm">
+                <div class="col-12 col-md-3 mt-4">
+                    <select formControlName="category"
+                        class="custom-select ptr col-11 col-md-12 col-lg-10 col-xl-12 bordered" (change)="searchBy(currentPage)">
+                        <option [ngValue]="null" hidden disabled>Kategorien</option>
+                        <option [ngValue]="0">Alle</option>
+                        <option [ngValue]="'gift'">Geschenkideen</option>
+                        <option *ngFor="let c of categories" [ngValue]="c.Id">
+                            {{c.Title}}
+                        </option>
+                    </select>
+                    <fa-icon class="px-2 input-icon" [icon]="faChevronDown"></fa-icon>
+                </div>
+                <div class="col-12 col-md-3 mt-4">
+                    <select formControlName="priceSort"
+                        class="custom-select ptr col-11 col-md-12 col-lg-10 col-xl-12 bordered "
+                        (change)="sortArticlesByPrice(currentPage)">
+                        <option [ngValue]="null" [defaultSelected]=true disabled hidden>Preis</option>
+                        <option *ngFor="let s of sortTypes" [ngValue]="s.type">
+                            {{s.name}}
+                        </option>
+                    </select>
+                    <fa-icon class="px-2 input-icon" [icon]="faChevronDown"></fa-icon>
+                </div>
+                <!--
+                <div class="col-12 col-md-3 mt-4">
+                    <select formControlName="gift"
+                        class="custom-select ptr col-11 col-md-12 col-lg-10 col-xl-12 bordered" (change)="searchBy('gift')">
+                        <option [ngValue]="null" [defaultSelected]=true disabled hidden> Geschenkideen</option>
+                        <option *ngFor="let g of gifts" [ngValue]="g.Id">
+                            {{g.Title}}
+                        </option>
+                    </select>
+                    <fa-icon class="px-2 input-icon" [icon]="faChevronDown"></fa-icon>
+                </div>
+                <div class="col-12 col-md-3 mt-4">
+                    <select formControlName="rating"
+                        class="custom-select ptr col-11 col-md-12 col-lg-10 col-xl-12 bordered" (change)="search()">
+                        <option [ngValue]="null" [defaultSelected]=true disabled hidden>Bewertungen</option>
+                        <option *ngFor="let g of rates" [ngValue]="g.length">
+                            <span *ngFor="let star of g">&#9733;</span><span> & mehr</span>
+                        </option>
+                    </select>
+                    <fa-icon class="px-2 input-icon" [icon]="faChevronDown"></fa-icon>
+                </div>
+            -->
+            </form>
+        </div>
+
+        <div class="row ">
+            <div class=" col order-2 order-md-1 order-lg-1 col-md-8 col-lg-9 mt-5">
+                <div class="t-bold t-14 m-0 pt-3 ptr {{mode === 'light'? 'text-darkgrey' : 'text-white'}}"
+                    (click)="getArticles(0, true)">
+                    Alle Produkte
+                </div>
+
+            </div>
+            <div class="col-11 order-1 order-md-2 order-lg-2 col-md-4 col-lg-3 mt-5 d-flex align-items-center">
+                <input type="search" class="form-control inputWhite {{mode === 'light'? 'text-grey' : 'text-white'}}"
+                    name="searchString" placeholder="Suchen..." [(ngModel)]="searchString"(keyup.enter)="search(currentPage)">
+                <fa-icon title="Suchen" class="px-1 inputSearch-icon cr ptr" (click)="search(currentPage)" [icon]="faSearch">
+                </fa-icon>
+                
+            </div>
+        </div>
+        <hr class="text-darkgrey">
+        <ng-container *ngIf="shopItems?.length>0; else noItems">
+        <div class="row">
+            <div class="col-12 col-md-6 col-lg-3 mt-4 d-flex flex-column align-items-center justify-content-between"
+            *ngFor="let item of pagedShopItem ;trackBy: trackByFn; let i = index">
+            <div class="position-relative">
+                <span *ngIf="isLoggedIn && !item.IsWishlisted" role="button" title="Auf die Wunschliste" (click)="addToWishlist(item.Id); item.IsWishlisted=true" class="wishlist-icon ptr"><img [src]="wishlistIcon"></span>
+                <span *ngIf="isLoggedIn && item.IsWishlisted" role="button" title="Aus der Wunschliste entfernen" (click)="removedToWishlist(item.Id);item.IsWishlisted=false " class="wishlisted-icon ptr"><img [src]="wishListedIcon"></span>
+                <a [routerLink]="['/artikel/',item.Id, item.Name]">
+                    <img *ngIf="!item.Thumbnail" class="ptr img-height" [title]="item.ArticleImages[0]?.Author ? 'Autor: '+ item.ArticleImages[0]?.Author:''" [src]=toUrl(item.ArticleImages[0]?.SrcAttr) [alt]="item.Name">
+                    <img *ngIf="item.Thumbnail" class="ptr img-height" [title]="item.ArticleImages[0]?.Author ? 'Autor: '+ item.ArticleImages[0]?.Author:''" [src]="item.Thumbnail" [alt]="item.Name">
+                </a>
+            </div>
+            <div class="text-center mt-3">
+                <h3 class="t-bold t-16  {{mode === 'light'? 'text-darkgrey' : 'text-grey4'}}">{{item.Label || item.Name}}</h3>
+                <h3 class="t-bold t-14 text-grey4">{{item.NormalPrice | currency:'EUR':'code'}}</h3>
+                <button *ngIf="!item.ProductLink && !item.IsNotDeliverable" (click)="addToCart(item)" class="btn btn-green t-bold t-13 text-white">In den Warenkorb</button>
+                <a *ngIf="item.ProductLink" [href]="item.ProductLink" target="_blank" class="btn btn-green t-bold t-13 text-white">Produkt kaufen</a>
+            </div>
+            </div>
+        </div>
+        </ng-container>
+        <hr>
+       
+        <div class="row pb-5">
+            <div class="col d-flex justify-content-center justify-content-md-end">
+                <ng-container *ngIf="!(sortArtByPrice) && !(searchArtByCat) && !(searchArticle); else filtered">
+                    <ul *ngIf="shopPager.pages && shopPager.pages.length" class="t-13 t-light pagination float-right mt-2 text-grey2">
+                        <li [ngClass]="{disabled:currentPage === 1}">
+                            <a (click)="currentPage = 1;  getArticles(1); " title="Erste Seite" class="t-bold">&lt;&lt;</a>
+                        </li>
+                        <li [ngClass]="{disabled:currentPage === 1}">
+                            <a (click)="currentPage = currentPage-1;  getArticles(currentPage); " title="Vorherige Seite" class="t-bold mx-2">&lt;</a>
+                        </li>
+                        <li *ngFor="let page of  shopPager.pages" [ngClass]="{'text-green t-bold':currentPage === page}" class="mx-2">
+                            <a (click)="currentPage = page; getArticles(currentPage); ">{{page}}</a>
+                        </li>
+                        <li [ngClass]="{disabled:currentPage === shopPager.totalPages}">
+                            <a (click)="currentPage = currentPage+1;  getArticles(currentPage); " title="Nächste Seite" class="t-bold mx-2">&gt;</a>
+                        </li>
+                        <li [ngClass]="{disabled:currentPage ===  shopPager.totalPages}">
+                            <a (click)="currentPage=shopPager.totalPages;  getArticles(shopPager.totalPages); " class="t-bold" title="Letzte Seite">&gt;&gt;</a>
+                        </li>
+                    </ul>
+                </ng-container>
+                  <ng-template #filtered>
+                    <ul *ngIf="shopPager.pages && shopPager.pages.length"
+                        class="t-13 t-light pagination float-right mt-2 text-grey2">
+                        <li [ngClass]="{disabled:currentPage === 1}">
+                            <a *ngIf="searchArtByCat" (click)="currentPage = 1; searchBy(1);" class="t-bold" title="Erste Seite">&lt;&lt;</a>
+                            <a *ngIf="searchArticle" (click)="currentPage = 1; search(1); " class="t-bold" title="Erste Seite">&lt;&lt;</a>
+                            <a *ngIf="sortArtByPrice" (click)="currentPage = 1; sortArticlesByPrice(1);" class="t-bold" title="Erste Seite">&lt;&lt;</a>
+                        </li>
+                        <li [ngClass]="{disabled:currentPage === 1}">
+                            <a *ngIf="searchArtByCat" (click)="currentPage = currentPage-1; searchBy(currentPage);" class="t-bold mx-2" title="Vorherige Seite">&lt;</a>
+                            <a *ngIf="searchArticle" (click)="currentPage = currentPage-1; search(currentPage); " class="t-bold mx-2" title="Vorherige Seite">&lt;</a>
+                            <a *ngIf="sortArtByPrice" (click)="currentPage = currentPage-1; sortArticlesByPrice(currentPage);" class="t-bold mx-2" title="Vorherige Seite">&lt;</a>
+                        </li>
+                        <li *ngFor="let page of  shopPager.pages" [ngClass]="{'text-green t-bold':currentPage === page}" class="mx-2">
+                            <a *ngIf="searchArtByCat" (click)="currentPage= page; searchBy(currentPage);">{{page}}</a>
+                            <a *ngIf="searchArticle" (click)="currentPage = page; search(currentPage);">{{page}}</a>
+                            <a *ngIf="sortArtByPrice" (click)="currentPage = page; sortArticlesByPrice(currentPage);">{{page}}</a>
+                        </li>
+                        <li [ngClass]="{disabled:currentPage === shopPager.totalPages}">
+                            <a *ngIf="searchArtByCat" (click)="currentPage = currentPage+1; searchBy(currentPage);" class="t-bold mx-2" title="Nächste Seite">&gt;</a>
+                            <a *ngIf="searchArticle" (click)="currentPage = currentPage+1; search(currentPage); " class="t-bold mx-2" title="Nächste Seite">&gt;</a>
+                            <a *ngIf="sortArtByPrice" (click)="currentPage = currentPage+1; sortArticlesByPrice(currentPage);" class="t-bold mx-2" title="Nächste Seite">&gt;</a>
+                        </li>
+                        <li [ngClass]="{disabled:currentPage ===  shopPager.totalPages}">
+                            <a *ngIf="searchArtByCat" (click)="currentPage=shopPager.totalPages; searchBy(shopPager.totalPages); " class="t-bold" title="Letzte Seite">&gt;&gt;</a>
+                            <a *ngIf="searchArticle" (click)="currentPage=shopPager.totalPages; search(shopPager.totalPages);" class="t-bold" title="Letzte Seite">&gt;&gt;</a>
+                            <a *ngIf="sortArtByPrice" (click)="currentPage=shopPager.totalPages; sortArticlesByPrice(shopPager.totalPages); " class="t-bold" title="Letzte Seite">&gt;&gt;</a>
+                        </li>
+                    </ul>
+                  </ng-template>
+                  <ng-template #noItems>
+                    <div class="row {{mode === 'light'? 'text-darkgrey' : 'text-white'}}">
+                        <div class="col">
+                            <p >
+                                Es wurde keine Produkte gefunden.
+                            </p>
+                        </div>
+                    </div>
+
+                  </ng-template>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,43 @@
+.wrapper.dark .col-7 {
+    background-color: black;
+}
+.wrapper.light .col-7 {
+    background-color: white;
+}
+.wrapper.dark {
+    color: white;
+}
+.wrapper.dark input.inputWhite, textarea { background-color: black !important;  }
+.wrapper.light input.inputWhite, textarea { background-color: #fff !important; }
+.wrapper.light input, .wrapper.light select, .wrapper.dark input, .wrapper.dark select {
+    border-bottom: none !important;
+    line-height: 30px;
+    width: 100%;
+   
+}
+.wrapper.light input{
+  color:black
+}
+.wrapper.dark input{
+  color:#fff
+}
+.diaryImageInput {
+    width: 100%;
+    cursor: pointer;
+    height: 100%;
+    margin-bottom: 0;
+    padding-top: 0.6rem;
+}
+.diaryImageInput input {
+    display: none;
+}
+.input-icon {
+    top: 0.6rem;
+    background-color: transparent;
+    color: inherit;
+}
+img.uploaded {
+    height: 60px;
+    width: 60px;
+    margin: 6px 6px;
+}

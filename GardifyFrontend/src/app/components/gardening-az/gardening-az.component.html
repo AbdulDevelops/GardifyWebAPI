@@ -1,0 +1,64 @@
+<div class="wrapper {{mode}} pb-5">
+  <div class="container pt-3 pb-5">
+    <div class="row mt-5 mb-4 justify-content-between bt-border {{mode}} ">
+      <div class="col-12 mb-4">
+        <h2 class="t-light t-26 {{mode === 'light'? 'text-grey' : 'text-white'}}">GÄRTNERN VON A-Z</h2>
+      </div>
+      <div class="col-12 mb-4 px-0  test1">
+        <div class="selector col-12 col-lg-8 col-md-12 pt-2 mb-5 pb-4 mb-md-0 pb-md-0 mr-0 d-md-inline-block test2">
+          <img (click)="stepLetter(-1)" class="arrow ptr mb-1 mb-md-0 mr-md-1 d-block d-md-inline-block" src="assets/main-icons/Pfeil_links.svg">
+          <span *ngFor="let letter of letters;"
+                (click)="selectLetter(letter)" 
+                [ngClass]="{'sel-letter': isSelected(letter)}"
+                class="mx-2 mx-md-1 ptr t-12 let text-grey d-block d-md-inline-block test3" >{{letter}}</span>
+          <img (click)="stepLetter(1)" class="arrow ptr mt-1 mt-md-0 ml-md-1 d-block d-md-inline-block" src="assets/main-icons/Pfeil_rechts.svg">
+        </div>
+        <div class="col-10 col-lg-4 col-md-5 mr-0 d-inline-block mt-md-3">
+          <input type="text" #searchTerm (keyup)="search($event.target.value)" class="form-control" placeholder="Nach Begriff suchen">
+          <fa-icon title="Suchen" class="px-1 input-icon cr ptr" (click)="search(searchTerm.value)" [icon]="faSearch"></fa-icon>
+        </div>
+    
+      </div>
+    </div>
+  </div>
+  <ng-container *ngIf="termsCache; else loader">
+    <div *ngFor="let term of terms; let i = index; let even = even;" [ngClass]="{'darker': even}" class="pt-3">
+      <div class="container px-4 px-md-5">
+        <div class="row">
+          <div class="col-11 col-md-4 pt-3" [ngClass]="{'pb-4': term.expanded}">
+            <h3 class="t-reg t-16 mb-3 {{mode==='light'?'text-darkgrey':'text-white'}}">{{term.Name}}</h3>
+            <div class="col-12 px-0 pt-1">
+              <img [title]="term.Images[0]?.Author ? 'Autor: '+ term.Images[0]?.Author:''" [ngClass]="{'expanded': term.expanded}" [src]="toUrl(term.Images)" [alt]=term.Name>
+            </div>
+          </div>
+          <div class="col-11 col-md-8 mt-md-5 pb-2">
+            <h3 class="t-light t-12 pt-3 {{mode==='light'?'text-darkgrey':'text-white'}}">
+              {{term.expanded?term.Description:term.Description.substring(0,175)+'...'}}
+              <span class="ptr mx-1 text-green t-bold" (click)="term.expanded = !term.expanded;" role="button">
+                {{term.expanded?'weniger':'mehr'}}
+              </span>
+            </h3>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="terms.length==0" class="darker">
+      <div class="container px-4 px-md-3">
+        <div class="row">
+          <div class="col-12 py-5 text-center">
+            <h3 class="t-reg t-14 mb-4 text-grey">Keine Einträge gefunden.</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <ng-template #loader>
+      <div class="row app-loading">
+          <div class="logo"></div>
+          <svg class="spinner" viewBox="25 25 50 50">
+              <circle class="path" cx="50" cy="50" r="15" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+          </svg>
+      </div>
+  </ng-template>
+  
+</div>

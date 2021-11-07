@@ -1,0 +1,27 @@
+<div class="modal fade" id="movePlantToList" tabindex="-1" role="dialog" aria-hidden="true" #dm>
+    <div class="modal-dialog" role="document">
+      <div class="modal-content {{mode}}">
+        <div class="modal-header">
+          <h5 class="modal-title">{{selectedPlant?.UserPlant?.Name}} in eine andere Liste verschieben</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span class="{{mode==='dark'?'text-ltgrey':'text-blackish'}}" aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <label class="{{mode==='dark'?'text-white':'text-blackish'}} mb-0">Liste auswählen:</label>
+
+          <ng-multiselect-dropdown class="{{mode==='dark'?'text-white':'text-blackish'}} "
+            [placeholder]="'Meine Listen'" 
+            [settings]="dropdownSettings" 
+            [data]="dropdownList"
+             [(ngModel)]="selectedItems"
+            (onSelect)="onItemSelect($event)">
+          </ng-multiselect-dropdown>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn_border075 text-white" data-dismiss="modal">Abbrechen</button>
+          <button type="button" class="btn btn-green btn_border075 text-white" data-dismiss="modal" (click)="movePlant()">Speichern</button>
+        </div>
+      </div>
+    </div>
+  </div>

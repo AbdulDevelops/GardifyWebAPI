@@ -1,0 +1,48 @@
+﻿@model List<GardifyModels.Models.VideoEntryViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdminArea.cshtml";
+}
+<h2>Alle Videos</h2>
+<p>
+    @Html.ActionLink("Neuer Beitrag", "Create")
+</p>
+<div>
+	@if (Model != null && Model.Any())
+	{
+		foreach (var item in Model)
+		{
+			<div class="row">
+                <div class="image-wrapper col-md-4">
+                    <div class="title-image">
+                        <iframe width="360" height="240" src="@item.YTLink" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <h3>@Html.ActionLink(item.Title, "Edit", new { id = item.Id }, new { style = "color: #000" })</h3>
+                    <h4>@Html.DisplayFor(model => item.SubTitle)</h4>
+                    @if (item.Text.Length > 228)
+                    {
+                        @(item.Text.Substring(0, 228) + " ...")
+                    }
+                    else
+                    {
+                        @item.Text
+                    }
+                </div>
+			</div>
+			<div class="row">
+				<div class="col-xs-3 col-md-push-9">
+					<hr />
+					@Html.ActionLink("ändern", "Edit", new { id = item.Id }, new { style = "float: right; margin: 0 20px 0 0;", @class = "btn btn-default" })
+				</div>
+			</div>
+			<hr />
+		}
+	}
+	else
+	{
+		<p>Es sind noch keine Videos vorhanden</p>
+	}
+</div>

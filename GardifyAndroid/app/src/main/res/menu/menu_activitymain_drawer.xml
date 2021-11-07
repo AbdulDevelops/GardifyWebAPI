@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_my_garden"
+            android:title="@string/menuActivityMainDrawer_myGarden" />
+        <item
+            android:id="@+id/nav_todo"
+            android:title="@string/menuActivityMainDrawer_toDo" />
+        <item
+            android:id="@+id/nav_plant_search"
+            android:title="@string/menuActivityMainDrawer_plantSearch" />
+        <item
+            android:id="@+id/nav_plant_scan"
+            android:title="@string/menuActivityMainDrawer_plantScan" />
+        <item
+            android:id="@+id/nav_news"
+            android:title="@string/menuActivityMainDrawer_gardifyNews" />
+        <item
+            android:id="@+id/nav_gardify_video"
+            android:title="@string/menuActivityMainDrawer_gardenVideo" />
+        <item
+            android:id="@+id/nav_plant_doc"
+            android:title="@string/menuActivityMainDrawer_plantDoc" />
+        <item
+            android:id="@+id/nav_weather"
+            android:title="@string/menuActivityMainDrawer_gardenWeather" />
+        <item
+            android:id="@+id/nav_shop"
+            android:title="@string/menuActivityMainDrawer_gardifyShop" />
+        <item
+            android:id="@+id/nav_eco_scan"
+            android:title="@string/menuActivityMainDrawer_ecoScan" />
+
+        <item
+            android:id="@+id/nav_garden_glossary"
+            android:title="@string/menuActivityMainDrawer_gardenGlossary" />
+        <item
+            android:id="@+id/nav_add_plants"
+            android:title="@string/menuActivityMainDrawer_suggestPlant" />
+
+        <item
+            android:id="@+id/nav_gardify_plus"
+            android:title="@string/menuActivityMainDrawer_gardifyPlus" />
+
+        <item
+            android:id="@+id/nav_guided_tour"
+            android:title="@string/all_guidedTour" />
+    </group>
+</menu>

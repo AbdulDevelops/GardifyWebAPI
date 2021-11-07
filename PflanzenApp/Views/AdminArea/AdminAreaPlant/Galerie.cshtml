@@ -1,0 +1,70 @@
+﻿@model GardifyModels.Models.ImagesListViewModel
+
+@{
+    ViewBag.Title = "Galerie";
+    Layout = "~/Views/Shared/_LayoutAdminArea.cshtml";
+
+}
+<h2>Galerie</h2>
+<div class="row">
+    @Html.ActionLink("Zurück zur Übersicht", "Index")
+</div>
+
+<div class="row" style="margin-top:2rem">
+    <div class="col-lg-6">
+        <button class="btn btn-default">
+            @Html.ActionLink("Sammelkarte", "Galerie", new
+            {
+         Name = ViewBag.TitelAtr,
+         FilterBy = "Sammelkarte",
+         Page = ViewBag.Page
+            })
+
+        </button>
+      
+    </div>
+    <div class="col-lg-6">
+        <button class="btn btn-default">
+            @Html.ActionLink("Filter zurücksetzen", "Galerie", new
+            {
+         Name = ViewBag.TitelAtr,
+         FilterBy = "",
+         Page = ViewBag.Page
+            })
+
+        </button>
+    </div>
+</div>
+<div class="row" style="margin-top:2rem">
+    
+    @foreach (var item in Model.Images)
+    {
+        if (Model.Images.Any())
+        {
+            if (item != null)
+            {
+                <div class="col-2 col-lg-3">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <img title="@item.TitleAttr" src="@item.SrcAttr" alt="@item.AltAttr" style="width: 250px;padding: 0 5px;" class="image-wrapper"/>
+
+                        </div>
+                        <div class="panel-footer">
+                            <h4>@item.TitleAttr</h4>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            }
+        }
+
+    }
+</div>
+<div class="row">
+    @Html.ActionLink("Zurück zur Übersicht", "Index")
+</div>
+
+
+

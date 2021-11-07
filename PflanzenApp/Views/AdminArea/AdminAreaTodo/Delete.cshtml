@@ -1,0 +1,23 @@
+﻿@model GardifyModels.Models.TodoTemplateViewModels.TodoTemplateDeleteViewModel
+
+    @{
+        ViewBag.Title = "Vorlage Löschen";
+        Layout = "~/Views/Shared/_LayoutAdminArea.cshtml";
+    }
+
+    <h2>Vorlage Löschen</h2>
+
+    <h3>Sind Sie sicher, dass Sie @Model.Title löschen möchten?</h3>
+    @*<p>Das würde alle To-dos löschen, die aus dieser Vorlage stammen.</p>*@
+        <div>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color">
+                    <input type="submit" value="Löschen" class="btn btn-default" /> |
+                    @Html.ActionLink("Zurück zur Übersicht", "Index")
+                </div>
+            }
+        </div>

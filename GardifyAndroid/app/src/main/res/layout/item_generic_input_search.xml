@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <import type="android.view.View" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/source_sans_pro"
+            android:textColor="?android:attr/textColorSecondary"
+            android:textSize="@dimen/textSize_title" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/image_view_search_input_icon"
+                android:layout_width="@dimen/imageView_all_width_50sdp"
+                android:layout_height="@dimen/imageView_all_height_50sdp"
+                android:layout_marginEnd="@dimen/imageView_all_marginEnd_8sdp"
+                android:src="@drawable/gardify_image_placeholder" />
+
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                android:id="@+id/auto_complete_edit_text_name"
+                android:layout_width="match_parent"
+                android:hint="@string/all_search"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_gravity="center_vertical"
+                android:inputType="textNoSuggestions"
+                android:textSize="@dimen/textSize_body_medium" />
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/plants_name_listview"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_150sdp"
+            android:nestedScrollingEnabled="true"
+            android:visibility="gone" />
+
+    </LinearLayout>
+</layout>

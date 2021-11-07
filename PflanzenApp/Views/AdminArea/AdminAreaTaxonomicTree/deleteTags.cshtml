@@ -1,0 +1,30 @@
+﻿@model GardifyModels.Models.AdminAreaViewModels.TaxonomicBulkDeleteViewModel
+
+@{
+    ViewBag.Title = "deleteTags";
+    Layout = "~/Views/Shared/_LayoutAdminArea.cshtml";
+}
+
+<h2>Eigenschaft löschen</h2>
+
+<h3>Sind Sie sicher, dass Sie diese Eigenschaft löschen wollen?</h3>
+<div>
+    <h4>@Model.TagName</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <input hidden name="tagId" value="@Model.TagId" />
+        <input hidden name="treeId" value="@Model.TreeId" />
+        <input hidden name="plantId" value="@Model.PlantId" />
+        <input hidden name="fromDetail" value="@Model.fromDetail" />
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Züruck", "BulkEdit", new { treeId = Model.TreeId })
+        </div>
+    }
+</div>

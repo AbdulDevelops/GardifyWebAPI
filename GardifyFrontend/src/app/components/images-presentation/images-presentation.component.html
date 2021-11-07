@@ -1,0 +1,271 @@
+<div class="mt-3">
+<div class="row">
+    <div class="col">
+        <div class="d-flex" >
+            <ng-container *ngIf="showSinglePresentation==false && showSingleAlbumPre==false">
+                <div class="mr-2" >
+                    <button class="btn_white btn btn_border075 t-bold text-ltgrey t-12" style="width: 200px;" [ngClass]="{'btn-green':selectedViewType=='album', 'text-white':selectedViewType=='album', 'btn_white':selectedViewType!=='album'}" value="album" (click)="viewMode('album')">Alben({{albumsImgs?.length}})</button> 
+                </div>
+                <div class="mr-auto">
+                    <button class="btn_white btn btn_border075 t-bold text-ltgrey t-12" style="width: 200px;" [ngClass]="{'btn-green':selectedViewType=='presentation', 'text-white':selectedViewType=='presentation', 'btn_white':selectedViewType!=='presentation'}" value="presentation" (click)="viewMode('presentation')" >Präsentationen ({{presentationsImgs?.length}})</button>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="showSinglePresentation==true || showSingleAlbumPre==true">
+                
+                <div class="mr-auto ptr">
+                    <h2 *ngIf="showSingleAlbumPre==true"><img src="assets/images/Pfeil_nach_links.svg" style="height: 25px; " > <span class="t-bold t-14 ml-2" (click)="showSingleAlbumPre=false; findMember=false"> Zurück zu: Alben</span></h2>
+
+                    <h2 *ngIf="showSinglePresentation==true"><img src="assets/images/Pfeil_nach_links.svg" style="height: 25px; " > <span class="t-bold t-14 ml-2" (click)="showSinglePresentation=false ; findMember=false"> Zurück zu: Präsentationen</span></h2>
+                </div>
+                <div class="ptr" (click)="shareAlbum=true;  getPresiContacts()">
+                    <div class=" ">
+                        <img src="assets/images/Teilen.svg" class=" mr-3 ptr" style="height: 25px;" >
+                        <ng-container *ngIf="shareAlbum" >
+                            <ul class="dropdown-list {{mode}} ul-dropdown" (mouseleave)="shareAlbum = false">
+                                <li class="mb-1">
+                                    <div class="d-flex">
+                                        <div class="mr-auto">
+                                            <span class="t-bold t-13" *ngIf="showSingleAlbumPre==true">
+                                             Album teilen
+                                            </span>
+                                            <span class="t-bold t-13" *ngIf="showSinglePresentation==true">
+                                                Presentation teilen
+                                            </span>
+                                        </div>
+                                        <div (click)="shareAlbum = false">
+                                            <span class="t-bold t-13" >
+                                                &times;
+                                            </span>
+                                        </div>
+        
+                                    </div>
+                                    
+                                </li>
+                                <li>
+                                    <div class="d-flex" *ngIf="presiContacts?.length>0">
+                                        <div class="mr-2 " *ngFor="let contact of presiContacts ">
+                                            <img src="https://robohash.org/9b1c3922aa46858242acc0a0f676d860?set=set2&bgset=&size=400x400" style="height: 50px; " class="mr-2">
+                                            <h2 class="t-reg t-12">{{contact.userName}}</h2>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="mr-2 " (click)="findMember=true">
+                                            <img src="assets/images/Mitglied_finden.svg" style="height: 50px; " class="mr-2">
+                                            <h2 class="t-reg t-12">Mitglied finden</h2>
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                </li>
+                                <li (click)="editPresentation(presentation,'allUsers')">
+                                    <img src="assets/images/Mit_jedem_teilen.svg" style="height: 25px; " class="mr-2">
+                                    <span class="t-reg t-12">
+                                       Mit jedem
+                                    </span>
+                                </li>
+                                <li (click)="editPresentation(presentation,'usersInContact')">
+                                    <img src="assets/images/Mit_allen_Kontakten_teilen.svg" style="height: 25px; " class="mr-2" >
+                                    <span class="t-reg t-12">
+                                       Allen Kontakten
+                                    </span>
+                                </li>
+                                <li (click)="editPresentation(presentation,'selectedUsers')">
+                                    <img src="assets/images/Mit_ausgewählten_Kontakten_teilen.svg" style="height: 25px; " class="mr-2" >
+                                    <span class="t-reg t-12">
+                                     Nur mit ausgewählten Kontakten
+                                    </span>
+                                </li>
+                                
+                            </ul>
+        
+                        </ng-container>
+                    </div>
+                </div>
+                <div class="ptr" (click)="editAlbum=true">
+                  <img src="assets/images/Edit.svg" class="edit mr-3 ptr" style="height: 8px;" >
+                  <ng-container *ngIf="editAlbum" >
+                    <ul class="dropdown-list {{mode}} ul-dropdown" (mouseleave)="editAlbum = false">
+                        <li class="mb-1">
+                            <div class="d-flex">
+                                <div class="mr-auto">
+                                    <span class="t-bold t-13" *ngIf="showSingleAlbumPre==true">
+                                     Album bearbeiten
+                                    </span>
+                                    <span class="t-bold t-13" *ngIf="showSinglePresentation==true">
+                                        Presentation bearbeiten
+                                    </span>
+                                </div>
+                               
+                                <div>
+                                    <span class="t-bold t-13" (click)="editAlbum = false">
+                                        &times;
+                                    </span>
+                                </div>
+
+                            </div>
+                            
+                        </li>
+                        <li *ngIf="album"  [routerLink]="['/gartenarchiv/images/edit-album', album.Id]" [queryParams]="{o: 'album'}">
+                            <img src="assets/images/Freigaben_verwalten.svg" style="height: 25px; " class="mr-2">
+                            <span class="t-reg t-12">
+                               Freigaben verwalten
+                            </span>
+                        </li>
+                        <li *ngIf="presentation"  [routerLink]="['/gartenarchiv/images/edit-album', presentation.PresentationId]" [queryParams]="{o: 'presentation'}">
+                            <img src="assets/images/Freigaben_verwalten.svg" style="height: 25px; " class="mr-2">
+                            <span class="t-reg t-12">
+                               Freigaben verwalten
+                            </span>
+                        </li>
+                        <li>
+                            <img src="assets/images/Umbenennen.svg" style="height: 25px; " class="mr-2" >
+                            <span class="t-reg t-12" *ngIf="showSingleAlbumPre==true">
+                                Album umbenennen
+                            </span>
+                            <span class="t-reg t-12" *ngIf="showSinglePresentation==true" >
+                                Presentation umbenennen
+                            </span>
+                        </li>
+                        <li *ngIf="presentation"  [routerLink]="['/gartenarchiv/images/edit-album', presentation.PresentationId]" [queryParams]="{o: 'presentation'}">
+                            <img src="assets/images/Bildreihenfolge_ändern.svg" style="height: 25px; " class="mr-2" >
+                            <span class="t-reg t-12">
+                               Bildreihenfolge ändern
+                            </span>
+                        </li>
+                        <li *ngIf="album"  [routerLink]="['/gartenarchiv/images/edit-album', album.Id]" [queryParams]="{o: 'album'}" >
+                            <img src="assets/images/Bildreihenfolge_ändern.svg" style="height: 25px; " class="mr-2" >
+                            <span class="t-reg t-12">
+                               Bildreihenfolge ändern
+                            </span>
+                        </li>
+                        
+                        <li class="ptr t-reg t-12" (click)="deleteAlbum(album.Id)" *ngIf="showSingleAlbumPre==true">
+                            <img src="assets/images/Löschen.svg" style="height: 25px; " class="mr-2" >
+                           <span>Album löschen</span> 
+                        </li> 
+                        <li class="ptr t-reg t-12" (click)="deletePresentation(presentation.PresentationId)"  *ngIf="showSinglePresentation==true && presentation ">
+                            <img src="assets/images/Löschen.svg" style="height: 25px; " class="mr-2" >
+                           <span>Presentation löschen</span> 
+                        </li>                        
+
+                    </ul>
+
+                </ng-container>
+                </div>
+                <div class="ptr">
+                    <button class="btn-grey btn t-bold text-white t-12 filterbtn rounded-pill"> Auswählen</button>
+                </div>
+            </ng-container>
+            
+            
+            <div class="ml-2" >
+                <img [routerLink]="'/gartenarchiv/uploadfoto'" class="ptr"  src="assets/images/Hinzufügen.svg" style="height: 30px;">
+            </div>
+           <div class="ml-2">
+                <img src="assets/images/Filtern.svg" style="height: 30px;">
+            </div> 
+        </div>
+    </div>
+</div>
+<app-find-member *ngIf="findMember" [presiId]="presentationId" [findInContacts]="true"></app-find-member>
+<ng-container *ngIf="!findMember">
+    <div class="row mb-5 mt-4"  *ngIf="presentationsImgs?.length>0 && selectedViewType =='presentation' && showSinglePresentation==false ">
+        <div class="col-12 mb-4" >
+            <ng-container *ngFor="let presentation of presentationsImgs">
+                
+                <div class="row  mb-4 mt-3"  style="background-color: #f9f5f5; border-radius: 0.75rem; ">
+                    <div class="col-12 mt-3">
+                        <span class="t-15 t-bold text-darkgrey {{mode==='light'?'text-darkgrey':'text-white'}}">{{presentation.Headline}}</span><span class="float-right ptr"><span class="t-15 mr-2">{{presentation.EntryImages.length}}</span> <img src="assets/images/Pfeil_nach_rechts.svg" style="height: 30px; " (click)="showSinglePresi(presentation.PresentationId)" ></span>
+                    </div>
+                    <div class="col-12 mb-3">
+                        <div class="d-flex flex-wrap" *ngIf="presentation.EntryImages.length>0">
+                            <ng-container *ngFor="let img of presentation.EntryImages; let i=index">
+                                <img *ngIf="i <= 6" style="height: 200px; width: 200px;"  class="p-1" [title]="img.Author? 'Autor:'+ img.Author : '' " [alt]="img.AltAttr" [src]="toUrl(img.SrcAttr,false)" [routerLink]="['/gartenarchiv/image/detail', img.Id]" [queryParams]="{o: 'presi',presiId:presentation.PresentationId}">
+                            </ng-container>
+                        </div>
+                    </div>
+                    
+                </div>
+            </ng-container>
+        </div>
+        
+    </div>
+    <div class="row mb-5"  *ngIf="albumsImgs?.length>0 && selectedViewType =='album' && showSingleAlbumPre==false ">
+          <div class="col-12 mb-4" >
+            <ng-container *ngFor="let albums of albumsImgs">
+                
+                <div class="row  mb-4 mt-3" style="background-color: #f9f5f5; border-radius: 0.75rem; " >
+                    <div class="col-12 mt-3">
+                        <span class="t-15 t-bold text-darkgrey {{mode==='light'?'text-darkgrey':'text-white'}}">{{albums.Name}}</span><span class="float-right ptr"><span class="t-15 mr-2">{{albums.EntryImages.length}}</span> <img src="assets/images/Pfeil_nach_rechts.svg" style="height: 30px; " (click)="showSingleAlbum(albums.Id)" ></span>
+                    </div>
+                    
+                    <div class="col-12 mb-3">
+                        <div class="d-flex flex-wrap" *ngIf="albums.EntryImages.length>0">
+                            <ng-container *ngFor="let img of albums.EntryImages">
+                                <img style="height: 200px; width: 200px;"  class="p-1" [title]="img.Author? 'Autor:'+ img.Author : '' " [alt]="img.AltAttr" [src]="toUrl(img.SrcAttr,false)" [routerLink]="['/gartenarchiv/image/detail', img.Id]" [queryParams]="{o: 'album',albumId:albums.Id}">
+                            </ng-container>
+                        </div>
+                    </div>
+                    
+                </div>
+            </ng-container>
+        </div> 
+        
+    </div>
+    <div class="row singlePresi" *ngIf="showSinglePresentation">
+        <div class="col-12 mb-4">
+            <ng-container *ngIf="presentation">
+                
+                <div class="row  mb-4 mt-3" >
+                    <div class="col-12">
+                        <div class="d-flex">
+                            <div class="mr-2">
+                                <span class="t-15 t-bold text-darkgrey {{mode==='light'?'text-darkgrey':'text-white'}}">{{presentation.Headline}}</span>
+                            </div>
+                            
+                                <mat-divider [vertical]="true"> </mat-divider>
+                            
+                            <div class="ml-2">
+                                <span class="t-15 mr-2">{{presentation.EntryImages.length}}</span>
+                            </div>
+                        </div>
+                       
+                    </div>
+                    <div class="d-flex flex-wrap" *ngIf="presentation.EntryImages.length>0" >
+                        <ng-container *ngFor="let img of presentation.EntryImages">
+                            <img style="height: 200px; width: 200px;"  class="p-1" [title]="img.Author? 'Autor:'+ img.Author : '' " [alt]="img.AltAttr" [src]="toUrl(img.SrcAttr,false)" [routerLink]="['/gartenarchiv/image/detail', img.Id]" [queryParams]="{o: 'presi', presiId:presentation.PresentationId}">
+                        </ng-container>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+    <div class="row singleAlbum" *ngIf="showSingleAlbumPre">
+        <div class="col-12 mb-4">
+            <ng-container *ngIf="album">
+                
+                <div class="row  mb-4 mt-3" >
+                    <div class="col-12">
+                        <div class="d-flex">
+                            <div class="mr-2">
+                                <span class="t-15 t-bold text-darkgrey {{mode==='light'?'text-darkgrey':'text-white'}}">{{album.Name}}</span>
+                            </div>
+                            
+                                <mat-divider [vertical]="true"> </mat-divider>
+                            
+                            <div class="ml-2">
+                                <span class="t-15 mr-2">{{album.EntryImages.length}}</span>
+                            </div>
+                        </div>
+                       
+                    </div>
+                    <div class="d-flex flex-wrap" *ngIf="album.EntryImages.length>0" >
+                        <ng-container *ngFor="let img of album.EntryImages">
+                            <img style="height: 200px; width: 200px;"  class="p-1" [title]="img.Author? 'Autor:'+ img.Author : '' " [alt]="img.AltAttr" [src]="toUrl(img.SrcAttr,false)" [routerLink]="['/gartenarchiv/image/detail', img.Id]" [queryParams]="{o: 'album',albumId:album.Id}">
+                        </ng-container>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</ng-container>

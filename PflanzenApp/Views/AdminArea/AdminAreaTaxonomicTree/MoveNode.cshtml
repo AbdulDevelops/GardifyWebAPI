@@ -1,0 +1,89 @@
+﻿@model GardifyModels.Models.AdminAreaViewModels.TaxonomicTreeViewModel
+@{
+    /**/
+
+    ViewBag.Title = "Pflanzensystematik";
+    Layout = "~/Views/Shared/_LayoutAdminArea.cshtml";
+}
+
+@if (ViewBag.SuccessMessage != null)
+{
+    <div class="alert alert-success">
+        @ViewBag.SuccessMessage
+    </div>
+}
+<h2>Pflanzensystematiken (Transferprozess)</h2>
+@Html.ActionLink("zurück", "Index", new { taxonId = Model.CurrentMovingNode.Id })
+<br />
+
+<b>Name: </b>@Model.CurrentMovingNode.TitleGerman (@Model.CurrentMovingNode.TitleLatin)
+<br />
+<div class="alert alert-warning">
+    Achtung, Transfer ist im Gange! Bitte wählen Sie die ausgewählten Baumeltern aus.
+</div>
+@if (Model.TreeRootsWithChilds != null)
+{
+    foreach (var treeRoot in Model.TreeRootsWithChilds.OrderBy(t => t.TitleLatin))
+    {
+<div class="taxonomic-tree alert alert-warning">
+    <a class="@(treeRoot.IsParentOfOrSelectedTaxon ? "parent-taxon" : "")" href="@Url.Action("Index", new { taxonId = treeRoot.Id })">@treeRoot.TitleGerman (@treeRoot.TitleLatin)</a>
+    / <a href="@Url.Action("MoveNodeConfirm", new { taxonId = treeRoot.Id, movedNodeId = Model.MovingNodeId })">Als Elternbaum festlegen</a>
+    @*@Html.ActionLink("Editieren", "Edit", new { id = treeRoot.Id }) / <a href="@Url.Action("Create", new { parentId = treeRoot.Id })">Neue Ebene hierrunter</a>*@
+    @if (treeRoot.Childs != null && treeRoot.Childs.Any())
+    {
+        treeRoot.MovingNodeId = Model.MovingNodeId;
+        Html.RenderPartial("~/Views/AdminArea/AdminAreaTaxonomicTree/_taxonomicTreeNodeMove.cshtml", treeRoot);
+    }
+</div>
+        <hr />
+    }
+}
+
+<div style="margin: 20px 0 0 0;">
+    @if (Model.Plant != null)
+    {
+        <table class="table table-plant">
+            <tr>
+                <th>Bild</th>
+                <th>Name</th>
+                <th>Beschreibung</th>
+                <th></th>
+            </tr>
+            <tr>
+                <td>
+                    <a href="@Url.RouteUrl("AdminAreaPlant", new { id = Model.Plant.Id, Action = "Edit"  })">
+                        @if (Model.PlantImages != null && Model.PlantImages.Any())
+                        {
+                            <div class="image-wrapper" style="width: 200px;padding: 0 5px;">
+                                <div class="title-image">
+                                    <img title="@Model.PlantImages.FirstOrDefault().TitleAttr" src="@Model.PlantImages.FirstOrDefault().SrcAttr" alt="@Model.PlantImages.FirstOrDefault().AltAttr" />
+                                </div>
+                                @foreach (var img in Model.PlantImages.Skip(1))
+                                {
+                                    <div class="thumbnail col-md-4">
+                                        <img title="@img.TitleAttr" src="@img.SrcAttr" alt="@img.AltAttr" />
+                                    </div>
+                                }
+                            </div>
+                        }
+                    </a>
+                </td>
+                <td>
+                    <a href="@Url.RouteUrl("AdminAreaPlant", new { id = Model.Plant.Id, Action = "Edit" })">
+                        <b>@Html.DisplayFor(modelItem => Model.Plant.NameLatin)</b>
+                        @if (!String.IsNullOrEmpty(Model.Plant.NameGerman))
+                        {
+                            <br />@Html.DisplayFor(modelItem => Model.Plant.NameGerman)
+
+                        }
+                        <
+                    </a>
+                </td>
+                <td>
+                    @(Model.Plant.Description != null ? ((Model.Plant.Description.Length < 100) ? Model.Plant.Description : Model.Plant.Description.Substring(0, 100) + "...") : "")
+                </td>
+                <td></td>
+            </tr>
+        </table>
+    }
+</div>

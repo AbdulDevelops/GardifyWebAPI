@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/scrollView_all_seashell">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_margin="@dimen/marginPaddingSize_24sdp"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/linear_layout_eco_scan_top_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!-- fragment title & desc -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardView_home_plant_scan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/marginPaddingSize_24sdp"
+                app:cardCornerRadius="@dimen/cardCornerRadius_medium">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/marginPaddingSize_10sdp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+                        android:text="@string/contact_writeUs"
+                        android:textSize="@dimen/textSize_headline"
+                        android:textStyle="bold" />
+
+                    <!-- EditText with Label -->
+                    <TextView
+                        android:id="@+id/textView_fragmentContact_subject_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/marginPaddingSize_10sdp"
+                        android:text="@string/contact_subject"
+                        android:focusable="true"
+                        android:textSize="@dimen/textSize_body_medium" />
+
+                    <Spinner
+                        android:id="@+id/spinner_fragmentContact_subject"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/CustomSpinnerStyle"
+                        android:layout_marginTop="10dp" />
+                    <!-- EditText with Label -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/marginPaddingSize_10sdp"
+                        android:text="@string/contact_emailAddress"
+                        android:textSize="@dimen/textSize_body_medium" />
+
+                    <EditText
+                        android:id="@+id/editText_fragmentContact_emailAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/custom_edit_text_default"
+                        android:padding="@dimen/marginPaddingSize_10sdp"
+                        android:text="" />
+
+                    <!-- EditText with Label -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/marginPaddingSize_10sdp"
+                        android:text="@string/all_message"
+                        android:textSize="@dimen/textSize_body_medium" />
+
+                    <EditText
+                        android:id="@+id/editText_fragmentContact_message"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/custom_edit_text_default"
+                        android:gravity="top"
+                        android:padding="@dimen/marginPaddingSize_10sdp"
+                        android:lines="10" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/button_fragmentContact_send"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/marginPaddingSize_10sdp"
+                        style="@style/PrimaryButtonStyle"
+                        android:text="@string/all_send"/>
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/marginPaddingSize_24sdp"
+                android:text="@string/contact_commendationsAndCriticism"
+                android:textSize="@dimen/textSize_body_medium" />
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

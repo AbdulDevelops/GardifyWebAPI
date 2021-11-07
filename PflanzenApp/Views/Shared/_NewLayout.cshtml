@@ -1,0 +1,170 @@
+﻿@model GardifyModels.Models._BaseViewModel
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>@ViewBag.Title - PflanzenApp</title>
+	@Styles.Render("~/Content/newCss")
+	@Scripts.Render("~/bundles/modernizr")
+	@Scripts.Render("~/bundles/jquery")
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,700' rel='stylesheet' type='text/css'>
+</head>
+<body>
+	<header>
+		<div class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle navbar-left" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="search-icon-link icon-small icon-magglass" href="@Url.Action("Index", "PlantSearch")"></a>
+				</div>
+				<div class="navbar-collapse collapse">
+					<ul class="nav navbar-nav">
+						<li>@Html.ActionLink("Mein Garten", "Index", "Garden")</li>
+						<li>@Html.ActionLink("Meine Pflanzen", "Index", "UserPlants")</li>
+						<li>@Html.ActionLink("Pflanzenlexikon", "Index", "PlantSearch")</li>
+						<li>@Html.ActionLink("Pflanzendoktor", "Index", "Faq")</li>
+						<li>@Html.ActionLink("Garten-News", "Index", "News")</li>
+						<li><a href="@Url.Action("Index", "Article")">Shop</a></li>
+						<li><a href="~/intern/plant">Adminbereich</a></li>
+					</ul>
+					@Html.Partial("_LoginPartialNew", new ViewDataDictionary { { "shopcartCounter", Model.ShopcartCounter } })
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div id="slider">
+				<img src="@Url.Content("~/Images/header-image.jpg")" alt="" />
+			</div>
+			<div class="row info-bar">
+				<div class="col-xs-3 info-bar-elem">
+					Meine&nbsp;Pflanzen
+					<span class="info-bar-number">@Model.PlantCount</span>
+				</div>
+				<div class="col-xs-3 info-bar-elem">
+					Bonuspunkte
+					<span class="info-bar-number">@Model.Points</span>
+				</div>
+				<div class="col-xs-3 info-bar-elem">
+					To-dos
+					<span class="info-bar-number">@Model.CurrentTodoCount</span>
+				</div>
+				<div class="col-xs-3 info-bar-elem">
+					Nachrichten
+					<span class="info-bar-number info-bar-warning">@Model.NewMessages</span>
+				</div>
+			</div>
+			<div class="row quick-navbar">
+				<div class="col-xs-3 quick-navbar-elem">
+					<a href="@Url.Action("Index", "Garden")" class="icon-big icon-round icon-mygarden"></a>
+					<span>mein<br />Garten</span>
+				</div>
+				<div class="col-xs-3 quick-navbar-elem">
+					<a href="@Url.Action("Index", "PlantSearch")" class="icon-big icon-round icon-plantsearch"></a>
+					<span>Pflanzen-<br />suche</span>
+				</div>
+				<div class="col-xs-3 quick-navbar-elem">
+					<a href="@Url.Action("Index", "Faq")" class="icon-big icon-round icon-plantdoc"></a>
+					<span>Pflanzen-<br />doc</span>
+				</div>
+				<div class="col-xs-3 quick-navbar-elem">
+					<a href="#" class="icon-big icon-round">...</a>
+				</div>
+			</div>
+		</div>
+	</header>
+	<div class="container body-content">
+		@RenderBody()
+	</div>
+	<footer class="container">
+		<div class="row footer-navbar">
+			<a href="@Url.Action("Index", "Startpage")" class="col-xs-3 footer-navbar-elem active">
+				<i class="icon-small icon-home"></i>
+			</a>
+			<a href="@Url.Action("Index", "Faq")" class="col-xs-3 footer-navbar-elem">
+				<i class="icon-small icon-community"></i>
+			</a>
+			<a href="@Url.Action("Index", "Shop")" class="col-xs-3 footer-navbar-elem">
+				<i class="icon-small icon-shopcart"></i>
+			</a>
+			<a href="~/intern/plant" class="col-xs-3 footer-navbar-elem">
+				<i class="icon-small icon-settings"></i>
+			</a>
+		</div>
+	</footer>
+	@Scripts.Render("~/bundles/jqueryui")
+	@Scripts.Render("~/bundles/jqueryval")
+	@Scripts.Render("~/bundles/globalize")
+	@Scripts.Render("~/bundles/bootstrap")
+
+	<script type="text/javascript">
+		$.validator.methods.number = function (value, element) {
+			return this.optional(element) ||
+                !isNaN(Globalize.parseFloat(value));
+		}
+		$(document).ready(function () {
+			// Globalize.culture('@(System.Threading.Thread.CurrentThread.CurrentCulture.Name)');
+		});
+
+		jQuery.extend(jQuery.validator.methods, {
+			range: function (value, element, param) {
+				//Use the Globalization plugin to parse the value
+				var val = Globalize.parseFloat(value);
+				return this.optional(element) || (
+                    val >= param[0] && val <= param[1]);
+			}
+		});
+		$.validator.methods.date = function (value, element) {
+			return this.optional(element) ||
+                Globalize.parseDate(value) ||
+                Globalize.parseDate(value, "dd-MM-yyyy") ||
+                Globalize.parseDate(value, "dd.MM.yyyy");
+		}
+
+		function updateShopcartCounter() {
+			$.ajax({
+				url: '@Url.Action("getShopcartCounter", "Shopcart")',
+				type: 'get',
+				cache: false
+			})
+			.done(function (result) {
+				$('#shopcart-counter').html(result);
+			});
+		}
+
+		//------------------ ADD CSRF-TOKEN TO AJAX ----------------------
+		//function GetAntiForgeryToken() {
+		//    var tokenField = $("input[type='hidden'][name$='RequestVerificationToken']");
+		//    if (tokenField.length == 0) {
+		//        return null;
+		//    } else {
+		//        return {
+		//            name: tokenField[0].name,
+		//            value: tokenField[0].value
+		//        };
+		//    }
+		//}
+
+		//$.ajaxPrefilter(
+		//    function (options, localOptions, jqXHR) {
+		//        if (options.type !== "GET") {
+		//            var token = GetAntiForgeryToken();
+		//            if (token !== null) {
+		//                if (options.data.indexOf("X-Requested-With") === -1) {
+		//                    options.data = "X-Requested-With=XMLHttpRequest" + ((options.data === "") ? "" : "&" + options.data);
+		//                }
+		//                options.data = options.data + "&" + token.name + '=' + token.value;
+		//            }
+		//        }
+		//    }
+		// );
+	</script>
+
+	@RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,17 @@
+﻿@model GardifyModels.Models.TaxonomicTree
+
+@if (Model != null)
+{
+    <ul>
+        @foreach (var childNode in Model.Childs)
+        {
+            <li>
+                <a class="taxon-link@(childNode.IsParentOfOrSelectedTaxon ? " parent-taxon" : "")" data-taxonid="@childNode.Id" onclick="taxonClick(this);return false" href="@Url.Action("Index", "PlantSearch", new { taxonId = childNode.Id })">@childNode.TitleGerman (@childNode.TitleLatin)</a>
+                @if (childNode.Childs != null && childNode.Childs.Any())
+                {
+                    Html.RenderPartial("_taxonomicTreeNode", childNode);
+                }
+            </li>
+        }
+    </ul>
+}

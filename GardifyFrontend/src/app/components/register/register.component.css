@@ -1,0 +1,93 @@
+#regCarousel {
+    overflow-y: hidden;
+    max-height: 1200px;
+}
+.carousel-caption {
+    text-align: unset;
+    bottom: -10px;
+}
+img.d-block {
+    height: 900px;
+    object-fit: cover;
+}
+.reg-caption {
+    max-width: 485px;
+    margin: 0 auto;
+}
+.reg-caption.dark {
+    color: white;
+}
+.reg-caption.light {
+    color: #000;
+}
+.btnProp{
+    height: 30px;
+    line-height: 11pt;
+}
+.boxConfirm{
+margin-bottom: 30rem!important;
+width: 900px
+}
+.btnlittle{
+    height: 20px;
+    line-height: 5pt;
+    max-width: 200px;
+}
+.BoxReg{
+    width: 960px;
+}
+.reg-caption.light .BoxReg {
+    background-color: rgba(255,255,255,0.8);
+}
+.reg-caption.light .boxConfirm{
+    background-color: rgba(255,255,255,0.8);
+}
+.reg-caption.dark .BoxReg {
+    background-color: rgba(50,50,50,0.8);
+}
+.reg-caption.dark .boxConfirm{
+    background-color: rgba(50,50,50,0.8);
+}
+input, select {
+    height: 25px;
+    padding: 0;
+    max-width: 200px;
+    /* line-height: 7pt; */
+    background-clip: border-box;
+    border: 1px solid #000 !important;
+    border-bottom: 1px solid #000 !important;
+}
+.reg-caption.light input, .reg-caption.light select {
+    background-color: white !important;
+}
+.reg-caption.dark input, .reg-caption.dark select {
+    background-color: black !important;
+}
+
+@media screen and (max-width: 768px) {
+    input, select, .btnlittle {
+        max-width: 100%;
+    }
+}
+.borderDanger {
+    border-color: crimson !important;
+}
+
+.custom-control-input:focus~.custom-control-label::before {
+    border-color: #7a9d34 !important;
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25) !important;
+  }
+  
+  .custom-control-input:checked~.custom-control-label::before {
+    border-color: #7a9d34 !important;
+    background-color:#7a9d34 !important;
+  }
+  
+  .custom-control-input:focus:not(:checked)~.custom-control-label::before {
+    border-color: #5bd778 !important;
+  }
+  
+  .custom-control-input:not(:disabled):active~.custom-control-label::before {
+    background-color: #d6f5dd !important;
+    border-color: #d6f5dd !important;
+  }

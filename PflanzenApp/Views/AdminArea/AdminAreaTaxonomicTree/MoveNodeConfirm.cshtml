@@ -1,0 +1,45 @@
+﻿@model GardifyModels.Models.TaxonomicTreeMoveConfirmView
+
+
+@{
+    ViewBag.Title = "MoveNodeConfirm";
+    Layout = "~/Views/Shared/_LayoutAdminArea.cshtml";
+}
+
+<h2>Bestätigung der Verschiebung</h2>
+
+@if (!Model.DisableFeature)
+{
+    <div class="alert alert-warning">
+        Warnung, werden auch alle Kinder dieses Knotens verschoben. <br />
+
+        @Model.message
+    </div>
+}
+else
+{
+    <div class="alert alert-danger">
+        Warnung, werden auch alle Kinder dieses Knotens verschoben. <br />
+
+        @Model.message
+    </div>
+}
+
+@if (!Model.DisableFeature)
+{
+    using (Html.BeginForm("node-move", "AdminAreaTaxonomicTree", new { movedNodeId = Model.movedNodeId, taxonId = Model.SelectedtaxonId }, FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <input type="submit" value="Ja" class="btn btn-default" />
+
+        @*<a href="@Url.Action("add-new-tags", new { tagId = Model.TagId, treeId = Model.TreeId, plantId = plant.PlantId})">Add</a>*@
+
+
+    }
+
+}
+
+<br />
+@Html.ActionLink("zurück", "MoveNode", new { movedNodeId = Model.movedNodeId, taxonId = Model.SelectedtaxonId })
+
+

@@ -1,0 +1,77 @@
+<div class="row mt-5">
+    <div class="col-9">
+        <div class="d-flex">
+            <div class="p-2">
+                <a [routerLink]="'/community/communityGarden'" routerLinkActive="active">
+                    <h3>GARTEN <span class="t-bold">COMMUNITY</span></h3>
+                </a>
+            </div>
+            <div class="p-2">
+                <mat-divider [vertical]="true"> </mat-divider>
+            </div>
+            <div class="p-2">
+                <a [routerLink]="'/community/communityPicture'" routerLinkActive="active">
+                    <h3>BILDER <span class="t-bold">COMMUNITY</span></h3>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="col-3">
+
+        <div class="d-flex justify-content-end">
+            <div class="col-3">
+                <span> <a [routerLink]="'/community'" (click)="showPresentation=false">
+                        <img class="ratio-1x1 align-middle" src="./assets/community-icons/Feed_mit_Posts_on.svg"
+                            style="width: 30px;">
+                    </a></span>
+            </div>
+            <mat-divider [vertical]="true"> </mat-divider>
+            <div class="col-3">
+                <span> <a [routerLink]="'/community'" (click)="showPresentation=false">
+                        <img class="ratio-1x1 align-middle" src="./assets/community-icons/Mein_Profil_off.svg"
+                            style="width: 30px;">
+                    </a></span>
+            </div>
+            <mat-divider [vertical]="true"> </mat-divider>
+            <div class="col-3">
+                <span> <a [routerLink]="'/community/messageList'" (click)="showPresentation=false">
+                        <img class="ratio-1x1 align-middle" src="./assets/community-icons/Nachriten_off.svg"
+                            style="width: 30px;">
+                    </a></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- search row -->
+<form>
+    <div class="form-row align-items-center">
+        <div class="col-6">
+            <div class="d-flex">
+                <div class="p-2"> <img class="rounded-circle" [src]="toUrl(currentUser?.imageData?.Images[0]?.SrcAttr)"
+                        style="width: 50px; height: 50px;" /></div>
+                <div class="p-2 w-100">
+                    <div class="form-group d-flex align-items-center">
+                        <input type="text" class="form-control" id="searchCommunity" placeholder="Suche">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="row">
+                <div class="col-6">
+                    <button type="button" [routerLink]="'/community/askQuestion'" [queryParams]="{askAdmin : 'false'}"
+                        class="px-3 btn btn-green btn_border075 t-bold text-white t-12 float-right w-100">Frage an
+                        Community</button>
+                </div>
+                <div class="col-6">
+                    <button type="button" [routerLink]="'/community/askQuestion'" [queryParams]="{askAdmin : 'true'}"
+                        class="px-3 btn btn-green btn_border075 t-bold text-white t-12 float-right w-100">Frage an
+                        Experten</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<hr>

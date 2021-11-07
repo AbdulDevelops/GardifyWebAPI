@@ -1,0 +1,19 @@
+<div class="row">
+    <div class="col-12 my-2">
+        <h2 class="t-15 t-bold">Mitglied finden</h2>
+    </div>
+    <div class="col-12 mb-3">
+        <input type="search" class="form-control text-input" (keyup)="onSearchMember($event)" />
+    </div>
+    <div class="col-12 mt-1" *ngIf="userList?.length>0">
+        <div class="row" style="height: 500px; overflow-y: scroll;">
+            <div class="col-6" *ngFor="let user of userList">
+                
+                <img src="https://robohash.org/9b1c3922aa46858242acc0a0f676d860?set=set2&bgset=&size=400x400" style="height: 50px; " class="mr-2">
+                <span class="t-bold t-14"> {{user}}</span>
+                <img src="assets/images/Hinzufügen.svg" style="height: 15px; " class="t-bold t-14 ml-2 ptr" (click)="addExistingContact(user)" title="Kontakt hinzufügen">
+                <hr >
+            </div>
+        </div>
+    </div>
+</div>

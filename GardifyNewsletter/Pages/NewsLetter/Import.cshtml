@@ -1,0 +1,109 @@
+﻿@page
+@model GardifyNewsletter.Areas.Intern.Pages.NewsLetter.ImportModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Pages/Shared/_LayoutIntern.cshtml";
+}
+<p class="text-secondary mt-4 mb-4">Interner Bereich: Newsletter Abonnenten</p>
+
+<h3 class="mt-3">Import</h3>
+<p class="mt-2 mb-4">
+    @*<a class="text-dark" asp-page="IndexList">Übersicht Abonnentengruppen</a>
+        <span> | </span>*@
+    <a class="text-dark" asp-page="Subscribers">Abonnenten</a>
+    <span> | </span>
+    @*<a class="text-dark" asp-page="CreateList">Neue Gruppe</a>
+        <span> | </span>*@
+    <a class="text-dark" asp-page="Import">Import</a>
+</p>
+<br />
+<div class="row">
+    <div class="col-md-8">
+        <p>
+            Hier können Sie Newsletter-Abonnenten aus externen Quellen in die Verteiler Ihrer Webseite importieren.
+        </p>
+        <p>
+            Bitte bereiten Sie Ihre Daten wie folgt vor:
+        </p>
+        <ul class="checkmark">
+            <li>
+                In Excel oder einem anderen Progrmm, das .csv-Dateien verarbeitet, die zu importierenden Newsletterempfänger in einer einzigen Spalte ohne Spaltenüberschrift zusammenstellen.
+            </li>
+            <li>
+                als csv-Datei speichern
+            </li>
+            <li>
+                Import-Formular ausfüllen und absenden
+            </li>
+        </ul>
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <form method="post" enctype="multipart/form-data">
+
+            <label class="control-label" style="color:red">
+
+                @Model.ErrorText
+            </label>
+            <label class="control-label" style="color:green">
+
+                @Model.SuccessText
+            </label> <br />
+            <!-- <label asp-for="SelectedSector">Import in Verteiler</label>
+    <div class="form-group">
+        <select asp-for="SelectedSector" name="SelectedSector" asp-items="Model.DistributorsList" class="form-control"></select>
+
+        <span asp-validation-for="SelectedSector" class="text-danger"></span>
+    </div> -->
+            <label asp-for="ImportedFileName">Name der zu importierenden Liste</label>
+            <div class="form-group">
+                <input type="text" asp-for="@Model.ImportedFileName" class="form-control" />
+            </div>
+            <label asp-for="Keywords">Stichworte(durch Komma getrennt)</label>
+
+            <div class="form-group">
+                <input type="text" class="form-control" value="@Model.Keywords" asp-for="@Model.Keywords" />
+            </div>
+            <label>Datei hochladen:</label>
+            <input type="file" asp-for="Upload" />
+            <br />
+            <input class="btn btn-primary btn-sm mt-2" type="submit" value="Liste importieren" />
+        </form>
+        <br />
+        <div>
+            <a asp-page="IndexList">Zurück zur Übersicht</a>
+        </div>
+
+        @if (Model.Count > 0)
+        {
+            <p class="text-orange mt-4"> @Model.Count Einträge importiert.</p>
+
+            <hr />
+            <table cellpadding="0" cellspacing="0" border="1">
+                <tr>
+                    <td>
+                        Name
+                    </td>
+                </tr>
+                @foreach (var item in Model.NewsletterRecipients)
+                {
+                    <tr>
+                        <td>
+                            @item.RecipientEmail
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        }
+
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,155 @@
+<div class="row">
+
+    <div class="col-md-6">
+        <h4>Fragen an Community</h4>
+        <div *ngFor="let data of communityWithAnswers">
+            <div class="card mb-5">
+                <!-- post_topbar -->
+                <div class="d-flex justify-content-between bd-highlight">
+                    <div class="p-2 bd-highlight">
+                        <div class="d-flex justify-content-start">
+                            <img class="rounded-circle" [src]="toUrl(data.AutorProfilUrl[0]?.SrcAttr)"
+                                style="width: 50px; height: 50px;">
+                            <div class="d-flex flex-column pl-2">
+                                <div><b>{{data.AutorProfilUrl[0]?.Author}}</b></div>
+                                <div>{{beautifyTimeDate(data.Post.PublishDate)}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-2 bd-highlight"><img class="ratio-1x1" src="./assets/images/Bearbeiten.svg"
+                            style="width: 20px;"></div>
+                </div>
+                <!--post-image-->
+                <div><img class="img-fluid" [src]="toUrl(data.Post.Images[0].SrcAttr)"
+                        style="width: 100%; height: 300px; object-fit: cover;"></div>
+                <div class="card-body">
+                    <p class="card-text">{{data.Post.QuestionText}}</p>
+
+                    <div class="d-flex justify-content-start" *ngIf="data.CommunityAnswerList.length>0">
+                        <img class="ratio-1x1" src="./assets/community-icons/Antworten.svg" style="width: 20px;">
+                        <div class="pl-2"><b>{{data.CommunityAnswerList.length}} Antworten</b></div>
+                    </div>
+
+                    <div *ngFor="let comment of data.CommunityAnswerList | slice:0:(more ? undefined : commentLength)">
+                        <div class="d-flex justify-content-start mt-2">
+                            <img class="rounded-circle" [src]="toUrl(comment.ProfilUrl[0]?.SrcAttr)"
+                                style="width: 50px; height: 50px;">
+                            <div class="d-flex flex-column pl-2">
+                                <div><b>{{comment.AutorName}}</b></div>
+                                <div>{{comment.AnswerText}}</div>
+                                <div class="text-muted">{{beautifyTimeDate(comment.Date)}}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-start mt-2"
+                        *ngIf="data.CommunityAnswerList.length>commentLength">
+                        <img class="ratio-1x1" src="./assets/community-icons/Antworten.svg" style="width: 20px;">
+                        <div class="pl-2"><b></b></div>
+                        <div>
+                            <b><a (click)="more = !more">{{ more ? 'weniger anzeigen' : 'Alle Antworten
+                                    anzeigen'}}</a></b>
+                        </div>
+                    </div>
+
+
+                    <!-- add comment -->
+                    <div>
+                        <div class="d-flex">
+                            <div class="pt-2">
+                                <img class="rounded-circle" [src]="toUrl(currentUser?.imageData?.Images[0]?.SrcAttr)"
+                                    style="width: 50px; height: 50px;" />
+                            </div>
+                            <div class="pl-2 pt-2 w-100">
+                                <div class="form-group d-flex align-items-center">
+                                    <input type="text" class="form-control input-comment" id="addComment"
+                                        (keydown.enter)="postComment($event, data, false)" placeholder="Deine Antwort">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- expert column -->
+
+    <div class="col-md-6">
+        <h4>Fragen an Experten</h4>
+        <div *ngFor="let data of communityWithAnswersExpert">
+            <div class="card mb-5">
+                <!-- post_topbar -->
+                <div class="d-flex justify-content-between bd-highlight">
+                    <div class="p-2 bd-highlight">
+                        <div class="d-flex justify-content-start">
+                            <img class="rounded-circle" [src]="toUrl(data.AutorProfilUrl[0]?.SrcAttr)"
+                                style="width: 50px; height: 50px;">
+                            <div class="d-flex flex-column pl-2">
+                                <div><b>{{data.AutorProfilUrl[0]?.Author}}</b></div>
+                                <div>{{beautifyTimeDate(data.Post.PublishDate)}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-2 bd-highlight"><img class="ratio-1x1" src="./assets/images/Bearbeiten.svg"
+                            style="width: 20px;"></div>
+                </div>
+                <!--post-image-->
+                <div><img class="img-fluid" [src]="toUrl(data.Post.Images[0].SrcAttr)"
+                        style="width: 100%; height: 300px; object-fit: cover;"></div>
+                <div class="card-body">
+                    <p class="card-text">{{data.Post.QuestionText}}</p>
+
+                    <div class="d-flex justify-content-start" *ngIf="data.CommunityAnswerList.length>0">
+                        <img class="ratio-1x1" src="./assets/community-icons/Antworten.svg" style="width: 20px;">
+                        <div class="pl-2"><b>{{data.CommunityAnswerList.length}} Antworten</b></div>
+                    </div>
+
+                    <div *ngFor="let comment of data.CommunityAnswerList | slice:0:(more ? undefined : commentLength)">
+                        <div class="d-flex justify-content-start mt-2">
+                            <img class="rounded-circle" [src]="toUrl(comment.ProfilUrl[0]?.SrcAttr)"
+                                style="width: 50px; height: 50px;">
+                            <div class="d-flex flex-column pl-2">
+                                <div class="d-flex" *ngIf="comment.IsFromAdmin; else elseBlock">
+                                    <span class='d-flex gardify-icon'></span>
+                                    <b class="admin-name ml-2">{{comment.AutorName}}</b>
+                                </div>
+                                <ng-template #elseBlock><b>{{comment.AutorName}}</b></ng-template>
+                                <div>{{comment.AnswerText}}</div>
+                                <div class="text-muted">{{beautifyTimeDate(comment.Date)}}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-start mt-2"
+                        *ngIf="data.CommunityAnswerList.length>commentLength">
+                        <img class="ratio-1x1" src="./assets/community-icons/Antworten.svg" style="width: 20px;">
+                        <div class="pl-2"><b></b></div>
+                        <div>
+                            <b><a (click)="more = !more">{{ more ? 'weniger anzeigen' : 'Alle Antworten
+                                    anzeigen'}}</a></b>
+                        </div>
+                    </div>
+
+
+                    <!-- add comment -->
+                    <div *ngIf="currentUser?.user?.Admin">
+                        <div class="d-flex">
+                            <div class="pt-2">
+                                <img class="rounded-circle" [src]="toUrl(currentUser?.imageData?.Images[0]?.SrcAttr)"
+                                    style="width: 50px; height: 50px;" />
+                            </div>
+                            <div class="pl-2 pt-2 w-100">
+                                <div class="form-group d-flex align-items-center">
+                                    <input type="text" class="form-control input-comment" id="addComment"
+                                        (keydown.enter)="postComment($event, data, true)" placeholder="Deine Antwort">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="android.view.View" />
+    </data>
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- month previous next UI -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_view_expandable_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/marginPaddingSize_5sdp"
+            app:cardCornerRadius="@dimen/cardCornerRadius_small"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/month_prev"
+                            android:layout_width="@dimen/width_height_18sdp"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/source_sans_pro"
+                            android:gravity="center"
+                            android:text="&#12296;"
+                            android:textStyle="bold" />
+
+                        <Spinner
+                            android:id="@+id/spinner_todo_date_month"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:padding="@dimen/marginPaddingSize_5sdp"
+                            android:background="@android:color/transparent"
+                            android:textAlignment="center" />
+
+                        <TextView
+                            android:id="@+id/month_next"
+                            android:layout_width="@dimen/width_height_18sdp"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/source_sans_pro"
+                            android:gravity="center"
+                            android:text="&#12297;"
+                            android:textSize="@dimen/textSize_body_xsmall"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <View
+                        android:id="@+id/divider_splash_screen"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_weight="0.5"
+                        android:visibility="invisible" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/year_prev"
+                            android:layout_width="@dimen/width_height_18sdp"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/source_sans_pro"
+                            android:gravity="center"
+                            android:text="&#12296;"
+                            android:textSize="@dimen/textSize_body_xsmall"
+                            android:textStyle="bold" />
+
+                        <Spinner
+                            android:id="@+id/spinner_todo_date_year"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:padding="@dimen/marginPaddingSize_5sdp"
+                            android:background="@android:color/transparent"
+                            android:textAlignment="center" />
+
+                        <TextView
+                            android:id="@+id/year_next"
+                            android:layout_width="@dimen/width_height_18sdp"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/source_sans_pro"
+                            android:gravity="center"
+                            android:text="&#12297;"
+                            android:textSize="@dimen/textSize_body_xsmall"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- calendar -->
+                <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+                    android:id="@+id/calendarView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:mcv_tileHeight="@dimen/height_35sdp"
+                    app:mcv_selectionColor="@color/calendarView_todoCalendar_pointer"
+                    app:mcv_dateTextAppearance="@style/CalendarTextAppearance"
+                    app:mcv_headerTextAppearance="@style/CalendarTextAppearance"
+                    app:mcv_weekDayTextAppearance="@style/CalendarWeekLabelAppearance" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
+</layout>

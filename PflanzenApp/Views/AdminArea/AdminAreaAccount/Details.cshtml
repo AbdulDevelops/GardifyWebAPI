@@ -1,0 +1,35 @@
+﻿@model GardifyModels.Models.DetailsUserViewModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutAdminArea.cshtml";
+}
+
+<h2>Details zum Benutzer</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RoleNames)
+        </dt>
+        @foreach(var role in Model.RoleNames)
+        {
+            <dd>
+                @Html.DisplayFor(model => role)
+            </dd>
+        }
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Bearbeiten", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Zurück zur Übersicht", "Index")
+</p>

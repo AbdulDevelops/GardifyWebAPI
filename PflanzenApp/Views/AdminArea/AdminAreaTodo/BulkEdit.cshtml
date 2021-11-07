@@ -1,0 +1,245 @@
+﻿@model GardifyModels.Models.TodoTemplateViewModels.TodoTemplateBulkViewModel
+
+@{
+    ViewBag.Title = "BulkEdit";
+    Layout = "~/Views/Shared/_LayoutAdminArea.cshtml";
+}
+
+<h2>Vorlage bearbeiten</h2>
+
+
+<div>
+    <div class="form-horizontal">
+        @using (Html.BeginForm())
+        {
+            @Html.HiddenFor(model => model.Id)
+            <div class="form-group">
+                <p class="control-label col-md-2">Titel</p>
+                <div class="col-md-10">
+                    @*@Html.DisplayFor(model => model.Title)*@
+                    @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <p class="control-label col-md-2">Beschreibung</p>
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.Description, new { @class = "form-control", rows = 10, cols = 10 })
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <p class="control-label col-md-2">Zu erledigen von/am</p>
+                <div class="col-md-10">
+                    <select name="DateStartDay" id="DateStartDay" value="@Model.DateStart.Day">
+                        <option value="0">-</option>
+                        <option value="1" selected="@(Model.DateStart.Day == 1 ? true : false)">Anfang</option>
+                        <option value="11" selected="@(Model.DateStart.Day == 11 ? true : false )">Mitte</option>
+                        <option value="21" selected="@(Model.DateStart.Day == 21 ? true : false)">Ende</option>
+                    </select>
+                    <select name="DateStartMonth" id="DateStartMonth" value="@Model.DateStart.Month">
+                        <option value="0">-</option>
+                        <option value="1" selected="@(Model.DateStart.Month == 1 ? true : false)">Januar</option>
+                        <option value="2" selected="@(Model.DateStart.Month == 2 ? true : false)">Februar</option>
+                        <option value="3" selected="@(Model.DateStart.Month == 3 ? true : false)">März</option>
+                        <option value="4" selected="@(Model.DateStart.Month == 4 ? true : false)">April</option>
+                        <option value="5" selected="@(Model.DateStart.Month == 5 ? true : false)">Mai</option>
+                        <option value="6" selected="@(Model.DateStart.Month == 6 ? true : false)">Juni</option>
+                        <option value="7" selected="@(Model.DateStart.Month == 7 ? true : false)">Juli</option>
+                        <option value="8" selected="@(Model.DateStart.Month == 8 ? true : false)">August</option>
+                        <option value="9" selected="@(Model.DateStart.Month == 9 ? true : false)">September</option>
+                        <option value="10" selected="@(Model.DateStart.Month == 10 ? true : false)">Oktober</option>
+                        <option value="11" selected="@(Model.DateStart.Month == 11 ? true : false)">November</option>
+                        <option value="12" selected="@(Model.DateStart.Month == 12 ? true : false)">Dezember</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group bis">
+                <p class="control-label col-md-2">Zu erledigen bis</p>
+                <div class="col-md-10">
+                    <select name="DateEndDay" id="DateEndDay" value="@Model.DateEnd.Day">
+                        <option value="0">-</option>
+                        <option value="1" selected="@(Model.DateEnd.Day == 1 ? true : false)">Anfang</option>
+                        <option value="11" selected="@(Model.DateEnd.Day == 11 ? true : false )">Mitte</option>
+                        <option value="21" selected="@(Model.DateEnd.Day == 21 ? true : false)">Ende</option>
+                    </select>
+                    <select name="DateEndMonth" id="DateEndMonth" value="@Model.DateEnd.Month">
+                        <option value="0">-</option>
+                        <option value="1" selected="@(Model.DateEnd.Month == 1 ? true : false)">Januar</option>
+                        <option value="2" selected="@(Model.DateEnd.Month == 2 ? true : false)">Februar</option>
+                        <option value="3" selected="@(Model.DateEnd.Month == 3 ? true : false)">März</option>
+                        <option value="4" selected="@(Model.DateEnd.Month == 4 ? true : false)">April</option>
+                        <option value="5" selected="@(Model.DateEnd.Month == 5 ? true : false)">Mai</option>
+                        <option value="6" selected="@(Model.DateEnd.Month == 6 ? true : false)">Juni</option>
+                        <option value="7" selected="@(Model.DateEnd.Month == 7 ? true : false)">Juli</option>
+                        <option value="8" selected="@(Model.DateEnd.Month == 8 ? true : false)">August</option>
+                        <option value="9" selected="@(Model.DateEnd.Month == 9 ? true : false)">September</option>
+                        <option value="10" selected="@(Model.DateEnd.Month == 10 ? true : false)">Oktober</option>
+                        <option value="11" selected="@(Model.DateEnd.Month == 11 ? true : false)">November</option>
+                        <option value="12" selected="@(Model.DateEnd.Month == 12 ? true : false)">Dezember</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <p class="control-label col-md-2">Wiederholungsart</p>
+                <div class="col-md-10">
+                    @Html.DropDownList("Cycle", new List<SelectListItem>(){
+                   new SelectListItem() { Text="-",Value="0", Selected = true },
+            new SelectListItem() { Text="Wöchentlich",Value="1" },
+            new SelectListItem() { Text="Monatlich",Value="2" },
+            new SelectListItem() { Text="Jährlich",Value="3" },
+            new SelectListItem() { Text="Alle 2 Jahre",Value="4" } })
+                </div>
+            </div>
+            <div class="form-group">
+                <p class="control-label col-md-2">Gehört zu</p>
+                <div class="col-md-10">
+                    @Html.DropDownList("ReferenceType", new List<SelectListItem>(){
+            new SelectListItem() { Text="Pflanze", Value = "4", Selected = true},
+            new SelectListItem() { Text="Tool",Value="5" }}, new { @onchange = "ondropdownselect(this.value)" })
+                </div>
+            </div>
+            <div class="form-group" id="reference-list">
+                <p class="control-label col-md-2">Wähle zugehöriges Objekt</p>
+                <div class="col-md-10" id="dropdowns">
+                    <select name="ReferenceId[0]" disabled>
+                        <option value="-1">Bitte auswählen</option>
+                        @foreach (var m in Model.InfoObjects)
+                        {
+                            var select = m.Id == Model.ReferenceId[0] ? "selected" : "";
+                            <option name="@m.Name" value="@m.Id" @select>@m.Name</option>
+                        }
+                    </select>
+                    @*<button type="button" onclick="addDropdown()">+</button>*@
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Speichern" class="btn btn-default" />
+                </div>
+            </div>
+        }
+
+    </div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        @*
+            <dt>
+                Titel
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Title)
+            </dd>
+            <dt>
+                Beschreibung
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+
+
+
+            <dt>
+                Zu erledigen von/am
+            </dt>
+
+            <dd>
+                <select name="DateStartDay" id="DateStartDay" value="@Model.DateStart.Day" disabled>
+                    <option value="0">-</option>
+                    <option value="1" selected="@(Model.DateStart.Day == 1 ? true : false)">Anfang</option>
+                    <option value="11" selected="@(Model.DateStart.Day == 11 ? true : false )">Mitte</option>
+                    <option value="21" selected="@(Model.DateStart.Day == 21 ? true : false)">Ende</option>
+                </select>
+                <select name="DateStartMonth" id="DateStartMonth" value="@Model.DateStart.Month" disabled>
+                    <option value="0">-</option>
+                    <option value="1" selected="@(Model.DateStart.Month == 1 ? true : false)">Januar</option>
+                    <option value="2" selected="@(Model.DateStart.Month == 2 ? true : false)">Februar</option>
+                    <option value="3" selected="@(Model.DateStart.Month == 3 ? true : false)">März</option>
+                    <option value="4" selected="@(Model.DateStart.Month == 4 ? true : false)">April</option>
+                    <option value="5" selected="@(Model.DateStart.Month == 5 ? true : false)">Mai</option>
+                    <option value="6" selected="@(Model.DateStart.Month == 6 ? true : false)">Juni</option>
+                    <option value="7" selected="@(Model.DateStart.Month == 7 ? true : false)">Juli</option>
+                    <option value="8" selected="@(Model.DateStart.Month == 8 ? true : false)">August</option>
+                    <option value="9" selected="@(Model.DateStart.Month == 9 ? true : false)">September</option>
+                    <option value="10" selected="@(Model.DateStart.Month == 10 ? true : false)">Oktober</option>
+                    <option value="11" selected="@(Model.DateStart.Month == 11 ? true : false)">November</option>
+                    <option value="12" selected="@(Model.DateStart.Month == 12 ? true : false)">Dezember</option>
+                </select>
+            </dd>
+
+            <dt>
+                Zu erledigen bis
+            </dt>
+
+            <dd>
+                <select name="DateEndDay" id="DateEndDay" value="@Model.DateEnd.Day" disabled>
+                    <option value="0">-</option>
+                    <option value="1" selected="@(Model.DateEnd.Day == 1 ? true : false)">Anfang</option>
+                    <option value="11" selected="@(Model.DateEnd.Day == 11 ? true : false )">Mitte</option>
+                    <option value="21" selected="@(Model.DateEnd.Day == 21 ? true : false)">Ende</option>
+                </select>
+                <select name="DateEndMonth" id="DateEndMonth" value="@Model.DateEnd.Month" disabled>
+                    <option value="0">-</option>
+                    <option value="1" selected="@(Model.DateEnd.Month == 1 ? true : false)">Januar</option>
+                    <option value="2" selected="@(Model.DateEnd.Month == 2 ? true : false)">Februar</option>
+                    <option value="3" selected="@(Model.DateEnd.Month == 3 ? true : false)">März</option>
+                    <option value="4" selected="@(Model.DateEnd.Month == 4 ? true : false)">April</option>
+                    <option value="5" selected="@(Model.DateEnd.Month == 5 ? true : false)">Mai</option>
+                    <option value="6" selected="@(Model.DateEnd.Month == 6 ? true : false)">Juni</option>
+                    <option value="7" selected="@(Model.DateEnd.Month == 7 ? true : false)">Juli</option>
+                    <option value="8" selected="@(Model.DateEnd.Month == 8 ? true : false)">August</option>
+                    <option value="9" selected="@(Model.DateEnd.Month == 9 ? true : false)">September</option>
+                    <option value="10" selected="@(Model.DateEnd.Month == 10 ? true : false)">Oktober</option>
+                    <option value="11" selected="@(Model.DateEnd.Month == 11 ? true : false)">November</option>
+                    <option value="12" selected="@(Model.DateEnd.Month == 12 ? true : false)">Dezember</option>
+                </select>
+            </dd>*@
+
+        <hr />
+
+        <dt>
+            Alle Pflanzen
+        </dt>
+
+
+        <dd>
+            @foreach (var plantTemplate in Model.BulkTodoTemplates)
+            {
+                @Html.DisplayFor(m => plantTemplate.nameComplete) @Html.Raw(" | ")
+                @Html.ActionLink("Löschen", "Delete", new { id = plantTemplate.TemplateId })
+                <br />
+            }
+        </dd>
+
+        <dt>
+            Neue Pflanze hinzufügen
+        </dt>
+        <dd>
+            @using (Html.BeginForm("BulkEditAdd", "AdminAreaTodo"))
+            {
+                @Html.AntiForgeryToken()
+                @Html.Hidden("baseId", Model.Id)
+
+
+                <select name="ReferenceId" multiple>
+                    <option value="-1" disabled>Bitte auswählen</option>
+                    @foreach (var m in Model.InfoObjects)
+                    {
+                        <option name="@m.Name" value="@m.Id">@m.Name</option>
+                    }
+                </select>
+                <input type="submit" value="Speichern" class="btn btn-default" />
+
+            }
+
+
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Zurück zur Übersicht", "Index")
+</p>

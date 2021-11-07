@@ -1,0 +1,49 @@
+﻿@model GardifyModels.Models.WarningViewModel
+<h3>Hallo @Model.UserName,</h3>
+
+<p>
+    <span>ab @Model.Date.ToShortDateString() ist die erwartete Temperatur @Model.MinTemp °C </span>
+    @{if (@Model.MaxWindSpeed > 0)
+        {
+            <span>und die maximale Windgeschwindigkeit @Model.MaxWindSpeed Km/H.</span>
+        }
+    }
+</p>
+<ul>
+    @{if (Model.Alerts.Where(a => a.ObjectType == GardifyModels.Models.ModelEnums.ReferenceToModelClass.Plant).ToList().Count > 0)
+        {
+            <p>Die folgenden Pflanzen in Ihrem Garten sind betroffen:</p>
+            foreach (var alert in Model.Alerts)
+            {
+                if (alert.ObjectType == GardifyModels.Models.ModelEnums.ReferenceToModelClass.Plant)
+                {
+                    <li>@alert.RelatedObject</li>
+                }
+            }
+        }
+    }
+</ul>
+@{ if (Model.Alerts.Where(a => a.ObjectType == GardifyModels.Models.ModelEnums.ReferenceToModelClass.Device).Any())
+    {
+        <p>Die folgende Geräte sind betroffen:</p>
+        <ul>
+            @{foreach (var alert in Model.Alerts)
+                {
+                    if (alert.ObjectType == GardifyModels.Models.ModelEnums.ReferenceToModelClass.Device)
+                    {
+                        <li>@alert.RelatedObject</li>
+                    }
+                }
+            }
+        </ul>
+    }
+}
+
+
+<h4>Das gardify-Team</h4>
+<br />
+<small>Du kannst Frost- und Sturmwarnungen komfortabel für alle betroffenen Pflanzen und Geräte in einer Liste pflegen. </small>
+<br />
+<small>Klicke auf „Warnungen“ oder öffne diese unter „Listen“ in „Mein Garten“ oder unter „Einstellungen“.</small>
+<br />
+<small>Den Erhalt von Push-Mails und die Einstellung der Temperaturgrenze von Warnungen können Sie unter Einstellungen oder dem Profil-Ikon oben rechts neben Login vornehmen.</small>

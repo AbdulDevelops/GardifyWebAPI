@@ -1,0 +1,11 @@
+﻿@page
+@model GardifyNewsletter.Areas.Intern.Pages.IndexModel
+
+@{
+    ViewData["Title"] = "Startseite";
+    Layout = "~/Pages/Shared/_LayoutIntern.cshtml";
+}
+<div class="jumbotron text-center" style="background-color:transparent">
+    <h3>Willkommen @User.Identity.Name</h3>
+    <p class="lead">im internen Bereich!</p>
+</div>

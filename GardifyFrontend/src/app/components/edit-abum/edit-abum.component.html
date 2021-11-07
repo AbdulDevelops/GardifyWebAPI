@@ -1,0 +1,207 @@
+<div class="overlay-loading" [hidden]="!loading">
+    <svg class="spinner position-relative" viewBox="25 25 50 50">
+      <circle class="path" cx="50" cy="50" r="24" fill="none" stroke-width="2" stroke-miterlimit="10" />
+    </svg>
+</div>
+<form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+    <div class="row mb-5">
+        <div class="col-12">
+            <h3 class="t-bold text-grey t-16" *ngIf="origin=='album'">Album bearbeiten</h3>
+            <h3 class="t-bold text-grey t-16" *ngIf="origin=='presentation'">Presentation bearbeiten</h3>
+            <button *ngIf="origin=='presentation'" class="btn_white btn btn_border075 t-bold text-ltgrey t-12 float-right"  [ngClass]="{'btn-green':showPresiImages=='true', 'text-white':showPresiImages=='true'}" value="presi" type="button" (click)="viewMode()"> Presentation Bilder bearbeiten</button> 
+            <button *ngIf="origin=='album'"  class="btn_white btn btn_border075 t-bold text-ltgrey t-12 float-right"  [ngClass]="{'btn-green':showPresiImages=='true', 'text-white':showPresiImages=='true'}" value="album" type="button" (click)="viewMode()">Album Bilder bearbeiten</button> 
+
+        </div>
+        <div class="col-12">
+            <div class="row">
+                <div class="col-6">
+                    <div class="d-flex">
+                        <div class="fotoUploadLocalStorage" (click)="uploadImageMode()">
+                            <label for="file-input">
+                                <div class="btn_border075 text-center my-4 ptr" style="height: 200px; width: 200px; background-color: #7bbaa7; ">
+                                    <img src="assets/images/Fotos_hochladen.svg" style="height: 100px;" class="mx-3 my-3"><br>
+                                    <span class="t-bold text-white t-12"> Fotos</span> <br><span class="t-ligth text-white t-12">HOCHLADEN</span>
+                                </div>
+                            </label>
+                            <input 
+                                
+                                id="file-input" 
+                                type="file" 
+                               style="display: none;"
+                                (change)="onFileChange($event)" accept=".png, .jpg, .jpeg, .gif, .svg" />
+                            <div *ngIf="f.file.touched && f.file.invalid" class="alert alert-danger">
+                                <div *ngIf="f.file.errors.required">File is required.</div>
+                            </div>
+                        </div>
+                        <div class="fotoFromGardify" (click)="uploadImage=false; imageSrc=null; showSelectedImg=false; addImgFromGardify=true" >
+                            <div class="btn_border075 text-center  my-4 ml-4 ptr" style="height: 200px; width: 200px; background-color: #7bbaa7;" (click)="getAllAlbumImg()">
+                                <img src="assets/images/Gardify_Fotos.svg" style="height: 100px;" class="mx-3 my-3"><br>
+                                <span class="t-bold text-white t-12"> Fotos</span> <br><span class="t-ligth text-white t-12">GARDIFY</span>
+                            </div>
+                        </div>
+                       
+                    </div>
+                    <div class="d-flex flex-column" >
+                        <img #image src="{{imageSrc}}" [hidden]="!showSelectedImg"  class="ml-2" style="height: 200px; width: 200px;"/>
+                    </div>
+                    <div class="d-flex flex-column">
+                        <div class="">
+                            <h2 for="Headline" class="t-14 t-bold text grey">Überschrift</h2> 
+                            <input id="Headline" type="text"  formControlName="Headline" class="form-control text-input t-12">
+                            <mat-divider class="my-3 " > </mat-divider>
+                        </div>
+                        <div *ngIf="origin=='album'">
+                            <h2 for="Description" class="t-14 t-bold text grey">Beschreibung</h2> 
+                            <input id="Description" type="text"  formControlName="Description" class="form-control text-input t-12">
+                            <mat-divider class="my-3 " > </mat-divider>
+                        </div>
+                        <div *ngIf="origin=='presentation'">
+                            <h2 for="headline" class="t-14 t-bold text grey">Elemente einblenden</h2> 
+                            <div class="d-flex">
+                                <div class="mr-auto t-12 ">Überschrift der Präsentation einblenden</div>
+                                 <div>   <mat-slide-toggle formControlName="ShowHeadline"></mat-slide-toggle></div>
+                            </div>
+                            <div class="d-flex">
+                                <div class="mr-auto t-12">Bildnummern einblenden</div>
+                                 <div>  <mat-slide-toggle formControlName="ShowPictureNumber"></mat-slide-toggle></div>
+                            </div>
+                            <hr class="my-3 " >
+                        </div>
+                        <div>
+                            <h2  *ngIf="origin=='album'" class="t-14 t-bold text grey">Album teilen mit</h2> 
+                            <h3 class="t-14 t-bold text grey" *ngIf="origin=='presentation'">Presentation teilen mit</h3>
+                            <div formArrayName="ShowModeArray">
+                                <ng-container *ngFor="let o of editForm.get('ShowModeArray')['controls']; let i = index;" [formGroupName]="i"
+                                    style="list-style: none;">
+                                    <span>
+                                        <div class="d-flex">
+                                            <div class="mr-auto">
+                                                <div *ngIf="i==0" class="mr-auto t-12"><span class="mr-2"><img src="assets/images/Mit_jedem_teilen.svg" style="height: 15px;"></span>Jedem</div>
+                                                <div *ngIf="i==1" class="mr-auto t-12"><span class="mr-2" ><img src="assets/images/Mit_allen_Kontakten_teilen.svg" style="height: 15px;"></span>Allen Kontakten</div>
+                                                <div *ngIf="i==2" class="mr-auto t-12"><span class="mr-2"><img src="assets/images/Mit_ausgewählten_Kontakten_teilen.svg" style="height: 15px;"></span>Nur ausgewählten Kontakten</div>
+                                            </div>
+                                            <div class="">
+                                                <mat-slide-toggle (change)='updateAnswer(i)' formControlName="answer">
+                                                </mat-slide-toggle>
+                                            </div>
+                                        </div>
+                                    </span>
+                                   
+                                </ng-container>
+                            </div>
+                          
+                        </div>
+                        <div *ngIf="shareWithOthers" class="my-3">
+                            <h2 *ngIf="origin=='album'" class="t-bold t-15"> Album geteilt mit</h2>
+                            <h2 *ngIf="origin=='presentation'" class="t-bold t-15"> Presentation geteilt mit</h2>
+                            <ng-container *ngIf="presiContacts?.length>0">
+                                <div class="d-flex my-2"  *ngFor="let contact of presiContacts ">
+                                    <div class="mr-auto">
+                                        <img src="https://robohash.org/9b1c3922aa46858242acc0a0f676d860?set=set2&bgset=&size=400x400" style="height: 50px; " class="mr-2">
+                                        <h2 class="t-reg t-12">{{contact.userName}}</h2>
+                                    </div>
+                                    <div class="">
+                                        <img src="assets/images/Löschen_rot.svg" style="height: 15px; " class="mr-2">
+                                       
+                                    </div>
+                                </div>
+                            </ng-container>
+                            
+                            <div class="d-flex my-2">
+                                <div class="mr-auto">
+                                    <img src="assets/images/Kontakt_hinzufügen.svg" style="height: 50px; " class="mr-2" (click)="findMember=true"><span class="t-bold t-14" > Kontakt hinzufügen</span>
+                                   
+                                </div>
+                               
+                            </div>
+                            <app-find-member *ngIf="findMember" [presiId]="selectedPresiId" [findInContacts]="true"></app-find-member>
+                        </div>
+                        <div ><button type="submit" class="btn btn-green mt-4 t-12 text-white t-bold" style="width: 200px; border-radius: 0.75rem;">Speichern</button> </div>
+                    </div>
+                </div>
+
+                <div class="col-6" *ngIf="selectedAlbimgs?.length>0 && !uploadImage && addImgFromGardify==false && showPresiImages==true ">
+                    <div class="d-flex flex-wrap selectedAlbImgs" >
+                        <ng-container *ngFor="let img of selectedAlbimgs[0].EntryImages">
+                            <div class="img-container mr-3 mt-3" style="height: 200px; width: 200px;">
+                                <img   class=" ptr image" [title]="img.Author? 'Autor:'+ img.Author : '' " [alt]="img.AltAttr" [src]="toUrl(img.SrcAttr,false)" (click)="pushSelectedImgId(img.Id); img.highlighted=true">
+                                 <div *ngIf="img.highlighted==true" class="overlay t-10" (click)="img.highlighted=false; removeImgFromSelection(img.Id)"><img src="assets/images/Löschen_rot.svg" class=" ptr" style="height: 25px; " ><br><span>Bild löschen</span></div>
+                             </div>      
+                        </ng-container>
+                    </div>
+                </div>
+
+                <div class="col-6" *ngIf="listOfImages?.length>0 && !uploadImage && addImgFromGardify==true && origin=='presentation' ">
+                    <div class="d-flex flex-wrap" >
+                        <ng-container *ngFor="let img of listOfImages">
+                            <div class="img-container mr-3 mt-3" style="height: 200px; width: 200px;">
+                                <img   class=" ptr image" [title]="img.Author? 'Autor:'+ img.Author : '' " [alt]="img.AltAttr" [src]="toUrl(img.SrcAttr,false)" (click)="pushSelectedImgId(img.Id); img.highlighted=true">
+                                 <div *ngIf="img.highlighted==true" class="overlay t-10" (click)="img.highlighted=false; removeImgFromSelection(img.Id)"><img src="assets/images/Ausgewählt.svg" class=" ptr" style="height: 25px; " ><br><span>Bild auswählen</span> </div>
+                             </div>     
+                        </ng-container>
+                    </div>
+                </div>
+                <div class="col-6 text-grey" *ngIf="uploadImage && addImgFromGardify==false ">
+       
+                    <div class="row" formGroupName="fileDetails">
+                        <div class="col-12">
+                            <h2 for="headline" class="t-12 t-bold text grey">Bildunterschrift</h2> 
+                            <input id="headline" type="text" [class.borderDanger]="fControl['headline'].invalid" formControlName="headline" class="form-control text-input">
+                        </div>
+                        <div class="col-12 mt-2">
+                            <h2 for="location " class="t-12 t-bold text grey">Anmerkung/Standort</h2> 
+                            <input id="location" type="text" [class.borderDanger]="fControl['location'].invalid" formControlName="location" class="form-control text-input">
+                        </div>
+                        <div class="col-12 mt-2">
+                            <h2 for="keywords" class="t-12 t-bold text grey">Stichworte/Verschlagwortung</h2> 
+                            <textarea id="keywords" type="text" [class.borderDanger]="fControl['keywords'].invalid"  formControlName="keywords" class="form-control"></textarea>
+                        </div>
+                        <div class="col-12 mt-2">
+                            <h2 for="creationDate" class="t-12 t-bold text grey">Erstellungsdatum</h2> 
+                            <!-- <input id="creationDate" type="text" formControlName="creationDate"> -->
+                            <mat-form-field appearance="fill">
+                                <mat-label>Choose a date</mat-label>
+                                <input class="date-input" matInput [matDatepicker]="creationDate" [class.borderDanger]="fControl['creationDate'].invalid" formControlName="creationDate"  />
+                                <mat-datepicker-toggle matSuffix [for]="creationDate"></mat-datepicker-toggle>
+                                <mat-datepicker #creationDate></mat-datepicker>
+                              </mat-form-field>
+                        </div>
+                        <div class="col-12 mt-2">
+                            <h2 for="alternativeDate" class="t-12 t-bold text grey" >Belibiges Datum</h2> 
+                            <!-- <input id="alternativeDate" type="text" class="form-control" formControlName="alternativeDate"> -->
+                            <mat-form-field appearance="fill">
+                                <mat-label>Choose a date</mat-label>
+                                <input class="date-input" matInput [matDatepicker]="alternativeDate" [class.borderDanger]="fControl['alternativeDate'].invalid" formControlName="alternativeDate"  />
+                                <mat-datepicker-toggle matSuffix [for]="alternativeDate"></mat-datepicker-toggle>
+                                <mat-datepicker #alternativeDate></mat-datepicker>
+                              </mat-form-field>
+                              <h2 for="alternativeDate" class="t-10 mt-2 t-bold text grey" >Hier kannst du belibiges Datum eingeben</h2> 
+                        </div>
+                        <mat-divider class="mt-3 " > </mat-divider>
+                        <div class="col-12" (click)="toggleradiobtn()">
+                            <h2 for="pictureOwner" class="t-12 t-bold text grey">Filter</h2> 
+                            
+                            <label class="mt-2 t-12" >
+                                <!-- <img src="assets/images/Kreis_zum_abhaken.svg" class="radioBtn"> -->
+                                <input id="pictureOwner" type="checkbox" [value]="true" [class.borderDanger]="fControl['pictureOwner'].invalid" formControlName="pictureOwner" > 
+                                 Dieses Bild stammt nicht von mir</label> <br>
+                            <!-- <label class="mt-2 t-12" *ngIf="buttonSelected"><img src="assets/images/Ausgewählt.svg" class="radioBtnChecked" > Dieses Bild stammt nicht von mir</label> <br> -->
+        
+                            <span class="t-10"> Diese Funktion schützt dich davor, aus Versehen in der Community Bilder zu veröffentlichen, deren Bildrechte du nicht hast</span>
+                        </div>
+                        <div class="col-12">
+                            <h2 for="pictureSource" class="t-12 t-bold text grey">Bildherkunft oder Urheber eintragen (optional)</h2> 
+                            <input id="pictureSource" type="text" class="form-control text-input" formControlName="pictureSource">
+                    
+                        </div>
+                       
+                    </div>
+                
+            </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</form>
+

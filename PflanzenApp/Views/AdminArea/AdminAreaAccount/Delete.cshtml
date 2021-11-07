@@ -1,0 +1,22 @@
+﻿@model GardifyModels.Models.DeleteUserViewModel
+
+@{
+    ViewBag.Title = "Löschen";
+    Layout = "~/Views/Shared/_LayoutAdminArea.cshtml";
+}
+
+<h2>Löschen</h2>
+
+<h3>Sind Sie sicher, dass Sie @Model.Email löschen möchten?</h3>
+<div>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Löschen" class="btn btn-default" /> |
+            @Html.ActionLink("Zurück zur Benutzerübersicht", "Index")
+        </div>
+    }
+</div>

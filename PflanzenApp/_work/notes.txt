@@ -1,0 +1,21 @@
+﻿var userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+
+var netzlabUser = new ApplicationUser { UserName = "netzlab", PhoneNumber = "", Email = "info@netzlab.de", EmailConfirmed = true };
+var ninaUser = new ApplicationUser { UserName = "netzlabNV", PhoneNumber = "", Email = "nv@netzlab.de", EmailConfirmed = true };
+var andrejUser = new ApplicationUser { UserName = "netzlabAV", PhoneNumber = "", Email = "av@netzlab.de", EmailConfirmed = true };
+var kfjUser = new ApplicationUser { UserName = "netzlabKFJ", PhoneNumber = "", Email = "kfj@netzlab.de", EmailConfirmed = true };
+var testUser = new ApplicationUser { UserName = "testuser", PhoneNumber = "", Email = "testuser@netzlab.de", EmailConfirmed = true };
+
+CreatedBy = c.String(nullable: false, maxLength: 256, defaultValue: "CREATED_BY_SYSTEM"),
+CreatedDate = c.DateTime(nullable: false, defaultValueSql: "GETDATE()"),
+EditedBy = c.String(maxLength: 256, defaultValue: "EDITED_BY_SYSTEM"),
+EditedDate = c.DateTime(nullable: false, defaultValueSql: "GETDATE()"),
+Deleted = c.Boolean(nullable: false),
+
+userManager.Create(netzlabUser, "Admin42781!");
+userManager.Create(ninaUser, "Admin42781!");
+userManager.Create(andrejUser, "Admin42781!");
+userManager.Create(kfjUser, "Admin42781!");
+userManager.Create(testUser, "Test1234!");
+
+Update-Database -Script -SourceMigration: database-update-3 -TargetMigration: database-update-4

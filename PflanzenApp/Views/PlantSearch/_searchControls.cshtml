@@ -1,0 +1,103 @@
+﻿@model GardifyModels.Models.PlantSearchViewModel
+<div class="form-group clearfix">
+    <label class="col-md-2 control-label">Systematik</label>
+    <div id="taxonomic-tree" class="col-md-10 taxonomic-tree">
+        @if (Model.TreeRoot != null)
+            {
+                Html.RenderPartial("_taxonomicTreeNode", Model.TreeRoot);
+            }
+    </div>
+</div>
+<hr />
+<div class="form-group">
+    <label class="control-label col-md-2">Kategorie</label>
+    <div class="col-md-10">
+        @if (Model.CategoryList != null && Model.CategoryList.Any())
+            {
+            @Html.DropDownListFor(model => model.CategoryId, new SelectList(Model.CategoryList, "id", "title", Model.CategoryId), new { @class = "form-control", @onchange = "changeCategory(this.value)" })
+        }
+        else
+        {
+            <select class="form-control" disabled>
+                <option>Keine weitere Einschränkung möglich</option>
+            </select>}
+    </div>
+</div>
+@if (Model.SubCategoryList != null && Model.SubCategoryList.Any())
+{
+    <div class="form-group">
+        <label class="control-label col-md-2">Unterkategorie</label>
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.SubCategoryId, new SelectList(Model.SubCategoryList, "id", "title", Model.SubCategoryId), new { @class = "form-control", @onchange = "changeSubCategory(this.value)" })
+        </div>
+    </div>
+}
+@if (Model.TagsList != null && Model.TagsList.Any())
+{
+    <div class="form-group">
+        <label class="col-md-2 control-label">Eigenschaften</label>
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.SelectedTagId, new SelectList(Model.TagsList, "id", "title", Model.SelectedTagId), new { @class = "form-control", @style = "display:inline-block" })
+            <a href="#" onclick="addPositiveTag(); return false;" class="btn btn-default">Suchkriterium hinzufügen</a>
+        </div>
+    </div>
+}
+<hr />
+<div class="form-group">
+    <label class="col-md-2 control-label">Aktive Suchkriterien</label>
+    <div class="col-md-10">
+        @if (Model.PositiveFilterTagsList != null && Model.PositiveFilterTagsList.Any())
+            {
+            <ul id="positive-filter-tag-list">
+                @foreach (var tag in Model.PositiveFilterTagsList)
+                {
+                    <li>@tag.Title <a href="#" data-title="@tag.Title" data-tagid="@tag.Id" onclick="removePositiveTag(this); return false;">entfernen</a></li>
+                }
+            </ul>}
+    </div>
+</div>
+<hr />
+<div class="form-group">
+    <label class="col-md-2 control-label">Wuchshöhe</label>
+    <div class="col-md-8">
+        von:<input type="text" name="selHmin" id="selHmin" readonly style="border:0; width:30px; padding:0 2px 0 0; text-align:right;">cm&nbsp;bis:<input type="text" name="selHmax" id="selHmax" readonly style="border:0; width:30px; padding:0 2px 0 0; text-align:right;">cm
+        <div id="slider-height"></div>
+    </div>
+</div>
+<hr />
+<div class="form-group">
+    <label class="col-md-2 control-label">Blütezeit</label>
+    <div class="col-md-10 check-month">
+        @if (Model.MonthCheckboxes != null && Model.MonthCheckboxes.Any())
+            {
+                foreach (var checkbox in Model.MonthCheckboxes)
+                {
+                <div class="checkbox">
+                    <label>
+                        @if (checkbox.Disabled)
+                        {
+                            @Html.CheckBox("month", checkbox.Checked, new Dictionary<string, object> {
+                                    { "disabled", true }, { "value", checkbox.Value }, { "class", "month-checkbox" }, { "data_text", checkbox.Text } });
+                        }
+                        else
+                        {
+                            @Html.CheckBox("month", checkbox.Checked, new { value = checkbox.Value, @class = "month-checkbox", data_text = checkbox.Text })
+                        }
+                        @checkbox.Text
+                    </label>
+                </div>
+            }
+        }
+    </div>
+</div>
+<hr />
+<div class="form-group clearfix">
+    <label class="col-md-2 control-label">Gespeicherte Suchanfragen verwenden</label>
+    <div id="search-queries-wrapper" class="col-md-10">
+        @if (Model.SearchQueries != null)
+            {
+                Html.RenderPartial("~/Views/SearchQuery/_SearchQueryList.cshtml", Model.SearchQueries);
+            }
+    </div>
+</div>
+<hr />

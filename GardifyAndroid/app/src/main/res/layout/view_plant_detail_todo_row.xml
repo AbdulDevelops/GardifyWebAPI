@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/text_view_detail_todo_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@color/textView_all_dawn"
+        android:padding="@dimen/marginPaddingSize_5sdp"
+        android:text="To-dos"
+        android:textColor="@color/text_all_gunmetal"
+        android:textSize="@dimen/textSize_body_medium"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/text_view_detail_todo_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="sample text"
+        android:textStyle="bold"
+        android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+        android:textSize="@dimen/textSize_body_medium" />
+
+    <TextView
+        android:id="@+id/text_view_detail_todo_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="sample text"
+        android:textSize="@dimen/textSize_body_xsmall" />
+
+</LinearLayout>

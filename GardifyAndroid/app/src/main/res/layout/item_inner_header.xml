@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/linear_layout"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:gravity="bottom"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/marginPaddingSize_10sdp"
+            android:paddingBottom="@dimen/marginPaddingSize_10sdp"
+            android:paddingTop="@dimen/marginPaddingSize_10sdp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <ImageView
+                    android:id="@+id/title_icon"
+                    android:visibility="gone"
+                    android:layout_marginRight="@dimen/marginPaddingSize_10sdp"
+                    android:layout_width="@dimen/imageView_all_width_18sdp"
+                    android:layout_height="@dimen/imageView_all_height_18sdp"/>
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/source_sans_pro"
+                    android:textSize="@dimen/textSize_title"
+                    android:textColor="@color/text_all_gunmetal"
+                    tools:text="What's hot"
+                    />
+            </LinearLayout>
+
+
+
+            <TextView
+                android:id="@+id/subtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:fontFamily="@font/source_sans_pro"
+                android:textColor="?android:attr/textColorSecondary"
+                tools:text="What's hot"
+                />
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/icon"
+            android:padding="@dimen/marginPaddingSize_10sdp"
+            android:background="@drawable/ripple_circular"
+            android:layout_gravity="center_vertical"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+    </LinearLayout>
+</layout>

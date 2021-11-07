@@ -1,0 +1,53 @@
+﻿@model GardifyModels.Models.ForumViewModels.ForumThreadViewModel
+@{
+    ViewBag.Title = "Thread";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using PflanzenApp.HtmlHelpers
+
+<div id="forum-wrapper">
+	@Html.Partial("_ThreadView", Model)
+</div>
+@section Scripts {
+	<script type="text/javascript">
+
+
+	$(document).ready(function () {
+		var forum = new Forum('#forum-wrapper');
+		console.log(forum);
+		forum.updateControls();
+	});
+
+	function Forum(forumSelector) {
+		this.selector = forumSelector;
+		var root = this;
+
+		this.updateControls = function () {
+			$(this.selector + ' .add-post-btn').click(function (event) {
+				event.preventDefault();
+				console.log(this);
+				root.addPost($(this).data('headerid'));
+			});
+		}
+
+		this.addPost = function (headerid) {
+			$(root.selector + ' .loading-div').show();
+			content = $(root.selector + " textarea[name=postcontent]").val();
+			$.ajax({
+				url: '@Url.Action("CreatePlantPost", "Forum", new { plantId = Model.ThreadHeader.RelatedObjectId })',
+				type: 'post',
+				cache: false,
+				data: { 'HeaderId': headerid, 'Content': content, @Html.AjaxAntiForgeryTokenExtention() },
+			})
+			.done(function (result) {
+				$(root.selector).html(result);
+				root.updateControls();
+				$(root.selector + ' .loading-div').hide();
+			});
+		}
+	}
+	</script>
+
+	@Scripts.Render("~/scripts/jquery.unobtrusive-ajax.min.js")
+
+}

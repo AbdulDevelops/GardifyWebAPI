@@ -1,0 +1,224 @@
+<ng-container *ngIf="loading">
+  <div class="overlay-loading" [hidden]="!loading">
+    <svg class="spinner position-relative" viewBox="25 25 50 50">
+      <circle class="path" cx="50" cy="50" r="24" fill="none" stroke-width="2" stroke-miterlimit="10" />
+    </svg>
+  </div>
+</ng-container>
+<ng-container *ngIf="todo; else noTodo">
+<div class="wrapper {{mode}}">
+  <div class="container pt-3 pb-5">
+    <div class="row mt-5 mb-4">
+      <div class="col-12 col-md-6">
+        <h2 class="t-light t-11 text-grey">
+          Todos/Tododetails</h2>
+        <a [routerLink]="['/meingarten']">
+          <h2 class="t-light t-26 {{mode === 'light'? 'text-grey' : 'text-white'}}">
+            << TODODETAILS</h2> 
+        </a> 
+      </div> 
+    </div> 
+    <hr>
+
+    <div class="row pt-2">
+      <div class="col-lg-4">
+        <div class="overlay-loading" *ngIf="clicked">
+          <svg class="spinner position-relative" viewBox="25 25 50 50">
+            <circle class="path" cx="50" cy="50" r="24" fill="none" stroke-width="2" stroke-miterlimit="10" />
+          </svg>
+        </div>
+        <div>
+          <img [src]="todoUrl()" [alt]=todo.Title class="plant-img">
+        </div>
+      </div>
+      <div class="col-lg-8">
+        <ng-container>
+          <h2 class="t-bold t-16 mt-4 text-ltsgrey">Todotitel</h2>
+          <span class="t-reg t-14 {{mode === 'light'? 'text-darkgrey' : 'text-white'}}">
+            {{todo.Title}}
+          </span>
+        </ng-container>
+        <ng-container>
+          <h2 class="t-bold t-16 mt-4 text-ltsgrey">Beschreibung</h2>
+          <span class="t-reg t-14 {{mode === 'light'? 'text-darkgrey' : 'text-white'}}">
+            {{todo.Description}}
+          </span>
+        </ng-container>
+        <ng-container>
+          <h2 class="t-bold t-16 mt-4 text-ltsgrey">Zeitraum</h2>
+          <span class="t-reg t-14 {{mode === 'light'? 'text-darkgrey' : 'text-white'}}">
+            zwischen {{todo.DateStart | date:'dd.MM.'}} und {{todo.DateEnd | date:'dd.MM.'}}
+          </span>
+        </ng-container>
+      </div>
+      <div class="col-lg-12">
+        <button data-toggle="modal" (click)="selectedTodo = todo" data-target="#updateTodo" class="btn btn-green" style="float:right">Bearbeiten</button>
+      </div>
+    </div>
+    <hr>
+<!--Update Todo-->
+<ng-container *ngIf="selectedTodo">
+  <div class="modal fade" id="updateTodo" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content {{mode}}">
+        <div class="modal-header">
+          <h5 class="modal-title">{{selectedTodo.ObjectId?'Eintrag':'To-do'}} bearbeiten</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span class="{{mode==='dark'?'text-white':'text-darkgrey'}}" aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form class="modal-body">
+          <div class="row mb-3">
+            <div class="form-group col-12 px-2">
+              <label class="{{mode==='light'?'text-darkgrey':'text-white'}}">Titel</label>
+              <input [(ngModel)]="selectedTodo.Title" type="text" class="form-control" name="TodoTitle">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="form-group col-12 px-2">
+              <label class="{{mode==='light'?'text-darkgrey':'text-white'}}">Beschreibung</label>
+              <textarea [(ngModel)]="selectedTodo.Description" type="text" class="form-control" name="TodoDesc"></textarea>
+            </div>
+          </div>
+          <!--update Start and End Date -->
+          <!--
+            <div class="row mb-3" >
+            <div class="form-group col-12 px-2">
+              <label class="{{mode==='light'?'text-darkgrey':'text-white'}}">Startdatum ändern</label>
+              <input *ngIf="selectedTodo.ObjectId" [(ngModel)]="selectedTodo.Date" type="date" class="form-control" name="TodoDate">
+              <input *ngIf="!selectedTodo.ObjectId" [(ngModel)]="selectedTodo.DateStart" type="date" class="form-control" name="TodoDate">
+            </div>
+            <div class="form-group col-12 px-2" *ngIf="!selectedTodo.ObjectId">
+              <label class="{{mode==='light'?'text-darkgrey':'text-white'}}">Enddatum ändern</label>
+              <input  [(ngModel)]="selectedTodo.DateEnd" type="date" class="form-control" name="TodoDate">
+            </div>
+          </div>
+          -->
+          <!-- <div class="row mb-3">
+            <div class="form-group col-12 px-2">
+              <label class="{{mode==='light'?'text-darkgrey':'text-white'}}">Ihre Notizen</label>
+              <textarea *ngIf="selectedTodo.ObjectId" [(ngModel)]="selectedTodo.Description"
+                        type="text" class="form-control" name="TodoNotes">
+              </textarea>
+              <textarea *ngIf="!selectedTodo.ObjectId" [(ngModel)]="selectedTodo.Notes"
+                        type="text" class="form-control" name="TodoNotes">
+              </textarea>
+            </div>
+          </div> -->
+        </form>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
+          <button type="button" class="btn btn-green" data-dismiss="modal" (click)="updateTodo(selectedTodo)">Speichern</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+    <!--Tipps Section-->
+  <div class="container news-section d-none d-lg-block">
+      <h5 class="mt-5 t-18 text-green">Hilfreiche Produkte</h5>
+      <div class="container px-1 mt-4 pb-3">
+        <div id="tippsCarousel" class="carousel slide" data-ride="carousel">
+          <div class="carousel-inner pb-5 d-none d-lg-block">
+            <div class="carousel-item active">
+              <div class="row pt-1 pb-5 justify-content-between">
+                <div class="col-sm-3 caro-item-ph tipp1 {{mode}}" style="max-width:220px;">
+                  <a href="#" class="tipp-text">Handy-Mikroskop</a>
+                </div>
+                <div class="col-sm-3 caro-item-ph tipp2 {{mode}}" style="max-width:220px;">
+                  <a href="#" class="tipp-text">Kniekissen</a>
+                </div>
+                <div class="col-sm-3 caro-item-ph tipp3 {{mode}}" style="max-width:220px;">
+                  <a href="#" class="tipp-text">Gartenschuhe</a>
+                </div>
+                <div class="col-sm-3 caro-item-ph tipp4 {{mode}}" style="max-width:220px;">
+                  <a href="#" class="tipp-text">Wandschlauchbox</a>
+                </div>
+              </div>
+            </div>
+          </div>
+      
+          <a class="carousel-control-prev" href="#tippsCarousel" role="button" data-slide="prev" style="top:80px;">
+            <span class="carousel-control-prev {{mode}}" aria-hidden="true"></span>
+            <span><img class="img-fluid" src="./assets/images/pfeilR1.png" width="20"></span>
+          </a>
+          <a class="carousel-control-next" href="#tippsCarousel" role="button" data-slide="next" style="top:80px;">
+            <span class="carousel-control-next {{mode}}" aria-hidden="true"></span>
+            <span><img class="img-fluid" src="./assets/images/pfeilL1.png" width="20"></span>
+          </a>
+       
+      </div>
+    </div>
+  </div>
+    <!--Tipps Section Mobile-->
+  <div class="container news-section d-block d-lg-none">
+    <h5 class="mt-5 t-reg t-18 text-green">Hilfreiche Produkte</h5>
+    <div class="container px-1 mt-4 pb-5">
+      <div id="tippsCarousel3" class="carousel slide" data-ride="carousel" data-interval="0">
+  
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div class="row pt-1 pb-5 justify-content-center">
+              <div class="col-sm-5 col-md-4 caro-item-ph tipp1 {{mode}}" style="max-width:220px;">
+                <a href="#" class="tipp-text">Handy-Mikroskop</a>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="row pt-1 pb-5 justify-content-center">
+              <div class="col-sm-5 col-md-4 caro-item-ph tipp2 {{mode}}" style="max-width:220px;">
+                <a href="#" class="tipp-text">Kniekissen</a>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="row pt-1 pb-5 justify-content-center">
+              <div class="col-sm-5 col-md-4 caro-item-ph tipp3 {{mode}}" style="max-width:220px;">
+                <a href="#" class="tipp-text">Gartenschuhe</a>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="row pt-1 pb-5 justify-content-center">
+              <div class="col-sm-5 col-md-4 caro-item-ph tipp4 {{mode}}" style="max-width:220px;">
+                <a href="#" class="tipp-text">Wandschlauchbox</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a class="carousel-control-prev" href="#tippsCarousel3" role="button" data-slide="prev" style="top:80px;">
+          <span class="carousel-control-prev {{mode}}" aria-hidden="true"></span>
+          <span><img class="img-fluid" src="./assets/images/pfeilR1.png" width="20"></span>
+        </a>
+        <a class="carousel-control-next" href="#tippsCarousel3" role="button" data-slide="next" style="top:80px;">
+          <span class="carousel-control-next {{mode}}" aria-hidden="true"></span>
+          <span><img class="img-fluid" src="./assets/images/pfeilL1.png" width="20"></span>
+        </a>
+  
+      </div>
+      </div>
+    </div>
+    <hr>
+  </div>
+</div>
+</ng-container>
+
+<ng-template #noTodo>
+  <div class="wrapper {{mode}} {{mode === 'light'? 'text-darkgrey' : 'text-white'}}">
+    <div class="container pt-3 pb-5">
+      <div class="row mt-5 mb-4">
+        <div class="col-12 col-md-6">
+          <h2 class="t-light t-11 text-grey">
+            Todos/Tododetails</h2>
+          <a [routerLink]="['/meingarten']">
+            <h2 class="t-light t-20">
+              << Tododetails</h2> 
+          </a> 
+        </div> 
+        <div class="col-12 mt-4">
+          <p>Dieses To-do existiert nicht bzw. wurde entfernt.</p>
+        </div>
+      </div> 
+    </div>
+  </div>
+</ng-template>

@@ -1,0 +1,52 @@
+<div class="wrapper {{mode}} {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+  <div class="container pt-3 pb-5">
+    <div class="row mt-5 mb-4 t-14 t-reg">
+      <div class="col-12 mb-4">
+          <h2 class="t-light t-26 {{mode==='dark'?'text-white':'text-grey'}}">DEINE BESTELLUNGEN</h2>
+      </div>
+      <ng-container *ngIf="orders.length > 0; else noOrders">
+        <div class="container order {{mode}} bt-border mt-2" *ngFor="let order of orders">
+          <div class="row order-header p-3 mb-2">
+            <div class="col-3">
+              <span class="d-block">Summe</span>
+              <span class="t-light">{{order.OrderAmount | currency:'EUR':'code'}}</span>
+              </div>
+            <div class="col-3">
+              <span class="d-block">Bestellnr.</span>
+              <span class="t-light">{{order.OrderId}}</span>
+              </div>
+            <div class="col-3">
+              <span class="d-block">Versandadresse</span>
+              <span class="t-light">{{order.CustomerName}}, {{order.Street}} {{order.HouseNr || ''}}</span>
+              </div>
+            <div class="col-3">
+              <span class="d-block">Bestellung aufgegeben</span>
+              <span class="t-light">{{order.Date | date:'dd.MM.yyyy'}}</span>
+              </div>
+          </div>
+          <div *ngFor="let article of order.OrderedArticles" class="row mb-1">
+            <div class="col-2">
+              <img [routerLink]="'/artikel/'+article.ArticleView.Id" class="article-img ptr" [src]=toUrl(article.ArticleView.ArticleImages[0]?.SrcAttr) [alt]=article.Name>
+            </div>
+            <div class="col-5 pt-3">
+              <p class="mb-0">{{article.ArticleView.Name}} <span class="t-italic" *ngIf="article.IsPreorder"> (vorbestellt)</span></p>
+              <p>Menge: {{article.Quantity}}</p>
+              <p class="text-green">{{article.ArticleView.NormalPrice | currency:'EUR':'code'}}</p>
+            </div>
+            <div class="col-3 pt-3">
+              <button (click)="buyAgain(article.ArticleView.Id)" class="text-white btn btn-green">
+                Nochmals kaufen
+              </button>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-template #noOrders>
+        <div class="col-12">
+          <p>Du hast noch keine Einkäufe getätigt.</p>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

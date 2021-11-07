@@ -1,0 +1,10 @@
+.consent-popup {
+    position: sticky;
+    bottom: 0;
+    background-color: rgb(178, 204, 143);
+    color: #333;
+    z-index: 999;
+}
+button {
+    color: #333;
+}

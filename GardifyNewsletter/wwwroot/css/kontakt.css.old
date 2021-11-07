@@ -1,0 +1,495 @@
+﻿body {}
+
+@font-face {
+    font-family: 'DINPro-Regular_13937';
+    src: url('DINPro-Regular_13937.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'DINPro-Medium_13936';
+    src: url('DINPro-Medium_13936.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'DINPro-Light_13935';
+    src: url('DINPro-Light_13935.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'DINPro-Bold_13934';
+    src: url('DINPro-Bold_13934.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'DINPro-Black_13933';
+    src: url('DINPro-Black_13933.ttf') format('truetype');
+}
+
+.font-family-regular {
+    font-family: 'DINPro-Regular_13937';
+}
+
+.font-family-medium {
+    font-family: 'DINPro-Medium_13936';
+
+}
+
+.font-family-light {
+    font-family: 'DINPro-Light_13935';
+}
+
+.font-family-bold {
+    font-family: 'DINPro-Bold_13934';
+}
+
+.font-family-black {
+    font-family: 'DINPro-Black_13933';
+}
+
+
+
+.letter-spacing {
+    letter-spacing: 0.01em;
+}
+
+.line_height_36 {
+    line-height: 34px;
+
+}
+
+.font-15 {
+    font-size: 15px;
+}
+
+.font-14 {
+    font-size: 14px;
+}
+
+.font-16 {
+    font-size: 16px;
+}
+
+.font-20 {
+    font-size: 20px;
+}
+
+.font-22 {
+    font-size: 20px;
+}
+
+.font-25 {
+
+    font-size: 24px;
+    /*    font-size: 1.2vw;*/
+}
+
+.font-34 {
+    font-size: 34px;
+}
+
+.color-gray {
+    color: #787977;
+}
+
+
+.orangecolor {
+    color: #d68a27;
+}
+
+.bgorange {
+    background-color: #d68a27;
+}
+
+.h-gray {
+    color: #f5f5f5;
+}
+
+.b-gray {
+    background-color: #f5f5f5;
+}
+
+.form-controlA {
+    width: 200px !important;
+    height: 35px !important;
+    background-color: #f5f5f5;
+    border: none;
+    border-radius: 0;
+}
+
+.btn-controlA {
+    width: 78px !important;
+    height: 35px;
+    background-color: #f5f5f5;
+    border: none;
+    border-radius: 0;
+}
+
+.btn-control {
+    width: 78px !important;
+    height: 35px;
+    background-color: #f5f5f5;
+    border: none;
+    border-radius: 0;
+}
+
+.col-nav {
+    height: 10vh !important;
+    z-index: 11;
+}
+
+#navbarNav li a:hover {
+    color: #787977;
+    border-bottom: solid 3px #d68a27;
+
+}
+
+.form-control {
+    border-radius: 0px !important;
+}
+
+.btn-abs {
+    height: 60px;
+    border-radius: 0px !important;
+    border: 0px;
+
+}
+
+.btn-abs:hover {
+    background-color: #787977 !important;
+
+}
+
+.custom-select {
+    border-radius: 0px !important;
+}
+
+#exampleFormControlTextarea1 {
+    width: 100% !important;
+}
+
+select {
+
+    /* styling */
+    width: 100%;
+    background-color: transparent;
+    border: solid 1px #f5f5f5;
+    border-radius: 0px;
+    display: inline-block;
+    font: inherit;
+    line-height: 1.5em;
+    padding: 0.5em 3.5em 0.5em 1em;
+
+    /* reset */
+
+    margin: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+
+/* arrows */
+
+
+
+.col-wow::before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    color: #fff;
+
+    content: "\f078";
+    font-size: 25px;
+    position: absolute;
+    top: 0;
+    left: 160px;
+    z-index: -1;
+    /*   background-color: #d68a27;
+    width: 40px;
+    height: 40px;*/
+
+}
+
+.col-wow::after {
+
+
+    content: "";
+    font-size: 25px;
+    position: absolute;
+    top: 0;
+    left: 150px;
+    z-index: -2;
+    background-color: #d68a27;
+    width: 40px;
+    height: 40px;
+
+}
+
+.col-wot::before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    color: #fff;
+
+    content: "\f078";
+    font-size: 25px;
+    position: absolute;
+    top: 0;
+    left: 292px;
+    z-index: -1;
+    /*
+    background-color: #d68a27;
+    width: 40px;
+    height: 40px;
+*/
+
+}
+
+.col-wot::after {
+
+
+    content: "";
+    font-size: 25px;
+    position: absolute;
+    top: 0;
+    left: 284px;
+    z-index: -2;
+    background-color: #d68a27;
+    width: 40px;
+    height: 40px;
+
+}
+
+
+
+
+
+/*
+    {
+
+    background-image: linear-gradient(45deg, transparent 50%, #fff 50%),
+
+        linear-gradient(135deg, #fff 50%, transparent 50%),
+        linear-gradient(to right, #d68a27, #d68a27);
+
+    background-position: calc(100% - 20px) calc(1em + 2px),
+        calc(100% - 15px) calc(1em + 2px),
+        100% 0;
+    background-size: 5px 5px,
+        5px 5px,
+        2.5em 2.5em;
+    background-repeat: no-repeat;
+}
+
+
+
+select.classic:focus {
+    background-image:
+        linear-gradient(45deg, #fff 50%, transparent 50%),
+        linear-gradient(135deg, transparent 50%, #fff 50%),
+        linear-gradient(to right, gray, gray);
+    background-position:
+        calc(100% - 15px) 1em,
+        calc(100% - 20px) 1em,
+        100% 0;
+    background-size:
+        5px 5px,
+        5px 5px,
+        2.5em 2.5em;
+    background-repeat: no-repeat;
+    border-color: grey;
+    outline: 0;
+}
+*/
+
+
+@media (max-width: 1141px) {
+
+
+    .font-25 {
+        font-size: 19px !important;
+
+    }
+
+    .form-be {
+        margin-top: 0px;
+        width: 100%;
+
+    }
+
+
+    #exampleFormControlTextarea1 {
+        width: 100% !important;
+    }
+
+    .col-wow::before {
+
+        left: 125px;
+    }
+
+    .col-wow::after {
+
+
+
+        left: 120px;
+
+
+    }
+
+    .col-wot::before {
+
+        left: 238px;
+    }
+
+    .col-wot::after {
+
+
+
+        left: 230px;
+
+
+    }
+}
+
+@media (max-width: 769px) {
+
+    .font-22 {
+        font-size: 18px !important;
+    }
+
+    .form-controlA {
+        width: 100px !important;
+        height: 35px !important;
+
+
+    }
+
+    .btn-controlA {
+        width: 54px !important;
+
+    }
+
+    .nav-to {
+        border: 0px !important;
+
+    }
+
+    .font-25 {
+        font-size: 19px !important;
+
+    }
+
+    .form-be {
+        margin-top: 26px;
+        height: 180px !important;
+    }
+
+    .col-wow::before {
+
+        left: 85px;
+
+
+    }
+
+    .col-wow::after {
+
+
+
+        left: 80px;
+
+
+    }
+
+    .col-wot::before {
+
+        left: 325px;
+
+
+    }
+
+    .col-wot::after {
+
+
+
+        left: 318px;
+
+
+    }
+}
+
+
+@media (max-width: 576px) {
+
+
+
+
+
+    #inlineFormCustomSelectPref,
+    #colFormLabelLg,
+    #exampleFormControlTextarea1 {
+        width: 100% !important;
+    }
+
+
+    .col-nav {
+        height: 7vh !important;
+        z-index: 11;
+    }
+
+
+    .form-control {
+        width: 170px !important;
+        height: 35px !important;
+        background-color: #f5f5f5;
+        border: none;
+        border-radius: 0;
+    }
+
+    .btn-control {
+        width: 20vw !important;
+
+    }
+
+    .font-22 {
+        font-size: 22px !important;
+    }
+
+
+
+
+
+    .nav-to {
+        border: 0px !important;
+
+    }
+
+    .col-wow::before {
+
+        left: 125px;
+
+
+    }
+
+    .col-wow::after {
+
+
+        left: 120px;
+
+
+    }
+
+    .col-wot::before {
+
+        left: 272px;
+
+
+    }
+
+    .col-wot::after {
+
+
+        left: 264px;
+
+
+    }
+}

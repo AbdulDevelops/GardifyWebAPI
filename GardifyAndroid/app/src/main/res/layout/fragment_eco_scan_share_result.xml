@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/relativeLayout_all_seashell"
+    android:padding="@dimen/marginPaddingSize_24sdp">
+
+    <ProgressBar
+        android:id="@+id/progressBar_ecoScanShareResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:elevation="@dimen/elevation_20dp"
+        android:visibility="gone" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/linear_layout_eco_scan_top_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!-- fragment title & desc -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardView_home_plant_scan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/marginPaddingSize_24sdp"
+                app:cardCornerRadius="@dimen/cardCornerRadius_medium">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/marginPaddingSize_10sdp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+                        android:text="@string/ecoScan_shareResult"
+                        android:textSize="@dimen/textSize_headline"
+                        android:textStyle="bold" />
+
+                    <!-- EditText with Label -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/marginPaddingSize_10sdp"
+                        android:text="@string/all_email"
+                        android:textSize="@dimen/textSize_body_medium" />
+
+                    <EditText
+                        android:id="@+id/edit_text_share_result_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/PrimaryEditTextStyle"
+                        android:inputType="textEmailAddress"
+                        android:text="" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/marginPaddingSize_10sdp"
+                        android:text="@string/ecoScan_emailNote"
+                        android:textSize="@dimen/textSize_body_xsmall" />
+
+                    <!-- EditText with Label -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/marginPaddingSize_10sdp"
+                        android:text="@string/ecoScan_yourEmail"
+                        android:textSize="@dimen/textSize_body_medium" />
+
+                    <EditText
+                        android:id="@+id/edit_text_share_result_your_email"
+                        android:layout_width="match_parent"
+                        android:inputType="textEmailAddress"
+                        android:layout_height="wrap_content"
+                        style="@style/PrimaryEditTextStyle"
+                        android:text="" />
+
+                    <!-- EditText with Label -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/marginPaddingSize_10sdp"
+                        android:text="@string/ecoScan_from"
+                        android:textSize="@dimen/textSize_body_medium" />
+
+                    <EditText
+                        android:id="@+id/edit_text_share_result_from"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/PrimaryEditTextStyle"
+                        android:text="" />
+
+                    <!-- EditText with Label -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/marginPaddingSize_10sdp"
+                        android:text="@string/ecoScan_to"
+                        android:textSize="@dimen/textSize_body_medium" />
+
+                    <EditText
+                        android:id="@+id/edit_text_share_result_to"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/PrimaryEditTextStyle"
+                        android:text="" />
+
+                    <!-- EditText with Label -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/marginPaddingSize_10sdp"
+                        android:text="@string/all_message"
+                        android:textSize="@dimen/textSize_body_medium" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/textView_ecoScanShareResult_messagePrefix"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/marginPaddingSize_10sdp"
+                            android:textSize="@dimen/textSize_body_medium"
+                            android:elevation="5dp"
+                            android:text="@string/all_hello"/>
+
+                        <EditText
+                            android:id="@+id/edit_text_share_result_email_message"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/custom_edit_text_default"
+                            android:textSize="@dimen/textSize_body_medium"
+                            android:gravity="top"
+                            android:scrollbars="vertical"
+                            android:isScrollContainer="true"
+                            android:paddingLeft="@dimen/marginPaddingSize_10sdp"
+                            android:paddingRight="@dimen/marginPaddingSize_10sdp"
+                            android:paddingTop="@dimen/marginPaddingSize_40sdp"
+                            android:paddingBottom="@dimen/marginPaddingSize_60sdp"
+                            android:lines="12" />
+                        <TextView
+                            android:id="@+id/textView_ecoScanShareResult_messageSuffix"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:maxLines="2"
+                            android:lines="2"
+                            android:textSize="@dimen/textSize_body_medium"
+                            android:padding="@dimen/marginPaddingSize_10sdp"
+                            android:layout_alignBottom="@id/edit_text_share_result_email_message"
+                            android:text="@string/ecoScan_messageClosingSignature"/>
+                    </RelativeLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/button_share_fragment_send"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/marginPaddingSize_10sdp"
+                        android:text="@string/ecoScan_sendOff"
+                        style="@style/PrimaryButtonStyle" />
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>
+

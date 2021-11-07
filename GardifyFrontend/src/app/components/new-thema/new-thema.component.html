@@ -1,0 +1,78 @@
+<div class="overlay-loading" [hidden]="!loading">
+  <svg class="spinner position-relative" viewBox="25 25 50 50">
+    <circle class="path" cx="50" cy="50" r="24" fill="none" stroke-width="2" stroke-miterlimit="10" />
+  </svg>
+</div>
+
+<div class=" wrapper {{mode}} pt-5 ">
+  <div class="container px-5 pb-5 ">
+      <div class="row pt-4 pb-4 {{mode}}">
+          <div class="col-lg-12 bt-border">
+          <h2 class="t-26 mt-3 t-light {{mode === 'light'? 'text-grey' : 'text-white'}} ptr" [routerLink]="['/pflanzendoc']"><< PFLANZEN-DOC</h2>
+          </div>
+          
+      </div>
+      <form [formGroup]="newThema">
+        <div class="row bt-border">
+          <div class="col-lg-3 text-center pt-5" style="background-color: #7a9d34; height: 250px;width: 250px;">
+            <label class="btn btn_border075 t-19 btn-green mt-3 text-center pt-4 {{mode === 'light'? 'text-white' : 'text-white'}} ">
+              Bild hochladen
+              <input class="form-control d-none" type="file" accept="image/*, .heic, .heics, .heif, .heifs" (change)="onImageUpload($event)">
+            </label>
+          </div>
+          <div class="col-lg-8">
+            <div class="row form-check">
+              <div class="col-12 mt-1">
+                <input type="text" class="inputWhite t-italic w-100" formControlName="Thema" placeholder="Thema">
+              </div>
+              <div class="col-12 mt-1">
+                <input type="text" class="inputWhite w-100" formControlName="Description" placeholder="Beschreibung">
+              </div>
+            </div>
+          </div>
+          <ng-container *ngIf="isMobile">
+            <div class="col-12 col-lg-12 mt-1 mr-3">
+              <div class="form-check-inline mb-2 ch-container">
+                <div class="">
+                  <label class="form-check-label" style="width: 240px;">
+                    <input class="form-check-input check " style="margin-left: 0px; margin-right: 0px;" type="checkbox" formControlName="Isownfoto">
+                    <div class="d-inline-block"> Die verwendeten Bilder habe ich gemacht</div>
+                    <span class="checkmark weiß"></span>
+                    </label>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="!isMobile">
+            <div class="col-lg-12 mt-1 mr-3">
+              <div class="form-check-inline mb-2 float-right ch-container">
+                <label class="form-check-label" style="width: 334px;">
+                <input class="form-check-input check mx-2" type="checkbox" formControlName="Isownfoto">
+                  Die verwendeten Bilder habe ich gemacht
+                  <span class="checkmark weiß"></span>
+                </label>
+              </div>
+            </div>
+          </ng-container>
+         
+        </div>
+        <div class="row mt-2">
+          <div class="col-lg-6" style="height: 100px;width: 100px;">
+              <img *ngFor="let img of images" [src]=img.src alt="img.title" class="uploaded">
+          </div>
+        </div>
+        <div class="wrapper {{mode}} row mt-3">
+          <div class="col-lg-12 mb-5 pt-2">
+            <h2 class="text-green t-14 t-reg">Frage</h2>
+            <textarea type="text" class="inputWhite w-100 form-control" formControlName="QuestionText" placeholder="..."></textarea>
+          </div>
+        
+          <div class="col-lg-12 ">
+            <button type="submit"  [disabled]="newThema.invalid || invalidImg"class="float-right btn btn_border075 btn-green mb-3 text-center {{mode === 'light'? 'text-white' : 'text-white'}} " (click)="addQuestion()">Frage abschicken</button>
+
+          </div>
+        </div>
+      </form>
+      
+  </div>
+</div>

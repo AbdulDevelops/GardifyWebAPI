@@ -1,0 +1,456 @@
+﻿@model GardifyModels.Models.PlantDocDetailViewModel
+@{
+    ViewBag.Title = "Detail view";
+    Layout = "~/Views/Shared/_LayoutAdminArea.cshtml";
+}
+<head>
+    <link href="~/Scripts/jquery-te-1.4.0.css" rel="stylesheet" />
+    <script type="text/javascript" src="http://code.jquery.com/jquery.min.js" charset="utf-8"></script>
+    <script src="~/Scripts/jquery-te-1.4.0.min.js"></script>
+</head>
+    <div class="row">
+        <h2 style="color:darkred"> Frage</h2>
+        @{int i = 0;}
+        @if (Model.PlantDocViewModel != null)
+        {
+
+            <div class="col-md-12 col-lg-12">
+                <div class="row">
+                    @if (ViewBag.Message != null)
+                    {
+                    <div class="alert alert-danger col-12" role="alert">
+                        Die Größe des Bildes sollte 4 MB nicht überschreiten
+                    </div>
+                    }
+                    
+                <div class="col-md-3">
+                    @if (Model.PlantDocViewModel.Images != null)
+                    {
+                        if (Model.PlantDocViewModel.Images.FirstOrDefault().SrcAttr.Contains("Platzhalter"))
+                        {
+                            <img title="@Model.PlantDocViewModel.Images.FirstOrDefault().TitleAttr" src="@Model.PlantDocViewModel.Images.FirstOrDefault().SrcAttr" alt="@Model.PlantDocViewModel.Images.FirstOrDefault().AltAttr" />
+
+                        }
+                        else
+                        {
+                            if (Model.PlantDocViewModel.mainImg != null)
+                            {
+                                <b>TitelBild</b><br />
+                                using (Html.BeginForm("delete-question-entry-image", "AdminAreaPlantDoc"))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.Hidden("imageRefId", Model.PlantDocViewModel.mainImg.Id)
+                                    @Html.Hidden("questionId", Model.PlantDocViewModel.QuestionId)
+                                    <input type="submit" value="Bild löschen" class="btn btn-default" />
+                                }
+                                if (Model.PlantDocViewModel.Images.FirstOrDefault().AltAttr.Contains("Admin_image"))
+                                {
+                                    <img title="@Model.PlantDocViewModel.Images.FirstOrDefault().AltAttr" src="@Model.PlantDocViewModel.Images.FirstOrDefault().SrcAttr" alt="@Model.PlantDocViewModel.Images.FirstOrDefault().AltAttr" />
+
+                                }
+                                else
+                                {
+                                    <img title="@Model.PlantDocViewModel.mainImg.AltAttr" src="https://gardifybackend.sslbeta.de/@(Model.PlantDocViewModel.mainImg.SrcAttr)" alt="@Model.PlantDocViewModel.mainImg.AltAttr" />
+                                }
+
+                            }
+                            else
+                            {
+                                @*using (Html.BeginForm("set-main-image", "AdminAreaPlantDoc"))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        @Html.Hidden("imageRefId", Model.PlantDocViewModel.Images.FirstOrDefault().Id)
+                                        @Html.Hidden("questionId", Model.PlantDocViewModel.QuestionId)
+                                        <input type="submit" value="Titel Bild" class="btn btn-default" />
+                                    }
+                                *@
+                                using (Html.BeginForm("delete-question-entry-image", "AdminAreaPlantDoc"))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.Hidden("imageRefId", Model.PlantDocViewModel.Images.FirstOrDefault().Id)
+                                    @Html.Hidden("questionId", Model.PlantDocViewModel.QuestionId)
+                                    <input type="submit" value="Bild löschen" class="btn btn-default" />
+                                }
+                                if (Model.PlantDocViewModel.Images.FirstOrDefault().AltAttr.Contains("Admin_image"))
+                                {
+                                    <img title="@Model.PlantDocViewModel.Images.FirstOrDefault().AltAttr" src="@Model.PlantDocViewModel.Images.FirstOrDefault().SrcAttr" alt="@Model.PlantDocViewModel.Images.FirstOrDefault().AltAttr" />
+
+                                }
+                                else
+                                {
+                                    <img title="@Model.PlantDocViewModel.Images.FirstOrDefault().AltAttr" src="https://gardifybackend.sslbeta.de/@(Model.PlantDocViewModel.Images.FirstOrDefault().SrcAttr)" alt="@Model.PlantDocViewModel.Images.FirstOrDefault().AltAttr" />
+                                }
+                            }
+
+                        }
+                    }
+                </div>
+                    <div class="col-md-9">
+                        <b>Thema: @Model.PlantDocViewModel.Thema</b> <a data-toggle="modal" href="#updateTheme">Thema ändern</a> <br />
+                        <b>Beschreibung:</b> @Model.PlantDocViewModel.Description<br />
+                        <b>Frage:</b> @Model.PlantDocViewModel.QuestionText<br />
+                        <b>
+                            Benutzer erlaubt die Veröffentlichung?:
+                        </b>
+                        @{if (@Model.PlantDocViewModel.UserAllowsPublishment)
+                            {<span>Ja</span>}
+                            else
+                            {<span>Nein</span>}
+                        }<br />
+                        <b>Bild hochladen: </b> <a data-toggle="modal" href="#uploadImg">Upload</a> <br />
+                    </div>
+                    <div class="modal fade" id="updateTheme" tabindex="-1" role="dialog" aria-labelledby="updateThemeLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="updateThemeLabel">Thema bearbeiten</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                @using (Html.BeginForm("updateTheme", "AdminAreaPlantDoc", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                {
+                                    <div class="modal-body">
+
+                                        @Html.AntiForgeryToken()
+                                        @Html.Hidden("questionId", Model.PlantDocViewModel.QuestionId)
+
+                                        <div class="form-group" style="margin-top:3rem">
+                                            <label class="control-label col-md-5">Neues Thema</label>
+                                            <div class="col-md-12">
+                                                @Html.TextAreaFor(model => Model.Thema, 5, 50, new { @class = "form-control" })
+                                                <br />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Schließen</button>
+                                        <button type="submit" value="Antwort bearbeiten" class="btn btn-primary">Speichern</button>
+                                    </div>
+
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="uploadImg" tabindex="-1" role="dialog" aria-labelledby="updateImgLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="updateImgLabel">
+                                        Bild hochladen/h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                </div>
+                                @using (Html.BeginForm("upload-plantDocQuestion-image", "AdminAreaPlantDoc", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                {
+                                    <div class="modal-body">
+                                        @Html.AntiForgeryToken()
+                                        @Html.Hidden("questionId", Model.PlantDocViewModel.QuestionId)
+                                        <div class="row form-horizontal">
+                                            <div class="col-md-12 col-lg-12" style="">
+                                                <h4>Bild hochladen</h4>
+                                                <div class="form-group row col-md-12" style="padding-top: 4rem;">
+                                                    <label class="control-label col-md-2">Datei auswählen</label>
+                                                    <div class="col-md-10">
+                                                        <input type="file" name="imageFile" />
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-md-12" style="padding-top: 3rem;">
+                                                    <label class="control-label col-md-2 mt-3">Titel</label>
+                                                    <div class="col-md-10">
+                                                        <input class="form-control" name="imageTitle" type="text" />
+                                                    </div>
+                                                </div>
+                                                <div class="form-group  col-md-12" style="padding-top: 3rem;">
+                                                    <label class="control-label col-md-2">Bild-Autor</label>
+                                                    <div class="col-md-10">
+                                                        <input class="form-control" name="imageAuthor" type="text" />
+                                                    </div>
+                                                </div>
+                                                <div class="form-group  col-md-12" style="padding-top: 3rem;">
+                                                    <label class="control-label col-md-2">Lizenz-Quelle</label>
+                                                    <div class="col-md-10">
+                                                        <input class="form-control" name="imageLicense" type="text" />
+                                                    </div>
+                                                </div>
+                                                <div class="form-group  col-md-12" style="padding-top: 3rem;">
+                                                    <label class="control-label col-md-2">Beschreibung</label>
+                                                    <div class="col-md-10">
+                                                        <textarea class="form-control" name="imageDescription" rows="2" cols="80"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Schließen</button>
+                                        <button type="submit" value="Bild hochladen" class="btn btn-primary">Speichern</button>
+                                    </div>
+
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12" style="margin-top:20rem">
+                        <div class="row">
+                            @if (Model.PlantDocViewModel.Images != null)
+                            {
+                                foreach (var img in Model.PlantDocViewModel.Images.Skip(1))
+                                {
+                            <div class="thumbnail col-md-4">
+                                @if (img.SrcAttr.Contains("Platzhalter"))
+                                {
+                                    <img title="@img.TitleAttr" src="@img.SrcAttr" alt="@img.AltAttr " />
+
+                                }
+                                else
+                                {
+                                    using (Html.BeginForm("set-main-image", "AdminAreaPlantDoc"))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        @Html.Hidden("imageRefId", img.Id)
+                                        @Html.Hidden("questionId", Model.PlantDocViewModel.QuestionId)
+                                        <input type="submit" value="Titel Bild" class="btn btn-default" />
+                                    }
+
+                                    using (Html.BeginForm("delete-question-entry-image", "AdminAreaPlantDoc"))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        @Html.Hidden("imageRefId", img.Id)
+                                        @Html.Hidden("questionId", Model.PlantDocViewModel.QuestionId)
+                                        <input type="submit" value="Bild löschen" class="btn btn-default" />
+                                    }
+                                   
+
+                                    if (@img.AltAttr.Contains("Admin_image"))
+                                    {
+                                        <img title="@img.TitleAttr" src="https://gardify.de/intern/@(img.SrcAttr)" alt="@img.AltAttr" />
+
+                                    }
+                                    else
+                                    {
+                                        <img title="@img.TitleAttr" src="https://gardifybackend.sslbeta.de/@(img.SrcAttr)" alt="@img.AltAttr" />
+                                    }
+                                }
+                            </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr />
+
+            if (Model.PlantDocAnswerList != null && Model.PlantDocAnswerList.Any())
+            {
+                <h3 style="color:forestgreen"> Antwort(en) zu diesem Thema</h3>
+
+                foreach (var a in Model.PlantDocAnswerList)
+                {
+                    <div class="row">
+                        <div class="col-md-10">
+                            <b style="font-size:13pt">AutorName</b>: <span class="" style="color:darkred; font-size:15pt">@a.AutorName</span>
+                            @if (a.IsEdited)
+                            {
+                                <span style="font-weight:lighter; color:gray"> (bearbeitet)</span>
+                            }
+                        <p class="" style="font-size:12pt">
+                            @Html.TextAreaFor(model => @a.AnswerText, 5, 50, new { @class = "form-control display-answer" })
+                            
+                        </p>
+
+                        </div>
+                        <div class="col-md-2">
+                            @using (Html.BeginForm("delete-answer", "AdminAreaPlantDoc"))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.Hidden("id", a.AnswerId)
+                                <div class="form-group">
+                                    <div class="">
+                                        <input type="submit" value="Löschen" class="btn btn-danger" />
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            @if (a.EnableToEdit)
+                            {
+                                <button type="button" class="btn btn-success " data-toggle="modal" style="float:right; margin-right:7rem" data-target="#updateAnswer">
+                                    Bearbeiten
+                                </button>
+                                <!-- Modal -->
+                                <div class="modal fade" id="updateAnswer" tabindex="-1" role="dialog" aria-labelledby="updateAnswerLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="updateAnswerLabel">Antwort bearbeiten</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            @using (Html.BeginForm("updateAnswer", "AdminAreaPlantDoc", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                            {
+                                                <div class="modal-body">
+
+                                                    @Html.AntiForgeryToken()
+                                                    @Html.Hidden("answerId", a.AnswerId)
+                                            
+                                                    <div class="form-group" style="margin-top:3rem">
+                                                        <label class="control-label col-md-5">Neue Antwort</label>
+                                                        <div class="col-md-12">
+                                                            @Html.TextAreaFor(model => @Model.NewAnswer, 5, 50, new { @class = "form-control", @id = "editor-answer" })
+                                                            <br />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Schließen</button>
+                                                    <button type="submit" value="Antwort bearbeiten" class="btn btn-primary">Speichern</button>
+                                                </div>
+
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+                        </div>
+                        <div class="col-md-12" style="margin-top: 4rem;">
+                            @if (a.IsEdited)
+                            {
+                                <button type="button" style="float:right" class="btn btn-default " data-toggle="collapse" data-target="#viewOriginalText_@i" aria-expanded="false" aria-controls="viewOriginalText_@i">
+                                    Original Antwort anzeigen
+                                </button>
+                                <div class="row">
+                                    <div class="col-md-12" style=" margin-top: 7rem;">
+   
+                                        <div class="collapse" id="viewOriginalText_@i">
+
+                                            <p style="border-color:grey!important; border:solid;padding-left:1rem">    @Html.TextAreaFor(model => @a.OriginalAnswer, 5, 50, new { @class = "form-control display-answer" })</p>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            }
+                        </div>
+                    </div>
+                    <div class="row" style=" margin-top: 3rem;">
+                        <div class="col-md-12">
+                            @if (a.AnswerImages != null && a.AnswerImages.Any())
+                            {
+                                foreach (var img in a.AnswerImages)
+                                {
+                                <div class=" thumbnail col-md-3">
+                                   
+                                    @if (a.EnableToEdit)
+                                    {
+                                        <img title="@img.TitleAttr" src="@img.SrcAttr" alt="@img.AltAttr" />
+                                    }
+                                    else
+                                    {
+                                        <img title="@img.TitleAttr" src="https://gardifybackend.sslbeta.de/@img.SrcAttr" alt="@img.AltAttr" />
+                                    }
+
+                                </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                    <hr />
+                    i++;
+                }
+
+            }
+        }
+        <div class="col-md-12">
+
+            @Html.ActionLink("zurück", "Index", new { }, new { style = "margin-top: 1rem; margin-bottom: 1rem;", @class = "btn btn-default" })
+
+        </div>
+        <div class="col-md-12">
+            <div class="row form-horizontal">
+
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <h3>Diese Frage beantworten</h3>
+                        @using (Html.BeginForm("addAnswer", "AdminAreaPlantDoc", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.Hidden("questionId", @Model.PlantDocViewModel.QuestionId)
+                            <div class="form-group" style="margin-top:3rem">
+                                <label class="control-label col-md-2">Thema zuordnen:</label>
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Thema, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-top:3rem">
+                                <label class="control-label col-md-2">Neue Antwort</label>
+                                <div class="col-md-10">
+                                    @Html.TextAreaFor(model => @Model.NewAnswer, 5, 50, new { @class = "form-control" , @id = "editor-edit-answer" })
+                                    @Html.ValidationMessageFor(model => model.NewAnswer, "", new { @class = "text-danger" })
+                                
+                                    <br />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-lg-12" style="">
+                                    <h4>Bild hochladen</h4>
+                                    <div class="form-group row col-md-12" style="padding-top: 4rem;">
+                                        <label class="control-label col-md-2">Datei auswählen</label>
+                                        <div class="col-md-10">
+                                            <input type="file" name="imageFile" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-12" style="padding-top: 3rem;">
+                                        <label class="control-label col-md-2 mt-3">Titel</label>
+                                        <div class="col-md-10">
+                                            <input class="form-control" name="imageTitle" type="text" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group  col-md-12" style="padding-top: 3rem;">
+                                        <label class="control-label col-md-2">Bild-Autor</label>
+                                        <div class="col-md-10">
+                                            <input class="form-control" name="imageAuthor" type="text" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group  col-md-12" style="padding-top: 3rem;">
+                                        <label class="control-label col-md-2">Lizenz-Quelle</label>
+                                        <div class="col-md-10">
+                                            <input class="form-control" name="imageLicense" type="text" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group  col-md-12" style="padding-top: 3rem;">
+                                        <label class="control-label col-md-2">Beschreibung</label>
+                                        <div class="col-md-10">
+                                            <textarea class="form-control" name="imageDescription" rows="2" cols="80"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group  col-md-12" style="padding-top: 3rem;">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Antwort hinzufügen" class="btn btn-default" />
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <script type="text/javascript">
+    $(document).ready(function () {
+        $("#editor-answer").jqte();
+        $("#editor-edit-answer").jqte();
+        $(".display-answer").jqte();
+    });
+
+    </script>
+

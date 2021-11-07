@@ -1,0 +1,836 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "55D0D1EC-12F0-4376-B512-47AB27DCE325"
+   type = "0"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C31612B9-74DB-4EA7-97ED-46A81710D96E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GardifyIOS/Controllers/WeatherViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "109"
+            endingLineNumber = "109"
+            landmarkName = "WeatherViewController"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CC64A270-1157-427A-B373-06982FC9CEB5"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GardifyIOS/Controllers/WeatherViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
+            landmarkName = "loadDailyForecast()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "CC64A270-1157-427A-B373-06982FC9CEB5 - 921ba7d6b1a4ddd1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "GardifyIOS.WeatherViewController.loadDailyForecast() -&gt; ()"
+                  moduleName = "GardifyIOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rifathussain/Documents/Gardify/GardifyWebAPI/GardifyIOS/GardifyIOS/Controllers/WeatherViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "55"
+                  endingLineNumber = "55"
+                  offsetFromSymbolStart = "34">
+               </Location>
+               <Location
+                  uuid = "CC64A270-1157-427A-B373-06982FC9CEB5 - 5a2ad05cd5e1f0c4"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (GardifyIOS.RequestModel) -&gt; () in GardifyIOS.WeatherViewController.loadDailyForecast() -&gt; ()"
+                  moduleName = "GardifyIOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rifathussain/Documents/Gardify/GardifyWebAPI/GardifyIOS/GardifyIOS/Controllers/WeatherViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "56"
+                  endingLineNumber = "56"
+                  offsetFromSymbolStart = "99">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "DF5C2E88-2080-4177-9560-EBDBD961763D"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GardifyIOS/Controllers/WeatherViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
+            landmarkName = "loadForcast()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "DF5C2E88-2080-4177-9560-EBDBD961763D - 499c2ff51f620003"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "GardifyIOS.WeatherViewController.loadTodayForcast() -&gt; ()"
+                  moduleName = "GardifyIOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rifathussain/Documents/Gardify/GardifyWebAPI/GardifyIOS/GardifyIOS/Controllers/WeatherViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "29"
+                  endingLineNumber = "29"
+                  offsetFromSymbolStart = "34">
+               </Location>
+               <Location
+                  uuid = "DF5C2E88-2080-4177-9560-EBDBD961763D - 51d71d7845221fd0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (GardifyIOS.RequestModel) -&gt; () in GardifyIOS.WeatherViewController.loadTodayForcast() -&gt; ()"
+                  moduleName = "GardifyIOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rifathussain/Documents/Gardify/GardifyWebAPI/GardifyIOS/GardifyIOS/Controllers/WeatherViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "30"
+                  endingLineNumber = "30"
+                  offsetFromSymbolStart = "99">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5D47F351-0B02-45FC-8CB2-9C91517BB294"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GardifyIOS/Controllers/WeatherViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "118"
+            endingLineNumber = "118"
+            landmarkName = "loadDailyForecast()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3B1C52FF-46F9-43E3-8012-E7E072BED5FB"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GardifyIOS/Controllers/WeatherViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "227"
+            endingLineNumber = "227"
+            landmarkName = "tableView(_:numberOfRowsInSection:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8A98CD7A-1466-4667-B92A-3FBCDB692E3D"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GardifyIOS/Controllers/WeatherViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "219"
+            endingLineNumber = "219"
+            landmarkName = "tableView(_:numberOfRowsInSection:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "761A7C56-9A29-4D8D-9300-0A47EF5B328F"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GardifyIOS/Controllers/WeatherViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "207"
+            endingLineNumber = "207"
+            landmarkName = "clickMorgenButton(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "761A7C56-9A29-4D8D-9300-0A47EF5B328F - c9d11e38aec1593b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "GardifyIOS.WeatherViewController.clickMorgenButton(__C.UIButton) -&gt; ()"
+                  moduleName = "GardifyIOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rifathussain/Documents/Gardify/GardifyWebAPI/GardifyIOS/GardifyIOS/Controllers/WeatherViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "178"
+                  endingLineNumber = "178"
+                  offsetFromSymbolStart = "50">
+               </Location>
+               <Location
+                  uuid = "761A7C56-9A29-4D8D-9300-0A47EF5B328F - e247751fa809b0ab"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (GardifyIOS.Weather) -&gt; Swift.Bool in GardifyIOS.WeatherViewController.clickMorgenButton(__C.UIButton) -&gt; ()"
+                  moduleName = "GardifyIOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rifathussain/Documents/Gardify/GardifyWebAPI/GardifyIOS/GardifyIOS/Controllers/WeatherViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "178"
+                  endingLineNumber = "178"
+                  offsetFromSymbolStart = "50">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7945DF7D-E2A1-4015-A7EB-E7F8FBD50943"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GardifyIOS/Controllers/WeatherUpdateViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "711"
+            endingLineNumber = "711"
+            landmarkName = "tableView(_:numberOfRowsInSection:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CB72E17B-A4B7-4B50-A521-F9AEAEC67290"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GardifyIOS/Controllers/WeatherUpdateViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "714"
+            endingLineNumber = "714"
+            landmarkName = "WeatherUpdateViewController"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "27A4222A-3619-4842-8750-5A886189CC81"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GardifyIOS/Controllers/WeatherUpdateViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "713"
+            endingLineNumber = "713"
+            landmarkName = "tableView(_:numberOfRowsInSection:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "33462AB3-A029-4561-9507-923F3ABF85B7"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GardifyIOS/Controllers/WeatherUpdateViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "694"
+            endingLineNumber = "694"
+            landmarkName = "windLevel(value:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "588F12F3-28DE-47E0-AADD-61B58D383080"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GardifyIOS/Controllers/WeatherUpdateViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "478"
+            endingLineNumber = "478"
+            landmarkName = "getWeatherclarity(psoWeather:pshPrecipitation:range:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "588F12F3-28DE-47E0-AADD-61B58D383080 - 1dd2b3f91f73348f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (inout Swift.Float, GardifyIOS.dayRangeForecastData) -&gt; () in GardifyIOS.WeatherUpdateViewController.getWeatherclarity(psoWeather: GardifyIOS.Weather, pshPrecipitation: Swift.Float, range: Swift.Array&lt;GardifyIOS.dayRangeForecastData&gt;) -&gt; Swift.String"
+                  moduleName = "GardifyIOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rifathussain/Documents/Gardify/GardifyWebAPI/GardifyIOS/GardifyIOS/Controllers/WeatherUpdateViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "269"
+                  endingLineNumber = "269"
+                  offsetFromSymbolStart = "47">
+               </Location>
+               <Location
+                  uuid = "588F12F3-28DE-47E0-AADD-61B58D383080 - 2d3bc7065f47cf75"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (GardifyIOS.Weather) -&gt; Swift.Optional&lt;Swift.Optional&lt;Swift.Float&gt;&gt; in closure #1 (inout Swift.Float, GardifyIOS.dayRangeForecastData) -&gt; () in GardifyIOS.WeatherUpdateViewController.getWeatherclarity(psoWeather: GardifyIOS.Weather, pshPrecipitation: Swift.Float, range: Swift.Array&lt;GardifyIOS.dayRangeForecastData&gt;) -&gt; Swift.String"
+                  moduleName = "GardifyIOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rifathussain/Documents/Gardify/GardifyWebAPI/GardifyIOS/GardifyIOS/Controllers/WeatherUpdateViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "269"
+                  endingLineNumber = "269"
+                  offsetFromSymbolStart = "16">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A21E3D35-B962-439B-84CE-2F3FF2E89C39"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GardifyIOS/Controllers/WeatherUpdateViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "482"
+            endingLineNumber = "482"
+            landmarkName = "getWeatherclarity(psoWeather:pshPrecipitation:range:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "449E3A0F-3EA9-45DC-A753-B5D09305BE09"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GardifyIOS/Controllers/MenuController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
+            landmarkName = "tableView(_:didSelectRowAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2E2FBCC5-C4BB-49AC-A0F9-2DA3D5FC5A3C"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GardifyIOS/Controllers/Setting/SettingViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "332"
+            endingLineNumber = "332"
+            landmarkName = "imagePickerController(_:didFinishPickingMediaWithInfo:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C7571A35-2140-4C0D-8A1D-3D8A73C4EC81"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GardifyIOS/Controllers/Setting/SettingViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "324"
+            endingLineNumber = "324"
+            landmarkName = "onTempUp(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "C7571A35-2140-4C0D-8A1D-3D8A73C4EC81 - de1e9bde596ec413"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in GardifyIOS.SettingViewController.uploadedImage(imageFile: __C.UIImage) -&gt; ()"
+                  moduleName = "GardifyIOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rifathussain/Documents/Gardify/GardifyWebAPI/GardifyIOS/GardifyIOS/Controllers/Setting/SettingViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "234"
+                  endingLineNumber = "234"
+                  offsetFromSymbolStart = "940">
+               </Location>
+               <Location
+                  uuid = "C7571A35-2140-4C0D-8A1D-3D8A73C4EC81 - 2c6328f104635756"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Alamofire.MultipartFormData) -&gt; () in closure #1 () -&gt; () in GardifyIOS.SettingViewController.uploadedImage(imageFile: __C.UIImage) -&gt; ()"
+                  moduleName = "GardifyIOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rifathussain/Documents/Gardify/GardifyWebAPI/GardifyIOS/GardifyIOS/Controllers/Setting/SettingViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "235"
+                  endingLineNumber = "235"
+                  offsetFromSymbolStart = "140">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2930BDC6-E9EC-475C-A716-7189AD6CDFB0"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GardifyIOS/Controllers/Setting/SettingViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "346"
+            endingLineNumber = "346"
+            landmarkName = "uploadedImage(imageFile:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "51FBC2A1-1297-43A7-B6E4-3FA3210F8416"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GardifyIOS/Controllers/EcoScanViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "530"
+            endingLineNumber = "530"
+            landmarkName = "clickSaveToCalender(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8F0424A6-A8F1-4798-B467-8915BD34E7DA"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GardifyIOS/Controllers/EcoScanViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "563"
+            endingLineNumber = "563"
+            landmarkName = "convertJsonToBase64(json:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A9474C1F-822C-4300-9B4E-23EE1EE1C763"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GardifyIOS/Controllers/EcoScanViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "217"
+            endingLineNumber = "217"
+            landmarkName = "configureChart()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9D7DE660-AD1D-47D0-B3FD-3D4A9E6F4220"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GardifyIOS/Controllers/EcoScanViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "552"
+            endingLineNumber = "552"
+            landmarkName = "clickSaveToCalender(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "9D7DE660-AD1D-47D0-B3FD-3D4A9E6F4220 - 36be833431526063"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "GardifyIOS.EcoScanViewController.clickSaveToCalender(__C.UIButton) -&gt; ()"
+                  moduleName = "GardifyIOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rifathussain/Documents/Gardify/GardifyWebAPI/GardifyIOS/GardifyIOS/Controllers/EcoScanViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "552"
+                  endingLineNumber = "552"
+                  offsetFromSymbolStart = "6064">
+               </Location>
+               <Location
+                  uuid = "9D7DE660-AD1D-47D0-B3FD-3D4A9E6F4220 - d6a7e4e5813e18ee"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (GardifyIOS.RequestModel) -&gt; () in GardifyIOS.EcoScanViewController.clickSaveToCalender(__C.UIButton) -&gt; ()"
+                  moduleName = "GardifyIOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rifathussain/Documents/Gardify/GardifyWebAPI/GardifyIOS/GardifyIOS/Controllers/EcoScanViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "554"
+                  endingLineNumber = "554"
+                  offsetFromSymbolStart = "32">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "995C6DAC-6F58-44C1-9E18-0DD4A6BEDE0B"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GardifyIOS/Utilities/Networking/Networking.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "205"
+            endingLineNumber = "205"
+            landmarkName = "requestDataAsync(type:_:_:method:printRequest:encoding:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3F67AE6D-2A71-440B-8916-404DB6F1EC90"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GardifyIOS/Utilities/Networking/Networking.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "207"
+            endingLineNumber = "207"
+            landmarkName = "requestDataAsync(type:_:_:method:printRequest:encoding:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3FEA661B-295B-455C-A64C-5CED2B8D4A29"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GardifyIOS/Utilities/Networking/Networking.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "209"
+            endingLineNumber = "209"
+            landmarkName = "requestDataAsync(type:_:_:method:printRequest:encoding:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F92D85A5-A0AC-4975-8004-723B436CC52F"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GardifyIOS/Utilities/Networking/Networking.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "206"
+            endingLineNumber = "206"
+            landmarkName = "requestDataAsync(type:_:_:method:printRequest:encoding:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9ABB06AB-3ADC-4F78-8B35-297DE391CCE3"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GardifyIOS/Controllers/Setting/SettingEditViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "236"
+            endingLineNumber = "236"
+            landmarkName = "clickSaveButton(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "9ABB06AB-3ADC-4F78-8B35-297DE391CCE3 - 12d2e2bee583b53b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "GardifyIOS.SettingEditViewController.clickSaveButton(__C.UIButton) -&gt; ()"
+                  moduleName = "GardifyIOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rifathussain/Documents/Gardify/GardifyWebAPI/GardifyIOS/GardifyIOS/Controllers/Setting/SettingEditViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "197"
+                  endingLineNumber = "197"
+                  offsetFromSymbolStart = "2400">
+               </Location>
+               <Location
+                  uuid = "9ABB06AB-3ADC-4F78-8B35-297DE391CCE3 - d4440ce23ff61d6c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (GardifyIOS.RequestModel) -&gt; () in GardifyIOS.SettingEditViewController.clickSaveButton(__C.UIButton) -&gt; ()"
+                  moduleName = "GardifyIOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rifathussain/Documents/Gardify/GardifyWebAPI/GardifyIOS/GardifyIOS/Controllers/Setting/SettingEditViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "198"
+                  endingLineNumber = "198"
+                  offsetFromSymbolStart = "64">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "366B8F9E-4372-41A8-BC7F-DE3C5735B44F"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GardifyIOS/Controllers/Setting/SettingEditViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
+            landmarkName = "SettingEditViewController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "366B8F9E-4372-41A8-BC7F-DE3C5735B44F - f07af3f9ef620b5e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "GardifyIOS.SettingEditViewController.newUsernameContainerView.getter : Swift.Optional&lt;__C.UIView&gt;"
+                  moduleName = "GardifyIOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rifathussain/Documents/Gardify/GardifyWebAPI/GardifyIOS/GardifyIOS/Controllers/Setting/SettingEditViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "26"
+                  endingLineNumber = "26"
+                  offsetFromSymbolStart = "104">
+               </Location>
+               <Location
+                  uuid = "366B8F9E-4372-41A8-BC7F-DE3C5735B44F - 172c3fbe5a9ea7ba"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "GardifyIOS.SettingEditViewController.newUsernameContainerView.setter : Swift.Optional&lt;__C.UIView&gt;"
+                  moduleName = "GardifyIOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rifathussain/Documents/Gardify/GardifyWebAPI/GardifyIOS/GardifyIOS/Controllers/Setting/SettingEditViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "26"
+                  endingLineNumber = "26"
+                  offsetFromSymbolStart = "148">
+               </Location>
+               <Location
+                  uuid = "366B8F9E-4372-41A8-BC7F-DE3C5735B44F - ad4873acdc277e19"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "GardifyIOS.SettingEditViewController.newUsernameContainerView.modify : Swift.Optional&lt;__C.UIView&gt;"
+                  moduleName = "GardifyIOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rifathussain/Documents/Gardify/GardifyWebAPI/GardifyIOS/GardifyIOS/Controllers/Setting/SettingEditViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "60">
+               </Location>
+               <Location
+                  uuid = "366B8F9E-4372-41A8-BC7F-DE3C5735B44F - 8e88eec677815ab1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "GardifyIOS.SettingEditViewController.newUsernameContainerView.modify : Swift.Optional&lt;__C.UIView&gt; with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "GardifyIOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rifathussain/Documents/Gardify/GardifyWebAPI/GardifyIOS/GardifyIOS/Controllers/Setting/SettingEditViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "26"
+                  endingLineNumber = "26"
+                  offsetFromSymbolStart = "72">
+               </Location>
+               <Location
+                  uuid = "366B8F9E-4372-41A8-BC7F-DE3C5735B44F - cfd761ea57fcb0e6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "GardifyIOS.SettingEditViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; GardifyIOS.SettingEditViewController"
+                  moduleName = "GardifyIOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rifathussain/Documents/Gardify/GardifyWebAPI/GardifyIOS/GardifyIOS/Controllers/Setting/SettingEditViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "26"
+                  endingLineNumber = "26"
+                  offsetFromSymbolStart = "1072">
+               </Location>
+               <Location
+                  uuid = "366B8F9E-4372-41A8-BC7F-DE3C5735B44F - 738e73ef8f9d79a8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "GardifyIOS.SettingEditViewController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;GardifyIOS.SettingEditViewController&gt;"
+                  moduleName = "GardifyIOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rifathussain/Documents/Gardify/GardifyWebAPI/GardifyIOS/GardifyIOS/Controllers/Setting/SettingEditViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "26"
+                  endingLineNumber = "26"
+                  offsetFromSymbolStart = "1048">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8732C5C3-409D-44AC-98D8-264E0C3C0C55"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GardifyIOS/Controllers/Setting/SettingEditViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
+            landmarkName = "SettingEditViewController"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "DE5653C2-70EF-4FF3-8AA8-46CD2A37C26E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GardifyIOS/Controllers/Setting/SettingEditViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "190"
+            endingLineNumber = "190"
+            landmarkName = "getUserInfo()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "DE5653C2-70EF-4FF3-8AA8-46CD2A37C26E - 33e00db288e4be79"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "GardifyIOS.SettingEditViewController.getUserInfo() -&gt; ()"
+                  moduleName = "GardifyIOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rifathussain/Documents/Gardify/GardifyWebAPI/GardifyIOS/GardifyIOS/Controllers/Setting/SettingEditViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "168"
+                  endingLineNumber = "168"
+                  offsetFromSymbolStart = "52">
+               </Location>
+               <Location
+                  uuid = "DE5653C2-70EF-4FF3-8AA8-46CD2A37C26E - 820d38fcc2893a2c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (GardifyIOS.RequestModel) -&gt; () in GardifyIOS.SettingEditViewController.getUserInfo() -&gt; ()"
+                  moduleName = "GardifyIOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rifathussain/Documents/Gardify/GardifyWebAPI/GardifyIOS/GardifyIOS/Controllers/Setting/SettingEditViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "169"
+                  endingLineNumber = "169"
+                  offsetFromSymbolStart = "72">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7A2D2342-AC09-40A2-8572-84421EB660C7"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GardifyIOS/Controllers/Setting/SettingEditViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "203"
+            endingLineNumber = "203"
+            landmarkName = "getLocationInfo()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

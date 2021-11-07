@@ -1,0 +1,88 @@
+img.article {
+    height: 100%;
+    width: 100%;
+    max-height: 160px;
+    object-fit: cover;
+}
+.payment-icon {
+    width: 48px;
+}
+
+.input-icon {
+    position: unset;
+    background-color: transparent;
+    top: 4px;
+    margin-left: -24px;
+    padding: 0 4px;
+    color: #777;
+}
+
+.edit-icon {
+    margin-left: -20px;
+    opacity: 0.5;
+    color: #777;
+}
+
+.wrapper.dark input {
+    color: white;
+}
+.wrapper.light input{
+    border-bottom: none!important;
+}
+@media (max-width: 990px) and (orientation:landscape) {
+    .col-md-2 {
+        flex: 0 0 30%;
+        max-width: 30%;
+    }
+    form.col-md-7 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    .col-md-8, .col-md-4 {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+}
+.form-group{
+    width: 400px
+}
+
+.form-hairline-top{
+  border-top: 1px solid #b9baba;
+  margin-left: -15px;
+  margin-right: -15px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.form-area-background, .form-line-background{
+  padding-top: 0.5rem;
+  padding-bottom: 0.5em;
+  
+  line-height: 20px;
+
+}
+
+.form-area-background{
+  background-color: white;
+  border-radius: 8px;
+}
+
+
+
+.dark .form-area-background{
+  background-color: black;
+}
+
+ .form-line-background{
+  border-bottom: 1px solid #b9baba;
+}
+.form-hairline-top .form-line-background:last-child{
+  border-bottom: 0px solid #b9baba;
+}
+
+
+
+.setting-pencil{
+  border-left: 1px solid #b9baba;
+}

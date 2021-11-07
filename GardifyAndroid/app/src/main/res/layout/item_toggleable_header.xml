@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_view_expandable_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+        android:layout_marginBottom="@dimen/marginPaddingSize_5sdp"
+        android:background="@color/cardView_all_white"
+        app:cardCornerRadius="10dp"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/marginPaddingSize_10sdp"
+            android:paddingTop="@dimen/marginPaddingSize_5sdp"
+            android:paddingBottom="@dimen/marginPaddingSize_5sdp"
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="bottom"
+                android:orientation="vertical">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.switchmaterial.SwitchMaterial
+                        android:id="@+id/switch_warning"
+                        style="@style/CustomSwitchStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+
+                    <TextView
+                        android:id="@+id/title"
+                        style="@style/TextViewExpandableListTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/marginPaddingSize_5sdp"
+                        android:layout_marginEnd="@dimen/marginPaddingSize_2sdp"
+                        android:singleLine="true"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:scrollHorizontally="true"
+                        android:text="asdfasdfasdf asdf asdf adsf adsf adf ffssssss"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/image_view_warning_icon"
+                        app:layout_constraintStart_toEndOf="@+id/switch_warning"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/image_view_warning_icon"
+                        android:layout_width="@dimen/imageView_all_width_18sdp"
+                        android:layout_height="@dimen/imageView_all_height_18sdp"
+                        android:layout_marginEnd="@dimen/imageView_toggleableHeader_marginEnd_2sdp"
+                        android:layout_gravity="center_vertical"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/image_view_is_in_pot"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:src="@drawable/warnungen_icon"/>
+                    <ImageView
+                        android:id="@+id/image_view_is_in_pot"
+                        android:layout_width="@dimen/imageView_all_width_18sdp"
+                        android:layout_height="@dimen/imageView_all_height_18sdp"
+                        android:layout_gravity="center_vertical"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/tv_alert_condition_value"
+                        android:src="@drawable/warnungen_beetpflanzen"/>
+                    <TextView
+                        android:id="@+id/tv_alert_condition_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:minWidth="40dp"
+                        android:layout_marginLeft="@dimen/marginPaddingSize_5sdp"
+                        style="@style/TextViewExpandableListTitle"
+                        tools:text="0"
+                        tools:ignore="NotSibling" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/ripple_circular"
+                android:padding="@dimen/marginPaddingSize_10sdp" />
+        </LinearLayout>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

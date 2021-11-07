@@ -1,0 +1,45 @@
+﻿@model GardifyModels.Models.GardenNote
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutAdminArea.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>GardenNote</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NoteTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NoteTitle)
+        </dd>
+
+  
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EditedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EditedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Deleted)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Deleted)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

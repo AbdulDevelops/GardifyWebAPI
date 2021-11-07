@@ -1,0 +1,147 @@
+﻿@model GardifyModels.Models.AlertViewModels.AlertViewModel
+
+@{
+    /**/
+
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using GardifyModels.Models
+<h2>Warnung editieren</h2>
+<div class="form-horizontal">
+    @using (Html.BeginForm("EditAlert", "Alert", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.RelatedObjectId)
+        @Html.HiddenFor(model => model.ObjectType)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Beschreibung</label>
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Text, 10, 80, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Speichern" class="btn btn-default" />
+            </div>
+        </div>
+    }
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            @using (Html.BeginForm("DeleteAlert", "Alert", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.Hidden("id", Model.Id)
+                @Html.Hidden("returnUrl", this.Request.RawUrl)
+                <input type="submit" value="Entfernen" class="btn btn-default" />
+            }
+        </div>
+    </div>
+
+    <hr />
+    <h3>Neue Bedingung hinzufügen</h3>
+    @using (Html.BeginForm("CreateAlertCondition", "Alert", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.Hidden("returnUrl", this.Request.RawUrl)
+        @Html.Hidden("TriggerId", Model.Triggers.FirstOrDefault().Id)
+        <div class="form-group">
+            <label class="control-label col-md-2">Werttyp</label>
+            <div class="col-md-10">
+                <select class="form-control" name="ValueType">
+                    <option value="@ModelEnums.ComparedValueType.MaxTemperature">Maximale Temperatur</option>
+                    <option value="@ModelEnums.ComparedValueType.MinTemperature">Minimale Temperatur</option>
+                    <option value="@ModelEnums.ComparedValueType.MaxWindSpeed">Maximale Windgeschwindigkeit</option>
+                    <option value="@ModelEnums.ComparedValueType.MinWindSpeed">Minimale Windgeschwindigkeit</option>
+                    <option value="@ModelEnums.ComparedValueType.YearsSpan">Anzahl Jahre</option>
+                    <option value="@ModelEnums.ComparedValueType.MonthsSpan">Anzahl Monate</option>
+                    <option value="@ModelEnums.ComparedValueType.DaysSpan">Anzahl Tage</option>
+                    <option value="@ModelEnums.ComparedValueType.ActualDate">Aktuelles Datum</option>
+                    <option value="@ModelEnums.ComparedValueType.ActualYear">Aktuelles Jahr</option>
+                    <option value="@ModelEnums.ComparedValueType.ActualMonth">Aktueller Monat</option>
+                    <option value="@ModelEnums.ComparedValueType.ActualDay">Aktueller Tag</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Vergleichsoperator</label>
+            <div class="col-md-10">
+                <select class="form-control" name="ComparisonOperator">
+                    <option value="@ModelEnums.ComparisonOperator.Greater">Größer</option>
+                    <option value="@ModelEnums.ComparisonOperator.GreaterOrEqual">Größer-gleich</option>
+                    <option value="@ModelEnums.ComparisonOperator.Less">Kleiner</option>
+                    <option value="@ModelEnums.ComparisonOperator.LessOrEqual">Kleiner-gleich</option>
+                    <option value="@ModelEnums.ComparisonOperator.Equal">Gleich</option>
+                    <option value="@ModelEnums.ComparisonOperator.NotEqual">Nicht gleich</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Zahl</label>
+            <div class="col-md-2">
+                <input class="form-control" type="text" name="FloatValue" value="" />
+            </div>
+            <label class="control-label col-md-1">Datum</label>
+            <div class="col-md-2">
+                <input class="form-control" type="text" name="DateValue" value="" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Hinzufügen" class="btn btn-default" />
+            </div>
+        </div>
+    }
+    <hr />
+    @if (Model.Triggers != null && Model.Triggers.Any())
+    {
+        foreach (var trigger in Model.Triggers)
+        {
+            <div class="form-group">
+                <label class="control-label col-md-2">Komplete Bedingung:</label>
+                <div class="col-md-10">@trigger.ReadableCondition</div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Verknüpfte Bedingungen</label>
+                <div class="col-md-10">
+                    @if (trigger.Conditions != null && trigger.Conditions.Any())
+                    {
+                        <table class="table">
+                            @foreach (var condition in trigger.Conditions)
+                            {
+                                <tr>
+                                    <td>@condition.ReadableCondition</td>
+                                    <td>
+                                        @using (Html.BeginForm("DeleteAlertCondition", "Alert", FormMethod.Post))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            @Html.Hidden("returnUrl", this.Request.RawUrl)
+                                            @Html.Hidden("alertConditionId", condition.Id)
+                                            <input type="submit" value="Entfernen" class="btn btn-default" />
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                    }
+                </div>
+            </div>
+            <hr />
+        }
+    }
+</div>
+
+<div>
+    @Html.ActionLink("zurück", "Edit", "AdminAreaPlant", new { id = Model.RelatedObjectId }, null)
+</div>

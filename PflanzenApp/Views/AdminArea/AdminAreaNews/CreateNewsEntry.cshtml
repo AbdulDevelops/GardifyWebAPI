@@ -1,0 +1,105 @@
+﻿@model GardifyModels.Models.NewsViewModels.NewsEntryViewModel
+
+@{
+    ViewBag.Title = "CreateNewsEntry";
+    Layout = "~/Views/Shared/_LayoutAdminArea.cshtml";
+}
+@if (Model.StatusMessage != null)
+{
+	Html.RenderPartial("_modalStatusMessage", Model.StatusMessage);
+}
+<h2>News erstellen</h2>
+@using (Html.BeginForm("Create", "AdminAreaNews", null, FormMethod.Post, new { enctype = "multipart/form-data" })) 
+{
+    @Html.AntiForgeryToken()    
+<div class="form-horizontal">
+    <div class="form-group">
+        <label for="date" class="control-label col-md-2">Datum</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="title" class="control-label col-md-2">Titel</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="subtitle" class="control-label col-md-2">Zweiter Titel</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.SubTitle, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.SubTitle, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="theme" class="control-label col-md-2">Thema</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Theme, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Theme, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="author" class="control-label col-md-2">Verfasser</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Author, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Author, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="timing" class="control-label col-md-2">Gültigkeitsdauer</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Timing, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Timing, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="text" class="control-label col-md-2">Text</label>
+        <div class="col-md-10">
+            <textarea class="form-control" name="text" rows="5" cols="80">@Model.Text</textarea>
+            @Html.ValidationMessageFor(model => model.Text, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="tipp" class="control-label col-md-2">Tipp</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Tipp, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Tipp, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="validFrom" class="control-label col-md-2">Sichtbar von</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ValidFrom, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ValidFrom, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="validTo" class="control-label col-md-2">Sichtbar bis</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ValidTo, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ValidTo, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="isVisibleOnPage" class="control-label col-md-2">Sichtbar auf der Seite</label>
+        <div class="col-md-10">
+            <div class="checkbox">
+                @Html.EditorFor(model => model.IsVisibleOnPage)
+                @Html.ValidationMessageFor(model => model.IsVisibleOnPage, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Erstellen" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Zurück", "Index")
+</div>

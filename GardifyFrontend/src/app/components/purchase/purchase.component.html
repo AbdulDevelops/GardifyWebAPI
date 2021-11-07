@@ -1,0 +1,153 @@
+<div class="overlay-loading" [hidden]="!loading">
+  <svg class="spinner position-relative" viewBox="25 25 50 50">
+      <circle class="path" cx="50" cy="50" r="24" fill="none" stroke-width="2" stroke-miterlimit="10" />
+  </svg>
+</div>
+<div class="wrapper {{mode}} {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+  <div class="container pt-3 pb-5">
+    <div class="row mt-5 mb-4">
+      <div class="col-12">
+        <h2 class="t-light t-26 {{mode === 'light'? 'text-grey' : 'text-white'}}">BESTELLUNG ABSCHLIEßEN</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-md-8" *ngIf="OrderForm.Cart?.EntriesList?.length > 0; else noItems">
+        <div *ngFor="let item of OrderForm.Cart?.EntriesList">
+          <div class="row">
+            <div class="col-4 col-md-3 mt-3" *ngIf="item.ArticleView.ArticleImages?.length>0">
+              <img class="ptr article" [routerLink]="'/artikel/'+item.ArticleView?.Id"
+                [src]="item.ArticleView.Thumbnail || toUrl(item.ArticleView.ArticleImages[0].SrcAttr)" [alt]="item.Name">
+            </div>
+            <div class="col-8 col-md-9 mt-4 row">
+              <div class="col-md-12 underlined {{mode === 'light'? 'text-darkgrey' : 'text-white'}} ">
+                <h3 class="t-16 t-reg">{{item.ArticleView.Name}}</h3>
+                <h3 class="t-15 t-reg"><span> Preis:
+                  </span>{{item.ArticleView.NormalPrice * item.Quantity | currency:'EUR':'code'}}
+                </h3>
+                <h3 class="t-16">
+                  <span class="mr-2 pr-2 t-14" *ngIf="item.Quantity>1"><a
+                          (click)="changeQuantity(item.ArticleView.Id,false,true)"
+                          title="Anzahl reduzieren">
+                          <fa-icon [icon]="faMinus"></fa-icon>
+                      </a></span>
+                  <span class="t-reg t-15"> Anzahl: </span> {{item.Quantity}}
+                  <span class="ml-2 pl-2 t-14"><a (click)="changeQuantity(item.ArticleView.Id,true,false)"
+                          title="Anzahl erhöhen">
+                          <fa-icon [icon]="faPlus"></fa-icon>
+                      </a></span>
+                </h3>
+                <button class="btn btn-secondary t-13 text-white {{mode}}" (click)="removeItem(item.ArticleView.Id)">
+                    Löschen
+                </button>
+              </div>
+            </div>
+            <hr>
+          </div>
+        </div>
+        <div class="my-3">
+          <p>
+            <span>Zahlungsart: {{PAYMENT_TEXT[OrderForm.payment_method] || OrderForm.payment_method}}</span>
+            <a data-toggle="modal" href="#newPayment" class="text-green ptr mx-3">ändern</a>
+          </p>
+        </div>
+        <div class="my-3">
+          <p>Lieferbar in 2-4 Werktagen.</p>
+        </div>
+      </div>
+
+      <ng-template #noItems>
+        <p>Du hast noch keinen Artikel im Warenkorb. <a class="text-green" routerLink="/shop">Zurück zur Shop</a>?</p>
+      </ng-template>
+      
+
+      <div class="col-12 col-md-4" *ngIf="OrderForm.Cart?.EntriesList?.length > 0;">
+        <h3 class="t-bold t-14 text-green m-0 py-2 bt-border {{mode}}">Bestellungsübersicht</h3>
+        <div class="px-1 pt-2">
+          <span class="mt-2 mb-0">Lieferadresse:</span><span class="d-block">{{OrderForm.CustomerName}}</span>
+          <span class="d-block">{{OrderForm.Street}} {{OrderForm.InvoiceHouseNr}}, {{OrderForm.Zip}} {{OrderForm.City}}</span>
+        </div>
+        <div class="px-1 pt-2">
+          <span class="mt-2 mb-0">Rechnungsadresse:</span><span class="d-block">{{OrderForm.InvoiceCustomerName}}</span>
+          <span class="d-block">{{OrderForm.InvoiceStreet}} {{OrderForm.InvoiceHouseNr}}, {{OrderForm.InvoiceZip}} {{OrderForm.InvoiceCity}}</span>
+        </div>
+        <hr>
+        <div class="px-1">
+          <span class="mt-2 mb-0">Zwischensumme:</span><span class="float-right">{{subTotal | currency:'EUR':'code'}}</span>
+        </div>
+        <div class="px-1">
+          <span class="mt-2 mb-0">Verpackung & Versand:</span><span class="float-right">{{shippingCosts | currency:'EUR':'code'}}</span>
+        </div>
+        <div class="px-1">
+          <span class="mt-2 mb-0">Rabatte: </span><span class="float-right">0,00 EUR</span>
+        </div>
+        <hr>
+        <div class="px-1 mb-3">
+          <span class="t-bold">Gesamtsumme:</span><span class="float-right t-bold">{{totalNormal | currency:'EUR':'code'}}</span>
+          <small class="d-block">inklusive Mehrwertsteuer</small>
+        </div>
+        <form *ngIf="!payWithInvoice" class="text-center" ngNoForm method="POST" action="https://trg.lkg-va.de/trg/api">
+          <input type="hidden" name="user" [value]="OrderForm.user" />
+          <input type="hidden" name="key" [value]="OrderForm.key" />
+          <input type="hidden" name="testmodus" [value]="OrderForm.testmodus" />
+          <input type="hidden" name="payment_method" [value]="OrderForm.payment_method" />
+          <input type="hidden" name="amount" [value]="OrderForm.amount" />
+          <!-- <input type="hidden" name="currency" [value]="OrderForm.currency" /> -->
+          <input type="hidden" name="orderid" [value]="OrderForm.orderid" />
+          <input type="hidden" name="hash" [value]="OrderForm.hash" />
+          <input type="hidden" name="abort" [value]="OrderForm.abort" />
+          <input type="hidden" name="success" [value]="OrderForm.success" />
+          <button type="submit" class="t-reg btn btn-green t-13 text-white">Kaufen</button>
+        </form>
+        <div class="text-center" *ngIf="payWithInvoice">
+          <button type="button" (click)="redirect()" class="t-reg btn btn-green t-13 text-white">Kaufen</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade pr-0" tabindex="-1" role="dialog" aria-hidden="true" id="newPayment" #newPayment>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content {{mode}} {{mode==='dark'?'text-white':'text-blackish'}}">
+      <div class="modal-header">
+        <h5 class="modal-title">Zahlungsart ändern</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span class="{{mode==='dark'?'text-ltgrey':'text-blackish'}}" aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="newPaymentForm">
+          <div class="col-6 col-md-4 d-inline-block">
+            <input type="radio" formControlName="PaymentMethod" value="paypal">
+            <img src="assets/main-icons/paypal.png" class="ml-1 payment-icon" title="PayPal" alt="PayPal">
+            <small class="d-block ml-3">PayPal</small>
+          </div>
+          <div class="col-6 col-md-4 d-inline-block">
+            <input type="radio" formControlName="PaymentMethod" value="sofort">
+            <img src="assets/main-icons/klarna.png" class="ml-1 payment-icon" title="Klarna Sofortüberweisung" alt="Klarna Sofortüberweisung">
+            <small class="d-block ml-3">Klarna Sofort</small>
+          </div>
+          <div class="col-6 col-md-4 d-inline-block">
+            <input type="radio" formControlName="PaymentMethod" value="M">
+            <img src="assets/main-icons/master-card.png" class="ml-1 payment-icon" title="Mastercard" alt="Mastercard">
+            <small class="d-block ml-3">Mastercard</small>
+          </div>
+          <div class="col-6 col-md-4 d-inline-block">
+            <input type="radio" formControlName="PaymentMethod" value="V">
+            <img src="assets/main-icons/visa.png" class="ml-1 payment-icon" title="Visa" alt="Visa">
+            <small class="d-block ml-3">Visa</small>
+          </div>
+          <div class="col-6 col-md-4 d-inline-block">
+            <input type="radio" formControlName="PaymentMethod" value="rechnung">
+            <img src="assets/main-icons/rechnung.png" class="ml-1 payment-icon" title="Rechnung" alt="Rechnung">
+            <small class="d-block ml-3">Rechnung</small>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
+        <button type="button" class="btn btn-green" data-dismiss="modal" (click)="updateOrder()">Speichern</button>
+      </div>
+    </div>
+  </div>
+</div>

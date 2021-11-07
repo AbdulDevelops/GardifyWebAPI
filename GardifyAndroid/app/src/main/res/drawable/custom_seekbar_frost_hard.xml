@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@android:id/background"
+        android:height="@dimen/height_35sdp"
+        android:drawable="@drawable/seekbar_drawable_frost" />
+    <item
+        android:id="@android:id/progress"
+        android:height="@dimen/height_35sdp"
+        android:drawable="@drawable/seekbar_drawable_frost_progress" />
+
+</layer-list>

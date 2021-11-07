@@ -1,0 +1,158 @@
+﻿<h3>Sehr geehrter Kunde,</h3>
+
+<p>vielen Dank für die Bestellung in unserem Online-Shop! Sie haben folgende Artikel bei uns bestellt:</p>
+@foreach (var a in Model.Articles)
+{
+    <div class="row">
+        <div class="col-8">
+            <span>Artikelnummer:  @a.ArticleView.Id</span><br />
+            <span>EAN: @a.ArticleView.EANCode</span><br />
+            <span>Bezeichnung:    @a.ArticleView.Name</span>
+            @if (@a.IsPreorder)
+            {
+                <span> (Vorbestellung)</span><br />
+            }
+            else
+            {
+                <br />
+            }
+            <span>Anzahl:        @a.Quantity</span><br />
+            <span>Preis:         @a.ArticleView.NormalPrice</span><br />
+        </div>
+    </div>
+    <span> ------------------------------------------------------------------------</span>
+}
+<br />
+
+<span>Bestellnummer: @Model.OrderId</span>
+<br />
+@if (@Model.Order.PaidWith != "rechnung")
+{
+    <span>Transaktionsnummer:  @Model.Order.TransactionId</span>
+}
+<br />
+<span>Zwischensumme: @Model.Order.OrderAmount €</span>
+<br />
+<span>Versandkosten: @Model.Order.ShippingAmount €</span>
+<br />
+<span>Gesamtsumme: @Model.TotalAmount €</span>
+<br />
+<p>
+    Sie möchten per @Model.Order.PaidWith bezahlen;<br />
+    Ihre Bestellung wird umgehend von uns bearbeitet.<br /><br />
+    Folgende Daten haben Sie uns übermittelt:<br />
+    <span>Anrede: @Model.User.Gender</span><br />
+    <span>Name: @Model.Order.InvoiceCustomerName</span><br />
+    <span>Straße: @Model.Order.InvoiceStreet</span><br />
+    <span>HausNr: @Model.Order.InvoiceHouseNr</span><br />
+    <span>Ort: @Model.Order.InvoiceCity</span><br />
+    <span>PLZ: @Model.Order.InvoiceZip</span><br />
+    @if (@Model.Order.InvoiceCountry == "DE")
+    {
+        <span>Land: Deutschland</span><br />
+    }
+    else if (@Model.Order.InvoiceCountry == "AT")
+    {
+        <span>Land: Österreich</span><br />
+    }
+    else
+    {
+        <span>Land:@Model.Order.InvoiceCountry</span><br />
+    }
+
+    <span> Email: @Model.User.Email</span><br />
+
+    <h3>Lieferanschrift:</h3>
+
+    <span>Name: @Model.Order.CustomerName</span><br />
+    <span>Straße: @Model.Order.Street</span><br />
+    <span>HausNr: @Model.Order.HouseNr</span><br />
+    <span>Ort: @Model.Order.City</span><br />
+    <span>PLZ:  @Model.Order.Zip</span><br />
+    @if (@Model.Order.Country == "DE")
+    {
+        <span>Land: Deutschland</span><br />
+    }
+    else if (@Model.Order.Country == "AT")
+    {
+        <span>Land: Österreich</span><br />
+    }
+    else
+    {
+    <span>Land:@Model.Order.Country</span><br />
+    }
+
+</p>
+<br />
+
+<p>
+    Mit freundlichen Grüßen<br /><br />
+    BECKER JOEST VOLK VERLAG GmbH & Co.KG<br />
+    Bahnhofsallee 5<br />
+    40721 Hilden<br />
+    Telefon 0 21 03 – 9 07 88 0<br />
+    Fax 0 21 03 – 9 07 88 28<br />
+    EMail:<a href="mailto:shop@gardify.de"> shop@gardify.de</a><br />
+    Internet www.gardify.de<br />
+    Registergericht Amtsgericht Düsseldorf<br />
+    Registernummer HRA 22734<br />
+    Verkehrsnummer 11460<br /><br />
+
+    Persönlich haftende Gesellschafterin<br />
+    Becker Joest Volk Verwaltungs GmbH<br />
+    Geschäftsführer Ralf Joest, Andreas Grewe, Johanna Hänichen<br />
+    Registergericht Amtsgericht Düsseldorf<br />
+    Registernummer HRB 72786<br /><br />
+
+    Finanzamt Hilden<br />
+    Steuernummer 135 / 5905 / 0545<br />
+    USt - IdNr.DE230403678<br />
+</p>
+
+<h3>Widerrufsrecht</h3>
+<p>
+    Sie haben das Recht, binnen vierzehn Tagen ohne Angabe von Gründen diesen Vertrag zu widerrufen. <br />
+    Die Widerrufsfrist beträgt vierzehn Tage ab dem Tag an dem Sie oder ein von Ihnen benannter Dritter, der nicht der Beförderer ist,
+    die Waren (oder die letzte Ware oder die letzte Teilsendung oder das letzte Stück im Falle eines Vertrags über mehrere Waren, die der
+    Verbraucher im Rahmen einer einheitlichen Bestellung bestellt hat und die getrennt geliefert werden sowie im Falle eines Vertrags über
+    die Lieferung einer Ware in mehreren Teilsendungen oder Stücken) in Besitz genommen haben bzw. hat. <br /> <br />
+
+    Um Ihr Widerrufsrecht auszuüben, müssen Sie uns <br /> <br />
+
+    BECKER JOEST VOLK VERLAG GmbH & Co. KG <br />
+    Bahnhofsallee 5 <br />
+    40721 Hilden <br />
+    <br />
+    Telefon 0 21 03 – 9 07 88 0 <br />
+    Fax 0 21 03 – 9 07 88 28 <br />
+    E-Mail: info@bjvv.de <br />
+
+    mittels einer eindeutigen Erklärung (z. B. ein mit der Post versandter Brief, Telefax oder E-Mail) über Ihren Entschluss, diesen Vertrag zu widerrufen, informieren.
+    Sie können dafür das beigefügte Muster-Widerrufsformular verwenden, das jedoch nicht vorgeschrieben ist. <br />
+
+    Zur Wahrung der Widerrufsfrist reicht es aus, dass Sie die Mitteilung über die Ausübung des Widerrufsrechts vor Ablauf der Widerrufsfrist absenden. <br />
+
+    <h3>Widerrufsfolgen</h3><br />
+    Wenn Sie diesen Vertrag widerrufen, haben wir Ihnen alle Zahlungen, die wir von Ihnen erhalten haben, einschließlich der Lieferkosten
+    (mit Ausnahme der zusätzlichen Kosten, die sich daraus ergeben, dass Sie eine andere Art der Lieferung als die von uns angebotene,
+    günstigste Standardlieferung gewählt haben), unverzüglich und spätestens binnen vierzehn Tagen ab dem Tag zurückzuzahlen, an dem die
+    Mitteilung über Ihren Widerruf dieses Vertrags bei uns eingegangen ist. Für diese Rückzahlung verwenden wir dasselbe Zahlungsmittel,
+    das Sie bei der ursprünglichen Transaktion eingesetzt haben, es sei denn, mit Ihnen wurde ausdrücklich etwas anderes vereinbart; in
+    keinem Fall werden Ihnen wegen dieser Rückzahlung Entgelte berechnet. Wir können die Rückzahlung verweigern, bis wir die Waren wieder
+    zurückerhalten haben oder bis Sie den Nachweis erbracht haben, dass Sie die Waren zurückgesandt haben, je nachdem, welches der frühere
+    Zeitpunkt ist. <br /><br />
+    Sie haben die Waren unverzüglich und in jedem Fall spätestens binnen vierzehn Tagen ab dem Tag, an dem Sie uns über den Widerruf dieses
+    Vertrags unterrichten, an LKG Kommissions- und Abrechnungsgesellschaft mbH, An der Südspitze 1–12, 04571 Rötha zurückzusenden oder zu
+    übergeben. Die Frist ist gewahrt, wenn Sie die Waren vor Ablauf der Frist von vierzehn Tagen absenden. <br />
+    Wir tragen die Kosten der Rücksendung der Waren. <br />
+    Sie müssen für einen etwaigen Wertverlust der Waren nur aufkommen, wenn dieser Wertverlust auf einen zur Prüfung der Beschaffenheit, Eigenschaften und Funktionsweise der Waren nicht notwendigen Umgang mit ihnen zurückzuführen ist. <br />
+    Ende der Widerrufsbelehrung
+</p>
+@*<p>
+        Deine Bestellung mit der Nummer @Model.OrderId ist bei uns eingegangen und wird schnellstmöglich bearbeitet und versendet. Bei Fragen steht dir unsere Hotline zur Verfügung unter
+        <a href="mailto:shop@gardify.de">shop@gardify.de</a> per Mail oder unter <a href="tel:+492103907880">+49 2103 90788-0</a> zur Verfügung.
+    </p>
+    <p>Wir wünschen Dir viel Spaß mit deinem Einkauf!</p>
+    <p>
+        Dein gardify® Team
+    </p>*@

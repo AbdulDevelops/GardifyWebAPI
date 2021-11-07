@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <import type="android.view.View" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/linearLayout_all_white"
+        android:padding="@dimen/marginPaddingSize_10sdp">
+        <!-- horizontal icon text - 1 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/imageView_all_width_18sdp"
+                android:layout_height="@dimen/imageView_all_height_18sdp"
+                android:src="@drawable/gardify_weather_icon_precipitation" />
+
+            <TextView
+                android:id="@+id/text_view_weather_precipitation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="--"
+                android:textSize="@dimen/textSize_body_xsmall" />
+        </LinearLayout>
+        <!-- horizontal icon text - 2 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/imageView_all_width_18sdp"
+                android:layout_height="@dimen/imageView_all_height_18sdp"
+                android:src="@drawable/gardify_weather_icon_wind" />
+
+            <TextView
+                android:id="@+id/text_view_weather_wind_direction_speed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/marginPaddingSize_5sdp"
+                android:text="--"
+                android:textSize="@dimen/textSize_body_xsmall" />
+        </LinearLayout>
+        <!-- horizontal icon text - 3 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/imageView_all_width_18sdp"
+                android:layout_height="@dimen/imageView_all_height_18sdp"
+                android:src="@drawable/gardify_weather_icon_air_pressure" />
+
+            <TextView
+                android:id="@+id/text_view_weather_air_pressure"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/marginPaddingSize_5sdp"
+                android:text="--"
+                android:textSize="@dimen/textSize_body_xsmall" />
+        </LinearLayout>
+        <!-- horizontal icon text - 4 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/marginPaddingSize_5sdp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/imageView_all_width_18sdp"
+                android:layout_height="@dimen/imageView_all_height_18sdp"
+                android:src="@drawable/gardify_weather_icon_humidity" />
+
+            <TextView
+                android:id="@+id/text_view_weather_humidity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/marginPaddingSize_5sdp"
+                android:text="--"
+                android:textSize="@dimen/textSize_body_xsmall" />
+        </LinearLayout>
+    </LinearLayout>
+</layout>

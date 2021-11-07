@@ -1,0 +1,865 @@
+﻿@using PflanzenApp.Controllers.AdminArea
+@model GardifyModels.Models.AdminAreaViewModels.PlantViewModel
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LayoutAdminArea.cshtml";
+}
+@using GardifyModels.Models
+
+
+@if (Model.StatusMessage != null)
+{
+    Html.RenderPartial("_modalStatusMessage", Model.StatusMessage);
+}
+<h2>Pflanze bearbeiten</h2>
+<div class="form-horizontal">
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Plant.Id)
+        <div class="form-group">
+            <label class="control-label col-md-2">Datenbank ID</label>
+            <div class="col-md-10">
+                <input class="form-control" value="@Model.Plant.Id" disabled />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Botanischer Name</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Plant.NameLatin, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Plant.NameLatin, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Deutscher Name</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Plant.NameGerman, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Plant.NameGerman, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Beschreibung</label>
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Plant.Description, 10, 80, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Plant.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Veröffentlichen</label>
+            <div class="col-md-10">
+                @Html.CheckBoxFor(model => model.Plant.Published, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Plant.Published, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">User benachrichtigen</label>
+            <div class="col-md-10">
+                <input type="checkbox" name="notifyUsers" value="true" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Vorschlagen</label>
+            <div class="col-md-10">
+                @Html.CheckBoxFor(model => model.Plant.Vorschlagen, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Plant.Vorschlagen, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Synonyme </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Plant.Synonym, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Plant.Synonym, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Familie</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Plant.Familie, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Plant.Familie, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Herkunft</label>
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Plant.Herkunft, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Plant.Herkunft, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+  
+            <div class="form-group">
+                <label class="control-label col-md-2">Gärtnerische Kategorie</label>
+                <div class="col-md-10">
+                    @Html.DropDownList("GardenCategories", null, htmlAttributes: new { @class = "form-control" })
+                </div>
+            </div>
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Speichern" class="btn btn-default" />
+            </div>
+        </div>
+    }
+
+
+    <h4>Verknüpfte Shop-Artikeln</h4>
+    <div class="form-group">
+        <div class="image-wrapper col-md-10">
+            @if (ViewBag.ArticleReferences != null)
+            {
+                <table class="table">
+                    <tr>
+                        <th>
+                            Name
+                        </th>
+                        <th></th>
+                    </tr>
+                    @foreach (GardifyModels.Models.ArticleReference reference in ViewBag.ArticleReferences)
+                    {
+                        <tr>
+                            <td>
+                                @reference.Article.Name
+                            </td>
+                            <td>
+                                @Html.ActionLink("Löschen", "DeleteArticleReference", new { articleId = reference.ArticleId, articleReferenceId = Model.Plant.Id })
+                            </td>
+                        </tr>
+                    }
+                </table>
+
+            }
+            else
+            {
+                <div>
+                    Keine Referenzen verfügbar.
+                </div>
+            }
+        </div>
+    </div>
+    <h4>Artikeln hinzufügen</h4>
+    @using (Html.BeginForm("AddArticleReference", "AdminAreaPlant"))
+    {
+        @Html.AntiForgeryToken()
+        @Html.Hidden("plantId", Model.Plant.Id)
+        <div class="form-group" id="group-plant">
+            <label class="control-label col-md-2">Artikeln</label>
+            @if (ViewBag.ArticlesList != null)
+            {
+                <div class="col-md-10">
+                    @Html.DropDownList("articleId", new SelectList(ViewBag.ArticlesList, "Id", "Name"), new { @class = "form-control" })
+                </div>
+            }
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" name="addArticle" value="Hinzufügen" class="btn btn-default" />
+            </div>
+        </div>
+    }
+    <h4>Neue Gruppen hinzufügen</h4>
+    @using (Html.BeginForm("add-group", "AdminAreaPlant"))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="container">
+            <nav>
+                <div class="row">
+
+                    <div class="row">
+                        @foreach (Group group in ViewBag.PlantGroup)
+                        {
+                            string checkedAttribute = "checked=\"checked\"";
+                            <div class="col-lg-6">
+                                <div class="row background-category-cont">
+                                    <div style="z-index: 2;">
+                                        @if (Model.Plant.PlantGroups.Any(t => t.Id == group.Id))
+                                        {
+                                            checkedAttribute = "checked=\"checked\"";
+                                        }
+                                        else
+                                        {
+                                            checkedAttribute = "";
+                                        }
+                                        <div class="col-sm-4 col-lg-4 col-xs-12" style="padding:5px;">
+                                            <div style="background-color: rgba(255,255,255,0.35); padding-left:5px;  min-height:4.5rem; ">
+                                                <label><input type="checkbox" name="checkedGroups" value="@group.Id" @checkedAttribute> @group.Name</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        }
+                    </div>
+
+                </div>
+            </nav>
+
+        </div>
+
+        @Html.HiddenFor(m => m.Plant.Id)
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Speichern" class="btn btn-default" />
+            </div>
+        </div>
+    }
+    @if (Model.ImportHistory != null)
+    {
+
+        <div class="panel panel-warning">
+            <div class="panel-heading">
+                Import-Log
+            </div>
+            <div class="panel-body">
+                @Html.Raw(Model.ImportHistory.ImportText)
+            </div>
+        </div>
+    }
+    <hr />
+
+    <h4>Verknüpfte interne Bemerkungen</h4>
+    <div class="form-group">
+        <div class="col-md-10">
+            <table class="table">
+                <tr>
+                    <th>Bemerkung</th>
+                    <th>Benutzer</th>
+                    <th></th>
+                </tr>
+                @foreach (var p in Model.PlantInternalComments.ListOfComments)
+                {
+                    <tr>
+                        <td>
+                            @p.Text
+                        </td>
+                        <td>@p.UserName</td>
+                        <td>
+                            @Html.ActionLink("Als erledigt markieren", "MarkFinished", new { id = p.Id, plantId = Model.Plant.Id }, null)
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+    <h2>Neue Bermerkung zu dieser Pflanze hinzufügen</h2>
+    <div class="form-group">
+        <div class="col-md-10">
+            @using (Html.BeginForm("addComment", "AdminAreaPlant"))
+            {
+                @Html.AntiForgeryToken()
+                @Html.Hidden("plantId", Model.Plant.Id)
+                <div class="form-group">
+                    <label class="control-label col-md-2">Neue Interne Bemerkung</label>
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.NewInternalComment, 5, 50, new { @class = "form-control" })
+                        <br />
+                        <input type="submit" value="Bemerkung hinzufügen" class="btn btn-default" />
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+    <hr />
+    <h4>Verknüpfte Bilder</h4>
+    <div class="form-group">
+        <label class="control-label col-md-2"></label>
+        <div class="image-wrapper col-md-10">
+            @if (Model.PlantImages != null && Model.PlantImages.Any())
+            {
+                foreach (var img in Model.PlantImages)
+                {
+                    <div class="tumbnail col-md-3">
+                        <img title="@img.TitleAttr" src="@img.SrcAttr" alt="@img.AltAttr" />
+                        <div class="caption">
+                            <h3>@img.FullTitle</h3>
+                            <p>@img.FullDescription</p>
+                            @using (Html.BeginForm("delete-plant-image", "AdminAreaPlant"))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.Hidden("imageId", img.Id)
+                                @Html.Hidden("plantId", Model.Plant.Id)
+                                <input type="submit" value="Bild löschen" class="btn btn-default" />
+                            }
+                            <button data-toggle="collapse" href="#editMode@(img.Id)" type="button" class="btn btn-success">Ändern</button>
+                            <div class="collapse" id="editMode@(img.Id)">
+                                @using (Html.BeginForm("edit-image-creds", "AdminAreaPlant"))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.Hidden("imageId", img.Id)
+                                    @Html.Hidden("plantId", Model.Plant.Id)
+                                    <input type="text" placeholder="Autor" value="@img.Author" name="imageAuthor" class="form-control" />
+                                    <input type="text" placeholder="Lizenz" value="@img.License" name="imageLicense" class="form-control" />
+                                    <input type="text" placeholder="Beschreibung" value="@img.FullDescription" name="imageDescription" class="form-control" />
+
+                                    <input type="submit" value="Speichern" class="btn btn-success" />
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <p>Noch kein Bild hochgeladen</p>}
+        </div>
+    </div>
+    <h4>Bild hochladen</h4>
+    @using (Html.BeginForm("upload-plant-image", "AdminAreaPlant", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.Hidden("plantId", Model.Plant.Id)
+        <div class="form-group">
+            <label class="control-label col-md-2">Datei auswählen</label>
+            <div class="col-md-10">
+                <input type="file" name="imageFile" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Titel</label>
+            <div class="col-md-10">
+                <input class="form-control" name="imageTitle" type="text" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Bild-Autor</label>
+            <div class="col-md-10">
+                <input class="form-control" name="imageAuthor" type="text" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Lizenz-Quelle</label>
+            <div class="col-md-10">
+                <input class="form-control" name="imageLicense" type="text" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Beschreibung</label>
+            <div class="col-md-10">
+                <textarea class="form-control" name="imageDescription" rows="2" cols="80"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Hochladen" class="btn btn-default" />
+            </div>
+        </div>
+    }
+
+    <hr />
+    @if (Model.ImportHistory != null && Model.ImportHistory.Danger)
+    {
+        <div class="alert alert-danger" role="alert">
+            Die Pflanze wurde beim importieren mit <b>Vorsicht!</b> markiert. Bitte überprüfen Sie gegebenenfalls nocheinmal die Eigenschaften der Pflanze.
+        </div>
+    }
+    <h4>Neue Eigenschaft hinzufügen</h4>
+    @using (Html.BeginForm("add-tag", "AdminAreaPlant"))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="container">
+            <nav>
+                <div class="row">
+
+                    <div class="row">
+                        @{
+                            int i = 0;
+                            var categoryOrder = new List<string> { "Wuchs", "Blattfarbe", "Blattform", "Blattstellung", "Blattrand", "Laub", "Herbstfärbung", "Laubrythmus", "Blüten", "Blütenfarben", "Blütenform", "Blütengröße", "Blütenstand", "Früchte", "Fruchtfarbe", "Wasserbedarf", "Boden", "Licht", "Winterhärte", "Düngung", "Schnitt", "Vermehrung", "Nutzpflanzen", "Verwendung ", "Besonderheiten", "Dekoaspekte", "Ausschlusskriterien" };
+                            var categoryOrderCount = categoryOrder.Count();
+                        }
+
+                        @foreach (var categoryGroup in Model.PlantTagsList.GroupBy(l => l.Category).OrderBy(g => categoryOrder.IndexOf(g.Key.Title) == -1 ? categoryOrderCount : categoryOrder.IndexOf(g.Key.Title)))
+                        {
+                            // Doing the above without calling IndexOf twice is surprisingly annoying and not much faster
+                            string checkedAttribute = "checked=\"checked\"";
+                            <div class="col-lg-6">
+                                <div class="row background-category-cont">
+                                    <div class="background-category-transparent" style="background-color:@categoryGroup.Key.Color;">
+
+                                    </div>
+                                    <div style="z-index: 2;">
+                                        <h2 class="title-category">@categoryGroup.Key.Title</h2>
+
+                                        @foreach (var plantTag in categoryGroup)
+                                        {
+                                            if (Model.Plant.PlantTags.Any(t => t.Id == plantTag.Id))
+                                            {
+                                                checkedAttribute = "checked=\"checked\"";
+                                            }
+                                            else
+                                            {
+                                                checkedAttribute = "";
+                                            }
+                                            <div class="col-sm-4 col-lg-4 col-xs-12" style="padding:5px;">
+                                                <div style="background-color: rgba(255,255,255,0.35); padding-left:5px;  min-height:4.5rem; ">
+
+                                                    @*@Html.CheckBoxFor(m => plantTag.Selected)
+                                                        @Html.HiddenFor(m => plantTag.Id)
+                                                        @Html.DisplayFor(m => plantTag.Title)*@
+                                                    <label><input type="checkbox" name="checkedTags" value="@plantTag.Id" @checkedAttribute> @plantTag.Title</label>
+                                                </div>
+                                            </div>
+                                        }
+                                        @{
+                                            var characteristicCategories = Model.characteristicCategories.Where(c => c.PlantTagCategoryId == categoryGroup.Key.Id);
+                                        }
+                                        @if (characteristicCategories != null && characteristicCategories.Any())
+                                        {
+                                            foreach (var characteristicCategory in characteristicCategories)
+                                            {
+                                                var characteristic = Model.Plant.PlantCharacteristics?.Where(p => p.CategoryId == characteristicCategory.Id && !p.Deleted).FirstOrDefault();
+                                                <div class="col-sm-4" style="padding:5px;">
+                                                    <div style="background-color: rgba(255,255,255,0.35); padding-left:5px;  min-height:4.5rem; ">
+                                                        @characteristicCategory.Title
+                                                        <input name="PlantCharacteristics[@i].CategoryId" value="@characteristicCategory.Id" hidden />
+                                                        @switch (characteristicCategory.CharacteristicValueType)
+                                                        {
+                                                            case ModelEnums.CharacteristicValueType.SingleMonth:
+                                                            case ModelEnums.CharacteristicValueType.SingleNumber:
+                                                                <input name="PlantCharacteristics[@i].Min" value="@(characteristic?.Min)" />
+                                                                break;
+                                                            case ModelEnums.CharacteristicValueType.MonthRange:
+                                                            case ModelEnums.CharacteristicValueType.NumberRange:
+                                                                <input name="PlantCharacteristics[@i].Min" value="@(characteristic?.Min)" />
+                                                                <input name="PlantCharacteristics[@i].Max" value="@(characteristic?.Max)" />
+                                                                break;
+                                                            case ModelEnums.CharacteristicValueType.SingleLatinNumber:
+                                                                <select name="PlantCharacteristics[@i].Min">
+                                                                    <option @(characteristic == null ? "selected" : "")>Bitte wählen</option>
+                                                                    <option @(characteristic?.Min == 1 ? "selected" : "") value="1">I</option>
+                                                                    <option @(characteristic?.Min == 2 ? "selected" : "") value="2">II</option>
+                                                                    <option @(characteristic?.Min == 3 ? "selected" : "") value="3">III</option>
+                                                                    <option @(characteristic?.Min == 4 ? "selected" : "") value="4">IV</option>
+                                                                    <option @(characteristic?.Min == 5 ? "selected" : "") value="5">V</option>
+                                                                    <option @(characteristic?.Min == 6 ? "selected" : "") value="6">VI</option>
+                                                                    <option @(characteristic?.Min == 7 ? "selected" : "") value="7">VII</option>
+                                                                    <option @(characteristic?.Min == 8 ? "selected" : "") value="8">VIII</option>
+                                                                    <option @(characteristic?.Min == 9 ? "selected" : "") value="9">IX</option>
+                                                                    <option @(characteristic?.Min == 10 ? "selected" : "") value="10">X</option>
+                                                                    <option @(characteristic?.Min == 11 ? "selected" : "") value="11">XI</option>
+                                                                    <option @(characteristic?.Min == 12 ? "selected" : "") value="12">XII</option>
+                                                                </select>
+                                                                break;
+                                                            case ModelEnums.CharacteristicValueType.LatinNumberRange:
+                                                                <select name="PlantCharacteristics[@i].Min">
+                                                                    <option @(characteristic == null ? "selected" : "")>Bitte wählen</option>
+                                                                    <option @(characteristic?.Min == 1 ? "selected" : "") value="1">I</option>
+                                                                    <option @(characteristic?.Min == 2 ? "selected" : "") value="2">II</option>
+                                                                    <option @(characteristic?.Min == 3 ? "selected" : "") value="3">III</option>
+                                                                    <option @(characteristic?.Min == 4 ? "selected" : "") value="4">IV</option>
+                                                                    <option @(characteristic?.Min == 5 ? "selected" : "") value="5">V</option>
+                                                                    <option @(characteristic?.Min == 6 ? "selected" : "") value="6">VI</option>
+                                                                    <option @(characteristic?.Min == 7 ? "selected" : "") value="7">VII</option>
+                                                                    <option @(characteristic?.Min == 8 ? "selected" : "") value="8">VIII</option>
+                                                                    <option @(characteristic?.Min == 9 ? "selected" : "") value="9">IX</option>
+                                                                    <option @(characteristic?.Min == 10 ? "selected" : "") value="10">X</option>
+                                                                    <option @(characteristic?.Min == 11 ? "selected" : "") value="11">XI</option>
+                                                                    <option @(characteristic?.Min == 12 ? "selected" : "") value="12">XII</option>
+                                                                </select>
+                                                                <select name="PlantCharacteristics[@i].Max">
+                                                                    <option @(characteristic == null ? "selected" : "")>Bitte wählen</option>
+                                                                    <option @(characteristic?.Max == 1 ? "selected" : "") value="1">I</option>
+                                                                    <option @(characteristic?.Max == 2 ? "selected" : "") value="2">II</option>
+                                                                    <option @(characteristic?.Max == 3 ? "selected" : "") value="3">III</option>
+                                                                    <option @(characteristic?.Max == 4 ? "selected" : "") value="4">IV</option>
+                                                                    <option @(characteristic?.Max == 5 ? "selected" : "") value="5">V</option>
+                                                                    <option @(characteristic?.Max == 6 ? "selected" : "") value="6">VI</option>
+                                                                    <option @(characteristic?.Max == 7 ? "selected" : "") value="7">VII</option>
+                                                                    <option @(characteristic?.Max == 8 ? "selected" : "") value="8">VIII</option>
+                                                                    <option @(characteristic?.Max == 9 ? "selected" : "") value="9">IX</option>
+                                                                    <option @(characteristic?.Max == 10 ? "selected" : "") value="10">X</option>
+                                                                    <option @(characteristic?.Max == 11 ? "selected" : "") value="11">XI</option>
+                                                                    <option @(characteristic?.Max == 12 ? "selected" : "") value="12">XII</option>
+                                                                </select>
+                                                                break;
+                                                        }
+                                                    </div>
+                                                </div>
+                                                i++;
+                                            }
+                                        }
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        }
+                    </div>
+
+                </div>
+            </nav>
+
+        </div>
+
+        @Html.HiddenFor(m => m.Plant.Id)
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Speichern" class="btn btn-default" />
+            </div>
+        </div>
+    }
+
+    <h4>Neues Merkmal hinzufügen</h4>
+    @using (Html.BeginForm("add-characteristic", "AdminAreaPlant"))
+    {
+        @Html.AntiForgeryToken()
+        @Html.Hidden("newCharacteristic.plantId", Model.Plant.Id)
+        <div class="form-group">
+            <label class="control-label col-md-2" for="">Merkmal</label>
+            <div class="col-md-10">
+                @Html.DropDownList("newCharacteristic.categoryId", new SelectList(Model.characteristicCategories, "id", "title", 0), new { @class = "form-control", @style = "display:inline-block" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.NewCharacteristic.Min, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-2">
+                @Html.EditorFor(model => model.NewCharacteristic.Min, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NewCharacteristic.Min, "", new { @class = "text-danger" })
+            </div>
+            @Html.LabelFor(model => model.NewCharacteristic.Max, htmlAttributes: new { @class = "control-label col-md-1" })
+            <div class="col-md-2">
+                @Html.EditorFor(model => model.NewCharacteristic.Max, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NewCharacteristic.Max, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Hinzufügen" class="btn btn-default" />
+            </div>
+        </div>
+    }
+    @if (Model.ImportHistory != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            Die Grenzwerte der Merkmale wurden beim Importieren automatisch konvertiert. Hierbei können ungenau Werte auftreten. Sollte ein Wert beim Importierten nicht bekannt sein, so wird hier eine "-1" angezeigt. Bitte überprüfen Sie nocheinmal die Werte auf Richtigkeit.
+        </div>
+    }
+    <h4>Merkmale mit Werten</h4>
+    <div class="form-group">
+        <label class="control-label col-md-2">
+            Verknüpfte Merkmale
+        </label>
+        <div class="col-md-10">
+            <table class="table">
+                <tr>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Bilddatei
+                    </th>
+                    <th>
+                        Werttyp
+                    </th>
+                    <th>
+                        Wert A
+                    </th>
+                    <th>
+                        Wert B
+                    </th>
+                    <th></th>
+                </tr>
+                @if (Model.Plant.PlantCharacteristics != null)
+                {
+                    foreach (var characteristic in Model.Plant.PlantCharacteristics)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => characteristic.Category.Title)
+                            </td>
+                            <td>
+                                @if (!String.IsNullOrEmpty(characteristic.Category.TagImage))
+                                {
+                                    <img class="tag-icon" src="@Url.Content("~/Images/Plant_tags/" + characteristic.Category.TagImage)" title="@characteristic.Category.Title" alt="@characteristic.Category.Title" /> @:( @(characteristic.Category.TagImage) )
+                                }
+                                else
+                                {
+                                    @: kein Bild
+                                }
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => characteristic.Category.CharacteristicValueType)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => characteristic.Min)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => characteristic.Max)
+                            </td>
+                            <td>
+                                @using (Html.BeginForm("remove-characteristic", "AdminAreaPlant"))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.Hidden("characteristicId", characteristic.Id)
+                                    @Html.Hidden("plantId", Model.Plant.Id)
+                                    <input type="submit" value="Entfernen" class="btn btn-default" />
+                                }
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="4">Keine Eigenschaften in dieser Kategorie</td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+    <hr />
+
+    <h4>
+        Vorhandene Todo-Vorlagen
+    </h4>
+    <table class="table">
+        <tr>
+            <th>Text</th>
+        </tr>
+
+        @foreach (var item in Model.TodoTemplateIndexViewModel.TodoTemplates)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    <a href="~/i/todo/edit/@item.Id">Bearbeiten</a> |
+                    <a href="~/i/todo/delete/@item.Id">Löschen</a>
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    <h4>Neue Todo-Vorlage hinzufügen</h4>
+    @Html.ActionLink("Neu erstellen", "Create", "AdminAreaTodo", new { selectedPlant = Model.Plant.Id, selectedPlantName = Model.Plant.Name }, new { @class = "btn btn-default" })
+    @*@using (Html.BeginForm("Create", "AdminAreaTodo"))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.Hidden("plantcallback", Model.Plant.Id)
+            <div class="form-group">
+                <p class="control-label col-md-2">Titel</p>
+                <div class="col-md-10">
+                    @{
+                        Model.NewTodoTemplate.Title = "";
+                    }
+                    @Html.Editor("Title", Model.NewTodoTemplate.Title, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.NewTodoTemplate.Title, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <p class="control-label col-md-2">Beschreibung</p>
+                <div class="col-md-10">
+                    @Html.TextArea("Description", Model.NewTodoTemplate.Description, new { @class = "form-control", rows = 10 })
+                    @Html.ValidationMessageFor(model => model.NewTodoTemplate.Description, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <p class="control-label col-md-2">Zu erledigen ab</p>
+                <div class="col-md-10">
+                    @{ Model.NewTodoTemplate.DateStart = DateTime.Now;}
+                    @Html.TextBox("DateStart", Model.NewTodoTemplate.DateStart, "{0:dd/MM/yyyy}", new { @class = "form control datepicker", placeholder = "Bitte Datum Wählen" })
+                    @Html.ValidationMessageFor(model => model.NewTodoTemplate.DateStart, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <p class="control-label col-md-2">Bis</p>
+                <div class="col-md-10">
+                    @{ Model.NewTodoTemplate.DateEnd = DateTime.Now;}
+                    @Html.TextBox("DateEnd", Model.NewTodoTemplate.DateEnd, "{0:dd/MM/yyyy}", new { @class = "form control datepicker", placeholder = "Bitte Datum Wählen" })
+                    @Html.ValidationMessageFor(model => model.NewTodoTemplate.DateEnd, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <p class="control-label col-md-2">Wiederholungsart</p>
+                <div class="col-md-10">
+                    @Html.DropDownList("Cycle", new List<SelectListItem>(){
+        new SelectListItem() { Text="-", Value = "0", Selected = true  },
+        new SelectListItem() { Text="Wöchentlich", Value = "1"},
+        new SelectListItem() { Text="Monatlich", Value = "2"},
+        new SelectListItem() { Text="Jährlich",Value="3" },
+        new SelectListItem() { Text="Alle 2 Jahre",Value="4" } })
+                </div>
+            </div>
+            @Html.Hidden("ReferenceId", Model.NewTodoTemplate.ReferenceId)
+            @Html.Hidden("ReferenceType", Model.NewTodoTemplate.ReferenceType)
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Erstellen" class="btn btn-default" />
+                </div>
+            </div>
+        }*@
+    <hr />
+    <h4>Taxonomische Eigenschaft setzen</h4>
+    @using (Html.BeginForm("set-taxonomictree", "AdminAreaPlant"))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <p class="control-label col-md-2">Taxonomischer Unterbereich</p>
+            <div class="col-md-10">
+                @{ Model.TaxonomicTreeInsertViewModel.AvailableTrees.Add(new TaxonomicTree { Id = -1, TitleLatin = "-" });}
+                @Html.DropDownList("TreeId", Model.TaxonomicTreeInsertViewModel.AvailableTrees.Select(v => new SelectListItem
+           {
+               Text = v.TitleLatin,
+               Value = "" + v.Id,
+               Selected = v.Id == Model.TaxonomicTreeInsertViewModel.TreeId
+           }))
+            </div>
+        </div>
+        @Html.Hidden("PlantId", Model.TaxonomicTreeInsertViewModel.PlantId)
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Setzen" class="btn btn-default" />
+            </div>
+        </div>
+    }
+    <hr />
+    <h4>Warnungen</h4>
+    <p>@Html.ActionLink("Neue Warnung erstellen", "CreateAlert", "Alert", new { relatedObjectId = Model.Plant.Id, objectType = ModelEnums.ReferenceToModelClass.Plant }, null)</p>
+    <div class="form-group">
+        <label class="control-label col-md-2">
+            Verknüpfte Warnungen
+        </label>
+        <div class="col-md-10">
+            <table class="table">
+                <tr>
+                    <th>
+                        Titel
+                    </th>
+                    <th>
+                        Text
+                    </th>
+                    <th>
+                        Bedingung
+                    </th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                @if (Model.Plant.Alerts != null)
+                {
+                    foreach (var alert in Model.Plant.Alerts)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => alert.Title)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => alert.Text)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => alert.ReadableCondition)
+                            </td>
+                            <td>
+                                @Html.ActionLink("editieren", "EditAlert", "Alert", new { id = alert.Id }, null)
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="4">Keine Eigenschaften in dieser Kategorie</td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+    <div>
+        @Html.ActionLink("Pflanze löschen", "DeletePlant", new { plantId = Model.Plant.Id }, new { @class = "btn btn-danger" })
+    </div>
+    <hr />
+</div>
+
+<div>
+    @Html.ActionLink("zurück", "Index")
+</div>
+
+
+@section Scripts {
+    <script type="text/javascript">
+        /* German initialisation for the jQuery UI date picker plugin. */
+        jQuery(function (el) {
+            el.datepicker.regional['de'] = {
+                closeText: 'schließen',
+                prevText: '&#x3c;zurück',
+                nextText: 'Vor&#x3e;',
+                currentText: 'heute',
+                monthNames: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni',
+                    'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
+                monthNamesShort: ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun',
+                    'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'],
+                dayNames: ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'],
+                dayNamesShort: ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'],
+                dayNamesMin: ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'],
+                weekHeader: 'Wo',
+                dateFormat: 'dd.mm.yy',
+                firstDay: 1,
+                isRTL: false,
+                showMonthAfterYear: false,
+                yearSuffix: ''
+            };
+            $.datepicker.setDefaults($.datepicker.regional['de']);
+        });
+        $(function () { // will trigger when the document is ready
+            $(".datepicker").datepicker($.datepicker.regional["de"]);
+        });
+        $(document).ready(function () {
+            $('#Title').attr("value", "");
+        });
+        $('#Plant_Description').bind('input propertychange', function () {
+            console.log(this.value.length);
+            if (this.value.length > 4000) {
+                $("#Plant_Description").val($("#Plant_Description").val().substring(0, 4000));
+                alert("Beschreibungslimit erreicht");
+            }
+        });
+    </script>
+
+
+
+    @*<script type="text/javascript">
+            function updateTagDDL(categoryId) {
+                var data = [];
+                data[0] = new Object();
+                data[0].categoryId = categoryId;
+
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("getTagsByCategoryId", "AdminAreaPlant")',
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: "json",
+                    // JSON.stringify()
+                    data: JSON.stringify(data),
+                    success: function (result) {
+                        var result = '';
+                        for (var i = 0, iL = data.length; i < iL; i++) {
+                            result += '<option value="' + data[i].value + '">' + data[i].text + '</option>';
+                        }
+                        $("#tagDDL").html(result);
+                    }
+                });
+            }
+        </script>
+
+        @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.min.js")*@
+
+
+}

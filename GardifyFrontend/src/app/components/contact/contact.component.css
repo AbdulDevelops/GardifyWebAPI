@@ -1,0 +1,30 @@
+.wrapper.dark .col-7 {
+    background-color: black;
+}
+.wrapper.light .col-7 {
+    background-color: white;
+}
+.wrapper.dark {
+    color: white;
+}
+.wrapper.dark input.inputWhite, .wrapper.dark textarea { background-color: black !important;  }
+.wrapper.light input.inputWhite, .wrapper.light textarea { background-color: #fff !important; }
+.wrapper.light textarea, .wrapper.light select, .wrapper.dark textarea, .wrapper.dark select {
+    border-bottom: none !important;
+    line-height: 30px;
+    width: 100%;
+}
+textarea {
+    border: none;
+}
+.wrapper.light textarea{
+  color:black
+}
+.wrapper.dark textarea{
+  color:#fff
+}
+.input-icon {
+    top: 0.6rem;
+    background-color: transparent;
+    color: inherit;
+}

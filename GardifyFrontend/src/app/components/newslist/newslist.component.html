@@ -1,0 +1,136 @@
+<div class="wrapper {{mode}}">
+  <div class="container pt-3 pb-5 {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+    <div class="row mt-5 mb-4">
+      <app-ad [ad]="ad" ></app-ad>
+
+      <div class="col-12">
+        <span class="t-light {{mode==='dark'?'text-white':'text-blackish'}}" [ngClass]="{'t-20': isMobile, 't-27': !isMobile}">
+          <a (click)= "showInstaPosts()" [ngClass]="{'text-green t-bold': showInstapost, 'text-blackish t-reg': !showInstapost}">Garten News</a> 
+          <div class="d-inline-block" style="border-left: 1px solid #666; margin-left: 1rem;
+          margin-right: 1rem;
+          height: 30px;"></div>
+          <a [ngClass]="{'text-green t-bold': !showInstapost, 'text-blackish t-reg': showInstapost}" (click)="hideInstaPosts()">Gardify News</a></span>
+      </div>
+    </div>
+  
+    <ng-container *ngIf="newsList && !showInstapost">
+        <div *ngFor="let article of newsList; let i = index">
+          <ng-container *ngIf="((i) % 6) == 0 && i > 0" >
+            <app-ad [ad]="ad" ></app-ad>
+          </ng-container>
+            <div class="row py-4 bt-border {{mode}}">
+                <div class="col-12 col-md-12 col-lg-4">
+                  <img class="ptr" [routerLink]="['/news/', article.Id, article.Title]" [src]="toUrl(article.EntryImages[0] || null)" [alt]=article.Title>
+                </div>
+                <div class="col-12 col-md-12 col-lg-7 offset-md-1">
+                  <h3 class="t-light t-13 text-grey">{{article.Date | date:'dd.MM.yyyy'}}</h3>  
+                  <h2 [routerLink]="['/news/', article.Id, article.Title]" class="t-bold t-18 ptr">{{article.Title}}</h2>
+                  <h2 [routerLink]="['/news/', article.Id, article.Title]" class="t-light t-italic t-18 ptr">{{article.SubTitle}}</h2>
+                  <p>
+                      <span class="t-light t-13 {{mode === 'light'? 'text-blackish' : 'text-white'}}" [innerHTML]="article.Text.replace(myRegex4,replacegrp).substr(0,400)">
+                      </span>
+                      <a [routerLink]="['/news/', article.Id, article.Title]" class="t-bold">...mehr</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+          <div class="col d-flex justify-content-center justify-content-md-end">
+            <ul *ngIf="newsPager.pages && newsPager.pages.length" class="t-13 t-light pagination float-right mt-2 text-grey2">
+              <li [ngClass]="{disabled:currentPage === 1}">
+                  <a (click)="currentPage = 1;  getAllNews(1); " title="Erste Seite" class="t-bold">&lt;&lt;</a>
+              </li>
+              <li [ngClass]="{disabled:currentPage === 1}">
+                  <a (click)="currentPage = currentPage-1;  getAllNews(currentPage); " title="Vorherige Seite" class="t-bold mx-2">&lt;</a>
+              </li>
+              <li *ngFor="let page of  newsPager.pages" [ngClass]="{'text-green t-bold':currentPage === page}" class="mx-2">
+                  <a (click)="currentPage = page; getAllNews(currentPage); ">{{page}}</a>
+              </li>
+              <li [ngClass]="{disabled:currentPage === newsPager.totalPages}">
+                  <a (click)="currentPage = currentPage+1;  getAllNews(currentPage); " title="Nächste Seite" class="t-bold mx-2">&gt;</a>
+              </li>
+              <li [ngClass]="{disabled:currentPage ===  newsPager.totalPages}">
+                  <a (click)="currentPage=newsPager.totalPages;  getAllNews(newsPager.totalPages); " class="t-bold" title="Letzte Seite">&gt;&gt;</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+    </ng-container>
+    <ng-container *ngIf="instaPostList && showInstapost ">
+      <div *ngFor="let post of instaPostList; let i = index">
+        <ng-container *ngIf="((i) % 6) == 0 && i > 0" >
+          <app-ad [ad]="ad" ></app-ad>
+        </ng-container>
+        <div class="row py-4 bt-border {{mode}}">
+            <div class="col-12 col-md-12 col-lg-4">
+              <div class="row">
+                <div class="col">
+                  <a data-toggle="modal" data-target="#newsImageModal" (click)="newsImageModal = ''; newsImageModal = post.MediaEntry; selectedPost=post">
+                  <img *ngIf="post.Media_Type =='IMAGE'" style="max-height: 400px;"  class="ptr post " [src]="post.MediaEntry" alt="image">
+                  <img *ngIf="post.Media_Type =='CAROUSEL_ALBUM'" style="max-height: 400px;" class="ptr post" [src]="post.MediaEntry" alt="carousel">
+                  <span *ngIf="post.Media_Type =='VIDEO'">
+                    <video controls width="330" height="250" [src]="post.MediaEntry" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></video>
+                  </span>
+                  </a>
+                </div>
+              </div>
+
+            </div>
+            <div class="col-12 col-md-12 col-lg-7 offset-md-1">
+              <h3 class="t-light t-13 text-grey">{{post.Date | date:'dd.MM.yyyy'}}</h3>  
+              <p>
+                  <span class="t-light t-13 {{mode === 'light'? 'text-blackish' : 'text-white'}}" [innerHTML]="post.Expanded?post.Text.replace(myRegex4,replacegrp):post.Text.replace(myRegex4,replacegrp).substring(0,200)+'...'">
+                  </span>
+                  <span class="ptr mx-1 text-green t-bold" (click)="post.Expanded = !post.Expanded;" role="button">
+                    {{post.Expanded?'weniger':'mehr'}}
+                  </span>
+                  
+                </p>
+            </div>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col d-flex justify-content-center justify-content-md-end">
+          <ul *ngIf="instaNewsPager.pages && instaNewsPager.pages.length" class="t-13 t-light pagination float-right mt-2 text-grey2">
+            <li [ngClass]="{disabled:currentPage === 1}">
+                <a (click)="currentPage = 1;  getInstaPosts(1); " title="Erste Seite" class="t-bold">&lt;&lt;</a>
+            </li>
+            <li [ngClass]="{disabled:currentPage === 1}">
+                <a (click)="currentPage = currentPage-1;  getInstaPosts(currentPage); " title="Vorherige Seite" class="t-bold mx-2">&lt;</a>
+            </li>
+            <li *ngFor="let page of  instaNewsPager.pages" [ngClass]="{'text-green t-bold':currentPage === page}" class="mx-2">
+                <a (click)="currentPage = page; getInstaPosts(currentPage); ">{{page}}</a>
+            </li>
+            <li [ngClass]="{disabled:currentPage === instaNewsPager.totalPages}">
+                <a (click)="currentPage = currentPage+1;  getInstaPosts(currentPage); " title="Nächste Seite" class="t-bold mx-2">&gt;</a>
+            </li>
+            <li [ngClass]="{disabled:currentPage ===  instaNewsPager.totalPages}">
+                <a (click)="currentPage=instaNewsPager.totalPages;  getInstaPosts(instaNewsPager.totalPages); " class="t-bold" title="Letzte Seite">&gt;&gt;</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </ng-container>
+  <ng-container *ngIf="selectedPost">
+    <div class="modal fade" id="newsImageModal" tabindex="-1" role="dialog" aria-labelledby="newsImageModal" aria-hidden="true">
+      <div class="modal-dialog" role="document" style="max-width: 600px;">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <img *ngIf="selectedPost.Media_Type =='IMAGE'"  class="ptr post " [src]="selectedPost.MediaEntry" alt="image">
+            <img *ngIf="selectedPost.Media_Type =='CAROUSEL_ALBUM'"  class="ptr post" [src]="selectedPost.MediaEntry" alt="image">
+            <span *ngIf="selectedPost.Media_Type =='VIDEO'">
+              <video controls width="330" height="250" [src]="selectedPost.MediaEntry" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></video>
+            </span>            
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  </div>
+</div>

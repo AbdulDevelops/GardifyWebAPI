@@ -1,0 +1,21 @@
+<div class="overlay-loading" [hidden]="!loading">
+    <div class="app-loading center-screen">
+        <svg class="spinner" viewBox="25 25 50 50">
+            <circle class="path" cx="50" cy="50" r="24" fill="none" stroke-width="2" stroke-miterlimit="10" />
+        </svg>
+    </div>
+</div>
+<div class="plantHeader wrapper {{mode}} pt-5 ">
+    <div class="container px-5 pb-5">
+        <app-ad [ad]="ad"></app-ad>
+
+        <div *ngIf="currentUser?.imageData?.Images !== undefined">
+
+            <app-community-header-search [currentUser]="currentUser" [themeMode]="mode"
+                (tabButtonClicked)="getCurrentTab($event)"></app-community-header-search>
+
+            <router-outlet></router-outlet>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,90 @@
+﻿@model List<GardifyModels.Models.OrderViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdminArea.cshtml";
+}
+    <style>
+        a.disabled {
+          pointer-events: none;
+          cursor: default;
+          color: grey;
+        }
+    </style>
+    <h2>Alle Bestellungen</h2>
+@{
+    <div class="odd-bg">
+        <table class="table">
+            <tr>
+                <th>
+                    Bestellungsnr.
+                </th>
+                <th>
+                    Transaktionsnr.
+                </th>
+                <th>
+                    Datum
+                </th>
+                <th>
+                    Summe
+                </th>
+                <th>
+                    Benutzername
+                </th>
+                <th>
+                    TeleCash-Code
+                </th>
+                <th>
+                    Status
+                </th>
+                <th></th>
+            </tr>
+            @foreach (var order in Model)
+            {
+            <tr title="@order.Comment">
+                <td>
+                    @Html.DisplayFor(modelItem => order.OrderId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => order.TransactionId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => order.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => order.OrderAmount)€
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => order.CustomerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => order.TCResponseCode)
+                </td>
+                <td>
+                    @switch ((int)order.Status)
+                    {
+                        case 0: <span>Neu</span>; break;
+                        case 1: <span>Versand</span>; break;
+                        case 2: <span>Rückgabe</span>; break;
+                        case 3: <span>Fertig</span>; break;
+                        default: <span>Neu</span>; break;
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink("Detail", "Details", "AdminAreaOrders", new { id = order.ShopOrderId }, null)
+                </td>
+            </tr>
+            }
+        </table>
+    </div>
+}
+
+<div>
+    @{
+        var prevDisabled = !ViewBag.HasPreviousPage;
+        var nextDisabled = !ViewBag.HasNextPage;
+    }
+
+    @Html.ActionLink("Zurück", "Index", "AdminAreaOrders", new { page = ViewBag.prevPage }, new { @class = @prevDisabled ? "disabled": "" })
+
+    @Html.ActionLink("Weiter", "Index", "AdminAreaOrders", new { page = ViewBag.nextPage }, new { @class = @nextDisabled ? "disabled": "" })
+</div>

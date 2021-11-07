@@ -1,0 +1,75 @@
+<div class="wrapper {{mode}}">
+  <div *ngIf="article" class="container pt-3 pb-5 {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+    <div class="row mt-5 mb-4 bt-border pb-4">
+      <div class="col-12 col-md-6">
+        <a [routerLink]="['/news']">
+          <h2 class="t-light ptr t-26 {{mode==='dark'?'text-white':'text-grey'}}"><< NEWS</h2>
+        </a>
+      </div>
+    </div>
+
+    <div class="row pb-4 bt-border mb-4">
+      <div class="col-lg-4">
+        <div>
+          <a data-toggle="modal" data-target="#articleImageModal" (click)="articleImageModal = toUrl(article.EntryImages[0]?.SrcAttr);">
+            <img [title]="article.EntryImages[0]?.Author ? 'Autor: '+ article.EntryImages[0]?.Author:''" [src]=toUrl(article.EntryImages[0]?.SrcAttr) [alt]=article.Title class="article-img">
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-8">
+          <h2 class="t-reg t-12">{{article.Date | date:'dd.MM.yyyy'}}</h2>
+
+          <h2 class="t-boldish t-18 mt-3">{{article.Title}}</h2>
+          <h2 class="t-light t-italic t-18">{{article.SubTitle}}</h2>
+
+          <h2 class="t-reg t-14 mt-4">Thema</h2>
+          <h2 class="t-boldish t-14">{{article.Theme ||'allgemein'}}</h2>
+
+          <h2 class="t-reg t-14 mt-4">Verfasser</h2>
+          <h2 class="t-boldish t-14">{{article.Author ||'Redaktion'}}</h2>
+
+          <h2 class="t-reg t-14 mt-4">Gültigkeitsdauer</h2>
+          <h2 class="t-boldish t-14">{{article.Timing ||'nicht festgelegt'}}</h2>
+      </div>
+    </div>
+    <div *ngIf="article.EntryImages.length > 1" class="row mb-4">
+      <div *ngFor="let img of article.EntryImages | slice:1">
+        <a data-toggle="modal" data-target="#articleImageModal" (click)="articleImageModal = toUrl(img.SrcAttr);">
+          <img class="article-sub-img" [title]="img.Author ? 'Autor: '+ img?.Author:''" [src]="toUrl(img.SrcAttr)" [alt]="img.TitleAttr">
+        </a>
+      </div>
+    </div>
+    <div class="row bt-border">
+      <div class="col-12">
+        <p class="t-light" [innerHTML]="article.Text.replace(myRegex4,replacegrp)"></p>
+      </div>
+      <div *ngIf="article.Tipp" class="col-12">
+        <h2 class="text-green t-bold t-15 mr-2">Tipp</h2>
+        <span class="t-light" [innerHTML]="article.Tipp">
+          {{article.Tipp}}
+        </span>
+      
+
+      </div>
+    </div>
+    <div class="row pl-3 mt-4">
+      <button class="btn btn-secondary btn_border075" (click)="goBack()">zurück</button>
+    </div>
+  </div>
+</div>
+<ng-container *ngIf="article">
+  <div class="modal fade" id="articleImageModal" tabindex="-1" role="dialog" aria-labelledby="articleImageModal" aria-hidden="true">
+    <div class="modal-dialog" role="document" style="max-width: 600px;">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <img class="w-100" [src]="articleImageModal" [alt]="article.Title">
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>

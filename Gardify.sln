@@ -1,0 +1,125 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29215.179
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GardifyModels", "GardifyModels\GardifyModels.csproj", "{1E065F0C-5341-449B-92B1-6F6BDF892E66}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PflanzenApp", "PflanzenApp\PflanzenApp.csproj", "{2D76C3A2-A032-472C-8605-4127DD5F4D7F}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "GardifyFrontend", "GardifyFrontend\", "{DD01FC1A-0059-425F-B08C-EA14EE24F0B1}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_50117"
+		Debug.AspNetCompiler.PhysicalPath = "GardifyFrontend\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_50117\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_50117"
+		Release.AspNetCompiler.PhysicalPath = "GardifyFrontend\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_50117\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "50117"
+		SlnRelativePath = "GardifyFrontend\"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GardifyWebAPI", "GardifyWebAPINew\GardifyWebAPI.csproj", "{48849564-E5A9-44BD-A1FD-EA336E73739A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WarningsScheduler", "WarningsScheduler\WarningsScheduler.csproj", "{B72053D5-3B61-41BB-989C-384CC953D9A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SiteMapGenerator", "SiteMapGenerator\SiteMapGenerator.csproj", "{6C40D8A8-4A31-4F36-9DD0-FE08369CF597}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GardifyAdminKeepAlive", "GardifyAdminKeepAlive\GardifyAdminKeepAlive.csproj", "{E41FAF80-1669-400A-A8CF-CA2B68FFAAD7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileUploadLib", "FileUploadLib\FileUploadLib.csproj", "{B2572DC6-62C1-41BA-BF82-234623822407}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImageEditLib", "ImageEditLib\ImageEditLib.csproj", "{8F8A853F-BAB5-4617-ADD9-417271BF1080}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GardifyNewsletter", "GardifyNewsletter\GardifyNewsletter.csproj", "{190F6E30-2749-4ABD-81F5-3155B4E0CCA4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GardifyAndroid", "GardifyAndroid", "{EDEB2EA1-7AFA-4D4D-877D-B002A6DF794C}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "GardifyIOS", "GardifyIOS\", "{1B935978-B2F7-4466-8610-DA703B534A2D}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_51193"
+		Debug.AspNetCompiler.PhysicalPath = "GardifyIOS\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_51193\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_51193"
+		Release.AspNetCompiler.PhysicalPath = "GardifyIOS\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_51193\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "51193"
+		SlnRelativePath = "GardifyIOS\"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1E065F0C-5341-449B-92B1-6F6BDF892E66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E065F0C-5341-449B-92B1-6F6BDF892E66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E065F0C-5341-449B-92B1-6F6BDF892E66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E065F0C-5341-449B-92B1-6F6BDF892E66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D76C3A2-A032-472C-8605-4127DD5F4D7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D76C3A2-A032-472C-8605-4127DD5F4D7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D76C3A2-A032-472C-8605-4127DD5F4D7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D76C3A2-A032-472C-8605-4127DD5F4D7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD01FC1A-0059-425F-B08C-EA14EE24F0B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD01FC1A-0059-425F-B08C-EA14EE24F0B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD01FC1A-0059-425F-B08C-EA14EE24F0B1}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD01FC1A-0059-425F-B08C-EA14EE24F0B1}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{48849564-E5A9-44BD-A1FD-EA336E73739A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48849564-E5A9-44BD-A1FD-EA336E73739A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48849564-E5A9-44BD-A1FD-EA336E73739A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48849564-E5A9-44BD-A1FD-EA336E73739A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B72053D5-3B61-41BB-989C-384CC953D9A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B72053D5-3B61-41BB-989C-384CC953D9A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B72053D5-3B61-41BB-989C-384CC953D9A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B72053D5-3B61-41BB-989C-384CC953D9A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C40D8A8-4A31-4F36-9DD0-FE08369CF597}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C40D8A8-4A31-4F36-9DD0-FE08369CF597}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C40D8A8-4A31-4F36-9DD0-FE08369CF597}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C40D8A8-4A31-4F36-9DD0-FE08369CF597}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E41FAF80-1669-400A-A8CF-CA2B68FFAAD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E41FAF80-1669-400A-A8CF-CA2B68FFAAD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E41FAF80-1669-400A-A8CF-CA2B68FFAAD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E41FAF80-1669-400A-A8CF-CA2B68FFAAD7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2572DC6-62C1-41BA-BF82-234623822407}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2572DC6-62C1-41BA-BF82-234623822407}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2572DC6-62C1-41BA-BF82-234623822407}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2572DC6-62C1-41BA-BF82-234623822407}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F8A853F-BAB5-4617-ADD9-417271BF1080}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F8A853F-BAB5-4617-ADD9-417271BF1080}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F8A853F-BAB5-4617-ADD9-417271BF1080}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F8A853F-BAB5-4617-ADD9-417271BF1080}.Release|Any CPU.Build.0 = Release|Any CPU
+		{190F6E30-2749-4ABD-81F5-3155B4E0CCA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{190F6E30-2749-4ABD-81F5-3155B4E0CCA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{190F6E30-2749-4ABD-81F5-3155B4E0CCA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{190F6E30-2749-4ABD-81F5-3155B4E0CCA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B935978-B2F7-4466-8610-DA703B534A2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B935978-B2F7-4466-8610-DA703B534A2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B935978-B2F7-4466-8610-DA703B534A2D}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B935978-B2F7-4466-8610-DA703B534A2D}.Release|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {63A92764-FCE8-40E1-BE7E-48656791D8C6}
+	EndGlobalSection
+EndGlobal

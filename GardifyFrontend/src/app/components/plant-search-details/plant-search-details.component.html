@@ -1,0 +1,979 @@
+<div class="overlay-loading" [hidden]="!loading">
+  <svg class="spinner position-relative" viewBox="25 25 50 50">
+    <circle class="path" cx="50" cy="50" r="24" fill="none" stroke-width="2" stroke-miterlimit="10" />
+  </svg>
+</div>
+<div class="wrapper {{mode}}">
+  <div *ngIf="item" class="container pt-3">
+              <div class="row mt-5 mb-4">
+                <div class="col-12 col-md-6">
+                  <h2 class="t-light t-16  {{mode === 'light'? 'text-grey' : 'text-grey4'}}">
+                    <span class="t-bold ">MEIN</span> <span class="t-reg ">GARTEN</span>
+                  </h2>
+                    <a [routerLink]="origin === 'grdn'? ['/meingarten'] : ['/suche']">
+                      <h2 class="t-bold t-15 {{mode === 'light'? 'text-grey' : 'text-white'}}">
+                        Pflanzendetails
+                      </h2> 
+                    </a> 
+                </div> 
+              </div> 
+              <hr>
+
+              <div class="row pt-2">
+                <div class="col-md-12 col-lg-12">
+                  <div class="overlay-loading" *ngIf="clicked">
+                    <svg class="spinner position-relative" viewBox="25 25 50 50">
+                      <circle class="path" cx="50" cy="50" r="24" fill="none" stroke-width="2" stroke-miterlimit="10" />
+                    </svg>
+                  </div>
+                  <div class="arrowcircle" style="width: 100%; "  *ngIf="item.Images?.length>0 " > 
+                    <!-- <a data-toggle="modal" data-target="#plantImageModal" (click)="plantImageModal = ''; plantImageModal = firstUrl;">
+                      <img *ngIf="item.Images?.length>0 && isCollectionCard(item.Images) || !checkIfAutor(item.Images)" [src]=firstUrl  [alt]=item.NameGerman class="plant-img-big">
+                      <img *ngIf="item.Images?.length>0 && !isCollectionCard(item.Images) && checkIfAutor(item.Images)" [src]=firstUrl [title]="item.Images[0]?.Author ? 'Autor: '+ item.Images[0]?.Author  +'\n'+'Kommentare: '+ item.Images[0]?.Comments :''" [alt]=item.NameGerman class="plant-img-big">
+
+                     
+                    </a> -->
+                    <div id="carouselExampleControls" data-interval="false" class="carousel slide" data-ride="carousel">
+                      <div class="carousel-inner">
+                        <div class="carousel-item" *ngFor="let img of item.Images let i = index"
+                          [ngClass]="{'active': i == 0 }">
+                         
+                          <img *ngIf="item.Images?.length>0 && isCollectionCard(item.Images) || !checkIfAutor(item.Images)" [src]=toUrl(img.SrcAttr,false)  [alt]=item.NameGerman class="plant-img-big">
+                          <img *ngIf="item.Images?.length>0 && !isCollectionCard(item.Images) && checkIfAutor(item.Images)" [src]=toUrl(img.SrcAttr,false) [title]="img.Author ? 'Autor: '+ img.Author  +'\n'+'Kommentare: '+ img.Comments :''" [alt]=item.NameGerman class="plant-img-big">
+    
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                          <span class="sr-only"></span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                          <span class="sr-only"></span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                  <div class="col-12 col-md-12">
+                    <div class="row">
+                      <div class="col-lg-8">
+                          <div *ngFor="let img of item.Images; let i=index" class="d-inline-block mt-3">
+                              <ng-container *ngIf="!(i==9)">
+                                <a> <img [src]=toUrl(img.SrcAttr) [alt]=item.NameGerman (click)="replaceUrl(img.SrcAttr)"
+                                    class="plant-img-sm"></a>
+                              </ng-container>
+                            </div>
+                      </div>
+                     
+                      <div class="col-4">
+                        <div class="d-flex mt-3 float-right">
+                          <div *ngIf="origin == 'grdn' && isLoggedIn || isTestAccount">
+                            <button class="btn bg-white btn_border075" (click)="showEditMenu=!showEditMenu; getSelectedPlantFromGarden()" style="width: 200px;">Bearbeiten</button>
+                            <ng-container *ngIf="showEditMenu">
+                              <ul class="dropdown-list {{mode}}" (mouseleave)="showEditMenu = false">
+                                <li class="ptr t-14 {{mode === 'light'? 'text-blackish' : 'text-white'}}"  data-target="#movePlantToList" data-toggle="modal" >Pflanze in einen anderen <br> Gartenbereich verschieben</li>
+                                <li class="ptr t-14 {{mode === 'light'? 'text-blackish' : 'text-white'}}"  data-target="#updatePlant" data-toggle="modal" (click)="updatePlantMode='notes'">Notizen zur Pflanze</li>
+                                <li class="ptr t-14 {{mode === 'light'? 'text-blackish' : 'text-white'}}" data-target="#updatePlant" data-toggle="modal" (click)="updatePlantMode='count'">Anzahl angeben</li>
+                                <li class="ptr t-14 text-danger" data-toggle="modal" data-target="#deletePlant" >Löschen</li>
+                              </ul>
+                            </ng-container>
+                          </div>
+                          <div>
+                            <img src="assets/images/Teilen.svg" class=" ml-4 ptr" style="height: 30px;"   >
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-12 mt-5 float-right">
+                        <button *ngIf="origin !== 'grdn' && isLoggedIn || isTestAccount" data-toggle="modal" data-target="#addPlantModal"
+                          (click)="selectPlant(item);getPlantLists();"
+                          class="t-light t-15 btn btn-green float-right {{mode === 'light'? 'text-ltsgrey' : 'text-white'}}">
+                          in meinen Garten speichern</button>
+                      </div>
+                    </div>
+  
+                  </div>
+                  
+                <div class="col-md-12 col-lg-12" #plantSibling>
+                  <div class="row">
+                    <div class="col-6">
+                      <span class="font-italic t-16 {{mode === 'light'? 'text-darkgrey' : 'text-white'}}">
+                        {{item.NameLatin.replace(myRegex4,'')}}</span>
+                      <span class="t-bold mx-2 t-16 d-inline-block {{mode === 'light'? 'text-darkgrey' : 'text-white'}}">
+                        {{item.NameGerman}}</span>
+                      <ng-container *ngIf="!(item.Synonym==null)">
+                        <h2 class="t-reg t-14 {{mode === 'light'? 'text-darkgrey' : 'text-white'}}" [innerHTML]=item.Synonym></h2>
+                      </ng-container>
+                      <ng-container *ngIf="item.PlantGroups?.length>0">
+                        <h2 class="t-reg t-14 mt-4 text-ltsgrey">Pflanzengruppe</h2>
+                        <span class="t-bold t-16 {{mode === 'light'? 'text-darkgrey' : 'text-white'}}"
+                          *ngFor="let p of item.PlantGroups; let i=index">
+                          {{p.Name}}{{i!=(item.PlantGroups.length)-1?',':''}}
+                        </span>
+                      </ng-container>
+                      <ng-container *ngIf="!(item.Family==null)">
+                        <h2 class="t-reg t-14 mt-4 text-ltsgrey">Familie:</h2>
+                        <h2 class="t-bold t-16 {{mode === 'light'? 'text-darkgrey' : 'text-white'}}">
+                          {{item.Family.replace(myRegex4,'')}} </h2>
+                      </ng-container>
+                      <ng-container *ngIf="!(item.Herkunft==null)">
+                        <h2 class="t-reg t-14 mt-4 text-ltsgrey">Herkunft</h2>
+                        <h2 class="t-bold t-16 {{mode === 'light'? 'text-darkgrey' : 'text-white'}}">
+                          {{item.Herkunft.replace(myRegex4,'')}}</h2>
+                      </ng-container>
+                    </div>
+                    <div class="col-6">
+                      <ng-container *ngIf="item.Colors?.length>0">
+                        <div class="row">
+                          <div class="col-lg-12 ">
+                            <span class="t-reg t-14  text-ltsgrey">Blütenfarbe erhältlich in:</span>
+                          </div>
+                          <div class="col-lg-12 pl-0 mt-2">
+    
+                            <div *ngFor="let color of item.Colors " class="d-inline-block">
+                                <span [title]="color"
+                                  class=" mt-2 mx-2 checkmark d-inline-block position-static {{color}} " style="border-radius: 0.5rem!important;
+                                  width: 30px!important;
+                                  height: 30px!important;"></span>
+                            </div>
+                          </div>
+                        </div>
+                        <hr class="mb-0 {{mode}}">
+                      </ng-container>
+                      <div class="row pt-0">
+                        <!-- <div class="col-12 col-lg-12"> -->
+                        <div *ngIf="hasBadgeById(plantBadges.BeesId)"
+                          class="d-inline-block col-6 col-md-3 col-lg-2 d-flex justify-content-center">
+                          <img class="g-badge" src="assets/images/Mein_Garten_Meine_Pflanzen_Bienenfreundlich_Mit_Kontur.svg" title="Bienenfreundlich"
+                            alt="Bienenfreundlich">
+                          
+                        </div>
+        
+                        <div *ngIf="hasBadgeById(plantBadges.InsectsId)"
+                          class="d-inline-block col-6 col-md-3 col-lg-2 d-flex justify-content-center">
+                          <img class="g-badge" src="assets/images/Mein_Garten_Meine_Pflanzen_Insektenfreundlich_Mit_Kontur.svg" title="Insektenfreundlich"
+                            alt="Insektenfreundlich">
+                          
+                        </div>
+        
+                        <div *ngIf="hasBadgeById(plantBadges.BirdsId)"
+                          class="d-inline-block col-6  col-md-3 col-lg-2 d-flex justify-content-center">
+                          <img class="g-badge" src="assets/Mein_Garten_Meine_Pflanzen_Vogelfreundlich_Mit_Kontur.svg" title="Vogelfreundlich"
+                            alt="Vogelfreundlich">
+                        </div>
+        
+                        <div *ngIf="hasBadgeById(plantBadges.ButterfliesId)"
+                          class="d-inline-block col-6  col-md-3 col-lg-2 d-flex justify-content-center">
+                          <img class="g-badge" src="assets/images/Mein_Garten_Meine_Pflanzen_Schmetterlingsfreundlich_Mit_Kontur.svg" title="Schmetterlingsfreundlich"
+                            alt="Schmetterlingsfreundlich">
+                          
+                        </div>
+        
+                        <div *ngIf="hasBadgeById(plantBadges.BioId)"
+                          class="d-inline-block col-6 col-md-3 col-lg-2 d-flex justify-content-center">
+                          <img class="g-badge" src="assets/images/Mein_Garten_Meine_Pflanzen_Ökologisch_wertvoll_Mit_Kontur.svg" title="Ökologisch wertvoll"
+                            alt="Ökologisch wertvoll">
+                          
+                        </div>
+        
+                        <div *ngIf="hasBadgeById(plantBadges.Domestic)"
+                          class="d-inline-block col-6  col-md-3 col-lg-2 d-flex justify-content-center">
+                          <img class="g-badge" src="assets/images/Mein_Garten_Meine_Pflanzen_heimische_Pflanze_Mit_Kontur.svg" title="Heimische Pflanze"
+                            alt="Heimische Pflanze">
+                        </div>
+                        <div *ngIf="hasBadgeById(plantBadges.WaterSaving)"
+                        class="d-inline-block col-6  col-md-3 col-lg-2 d-flex justify-content-center">
+                        <img class="g-badge" src="assets/images/Mein_Garten_Meine_Pflanzen_heimische_Pflanze_Mit_Kontur.svg" title="Heimische Pflanze"
+                          alt="Heimische Pflanze">
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                 
+
+                  
+                </div>
+
+              </div>
+              
+              
+               <hr  class="{{mode}}"> 
+            <div class="row">
+              <div class="col-lg-12 ">
+                <div class="d-flex">
+                  <div class="mr-auto"><h2 class="t-bold t-16 text-green" id="replace"> To-dos</h2></div>
+                  <div *ngIf="item.TodoTemplates?.length>0"><span class="text-green t-bold t-16">Erledigt</span></div>
+                </div>
+                
+                <ng-container *ngIf="item.TodoTemplates?.length>0">
+                  <div class="t-reg t-16 {{mode === 'light'? 'text-darkgrey' : 'text-white'}}"  style="overflow-y:auto; height:200px;"
+                   
+                    >
+                    <ul *ngFor="let todo of item.TodoTemplates; let i=index">
+                      <li>
+                        <div class="d-flex">
+                          <div class="mr-auto">     
+                             <a data-toggle="collapse" href="#collapseItem-{{i}}"  aria-expanded="false" aria-controls="collapseItem-{{i}}"><h2 class="t-bold t-16">{{todo.Title}}</h2></a>
+                             <p [innerHTML]="todo.Description.replace(italicRegex,replacegrp)" class="collapse" id="collapseItem-{{i}}"></p>
+                            </div>
+                          <div>
+                            <div class="form-group col-2 ch-container mb-0 ">
+                              <label class="t-reg t-12" *ngIf="todo.DateStart && isActive(todo)">
+                                <input type="checkbox" name="ViewedFinished" [(ngModel)]="todo.Finished"
+                                      (change)="markDone(todo,item.UserPlant.Gardenid)">
+                                <span class="checkmark cr ml-3"></span>
+                              </label>
+                              <label class="t-reg t-12" *ngIf="!isActive(todo)" matTooltip="To-do liegt schon in der vergangenheit"
+                              matTooltipHideDelay="0" #markdone="matTooltip" [matTooltipPosition]="'above'" matTooltipClass="tooltip-text" (click)="markdone.toggle()">
+                                <input type="checkbox" name="ViewedFinished" [(ngModel)]="todo.Finished"
+                                      (change)="markDone(todo,item.UserPlant.Gardenid)" disabled>
+                                <span class="checkmark cr ml-3" disabled></span>
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                        
+                      </li>
+                    </ul>
+                  </div>
+                  
+                </ng-container>
+                <ng-container *ngIf="!(item.TodoTemplates?.length>0)">
+                  <span class="d-inlineblock t-bold text-green ">Keine To-dos vorhanden</span>
+                </ng-container>
+                
+              </div>
+             </div>
+             <hr  class="{{mode}}"> 
+              <div class="row justify-content-between pt-4">
+
+                <div class="col-lg-12">
+                  <h2 class="t-bold t-16 {{mode === 'light'? 'text-green' : 'text-green'}} mt-4" id="replace">
+                    Beschreibung:</h2>
+                  <p class="t-reg t-16 {{mode === 'light'? 'text-darkgrey' : 'text-white'}}" ng-controller="MainCtrl"
+                    [innerHTML]=item.Description></p>
+                </div>
+              </div>
+              <hr>
+
+              <div class="row mt-4">
+                <div class="col-12 col-md-5 mb-4 "
+                  *ngIf="particularity?.length>0 || autumncolouring?.length>0 || ground?.length>0 || exclusioncriteria?.length>0 || decoaspects?.length>0 ||leafrythm?.length>0 ">
+                  <table class="table {{mode === 'light'? 'text-darkgrey' : 'text-white'}} {{mode}} bg-colorGreenForest" >
+                    <thead class="bg-colorGreenForest">
+                      <tr class=" t-bold t-14 text-white  {{mode}} mb-1">
+                        <th>Eigenschaften</th>
+                      </tr>
+
+                    </thead>
+                    <tbody class="bg-greenforestLigth">
+                      <tr *ngIf="particularity?.length>0">
+                        <th
+                          class=" t-reg t-table {{mode === 'light'? 'text-darkgrey' : 'text-white'}} "
+                          scope="row">Verwendung</th>
+                        <td scope="col-lg-6">
+                          <span *ngFor="let item of use; let i = index"
+                            class="t-reg t-table {{mode === 'light'? 'text-darkgrey' : 'text-white'}} line_height-2 ">{{item.Title}}{{i!=use.length-1?',':''}}<br />
+                          </span>
+                        </td>
+                      </tr>
+                      <tr *ngIf="particularity?.length>0">
+                        <th
+                          class=" t-reg t-table {{mode === 'light'? 'text-darkgrey' : 'text-white'}} "
+                          scope="row">Besonderheiten</th>
+                        <td scope="col-lg-6">
+                          <span *ngFor="let item of particularity; let i = index"
+                            class="t-reg t-table {{mode === 'light'? 'text-darkgrey' : 'text-white'}} line_height-2 ">{{item.Title}}{{i!=particularity.length-1?',':''}}<br />
+                          </span>
+                        </td>
+
+                      </tr>
+                      <tr class="" *ngIf="autumncolouring?.length>0">
+                        <th
+                          class=" t-reg t-table {{mode === 'light'? 'text-darkgrey' : 'text-white'}} ">
+                          Herbstfärbung </th>
+                        <td>
+                          <span *ngFor="let item of autumncolouring; let i = index"
+                            class="t-reg t-table {{mode === 'light'? 'text-darkgrey' : 'text-white'}} line_height-2">{{item.Title}}{{i!=autumncolouring.length-1?',':''}}<br />
+                          </span>
+                        </td>
+                      </tr>
+                      <tr class="" *ngIf="growth?.length>0">
+                        <th
+                          class="t-reg  t-table {{mode === 'light'? 'text-darkgrey' : 'text-white'}} ">
+                          Wuchs
+                        </th>
+                        <td>
+                          <span *ngFor="let item of growth; let i = index "
+                            class="t-reg t-table {{mode === 'light'? 'text-darkgrey' : 'text-white'}} line_height-2">{{item.Title || parseCharacteristic(item)}}{{i!=growth.length-1?',':''}}<br />
+                          </span>
+
+                        </td>
+                      </tr>
+                      <tr class="" *ngIf="cropPlant?.length>0">
+                        <th
+                          class="t-reg  t-table {{mode === 'light'? 'text-darkgrey' : 'text-white'}} ">
+                          Nutzpflanzen
+                        </th>
+                        <td>
+                          <span *ngFor="let item of cropPlant; let i = index "
+                            class="t-reg t-table {{mode === 'light'? 'text-darkgrey' : 'text-white'}} line_height-2">{{item.Title || parseCharacteristic(item)}}{{i!=cropPlant.length-1?',':''}}<br />
+                          </span>
+
+                        </td>
+                      </tr>
+                      <tr class="" *ngIf="exclusioncriteria?.length>0">
+                        <th
+                          class=" t-reg t-table {{mode === 'light'? 'text-darkgrey' : 'text-white'}} ">
+                          Ausschlusskriterien </th>
+                        <td>
+                          <span *ngFor="let item of exclusioncriteria; let i = index"
+                            class="t-reg t-table {{mode === 'light'? 'text-darkgrey' : 'text-white'}} line_height-2">{{item.Title}}{{i!=exclusioncriteria.length?',':''}}<br />
+                          </span>
+                        </td>
+                      </tr>
+                      <tr class="" *ngIf="(decoaspects?.length>0)">
+                        <th
+                          class="t-reg t-table {{mode === 'light'? 'text-darkgrey' : 'text-white'}} ">
+                          Dekoaspekte</th>
+                        <td>
+                          <span *ngFor="let item of decoaspects; let i = index"
+                            class="t-reg t-table {{mode === 'light'? 'text-darkgrey' : 'text-white'}} line_height-2">{{item.Title}}{{i!=decoaspects.length-1?',':''}}<br />
+                          </span>
+                        </td>
+                      </tr>
+                      <tr class="" *ngIf="leafrythm?.length>0">
+                        <th
+                          class="t-reg t-table {{mode === 'light'? 'text-darkgrey' : 'text-white'}} ">
+                          Laubrhythmus</th>
+                        <td>
+                          <span *ngFor="let item of leafrythm; let i = index"
+                            class="t-reg t-table {{mode === 'light'? 'text-darkgrey' : 'text-white'}} line_height-2">{{item.Title}}{{i!=leafrythm.length-1?',':''}}<br />
+                          </span>
+                        </td>
+                      </tr>
+                      
+                      <tr class="" *ngIf="winterHardness?.length>0">
+                        <th
+                          class="t-reg t-table {{mode === 'light'? 'text-darkgrey' : 'text-white'}} ">
+                          Winterhärte</th>
+                        <td>
+                          <span *ngFor="let item of winterHardness; let i = index"
+                            class="t-reg t-table {{mode === 'light'? 'text-darkgrey' : 'text-white'}} line_height-2">{{item.Title}}{{i!=winterHardness.length-1?',':''}}<br />
+                          </span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="col-12 col-md-5 offset-md-2 ">
+                  <div class="row">
+                    <div class=" col-12 "
+                    *ngIf="blossoms?.length>0 ||flowercolours?.length>0 ||flowershaped?.length>0||flowersized?.length>0||flowering?.length>0 ">
+                    <table class="table backgrdColorRosa">
+                      <thead class="backgrdColorRosa">
+                        <tr class="text-white t-bold t-14 mb-1">
+                          <th>Blüten</th>
+                        </tr>
+                      </thead>
+                      <tbody class="backgrdColorRosaLigth">
+
+                        <tr *ngIf="blossoms?.length>0">
+                          <th
+                            class=" t-reg t-table {{mode === 'light'? 'text-darkgrey' : 'text-white'}} backgrdColorVioletLight"
+                            scope="row">Blüten</th>
+                          <td scope="col-lg-6">
+                            <span *ngFor="let item of blossoms; let i = index"
+                              class="t-reg t-table {{mode === 'light'? 'text-darkgrey' : 'text-white'}} line_height-2">{{item.Title || parseCharacteristic(item)}}{{i!=blossoms.length-1?',':''}}<br />
+                            </span>
+                          </td>
+                        </tr>
+                        <tr class="" *ngIf="flowercolours?.length>0">
+                          <th
+                            class=" t-reg t-table {{mode === 'light'? 'text-darkgrey' : 'text-white'}} backgrdColorVioletLight">
+                            Blütenfarben </th>
+                          <td>
+                            <span *ngFor="let item of flowercolours; let i = index"
+                              class="t-reg t-table {{mode === 'light'? 'text-darkgrey' : 'text-white'}} line_height-2">{{item.Title}}{{i!=flowercolours.length-1?',':''}}<br />
+                            </span>
+                          </td>
+
+                        </tr>
+                        <tr class="" *ngIf="flowershaped?.length>0">
+                          <th
+                            class=" t-reg t-table {{mode === 'light'? 'text-darkgrey' : 'text-white'}} backgrdColorVioletLight">
+                            Blütenform</th>
+                          <td>
+                            <span *ngFor="let item of flowershaped; let i = index"
+                              class="t-reg t-table {{mode === 'light'? 'text-darkgrey' : 'text-white'}} line_height-2">{{item.Title}}{{i!=flowershaped.length-1?',':''}}<br />
+                            </span>
+                          </td>
+                        </tr>
+                        <tr class="" *ngIf="flowersized?.length>0">
+                          <th
+                            class="t-reg t-table {{mode === 'light'? 'text-darkgrey' : 'text-white'}} backgrdColorVioletLight">
+                            Blütengröße </th>
+                          <td>
+                            <span *ngFor="let item of flowersized; let i = index"
+                              class="t-reg t-table {{mode === 'light'? 'text-darkgrey' : 'text-white'}} line_height-2">{{item.Title}}{{i!=flowersized.length-1?',':''}}<br />
+                            </span>
+                          </td>
+                        </tr>
+                        <tr class="" *ngIf="flowering?.length>0">
+                          <th
+                            class="t-reg t-table {{mode === 'light'? 'text-darkgrey' : 'text-white'}} backgrdColorVioletLight">
+                            Blütenstand</th>
+                          <td>
+                            <span *ngFor="let item of flowering; let i = index"
+                              class="t-reg t-table {{mode === 'light'? 'text-darkgrey' : 'text-white'}} line_height-2">{{item.Title}}{{i!=flowering.length-1?',':''}}<br />
+                            </span>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    </div>
+                    <div class="col-12"
+                      *ngIf="leafcolour?.length>0 || sheetposition?.length>0 ||leafshape?.length>0 ||leafmargin?.length>0">
+                      <table class="table backgrdColorGreen">
+                        <thead class="backgrdColorGreen">
+                          <tr class="text-white t-bold t-14 "> <th>Blätter</th></tr>
+                        </thead>
+                        <tbody class="backgrdColorGreenLigth">
+                          <tr *ngIf="leafcolour?.length>0">
+                            <th
+                              class="t-reg t-table {{mode === 'light'? 'text-darkgrey' : 'text-white'}} ">
+                              Blattfarbe</th>
+                            <td>
+                              <span *ngFor="let item of leafcolour; let i = index"
+                                class="t-reg t-table {{mode === 'light'? 'text-darkgrey' : 'text-white'}} line_height-2">{{item.Title}}{{i!=leafcolour.length-1?',':''}}<br />
+                              </span>
+                            </td>
+                          </tr>
+                          <tr *ngIf="leafshape?.length>0">
+                            <th
+                              class="t-reg t-table {{mode === 'light'? 'text-darkgrey' : 'text-white'}} ">
+                              Blattform</th>
+                            <td>
+                              <span *ngFor="let item of leafshape; let i = index"
+                                class="t-reg t-table {{mode === 'light'? 'text-darkgrey' : 'text-white'}} line_height-2">{{item.Title}}{{i!=leafshape.length-1?',':''}}<br />
+                              </span>
+                            </td>
+                          </tr>
+                          <tr *ngIf="leafmargin?.length>0">
+                            <th
+                              class="t-reg t-table {{mode === 'light'? 'text-darkgrey' : 'text-white'}} ">
+                              Blattrand</th>
+                            <td>
+                              <ng-container *ngIf="leafmargin?.length>0">
+                                <span *ngFor="let item of leafmargin; let i = index"
+                                  class="t-reg t-table {{mode === 'light'? 'text-darkgrey' : 'text-white'}} line_height-2">{{item.Title}}{{i!=leafmargin.length-1?',':''}}<br />
+                                </span>
+                              </ng-container>
+                            </td>
+                          </tr>
+                          <tr *ngIf="sheetposition?.length>0">
+                            <th
+                              class="t-reg t-table {{mode === 'light'? 'text-darkgrey' : 'text-white'}} ">
+                              Blattstellung</th>
+                            <td>
+                              <ng-container *ngIf="sheetposition?.length>0">
+                                <span *ngFor="let item of sheetposition; let i = index"
+                                  class="t-reg t-table {{mode === 'light'? 'text-darkgrey' : 'text-white'}} line_height-2">{{item.Title}}{{i!=sheetposition.length-1?',':''}}<br />
+                                </span>
+                              </ng-container>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                   
+                    <div class="col-12" *ngIf="fruits?.length>0 ||fruitcolor?.length>0">
+                      <table class="table backgrdColorRosa">
+                        <thead class="backgrdColorRosa">
+                          <tr class="text-whitet-14 t-table">
+                            <th>Früchte</th>
+                          </tr>
+                        </thead>
+                        <tbody class="backgrdColorRosaLigth">
+
+                          <tr *ngIf="fruits?.length>0">
+                            <th
+                              class="t-reg t-table {{mode === 'light'? 'text-darkgrey' : 'text-white'}} ">
+                              Früchte</th>
+                            <td>
+                              <span *ngFor="let item of fruits; let i = index"
+                                class="t-reg t-table {{mode === 'light'? 'text-darkgrey' : 'text-white'}} line_height-2">
+                                {{item.Title || parseCharacteristic(item)}}{{i!=fruits.length-1?',':''}}<br />
+                              </span>
+                            </td>
+                          </tr>
+                          <tr *ngIf="fruitcolor?.length>0">
+                            <th
+                              class="t-reg t-table {{mode === 'light'? 'text-darkgrey' : 'text-white'}} ">
+                              Fruchtfarbe</th>
+                            <td>
+                              <span *ngFor="let item of fruitcolor; let i = index"
+                                class="t-reg t-table {{mode === 'light'? 'text-darkgrey' : 'text-white'}} line_height-2">{{item.Title}}{{i!=fruitcolor.length-1?',':''}}<br />
+                              </span>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                
+               
+                
+                <div class="col-12 col-md-5"
+                *ngIf="light?.length>0 || ground?.length>0 || cut?.length>0 ||fertilisation?.length>0 ||waterneeds?.length>0||augmentation?.length>0">
+                <table class="table backgrdColorSenft">
+                  <thead class="backgrdColorSenft">
+                    <tr class="text-white t-bold t-14 pb-1"><th>Standort&nbsp;&&nbsp;Pflege</th></tr>
+                  </thead>
+                  <tbody class="backgrdColorSenftLigth">
+                    <tr *ngIf="light?.length>0">
+                      <th
+                        class=" t-reg t-table {{mode === 'light'? 'text-darkgrey' : 'text-white'}} "
+                        scope="row">Licht</th>
+                      <td scope="col-lg-6">
+                        <span *ngFor="let item of light; let i = index"
+                          class="t-reg t-table {{mode === 'light'? 'text-darkgrey' : 'text-white'}} line_height-2">{{item.Title}}{{i!=light.length-1?',':''}}<br />
+                        </span>
+                      </td>
+                    </tr>
+                    <tr class="" *ngIf="ground?.length>0">
+                      <th
+                        class="t-reg t-table {{mode === 'light'? 'text-darkgrey' : 'text-white'}} ">
+                        Boden
+                      </th>
+                      <td>
+                        <span *ngFor="let item of ground; let i = index"
+                          class="t-reg t-table {{mode === 'light'? 'text-darkgrey' : 'text-white'}} line_height-2">{{item.Title}}{{i!=ground.length-1?',':''}}<br />
+                        </span>
+                      </td>
+                    </tr>
+                    <tr class="" *ngIf="cut?.length>0">
+                      <th
+                        class="t-reg t-table {{mode === 'light'? 'text-darkgrey' : 'text-white'}} ">
+                        Schnitt
+                      </th>
+                      <td>
+                        <span *ngFor="let item of cut; let i = index"
+                          class="t-reg t-table {{mode === 'light'? 'text-darkgrey' : 'text-white'}} line_height-2">{{item.Title}}{{i!=cut.length-1?',':''}}<br />
+                        </span>
+
+                      </td>
+                    </tr>
+                    <tr class="" *ngIf="fertilisation?.length>0">
+                      <th
+                        class="t-reg t-table {{mode === 'light'? 'text-darkgrey' : 'text-white'}} ">
+                        Düngung
+                      </th>
+                      <td>
+                        <span *ngFor="let item of fertilisation; let i = index"
+                          class="t-reg t-table {{mode === 'light'? 'text-darkgrey' : 'text-white'}} line_height-2">{{item.Title}}{{i!=fertilisation.length-1?',':''}}<br />
+                        </span>
+                      </td>
+                    </tr>
+                    <tr class="" *ngIf="waterneeds?.length>0">
+                      <th
+                        class="t-reg t-table {{mode === 'light'? 'text-darkgrey' : 'text-white'}} ">
+                        Wasserbedarf</th>
+                      <td>
+                        <span *ngFor="let item of waterneeds; let i = index"
+                          class="t-reg t-table {{mode === 'light'? 'text-darkgrey' : 'text-white'}} line_height-2">{{item.Title}}{{i!=waterneeds.length-1?',':''}}<br />
+                        </span>
+                      </td>
+                    </tr>
+                    <tr *ngIf="augmentation?.length>0">
+                      <th
+                        class="t-reg t-table {{mode === 'light'? 'text-darkgrey' : 'text-white'}} ">
+                        Vermehrung</th>
+                      <td>
+                        <span *ngFor="let item of augmentation; let i = index"
+                          class="t-reg t-table {{mode === 'light'? 'text-darkgrey' : 'text-white'}} line_height-2">{{item.Title}}{{i!=augmentation.length-1?',':''}}<br />
+                        </span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                </div>
+
+              </div>
+              <hr>
+
+            
+              <br />
+              
+              <div class="container pt-3">
+                <div class="row ">
+                  <div class="col-12 pl-0 bt-border {{mode === 'light'? 'text-darkgrey' : 'text-white'}}">
+                    <h2 class=" {{mode === 'light'? 'text-darkgrey' : 'text-white'}} t-bold t-14 ">Hilfreiche Produkte
+                    </h2>
+                  </div>
+                </div>
+                <div class="row " *ngIf="item" >
+                  <div class="col-md-12  text-center " *ngIf="!item.Articles?.length>0">
+                    <span class="{{mode==='light'? 'text-darkgrey':'text-white'}} t-18"> Keine hilfreichen Produkte vorhanden</span>
+                  </div>
+                  <div class="row  middle-search {{mode}}" *ngIf="item.Articles?.length>0"></div>
+                    <div class="container d-none d-lg-block" *ngIf="item.Articles?.length>0">
+                      <div class="row d-none d-lg-block">
+                          <div class="carousel-inner ">
+                            <div class="carousel-item active" data-interval="0">
+                              <div class="container" >
+                                <div class="row d-flex justify-content-center" >
+                                  <ng-container *ngFor="let article of item.Articles; let k=index">
+                                  <div class="col-xl-3 col-lg-4 caro-item-pho align-items-center justify-content-between " *ngIf="k<4">
+                                    
+                                    <h4 class="{{mode === 'light'? 'text-ltsgrey' : 'text-white'}} t-14 text-center">{{article.Name}}</h4>
+                                    <div class="container d-flex flex-column align-items-center justify-content-center ">
+                                      <img *ngIf="!article.Thumbnail" class="ptr img-height caro-img" [src]=toUrl(article.ArticleImages[0]?.SrcAttr) [alt]="article.Name">
+                                      <img *ngIf="article.Thumbnail" class="ptr img-height caro-img" [src]="article.Thumbnail" [alt]="article.Name">
+                                      <details *ngIf="article.Description" class="t-light t-14 {{mode === 'light'? 'text-blackish' : 'text-white'}}">
+                                        <summary class="d-inline">{{article.Description.substring(0,170)}}</summary>
+                                        <span>{{article.Description.substring(170)}}</span>
+                                      </details>
+                                    </div>
+                                    <div class="container d-flex flex-column align-items-center">
+                                      <button
+                                        class="t-light t-12 btn btn-greenLitle btn_border075 mt-3 {{mode === 'light'? 'text-ltsgrey' : 'text-white'}}" (click)="addToCart(article)">in
+                                        der Einkaufswagen</button>
+                                      <button
+                                        class="t-light t-12 btn btn-greenLitle btn_border075 mt-2 {{mode === 'light'? 'text-ltsgrey' : 'text-white'}}">Auf
+                                        die Wunschliste</button>
+                                    </div>
+                                  </div>
+                                  </ng-container >
+                                </div>
+                              </div>
+                            </div>
+                            <div class="carousel-item" data-interval="2000">
+                              <div class="container" >
+                                   <div class="row d-flex justify-content-center" >
+                                    <ng-container *ngFor="let article of item.Articles; let j=index">
+                                    <div class="col-xl-3 col-lg-4 caro-item-pho align-items-center justify-content-between "  *ngIf="j>=4 && !j>6">
+                                      <div class="container d-flex flex-column align-items-center justify-content-center ">
+                                        <h4 class="{{mode === 'light'? 'text-ltsgrey' : 'text-white'}} t-14 text-center">{{article.Name}}</h4>
+                                        <img *ngIf="!article.Thumbnail" class="ptr img-height caro-img" [src]=toUrl(article.ArticleImages[0]?.SrcAttr) [alt]="article.Name">
+                                        <img *ngIf="article.Thumbnail" class="ptr img-height caro-img" [src]="article.Thumbnail" [alt]="article.Name">
+                                        <p
+                                          class="{{mode === 'light'? 'text-ltsgrey' : 'text-white'}} text-center mt-2">
+                                        {{article.Description}}
+                                        </p>
+                                      </div>
+                                      <div class="container d-flex flex-column align-items-center">
+                                        <button
+                                          class="t-light t-12 btn btn-greenLitle btn_border075 mt-3 {{mode === 'light'? 'text-ltsgrey' : 'text-white'}}" (click)="addToCart(article)">in
+                                          der Einkaufswagen</button>
+                                        <button
+                                          class="t-light t-12 btn btn-greenLitle btn_border075 mt-2 {{mode === 'light'? 'text-ltsgrey' : 'text-white'}}">Auf
+                                          die Wunschliste</button>
+                                      </div>
+                                    </div>
+                                    </ng-container>
+                                  </div>
+                              </div>
+                            </div>
+                            <div class="carousel-item">
+                              <img src="..." class="d-block w-100" alt="...">
+                            </div>
+                          </div>
+                          <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev" *ngIf="item.Articles?.length>3">
+                            <span class="carousel-control-prev" aria-hidden="true"></span>
+                            <span><img class="pfeil" src="./assets/images/pfeilR1.png"></span>
+                          </a>
+                          <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next"*ngIf="item.Articles?.length>3">
+                            <span class="carousel-control-next" aria-hidden="true"></span>
+                            <span><img class="pfeil" src="./assets/images/pfeilL1.png"></span>
+                          </a>
+                      </div>
+                    </div>
+                  
+                  <!-- HIDDEN COLUMN LG  -->
+                  <div class="col col-md-12 col-lg-11 col-xl-7 pl-0 pr-0  d-block d-lg-none">
+                    <div class="container ">
+                      <div class="row d-flex justify-content-center">
+                        <div class="row  middle-search {{mode}}"></div>
+                        <div class="col-12 col-md-5" *ngIf="item.Articles?.length>0">
+                          <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="0">
+                            <div class="carousel-inner ">
+                              <div class=" " >
+        
+                                <div class="container"  >
+                                  <div class="row carousel-item  " data-interval="0" *ngFor="let article of item.Articles; let i=index" [ngClass]="(i === 0) ? 'active' : ''">
+                                    <div class="col-xl-3 col-lg-4 d-flex flex-column align-items-center justify-content-between ">
+                                      <div class="container d-flex flex-column align-items-center justify-content-center ">
+                                        <h4 class="{{mode === 'light'? 'text-ltsgrey' : 'text-white'}} t-14 text-center">{{article.Name}}</h4>
+                                        <img *ngIf="!article.Thumbnail" class="ptr img-height" [src]=toUrl(article.ArticleImages[0]?.SrcAttr) [alt]="article.Name">
+                                          <img *ngIf="article.Thumbnail" class="ptr img-height" [src]="article.Thumbnail" [alt]="article.Name">
+        
+                                        <p class="{{mode === 'light'? 'text-ltsgrey' : 'text-white'}} text-center mt-2">
+                                        {{article.Description}}
+                                        </p>
+                                      </div>
+                                      <div class="container d-flex flex-column align-items-center">
+                                        <button
+                                          class="t-light t-12 btn btn-greenLitle btn_border075 mt-3 {{mode === 'light'? 'text-ltsgrey' : 'text-white'}}" (click)="addToCart(article)">in
+                                          den Einkaufswagen</button>
+                                        <button
+                                          class="t-light t-12 btn btn-greenLitle btn_border075 mt-2 {{mode === 'light'? 'text-ltsgrey' : 'text-white'}}">Auf
+                                          die Wunschliste</button>
+                                      </div>
+                                    </div>
+        
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                              <span class="carousel-control-prev" aria-hidden="true"></span>
+                              <span><img class="pfeil" src="./assets/images/pfeilR1.png"></span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                              <span class="carousel-control-next" aria-hidden="true"></span>
+                              <span><img class="pfeil" src="./assets/images/pfeilL1.png"></span>
+                            </a>
+        
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mt-4 mb-4">
+                  <ng-container *ngIf="plantSiblings?.length>0">
+                    <h2 class="t-20 t-reg text-greenprim mb-3">Ähnliche Pflanzen</h2>
+                    <div class="container-fluid">
+
+                      <div class="row testimonial-group">
+                        <div *ngFor="let sibling of plantSiblings">
+                          <a [routerLink]="['/pflanze/', sibling.Id, sibling.PlantUrl]" class="col-lg-3 mb-4 "
+                            (click)="clearArray(plantSibling)">
+                            <div class="img-container m-1">
+                              <img [src]=toUrl(sibling.Images[0]?.SrcAttr) class="img-sibling" [alt]=sibling.NameGerman>
+                              <div class="overlay text-center">
+                                <h2 class="t-bold t-12 {{mode === 'light'? 'text-darkgrey' : 'text-green'}}">
+                                  {{sibling.NameGerman}}</h2><br />
+                                <h2
+                                  class="t-reg t-italic t-12 mt-5 {{mode === 'light'? 'text-ltsgrey' : 'text-ltsgrey'}}">
+                                  {{sibling.NameLatin.replace(myRegex4,'')}}</h2>
+                              </div>
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-container>
+
+                  <ng-container *ngIf="!(plantSiblings?.length>0)">
+                    <div class=" col-12 col-lg-12 pl-0">
+                      <h2 class="t-20 t-reg text-greenprim mb-3 text-left">Keine ähnlichen Pflanzen gefunden</h2>
+                    </div>
+                    <div class="col-12 col-md-6 pl-0 mt-3">
+                      <button [routerLink]="['/suche']"
+                        class="t-reg  t-16 btn_border075 btn btn-secondary {{mode === 'light'? 'text-white' : 'text-white'}}">zurück</button>
+
+                    </div>
+                  </ng-container>
+
+                </div>
+                
+              </div>
+             
+      </div>
+      <!-- TIPPS SECTION  -->
+      <div class="container-fluid  mt-4" *ngIf="item" >
+        
+
+        <div class="container {{mode}} ">
+          <div class="row">
+            <div class="col dummy">
+
+            </div>
+          </div>
+        </div>
+        <!--add plant in garden Modal-->
+        <ng-container *ngIf="selectedPlant">
+          <div class="modal fade" id="addPlantModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content {{mode}}">
+                <div class="modal-header">
+                  <h5 class="modal-title">{{selectedPlant.NameGerman}} zu meinem Gartenbereich hinzufügen</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span class="{{mode==='dark'?'text-ltgrey':'text-blackish'}}" aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <form class="modal-body" [formGroup]="addForm" ngNativeValidate>
+                  <div class="form-group mb-3">
+                    <label class="mb-0 {{mode==='light'?'text-darkgrey':'text-white'}}">Gartenbereich: </label>
+        
+                  </div>
+                  <div class="form-group mb-3 ">
+                    <label class="{{mode==='dark'?'text-white':'text-blackish'}} mb-0">Liste auswählen:</label>
+                
+                    <ng-multiselect-dropdown class="{{mode==='dark'?'text-white':'text-blackish'}} "
+                      [placeholder]="'Meine Listen'"
+                      [data]="userLists"
+                      [(ngModel)]="selectedLists"
+                      [settings]="dropdownSettings"
+                      [ngModelOptions]="{standalone: true}"
+                      (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)" [required]='requiredField' [ngClass]='setClass()'
+                      >
+                    </ng-multiselect-dropdown>
+                    <p *ngIf="!requiredField" class="text-danger">
+                      Bitte eine Liste auswählen oder  <a data-dismiss="modal" [routerLink]="['/meingarten']"><u>eine neue Liste erstellen.</u></a>
+                    </p>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="form-group col-12">
+                      <label class="mb-0 {{mode==='light'?'text-darkgrey':'text-white'}}">Anzahl</label>
+                      <input class="form-control" type="number" min="1" formControlName="Count">
+                    </div>
+        
+                  </div>
+                  <div class="form-group mb-2 col-12 ch-container">
+                    <label class="t-reg t-12 {{mode==='light'?'text-darkgrey':'text-white'}}">
+                      <input type="checkbox" formControlName="IsInPot">
+                      <p class="{{mode==='light'?'text-darkgrey':'text-white'}}">Topfpflanze?</p>
+                      <span class="checkmark" style="top: 0;"></span>
+                    </label>
+                  </div>
+                </form>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
+                  <button type="button" class="btn btn-green" data-dismiss="modal" (click)="borrowPlant()">Hinzufügen</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+        <!--To-dos übernehmen-->
+
+        <div class="modal fade" id="newTodoModal" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content {{mode}}">
+              <div class="modal-header">
+                <h5 class="modal-title {{mode==='dark'?'text-ltgrey':'text-blackish'}}">To-dos übernehmen--</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span class="{{mode==='dark'?'text-ltgrey':'text-blackish'}}" aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <input [(ngModel)]="newTodo.Title" class="input-field form-control mb-2" type="text"
+                  placeholder="To-do Titel">
+
+                <div class="row">
+                  <div class="col-6 mt-3">
+                    <label>Start Datum</label>
+                    <input [(ngModel)]="newTodo.DateStart" class="input-field form-control mb-2" type="date"
+                      class="form-control" placeholder=" DateStart tt.mm.jjjj">
+                  </div>
+                  <div class="col-6 mt-3">
+                    <label>Ende Datum</label>
+                    <input [(ngModel)]="newTodo.DateEnd" class="input-field form-control mb-2" type="date"
+                      class="form-control" placeholder=" DateEnd tt.mm.jjjj">
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
+                <button type="button" class="btn btn-green" data-dismiss="modal"
+                  (click)="addNewTodo()">Erstellen</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ng-container *ngIf="plantImageModal">
+        <div class="modal fade" id="plantImageModal" tabindex="-1" role="dialog" aria-labelledby="plantImageModal" aria-hidden="true">
+          <div class="modal-dialog" role="document" style="max-width: 600px;">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <img style="width: 100%; height: 400px;" *ngIf="item.Images?.length < 4" [src]=firstUrl [title]="item.Images[0]?.Author ? 'Autor: '+ item.Images[0]?.Author:''" [alt]=item.NameGerman>
+                <ng-container *ngIf="item.Images?.length >= 4">
+                  <img class="quarter-img" *ngFor="let pnImg of item.Images | slice:0:4" 
+                    [src]="toUrl(pnImg.SrcAttr)" 
+                    [alt]=item.NameGerman
+                    [title]="pnImg.Author ? 'Autor: '+ pnImg.Author:''">
+                </ng-container>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+       <!-- Add to list Modal -->
+     <app-moveplant-to-list  [dropdownList]="dropdownList" [selectedPlant]="selectedPlantFromGarden" (moveplantEvent)="moveplantEvent($event)"></app-moveplant-to-list>
+     <ng-container *ngIf="item">
+      <div class="modal fade" id="updatePlant" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content {{mode}}">
+            <div class="modal-header">
+              <h5 class="modal-title">{{updatePlantMode=='count'?'Anzahl angeben':'Notizen bearbeiten'}}</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span class="{{mode==='dark'?'text-white':'text-darkgrey'}}" aria-hidden="true">&times;</span>
+              </button>
+            </div>
+              
+            <form class="modal-body" ngNativeValidate>
+             
+              <div class="row mb-3">
+                <div *ngIf="updatePlantMode=='count'" class="form-group col-12 px-2">
+                  <label class="text-darkgrey">Anzahl</label>
+                  <input [(ngModel)]="selectedPlantFromGarden.UserPlant.Count" type="number" class="form-control" name="Count" required>
+                </div>
+                <div *ngIf="updatePlantMode=='notes'" class="form-group col-12 px-2">
+                  <label class="text-darkgrey">Deine Notizen</label>
+                  
+                  <quill-editor 
+                  [(ngModel)]="selectedPlantFromGarden.UserPlant.Notes"
+                  name="Notes"
+                  (blur)="onEditorBlured($event)"
+                  (onFocus)="onEditorFocused($event)"
+                  (onEditorCreated)="onEditorCreated($event)"
+                  (onEditorChanged)="onContentChanged($event)"
+                  [styles]="{height: '200px'}"[modules]="editor" >
+                </quill-editor>
+                <pre><code>{{ selectedPlantFromGarden.Notes }}</code></pre>
+                </div>
+              </div>
+            </form>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary btn_border075" data-dismiss="modal">Abbrechen</button>
+              <button *ngIf="updatePlantMode!=='count'" type="button" class="btn btn-green btn_border075 text-white" data-dismiss="modal" (click)="updatePlant()">Speichern</button>
+              <button *ngIf="updatePlantMode==='count'" type="button" class="btn btn-green btn_border075 text-white" data-dismiss="modal" (click)="updatePlant(true)">Speichern</button>
+    
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+     <!-- delete userplant Modal -->
+     <ng-container *ngIf="item">
+      <div class="modal fade" id="deletePlant" tabindex="-1" role="dialog" aria-hidden="true" #dm>
+        <div class="modal-dialog" role="document">
+          <div class="modal-content {{mode}}">
+            <div class="modal-header">
+              <h5 class="modal-title"><b>{{selectedPlantFromGarden?.UserPlant?.Name}}</b> löschen</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span class="{{mode==='dark'?'text-ltgrey':'text-blackish'}}" aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p class="{{mode==='dark'?'text-ltgrey':'text-blackish'}}">Bist du sicher, dass du diese Pflanze löschen möchtest?</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary btn_border075 text-white" data-dismiss="modal">Abbrechen</button>
+              <button  type="button" class="btn btn-danger btn_border075 text-white" data-dismiss="modal" (click)="deleteUserPlantFromAllUserlists(selectedPlantFromGarden.UserPlant.PlantId, selectedPlantFromGarden.UserPlant.Gardenid)">Löschen</button>
+    
+            </div>
+          </div>
+        </div>
+      </div>
+      </ng-container>

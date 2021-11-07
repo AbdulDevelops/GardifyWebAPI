@@ -1,0 +1,70 @@
+﻿@page
+@model GardifyNewsletter.Areas.Intern.Pages.Newsletter.SendModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+
+@{
+    ViewData["Title"] = "Test";
+    Layout = "~/Pages/Shared/_LayoutIntern.cshtml";
+    int amount = 500;
+}
+<p class="text-secondary mt-4 mb-4">Interner Bereich: Newsletter versenden</p>
+
+<h3>
+    Newsletter zum Versenden vorbereiten
+</h3>
+<div class="row">
+    <div class="col-md-6">
+        <form method="post" asp-page-handler="AddToSpool">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label>Newsletter:</label>
+                <div class="form-group">
+                    <select name="newsletterId" asp-items="Model.NewsLetterList" class="form-control"></select>
+                </div>
+                <div class="form-group">
+                    <select asp-for="SelectedSector" name="SelectedSector" class="form-control">
+                        <option value="sub" selected="selected">Nur Abonnenten</option>
+                        <option value="non-sub">User ohne Abo</option>
+                        <option value="all">Alles</option>
+                    </select>
+                    <span asp-validation-for="SelectedSector" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Senden starten" class="btn btn-sm btn-orange" />
+            </div>
+        </form>
+        <hr />
+        <h5>
+            Newsletter senden
+        </h5>
+        <p>
+            @Model.NewsletterSpool.Count Newsletteraussendungen zum Senden vorhanden.
+        </p>
+        <p>
+            In der letzten Stunde wurden @Model.SpoolArchiveLastHour.Count versendet.
+        </p>
+        <p>
+            Das System sendet nicht mehr als @amount Mails pro Stunde, damit die Aussendungen weniger wahrscheinlich als Spam klassifiziert werden.
+        </p>
+
+    </div>
+</div>
+<div>
+    <a asp-page="Index">Zurück zur Übersicht</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+<script type="text/javascript">
+
+    $('form').submit(function () {
+        if ($(this).valid()) {
+            $(this).find(':submit').attr('disabled', 'disabled');
+        }
+    });
+
+</script>

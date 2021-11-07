@@ -1,0 +1,201 @@
+﻿@model GardifyModels.Models.AdminPlantDocListViewModel
+@{
+    ViewBag.Title = "Alle Fragen";
+    Layout = "~/Views/Shared/_LayoutAdminArea.cshtml";
+}
+@*@if (Model.StatusMessage != null)
+{
+    Html.RenderPartial("_modalStatusMessage", Model.StatusMessage);
+}*@
+<div class="container">
+    <div class="row">
+        <h2> PlantDoc </h2>
+        <div class="col-lg-3"></div>
+        <div class="col-lg-4">
+            @using (Html.BeginForm("sort-question-date-asc", "AdminAreaPlantDoc"))
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-group">
+                    <div class="">
+                        <input type="submit" value="Sortieren: aufsteigend" class="btn btn-default" />
+                        <span class="glyphicon glyphicon-arrow-up" style="font-size:2rem"></span>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="col-lg-4">
+            @using (Html.BeginForm("sort-question-date-desc", "AdminAreaPlantDoc"))
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-group">
+                    <div class="">
+                        <input type="submit" value="Sortieren: absteigend" class="btn btn-default" />
+                        <span class="glyphicon glyphicon-arrow-down" style="font-size:2rem"></span>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <hr />
+</div>
+    <div class="container">
+        @if (Model.ListEntries != null && Model.ListEntries.Any())
+        {
+            foreach (var entry in Model.ListEntries.Select((value, i) => new { i, value }))
+            {
+                var item = entry.value;
+                var index = entry.i;
+             <div class="row">
+                @if (item.Images != null && item.Images.Any())
+                {
+                    <div class="image-wrapper col-md-3">
+                        <div class="title-image">
+                            @if (@item.Images.FirstOrDefault().SrcAttr.Contains("Platzhalter"))
+                            {
+                                <img title="@item.Images.FirstOrDefault().TitleAttr" src="@(item.Images.FirstOrDefault().SrcAttr)" alt="@item.Images.FirstOrDefault().AltAttr" />
+
+                            }
+                            else if (@item.Images.FirstOrDefault().AltAttr.Contains("Admin_image"))
+                            {
+                                <img title="@item.Images.FirstOrDefault().TitleAttr" src="https://gardify.de/intern/@(item.Images.FirstOrDefault().SrcAttr)" alt="@item.Images.FirstOrDefault().AltAttr" />
+                            }
+                            else
+                            {
+                                <img title="@item.Images.FirstOrDefault().TitleAttr" src="https://gardifybackend.sslbeta.de/@(item.Images.FirstOrDefault().SrcAttr)" alt="@item.Images.FirstOrDefault().AltAttr" />
+
+                            }
+                        </div>
+                   
+                        @foreach (var img in item.Images.Skip(1))
+                        {
+                            <div class="thumbnail col-md-4">
+                                @if (@item.Images.FirstOrDefault().SrcAttr.Contains("Platzhalter"))
+                                {
+                                    <img title="@img.TitleAttr" src="@(img.SrcAttr)" alt="@img.AltAttr" />
+                                }
+                                else
+                                {
+                                    if (@img.AltAttr.Contains("Admin_image"))
+                                    {
+                                        <img title="@img.TitleAttr" src="https://gardify.de/intern/@(img.SrcAttr)" alt="@img.AltAttr" />
+
+                                    }
+                                    else
+                                    {
+                                        <img title="@img.TitleAttr" src="https://gardifybackend.sslbeta.de/@(img.SrcAttr)" alt="@img.AltAttr" />
+                                    }
+                                }
+                            </div>
+                        }
+                    </div>
+                }
+             <div class="col-md-6">
+                 <span><b style="font-size:14px">AutorName:</b> <span style="font-style:italic; color:darkred" class="h4">@item.AuthorName</span></span>
+                 <span style="margin-left:5rem"><b style="font-size:14px">Editdate:</b> <span style="font-style:italic; color:forestgreen" class="h4">@item.Editdate</span></span>
+                 @{ if (item.isEdited)
+                     {
+                         <hr />
+                         <b style="font-size:14px">Thema:</b> <span style="font-style:italic" class="h4">@item.ThemaUpdate</span><br />
+                         <b style="font-size:14px">Beschreibung: </b>@item.DescriptionUpdate<br />
+                         <b style="font-size:14px">Frage:</b> @item.QuestionTextUpdate
+                         <details>
+                             <summary><span style="font-style:italic;cursor:pointer">...mehr</span></summary>
+                             <p>@item.QuestionTextUpdate</p>
+                         </details>
+                         <b style="font-size:14px">Benutzer erlaubt die Veröffentlichung?: </b>
+
+                         if (item.UserAllowsPublishment)
+                         {<span>Ja</span>}
+                         else
+                         {<span>Nein</span>}<br />
+                         <b style="font-size:14px">Der Benutzer ist der Eigentümer der Fotos?: </b>
+
+                         if (item.IsOwnFoto)
+                         {<span>Ja</span>}
+                         else
+                         {<span>Nein</span>}
+                         <hr />
+                         <h5 style="font-size:medium; color:green">Original Post</h5>
+                     }
+                     <hr />
+                 }
+
+
+                 <b style="font-size:14px">Thema:<span style="font-style:italic" class="h4">@item.Thema</span></b><br />
+                 @{ if (!String.IsNullOrEmpty(item.Description))
+                     {
+                         <b style="font-size:14px">Beschreibung: </b>@item.Description<br />
+                     }
+                 }
+                 <b style="font-size:14px">Frage:</b>
+                 <details>
+                     <summary><a style="font-style:italic;cursor:pointer">...mehr</a></summary>
+                     <p>@item.QuestionText</p>
+                 </details>
+                 <b>Benutzer erlaubt die Veröffentlichung?: </b>
+                 @{if (item.UserAllowsPublishment)
+                     {<span>Ja</span>}
+                     else
+                     {<span>Nein</span>}
+                 }<br />
+                 <b style="font-size:14px">Der Benutzer ist der Eigentümer der Fotos?: </b>
+
+                 @if (item.IsOwnFoto)
+                 {<span>Ja</span>}
+                 else
+                 {<span>Nein</span>}
+
+             </div>
+                    <div class="col-md-3">
+                        <div class="row">
+                            <h5 class="" style="margin-left:1rem">
+                                @if (item.AdminAllowsPublishment)
+                                {
+                                    @Html.ActionLink("Nicht mehr veröffentlichen", "SetPostPublishedState", new { id = item.QuestionId, published = false })
+                                }
+                                else
+                                {
+                                    @Html.ActionLink("Veröffentlichen", "SetPostPublishedState", new { id = item.QuestionId, published = true })
+                                }
+                            </h5>
+                            <h5 class="" style="margin-left:1rem">
+                                @if (item.PublishWithImages)
+                                {
+                                    @Html.ActionLink("Images Nicht mehr veröffentlichen", "SetImagesPublishedState", new { id = item.QuestionId, published = false })
+                                }
+                                else
+                                {
+                                    @Html.ActionLink("Images Veröffentlichen", "SetImagesPublishedState", new { id = item.QuestionId, published = true })
+                                }
+                            </h5>
+                            <div class="col-xs-3 col-lg-10 ">
+
+                                @Html.ActionLink("antworten", "Detail", new { questionId = item.QuestionId }, new { style = "margin-top: 1rem; margin-bottom: 1rem;", @class = "btn btn-default" })
+                            </div>
+                            <div class="col-xs-3 col-lg-10">
+                                @using (Html.BeginForm("delete-question", "AdminAreaPlantDoc"))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.Hidden("id", item.QuestionId)
+                                    <div class="form-group">
+                                        <div class="">
+                                            <input type="submit" value="Löschen" class="btn btn-danger" />
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+
+
+                    </div>
+           
+             </div>
+            <hr />
+            }
+        }
+        else
+        {
+            <p>Keine Frage gefunden</p>
+        }
+    </div>
+

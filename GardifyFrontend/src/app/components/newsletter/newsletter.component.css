@@ -1,0 +1,18 @@
+.form-area-background, .form-line-background{
+    padding-top: 0.5rem;
+    padding-bottom: 0.5em;
+    
+    line-height: 20px;
+  
+  }
+  
+  .form-area-background{
+    background-color: white;
+    border-radius: 8px;
+  }
+  
+  
+  
+  .dark .form-area-background{
+    background-color: black;
+  }

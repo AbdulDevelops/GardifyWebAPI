@@ -1,0 +1,42 @@
+﻿@model GardifyModels.Models.GardenViewModels.GardenDetailsViewModel
+@using GardifyModels.Models
+@{
+    ViewBag.Title = Model.Name;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>@Model.Name</h2>
+@if (Model.Images != null && Model.Images.Any())
+{
+    <div class="image-wrapper clearfix" style="max-width: 300px;">
+        <div class="title-image">
+            <img title="@Model.Images.FirstOrDefault().TitleAttr" src="@Model.Images.FirstOrDefault().SrcAttr" alt="@Model.Images.FirstOrDefault().AltAttr" />
+        </div>
+        @foreach (var img in Model.Images.Skip(1))
+        {
+            <div class="thumbnail col-md-4">
+                <img title="@img.TitleAttr" src="@img.SrcAttr" alt="@img.AltAttr" />
+            </div> }
+    </div>
+    <hr />
+}
+<h4>Pflanzen-Übersicht für diesen Garten</h4>
+@foreach(var plant in Model.Plants.UserPlants)
+{
+    <div>
+        @plant.Name
+        <br />
+    </div>
+}
+<hr />
+<h4>Todo-Übersicht für diesen Garten</h4>
+@Html.Partial("_TodoList", Model.TodoList)
+<hr />
+<p>
+    @Html.ActionLink("Gartenbereich löschen", "Delete", new { id = Model.Id }) |
+    @Html.ActionLink("Eigenschaften bearbeiten", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Nach neuen Pflanzen suchen", "Index", "PlantSearch") |
+    @Html.ActionLink("Zurück zum Garten", "Index")
+</p>
+<hr />
+<h2>Tagebuch des Gartenbereiches</h2>
+@Html.Action("getDiaryEntries", "Diary", new { objectId = Model.Id, diaryType = GardifyModels.Models.ModelEnums.ReferenceToModelClass.Garden })

@@ -1,0 +1,179 @@
+@model GardifyModels.Models.AdminAreaViewModels.PlantViewModel
+@using GardifyModels.Models
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LayoutAdminArea.cshtml";
+}
+
+
+@if (Model.StatusMessage != null)
+{
+    Html.RenderPartial("_modalStatusMessage", Model.StatusMessage);
+}
+<h2>Vorschlag bearbeiten</h2>
+<div class="form-horizontal">
+    @using (Html.BeginForm("saveVorschlagen", "AdminAreaVorschlagen", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Plant.Id)
+        <input hidden name="Id" value="@Model.Plant.Id" />
+
+        if (ViewBag.alert != null)
+        {
+            <div class="alert alert-danger" role="alert">
+                @ViewBag.alert
+            </div>
+        }
+        if (ViewBag.success != null)
+        {
+            <div class="alert alert-success" role="alert">
+                @ViewBag.success
+            </div>
+        }
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Datenbank ID</label>
+            <div class="col-md-10">
+                <input class="form-control" value="@Model.Plant.Id" disabled />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Botanischer Name</label>
+            <div class="col-md-10">
+                <input class="form-control" value="@Model.Plant.NameLatin" disabled />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Deutscher Name</label>
+            <div class="col-md-10">
+                <input class="form-control" value="@Model.Plant.NameGerman" disabled />
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Autor</label>
+            <div class="col-md-10">
+                <input name="author" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Autoren-E-Mail</label>
+            <div class="col-md-10">
+                <input name="authorEmail" class="form-control" required />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Message</label>
+            <div class="col-md-10">
+                <textarea name="message" class="form-control"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Pflanze Id zum Mergen</label>
+            <div class="col-md-10">
+                @*<input name="mergeId" class="form-control" />*@
+                @Html.DropDownList("mergeId", null, htmlAttributes: new { @class = "form-control" })
+
+            </div>
+        </div>
+        <h4>Verknüpfte Bilder</h4>
+        <div class="form-group">
+            <label class="control-label col-md-2"></label>
+            <div class="image-wrapper col-md-10">
+                @if (Model.PlantImages != null && Model.PlantImages.Any())
+                {
+                    foreach (var img in Model.PlantImages)
+                    {
+                        <div class="tumbnail col-md-3">
+                            <img title="@img.TitleAttr" src="@img.SrcAttr" alt="@img.AltAttr" />
+                        </div>
+                    }
+                }
+                else
+                {
+                    <p>Noch kein Bild hochgeladen</p>}
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Genehmigt</label>
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.Plant.SuggestionStatusText)
+                @*@Html.RadioButtonFor(s => Model.Plant.Genehmigt, ModelEnums.SuggestionApproved.Approved)@Html.Label("Approve")<br />
+                    @Html.RadioButtonFor(s => Model.Plant.Genehmigt, ModelEnums.SuggestionApproved.NotApproved)@Html.Label("NotApproved")<br />
+                    @Html.RadioButtonFor(s => Model.Plant.Genehmigt, ModelEnums.SuggestionApproved.Undecided)@Html.Label("Undecided")<br />*@
+            </div>
+        </div>
+        <hr />
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" name="decision" value="Genehmigen" class="btn btn-default" />
+                <input type="submit" name="decision" value="Nicht genehmigen" class="btn btn-default" />
+                <input type="submit" name="decision" value="Merge" class="btn btn-default" />
+
+
+            </div>
+        </div>
+
+    }
+
+
+
+</div>
+<div>
+    @Html.ActionLink("zurück", "Index")
+</div>
+<div>
+    @Html.ActionLink("zurück", "Index")
+</div>
+
+
+@section Scripts {
+    <script type="text/javascript">
+        /* German initialisation for the jQuery UI date picker plugin. */
+        jQuery(function (el) {
+            el.datepicker.regional['de'] = {
+                closeText: 'schließen',
+                prevText: '&#x3c;zurück',
+                nextText: 'Vor&#x3e;',
+                currentText: 'heute',
+                monthNames: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni',
+                    'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
+                monthNamesShort: ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun',
+                    'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'],
+                dayNames: ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'],
+                dayNamesShort: ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'],
+                dayNamesMin: ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'],
+                weekHeader: 'Wo',
+                dateFormat: 'dd.mm.yy',
+                firstDay: 1,
+                isRTL: false,
+                showMonthAfterYear: false,
+                yearSuffix: ''
+            };
+            $.datepicker.setDefaults($.datepicker.regional['de']);
+        });
+        $(function () { // will trigger when the document is ready
+            $(".datepicker").datepicker($.datepicker.regional["de"]);
+        });
+        $(document).ready(function () {
+            $('#Title').attr("value", "");
+        });
+        $('#Plant_Description').bind('input propertychange', function () {
+            console.log(this.value.length);
+            if (this.value.length > 4000) {
+                $("#Plant_Description").val($("#Plant_Description").val().substring(0, 4000));
+                alert("Beschreibungslimit erreicht");
+            }
+        });
+    </script>
+
+
+
+
+}

@@ -1,0 +1,112 @@
+﻿@model IEnumerable<GardifyModels.Models.PlantTagCategory>
+
+@{
+    ViewBag.Title = "Anordnung";
+    Layout = "~/Views/Shared/_LayoutAdminArea.cshtml";
+}
+
+<h2>Anordnung von Kategorien ändern</h2>
+
+<p>
+    @Html.ActionLink("Neue Kategorie", "Create")
+</p>
+<p>
+    @Html.ActionLink("Tags anordnen", "OrderTags")
+</p>
+<ul class="categories">
+    @foreach (var c1 in Model.Where(x => !x.Deleted))
+    {
+        <li class="category" data-categoryId="@c1.Id">
+            <h3>Kategorie: <b> @c1.Title</b></h3>
+            @Html.ActionLink("Bearbeiten", "category-edit", new { id = c1.Id })
+            <hr />
+            @*@if (c1.TagsInThisCategory != null && c1.TagsInThisCategory.Any())
+                {
+                    <h4>Alle Tags von @c1.Title</h4>
+                    <ul>
+                        @foreach (var tag in c1.TagsInThisCategory)
+                        {
+                            <li>@tag.Title</li>
+                        }
+                    </ul>
+                    <hr />
+                }*@
+            <h4>Alle Kinder von @c1.Title</h4>
+            <ul class="categories">
+                @foreach (var c2 in c1.Childs.Where(x => !x.Deleted))
+                {
+                    <li class="category" data-categoryId="@c2.Id">
+                        <h3>Kategorie: <b> @c2.Title</b></h3>
+                        @Html.ActionLink("Bearbeiten", "category-edit", new { id = c2.Id })
+                        <hr />
+                        @*@if (c2.TagsInThisCategory != null && c1.TagsInThisCategory.Any())
+                            {
+                                <h4>Alle Tags von @c2.Title</h4>
+                                <ul>
+                                    @foreach (var tag in c2.TagsInThisCategory)
+                                    {
+                                        <li>@tag.Title</li>
+                                    }
+                                </ul>
+                                <hr />
+                            }*@
+                        <h4>Alle Kinder von @c2.Title</h4>
+                        <ul class="categories">
+                            @foreach (var c3 in c2.Childs.Where(x => !x.Deleted))
+                            {
+                                <li class="category" data-categoryId="@c3.Id">
+
+                                    <h3>
+                                        Kategorie: <b> @c3.Title</b>
+                                    </h3>
+                                    @Html.ActionLink("Bearbeiten", "category-edit", new { id = c3.Id })
+                                    <hr />
+
+                                    @*@if (c3.TagsInThisCategory != null && c1.TagsInThisCategory.Any())
+                                        {
+                                            <h4>Alle Tags von @c3.Title</h4>
+                                            <ul>
+                                                @foreach (var tag in c3.TagsInThisCategory)
+                                                {
+                                                    <li>@tag.Title</li>
+                                                }
+                                            </ul>
+                                            <hr />
+                                        }*@
+                                    <ul class="categories"></ul>
+                                </li>
+                            }
+
+                        </ul>
+                        <hr />
+                    </li>
+                }
+
+            </ul>
+            <hr />
+        </li>
+    }
+
+</ul>
+
+<script>
+    $(".categories").sortable(
+        {
+            connectWith: ".categories",
+            revert: true,
+            cursor: 'move',
+            stop: function (event, ui) {
+                var item = ui.item;
+                console.log(item);
+                if (item.parent(".category")) {
+                    var parent = item.parents(".category");
+                    console.log(parent);
+                    var pId = parent.data("categoryid");
+                    var cId = item.data("categoryid");
+                    console.log("pId: " + pId + ", cId: " + cId);
+                    window.location.href = "@Url.Action("SetCategory","AdminAreaPlantTag")?categoryId=" + cId + "&parentId=" + pId;
+                }
+            }
+        }
+    );
+</script>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="yfg-uj-tcC">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bPh-Hx-II5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <navigationController id="4B2-kk-7tW" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="L7e-xa-PTw">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="dny-qw-TPh" kind="relationship" relationship="rootViewController" id="eQy-hb-eis"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="-817" y="11"/>
+        </scene>
+        <!--Test Mein Garten-->
+        <scene sceneID="pZh-fg-TTC">
+            <objects>
+                <viewController id="dny-qw-TPh" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" title="Test Mein Garten" id="Wn9-YQ-XHi"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xdo-mz-y9T" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="0.0" y="12"/>
+        </scene>
+    </scenes>
+</document>

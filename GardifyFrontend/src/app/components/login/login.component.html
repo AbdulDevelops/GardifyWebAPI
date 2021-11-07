@@ -1,0 +1,115 @@
+ <ng-container *ngIf="loginRoute">
+   <div id="regCarousel" class="carousel slide pb-5 pb-md-0" data-ride="carousel" data-interval="70000">
+    <ol class="carousel-indicators pb-5 pb-md-2">
+      <li data-target="#regCarousel" data-slide-to="0" class="inactive"></li>
+    </ol>
+      <div class="carousel-inner">
+      <div class="carousel-item active">
+        <picture>
+            <source media="(max-width: 768px)" srcset="./assets/images/_JAY9125_Header_mobil.jpg">
+            <img class="d-block w-100" src="./assets/images/_JAY9125_Header_Desktop.jpg" alt="Erste Slide">
+        </picture>
+        <div class="carousel-caption reg-caption {{mode}} d-block"> -->
+          <ng-template [ngTemplateOutlet]="loginTemplate"></ng-template>
+        
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+<ng-container *ngIf="!loginRoute">
+  <ng-template [ngTemplateOutlet]="loginTemplate"></ng-template>
+</ng-container>
+<ng-template #loginTemplate>
+   <div class="container px-0 px-md-2">
+          <div class="row justify-content">
+            <div class="BoxReg pt-2 px-1 px-md-3">
+              <form *ngIf="!confirmForgot" class="form-horizontal px-3" id="login" [formGroup]="loginForm" (ngSubmit)="onSubmit()" validate>
+                <div class="row mb-4">
+                  <!-- <label for="email" class="col-12 t-12 t-light mb-0 text-center">{{simpleMode ? 'USERNAME/ EMAIL:':''}}</label> -->
+                  <!-- <label for="email" class="col-12 t-12 t-light mb-0 text-center">{{simpleMode ? 'USERNAME:':'EMAIL:'}}</label> -->
+                  <div class="col-12">
+                    <input type="email" formControlName="Email" class="form-control t-10 t-light" placeholder="{{simpleMode ? 'eine Email oder einen Usernamen':''}}" (change)="updateEmail($event.target.value)">
+                    <!-- <input type="email" formControlName="Email" class="form-control t-10 t-light mx-auto" placeholder="Geben Sie {{simpleMode ? 'einen Usernamen':'eine Emailadresse:'}} ein"> -->
+                    <small class="text-danger" [hidden]="!f['Email'].invalid || !(f['Email'].dirty || f['Email'].touched)">
+                      Keine gültige Eingabe
+                    </small>
+                  </div>
+                </div>
+                <div class="row mb-4">
+                  <!-- <label for="password" class="col-12 t-12 t-light mb-0 text-center">PASSWORT:</label> -->
+                  <div class="col-12 " style="display: inherit;">
+                    <input type="password" formControlName="Password" class="form-control t-10 t-light" placeholder="Passwort" (change)="updatePassword($event.target.value)" appAppPassword>
+                    <small class="text-danger" [hidden]="!f['Password'].invalid || !(f['Password'].dirty || f['Password'].touched)">
+                      Passwort muss mind. 6 Zeichen sein und Folgendes enthalten: Großbuchstaben, Nummer, Sonderzeichen
+                    </small>
+                  </div>
+                </div>
+                <div class="row mb-4">
+                  <div class="form-group col-12 col-md-6 ch-container mb-0 mx-auto">
+                    <label class="t-light t-12 pl-3">
+                      <input type="checkbox" formControlName="RememberMe">
+                      <span class="checkmark cr ml-3 {{mode}}"></span>
+                      Eingeloggt bleiben
+                    </label>
+                  </div>
+                  <div class="col-12 col-md-6 text-center">
+                    <button type="button" class="forgot-btn t-12 t-light {{mode==='light'?'text-blackish':'text-white'}}" (click)="confirmForgot = true">Passwort vergessen?</button>
+                  </div>
+                </div>
+                <div class="form-group row mb-4 {{confirmForgot?'justify-content-center':''}}">
+                  <div class="col-12 col-md-6 mb-2 order-2 order-md-1">
+                    <div class="text-center">
+                      <button *ngIf="loginRoute" [routerLink]="[ '/register' ]" class="btn btn-green btnProp btn_border075 t-bold text-white t-12 d-inline-block mb-2 ">Kostenlos registrieren</button>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-6 mb-2 order-1 order-md-2">
+                    <div class="text-center">
+                    
+                      <button autofocus [disabled]="loading" (click)="checkFormValue()" form="login" class="btn btn-green btnProp btn_border075 t-bold text-white t-12 d-inline-block ">Einloggen
+                        <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                    </button>
+                    <!-- <button autofocus [disabled]="loading" type="submit" (click)="checkFormValue()" form="login" class="btn btn-green btnProp btn_border075 t-bold text-white t-12 d-inline-block ">Einloggen
+                      <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                  </button> -->
+                    </div>
+                  </div>
+                  <div *ngIf="displayMsg" class="col-12 col-md-12">
+                    <p class="text">
+                      Du hast deine Registrierung noch nicht abgeschlossen. Bitte bestätige deine E-Mail Adresse, um dich auf gardify einloggen zu können. 
+                      Du hast keinen Bestätigungslink erhalten? <a (click)="resendConfEmail()">Klicke hier</a>, um einen neuen anzufordern.
+                    </p>
+                  </div>
+                </div>
+              </form>
+
+              <form *ngIf="confirmForgot" class="form-horizontal px-3" id="forgot" [formGroup]="forgotForm" (ngSubmit)="onSubmit()" validate>
+                <div class="row mb-4">
+                  <label for="email" class="col-12 t-12 t-light mb-0 text-center">EMAIL:</label>
+                  <div class="col-12 text-center">
+                    <input type="email" formControlName="Email" class="form-control t-10 t-light mx-auto" placeholder="Geben Sie eine Emailadresse ein">
+                    <small class="text-danger" [hidden]="!f['Email'].invalid || !(f['Email'].dirty || f['Email'].touched)">
+                      Bitte geben Sie eine richtige Emailadresse ein
+                    </small>
+                  </div>
+                </div>
+                <div class="row mb-4" *ngIf="displayCheckMsg">
+                  <h2 class="t-reg t-14 mx-auto">Überprüfe deinen E-Mail Posteingang.</h2>
+                  <small class="mx-auto">Keine Email erhalten? Bitte überprüfe deinen Spam-Ordner oder <span class="text-green ptr" (click)="resendEmail()" role="button">klicke-hier</span></small>
+                  <img class="mx-auto" *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                  <small *ngIf="emailResent" class="mx-auto">Wir haben dir soeben eine Email versendet.</small>
+                </div>
+                <div class="form-group row mb-4 justify-content-center" *ngIf="!displayCheckMsg">
+                  <div class="col-12 col-md-6 mb-2">
+                    <div class="text-center">
+                      <button [disabled]="loading" type="submit" form="forgot" class="btn btn-green btnProp btn_border075 t-bold text-white t-12 d-inline-block ">Bestätigen
+                          <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+</ng-template>

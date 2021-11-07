@@ -1,0 +1,145 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Adminbereich</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/globalize")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top" style="background-color: #8b0000">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("zur Startseite", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" style="background-color: #8b0000">
+                            Menu
+                        </a>
+                        <div class="dropdown-menu">
+                            <ul class="nav navbar-nav" style="overflow-y: scroll; max-height: 620px;">
+                                <li style="width: 100%;"><a href="~/i/plant">Pflanzendatenbank</a></li>
+                                <li style="width: 100%;"><a href="~/i/plant-tag">Pflanzeneigenschaften</a></li>
+                                <li style="width: 100%;"><a href="~/i/plant-tag/ordercategories">Anordnung Pflanzeneigenschaften (Kategorien)</a></li>
+                                <li style="width: 100%;"><a href="~/i/plant-tag/ordertags">Anordnung Pflanzeneigenschaften (Tags)</a></li>
+                                <li style="width: 100%;"><a href="~/i/taxonomic-tree">Hierarchiebaum</a></li>
+                                <li style="width: 100%;"><a href="~/i/faq">FAQ<br /></a></li>
+                                <li style="width: 100%;"><a href="~/i/news">News</a></li>
+                                <li style="width: 100%;"><a href="~/i/orders">Bestellungen</a></li>
+                                <li style="width: 100%;"><a href="~/i/videos">Videos</a></li>
+                                <li style="width: 100%;"><a href="~/i/shop">Shop</a></li>
+                                <li style="width: 100%;"><a href="~/i/internalcomment">Kommentare</a></li>
+                                <li style="width: 100%;"><a href="~/i/garden-category">Gärtnerische Kategorie</a></li>
+                                <li style="width: 100%;"><a href="~/i/article-categories">Artikel-Kategorien</a></li>
+                                <li style="width: 100%;"><a href="~/i/eco-elements">Öko-Elemente</a></li>
+                                <li style="width: 100%;"><a href="~/i/lexicon">Gärtnern von A-Z</a></li>
+                                <li style="width: 100%;"><a href="~/i/stats/GetUsersStats">Benutzer-Statistik</a></li>
+                                <li style="width: 100%;"><a href="~/i/stats">Seiten-Statistik</a></li>
+                                <li style="width: 100%;"><a href="~/i/devices">Geräte</a></li>
+                                <li style="width: 100%;"><a href="~/i/groups">Gruppe</a></li>
+                                <li style="width: 100%;"><a href="~/i/plant-doc">Pflanzen-Doc</a></li>
+                                <li style="width: 100%;"><a href="~/i/warnings">Warnungen</a></li>
+                                <li style="width: 100%;"><a href="~/i/launchpage">Landing Page</a></li>
+                                <li style="width: 100%;"><a href="~/i/garden-notes">Garten Note</a></li>
+                                <li style="width: 100%;"><a href="~/i/settings">Einstellung</a></li>
+
+                            </ul>
+
+                        </div>
+                    </li>
+                    @*<li><a href="~/intern/plant">Pflanzendatenbank</a></li>
+                    <li><a href="~/intern/plant-tag">Pflanzeneigenschaften</a></li>
+                    <li><a href="~/intern/taxonomic-tree">Hierarchiebaum</a></li>
+                    <li><a href="~/intern/faq">FAQ</a></li>
+                    <li><a href="~/intern/news">News</a></li>*@
+                    @*<li><a href="~/intern/shop">Shop</a></li>
+                    <li><a href="~/internalcomment">Kommentare</a></li>*@
+                    <li><a href="~/i/points">Points</a></li>
+                    <li><a href="~/i/content">Synonyme</a></li>
+                    <li><a href="~/i/todo">Todo-Vorlagen</a></li>
+                    <li><a href="~/i/account">Benutzer</a></li>
+                    <li><a href="~/i/import">Importieren</a></li>
+
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year</p>
+        </footer>
+    </div>
+
+    <script type="text/javascript">
+        $.validator.methods.number = function (value, element) {
+            return this.optional(element) ||
+                !isNaN(Globalize.parseFloat(value));
+        }
+        $(document).ready(function () {
+            // Globalize.culture('@(System.Threading.Thread.CurrentThread.CurrentCulture.Name)');
+        });
+
+        jQuery.extend(jQuery.validator.methods, {
+            range: function (value, element, param) {
+                //Use the Globalization plugin to parse the value
+                var val = Globalize.parseFloat(value);
+                return this.optional(element) || (
+                    val >= param[0] && val <= param[1]);
+            }
+        });
+        $.validator.methods.date = function (value, element) {
+            return this.optional(element) ||
+                Globalize.parseDate(value) ||
+                Globalize.parseDate(value, "dd-MM-yyyy") ||
+                Globalize.parseDate(value, "dd.MM.yyyy");
+        }
+
+
+        //------------------ ADD CSRF-TOKEN TO AJAX ----------------------
+        function GetAntiForgeryToken() {
+            var tokenField = $("input[type='hidden'][name$='RequestVerificationToken']");
+            if (tokenField.length == 0) {
+                return null;
+            } else {
+                return {
+                    name: tokenField[0].name,
+                    value: tokenField[0].value
+                };
+            }
+        }
+
+        $.ajaxPrefilter(
+            function (options, localOptions, jqXHR) {
+                if (options.type !== "GET") {
+                    var token = GetAntiForgeryToken();
+                    if (token !== null) {
+                        if (options.data.indexOf("X-Requested-With") === -1) {
+                            options.data = "X-Requested-With=XMLHttpRequest" + ((options.data === "") ? "" : "&" + options.data);
+                        }
+                        options.data = options.data + "&" + token.name + '=' + token.value;
+                    }
+                }
+            }
+         );
+    </script>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--after tap state-->
+    <item android:color="@color/white" android:state_selected="true" />
+    <!--normal state-->
+    <item android:color="@color/button_all_confirm" />
+
+</selector>

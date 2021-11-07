@@ -1,0 +1,51 @@
+PODS:
+  - Alamofire (4.9.1)
+  - Alamofire-Synchronous (4.0.0):
+    - Alamofire (~> 4.0)
+  - AvailableHapticFeedback (1.0.2)
+  - Charts (3.6.0):
+    - Charts/Core (= 3.6.0)
+  - Charts/Core (3.6.0)
+  - FontBlaster (5.1.1)
+  - MultiSlider (1.10.12):
+    - AvailableHapticFeedback
+    - SweeterSwift
+  - ReachabilitySwift (5.0.0)
+  - SweeterSwift (1.1.4)
+  - youtube-ios-player-helper (1.0.2)
+
+DEPENDENCIES:
+  - Alamofire
+  - Alamofire-Synchronous
+  - Charts
+  - FontBlaster
+  - MultiSlider
+  - ReachabilitySwift
+  - youtube-ios-player-helper
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - Alamofire-Synchronous
+    - AvailableHapticFeedback
+    - Charts
+    - FontBlaster
+    - MultiSlider
+    - ReachabilitySwift
+    - SweeterSwift
+    - youtube-ios-player-helper
+
+SPEC CHECKSUMS:
+  Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
+  Alamofire-Synchronous: eedf1e6e961c3795a63c74990b3f7d9fbfac7e50
+  AvailableHapticFeedback: 9b21b9f6d3e4566015988b5de35b40abefe6c09a
+  Charts: b1e3a1f5a1c9ba5394438ca3b91bd8c9076310af
+  FontBlaster: 8897ebdbb4b6ace3ab78c92b665d88c954f19e4a
+  MultiSlider: 13033e62dadbae2de3c3bd93a2c4bc27cdeec7b8
+  ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
+  SweeterSwift: 8a90cf3156f5a1b6f39785c479369a16633b5ea9
+  youtube-ios-player-helper: 40b96e52c22445f0fdc43731cefa32c67075ff81
+
+PODFILE CHECKSUM: 764bd2d810e2010fb800dbf16fdf90af8b2965e0
+
+COCOAPODS: 1.8.4

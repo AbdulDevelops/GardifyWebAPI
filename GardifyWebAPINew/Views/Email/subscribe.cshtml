@@ -1,0 +1,30 @@
+﻿<style>
+    a, .green {
+        color: #7a9d34;
+    }
+
+        a:hover {
+            cursor: pointer;
+        }
+</style>
+<h3>Hallo @Model.UserName,</h3>
+
+<p>
+    Du bist für den gardify®-Newsletter eingetragen
+</p>
+<br />
+<p>
+    Bitte bestätige deine Emailadresse <a href="@Model.Action_Url" target="_blank">hier</a>.
+</p>
+<p>
+    Wenn Du den Newsletter nicht mehr erhalten möchtest, klick bitte <a href="https://gardifybackend.sslbeta.de/api/newsletterapi/unsubscribe/@(Model.UserId)" target="_blank">hier</a>.
+</p>
+
+
+<h3>
+    Vielen Dank,
+</h3>
+<h4>Das gardify-Team</h4>
+
+
+

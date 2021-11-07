@@ -1,0 +1,38 @@
+﻿@model IEnumerable<GardifyModels.Models.InsatPostEntryView>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body class="p-0" style=" max-width: 100%; overflow-x: hidden;">
+    <div class="row">
+        @foreach (var item in Model)
+                {
+                    var url = item.MediaType == "VIDEO" ? item.ThumbnailUrl : item.MediaUrl;
+        <div class="col-4">
+            <a style="width: 100%; display: block;" href="https://www.instagram.com/gardify_official/">
+
+                <img class="p-2" style="object-fit:contain; width: 100%" src="@url" />
+            </a>
+
+            @*@item.encodeInstaId*@
+        </div>
+            }
+
+        </div>
+  
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @*@RenderSection("scripts", required: false)*@
+</body>
+</html>

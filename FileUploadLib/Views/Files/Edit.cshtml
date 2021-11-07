@@ -1,0 +1,231 @@
+﻿@model FileUploadLib.Models.FileEditViewModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+}
+<link rel="stylesheet" href="~/Files/css/font-awesome.css" />
+@foreach (var file in Model.Files)
+{
+    <form asp-controller="File" asp-action="Put" method="post" enctype="multipart/form-data" class="FileEditLibForm">
+        <div class="media">
+            @if (file.File.IsImageFile)
+            {
+                <img src="~/@file.File.Path" class="mr-3 col-2" alt="@file.AltText">
+            }
+            else if (file.File.IsPdfFile)
+            {
+                <div class="mr-3 col-2 text-center">
+                    <a asp-controller="File" asp-action="Download" asp-route-fileToModuleId="@file.FileToModuleId" target="_blank">
+                        <i class="far fa-file-pdf fa-4x"></i>
+                        <p>@file.File.OriginalFileName</p>
+                    </a>
+                </div>
+            }
+            else if (file.File.IsExcelFile)
+            {
+                <div class="mr-3 col-2 text-center">
+                    <a asp-controller="File" asp-action="Download" asp-route-fileToModuleId="@file.FileToModuleId" target="_blank">
+                        <i class="far fa-file-excel fa-4x"></i>
+                        <p>@file.File.OriginalFileName</p>
+                    </a>
+                </div>
+            }
+            else
+            {
+
+                <div class="mr-3 col-2 text-center">
+                    <a asp-controller="File" asp-action="Download" asp-route-fileToModuleId="@file.FileToModuleId" target="_blank">
+                        <i class="far fa-file fa-4x"></i>
+                        <p>@file.File.OriginalFileName</p>
+                    </a>
+                </div>
+            }
+            <div class="media-body">
+                <div class='form-group'>
+                    <label for='File'>Datei ersetzen</label>
+                    <input type="file" asp-for="File" class="form-control border-0" />
+                </div>
+                @if (Model.ApplicationId != null)
+                {
+                    <input type="hidden" asp-for="ApplicationId" />
+                }
+                @if (Model.ModuleId != null)
+                {
+                    <input type="hidden" asp-for="ModuleId" />
+                }
+                @if (!string.IsNullOrEmpty(Model.ModuleName))
+                {
+                    <input type="hidden" asp-for="ModuleName" />
+                }
+                <input type="hidden" asp-for="FileToModuleId" value="@file.FileToModuleId" />
+                <input type="hidden" asp-for="DetailId" />
+                <input type="hidden" asp-for="UsesTestEnvironment" />
+                <div class='form-group'>
+                    <label for='Title'>Titel</label>
+                    <input type='text' value='@file.Title' placeholder='Bitte Titel angeben' asp-for="Title" class='form-control' />
+                </div>
+                <div class='form-group'>
+                    <label for='Description'>Beschreibung</label>
+                    <input type='text' value='@file.Description' placeholder='Bitte Beschreibung angeben' asp-for="Description" class='form-control' />
+                </div>
+                <div class='form-group'>
+                    <label for='AltText'>Alt-Text</label>
+                    <input type='text' value='@file.AltText' placeholder='Bitte Alt-Text angeben' asp-for="AltText" class='form-control' />
+                </div>
+                <div class='form-group'>
+                    <label for='Sort'>Sortierung</label>
+                    <input type='number' value='@file.Sort' placeholder='Bitte Sortierung angeben' asp-for="Sort" class='form-control' />
+                </div>
+                <div class='form-group'>
+                    <label for='FileUploadPublishedInput'>Sollen diese Dateien veröffentlicht werden?</label>
+                    <input asp-for="IsPublished" class='form-check-input ml-4' />
+                </div>
+                <button type='submit' class='btn btn-primary'>Speichern</button>
+                @if (Model.ModuleId == null)
+                {
+                    <button type="button" onclick="openDialog('@Model.ModuleName', '@Model.ApplicationId', @file.FileToModuleId, '@file.File.UriPath')" class="btn btn-danger">Löschen</button>
+                }
+                else
+                {
+                    <button type="button" onclick="openDialog(@Model.ModuleId, '@Model.ApplicationId', @file.FileToModuleId, '@file.File.UriPath')" class="btn btn-danger">Löschen</button>
+                }
+            </div>
+        </div>
+        <div>
+            <hr />
+        </div>
+    </form>
+}
+<div class="modal" id="file-upload-lib-modal-edit-@Model.DetailId" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Schließen</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(".FileEditLibForm").on('submit', function (e) {
+        e.preventDefault();
+
+        if (window.FormData !== undefined)
+        //make sure that we can use FormData ie>9, chrome > 7, opera > 12 safari >5, android > 3  gecko mobile > 2, opera mobile >12 <- wil support XHR too
+        {
+            var formData = new FormData(this);
+            $.ajax({
+                url: $(this).attr('action'),  //Path to the server script that process the data
+                type: 'PUT',
+                data: formData,
+                success: function (response) {
+                    var suceeded = true;
+                    var htmlString = "";
+                    for (i = 0; i < response.length; i++) {
+                        var obj = response[i];
+                        if (obj.responseCode == -1) {
+                            suceeded &= false;
+                        }
+                        htmlString += "<p>" + obj.responseMessage + "</p>";
+                        if (!suceeded) {
+                            $("#file-upload-lib-modal-edit-@Model.DetailId").find('.modal-content').removeClass('border-success');
+                            $("#file-upload-lib-modal-edit-@Model.DetailId").find('.modal-header').removeClass('bg-success');
+                            $("#file-upload-lib-modal-edit-@Model.DetailId").find('.modal-content').addClass('border-danger');
+                            $("#file-upload-lib-modal-edit-@Model.DetailId").find('.modal-header').addClass('bg-danger');
+                            $("#file-upload-lib-modal-edit-@Model.DetailId").find('.modal-title').html("Fehler");
+                        } else {
+                            $("#file-upload-lib-modal-edit-@Model.DetailId").find('.modal-content').removeClass('border-danger');
+                            $("#file-upload-lib-modal-edit-@Model.DetailId").find('.modal-header').removeClass('bg-danger');
+                            $("#file-upload-lib-modal-edit-@Model.DetailId").find('.modal-content').addClass('border-success');
+                            $("#file-upload-lib-modal-edit-@Model.DetailId").find('.modal-header').addClass('bg-success');
+                            $("#file-upload-lib-modal-edit-@Model.DetailId").find('.modal-title').html("Erfolg");
+                            $(':input', '#FileUploadLibForm')
+                                .not(':button, :submit, :reset, :hidden')
+                                .val('')
+                                .prop('checked', false)
+                                .prop('selected', false);
+                        }
+                        $('#file-upload-lib-modal-edit-@Model.DetailId').modal('show');
+                    }
+                    $("#file-upload-lib-modal-edit-@Model.DetailId").find('.modal-body').html(htmlString);
+                },
+                //Options to tell jQuery not to process data or worry about content-type.
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+        } else {
+            $("#file-upload-lib-modal-edit-@Model.DetailId").find('.modal-content').addClass('border-danger');
+            $("#file-upload-lib-modal-edit-@Model.DetailId").find('.modal-header').addClass('bg-danger');
+            $("#file-upload-lib-modal-edit-@Model.DetailId").find('.modal-title').html("Fehler");
+            $("#file-upload-lib-modal-edit-@Model.DetailId").find('.modal-body').html("Es ist ein Fehler bei Ihrer Eingabe aufgetreten");
+        }
+
+        return false;
+    });
+
+    var moduleId = null;
+
+    function openDialog(moduleId, applicationId, fileToModuleId, filePath) {
+        console.log("openDialog");
+        $("#file-upload-lib-modal-edit-@Model.DetailId").modal('show');
+        $("#file-upload-lib-modal-edit-@Model.DetailId").find('.modal-content').addClass('border-danger');
+        $("#file-upload-lib-modal-edit-@Model.DetailId").find('.modal-header').addClass('bg-danger');
+        $("#file-upload-lib-modal-edit-@Model.DetailId").find('.modal-title').html("Achtung");
+        $("#file-upload-lib-modal-edit-@Model.DetailId").find('.modal-body').html("<div class='media'><img src='/" + filePath + "' class='mr-3 col-4'><div class='media-body'><h5 class='mt-0'>Löschen! </h5>Möchten Sie diese Datei wirklich löschen?</div></div>");
+        $("#file-upload-lib-modal-edit-@Model.DetailId").find('.modal-footer').html('<button type="button" onclick="deleteFile(\'' + moduleId + '\',\'' + applicationId + '\',' + fileToModuleId + ')" class="btn btn-danger" id="submitDelete">Löschen</button>')
+    }
+
+    function deleteFile(moduleIdParam, applicationIdParam, fileToModuleIdParam) {
+        $("#file-upload-lib-modal-edit-@Model.DetailId").modal('hide');
+        $.ajax({
+            url: '@Url.Action("Delete", "File")',  //Path to the server script that process the data
+            type: 'DELETE',
+            data: JSON.stringify({ moduleId: moduleIdParam, applicationId: applicationIdParam, fileToModuleId: fileToModuleIdParam }),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                var suceeded = true;
+                var htmlString = "";
+                for (i = 0; i < response.length; i++) {
+                    var obj = response[i];
+                    if (obj.responseCode == -1) {
+                        suceeded &= false;
+                    }
+                    htmlString += "<p>" + obj.responseMessage + "</p>";
+                    $("#file-upload-lib-modal-edit-@Model.DetailId").find("#submitDelete").remove();
+                    if (!suceeded) {
+                        $("#file-upload-lib-modal-edit-@Model.DetailId").find('.modal-content').removeClass('border-success');
+                        $("#file-upload-lib-modal-edit-@Model.DetailId").find('.modal-header').removeClass('bg-success');
+                        $("#file-upload-lib-modal-edit-@Model.DetailId").find('.modal-content').addClass('border-danger');
+                        $("#file-upload-lib-modal-edit-@Model.DetailId").find('.modal-header').addClass('bg-danger');
+                        $("#file-upload-lib-modal-edit-@Model.DetailId").find('.modal-title').html("Fehler");
+                    } else {
+                        $("#file-upload-lib-modal-edit-@Model.DetailId").find('.modal-content').removeClass('border-danger');
+                        $("#file-upload-lib-modal-edit-@Model.DetailId").find('.modal-header').removeClass('bg-danger');
+                        $("#file-upload-lib-modal-edit-@Model.DetailId").find('.modal-content').addClass('border-success');
+                        $("#file-upload-lib-modal-edit-@Model.DetailId").find('.modal-header').addClass('bg-success');
+                        $("#file-upload-lib-modal-edit-@Model.DetailId").find('.modal-title').html("Erfolg");
+                        $(':input', '#FileUploadLibForm')
+                            .not(':button, :submit, :reset, :hidden')
+                            .val('')
+                            .prop('checked', false)
+                            .prop('selected', false);
+                    }
+                }
+                $("#file-upload-lib-modal-edit-@Model.DetailId").find('.modal-body').html(htmlString);
+                setTimeout(function () {
+                    $('#file-upload-lib-modal-edit-@Model.DetailId').modal('show');
+                }, 2000);
+
+            },
+        });
+        return false;
+    }
+</script>

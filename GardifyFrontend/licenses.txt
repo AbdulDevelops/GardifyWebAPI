@@ -1,0 +1,22 @@
+/**
+ * angular-calendar:
+ *  license: MIT (http://opensource.org/licenses/MIT)
+ *  author: Matt Lewis
+ *  version: 0.28.5
+ * ng5-slider:
+ *  license: MIT (http://opensource.org/licenses/MIT)
+ *  authors: Rafal Zajac <rzajac@gmail.com>, Piotr Dziwinski <piotrdz@gmail.com>
+ *  version: 1.2.4
+ * ng-multiselect-dropdown:
+ *  license: MIT (http://opensource.org/licenses/MIT)
+ *  author: Nilesh Patel
+ *  version: 0.2.10
+ * angular:
+ *  license: MIT (http://opensource.org/licenses/MIT)
+ *  authors: 2010-2020 Google LLC
+ *  version: 9.0.7
+ * cropperjs:
+ *  license: MIT (http://opensource.org/licenses/MIT)
+ *  authors: Chen Fengyuan
+ *  version: 1.5.9
+*/

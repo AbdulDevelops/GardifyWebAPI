@@ -1,0 +1,4 @@
+13/01/2021 17:07:18: dowork() started
+13/01/2021 17:07:19: found 0 spoolentries
+13/01/2021 17:07:19: finished sending
+13/01/2021 17:07:19: added to archive and removed
